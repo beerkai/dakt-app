@@ -48,9 +48,10 @@ export function EvidenceStampCard({
         dangerouslySetInnerHTML={{ __html: e.description }}
       />
       <div className="evidence-detail">
-        {e.details.map((d) => (
-          <span key={`${d.label}-${d.value}`}>
-            <span>▸ {d.label}:</span> {d.value}
+        {e.details.map((d, i) => (
+          <span key={`${e.id}-d-${i}`}>
+            <span>▸ {d.label}:</span>{" "}
+            <span dangerouslySetInnerHTML={{ __html: d.value }} />
             <br />
           </span>
         ))}
