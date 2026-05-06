@@ -13,17 +13,14 @@ import {
 import type { Suspect, VerdictData } from "@/lib/case-types";
 import {
   accuracyPercentForAttempts,
-  formatCertificateDate,
   formatDurationMs,
   incrementAttemptCount,
   readAttemptCount,
   readCaseStartTimestamp,
 } from "@/lib/case-playthrough-storage";
 import { readGuestUsernameTrimmed } from "@/lib/guest-session";
-import {
-  Certificate,
-  type CertificateHandle,
-} from "@/components/Certificate";
+// Aşama 4 (SSR sertifika): Certificate + formatCertificateDate yeniden eklenecek.
+// import { Certificate, type CertificateHandle } from "@/components/Certificate";
 import {
   MARKED_SUSPECTS_CHANGED_EVENT,
   markedSuspectsStorageKey,
@@ -133,8 +130,8 @@ export function CozumClient({
 
   type SuccessMeta = { durationMs: number; attempts: number; accuracy: number };
   const [successMeta, setSuccessMeta] = useState<SuccessMeta | null>(null);
-  const [certModalOpen, setCertModalOpen] = useState(false);
-  const certRef = useRef<CertificateHandle>(null);
+  // Aşama 4: const [certModalOpen, setCertModalOpen] = useState(false);
+  // Aşama 4: const certRef = useRef<CertificateHandle>(null);
   const [analystDisplay, setAnalystDisplay] = useState("Misafir Analist");
 
   useEffect(() => {
@@ -152,9 +149,10 @@ export function CozumClient({
 
   useEffect(() => {
     setSuccessMeta(null);
-    setCertModalOpen(false);
+    // Aşama 4: setCertModalOpen(false);
   }, [caseId]);
 
+  /* Aşama 4: sertifika modal — Escape ile kapatma
   useEffect(() => {
     if (!certModalOpen) return;
     function onKey(e: KeyboardEvent) {
@@ -163,6 +161,7 @@ export function CozumClient({
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [certModalOpen]);
+  */
   const frontSizerRef = useRef<HTMLDivElement>(null);
   const flipInnerRef = useRef<HTMLDivElement>(null);
   const [flipMinH, setFlipMinH] = useState(MIN_FLIP_H);
@@ -425,23 +424,33 @@ export function CozumClient({
             >
               Davalara Dön
             </Link>
-            <button
-              type="button"
-              onClick={() => setCertModalOpen(true)}
-              disabled={!successMeta}
-              className={`${btnMono} border-2 border-[var(--kraft-light)] bg-[var(--anthracite-2)] py-4 font-semibold text-[var(--paper)] shadow-[0_2px_12px_rgba(0,0,0,0.35)] transition-colors hover:border-[var(--bordeaux-bright)] hover:bg-[var(--bordeaux)] hover:text-[var(--paper)] disabled:cursor-not-allowed disabled:border-[var(--rule)] disabled:bg-[var(--anthracite-2)] disabled:text-[var(--meta-label)] disabled:opacity-55 disabled:shadow-none`}
-            >
-              Sertifikayı İndir
-            </button>
+            <div className="relative pt-5">
+              <span
+                className={`${btnMono} pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 whitespace-nowrap text-[9px] tracking-[0.18em] text-[var(--meta-label)] opacity-100`}
+                aria-hidden
+              >
+                ○ YAKINDA
+              </span>
+              <button
+                type="button"
+                disabled
+                title={analystDisplay}
+                className={`${btnMono} w-full border-2 border-[var(--rule)] bg-[var(--anthracite-2)] py-4 font-semibold text-[var(--meta-label)] opacity-50 shadow-none`}
+                style={{ cursor: "not-allowed" }}
+              >
+                Sertifikayı İndir
+              </button>
+            </div>
           </div>
 
           {showVerdictDoc ? <VerdictDocumentHtml verdict={verdict} /> : null}
         </div>
       )}
 
+      {/* Aşama 4 (SSR sertifika): modal + PNG — geçici kapalı
       {certModalOpen && successMeta ? (
         <div
-          className="fixed inset-0 z-[280] flex items-center justify-center p-3 md:p-6"
+          className="fixed inset-0 z-[280] flex items-center justify-center p-4 md:p-6"
           role="dialog"
           aria-modal="true"
           aria-labelledby="cert-modal-title"
@@ -453,7 +462,7 @@ export function CozumClient({
             onClick={() => setCertModalOpen(false)}
           />
           <div
-            className="relative z-[1] flex max-h-[min(96vh,940px)] w-full max-w-[880px] flex-col overflow-hidden rounded border-2 border-[var(--kraft-dark)] bg-[var(--paper)] shadow-[var(--shadow)]"
+            className="relative z-[1] flex max-h-[min(96vh,940px)] w-full max-w-[800px] flex-col overflow-hidden rounded border-2 border-[var(--kraft-dark)] bg-[var(--paper)] shadow-[var(--shadow)]"
             style={{ boxSizing: "border-box" }}
           >
             <h3
@@ -462,20 +471,24 @@ export function CozumClient({
             >
               Dosya kapama sertifikası
             </h3>
-            <div className="min-h-0 flex-1 overflow-auto p-3 md:p-5">
-              <div className="flex min-w-0 justify-center">
-                <div className="origin-top scale-[0.72] sm:scale-[0.85] md:scale-100">
-                  <Certificate
-                    ref={certRef}
-                    analystName={analystDisplay}
-                    caseNumber={caseId}
-                    codename={codename}
-                    date={formatCertificateDate()}
-                    analysisTime={formatDurationMs(successMeta.durationMs)}
-                    attemptCount={successMeta.attempts}
-                    accuracy={successMeta.accuracy}
-                  />
-                </div>
+            <div
+              className="min-h-0 flex-1 overflow-auto px-4 py-4 md:p-5"
+              style={{ boxSizing: "border-box" }}
+            >
+              <div
+                className="mx-auto w-full max-w-[800px]"
+                style={{ boxSizing: "border-box" }}
+              >
+                <Certificate
+                  ref={certRef}
+                  analystName={analystDisplay}
+                  caseNumber={caseId}
+                  codename={codename}
+                  date={formatCertificateDate()}
+                  analysisTime={formatDurationMs(successMeta.durationMs)}
+                  attemptCount={successMeta.attempts}
+                  accuracy={successMeta.accuracy}
+                />
               </div>
             </div>
             <div className="flex flex-col gap-2 border-t border-[var(--rule)] bg-[var(--anthracite)] p-3 sm:flex-row sm:justify-end sm:gap-3">
@@ -497,6 +510,7 @@ export function CozumClient({
           </div>
         </div>
       ) : null}
+      */}
 
       {view === "result" && !isCorrect && (
         <div className="cozum-result-fail">

@@ -1,13 +1,19 @@
 "use client";
 
-import html2canvas from "html2canvas";
+import domtoimage from "dom-to-image-more";
 import {
   forwardRef,
   useCallback,
   useImperativeHandle,
   useRef,
   useState,
+  type ReactNode,
 } from "react";
+
+const PAPER = "#f1e7cf";
+const INK = "#0e0f10";
+const BORDEAUX = "#6b1620";
+const KRAFT_DARK = "#8a774f";
 
 export type CertificateProps = {
   analystName: string;
@@ -28,40 +34,78 @@ function safeFilenamePart(s: string): string {
   return (t.length ? t : "analist").slice(0, 48);
 }
 
+function InfoRow({
+  label,
+  children,
+  last,
+}: {
+  label: string;
+  children: ReactNode;
+  last?: boolean;
+}) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        gap: 10,
+        marginBottom: last ? 0 : 6,
+        alignItems: "baseline",
+      }}
+    >
+      <span
+        style={{
+          color: KRAFT_DARK,
+          fontWeight: 700,
+          minWidth: 130,
+          fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
+          fontSize: 11,
+          letterSpacing: "0.1em",
+        }}
+      >
+        {label}
+      </span>
+      <span
+        style={{
+          fontFamily: "var(--font-special-elite), ui-monospace, monospace",
+          fontSize: 13,
+          color: INK,
+        }}
+      >
+        {children}
+      </span>
+    </div>
+  );
+}
+
 export const Certificate = forwardRef<CertificateHandle, CertificateProps>(
   function Certificate(props, ref) {
-    const innerRef = useRef<HTMLDivElement>(null);
+    const certificateRef = useRef<HTMLDivElement>(null);
     const [busy, setBusy] = useState(false);
 
     const downloadPng = useCallback(async () => {
-      const el = innerRef.current;
-      if (!el || busy) return;
+      const node = certificateRef.current;
+      if (!node || busy) return;
       setBusy(true);
       try {
-        const canvas = await html2canvas(el, {
-          scale: 2,
-          backgroundColor: "#f1e7cf",
-          logging: false,
+        const dataUrl = await domtoimage.toPng(node, {
+          quality: 1,
+          bgcolor: PAPER,
+          width: 1600,
+          height: 1200,
+          style: {
+            transform: "scale(2)",
+            transformOrigin: "top left",
+            width: "800px",
+            height: "600px",
+          },
         });
-        await new Promise<void>((resolve, reject) => {
-          canvas.toBlob(
-            (blob) => {
-              if (!blob) {
-                reject(new Error("PNG oluşturulamadı"));
-                return;
-              }
-              const url = URL.createObjectURL(blob);
-              const a = document.createElement("a");
-              a.href = url;
-              a.download = `dakt-sertifika-${props.caseNumber}-${safeFilenamePart(props.analystName)}.png`;
-              a.click();
-              URL.revokeObjectURL(url);
-              resolve();
-            },
-            "image/png",
-            0.95,
-          );
-        });
+
+        const link = document.createElement("a");
+        link.download = `dakt-sertifika-${props.caseNumber}-${safeFilenamePart(props.analystName)}.png`;
+        link.href = dataUrl;
+        link.click();
+      } catch (e) {
+        console.error("Sertifika PNG oluşturulamadı:", e);
       } finally {
         setBusy(false);
       }
@@ -72,180 +116,191 @@ export const Certificate = forwardRef<CertificateHandle, CertificateProps>(
     const cn = props.codename.toLocaleUpperCase("tr-TR");
 
     return (
-      <div className="cert-wrap">
+      <div
+        style={{
+          margin: "0 auto",
+          width: 800,
+          boxSizing: "border-box",
+        }}
+      >
         <div
-          ref={innerRef}
-          className="cert-sheet"
+          ref={certificateRef}
           style={{
             width: 800,
             height: 600,
+            margin: 0,
             boxSizing: "border-box",
             position: "relative",
-            backgroundColor: "var(--paper)",
-            color: "var(--ink)",
-            border: "4px solid var(--bordeaux)",
-            boxShadow:
-              "inset 0 0 0 2px rgba(107, 22, 32, 0.35), var(--shadow)",
-            padding: "48px 56px",
+            background: PAPER,
+            padding: "60px 80px",
+            fontFamily: "var(--font-special-elite), ui-monospace, monospace",
+            color: INK,
+            border: "none",
+            outline: "none",
             backgroundImage: `
               repeating-linear-gradient(
                 0deg,
                 transparent 0px,
-                transparent 28px,
-                rgba(107, 22, 32, 0.035) 28px,
-                rgba(107, 22, 32, 0.035) 29px
+                transparent 30px,
+                rgba(107, 22, 32, 0.04) 30px,
+                rgba(107, 22, 32, 0.04) 31px
               ),
-              radial-gradient(ellipse at top right, rgba(138, 119, 79, 0.2), transparent 50%),
-              radial-gradient(ellipse at bottom left, rgba(138, 119, 79, 0.12), transparent 55%)
+              radial-gradient(
+                ellipse at top right,
+                rgba(138, 119, 79, 0.18),
+                transparent 50%
+              )
             `,
-            fontFamily: "var(--font-special-elite), ui-monospace, monospace",
+            boxShadow: `
+              inset 0 0 0 4px ${BORDEAUX},
+              inset 0 0 0 6px ${PAPER},
+              inset 0 0 0 7px ${BORDEAUX}
+            `,
+            overflow: "visible",
           }}
         >
           <div
-            className="cert-classified-stamp"
             style={{
               position: "absolute",
-              top: 36,
-              right: 40,
-              border: "3px double var(--bordeaux)",
-              color: "var(--bordeaux)",
-              padding: "8px 16px",
-              fontFamily: "var(--font-jetbrains-mono), monospace",
-              fontSize: 11,
+              top: 40,
+              right: 60,
+              border: `4px double ${BORDEAUX}`,
+              color: BORDEAUX,
+              fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
               fontWeight: 700,
-              letterSpacing: "0.2em",
-              transform: "rotate(-9deg)",
-              opacity: 0.88,
+              fontSize: 22,
+              padding: "10px 22px",
+              letterSpacing: "0.1em",
+              transform: "rotate(-8deg)",
+              opacity: 0.85,
+              pointerEvents: "none",
+              zIndex: 2,
             }}
           >
             CLASSIFIED
           </div>
 
-          <div style={{ textAlign: "center" }}>
-            <div
-              style={{
-                fontFamily: "var(--font-cormorant), serif",
-                fontSize: 36,
-                fontWeight: 600,
-                fontStyle: "italic",
-                letterSpacing: "0.22em",
-                marginBottom: 8,
-              }}
-            >
-              D.A.K.T.
-            </div>
-            <div
-              style={{
-                height: 1,
-                background: "var(--bordeaux)",
-                opacity: 0.45,
-                maxWidth: 320,
-                margin: "0 auto 12px",
-              }}
-            />
-            <div
-              lang="en"
-              style={{
-                fontFamily: "var(--font-jetbrains-mono), monospace",
-                fontSize: 9,
-                letterSpacing: "0.14em",
-                color: "var(--kraft-dark)",
-                marginBottom: 28,
-              }}
-            >
-              DIVISION OF ANALYTIC KNOWLEDGE & TESTIMONIES
-            </div>
-            <div
-              style={{
-                fontFamily: "var(--font-cormorant), serif",
-                fontSize: 26,
-                fontWeight: 700,
-                letterSpacing: "0.06em",
-                marginBottom: 20,
-              }}
-            >
-              DOSYA KAPAMA SERTİFİKASI
-            </div>
-            <p
-              style={{
-                fontSize: 13,
-                lineHeight: 1.75,
-                maxWidth: 520,
-                margin: "0 auto 28px",
-                color: "var(--anthracite-2)",
-              }}
-            >
-              Bu belge, aşağıda kimliği belirtilen analistin{" "}
-              <strong>
-                DOSYA №{props.caseNumber} ({cn})
-              </strong>{" "}
-              vakasını başarıyla çözdüğünü tasdik eder.
-            </p>
-          </div>
-
           <div
             style={{
-              maxWidth: 440,
-              margin: "0 auto",
-              border: "2px solid rgba(107, 22, 32, 0.45)",
-              padding: "20px 24px",
-              borderRadius: 2,
-              fontFamily: "var(--font-jetbrains-mono), monospace",
-              fontSize: 11,
-              lineHeight: 1.85,
-              letterSpacing: "0.06em",
-            }}
-          >
-            <div>
-              <span style={{ color: "var(--kraft-dark)" }}>ANALİST:</span>{" "}
-              {props.analystName}
-            </div>
-            <div>
-              <span style={{ color: "var(--kraft-dark)" }}>TARİH:</span>{" "}
-              {props.date}
-            </div>
-            <div>
-              <span style={{ color: "var(--kraft-dark)" }}>
-                ANALİZ SÜRESİ:
-              </span>{" "}
-              {props.analysisTime}
-            </div>
-            <div>
-              <span style={{ color: "var(--kraft-dark)" }}>DENEME:</span>{" "}
-              {props.attemptCount}. denemede
-            </div>
-            <div>
-              <span style={{ color: "var(--kraft-dark)" }}>DOĞRULUK:</span>{" "}
-              {props.accuracy}%
-            </div>
-          </div>
-
-          <div
-            style={{
-              position: "absolute",
-              bottom: 36,
-              left: 48,
+              marginTop: 40,
+              textAlign: "center",
               fontFamily: "var(--font-cormorant), serif",
-              fontSize: 13,
               fontStyle: "italic",
-              color: "var(--kraft-dark)",
-              opacity: 0.9,
+              fontWeight: 600,
+              fontSize: 56,
+              letterSpacing: "0.3em",
+              color: BORDEAUX,
             }}
           >
-            ◆ mühür · D.A.K.T.
+            D.A.K.T.
           </div>
+
+          <div
+            lang="en"
+            style={{
+              marginTop: 8,
+              textAlign: "center",
+              fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
+              fontSize: 11,
+              letterSpacing: "0.25em",
+              color: KRAFT_DARK,
+            }}
+          >
+            DIVISION OF ANALYTIC KNOWLEDGE & TESTIMONIES
+          </div>
+
+          <div
+            style={{
+              margin: "32px auto",
+              width: 200,
+              height: 1,
+              background: KRAFT_DARK,
+            }}
+          />
+
+          <div
+            style={{
+              textAlign: "center",
+              fontFamily: "var(--font-cormorant), serif",
+              fontWeight: 700,
+              fontSize: 28,
+              color: INK,
+            }}
+          >
+            DOSYA KAPAMA SERTİFİKASI
+          </div>
+
+          <div
+            style={{
+              marginTop: 24,
+              textAlign: "center",
+              fontFamily: "var(--font-cormorant), serif",
+              fontWeight: 600,
+              fontSize: 18,
+              color: BORDEAUX,
+            }}
+          >
+            DOSYA №{props.caseNumber} ({cn})
+          </div>
+
+          <p
+            style={{
+              marginTop: 20,
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginBottom: 0,
+              textAlign: "center",
+              fontFamily: "var(--font-special-elite), ui-monospace, monospace",
+              fontSize: 13,
+              lineHeight: 1.7,
+              color: INK,
+              maxWidth: 540,
+            }}
+          >
+            Bu belge, aşağıda kimliği belirtilen analistin söz konusu vakayı
+            başarıyla çözdüğünü tasdik eder.
+          </p>
+
+          <div
+            style={{
+              margin: "32px auto 0",
+              maxWidth: 400,
+              padding: "20px 24px",
+              background: "rgba(138, 119, 79, 0.08)",
+              borderLeft: `3px solid ${BORDEAUX}`,
+              borderTop: "none",
+              borderRight: "none",
+              borderBottom: "none",
+              boxSizing: "border-box",
+            }}
+          >
+            <InfoRow label="ANALİST:">{props.analystName}</InfoRow>
+            <InfoRow label="TARİH:">{props.date}</InfoRow>
+            <InfoRow label="ANALİZ SÜRESİ:">{props.analysisTime}</InfoRow>
+            <InfoRow label="DENEME:">{props.attemptCount}. denemede</InfoRow>
+            <InfoRow label="DOĞRULUK:" last>
+              {props.accuracy}%
+            </InfoRow>
+          </div>
+
           <div
             style={{
               position: "absolute",
-              bottom: 32,
-              right: 48,
-              fontFamily: "var(--font-special-elite), monospace",
+              bottom: 30,
+              left: 80,
+              right: 80,
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
               fontSize: 11,
-              letterSpacing: "0.08em",
-              color: "var(--meta-label)",
+              letterSpacing: "0.2em",
+              color: "rgba(0,0,0,0.4)",
+              zIndex: 1,
             }}
           >
-            dakt.app · @dakt.app
+            <span>D.A.K.T. — 2026</span>
+            <span>dakt.app · @dakt.app</span>
           </div>
         </div>
       </div>
