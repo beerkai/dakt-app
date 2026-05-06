@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  /* Sticky vaka başlığı / sekme şeridi için — SiteNav yüksekliğiyle eşleşmeli */
-  --site-nav-offset: 3.5rem;
+  /* Sticky vaka kümesi (sistem şeridi + iç nav) — SiteNav tek satırına göre */
+  --site-nav-offset: 3.125rem;
   --ink: #0e0f10;
   --anthracite: #1a1c1f;
   --anthracite-2: #232629;
@@ -28,7 +28,7 @@
 
 @media (min-width: 768px) {
   :root {
-    --site-nav-offset: 4.75rem;
+    --site-nav-offset: 3.375rem;
   }
 }
 
@@ -150,6 +150,15 @@ body::after {
   background: var(--bordeaux-bright);
   animation: nav-live-pulse 1.6s ease-in-out infinite;
   display: inline-block;
+  flex-shrink: 0;
+}
+
+.site-nav-user-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--bordeaux-bright);
+  animation: nav-live-pulse 1.6s ease-in-out infinite;
   flex-shrink: 0;
 }
 

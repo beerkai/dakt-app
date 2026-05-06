@@ -1,6 +1,14 @@
 /* D.A.K.T. vaka 042 — ported from dakt-vaka-042.html (fonts use layout CSS variables) */
 
-/* === VAKA INNER NAV (iki satır, SiteNav altında sticky) === */
+/* === Sistem şeridi + iç nav — SiteNav altında tek yapışkan küme === */
+.vaka-case-sticky-cluster {
+  position: sticky;
+  top: var(--site-nav-offset);
+  z-index: 199;
+  background: var(--ink);
+}
+
+/* === VAKA INNER NAV (iki satır) === */
 .live-dot {
   width: 6px;
   height: 6px;
@@ -24,9 +32,7 @@
 }
 
 .vaka-case-strip {
-  position: sticky;
-  top: var(--site-nav-offset);
-  z-index: 199;
+  position: static;
   background: var(--ink);
   border-bottom: 1px solid var(--rule);
 }

@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import "./vaka-case.css";
 import { getCase } from "@/lib/case-helpers";
 import { notFound } from "next/navigation";
+import { SystemBar } from "@/components/SystemBar";
 import { VakaCaseInnerNav } from "./VakaCaseInnerNav";
 import { VakaCaseSoloTease } from "./VakaCaseSoloTease";
 
@@ -32,7 +33,10 @@ export default async function CaseLayout({
 
   return (
     <div className="relative z-[1] flex min-h-full flex-1 flex-col">
-      <VakaCaseInnerNav caseId={caseId} caseData={caseData} />
+      <div className="vaka-case-sticky-cluster">
+        <SystemBar />
+        <VakaCaseInnerNav caseId={caseId} caseData={caseData} />
+      </div>
       <main className="workspace flex-1">{children}</main>
       <footer className="foot">
         D.A.K.T. ·{" "}
