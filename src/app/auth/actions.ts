@@ -22,12 +22,9 @@ function parseColor(raw: string | null): AnalystColor {
   return "mavi";
 }
 
-export type AuthFormState = { error: string } | null;
+export type AuthActionResult = { success: true } | { error: string };
 
-export async function signUp(
-  _prev: AuthFormState,
-  formData: FormData,
-): Promise<AuthFormState> {
+export async function signUp(formData: FormData): Promise<AuthActionResult> {
   const supabase = await createClient();
 
   const email = String(formData.get("email") ?? "").trim();
@@ -65,13 +62,10 @@ export async function signUp(
   }
 
   revalidatePath("/", "layout");
-  redirect("/");
+  return { success: true };
 }
 
-export async function signIn(
-  _prev: AuthFormState,
-  formData: FormData,
-): Promise<AuthFormState> {
+export async function signIn(formData: FormData): Promise<AuthActionResult> {
   const supabase = await createClient();
 
   const email = String(formData.get("email") ?? "").trim();
@@ -91,7 +85,7 @@ export async function signIn(
   }
 
   revalidatePath("/", "layout");
-  redirect("/");
+  return { success: true };
 }
 
 export async function signOut() {

@@ -152,6 +152,7 @@ export function DavalarCatalog({ cases }: { cases: CaseData[] }) {
               onCtaClick={
                 active ? () => requestOpenBrief(briefHref) : undefined
               }
+              ctaBusy={active ? authLoading : false}
             />
           );
         })}

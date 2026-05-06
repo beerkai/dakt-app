@@ -17,6 +17,8 @@ export type CaseCardProps = {
   href?: string;
   /** Varsa CTA `Link` yerine tıklanınca bu çağrılır (ör. misafir takma adı modalı). */
   onCtaClick?: () => void;
+  /** Oturum yüklenirken buton kilitlenir (ör. useAuth loading). */
+  ctaBusy?: boolean;
   status: CaseStatus;
 };
 
@@ -37,9 +39,11 @@ export function CaseCard({
   suspectCount,
   href,
   onCtaClick,
+  ctaBusy,
   status,
 }: CaseCardProps) {
   const active = status === "DOSYA AÇIK";
+  const busy = Boolean(ctaBusy);
 
   return (
     <article className="group relative flex flex-col overflow-hidden border border-[var(--kraft-dark)] bg-[var(--anthracite)] shadow-[var(--shadow)]">
@@ -106,10 +110,15 @@ export function CaseCard({
           onCtaClick ? (
             <button
               type="button"
-              onClick={onCtaClick}
-              className={`${mono} inline-flex w-full cursor-pointer items-center justify-center border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] py-4 text-[10px] font-medium uppercase tracking-[0.26em] text-[var(--kraft-light)] transition-colors hover:bg-[var(--bordeaux-bright)] md:w-auto md:self-start md:px-10`}
+              onClick={() => {
+                if (busy) return;
+                onCtaClick();
+              }}
+              disabled={busy}
+              aria-busy={busy}
+              className={`${mono} inline-flex w-full items-center justify-center border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] py-4 text-[10px] font-medium uppercase tracking-[0.26em] text-[var(--kraft-light)] transition-colors hover:bg-[var(--bordeaux-bright)] md:w-auto md:self-start md:px-10 ${busy ? "cursor-wait opacity-75" : "cursor-pointer"}`}
             >
-              Dosyayı aç →
+              {busy ? "Yükleniyor..." : "Dosyayı aç →"}
             </button>
           ) : (
             <Link

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useActionState, useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 
 import { signIn, signUp } from "@/app/auth/actions";
 import {
@@ -74,10 +74,42 @@ export default function GirisPage() {
   const [guestError, setGuestError] = useState(false);
   const [sessionGuest, setSessionGuest] = useState<string | null>(null);
 
-  const [signUpState, signUpAction, signUpPending] = useActionState(signUp, null);
-  const [signInState, signInAction, signInPending] = useActionState(signIn, null);
+  const [signUpError, setSignUpError] = useState<string | null>(null);
+  const [signInError, setSignInError] = useState<string | null>(null);
+  const [signUpLoading, setSignUpLoading] = useState(false);
+  const [signInLoading, setSignInLoading] = useState(false);
 
   const [regColor, setRegColor] = useState<AnalystColor>("mavi");
+
+  async function handleSignUp(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSignUpError(null);
+    setSignUpLoading(true);
+    const formData = new FormData(e.currentTarget);
+    const result = await signUp(formData);
+    if ("error" in result) {
+      setSignUpError(result.error);
+      setSignUpLoading(false);
+      return;
+    }
+    router.refresh();
+    router.push("/");
+  }
+
+  async function handleSignIn(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSignInError(null);
+    setSignInLoading(true);
+    const formData = new FormData(e.currentTarget);
+    const result = await signIn(formData);
+    if ("error" in result) {
+      setSignInError(result.error);
+      setSignInLoading(false);
+      return;
+    }
+    router.refresh();
+    router.push("/");
+  }
 
   useEffect(() => {
     if (tabLocked) return;
@@ -283,7 +315,7 @@ export default function GirisPage() {
             ilerlemen aktarılır.
           </p>
 
-          <form className="space-y-5" action={signUpAction}>
+          <form className="space-y-5" onSubmit={handleSignUp}>
             <div>
               <label htmlFor="reg-email" className={labelMono}>
                 E-posta
@@ -294,7 +326,7 @@ export default function GirisPage() {
                 type="email"
                 required
                 autoComplete="email"
-                disabled={signUpPending}
+                disabled={signUpLoading}
                 placeholder="analist@buro.gov"
                 className={inputClass}
               />
@@ -310,7 +342,7 @@ export default function GirisPage() {
                 required
                 minLength={6}
                 autoComplete="new-password"
-                disabled={signUpPending}
+                disabled={signUpLoading}
                 placeholder="••••••••"
                 className={inputClass}
               />
@@ -325,7 +357,7 @@ export default function GirisPage() {
                 type="text"
                 required
                 autoComplete="nickname"
-                disabled={signUpPending}
+                disabled={signUpLoading}
                 placeholder="Çağrı kodun"
                 className={inputClass}
               />
@@ -338,17 +370,17 @@ export default function GirisPage() {
                 name="color"
               />
             </div>
-            {signUpState?.error ? (
+            {signUpError ? (
               <p className="text-[11px] tracking-[0.06em] text-[var(--bordeaux-bright)] [font-family:var(--font-jetbrains-mono),monospace]">
-                {signUpState.error}
+                {signUpError}
               </p>
             ) : null}
             <button
               type="submit"
-              disabled={signUpPending}
+              disabled={signUpLoading}
               className="w-full cursor-pointer border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] py-4 text-[10px] font-medium uppercase tracking-[0.24em] text-[var(--kraft-light)] transition-colors [font-family:var(--font-jetbrains-mono),monospace] hover:bg-[var(--bordeaux-bright)] disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {signUpPending ? "Bekleniyor..." : "Hesap Oluştur"}
+              {signUpLoading ? "Hesap oluşturuluyor..." : "Hesap Oluştur"}
             </button>
           </form>
 
@@ -382,7 +414,7 @@ export default function GirisPage() {
             Kayıtlı analist hesabınla dosyalarına eriş.
           </p>
 
-          <form className="space-y-5" action={signInAction}>
+          <form className="space-y-5" onSubmit={handleSignIn}>
             <div>
               <label htmlFor="login-email" className={labelMono}>
                 E-posta
@@ -393,7 +425,7 @@ export default function GirisPage() {
                 type="email"
                 required
                 autoComplete="email"
-                disabled={signInPending}
+                disabled={signInLoading}
                 placeholder="analist@buro.gov"
                 className={inputClass}
               />
@@ -408,22 +440,22 @@ export default function GirisPage() {
                 type="password"
                 required
                 autoComplete="current-password"
-                disabled={signInPending}
+                disabled={signInLoading}
                 placeholder="••••••••"
                 className={inputClass}
               />
             </div>
-            {signInState?.error ? (
+            {signInError ? (
               <p className="text-[11px] tracking-[0.06em] text-[var(--bordeaux-bright)] [font-family:var(--font-jetbrains-mono),monospace]">
-                {signInState.error}
+                {signInError}
               </p>
             ) : null}
             <button
               type="submit"
-              disabled={signInPending}
+              disabled={signInLoading}
               className="w-full cursor-pointer border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] py-4 text-[10px] font-medium uppercase tracking-[0.24em] text-[var(--kraft-light)] transition-colors [font-family:var(--font-jetbrains-mono),monospace] hover:bg-[var(--bordeaux-bright)] disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {signInPending ? "Bekleniyor..." : "Giriş Yap"}
+              {signInLoading ? "Giriş yapılıyor..." : "Giriş Yap"}
             </button>
           </form>
 
