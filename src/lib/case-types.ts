@@ -100,6 +100,52 @@ export interface DeductionBoard {
   elimination: DeductionItem[];
 }
 
+export type MessagePlatform =
+  | "whatsapp"
+  | "imessage"
+  | "instagram"
+  | "email";
+
+export interface MessageParticipant {
+  name: string;
+  isVictim?: boolean;
+  isPerpetrator?: boolean;
+  avatar?: string;
+  isUser?: boolean;
+}
+
+export interface ChatMessage {
+  id: string;
+  sender: string;
+  text: string;
+  time: string;
+  date?: string;
+  status?: "sent" | "delivered" | "read";
+  type?: "text" | "voice" | "image-placeholder" | "system";
+  voiceDuration?: string;
+  systemText?: string;
+  emailSubject?: string;
+  emailFrom?: string;
+  emailTo?: string;
+}
+
+export interface MessageThread {
+  id: string;
+  title: string;
+  caseId: string;
+  platform: MessagePlatform;
+  participants: MessageParticipant[];
+  messages: ChatMessage[];
+  meta?: {
+    extractedDate?: string;
+    deviceInfo?: string;
+    /** HTML içerebilir (çıkarsama vurguları) */
+    forensicNote?: string;
+  };
+  /** Belge imzası (dijital evrak altbilgisi) */
+  footerSignature?: { role: string; name: string };
+}
+
 export interface VerdictData {
   perpetratorId: string;
   perpetratorName: string;
@@ -138,6 +184,8 @@ export interface CaseData {
   forensics: Document[];
   evidence: Evidence[];
   documents?: Document[];
+  /** Sohbet / DM / e-posta — belgeler sekmesinde ayrı component ile */
+  messageThreads?: MessageThread[];
   technical: Document[];
   /** 042/067 sesli mesaj bloğu (Waveform + transkript) */
   technicalAudio?: {

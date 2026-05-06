@@ -9,6 +9,7 @@ import type {
 import gen from "./067-generated.json";
 import extra from "./067-extra.json";
 import briefVerdict from "./067-brief-verdict.json";
+import { messageThreads067 } from "./067-message-threads";
 
 const TL067_SHUFFLE_IDX = [
   17, 3, 11, 0, 8, 14, 5, 16, 2, 9, 12, 7, 4, 15, 1, 10, 6, 13,
@@ -66,14 +67,16 @@ const forensics: Document[] = gen.forensics.map((d) => ({
   signature: d.signature,
 }));
 
-const documents: Document[] = gen.documents.map((d) => ({
-  id: d.id,
-  docId: d.docId,
-  title: d.title,
-  meta: d.meta,
-  body: d.body,
-  signature: d.signature,
-}));
+const documents: Document[] = gen.documents
+  .filter((d) => d.id !== "067-emails")
+  .map((d) => ({
+    id: d.id,
+    docId: d.docId,
+    title: d.title,
+    meta: d.meta,
+    body: d.body,
+    signature: d.signature,
+  }));
 
 const technical: Document[] = gen.technical.map((d) => ({
   id: d.id,
@@ -145,6 +148,7 @@ export const case067: CaseData = {
   forensics,
   evidence,
   documents,
+  messageThreads: messageThreads067,
   technical,
   technicalAudio: {
     label: "067-T · Sesli Mesaj — Selin → Kerem · 13 Mart 23:51",

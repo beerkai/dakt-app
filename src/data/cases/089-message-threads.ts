@@ -1,0 +1,242 @@
+import type { MessageThread } from "@/lib/case-types";
+
+/** Belgelerden çıkarıldı — metinler kaynak HTML ile birebir. */
+export const messageThreads089: MessageThread[] = [
+  {
+    id: "089-mt-k",
+    caseId: "089",
+    platform: "whatsapp",
+    title: "WhatsApp Yazışmaları — İpek ↔ Alp",
+    participants: [
+      { name: "İpek Sarıhan", isUser: true },
+      { name: "Alp Erdoğan", isPerpetrator: true },
+    ],
+    meta: {
+      deviceInfo: "089-K · Dijital Adli İnceleme",
+      forensicNote:
+        '<strong>Çıkarsama:</strong> İpek, Alp\'i Kapadokya\'ya çağırmıştır. 6 Haziran akşamı Defne "her şeyi açıklayacağım" deyince İpek panikleyerek Alp\'i çağırmış ve "vadiye gel" demiştir. <strong>İpek 01:18\'de "dışarı çıkıyorum" diyor</strong> — kameralar onu 00:45\'te dışarı çıkarken gösteriyor. Yani İpek <strong>geri girip tekrar çıkmış olabilir</strong> veya saat senkronu tutarsız.',
+    },
+    footerSignature: {
+      role: "Dijital Adli İnceleme Uzmanı",
+      name: "B. Yıldız",
+    },
+    messages: [
+      {
+        id: "089-k-01",
+        sender: "İpek Sarıhan",
+        text: "Defne yarın oraya geliyor. İstersen yazarım sana.",
+        time: "5 Haz · 14:22",
+        date: "5 Haziran 2024",
+        status: "delivered",
+      },
+      {
+        id: "089-k-02",
+        sender: "Alp Erdoğan",
+        text: "Ciddi misin? Onunla konuşmam lazım.",
+        time: "5 Haz · 14:25",
+        date: "5 Haziran 2024",
+      },
+      {
+        id: "089-k-03",
+        sender: "İpek Sarıhan",
+        text: "ATV tura gelecekler. Sen de tur rehberisin zaten. Doğal görünür.",
+        time: "5 Haz · 14:28",
+        date: "5 Haziran 2024",
+        status: "delivered",
+      },
+      {
+        id: "089-k-04",
+        sender: "Alp Erdoğan",
+        text: "Ama Defne öğrenirse...",
+        time: "5 Haz · 14:30",
+        date: "5 Haziran 2024",
+      },
+      {
+        id: "089-k-05",
+        sender: "İpek Sarıhan",
+        text: "Öğrenmeyecek. Sana güveniyorum.",
+        time: "5 Haz · 14:31",
+        date: "5 Haziran 2024",
+        status: "read",
+      },
+      {
+        id: "089-k-06",
+        sender: "Alp Erdoğan",
+        text: "İpek, Defne biliyor. Bana baktığında gördüm.",
+        time: "6 Haz · 18:47",
+        date: "6 Haziran 2024",
+      },
+      {
+        id: "089-k-07",
+        sender: "İpek Sarıhan",
+        text: "Ne biliyor?",
+        time: "6 Haz · 18:48",
+        date: "6 Haziran 2024",
+        status: "delivered",
+      },
+      {
+        id: "089-k-08",
+        sender: "Alp Erdoğan",
+        text: "Her şeyi. Senle beni. Ve öncesini.",
+        time: "6 Haz · 18:49",
+        date: "6 Haziran 2024",
+      },
+      {
+        id: "089-k-09",
+        sender: "İpek Sarıhan",
+        text: "🤦‍♀️ Ben hallederim. Sen karışma.",
+        time: "6 Haz · 18:50",
+        date: "6 Haziran 2024",
+        status: "read",
+      },
+      {
+        id: "089-k-10",
+        sender: "İpek Sarıhan",
+        text: "Defne bu gece her şeyi söyleyeceğini söylüyor. Gel, konuşalım. Hepimiz.",
+        time: "6 Haz · 23:58",
+        date: "6 Haziran 2024",
+        status: "delivered",
+      },
+      {
+        id: "089-k-11",
+        sender: "Alp Erdoğan",
+        text: "Neredeyiz?",
+        time: "7 Haz · 00:02",
+        date: "7 Haziran 2024",
+      },
+      {
+        id: "089-k-12",
+        sender: "İpek Sarıhan",
+        text: "Defne dışarı çıktı. Ben de çıkıyorum. Vadiye gel.",
+        time: "7 Haz · 01:18",
+        date: "7 Haziran 2024",
+        status: "read",
+      },
+      {
+        id: "089-k-13",
+        sender: "Alp Erdoğan",
+        text: "Yoldayım.",
+        time: "7 Haz · 01:52",
+        date: "7 Haziran 2024",
+      },
+    ],
+  },
+  {
+    id: "089-mt-l",
+    caseId: "089",
+    platform: "whatsapp",
+    title: "WhatsApp — Defne → Ceren (6 Haziran)",
+    participants: [
+      { name: "Defne Karataş", isVictim: true, isUser: true },
+      { name: "Ceren Aksoy" },
+    ],
+    meta: {
+      deviceInfo: "089-L · Dijital Adli İnceleme",
+      forensicNote:
+        "<strong>Çıkarsama:</strong> Defne, <strong>01:00'da Hakan'la terasta buluşma planlamış</strong> (kartvizit arkası notla örtüşüyor). Defne, 01:15'te lobiden çıkmış — 15 dakika gecikmeli. Hakan \"23:00'da odama çıktım\" diyor — ama <strong>terasa VIP balkonundan kart kullanmadan çıkabilirdi</strong>.",
+    },
+    footerSignature: {
+      role: "Dijital Adli İnceleme",
+      name: "B. Yıldız",
+    },
+    messages: [
+      {
+        id: "089-l-01",
+        sender: "Defne Karataş",
+        text: "Ceren, İpek beni satıyor. Alp burada ve İpek onu çağırmış.",
+        time: "6 Haz · 09:14",
+        date: "6 Haziran 2024",
+        status: "delivered",
+      },
+      {
+        id: "089-l-02",
+        sender: "Defne Karataş",
+        text: "Bu gece her şeyi söyleyeceğim. İpek'e de, Alp'e de.",
+        time: "6 Haz · 09:16",
+        date: "6 Haziran 2024",
+        status: "delivered",
+      },
+      {
+        id: "089-l-03",
+        sender: "Ceren Aksoy",
+        text: "Defne yapma. Herkes zarar görür.",
+        time: "6 Haz · 09:22",
+        date: "6 Haziran 2024",
+      },
+      {
+        id: "089-l-04",
+        sender: "Defne Karataş",
+        text: "Ben zaten zarar gördüm.",
+        time: "6 Haz · 09:23",
+        date: "6 Haziran 2024",
+        status: "delivered",
+      },
+      {
+        id: "089-l-05",
+        sender: "Defne Karataş",
+        text: 'Bir de bir şey daha var. O iş adamı, Hakan. Bana tuhaf bir teklif yaptı. "Benim için çalış, Instagram\'ında markamı tanıt. Ödeme güzel olur." Ama göz teması... garip.',
+        time: "6 Haz · 22:31",
+        date: "6 Haziran 2024",
+        status: "delivered",
+      },
+      {
+        id: "089-l-06",
+        sender: "Ceren Aksoy",
+        text: "Dikkatli ol.",
+        time: "6 Haz · 22:35",
+        date: "6 Haziran 2024",
+      },
+      {
+        id: "089-l-07",
+        sender: "Defne Karataş",
+        text: "01:00'da terasta buluşacağız. Merak etme, konuşma.",
+        time: "6 Haz · 22:40",
+        date: "6 Haziran 2024",
+        status: "read",
+      },
+    ],
+  },
+  {
+    id: "089-mt-p",
+    caseId: "089",
+    platform: "instagram",
+    title: "Instagram — Defne ↔ Hakan (@horbay_official)",
+    participants: [
+      { name: "Defne Karataş", isVictim: true, isUser: true },
+      { name: "Hakan Orbay" },
+    ],
+    meta: {
+      deviceInfo:
+        "089-P · Dijital Adli — @defnekaratas → @horbay_official (Hakan'ın iş hesabı)",
+      forensicNote:
+        '<strong>Çıkarsama:</strong> Hakan\'ın teras daveti doğrulandı. "01:00, gece sakin olur" ifadesi, Hakan\'ın odada olduğu saatlerle (23:15 — kart) çelişiyor — <strong>Hakan VIP balkonundan terasa kart kullanmadan çıkabilir</strong>.',
+    },
+    footerSignature: {
+      role: "Dijital Adli",
+      name: "B. Yıldız",
+    },
+    messages: [
+      {
+        id: "089-p-01",
+        sender: "Defne Karataş",
+        text: "Merhaba, otelde tanıştık. Teklifiniz ilgimi çekti.",
+        time: "6 Haz · 23:02",
+        date: "6 Haziran 2024",
+      },
+      {
+        id: "089-p-02",
+        sender: "Hakan Orbay",
+        text: "Harika. Yarın detayları konuşalım. Terasta olabilir misin? 01:00 gibi? Gece sakin olur.",
+        time: "6 Haz · 23:08",
+        date: "6 Haziran 2024",
+      },
+      {
+        id: "089-p-03",
+        sender: "Defne Karataş",
+        text: "Olur. Biraz geç gelebilirim.",
+        time: "6 Haz · 23:12",
+        date: "6 Haziran 2024",
+      },
+    ],
+  },
+];

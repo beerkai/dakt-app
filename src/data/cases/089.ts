@@ -7,6 +7,7 @@ import type {
   TimelineEvent,
 } from "@/lib/case-types";
 import payload from "./089-payload.json";
+import { messageThreads089 } from "./089-message-threads";
 
 /** Zaman çizelgesi kartları — başlangıçta kronolojiden hafifçe karıştırılmış sıra */
 const TL089_SHUFFLE_IDX = [
@@ -115,14 +116,18 @@ const forensics: Document[] = payload.forensics.map((d) => ({
   signature: d.signature,
 }));
 
-const documents: Document[] = payload.documents.map((d) => ({
-  id: d.id,
-  docId: d.docId,
-  title: d.title,
-  meta: d.meta,
-  body: d.body,
-  signature: d.signature,
-}));
+const CHAT_DOC_IDS = new Set(["089-K", "089-L", "089-P"]);
+
+const documents: Document[] = payload.documents
+  .filter((d) => !CHAT_DOC_IDS.has(d.id))
+  .map((d) => ({
+    id: d.id,
+    docId: d.docId,
+    title: d.title,
+    meta: d.meta,
+    body: d.body,
+    signature: d.signature,
+  }));
 
 const technical: Document[] = payload.technical.map((d) => ({
   id: d.id,
@@ -317,6 +322,7 @@ export const case089: CaseData = {
   forensics,
   evidence,
   documents,
+  messageThreads: messageThreads089,
   technical,
   timeline,
   timelineInitialOrder,
