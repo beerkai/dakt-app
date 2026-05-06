@@ -16,6 +16,7 @@ export function SiteNav() {
   const [open, setOpen] = useState(false);
   const [guestUsername, setGuestUsername] = useState<string | null>(null);
   const [logoutToastKey, setLogoutToastKey] = useState(0);
+  const [shareToastKey, setShareToastKey] = useState(0);
 
   const readGuest = useCallback(() => {
     try {
@@ -62,6 +63,36 @@ export function SiteNav() {
     return () => window.clearTimeout(id);
   }, [logoutToastKey]);
 
+  useEffect(() => {
+    if (shareToastKey === 0) return;
+    const id = window.setTimeout(() => setShareToastKey(0), 3000);
+    return () => window.clearTimeout(id);
+  }, [shareToastKey]);
+
+  const handleShare = useCallback(async () => {
+    setOpen(false);
+    const url =
+      typeof window !== "undefined" ? window.location.origin : "";
+    try {
+      if (typeof navigator !== "undefined" && navigator.share) {
+        await navigator.share({
+          title: "D.A.K.T. — Karaağaç Davası",
+          text: "Bu vakayı çözmemde bana yardım eder misin?",
+          url,
+        });
+        return;
+      }
+    } catch (e) {
+      if (e instanceof DOMException && e.name === "AbortError") return;
+    }
+    try {
+      await navigator.clipboard.writeText(url);
+      setShareToastKey((n) => n + 1);
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
   const handleLogout = useCallback(() => {
     try {
       localStorage.removeItem(GUEST_KEY);
@@ -75,6 +106,9 @@ export function SiteNav() {
 
   const navLinkClass =
     "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace] text-[10px] uppercase tracking-[0.22em] text-[var(--subtitle-text)] transition-colors hover:text-[var(--kraft-light)] md:py-0 py-3 border-b border-[var(--rule)] md:border-b-0 last:border-b-0";
+
+  const shareNavBtnClass =
+    "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace] cursor-pointer border-0 bg-transparent text-left text-[10px] uppercase tracking-[0.22em] text-[var(--kraft)] transition-colors duration-200 ease-in-out hover:text-[var(--bordeaux-bright)] md:py-0 py-3 border-b border-[var(--rule)] md:border-b-0 w-full md:w-auto";
 
   const outlineBtn =
     "inline-flex shrink-0 items-center justify-center border border-[var(--kraft)] bg-transparent font-medium uppercase tracking-[0.2em] text-[var(--kraft-light)] transition-colors [font-family:var(--font-jetbrains-mono),ui-monospace,monospace] hover:border-[var(--kraft-light)] hover:bg-[var(--anthracite-2)]";
@@ -113,6 +147,13 @@ export function SiteNav() {
             <Link href="/nasil-oynanir" className={navLinkClass}>
               Nasıl Oynanır
             </Link>
+            <button
+              type="button"
+              onClick={() => void handleShare()}
+              className={shareNavBtnClass}
+            >
+              Paylaş
+            </button>
           </nav>
 
           <div className="hidden items-center gap-4 md:flex">
@@ -207,6 +248,14 @@ export function SiteNav() {
             )}
             <button
               type="button"
+              onClick={() => void handleShare()}
+              className="flex size-10 shrink-0 items-center justify-center border border-[var(--rule)] text-lg leading-none text-[var(--kraft)] transition-colors duration-200 ease-in-out [font-family:var(--font-jetbrains-mono),monospace] hover:border-[var(--kraft-dark)] hover:text-[var(--bordeaux-bright)]"
+              aria-label="Paylaş"
+            >
+              ↗
+            </button>
+            <button
+              type="button"
               className="flex size-10 shrink-0 items-center justify-center border border-[var(--rule)] text-[var(--kraft)] [font-family:var(--font-jetbrains-mono),monospace] hover:bg-[var(--anthracite-2)]"
               aria-expanded={open}
               aria-controls="site-nav-mobile-panel"
@@ -233,6 +282,13 @@ export function SiteNav() {
               <Link href="/nasil-oynanir" className={navLinkClass}>
                 Nasıl Oynanır
               </Link>
+              <button
+                type="button"
+                onClick={() => void handleShare()}
+                className={shareNavBtnClass}
+              >
+                Paylaş
+              </button>
             </nav>
             <div className="mx-auto flex max-w-[1280px] flex-col gap-2 border-t border-[var(--rule)] pt-3 pb-4">
               {loggedIn ? (
@@ -275,6 +331,17 @@ export function SiteNav() {
           aria-live="polite"
         >
           ● Çıkış yapıldı
+        </div>
+      ) : null}
+
+      {shareToastKey > 0 ? (
+        <div
+          key={shareToastKey}
+          className="site-nav-logout-toast"
+          role="status"
+          aria-live="polite"
+        >
+          ● Bağlantı kopyalandı
         </div>
       ) : null}
     </>

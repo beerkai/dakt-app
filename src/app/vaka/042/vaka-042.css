@@ -489,6 +489,108 @@ a.nav-item {
   color: var(--bordeaux-bright);
 }
 
+/* === ÇÖZÜM — oy seçimi (voting) === */
+.suspect-card.suspect-card--vote-selected {
+  border-color: var(--bordeaux-bright);
+  background: linear-gradient(
+    135deg,
+    rgba(201, 180, 138, 0.14),
+    rgba(107, 22, 32, 0.2)
+  );
+  box-shadow:
+    0 0 0 1px var(--bordeaux-bright),
+    0 8px 28px rgba(107, 22, 32, 0.28);
+}
+.suspect-card.suspect-card--vote-confirm {
+  animation: cozumVoteConfirm 0.8s ease-in-out;
+}
+@keyframes cozumVoteConfirm {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.12);
+    box-shadow:
+      0 0 0 2px var(--bordeaux-bright),
+      0 0 36px rgba(168, 36, 47, 0.5);
+  }
+}
+
+.cozum-result-success {
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--kraft-dark);
+  padding: clamp(2rem, 5vw, 3rem);
+  overflow: hidden;
+}
+.cozum-result-success > * {
+  position: relative;
+  z-index: 1;
+}
+.cozum-result-success::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 75% 55% at 50% -10%,
+    rgba(231, 216, 179, 0.65),
+    transparent 58%
+  );
+  z-index: 0;
+}
+.cozum-stamp-solved {
+  color: var(--bordeaux);
+  border-color: var(--bordeaux);
+  top: 1.25rem;
+  right: 1.25rem;
+  font-size: 22px;
+}
+@media (max-width: 720px) {
+  .cozum-stamp-solved {
+    top: 0.75rem;
+    right: 0.75rem;
+    font-size: 16px;
+    padding: 6px 12px;
+  }
+}
+.cozum-envelope-neutral-back {
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--anthracite-2);
+  border: 1px dashed var(--rule);
+  color: var(--meta-label);
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 24px;
+  text-align: center;
+}
+.cozum-callout-warn {
+  border: 2px solid var(--bordeaux);
+  background: rgba(107, 22, 32, 0.12);
+  padding: 16px 20px;
+  margin-bottom: 28px;
+  font-family: var(--font-special-elite), monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  color: var(--body-text);
+}
+.cozum-result-fail {
+  position: relative;
+  border: 1px solid var(--rule);
+  background: var(--anthracite);
+  padding: clamp(2rem, 5vw, 3rem);
+  text-align: center;
+  overflow: hidden;
+}
+
 /* === EVIDENCE GRID === */
 .evidence-grid {
   display: grid;
