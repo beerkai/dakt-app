@@ -16,7 +16,6 @@ import { caseTabHref } from "@/lib/case-tab-routes";
 import type { CaseData } from "@/lib/case-types";
 
 const PLACEHOLDER_CARDS = [
-  { n: "068", label: "○ Yakında — Dosya №068" },
   { n: "069", label: "○ Yakında — Dosya №069" },
   { n: "070", label: "○ Yakında — Dosya №070" },
   { n: "071", label: "○ Yakında — Dosya №071" },

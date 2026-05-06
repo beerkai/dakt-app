@@ -15,6 +15,16 @@ export default async function IfadelerPage({
   const num = sectionNumForTab(caseData, "ifadeler");
   const sub = caseData.tabSectionSub.ifadeler ?? "";
 
+  const suspectOrder = caseData.suspects.map((s) => s.name);
+  const testimoniesSorted = [...caseData.testimonies].sort((a, b) => {
+    const ai = suspectOrder.indexOf(a.suspectName);
+    const bi = suspectOrder.indexOf(b.suspectName);
+    const ar = ai === -1 ? 999 : ai;
+    const br = bi === -1 ? 999 : bi;
+    if (ar !== br) return ar - br;
+    return (a.session ?? 1) - (b.session ?? 1);
+  });
+
   return (
     <section id="testimonies">
       <div className="section-head">
@@ -23,7 +33,7 @@ export default async function IfadelerPage({
         <span className="section-sub">{sub}</span>
       </div>
 
-      {caseData.testimonies.map((t) => (
+      {testimoniesSorted.map((t) => (
         <TestimonyArticle key={t.id} caseId={caseId} t={t} />
       ))}
     </section>

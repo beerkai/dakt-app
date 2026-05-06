@@ -10,6 +10,22 @@ export function TestimonyArticle({
   caseId: string;
   t: Testimony;
 }) {
+  const headingTitle =
+    t.session != null && !/\([12]\.\s*Oturum\)/.test(t.title)
+      ? `${t.title} (${t.session}. Oturum)`
+      : t.title;
+
+  const metaRows =
+    t.metaRows ??
+    (
+      [
+        ["Tarih", t.date],
+        ["Doğum", t.birth],
+        ["Meslek", t.occupation],
+        ["Adres", t.address],
+      ] as const
+    ).map(([label, value]) => ({ label, value }));
+
   return (
     <ClientDocArticle
       caseId={caseId}
@@ -17,21 +33,14 @@ export function TestimonyArticle({
       headerMain={
         <>
           <div className="doc-id">{t.headerDocId}</div>
-          <h2 className="doc-title">{t.title}</h2>
+          <h2 className="doc-title">{headingTitle}</h2>
         </>
       }
       body={
         <>
           <dl className="doc-meta">
-            {(
-              [
-                ["Tarih", t.date],
-                ["Doğum", t.birth],
-                ["Meslek", t.occupation],
-                ["Adres", t.address],
-              ] as const
-            ).map(([label, value]) => (
-              <Fragment key={label}>
+            {metaRows.map(({ label, value }) => (
+              <Fragment key={`${t.id}-${label}`}>
                 <dt>{label}</dt>
                 <dd>{value}</dd>
               </Fragment>

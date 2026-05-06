@@ -59,6 +59,10 @@ export interface Testimony {
   signatureRole?: string;
   headerDocId: string;
   title: string;
+  /** Çift oturum ifadeleri — sıralama ve (isteğe bağlı) başlık için */
+  session?: 1 | 2;
+  /** 2. oturum gibi özel meta satırları (varsayılan Tarih/Doğum/Meslek/Adres yerine) */
+  metaRows?: Array<{ label: string; value: string }>;
 }
 
 export interface Evidence {

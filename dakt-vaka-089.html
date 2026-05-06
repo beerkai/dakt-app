@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D.A.K.T. // VAKA-089 // PERİ BACASI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=JetBrains+Mono:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0e0f10;--anthracite:#1a1c1f;--anthracite-2:#232629;--kraft:#c9b48a;--kraft-dark:#8a774f;--kraft-light:#e7d8b3;--paper:#f1e7cf;--paper-dim:#ddc99e;--bordeaux:#6b1620;--bordeaux-bright:#a8242f;--classified:#c0392b;--approved:#4a6b3a;--denied:#6b1620;--rule:rgba(255,255,255,0.08);--shadow:0 24px 60px rgba(0,0,0,0.55),0 4px 14px rgba(0,0,0,0.5)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--ink);color:#e8e4d8;font-family:'JetBrains Mono',monospace;min-height:100vh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(107,22,32,0.12),transparent 60%),radial-gradient(ellipse 60% 40% at 100% 100%,rgba(201,180,138,0.04),transparent 60%);pointer-events:none;z-index:0}
+body::after{content:"";position:fixed;inset:0;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,0.012) 0px,rgba(255,255,255,0.012) 1px,transparent 1px,transparent 3px);mix-blend-mode:overlay;pointer-events:none;z-index:999}
+.bar{position:sticky;top:0;z-index:100;background:var(--ink);border-bottom:1px solid var(--rule);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:0.18em;text-transform:uppercase}
+.bar-left{display:flex;gap:24px;align-items:center}
+.bar-logo{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;letter-spacing:0.4em;color:var(--kraft)}
+.bar-meta{color:#6a665b}
+.bar-right{display:flex;gap:16px;align-items:center;color:#6a665b}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--bordeaux-bright);animation:pulse 1.6s ease-in-out infinite;display:inline-block;margin-right:6px}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 var(--bordeaux-bright)}50%{opacity:0.4;box-shadow:0 0 0 6px transparent}}
+.hero{padding:80px 28px 48px;max-width:1280px;margin:0 auto;position:relative;z-index:1}
+.classification-strip{display:inline-flex;align-items:center;gap:12px;padding:6px 14px;background:var(--bordeaux);color:var(--paper);font-size:10px;letter-spacing:0.3em;text-transform:uppercase;margin-bottom:24px;border-left:3px solid var(--bordeaux-bright)}
+.classification-strip::before{content:"■";color:var(--paper)}
+.hero-title{font-family:'Cormorant Garamond',serif;font-weight:600;font-style:italic;font-size:clamp(48px,9vw,128px);line-height:0.92;letter-spacing:-0.02em;color:var(--paper);margin-bottom:16px}
+.hero-title em{font-style:normal;color:var(--kraft)}
+.hero-subtitle{font-family:'Special Elite',monospace;font-size:14px;letter-spacing:0.05em;color:#9c9588;max-width:580px;line-height:1.7;margin-top:28px}
+.hero-meta-grid{margin-top:56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--rule);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.hero-meta-cell{background:var(--ink);padding:18px 16px}
+.hero-meta-cell .lbl{font-size:9px;letter-spacing:0.3em;color:#6a665b;text-transform:uppercase;margin-bottom:8px}
+.hero-meta-cell .val{font-family:'Special Elite',monospace;font-size:14px;color:var(--kraft-light)}
+.nav{position:sticky;top:47px;z-index:90;background:var(--ink);border-bottom:1px solid var(--rule);padding:0 28px;overflow-x:auto}
+.nav-inner{max-width:1280px;margin:0 auto;display:flex;gap:4px}
+.nav-item{background:none;border:none;color:#6a665b;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;padding:18px 14px;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all 0.2s;position:relative}
+.nav-item:hover{color:var(--kraft-light)}
+.nav-item.active{color:var(--kraft);border-bottom-color:var(--bordeaux-bright)}
+.nav-item .num{font-size:9px;color:#4a463d;margin-right:6px}
+.nav-item.active .num{color:var(--bordeaux-bright)}
+.workspace{max-width:1280px;margin:0 auto;padding:60px 28px 120px;position:relative;z-index:1}
+.section{display:none;animation:fadeIn 0.4s ease}
+.section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.section-head{display:flex;align-items:baseline;gap:20px;margin-bottom:40px;padding-bottom:18px;border-bottom:1px solid var(--rule)}
+.section-num{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:64px;color:var(--bordeaux-bright);line-height:1}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:var(--paper);letter-spacing:-0.01em}
+.section-sub{font-size:11px;letter-spacing:0.2em;color:#6a665b;text-transform:uppercase;margin-left:auto}
+.doc{background:var(--paper);color:var(--ink);padding:56px 64px;margin-bottom:32px;position:relative;box-shadow:var(--shadow);font-family:'Special Elite',monospace;font-size:13px;line-height:1.85;background-image:repeating-linear-gradient(0deg,transparent 0px,transparent 30px,rgba(107,22,32,0.04) 30px,rgba(107,22,32,0.04) 31px),radial-gradient(ellipse at top right,rgba(138,119,79,0.18),transparent 50%),radial-gradient(ellipse at bottom left,rgba(138,119,79,0.12),transparent 60%);border:1px solid rgba(0,0,0,0.1);transform-origin:top center;transition:transform 0.3s}
+.doc::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background-image:radial-gradient(circle at 12% 8%,rgba(0,0,0,0.06) 0%,transparent 1.5%),radial-gradient(circle at 88% 22%,rgba(0,0,0,0.04) 0%,transparent 1%),radial-gradient(circle at 30% 95%,rgba(0,0,0,0.05) 0%,transparent 1.5%);pointer-events:none}
+.doc-header{border-bottom:2px solid var(--ink);padding-bottom:20px;margin-bottom:28px;display:flex;justify-content:space-between;align-items:flex-start;gap:32px}
+.doc-id{font-size:10px;letter-spacing:0.3em;color:var(--kraft-dark);text-transform:uppercase;margin-bottom:8px}
+.doc-title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:28px;letter-spacing:-0.01em;color:var(--ink);line-height:1.1}
+.doc-stamp-area{display:flex;flex-direction:column;align-items:flex-end;gap:8px;min-width:160px}
+.doc-meta{display:grid;grid-template-columns:max-content 1fr;gap:6px 20px;font-size:12px;margin-bottom:28px;padding:16px 20px;background:rgba(138,119,79,0.1);border-left:3px solid var(--bordeaux)}
+.doc-meta dt{font-weight:700;color:var(--kraft-dark);text-transform:uppercase;letter-spacing:0.1em;font-size:10px;align-self:center}
+.doc-meta dd{color:var(--ink)}
+.doc h3{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;margin:24px 0 10px;color:var(--ink);border-bottom:1px dashed rgba(0,0,0,0.2);padding-bottom:4px}
+.doc p{margin-bottom:14px}
+.doc ol,.doc ul{margin:10px 0 16px 24px}
+.doc li{margin-bottom:8px}
+.doc strong{font-weight:700;background:rgba(255,230,100,0.35);padding:0 3px}
+.doc-signature{margin-top:36px;padding-top:18px;border-top:1px dashed rgba(0,0,0,0.3);display:flex;justify-content:space-between;align-items:flex-end;gap:32px}
+.sig-line{font-size:11px;color:var(--kraft-dark)}
+.sig-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:var(--bordeaux);border-bottom:1px solid var(--ink);padding-bottom:4px;display:inline-block;min-width:180px;text-align:center;transform:rotate(-1.5deg)}
+.stamp-controls{display:flex;gap:6px;flex-wrap:wrap}
+.stamp-btn{background:transparent;border:1px solid var(--ink);padding:5px 9px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;color:var(--ink);transition:all 0.15s}
+.stamp-btn:hover{background:var(--ink);color:var(--paper)}
+.stamp{position:absolute;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:28px;letter-spacing:0.1em;padding:8px 18px;border:4px double currentColor;text-transform:uppercase;pointer-events:none;opacity:0.85;white-space:nowrap;z-index:5;user-select:none;animation:stampDrop 0.4s cubic-bezier(0.34,1.56,0.64,1)}
+@keyframes stampDrop{0%{transform:var(--rot,rotate(-12deg)) scale(2.5);opacity:0}50%{opacity:1}100%{transform:var(--rot,rotate(-12deg)) scale(1);opacity:0.85}}
+.stamp-approved{color:var(--approved);top:100px;right:80px;transform:rotate(-12deg);--rot:rotate(-12deg)}
+.stamp-denied{color:var(--denied);top:110px;right:60px;transform:rotate(8deg);--rot:rotate(8deg)}
+.stamp-classified{color:var(--classified);top:50%;left:50%;transform:translate(-50%,-50%) rotate(-6deg);--rot:translate(-50%,-50%) rotate(-6deg);font-size:42px}
+.stamp-cross{color:#2a4d6e;top:130px;right:100px;transform:rotate(-4deg);--rot:rotate(-4deg)}
+.suspect-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-bottom:32px}
+.suspect-card{background:var(--anthracite);border:1px solid var(--rule);padding:24px;position:relative;cursor:pointer;transition:all 0.25s;overflow:hidden}
+.suspect-card::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,transparent 0%,transparent 60%,rgba(107,22,32,0.15) 100%);pointer-events:none}
+.suspect-card:hover{border-color:var(--kraft-dark);transform:translateY(-2px)}
+.suspect-card.flagged{border-color:var(--bordeaux-bright);background:linear-gradient(135deg,var(--anthracite),rgba(107,22,32,0.2))}
+.suspect-card.flagged::after{content:"⚑ İŞARETLİ";position:absolute;top:12px;right:12px;font-size:9px;letter-spacing:0.2em;color:var(--bordeaux-bright)}
+.suspect-id{font-size:9px;letter-spacing:0.3em;color:#6a665b;text-transform:uppercase;margin-bottom:6px}
+.suspect-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--paper);letter-spacing:-0.01em;margin-bottom:4px}
+.suspect-role{font-family:'Special Elite',monospace;font-size:12px;color:var(--kraft);margin-bottom:14px}
+.suspect-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:#b8b1a0;line-height:1.5;padding-left:12px;border-left:2px solid var(--bordeaux)}
+.suspect-flag{margin-top:18px;background:transparent;border:1px solid var(--rule);color:#9c9588;padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;width:100%;transition:all 0.2s}
+.suspect-flag:hover{border-color:var(--bordeaux-bright);color:var(--bordeaux-bright)}
+.suspect-card.flagged .suspect-flag{border-color:var(--bordeaux-bright);color:var(--bordeaux-bright)}
+.evidence-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.evidence-card{background:var(--anthracite);border:1px solid var(--rule);padding:22px;position:relative}
+.evidence-tag{display:inline-block;font-size:9px;letter-spacing:0.25em;padding:3px 8px;background:var(--bordeaux);color:var(--paper);text-transform:uppercase;margin-bottom:10px}
+.evidence-code{font-family:'JetBrains Mono',monospace;font-size:10px;color:#6a665b;letter-spacing:0.2em;margin-bottom:4px}
+.evidence-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--paper);margin-bottom:12px;letter-spacing:-0.01em}
+.evidence-desc{font-family:'Special Elite',monospace;font-size:12px;color:#b8b1a0;line-height:1.6;margin-bottom:14px}
+.evidence-detail{font-size:11px;color:#9c9588;padding-top:14px;border-top:1px dashed var(--rule);line-height:1.7}
+.evidence-detail span{color:var(--kraft);font-weight:500}
+.timeline{position:relative;padding-left:40px;margin-top:20px}
+.timeline::before{content:"";position:absolute;left:12px;top:8px;bottom:8px;width:1px;background:linear-gradient(to bottom,var(--bordeaux-bright),var(--rule))}
+.tl-item{position:relative;padding-bottom:28px}
+.tl-item::before{content:"";position:absolute;left:-34px;top:6px;width:12px;height:12px;background:var(--ink);border:2px solid var(--kraft);border-radius:50%}
+.tl-item.critical::before{background:var(--bordeaux-bright);border-color:var(--bordeaux-bright);box-shadow:0 0 0 4px rgba(168,36,47,0.2)}
+.tl-time{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--kraft);letter-spacing:0.1em;margin-bottom:4px}
+.tl-item.critical .tl-time{color:var(--bordeaux-bright)}
+.tl-event{font-family:'Special Elite',monospace;font-size:13px;color:#d6cdb6;line-height:1.6}
+.tl-source{font-size:10px;color:#6a665b;letter-spacing:0.15em;margin-top:4px;text-transform:uppercase}
+.board{background:var(--anthracite);border:1px solid var(--rule);padding:32px;position:relative;overflow:hidden}
+.board::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(201,180,138,0.06) 1px,transparent 0);background-size:24px 24px;pointer-events:none}
+.board-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;position:relative}
+.board-col h4{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:var(--kraft);margin-bottom:14px;padding-bottom:8px;border-bottom:1px dashed var(--rule);letter-spacing:0.05em}
+.board-item{background:var(--ink);border:1px solid var(--rule);padding:12px 14px;margin-bottom:10px;font-family:'Special Elite',monospace;font-size:12px;color:#c4bda8;line-height:1.5;position:relative}
+.board-item .pin{position:absolute;top:-4px;right:10px;width:10px;height:10px;background:var(--bordeaux-bright);border-radius:50%;box-shadow:0 2px 4px rgba(0,0,0,0.6)}
+.note-pad{background:var(--paper-dim);color:var(--ink);padding:18px;margin-top:20px;font-family:'Special Elite',monospace;font-size:13px;line-height:1.7;border:none;width:100%;min-height:140px;resize:vertical;background-image:repeating-linear-gradient(0deg,transparent 0px,transparent 23px,rgba(0,0,0,0.1) 23px,rgba(0,0,0,0.1) 24px)}
+.note-pad:focus{outline:2px solid var(--bordeaux)}
+.gate{background:linear-gradient(135deg,var(--anthracite) 0%,var(--ink) 100%);border:1px solid var(--bordeaux);padding:60px 48px;text-align:center;position:relative;overflow:hidden}
+.gate::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,transparent 0px,transparent 20px,rgba(107,22,32,0.08) 20px,rgba(107,22,32,0.08) 22px);pointer-events:none}
+.gate-seal{font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:0.4em;color:var(--bordeaux-bright);text-transform:uppercase;margin-bottom:12px}
+.gate-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:56px;color:var(--paper);margin-bottom:16px;line-height:1}
+.gate-warn{font-family:'Special Elite',monospace;font-size:13px;color:#9c9588;max-width:540px;margin:0 auto 36px;line-height:1.7}
+.gate-btn{background:var(--bordeaux);border:1px solid var(--bordeaux-bright);color:var(--paper);padding:18px 40px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.3em;text-transform:uppercase;cursor:pointer;transition:all 0.3s;position:relative}
+.gate-btn:hover{background:var(--bordeaux-bright);letter-spacing:0.4em}
+.solution-content{display:none;animation:fadeIn 0.6s ease}
+.solution-content.revealed{display:block}
+.verdict{background:var(--paper);color:var(--ink);padding:56px 64px;margin:32px 0;position:relative;box-shadow:var(--shadow);font-family:'Special Elite',monospace;font-size:13px;line-height:1.85}
+.verdict-stamp{position:absolute;top:40px;right:60px;border:4px double var(--bordeaux);color:var(--bordeaux);padding:12px 24px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:22px;letter-spacing:0.2em;transform:rotate(-8deg);opacity:0.85}
+.verdict-name{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:64px;color:var(--bordeaux);letter-spacing:-0.02em;line-height:0.95;margin:24px 0;text-transform:uppercase}
+.foot{border-top:1px solid var(--rule);margin-top:80px;padding:32px 28px;text-align:center;font-size:10px;letter-spacing:0.3em;color:#4a463d;text-transform:uppercase}
+.foot em{font-family:'Cormorant Garamond',serif;font-style:italic;letter-spacing:0.2em;color:var(--kraft-dark)}
+.audio-unit{background:var(--anthracite);border:1px solid var(--rule);padding:28px;margin-top:24px}
+.audio-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:14px;border-bottom:1px dashed var(--rule)}
+.audio-label{font-size:10px;letter-spacing:0.3em;color:#6a665b;text-transform:uppercase}
+.audio-duration{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--kraft)}
+.waveform{display:flex;align-items:center;gap:2px;height:60px;margin-bottom:24px;padding:0 4px}
+.waveform-bar{flex:1;background:linear-gradient(to top,var(--bordeaux),var(--bordeaux-bright));border-radius:1px;opacity:0.5}
+.transcript{background:var(--ink);border-left:3px solid var(--bordeaux);padding:20px 24px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;line-height:1.8;color:#d6cdb6}
+.transcript p{margin-bottom:10px}
+.transcript .highlight{background:rgba(168,36,47,0.25);color:#ffd1d6;padding:0 4px;font-style:normal;font-family:'JetBrains Mono',monospace;font-size:13px}
+.signal-table{width:100%;margin-top:16px;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:12px}
+.signal-table th,.signal-table td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--rule)}
+.signal-table th{font-size:10px;letter-spacing:0.2em;color:#6a665b;text-transform:uppercase;font-weight:400}
+.signal-table td{color:#d6cdb6}
+.signal-table tr.alert td{color:var(--bordeaux-bright)}
+.signal-table tr.alert td:first-child::before{content:"▸ ";color:var(--bordeaux-bright)}
+.email-thread{background:var(--paper);color:var(--ink);padding:28px 36px;margin:16px 0;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.7;border-left:4px solid var(--bordeaux);box-shadow:var(--shadow)}
+.email-msg{padding-bottom:16px;margin-bottom:16px;border-bottom:1px dashed rgba(0,0,0,0.2)}
+.email-msg:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.email-head{display:grid;grid-template-columns:70px 1fr;gap:4px 16px;margin-bottom:12px;font-size:11px}
+.email-head dt{color:var(--kraft-dark);font-weight:700;text-transform:uppercase;letter-spacing:0.1em}
+.email-head dd{color:var(--ink)}
+.email-body{font-family:'Special Elite',monospace;font-size:13px}
+.handwritten{background:#f3e9d2;color:#2a1f10;padding:32px 40px;margin:16px 0;font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.9;font-style:italic;position:relative;box-shadow:var(--shadow);background-image:repeating-linear-gradient(0deg,transparent 0px,transparent 32px,rgba(74,60,30,0.18) 32px,rgba(74,60,30,0.18) 33px);transform:rotate(-0.4deg)}
+.handwritten::before{content:"";position:absolute;top:12px;left:12px;right:12px;bottom:12px;border:1px dashed rgba(74,60,30,0.3);pointer-events:none}
+.handwritten .torn{color:rgba(0,0,0,0.4);font-style:normal;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em}
+.bank-table,.ledger-table{width:100%;margin-top:12px;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink)}
+.bank-table th,.bank-table td,.ledger-table th,.ledger-table td{padding:10px 12px;text-align:left;border-bottom:1px solid rgba(0,0,0,0.1)}
+.bank-table th,.ledger-table th{font-size:10px;letter-spacing:0.2em;color:var(--kraft-dark);text-transform:uppercase;font-weight:700;background:rgba(138,119,79,0.15)}
+.bank-table tr.alert td{color:var(--bordeaux);font-weight:700}
+.bank-table .credit{color:var(--approved);font-weight:700}
+.bank-table .debit{color:var(--bordeaux)}
+.ledger-table tr.alert td{color:var(--bordeaux);font-weight:700;background:rgba(168,36,47,0.08)}
+.ledger-table tr.missing td{color:var(--bordeaux-bright);font-style:italic}
+.chat-bubble-left,.chat-bubble-right{max-width:85%;padding:14px 18px;margin-bottom:10px;font-family:'Special Elite',monospace;font-size:12px;line-height:1.6;position:relative}
+.chat-bubble-left{background:rgba(138,119,79,0.15);border-radius:0 12px 12px 12px;margin-right:auto;color:var(--ink)}
+.chat-bubble-right{background:rgba(107,22,32,0.12);border-radius:12px 0 12px 12px;margin-left:auto;color:var(--ink)}
+.chat-sender{font-size:10px;font-weight:700;letter-spacing:0.1em;color:var(--kraft-dark);text-transform:uppercase;margin-bottom:4px}
+.chat-time{font-size:10px;color:rgba(0,0,0,0.4);margin-top:4px;text-align:right}
+@media(max-width:720px){.doc{padding:32px 24px}.doc-header{flex-direction:column;gap:16px}.board-grid{grid-template-columns:1fr}.verdict{padding:32px 24px}.verdict-stamp{right:20px;top:20px;font-size:16px;padding:8px 14px}.gate-title{font-size:36px}.verdict-name{font-size:36px}.hero{padding:40px 20px 32px}.workspace{padding:40px 20px 80px}.nav{padding:0 16px}.email-thread{padding:20px}.handwritten{padding:24px;font-size:16px}}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-left">
+    <span class="bar-logo">D.A.K.T.</span>
+    <span class="bar-meta">Division of Analytic Knowledge & Testimonies</span>
+  </div>
+  <div class="bar-right">
+    <span><span class="live-dot"></span>OPS // CANLI</span>
+    <span id="clock">--:--:--</span>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="classification-strip">EYES ONLY · CLASSIFIED · ANALYST CLEARANCE REQUIRED</div>
+  <h1 class="hero-title">Vaka <em>№ 089</em><br><em style="font-style:italic;">Peri Bacası</em> Dosyası.</h1>
+  <p class="hero-subtitle">
+    Göreme, 7 Haziran 2024, 06:10. Sıcak hava balonları yükselirken bir balon pilotu, 
+    peri bacasının tepesinde çırılçıplak bir kadın cesedi görür. 25 yaşında. Boğularak öldürülmüş.
+    Altı şüpheli, yirmi iki belge, bir tatil grubu, bir yalan ağı.
+    <strong style="color:var(--kraft);">Bu davada herkes bir şey saklıyor — ama yalnızca biri öldürdü.</strong>
+  </p>
+
+  <div class="hero-meta-grid">
+    <div class="hero-meta-cell"><div class="lbl">Vaka Kodu</div><div class="val">DAKT-089-PRB</div></div>
+    <div class="hero-meta-cell"><div class="lbl">Operasyon</div><div class="val">Peri Bacası</div></div>
+    <div class="hero-meta-cell"><div class="lbl">Sınıflandırma</div><div class="val">Yüksek Öncelik</div></div>
+    <div class="hero-meta-cell"><div class="lbl">Şüpheli Sayısı</div><div class="val">06</div></div>
+    <div class="hero-meta-cell"><div class="lbl">Belge</div><div class="val">22 Adet</div></div>
+    <div class="hero-meta-cell"><div class="lbl">Açılış</div><div class="val">08.06.2024</div></div>
+  </div>
+</section>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <button class="nav-item active" data-tab="brief"><span class="num">01</span>Brief</button>
+    <button class="nav-item" data-tab="suspects"><span class="num">02</span>Şüpheliler</button>
+    <button class="nav-item" data-tab="testimonies"><span class="num">03</span>İfadeler</button>
+    <button class="nav-item" data-tab="forensics"><span class="num">04</span>Adli Tıp</button>
+    <button class="nav-item" data-tab="evidence"><span class="num">05</span>Deliller</button>
+    <button class="nav-item" data-tab="documents"><span class="num">06</span>Belgeler</button>
+    <button class="nav-item" data-tab="technical"><span class="num">07</span>Teknik</button>
+    <button class="nav-item" data-tab="timeline"><span class="num">08</span>Zaman Çizelgesi</button>
+    <button class="nav-item" data-tab="board"><span class="num">09</span>Deduction</button>
+    <button class="nav-item" data-tab="solution"><span class="num">10</span>Çözüm</button>
+  </div>
+</nav>
+
+<main class="workspace">
+
+<!-- ============ 01 BRIEF ============ -->
+<section class="section active" id="brief">
+  <div class="section-head">
+    <div class="section-num">01</div>
+    <h2 class="section-title">Vaka Özeti</h2>
+    <span class="section-sub">089-A · Olay Yeri</span>
+  </div>
+
+  <article class="doc" data-doc="brief">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">T.C. İçişleri Bakanlığı · Kriminal Soruşturma Birimi</div>
+        <h2 class="doc-title">Soruşturma Dosyası — Olay Özeti</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="approved">Approved</button>
+          <button class="stamp-btn" data-stamp="denied">Denied</button>
+          <button class="stamp-btn" data-stamp="classified">Classified</button>
+        </div>
+      </div>
+    </div>
+
+    <dl class="doc-meta">
+      <dt>Vaka No</dt><dd>089</dd>
+      <dt>Dosya Tipi</dt><dd>Cinayet — Boğma — Yüksek Öncelik</dd>
+      <dt>Olay Tarihi</dt><dd>7 Haziran 2024 · Gece 03:30 — 05:00 (tahmini)</dd>
+      <dt>Konum</dt><dd>Nevşehir · Göreme · Aşıklar Vadisi yakını, 14 numaralı peri bacası</dd>
+      <dt>Kurban</dt><dd>Defne Karataş (25, kadın)</dd>
+    </dl>
+
+    <h3>Olay</h3>
+    <p>7 Haziran 2024 sabahı saat 06:10'da, Kapadokya Balon Turizm pilotu <strong>Cengiz Balta</strong>, standart sabah uçuşu sırasında Aşıklar Vadisi yakınındaki 14 numaralı peri bacasının tepesinde <strong>çırılçıplak bir kadın cesedi</strong> fark etmiştir. Derhal iniş yapılarak jandarma bilgilendirilmiştir.</p>
+    <p>Ceset, 25 yaşındaki <strong>Defne Karataş</strong>'a aittir. İstanbul'dan gelen üç kişilik bir kadın arkadaş grubuyla Kapadokya tatilindeydi. Grup, Göreme merkezinde <strong>Kelebek Cave Otel'de</strong> konaklamaktaydı.</p>
+
+    <h3>Mağdur Profili</h3>
+    <p>Defne Karataş, İstanbul'da bir hukuk bürosunda avukat asistanı olarak çalışıyordu. Güçlü sosyal medya varlığı: Instagram'da 48.000 takipçi, "yaşam tarzı" ve "seyahat" içerikleri üretiyordu. Yakın arkadaşları <strong>İpek Sarıhan</strong> ve <strong>Ceren Aksoy</strong> ile birlikte 5 Haziran'da Kapadokya'ya gelmişti. 3 gecelik tatil planı. İkinci gece (6-7 Haziran), hayatını kaybetmiştir.</p>
+
+    <h3>Ölüm Şekli</h3>
+    <p>Ön otopsi: <strong>mekanik asfiksi — elle boğma</strong>. Boyun bölgesinde belirgin parmak izleri ve hiyoid kemik kırığı. Cinsel saldırı bulgusu <strong>yok</strong> — ancak cesedin soyulmuş halde bulunması, <strong>kıyafetlerin bilinçli olarak uzaklaştırıldığını</strong> göstermektedir. Kıyafetler olay yerinde bulunamamıştır.</p>
+    <p>Peri bacasının tepesine çıkmak, orta düzey tırmanma becerisi gerektirir. <strong>Ceset ölüm sonrası taşınmıştır</strong> — cesedin yerleştirilme zamanı 04:30 — 05:30 arası.</p>
+
+    <h3>Olay Penceresi</h3>
+    <p>Mağdurun son cep telefonu aktivitesi: <strong>6 Haziran, 23:47</strong> (Instagram story paylaşımı — otel restoranından). Son görülme: <strong>7 Haziran, 01:15</strong> civarında otel lobisinde, yalnız başına dışarı çıkarken (güvenlik kamerası). Tahmini ölüm saati: <strong>03:30 — 05:00</strong>. Cesedin bulunması: 06:10.</p>
+
+    <h3>Görev</h3>
+    <p>Bu dosyadaki <strong>22 belgeyi</strong> dikkatlice incele. Altı şüphelinin her birinin bir sırrı var — ancak yalnızca birinin sırrı cinayetle doğrudan ilgili. Cesedin neden çıplak bırakıldığını, peri bacasına neden taşındığını ve failin <strong>sahneyi neden kurguladığını</strong> anlamak, katili bulmaktan bile önemli olabilir.</p>
+    <p style="background:rgba(107,22,32,0.1);padding:12px 16px;border-left:3px solid var(--bordeaux);"><strong>UYARI:</strong> Bu davada iki şüpheli yalan söylüyor — biri cinayeti saklamak için, diğeri tamamen farklı bir suçu örtbas etmek için. Her iki yalanı da çözmelisin.</p>
+
+    <div class="doc-signature">
+      <div class="sig-line">Düzenleyen<br>Kriminal Soruşturma Birimi</div>
+      <div class="sig-name">G. Aras</div>
+    </div>
+  </article>
+</section>
+
+<!-- ============ 02 SUSPECTS ============ -->
+<section class="section" id="suspects">
+  <div class="section-head">
+    <div class="section-num">02</div>
+    <h2 class="section-title">Şüpheliler Listesi</h2>
+    <span class="section-sub">Gizli · 06 Profil</span>
+  </div>
+
+  <div class="suspect-grid">
+    <div class="suspect-card" data-suspect="ipek">
+      <div class="suspect-id">SUSP-01 · GRM-KCO/IP</div>
+      <h3 class="suspect-name">İpek Sarıhan</h3>
+      <div class="suspect-role">Yakın arkadaş · Tatil grubu üyesi · 26</div>
+      <p class="suspect-quote">"Defne gece dışarı çıktığında uyuyordum. Sabah yatağının boş olduğunu gördüm."</p>
+      <button class="suspect-flag">⚐ İŞARETLE</button>
+    </div>
+
+    <div class="suspect-card" data-suspect="ceren">
+      <div class="suspect-id">SUSP-02 · GRM-KCO/CA</div>
+      <h3 class="suspect-name">Ceren Aksoy</h3>
+      <div class="suspect-role">Yakın arkadaş · Tatil grubu üyesi · 25</div>
+      <p class="suspect-quote">"İpek'le ayrı odadaydım. Defne'yle akşam tartıştık, sonra barıştık. Normal bir gece."</p>
+      <button class="suspect-flag">⚐ İŞARETLE</button>
+    </div>
+
+    <div class="suspect-card" data-suspect="tolga">
+      <div class="suspect-id">SUSP-03 · GRM-RST/TK</div>
+      <h3 class="suspect-name">Tolga Kıvanç</h3>
+      <div class="suspect-role">Otel barmen · Yerel · 32</div>
+      <p class="suspect-quote">"Son içkisini ben hazırladım. Flört ettik mi? Belki. Ama takip etmedim."</p>
+      <button class="suspect-flag">⚐ İŞARETLE</button>
+    </div>
+
+    <div class="suspect-card" data-suspect="alp">
+      <div class="suspect-id">SUSP-04 · GRM-TUR/AE</div>
+      <h3 class="suspect-name">Alp Erdoğan</h3>
+      <div class="suspect-role">ATV tur rehberi · Eski sevgili (Defne) · 28</div>
+      <p class="suspect-quote">"Evet, Defne'nin burada olduğunu biliyordum. Tesadüf değil. Konuşmak istiyordum."</p>
+      <button class="suspect-flag">⚐ İŞARETLE</button>
+    </div>
+
+    <div class="suspect-card" data-suspect="hakan">
+      <div class="suspect-id">SUSP-05 · GRM-VIP/HO</div>
+      <h3 class="suspect-name">Hakan Orbay</h3>
+      <div class="suspect-role">İstanbul işadamı · Oteldeki misafir · 45</div>
+      <p class="suspect-quote">"Otel restoranında tanıştık. İçki ısmarladım. Bu kadar."</p>
+      <button class="suspect-flag">⚐ İŞARETLE</button>
+    </div>
+
+    <div class="suspect-card" data-suspect="elif">
+      <div class="suspect-id">SUSP-06 · GRM-KCO/EM</div>
+      <h3 class="suspect-name">Elif Mertoğlu</h3>
+      <div class="suspect-role">Otel müdiresi · Kelebek Cave Otel · 39</div>
+      <p class="suspect-quote">"Otelimde cinayet olması beni yıktı. Güvenlik kameralarını hemen teslim ettim."</p>
+      <button class="suspect-flag">⚐ İŞARETLE</button>
+    </div>
+  </div>
+
+  <p style="font-size:11px;letter-spacing:0.15em;color:#6a665b;text-transform:uppercase;text-align:center;padding:24px;">
+    ▸ Bir şüpheliyi işaretle ve ifadelerle çapraz okuma yap.
+  </p>
+</section>
+
+<!-- ============ 03 TESTIMONIES ============ -->
+<section class="section" id="testimonies">
+  <div class="section-head">
+    <div class="section-num">03</div>
+    <h2 class="section-title">Polis İfadeleri</h2>
+    <span class="section-sub">089-C → 089-J</span>
+  </div>
+
+  <!-- IPEK -->
+  <article class="doc" data-doc="ipek1">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">089-C · Nevşehir İl Jandarma Komutanlığı</div>
+        <h2 class="doc-title">İfade — İpek Sarıhan (1. Oturum)</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="approved">Approved</button>
+          <button class="stamp-btn" data-stamp="denied">Denied</button>
+          <button class="stamp-btn" data-stamp="cross">Cross-Ref</button>
+        </div>
+      </div>
+    </div>
+
+    <dl class="doc-meta">
+      <dt>Tarih</dt><dd>07.06.2024 · 10:30</dd>
+      <dt>Doğum</dt><dd>14.03.1998</dd>
+      <dt>Meslek</dt><dd>İç mimar · Serbest</dd>
+      <dt>Konaklama</dt><dd>Kelebek Cave Otel · Oda 12 (Defne ile paylaşım)</dd>
+    </dl>
+
+    <p>Defne ile 7 yıldır yakın arkadaşız. Bu tatili benim planladım. 5 Haziran'da geldik. İlk iki gün harika geçti — ATV, balon turu rezervasyonu, yerel şarap tadımı.</p>
+    <p>6 Haziran akşamı otel restoranında yemek yedik, üçümüz. Ceren biraz yorgundu, erken çıktı. Defne ve ben barda kaldık. Saat <strong>23:30 gibi ben de odaya çıktım</strong>. Defne hâlâ barda oturuyordu, <strong>barmenle sohbet ediyordu</strong>.</p>
+    <p>Odaya girdiğimde pijamalarımı giydim, ışığı kapattım. <strong>Defne'nin odaya ne zaman geldiğini bilmiyorum çünkü uyudum.</strong></p>
+    <p>Sabah 06:30'da uyandığımda Defne'nin yatağı boştu. Düzgündü bile — yani ya hiç yatmadı ya da kalktıktan sonra yatağı topladı. Ben ikincisine ihtimal vermiyorum, Defne hiç yatak toplamaz.</p>
+    <p>Telefonunu aradım, açılmadı. Ceren'i uyandırdım. O sırada jandarma otele geldi.</p>
+
+    <div class="doc-signature">
+      <div class="sig-line">İfade Sahibi · Baskısız</div>
+      <div class="sig-name">İ. Sarıhan</div>
+    </div>
+  </article>
+
+  <!-- IPEK 2. OTURUM -->
+  <article class="doc" data-doc="ipek2">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">089-C2 · Nevşehir İl Jandarma Komutanlığı</div>
+        <h2 class="doc-title">İfade — İpek Sarıhan (2. Oturum)</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="denied">Denied</button>
+          <button class="stamp-btn" data-stamp="cross">Cross-Ref</button>
+        </div>
+      </div>
+    </div>
+
+    <dl class="doc-meta">
+      <dt>Tarih</dt><dd>08.06.2024 · 14:00</dd>
+      <dt>Not</dt><dd>1. oturumdaki çelişkiler nedeniyle çağrıldı</dd>
+    </dl>
+
+    <p>S: Güvenlik kamerası sizi <strong>00:45'te</strong> otel lobisinden dışarı çıkarken gösteriyor. Siz 23:30'da odaya çıktığınızı söylediniz.<br>C: <em>[uzun sessizlik]</em> Uyuyamadım. Sigara içmek için aşağı indim.</p>
+    <p>S: Dışarıda ne kadar kaldınız?<br>C: 10-15 dakika.</p>
+    <p>S: Kamera sizi <strong>01:35'te</strong> geri dönerken gösteriyor. 50 dakika.<br>C: <em>[duraksama]</em> Biraz yürüdüm.</p>
+    <p>S: Gece 1'de Göreme sokaklarında mı yürüdünüz?<br>C: Evet. Başım ağrıyordu, hava iyi geldi.</p>
+    <p>S: O sırada Defne'yi gördünüz mü? O da 01:15'te dışarı çıkmış.<br>C: Hayır. Görmedim.</p>
+    <p>S: İpek Hanım, Alp Erdoğan'ı tanıyor musunuz?<br>C: <em>[şaşkınlık]</em> Defne'nin eski sevgilisi. Burada olduğunu bilmiyordum.</p>
+    <p>S: Telefonunuzda <strong>5 Haziran'da</strong> Alp'e atılmış bir mesaj var: "Defne yarın oraya geliyor. İstersen yazarım sana." Bu mesajı nasıl açıklarsınız?<br>C: <em>[uzun sessizlik]</em> Avukatımla konuşmak istiyorum.</p>
+
+    <p style="background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux);"><strong>Çelişki:</strong> İpek, Alp'in Kapadokya'da olduğunu bilmediğini söyledi — ama telefon kaydı aksini gösteriyor. Ayrıca gece 00:45-01:35 arası dışarıda olması, Defne'nin çıkış saatiyle (01:15) örtüşüyor.</p>
+
+    <div class="doc-signature">
+      <div class="sig-line">İfade Sahibi · Avukat talep etti</div>
+      <div class="sig-name">İ. Sarıhan</div>
+    </div>
+  </article>
+
+  <!-- CEREN -->
+  <article class="doc" data-doc="ceren1">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">089-D · Nevşehir İl Jandarma Komutanlığı</div>
+        <h2 class="doc-title">İfade — Ceren Aksoy</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="approved">Approved</button>
+          <button class="stamp-btn" data-stamp="cross">Cross-Ref</button>
+        </div>
+      </div>
+    </div>
+
+    <dl class="doc-meta">
+      <dt>Tarih</dt><dd>07.06.2024 · 11:15</dd>
+      <dt>Doğum</dt><dd>02.09.1998</dd>
+      <dt>Meslek</dt><dd>Eczacı · İstanbul</dd>
+      <dt>Konaklama</dt><dd>Kelebek Cave Otel · Oda 14 (tek kişilik)</dd>
+    </dl>
+
+    <p>Defne'yle liseden beri arkadaşız. İpek'i de üniversitede tanıdık. Bu tatil bize iyi gelecek diye düşündüm ama Defne son zamanlarda... farklıydı.</p>
+    <p>6 Haziran akşamı restoranda yemek yedik. <strong>Defne ile aramızda gerginlik vardı.</strong> İstanbul'da olan bir şey — iş meselesi. Burada konuşmak istemedim ama Defne ısrar etti.</p>
+    <p>S: Ne hakkında tartıştınız?<br>C: Defne, İpek'in erkek arkadaşıyla — yani eski erkek arkadaşıyla — bir şey yaşadığını ima etti. Ben de "bu senin sorunun değil" dedim. Gerginleşti. Sonra özür diledim, barıştık.</p>
+    <p>S: İpek'in eski erkek arkadaşı kim?<br>C: Alp. Alp Erdoğan. Onlar biteli 8 ay oldu. Ama İpek hâlâ konuşuyor onunla.</p>
+    <p>Saat <strong>22:45 gibi odama çıktım</strong>. Kulak tıkacı takıp uyudum. Sabaha kadar hiçbir şey duymadım. İpek beni uyandırdı.</p>
+    <p style="background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux);"><strong>Not:</strong> Ceren, Defne'nin "İpek'in eski erkek arkadaşıyla bir şey yaşadığını ima etti" diyor — yani Defne, İpek ve Alp arasındaki devam eden ilişkiyi biliyordu? Alp, <strong>İpek'in eski sevgilisi</strong> — Defne'nin değil. Fakat Defne'nin ölmeden önceki geceye kadar Alp'in burada olduğunu bilip bilmediği belirsiz.</p>
+
+    <div class="doc-signature">
+      <div class="sig-line">İfade Sahibi · Baskısız</div>
+      <div class="sig-name">C. Aksoy</div>
+    </div>
+  </article>
+
+  <!-- CEREN 2. OTURUM -->
+  <article class="doc" data-doc="ceren2">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">089-D2 · Nevşehir İl Jandarma Komutanlığı</div>
+        <h2 class="doc-title">İfade — Ceren Aksoy (2. Oturum)</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="denied">Denied</button>
+          <button class="stamp-btn" data-stamp="cross">Cross-Ref</button>
+        </div>
+      </div>
+    </div>
+
+    <dl class="doc-meta">
+      <dt>Tarih</dt><dd>09.06.2024 · 10:00</dd>
+      <dt>Not</dt><dd>WhatsApp kayıtları incelendikten sonra çağrıldı</dd>
+    </dl>
+
+    <p>S: Defne'nin size 6 Haziran sabahı attığı mesajda "Ceren, İpek beni satıyor. Alp burada ve İpek onu çağırmış" yazıyor. Bu mesajı neden 1. oturumda sakladınız?<br>C: <em>[ağlama]</em> Korktum. İpek'i korumak istedim.</p>
+    <p>S: İpek'in Alp'i buraya çağırdığını Defne'den mi öğrendiniz?<br>C: Evet. Defne 6 Haziran sabahı çok sinirliydi. ATV turunda Alp'i gördü. "Bu tesadüf değil" dedi. İpek'e sordu, İpek inkâr etti ama Defne inanmadı.</p>
+    <p>S: Defne neden bu kadar rahatsız oldu?<br>C: Çünkü... <em>[duraksama]</em> Defne ve Alp, İpek'ten önce birlikte olmuşlardı. Kısa süreli bir şey. İpek bunu bilmiyordu. Defne, Alp'in buraya gelmesiyle bu sırrın ortaya çıkacağından korkuyordu.</p>
+    <p>S: Yani <strong>Alp, önce Defne'yle sonra İpek'le birlikte oldu</strong> — ve İpek bunu bilmiyor?<br>C: Bilmiyor... du. Ama o akşam Defne, İpek'e söyleyeceğini söyledi. "Bu gece her şeyi açıklayacağım" dedi.</p>
+
+    <p style="background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux);"><strong>Kritik:</strong> Defne, ölmeden önceki gece hem İpek'e hem Alp'e bomba atacaktı: İpek'in bilmediği eski ilişki, ve Alp'in İpek tarafından buraya çağrılması. Bu bilginin kimlere ulaştığı, kimlerin "susturmak" isteyeceğini belirliyor.</p>
+
+    <div class="doc-signature">
+      <div class="sig-line">İfade Sahibi · Baskısız</div>
+      <div class="sig-name">C. Aksoy</div>
+    </div>
+  </article>
+
+  <!-- TOLGA -->
+  <article class="doc" data-doc="tolga">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">089-E · Nevşehir İl Jandarma Komutanlığı</div>
+        <h2 class="doc-title">İfade — Tolga Kıvanç</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="approved">Approved</button>
+          <button class="stamp-btn" data-stamp="denied">Denied</button>
+          <button class="stamp-btn" data-stamp="cross">Cross-Ref</button>
+        </div>
+      </div>
+    </div>
+
+    <dl class="doc-meta">
+      <dt>Tarih</dt><dd>07.06.2024 · 14:00</dd>
+      <dt>Doğum</dt><dd>15.11.1991</dd>
+      <dt>Meslek</dt><dd>Barmen · Kelebek Cave Otel (2 yıl)</dd>
+      <dt>Adres</dt><dd>Göreme · Müze Mah.</dd>
+    </dl>
+
+    <p>Defne Hanım o akşam barda oturdu. Saat 22:00 civarı geldi. İpek Hanım'la birlikte. Bir süre sonra İpek Hanım çıktı, Defne Hanım kaldı. Güzel bir kadındı, sohbeti güzeldi. Ben de sohbet ettim.</p>
+    <p><strong>Saat 00:30 civarı son içkisini verdim. Kırmızı şarap.</strong> Ödemeyi oda hesabına yazdım. Defne Hanım saat <strong>00:50 civarı bardan kalktı</strong>. "Biraz hava alacağım" dedi. Tek başına çıktı.</p>
+    <p>S: Peşinden gitmediniz mi?<br>C: Hayır. Baranın temizliğini yaptım. Saat 01:15'te barı kapattım. Kapanış sonrası arka kapıdan çıktım, evime yürüdüm.</p>
+    <p>S: O gece başka biriyle görüştünüz mü?<br>C: Hayır. Düz eve gittim.</p>
+    <p>S: Defne Hanım'la daha önce tanışıyor muydunuz?<br>C: Hayır, ilk defa o akşam gördüm.</p>
+
+    <p style="background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux);"><strong>Not:</strong> Tolga'nın 01:15 çıkışı kamera tarafından doğrulanacak. Ancak arka kapıdan çıkışı kamerayla örtüşmüyor — otel arka kapısında kamera <strong>yok</strong>. Tolga'nın evine varış saati doğrulanamıyor.</p>
+
+    <div class="doc-signature">
+      <div class="sig-line">İfade Sahibi · Baskısız</div>
+      <div class="sig-name">T. Kıvanç</div>
+    </div>
+  </article>
+
+  <!-- ALP -->
+  <article class="doc" data-doc="alp1">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">089-F · Nevşehir İl Jandarma Komutanlığı</div>
+        <h2 class="doc-title">İfade — Alp Erdoğan (1. Oturum)</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="approved">Approved</button>
+          <button class="stamp-btn" data-stamp="denied">Denied</button>
+          <button class="stamp-btn" data-stamp="cross">Cross-Ref</button>
+        </div>
+      </div>
+    </div>
+
+    <dl class="doc-meta">
+      <dt>Tarih</dt><dd>07.06.2024 · 16:00</dd>
+      <dt>Doğum</dt><dd>22.04.1996</dd>
+      <dt>Meslek</dt><dd>ATV Tur Rehberi · Kaptur Macera</dd>
+      <dt>Adres</dt><dd>Ürgüp · Kapadokya'da 3 yıldır</dd>
+    </dl>
+
+    <p>Evet, Defne'nin burada olduğunu biliyordum. İpek mesaj attı. "Gel, belki konuşursunuz" dedi. Defne'yle bir yıldan fazla olmuştu — <strong>İpek'le ise 8 ay önce başladık, 3 ay önce bitti.</strong></p>
+    <p>6 Haziran'da ATV turunda gruba eşlik ettim. Defne beni görünce <strong>çok şaşırdı</strong>. Kötü bir şaşkınlık. Turu bitirip gittim.</p>
+    <p>S: O akşam ne yaptınız?<br>C: Evimde kaldım. Ürgüp'teyim, Göreme'ye 15 dakika. Bira içtim, Netflix açtım.</p>
+    <p>S: Gece boyunca evden çıkmadınız mı?<br>C: Hayır.</p>
+    <p>S: Telefonunuz <strong>02:30'da Göreme merkezde</strong> sinyal vermiş.<br>C: <em>[uzun sessizlik]</em> ... Bu mümkün değil. Evimde kaldım.</p>
+    <p>S: SIM kartınız Göreme'deki baz istasyonuna bağlanmış. Açıklamanız?<br>C: <em>[sinirli]</em> Belki baz istasyonu menzil hatası. Bilmiyorum.</p>
+
+    <div class="doc-signature">
+      <div class="sig-line">İfade Sahibi · Baskısız</div>
+      <div class="sig-name">A. Erdoğan</div>
+    </div>
+  </article>
+
+  <!-- ALP 2. OTURUM -->
+  <article class="doc" data-doc="alp2">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">089-F2 · Nevşehir İl Jandarma Komutanlığı</div>
+        <h2 class="doc-title">İfade — Alp Erdoğan (2. Oturum)</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="denied">Denied</button>
+          <button class="stamp-btn" data-stamp="cross">Cross-Ref</button>
+        </div>
+      </div>
+    </div>
+
+    <dl class="doc-meta">
+      <dt>Tarih</dt><dd>09.06.2024 · 15:00</dd>
+      <dt>Not</dt><dd>Araç GPS kaydı ve baz istasyonu verisi sonrası çağrıldı</dd>
+    </dl>
+
+    <p>S: Aracınızın GPS kaydı, 7 Haziran <strong>01:50'de Ürgüp → Göreme</strong> yolunda, <strong>02:15'te Göreme merkezde</strong>, <strong>04:40'ta Göreme → Ürgüp</strong> dönüşünde olduğunuzu gösteriyor. Evdeydiniz mi?<br>C: <em>[sessizlik]</em> Tamam. Gittim. Defne'yle konuşmak istedim.</p>
+    <p>S: Gece 2'de mi?<br>C: İpek mesaj attı. "Defne sana bir şey söyleyecek, hazır ol" dedi. Ben de panikledim. Gittim.</p>
+    <p>S: Defne'yle buluştunuz mu?<br>C: <strong>Hayır.</strong> Göreme'ye geldim, otelin önünde bekledim. Mesaj attım ama okunmadı. Bir süre dolaştım. <strong>Aşıklar Vadisi yoluna girdim</strong> ama hiçbir şey bulamadım. 04:30'a doğru döndüm.</p>
+    <p>S: Aşıklar Vadisi — cesedin bulunduğu yer?<br>C: <em>[panik]</em> Ben sadece yürüdüm! Defne'yi aramaya gittim! Hiçbir şey yapmadım!</p>
+    <p>S: Ayakkabılarınızdaki kırmızı toprak, peri bacası bölgesindeki toprakla <strong>eşleşiyor</strong>.<br>C: Tabi eşleşir, ben ATV rehberiyim, her gün orada oluyorum!</p>
+    <p>S: Gece 2-4 arası mıydınız?<br>C: ... Avukat istiyorum.</p>
+
+    <div class="doc-signature">
+      <div class="sig-line">İfade Sahibi · Avukat talep etti</div>
+      <div class="sig-name">A. Erdoğan</div>
+    </div>
+  </article>
+
+  <!-- HAKAN -->
+  <article class="doc" data-doc="hakan">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">089-G · Nevşehir İl Jandarma Komutanlığı</div>
+        <h2 class="doc-title">İfade — Hakan Orbay</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="approved">Approved</button>
+          <button class="stamp-btn" data-stamp="cross">Cross-Ref</button>
+        </div>
+      </div>
+    </div>
+
+    <dl class="doc-meta">
+      <dt>Tarih</dt><dd>07.06.2024 · 17:00</dd>
+      <dt>Doğum</dt><dd>11.08.1978</dd>
+      <dt>Meslek</dt><dd>İhracatçı · Orbay Tekstil CEO</dd>
+      <dt>Konaklama</dt><dd>Kelebek Cave Otel · Suit 3 (VIP)</dd>
+    </dl>
+
+    <p>İş seyahati. Nevşehir'de bir tedarikçiyle görüşüyorum. Otelde 3 gece kalacaktım. 6 Haziran akşamı restoranda yemek yerken üç genç kadınla göz göze geldik. Defne Hanım masama geldi, sohbet ettik. Ben de bir şarap ısmarladım.</p>
+    <p>S: Ne hakkında konuştunuz?<br>C: Genel şeyler. Seyahat, iş. O Instagram işiyle ilgiliymiş, ben de "marka elçiliği" konusunda birlikte çalışabileceğimizi söyledim. Kartvizitimi verdim.</p>
+    <p>S: Başka bir şey oldu mu?<br>C: Hayır. Saat <strong>23:00 civarı odama çıktım</strong>. Yalnızdım. Sabaha kadar odamda kaldım.</p>
+    <p>S: Oda kartı okuyucu kaydı, kartınızın <strong>23:15'te</strong> kapıda kullanıldığını ve bir sonraki kullanımın <strong>07:30'da</strong> olduğunu gösteriyor. Bu tutarlı.<br>C: Söylediğim gibi.</p>
+    <p>S: Defne Hanım'la telefon numarası paylaştınız mı?<br>C: <em>[duraksama]</em> Kartvizitte var. O bana mesaj attı. "Yarın kahve?" diye. Ben de "tamam" yazdım.</p>
+
+    <p style="background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux);"><strong>Not:</strong> Hakan'ın oda kart kaydı 23:15 — 07:30 arası tutarlı. Odadan çıkmamış. Ancak Kelebek Cave Otel'de <strong>VIP odalarının balkonu</strong> dış merdivene bağlanıyor — kart kullanmadan çıkabilir. Bu henüz sorgulanmadı.</p>
+
+    <div class="doc-signature">
+      <div class="sig-line">İfade Sahibi · Avukat huzurunda</div>
+      <div class="sig-name">H. Orbay</div>
+    </div>
+  </article>
+
+  <!-- ELIF -->
+  <article class="doc" data-doc="elif">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">089-H · Nevşehir İl Jandarma Komutanlığı</div>
+        <h2 class="doc-title">İfade — Elif Mertoğlu</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="approved">Approved</button>
+          <button class="stamp-btn" data-stamp="cross">Cross-Ref</button>
+        </div>
+      </div>
+    </div>
+
+    <dl class="doc-meta">
+      <dt>Tarih</dt><dd>07.06.2024 · 18:30</dd>
+      <dt>Doğum</dt><dd>26.05.1985</dd>
+      <dt>Meslek</dt><dd>Otel müdiresi · Kelebek Cave Otel (5 yıl)</dd>
+      <dt>Adres</dt><dd>Göreme · otel bünyesinde · çatı katı</dd>
+    </dl>
+
+    <p>Otelimde cinayet olması beni yıktı. Güvenlik kameralarının tümünü teslim ettim. 6 kameramız var: giriş, lobi, restoran, bar, otopark, koridor (1. kat). Arka kapıda kamera yok — bütçe meselesi.</p>
+    <p>6 Haziran akşamı restoran kapatıldıktan sonra, saat 23:30 gibi çatı katındaki daireme çıktım. Gece nöbetçisi <strong>Murat</strong>, resepsiyonda kaldı.</p>
+    <p>S: Tolga Kıvanç hakkında ne söyleyebilirsiniz?<br>C: İyi bir çalışan. 2 yıldır burada. Bazen turistlerle... yakınlaşır. Şikâyet almadım ama duyumlar duydum.</p>
+    <p>S: Hakan Orbay hakkında?<br>C: VIP müşteri. 3. kez geliyor. Sessiz, saygılı. VIP odasının balkonu var, evet, dış merdivene bağlanıyor — ama merdiveni kullanmak için otelin arkasındaki kayalıktan inmek lazım. Gece karanlığında riskli.</p>
+    <p>S: 6 Haziran akşamı Defne Hanım'la konuştunuz mu?<br>C: Kısaca. Restoranda "otelimizi sevdiniz mi?" dedim. "Harika" dedi. Normal misafir ilişkisi.</p>
+    <p>S: Murat ile gece nöbetinde sorun var mı?<br>C: Murat <strong>02:00'de uyuyakalmış</strong>. Kamerada görülebilir. Bu yüzden 01:15 sonrası lobi girişi izlenemiyor.</p>
+
+    <div class="doc-signature">
+      <div class="sig-line">İfade Sahibi · Baskısız</div>
+      <div class="sig-name">E. Mertoğlu</div>
+    </div>
+  </article>
+</section>
+
+<!-- ============ 04 FORENSICS ============ -->
+<section class="section" id="forensics">
+  <div class="section-head">
+    <div class="section-num">04</div>
+    <h2 class="section-title">Adli Tıp & Olay Yeri</h2>
+    <span class="section-sub">089-A · 089-B</span>
+  </div>
+
+  <article class="doc" data-doc="autopsy">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">089-B · Nevşehir Devlet Hastanesi — Adli Tıp</div>
+        <h2 class="doc-title">Otopsi Raporu</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="approved">Approved</button>
+          <button class="stamp-btn" data-stamp="classified">Classified</button>
+        </div>
+      </div>
+    </div>
+
+    <dl class="doc-meta">
+      <dt>Olay Tarihi</dt><dd>07.06.2024</dd>
+      <dt>Rapor Tarihi</dt><dd>08.06.2024</dd>
+      <dt>Hazırlayan</dt><dd>Uzm. Dr. S. Yılmaz</dd>
+    </dl>
+
+    <h3>Dış Muayene</h3>
+    <ul>
+      <li>Boyun ön ve yan yüzeylerde <strong>belirgin parmak izleri</strong> — iki elle boğma</li>
+      <li><strong>Hiyoid kemik kırığı</strong> — ağır baskı uygulandığını gösterir</li>
+      <li>Alt çenede bir morluk — vuruş veya düşme</li>
+      <li>Sağ el tırnak altında <strong>deri kalıntısı</strong> (DNA analizi bekliyor)</li>
+      <li>Vücut tamamen çıplak — kıyafet kalıntısı yok</li>
+      <li>Sırt ve kalçalarda <strong>sıyrık ve aşınma izleri</strong> — kaya yüzeyi üzerinde sürüklenme</li>
+      <li>Cinsel saldırı bulgusu <strong>YOK</strong></li>
+    </ul>
+
+    <h3>İç Muayene</h3>
+    <ul>
+      <li>Tiroid kıkırdak kırığı — boğma ile uyumlu</li>
+      <li>Konjunktiva altında peteşi — asfiksi kanıtı</li>
+      <li>Kanda <strong>0.08 g/dL etanol</strong> — hafif alkollü</li>
+      <li>Mide içeriği: kırmızı şarap, hafif yemek</li>
+      <li>Toksikoloji: etanol dışında madde <strong>yok</strong></li>
+    </ul>
+
+    <h3>Ölüm Sebebi</h3>
+    <p><strong>Mekanik asfiksi — elle boğma.</strong> İki el kullanılmış. Ölüm 3-5 dakika süren sürekli baskı sonucu gelişmiştir. Fail, fiziksel olarak güçlü ve kararlı hareket etmiştir.</p>
+
+    <h3>Ölüm Zamanı & Sahne Kurgusu</h3>
+    <p>Tahmini ölüm: <strong>03:30 — 05:00</strong>. Cesedin peri bacası tepesine taşınması ölüm sonrası gerçekleşmiştir. Sırt sıyrıkları kaya üzerinde sürüklenmeye işaret eder — yani fail, cesedi <strong>peri bacasının yamacından yukarı çekmiştir</strong>. Bu, en az <strong>15-20 dakikalık fiziksel efor</strong> gerektirir.</p>
+    <p><strong>Cesedin soyulma nedeni:</strong> Kıyafetlerde olası DNA veya lif transferi temizlenmiştir. Fail, delil bırakmamak için kıyafetleri <strong>tamamen uzaklaştırmıştır</strong>. Bu, cinsel motiften çok <strong>adli farkındalığı</strong> gösterir.</p>
+
+    <h3>Kritik Bulgular</h3>
+    <p style="background:rgba(107,22,32,0.15);padding:14px 18px;border:1px solid var(--bordeaux);">
+      1. Sağ el tırnak altı DNA'sı analiz bekliyor — failin DNA'sı olma olasılığı yüksek.<br>
+      2. Boyundaki parmak izleri: <strong>büyük eller, geniş avuç</strong> — erkek profili ağır basıyor.<br>
+      3. Cesedin tepede konumlandırılması: <strong>ritualistik değil, sergileyen</strong> — fail, cesedin bulunmasını istiyordu. Neden?<br>
+      4. Peri bacası tepesinde <strong>küçük bir kumaş lifi</strong> bulundu — koyu mavi, pamuk. Mağdurun kıyafetlerinde koyu mavi parça yoktu. Lif <strong>failin kıyafetinden</strong> olabilir.
+    </p>
+
+    <div class="doc-signature">
+      <div class="sig-line">Uzm. Dr.</div>
+      <div class="sig-name">S. Yılmaz</div>
+    </div>
+  </article>
+
+  <article class="doc" data-doc="scene">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">089-A · Olay Yeri İnceleme</div>
+        <h2 class="doc-title">Olay Yeri Raporu</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="approved">Approved</button>
+          <button class="stamp-btn" data-stamp="cross">Cross-Ref</button>
+        </div>
+      </div>
+    </div>
+
+    <h3>Peri Bacası — 14 Numaralı Oluşum</h3>
+    <ol>
+      <li>Ceset, peri bacasının <strong>düz tepesinde</strong>, sırt üstü pozisyonda. Kollar yana açık — <strong>kasıtlı yerleştirme</strong>.</li>
+      <li>Tırmanma güzergahında: <strong>sürtünme izleri</strong>, toprak kayma alanları, bir tırnak kırığı (mağdurun tırnağı).</li>
+      <li>Peri bacası yamacında bir <strong>pamuk lifi</strong> (koyu mavi) — kaya çıkıntısına takılmış.</li>
+      <li>Olay yerinden <strong>150 metre uzakta</strong>, patika kenarında: sigara izmariti (Marlboro Red). DNA: analiz bekliyor.</li>
+      <li>Peri bacası çevresinde <strong>iki farklı ayakkabı izi</strong>: biri 42 numara (düz taban, spor ayakkabı), biri 38 numara (mağdurun ayağı).</li>
+      <li>Kıyafetler <strong>bulunamamıştır</strong> — fail tarafından uzaklaştırıldı.</li>
+    </ol>
+
+    <p style="background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux);"><strong>Ön Not:</strong> Cinayet yeri büyük olasılıkla peri bacası DEĞİL. Cesedin yerleştirilmesi ayrı bir eylem. Failin cesedi taşıma gücü, arazi bilgisi ve karanlıkta tırmanma cesareti var. Bu, bir <strong>yerel veya bölgeyi iyi tanıyan</strong> kişiye işaret eder.</p>
+
+    <div class="doc-signature">
+      <div class="sig-line">Jandarma Olay Yeri</div>
+      <div class="sig-name">Bşçvş. Yaman</div>
+    </div>
+  </article>
+</section>
+
+<!-- ============ 05 EVIDENCE ============ -->
+<section class="section" id="evidence">
+  <div class="section-head">
+    <div class="section-num">05</div>
+    <h2 class="section-title">Fiziksel Deliller</h2>
+    <span class="section-sub">7 Adet Delil Fişi</span>
+  </div>
+
+  <div class="evidence-grid">
+    <div class="evidence-card">
+      <span class="evidence-tag">DNA</span>
+      <div class="evidence-code">DFN-TRN01</div>
+      <h3 class="evidence-title">Tırnak Altı DNA</h3>
+      <p class="evidence-desc">Mağdurun sağ el tırnak altı sıyrıntısı. Failin derisinden olası transfer.</p>
+      <div class="evidence-detail">
+        <span>▸ Sonuç:</span> <strong>Alp Erdoğan</strong> ile %99.7 eşleşme ✓<br>
+        <span>▸ Yorum:</span> Mağdur saldırganı tırnaklarken DNA bırakmış<br>
+        <span>▸ Alp ifadesi:</span> "ATV turunda ellerim çizildi, belki orada bulaştı" — 6 Haziran sabahı, yani 24 saat önce
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <span class="evidence-tag">Lif</span>
+      <div class="evidence-code">PRB-LIF01</div>
+      <h3 class="evidence-title">Koyu Mavi Pamuk Lifi</h3>
+      <p class="evidence-desc">Peri bacası yamacındaki kaya çıkıntısında. <strong>Alp'in sweatshirt'ünün lifleriye eşleşmesi bekleniyor.</strong></p>
+      <div class="evidence-detail">
+        <span>▸ Renk:</span> Koyu lacivert, %100 pamuk<br>
+        <span>▸ Alp'in kıyafeti:</span> 7 Haziran sabahı arama — lacivert Nike sweatshirt, sol dirseğinde yırtık<br>
+        <span>▸ Eşleşme:</span> Lif analizi devam ediyor
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <span class="evidence-tag">İzmarit</span>
+      <div class="evidence-code">PRB-SIG01</div>
+      <h3 class="evidence-title">Sigara İzmariti — Marlboro Red</h3>
+      <p class="evidence-desc">Peri bacasından 150m uzakta patika kenarında. DNA tükürük analizi bekliyor.</p>
+      <div class="evidence-detail">
+        <span>▸ Marka:</span> Marlboro Red<br>
+        <span>▸ Not:</span> Alp'in marka tercihi: Parliament (Tolga ifadesinde doğrulandı)<br>
+        <span>▸ Tolga:</span> Marlboro Red içiyor (bar muhasebe çeki)<br>
+        <span>▸ Soru:</span> Tolga da orada mıydı?
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <span class="evidence-tag">Ayakkabı</span>
+      <div class="evidence-code">PRB-AYK01</div>
+      <h3 class="evidence-title">42 Numara Ayakkabı İzi</h3>
+      <p class="evidence-desc">Peri bacası çevresinde. Düz tabanlı spor ayakkabı desen. Mağdur: 38 numara.</p>
+      <div class="evidence-detail">
+        <span>▸ Alp Erdoğan:</span> 43 numara (yarım numara fark)<br>
+        <span>▸ Tolga Kıvanç:</span> <strong>42 numara</strong> ✓<br>
+        <span>▸ Hakan Orbay:</span> 44 numara<br>
+        <span>▸ Kritik:</span> Alp'in iz bırakmaması garip — ya başka ayakkabı giymişti ya da orada değildi
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <span class="evidence-tag">Dijital</span>
+      <div class="evidence-code">DFN-TEL01</div>
+      <h3 class="evidence-title">Defne'nin Telefonu</h3>
+      <p class="evidence-desc">Otel odasında, şarj kablolarında bulundu. Dışarı çıkarken telefonsuz gitmiş veya <strong>birisi odaya geri koymuş</strong>.</p>
+      <div class="evidence-detail">
+        <span>▸ Son aktivite:</span> 23:47 — Instagram story<br>
+        <span>▸ Çelişki:</span> 01:15'te dışarı çıktığında neden telefon yok?<br>
+        <span>▸ Olasılık:</span> Biri onu çağırdı — telefonu almadan çıktı (tanıdık biri)
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <span class="evidence-tag">Kıyafet</span>
+      <div class="evidence-code">ALP-SWR01</div>
+      <h3 class="evidence-title">Alp'in Lacivert Sweatshirt'ü</h3>
+      <p class="evidence-desc">Ürgüp evinde aramada ele geçirildi. Sol dirseğinde <strong>yırtık</strong>. Yıkama izi <strong>taze</strong>.</p>
+      <div class="evidence-detail">
+        <span>▸ Yıkama:</span> 7 Haziran sabahı 06:30'da makinede — şüpheli zamanlama<br>
+        <span>▸ Lif:</span> Peri bacası lifiyle eşleşme bekleniyor<br>
+        <span>▸ Kan:</span> Yıkama öncesi iz tespit edilemedi
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <span class="evidence-tag">Kartvizit</span>
+      <div class="evidence-code">HKN-KRT01</div>
+      <h3 class="evidence-title">Hakan'ın Kartviziti</h3>
+      <p class="evidence-desc">Defne'nin otel odasındaki çantasında bulundu. Arkasında el yazısı: <strong>"01:00, teras"</strong>.</p>
+      <div class="evidence-detail">
+        <span>▸ El yazısı:</span> Defne'nin yazısı (onaylı)<br>
+        <span>▸ Anlam:</span> Defne, Hakan'la 01:00'da buluşma planlamış mı?<br>
+        <span>▸ Hakan ifadesi:</span> "23:00'da odama çıktım" — teras buluşması bahsetmemiş
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 DOCUMENTS ============ -->
+<section class="section" id="documents">
+  <div class="section-head">
+    <div class="section-num">06</div>
+    <h2 class="section-title">Belgeler & Dijital Kanıtlar</h2>
+    <span class="section-sub">089-K → 089-R</span>
+  </div>
+
+  <!-- WHATSAPP CHATS -->
+  <article class="doc" data-doc="whatsapp1">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">089-K · Dijital Adli İnceleme</div>
+        <h2 class="doc-title">WhatsApp Yazışmaları — İpek ↔ Alp</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="classified">Classified</button>
+          <button class="stamp-btn" data-stamp="cross">Cross-Ref</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--paper);padding:24px;border-radius:0;">
+      <div class="chat-bubble-right"><div class="chat-sender">İpek</div>Defne yarın oraya geliyor. İstersen yazarım sana.<div class="chat-time">5 Haz · 14:22</div></div>
+      <div class="chat-bubble-left"><div class="chat-sender">Alp</div>Ciddi misin? Onunla konuşmam lazım.<div class="chat-time">5 Haz · 14:25</div></div>
+      <div class="chat-bubble-right"><div class="chat-sender">İpek</div>ATV tura gelecekler. Sen de tur rehberisin zaten. Doğal görünür.<div class="chat-time">5 Haz · 14:28</div></div>
+      <div class="chat-bubble-left"><div class="chat-sender">Alp</div>Ama Defne öğrenirse...<div class="chat-time">5 Haz · 14:30</div></div>
+      <div class="chat-bubble-right"><div class="chat-sender">İpek</div>Öğrenmeyecek. Sana güveniyorum.<div class="chat-time">5 Haz · 14:31</div></div>
+      <div style="height:24px"></div>
+      <div class="chat-bubble-left"><div class="chat-sender">Alp</div>İpek, Defne biliyor. Bana baktığında gördüm.<div class="chat-time">6 Haz · 18:47</div></div>
+      <div class="chat-bubble-right"><div class="chat-sender">İpek</div>Ne biliyor?<div class="chat-time">6 Haz · 18:48</div></div>
+      <div class="chat-bubble-left"><div class="chat-sender">Alp</div>Her şeyi. Senle beni. Ve öncesini.<div class="chat-time">6 Haz · 18:49</div></div>
+      <div class="chat-bubble-right"><div class="chat-sender">İpek</div>🤦‍♀️ Ben hallederim. Sen karışma.<div class="chat-time">6 Haz · 18:50</div></div>
+      <div style="height:24px"></div>
+      <div class="chat-bubble-right"><div class="chat-sender">İpek</div>Defne bu gece her şeyi söyleyeceğini söylüyor. Gel, konuşalım. Hepimiz.<div class="chat-time">6 Haz · 23:58</div></div>
+      <div class="chat-bubble-left"><div class="chat-sender">Alp</div>Neredeyiz?<div class="chat-time">7 Haz · 00:02</div></div>
+      <div class="chat-bubble-right"><div class="chat-sender">İpek</div>Defne dışarı çıktı. Ben de çıkıyorum. Vadiye gel.<div class="chat-time">7 Haz · 01:18</div></div>
+      <div class="chat-bubble-left"><div class="chat-sender">Alp</div>Yoldayım.<div class="chat-time">7 Haz · 01:52</div></div>
+    </div>
+
+    <p style="margin-top:18px;"><strong>Çıkarsama:</strong> İpek, Alp'i Kapadokya'ya çağırmıştır. 6 Haziran akşamı Defne "her şeyi açıklayacağım" deyince İpek panikleyerek Alp'i çağırmış ve "vadiye gel" demiştir. <strong>İpek 01:18'de "dışarı çıkıyorum" diyor</strong> — kameralar onu 00:45'te dışarı çıkarken gösteriyor. Yani İpek <strong>geri girip tekrar çıkmış olabilir</strong> veya saat senkronu tutarsız.</p>
+
+    <div class="doc-signature">
+      <div class="sig-line">Dijital Adli İnceleme Uzmanı</div>
+      <div class="sig-name">B. Yıldız</div>
+    </div>
+  </article>
+
+  <!-- DEFNE → CEREN -->
+  <article class="doc" data-doc="whatsapp2">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">089-L · Dijital Adli İnceleme</div>
+        <h2 class="doc-title">WhatsApp — Defne → Ceren (6 Haziran)</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="cross">Cross-Ref</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--paper);padding:24px;">
+      <div class="chat-bubble-right"><div class="chat-sender">Defne</div>Ceren, İpek beni satıyor. Alp burada ve İpek onu çağırmış.<div class="chat-time">6 Haz · 09:14</div></div>
+      <div class="chat-bubble-right"><div class="chat-sender">Defne</div>Bu gece her şeyi söyleyeceğim. İpek'e de, Alp'e de.<div class="chat-time">6 Haz · 09:16</div></div>
+      <div class="chat-bubble-left"><div class="chat-sender">Ceren</div>Defne yapma. Herkes zarar görür.<div class="chat-time">6 Haz · 09:22</div></div>
+      <div class="chat-bubble-right"><div class="chat-sender">Defne</div>Ben zaten zarar gördüm.<div class="chat-time">6 Haz · 09:23</div></div>
+      <div style="height:24px"></div>
+      <div class="chat-bubble-right"><div class="chat-sender">Defne</div>Bir de bir şey daha var. O iş adamı, Hakan. Bana tuhaf bir teklif yaptı. "Benim için çalış, Instagram'ında markamı tanıt. Ödeme güzel olur." Ama göz teması... garip.<div class="chat-time">6 Haz · 22:31</div></div>
+      <div class="chat-bubble-left"><div class="chat-sender">Ceren</div>Dikkatli ol.<div class="chat-time">6 Haz · 22:35</div></div>
+      <div class="chat-bubble-right"><div class="chat-sender">Defne</div>01:00'da terasta buluşacağız. Merak etme, konuşma.<div class="chat-time">6 Haz · 22:40</div></div>
+    </div>
+
+    <p style="margin-top:18px;"><strong>Çıkarsama:</strong> Defne, <strong>01:00'da Hakan'la terasta buluşma planlamış</strong> (kartvizit arkası notla örtüşüyor). Defne, 01:15'te lobiden çıkmış — 15 dakika gecikmeli. Hakan "23:00'da odama çıktım" diyor — ama <strong>terasa VIP balkonundan kart kullanmadan çıkabilirdi</strong>.</p>
+
+    <div class="doc-signature">
+      <div class="sig-line">Dijital Adli İnceleme</div>
+      <div class="sig-name">B. Yıldız</div>
+    </div>
+  </article>
+
+  <!-- HAKAN BACKGROUND CHECK -->
+  <article class="doc" data-doc="hakancheck">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">089-M · GBT & Sabıka Sorgusu</div>
+        <h2 class="doc-title">Arkaplan Kontrolü — Hakan Orbay</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="classified">Classified</button>
+        </div>
+      </div>
+    </div>
+
+    <dl class="doc-meta">
+      <dt>Kişi</dt><dd>Hakan Orbay · TC: 12XXXXXXX78</dd>
+      <dt>Sorgu Tarihi</dt><dd>08.06.2024</dd>
+    </dl>
+
+    <p><strong>Sabıka:</strong> Temiz.</p>
+    <p><strong>Eski soruşturmalar:</strong></p>
+    <ul>
+      <li>2019 — Cinsel taciz şikâyeti (çalışan tarafından). <strong>Dava düşürüldü</strong> — şikâyetçi geri çekildi.</li>
+      <li>2021 — Başka bir otel çalışanı tarafından "uygunsuz davranış" şikâyeti. <strong>Uzlaşmayla kapandı.</strong></li>
+    </ul>
+    <p><strong>Mali kayıtlar:</strong> Orbay Tekstil, son 2 yılda 3 farklı "genç marka elçisine" toplamda <strong>420.000 TL</strong> ödeme yapmış. Tüm elçiler 22-27 yaş arası kadınlar.</p>
+    <p><strong>Otel kayıtları:</strong> Hakan, Kelebek Cave Otel'e son 14 ayda <strong>3 kez</strong> gelmiş. Her seferinde VIP suit. İlk iki ziyarette "genç kadın misafir" ile birlikte kayıt olmuş; üçüncü ziyaret (olay) tek.</p>
+
+    <p style="background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux);"><strong>Çıkarsama:</strong> Hakan'ın "marka elçiliği" teklifi, bilinen bir yöntem. Defne'yle terasta buluşma planlaması bu çerçevede değerlendirilebilir. Ancak Hakan'ın <strong>fiziksel şiddete</strong> eğilimi belgelenmiş değil — sadece taciz dosyaları. Cinayet profili belirsiz.</p>
+
+    <div class="doc-signature">
+      <div class="sig-line">GBT Sorgu Memuru</div>
+      <div class="sig-name">K. Tunç</div>
+    </div>
+  </article>
+
+  <!-- TOLGA BACKGROUND -->
+  <article class="doc" data-doc="tolgacheck">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">089-N · GBT & Sabıka Sorgusu</div>
+        <h2 class="doc-title">Arkaplan Kontrolü — Tolga Kıvanç</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="classified">Classified</button>
+        </div>
+      </div>
+    </div>
+
+    <dl class="doc-meta">
+      <dt>Kişi</dt><dd>Tolga Kıvanç · TC: 34XXXXXXX56</dd>
+      <dt>Sorgu Tarihi</dt><dd>08.06.2024</dd>
+    </dl>
+
+    <p><strong>Sabıka:</strong></p>
+    <ul>
+      <li>2020 — Kavga/yaralama (bar kavgası). <strong>Para cezası.</strong></li>
+      <li>2022 — Uyuşturucu bulundurma (kişisel kullanım). <strong>Ertelenmiş hapis.</strong></li>
+    </ul>
+    <p><strong>Not:</strong> Tolga'nın evi Göreme merkezde, otelden <strong>8 dakika yürüme</strong> mesafesinde. Ev ile Aşıklar Vadisi arası <strong>20 dakika yürüme</strong>.</p>
+    <p><strong>Elif Mertoğlu ifadesi ile çapraz:</strong> "Bazen turistlerle yakınlaşır." Otel çalışan dosyasında 2023'te bir kadın misafirden gelen <strong>informal şikâyet</strong>: "Barmen gece geç saatte kapattıktan sonra odama geldi, kapıyı çaldı." İşlem yapılmamış.</p>
+
+    <p style="background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux);"><strong>Çıkarsama:</strong> Tolga'nın turistlerle sınır ihlali geçmişi var. Defne'yle bar sohbeti 3 saat sürmüş. 01:15'te arka kapıdan çıktığını söylüyor — kamera yok. 42 numara ayakkabı izi onunkiyle eşleşiyor. Sigara izmariti Marlboro Red — Tolga'nın markası.</p>
+
+    <div class="doc-signature">
+      <div class="sig-line">GBT Sorgu</div>
+      <div class="sig-name">K. Tunç</div>
+    </div>
+  </article>
+
+  <!-- OTEL KAMERA RAPORU -->
+  <article class="doc" data-doc="hotelcam">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">089-O · Kelebek Cave Otel — CCTV</div>
+        <h2 class="doc-title">Güvenlik Kamerası Tam Dökümü</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="approved">Approved</button>
+          <button class="stamp-btn" data-stamp="cross">Cross-Ref</button>
+        </div>
+      </div>
+    </div>
+
+    <h3>Kamera Listesi & Kapsam</h3>
+    <ul>
+      <li>Kanal 1 — Ana giriş ✓</li>
+      <li>Kanal 2 — Lobi / resepsiyon ✓</li>
+      <li>Kanal 3 — Restoran ✓</li>
+      <li>Kanal 4 — Bar ✓</li>
+      <li>Kanal 5 — Otopark ✓</li>
+      <li>Kanal 6 — 1. kat koridoru ✓</li>
+      <li>Arka kapı — KAMERA YOK ⚠</li>
+      <li>VIP balkon / dış merdiven — KAMERA YOK ⚠</li>
+    </ul>
+
+    <h3>Kritik Kayıtlar — 6-7 Haziran Gecesi</h3>
+    <table class="signal-table">
+      <thead><tr><th>Saat</th><th>Kanal</th><th>Olay</th></tr></thead>
+      <tbody>
+        <tr><td>22:45</td><td>K3 Rest.</td><td>Ceren Aksoy restorandan çıkar, koridora yönelir</td></tr>
+        <tr><td>23:00</td><td>K2 Lobi</td><td>Hakan Orbay lobiden asansöre biner</td></tr>
+        <tr><td>23:30</td><td>K4 Bar</td><td>İpek Sarıhan bardan çıkar, koridora yönelir</td></tr>
+        <tr><td>23:47</td><td>—</td><td>Defne: Instagram story (telefondan, kamera yok)</td></tr>
+        <tr class="alert"><td>00:45</td><td>K1 Giriş</td><td>İpek Sarıhan dışarı çıkar — sigara? yürüyüş?</td></tr>
+        <tr><td>00:50</td><td>K4 Bar</td><td>Defne bardan kalkar, lobiye yürür</td></tr>
+        <tr class="alert"><td>01:15</td><td>K1 Giriş</td><td>Defne dışarı çıkar — YALNıZ. Telefonsuz.</td></tr>
+        <tr class="alert"><td>01:35</td><td>K1 Giriş</td><td>İpek geri döner</td></tr>
+        <tr class="alert"><td>02:00</td><td>K2 Lobi</td><td>Gece nöbetçisi Murat uyuyakalmış — bu saatten itibaren lobi izlenmiyor</td></tr>
+        <tr><td>06:10</td><td>—</td><td>Balon pilotu cesedi bildirir</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:18px;background:rgba(107,22,32,0.15);padding:14px 18px;border:1px solid var(--bordeaux);">
+      <strong>KARA DELİK:</strong> 01:15 (Defne çıkış) ile 06:10 (bulunma) arasında <strong>ana girişten hiç giriş kaydı yok</strong>. Yani:<br>
+      — Ya kimse geri dönmedi (herkes arka kapıyı kullandı)<br>
+      — Ya da Murat'ın uyuması nedeniyle biri giriş yaptı ama kayıt düşmedi (kamera açıktı ama Murat kontrol edemedi)<br>
+      <strong>Arka kapıdan çıkıp girenler izlenemez.</strong> Bu, Tolga, Hakan (VIP balkon) ve İpek (01:35'te geri dönmüş ama sonra tekrar çıkmış olabilir) için kritik.
+    </p>
+
+    <div class="doc-signature">
+      <div class="sig-line">Güvenlik Sistem Sorumlusu</div>
+      <div class="sig-name">Kelebek Cave IT</div>
+    </div>
+  </article>
+
+  <!-- INSTAGRAM DM -->
+  <article class="doc" data-doc="instagram">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">089-P · Dijital Adli — Instagram DM</div>
+        <h2 class="doc-title">Defne'nin Instagram DM Geçmişi (Son 7 Gün)</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="classified">Classified</button>
+        </div>
+      </div>
+    </div>
+
+    <p><strong>@defnekaratas → @horbay_official</strong> (Hakan'ın iş hesabı)</p>
+    <div style="background:var(--paper);padding:16px;">
+      <div class="chat-bubble-right"><div class="chat-sender">Defne</div>Merhaba, otelde tanıştık. Teklifiniz ilgimi çekti.<div class="chat-time">6 Haz · 23:02</div></div>
+      <div class="chat-bubble-left"><div class="chat-sender">Hakan</div>Harika. Yarın detayları konuşalım. Terasta olabilir misin? 01:00 gibi? Gece sakin olur.<div class="chat-time">6 Haz · 23:08</div></div>
+      <div class="chat-bubble-right"><div class="chat-sender">Defne</div>Olur. Biraz geç gelebilirim.<div class="chat-time">6 Haz · 23:12</div></div>
+    </div>
+
+    <p style="margin-top:18px;"><strong>Çıkarsama:</strong> Hakan'ın teras daveti doğrulandı. "01:00, gece sakin olur" ifadesi, Hakan'ın odada olduğu saatlerle (23:15 — kart) çelişiyor — <strong>Hakan VIP balkonundan terasa kart kullanmadan çıkabilir</strong>.</p>
+
+    <div class="doc-signature">
+      <div class="sig-line">Dijital Adli</div>
+      <div class="sig-name">B. Yıldız</div>
+    </div>
+  </article>
+
+  <!-- OTEL KART OKUYUCU -->
+  <article class="doc" data-doc="keycards">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">089-Q · Otel Kart Okuyucu Logları</div>
+        <h2 class="doc-title">Oda Kart Hareketleri — 6-7 Haziran</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="cross">Cross-Ref</button>
+        </div>
+      </div>
+    </div>
+
+    <table class="ledger-table">
+      <thead><tr><th>Oda</th><th>Kişi</th><th>Son Giriş</th><th>Sonraki Kullanım</th><th>Not</th></tr></thead>
+      <tbody>
+        <tr><td>12</td><td>İpek + Defne</td><td>23:32</td><td>06:35 (İpek)</td><td>Defne geri dönmedi</td></tr>
+        <tr><td>14</td><td>Ceren</td><td>22:48</td><td>06:42</td><td>Kulak tıkacı, tutarlı</td></tr>
+        <tr class="alert"><td>Suit 3</td><td>Hakan</td><td>23:15</td><td>07:30</td><td>VIP balkon arka kapısı kart gerektirmez</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:18px;"><strong>Çıkarsama:</strong> Hakan'ın 23:15 — 07:30 kartı "alibi" gibi görünüyor, ama VIP balkon çıkışı <strong>kayıt dışı</strong>. İpek 23:32'de odaya girmiş ama <strong>00:45'te kameraya çıkmış</strong> — demek ki 23:32 - 00:45 arası bir kez daha çıkıp döndü (kart ile), sonra 00:45'te lobiden çıktı ve 01:35'te döndü. Ancak <strong>sonra tekrar çıkmış olabilir</strong> — arka kapıdan.</p>
+
+    <div class="doc-signature">
+      <div class="sig-line">Otel IT</div>
+      <div class="sig-name">Sistem Logu</div>
+    </div>
+  </article>
+
+  <!-- METEOROLOJI -->
+  <article class="doc" data-doc="weather">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">089-R · Meteoroloji Genel Müdürlüğü</div>
+        <h2 class="doc-title">Hava Durumu — 6-7 Haziran 2024, Göreme</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="approved">Approved</button>
+        </div>
+      </div>
+    </div>
+
+    <p>6 Haziran 23:00: <strong>18°C</strong>, açık, rüzgar 8 km/s KD<br>
+    7 Haziran 02:00: <strong>14°C</strong>, açık, rüzgar 12 km/s KD<br>
+    7 Haziran 04:00: <strong>11°C</strong>, açık, rüzgar 15 km/s KD — <strong>soğuk</strong><br>
+    7 Haziran 06:00: <strong>10°C</strong>, açık — balon uçuşuna uygun<br>
+    <strong>Ay:</strong> %72 dolunay — dışarıda <strong>görüş mesafesi yüksek</strong>, peri bacaları gözle seçilebilir.</p>
+
+    <p style="margin-top:14px;"><strong>Çıkarsama:</strong> Gece boyunca ay ışığı yeterliydi; fail, arazide karanlıkta yol bulamayacak değildi. Ancak saat 04:00'te 11°C ve 15 km/s rüzgar, cesedi tepede 15-20 dakika taşımayı <strong>fiziksel olarak zorlaştırır</strong>. Fail soğuğa dayanıklı ve bölgeyi bilen biri olmalı.</p>
+
+    <div class="doc-signature">
+      <div class="sig-line">Meteoroloji Nevşehir</div>
+      <div class="sig-name">Otomatik Rapor</div>
+    </div>
+  </article>
+</section>
+
+<!-- ============ 07 TECHNICAL ============ -->
+<section class="section" id="technical">
+  <div class="section-head">
+    <div class="section-num">07</div>
+    <h2 class="section-title">Teknik Analizler</h2>
+    <span class="section-sub">089-S · 089-T · 089-U</span>
+  </div>
+
+  <!-- GSM -->
+  <article class="doc" data-doc="gsm">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">089-S · GSM Baz İstasyonu Verileri</div>
+        <h2 class="doc-title">Sinyal Geçmişi — Tüm Şüpheliler</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="approved">Approved</button>
+          <button class="stamp-btn" data-stamp="cross">Cross-Ref</button>
+        </div>
+      </div>
+    </div>
+
+    <p><strong>ALP ERDOĞAN</strong></p>
+    <table class="signal-table">
+      <thead><tr><th>Saat</th><th>Konum</th><th>Tip</th></tr></thead>
+      <tbody>
+        <tr><td>01:50</td><td>Ürgüp → Göreme yolu</td><td>Hareket</td></tr>
+        <tr class="alert"><td>02:15</td><td>Göreme merkez</td><td>Sabit</td></tr>
+        <tr class="alert"><td>02:30</td><td>Göreme — Aşıklar Vadisi yönü</td><td>Hareket</td></tr>
+        <tr class="alert"><td>03:15</td><td>Aşıklar Vadisi baz istasyonu</td><td>Sabit — 45 dk</td></tr>
+        <tr class="alert"><td>04:00</td><td>Aşıklar Vadisi → Göreme</td><td>Hareket</td></tr>
+        <tr><td>04:40</td><td>Göreme → Ürgüp yolu</td><td>Hareket</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:24px;"><strong>İPEK SARIHAN</strong></p>
+    <table class="signal-table">
+      <thead><tr><th>Saat</th><th>Konum</th><th>Tip</th></tr></thead>
+      <tbody>
+        <tr><td>00:45</td><td>Otel çıkışı</td><td>Hareket</td></tr>
+        <tr><td>01:00</td><td>Göreme sokakları</td><td>Yürüyüş</td></tr>
+        <tr class="alert"><td>01:18</td><td>Otel yakını — WhatsApp mesajı Alp'e</td><td>Sabit</td></tr>
+        <tr><td>01:35</td><td>Otel girişi (kamera doğruladı)</td><td>Giriş</td></tr>
+        <tr><td>01:35 — 06:30</td><td>Otel içi — sabit sinyal</td><td>Sabit</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:24px;"><strong>TOLGA KIVANÇ</strong></p>
+    <table class="signal-table">
+      <thead><tr><th>Saat</th><th>Konum</th><th>Tip</th></tr></thead>
+      <tbody>
+        <tr><td>01:15</td><td>Otel — arka kapı çıkışı (beyanı)</td><td>—</td></tr>
+        <tr><td>01:25</td><td>Göreme merkez (ev yönü)</td><td>Hareket</td></tr>
+        <tr class="alert"><td>01:40</td><td>Göreme merkez — ev geçilmiş, Aşıklar Vadisi yönü</td><td>Hareket</td></tr>
+        <tr class="alert"><td>02:10</td><td>Aşıklar Vadisi baz istasyonu</td><td>Sabit</td></tr>
+        <tr class="alert"><td>03:00</td><td>Aşıklar Vadisi</td><td>Sabit — 50 dk</td></tr>
+        <tr class="alert"><td>03:50</td><td>Göreme merkez — eve dönüş yönü</td><td>Hareket</td></tr>
+        <tr><td>04:05</td><td>Ev konumu</td><td>Sabit</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:24px;"><strong>HAKAN ORBAY</strong></p>
+    <table class="signal-table">
+      <thead><tr><th>Saat</th><th>Konum</th><th>Tip</th></tr></thead>
+      <tbody>
+        <tr><td>23:15 — 07:30</td><td>Otel içi — VIP bölge — sabit sinyal</td><td>Sabit</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:18px;background:rgba(107,22,32,0.15);padding:14px 18px;border:1px solid var(--bordeaux);">
+      <strong>KRİTİK:</strong> Hem Alp <strong>hem Tolga</strong>, 7 Haziran gece 02:00-04:00 arası Aşıklar Vadisi baz istasyonunda sinyal vermiştir. <strong>İkisi de oradaydı.</strong> Tolga "düz eve gittim" dedi — yalan. Alp "Defne'yi aradım, bulamadım" dedi — ama vadide 45 dakika ne yaptı?<br><br>
+      <strong>İpek:</strong> 01:35'ten itibaren otelde. Fiziksel olarak vadide değil. Ancak <strong>Alp'i oraya yönlendiren İpek</strong>.<br>
+      <strong>Hakan:</strong> Otel sinyalinden çıkmamış — ancak WiFi bağlantılı telefon, baz istasyonuna bağlanmaz. VIP balkon çıkışı ve kısa mesafe yürüyüş, baz değiştirmeyebilir.
+    </p>
+
+    <div class="doc-signature">
+      <div class="sig-line">GSM Adli İşlem</div>
+      <div class="sig-name">D. Arslan</div>
+    </div>
+  </article>
+
+  <!-- GPS ALP ARACI -->
+  <article class="doc" data-doc="gps">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">089-T · Araç GPS Kaydı</div>
+        <h2 class="doc-title">Alp Erdoğan — ATV Firması Araç Takip</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="cross">Cross-Ref</button>
+        </div>
+      </div>
+    </div>
+
+    <p>Alp Erdoğan, Kaptur Macera'ya ait <strong>Ford Courier 50 NV 789</strong> plaka numaralı aracı iş dışı saatlerde de kullanmaktadır (iş sözleşmesi izin veriyor).</p>
+
+    <table class="signal-table">
+      <thead><tr><th>Saat</th><th>Konum</th><th>Hız</th></tr></thead>
+      <tbody>
+        <tr><td>01:48</td><td>Ürgüp çıkışı</td><td>65 km/s</td></tr>
+        <tr><td>01:58</td><td>Göreme kavşağı</td><td>40 km/s</td></tr>
+        <tr class="alert"><td>02:08</td><td>Kelebek Cave Otel yakını — park</td><td>0</td></tr>
+        <tr class="alert"><td>04:32</td><td>Hareket — Göreme çıkışı</td><td>55 km/s</td></tr>
+        <tr><td>04:48</td><td>Ürgüp — ev konumu</td><td>0</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:18px;"><strong>Çıkarsama:</strong> Alp <strong>02:08'de</strong> otelin yakınında park etmiş ve <strong>04:32'ye</strong> kadar aracını hareket ettirmemiş. Yani <strong>2 saat 24 dakika</strong> Göreme'de, büyük olasılıkla yaya olarak geçirmiştir. Bu süre, bir buluşma + cinayet + cesedi peri bacasına taşıma için <strong>yeterli</strong>.</p>
+
+    <div class="doc-signature">
+      <div class="sig-line">Kaptur Macera — Araç Takip</div>
+      <div class="sig-name">Firma Kaydı</div>
+    </div>
+  </article>
+
+  <!-- DNA RAPORU -->
+  <article class="doc" data-doc="dna">
+    <div class="doc-header">
+      <div>
+        <div class="doc-id">089-U · Adli Genetik Laboratuvarı</div>
+        <h2 class="doc-title">DNA Eşleşme Raporu — Nihai</h2>
+      </div>
+      <div class="doc-stamp-area">
+        <div class="stamp-controls">
+          <button class="stamp-btn" data-stamp="approved">Approved</button>
+          <button class="stamp-btn" data-stamp="classified">Classified</button>
+        </div>
+      </div>
+    </div>
+
+    <dl class="doc-meta">
+      <dt>Laboratuvar</dt><dd>Ankara Adli Bilimler — Genetik</dd>
+      <dt>Rapor Tarihi</dt><dd>12.06.2024</dd>
+    </dl>
+
+    <h3>Sonuçlar</h3>
+    <ol>
+      <li><strong>Tırnak altı DNA (DFN-TRN01):</strong> Alp Erdoğan — %99.7 eşleşme ✓</li>
+      <li><strong>Sigara izmariti DNA (PRB-SIG01):</strong> <strong>Tolga Kıvanç</strong> — %99.4 eşleşme ✓</li>
+      <li><strong>Peri bacası kumaş lifi (PRB-LIF01):</strong> Alp'in lacivert sweatshirt'ünün lif yapısıyla <strong>%94 benzerlik</strong> (kesin değil ama güçlü eşleşme)</li>
+      <li><strong>Boyun parmak izi (casting):</strong> Sağ el baş ve işaret parmağı belirgin. Avuç genişliği: <strong>~21 cm</strong><br>
+      — Alp Erdoğan avuç genişliği: <strong>22 cm</strong> (uyumlu)<br>
+      — Tolga Kıvanç avuç genişliği: <strong>19.5 cm</strong> (uyumsuz)<br>
+      — Hakan Orbay avuç genişliği: <strong>20 cm</strong> (sınırda)</li>
+    </ol>
+
+    <p style="background:rgba(107,22,32,0.15);padding:14px 18px;border:1px solid var(--bordeaux);">
+      <strong>SONUÇ:</strong> Tırnak altı DNA'sı + lif eşleşmesi + avuç genişliği + GPS/baz istasyonu verileri birlikte değerlendirildiğinde, <strong>Alp Erdoğan</strong> fiziksel delillerle en güçlü bağlantıya sahip şüphelidir.<br><br>
+      Tolga Kıvanç'ın sigara izmariti, vadide bulunduğunu kanıtlar — <strong>ancak cinayete katılımını değil, yalnızca orada olduğunu gösterir</strong>. Tolga'nın neden orada olduğu ayrıca sorgulanmalıdır.
+    </p>
+
+    <div class="doc-signature">
+      <div class="sig-line">Adli Genetik Uzmanı</div>
+      <div class="sig-name">Dr. A. Koç</div>
+    </div>
+  </article>
+</section>
+
+<!-- ============ 08 TIMELINE ============ -->
+<section class="section" id="timeline">
+  <div class="section-head">
+    <div class="section-num">08</div>
+    <h2 class="section-title">Zaman Çizelgesi</h2>
+    <span class="section-sub">6 — 7 Haziran 2024</span>
+  </div>
+
+  <div class="board">
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-time">6 Haz · 09:14</div><div class="tl-event">Defne → Ceren: "İpek beni satıyor. Alp burada."</div><div class="tl-source">089-L</div></div>
+      <div class="tl-item"><div class="tl-time">6 Haz · 18:47</div><div class="tl-event">Alp → İpek: "Defne her şeyi biliyor." İpek: "Ben hallederim."</div><div class="tl-source">089-K</div></div>
+      <div class="tl-item"><div class="tl-time">22:00</div><div class="tl-event">Defne ve İpek barda. Tolga barmen.</div><div class="tl-source">089-E</div></div>
+      <div class="tl-item"><div class="tl-time">22:45</div><div class="tl-event">Ceren odaya çıkar. Kulak tıkacı.</div><div class="tl-source">089-D</div></div>
+      <div class="tl-item"><div class="tl-time">23:00</div><div class="tl-event">Hakan Orbay lobiden asansöre — odaya.</div><div class="tl-source">089-O</div></div>
+      <div class="tl-item"><div class="tl-time">23:02 — 23:12</div><div class="tl-event">Defne ↔ Hakan Instagram DM: "01:00'da terasta."</div><div class="tl-source">089-P</div></div>
+      <div class="tl-item"><div class="tl-time">23:30</div><div class="tl-event">İpek bardan çıkar, odaya.</div><div class="tl-source">089-O</div></div>
+      <div class="tl-item"><div class="tl-time">23:47</div><div class="tl-event">Defne son Instagram story — barda, yalnız.</div><div class="tl-source">089-K</div></div>
+      <div class="tl-item critical"><div class="tl-time">23:58</div><div class="tl-event">İpek → Alp: "Defne bu gece her şeyi söyleyeceğini söylüyor. Gel."</div><div class="tl-source">089-K</div></div>
+      <div class="tl-item critical"><div class="tl-time">00:45</div><div class="tl-event">İpek lobiden dışarı çıkar.</div><div class="tl-source">089-O</div></div>
+      <div class="tl-item"><div class="tl-time">00:50</div><div class="tl-event">Defne bardan kalkar, lobiye yürür.</div><div class="tl-source">089-O</div></div>
+      <div class="tl-item critical"><div class="tl-time">01:15</div><div class="tl-event">Defne dışarı çıkar — YALNIZ. Telefonsuz.</div><div class="tl-source">089-O</div></div>
+      <div class="tl-item critical"><div class="tl-time">01:18</div><div class="tl-event">İpek → Alp: "Defne dışarı çıktı. Vadiye gel."</div><div class="tl-source">089-K</div></div>
+      <div class="tl-item"><div class="tl-time">01:35</div><div class="tl-event">İpek otele döner — kameradan görülüyor.</div><div class="tl-source">089-O</div></div>
+      <div class="tl-item critical"><div class="tl-time">01:40</div><div class="tl-event">Tolga — Aşıklar Vadisi yönünde hareket. Eve gitmemiş.</div><div class="tl-source">089-S</div></div>
+      <div class="tl-item"><div class="tl-time">01:52</div><div class="tl-event">Alp → İpek: "Yoldayım."</div><div class="tl-source">089-K</div></div>
+      <div class="tl-item"><div class="tl-time">02:00</div><div class="tl-event">Gece nöbetçisi Murat uyuyor.</div><div class="tl-source">089-H</div></div>
+      <div class="tl-item critical"><div class="tl-time">02:08</div><div class="tl-event">Alp'in aracı otel yakınında park.</div><div class="tl-source">089-T</div></div>
+      <div class="tl-item critical"><div class="tl-time">02:10</div><div class="tl-event">Tolga Aşıklar Vadisi baz istasyonu.</div><div class="tl-source">089-S</div></div>
+      <div class="tl-item critical"><div class="tl-time">02:15 — 03:15</div><div class="tl-event">Alp Göreme → Aşıklar Vadisi → 45 dk sabit.</div><div class="tl-source">089-S</div></div>
+      <div class="tl-item critical"><div class="tl-time">02:10 — 03:00</div><div class="tl-event">Tolga Aşıklar Vadisi → 50 dk sabit.</div><div class="tl-source">089-S</div></div>
+      <div class="tl-item critical"><div class="tl-time">03:30 — 05:00</div><div class="tl-event">Tahmini ölüm penceresi.</div><div class="tl-source">089-B</div></div>
+      <div class="tl-item"><div class="tl-time">03:50</div><div class="tl-event">Tolga eve dönüyor.</div><div class="tl-source">089-S</div></div>
+      <div class="tl-item"><div class="tl-time">04:00</div><div class="tl-event">Alp vadiden ayrılıyor.</div><div class="tl-source">089-S</div></div>
+      <div class="tl-item"><div class="tl-time">04:32</div><div class="tl-event">Alp'in aracı Göreme çıkışı.</div><div class="tl-source">089-T</div></div>
+      <div class="tl-item"><div class="tl-time">06:10</div><div class="tl-event">Balon pilotu cesedi görür.</div><div class="tl-source">089-A</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 DEDUCTION BOARD ============ -->
+<section class="section" id="board">
+  <div class="section-head">
+    <div class="section-num">09</div>
+    <h2 class="section-title">Deduction Board</h2>
+    <span class="section-sub">Çelişkiler · Eleme · İki Yalancı</span>
+  </div>
+
+  <div class="board">
+    <div class="board-grid">
+      <div class="board-col">
+        <h4>▸ Çelişki & Bağlantı Haritası</h4>
+        <div class="board-item"><span class="pin"></span><strong>İpek, Alp'i çağırdı:</strong> 5 Haziran'da "Defne yarın geliyor" mesajı. İpek bunu sakladı (1. oturum). Defne'nin "her şeyi söyleyeceğini" öğrenince panikle Alp'i vadiye yönlendirdi (01:18).</div>
+        <div class="board-item"><span class="pin"></span><strong>Tolga yalan söyledi:</strong> "Eve gittim" dedi ama GSM sinyali Aşıklar Vadisi'nde. 02:10-03:00 arası vadide. Neden? 42 numara ayakkabı izi onun, sigara izmariti DNA'sı onun.</div>
+        <div class="board-item"><span class="pin"></span><strong>Hakan'ın teras daveti:</strong> Defne 01:00'da terasta buluşmak istedi. Hakan "23:00'da odama çıktım" dedi ama VIP balkondan çıkabilir. Kart logu bunu yakalayamaz.</div>
+        <div class="board-item"><span class="pin"></span><strong>Defne telefonsuz çıktı:</strong> 01:15'te dışarı çıkarken telefon yok. Ya birisi onu çağırdı (yüz yüze) ya da önceden planlanmış bir buluşma. Kartvizit notu: "01:00, teras."</div>
+        <div class="board-item"><span class="pin"></span><strong>Tırnak altı DNA:</strong> Alp'in DNA'sı mağdurun tırnaklarında. ATV turu açıklaması (24 saat önce) zayıf — tırnak altı DNA günlük yıkama ile temizlenir.</div>
+        <div class="board-item"><span class="pin"></span><strong>İki kişi vadide:</strong> Hem Alp (03:15) hem Tolga (02:10-03:00). Tolga daha önce orada, Alp daha sonra. Ölüm penceresi: 03:30-05:00. Tolga ayrıldığında (03:50), Alp hâlâ vadide (04:00'a kadar).</div>
+        <div class="board-item"><span class="pin"></span><strong>Cesedin tepeye taşınması:</strong> 15-20 dk efor. Bölgeyi bilen biri — Alp, ATV rehberi olarak araziye hâkim. Tolga da yerel ama tırmanma profili zayıf.</div>
+      </div>
+
+      <div class="board-col">
+        <h4>▸ Eleme Mantığı</h4>
+        <div class="board-item"><span class="pin"></span><strong>Ceren Aksoy:</strong> 22:48'de oda, kulak tıkacı. Kart logu 06:42'ye kadar çıkış yok. GSM otel içi sabit. Fiziksel alibisi sağlam. Bilgi saklıyor (WhatsApp) ama fail değil. ✗</div>
+        <div class="board-item"><span class="pin"></span><strong>Elif Mertoğlu:</strong> Otel müdiresi. Motif yok. Çatı katında kalmış. Kameral logları teslim etmiş. Tolga hakkında bilgi verdi. Tanık. ✗</div>
+        <div class="board-item"><span class="pin"></span><strong>İpek Sarıhan:</strong> Alp'i çağırmış, Defne'yi "vadiye yönlendirme" planı yapmış. Ancak 01:35'ten itibaren otelde — fiziksel olarak vadide değil. GSM doğruladı. Motif (arkadaşlık ihaneti, sır ortaya çıkma korkusu) güçlü ama <strong>fiziksel temas yok</strong>. Şüpheli olarak suç ortağı profili — <strong>fail değil, yönlendirici</strong>. ⚠</div>
+        <div class="board-item"><span class="pin"></span><strong>Hakan Orbay:</strong> Teras daveti var ama oda kartı çıkmamış. VIP balkon çıkışı teorik ama fiziksel delil (DNA, lif, ayakkabı) Hakan'a bağlanmıyor. Sabıka taciz odaklı, fiziksel şiddet profili yok. Motif: "reddedilme" — ama Defne kabul etmişti (DM). Hakan'ın ikinci yalanı: teras buluşmasını sakladı — muhtemelen başka bir suçu örtüyor (uygunsuz teklif). ✗ (cinayet değil ama yalancı)</div>
+        <div class="board-item"><span class="pin"></span><strong>Tolga Kıvanç:</strong> Vadide bulundu (DNA + iz + GSM). Ama ölüm penceresi (03:30-05:00) başlamadan 30 dk önce ayrılmış (03:50). 42 numara ayakkabı izi orada olduğunu kanıtlıyor ama cinayet anında değildi. Tolga'nın yalanı: Defne'yi takip etti (bar sonrası saplantılı davranış), ama öldürmedi. Tolga <strong>ikinci yalancı</strong> — cinayeti değil, takipçilik suçunu gizliyor. ✗</div>
+        <div class="board-item"><span class="pin"></span><strong>Alp Erdoğan:</strong> Tırnak altı DNA (%99.7), lif eşleşmesi (%94), avuç genişliği uyumu, GPS 02:08-04:32 Göreme'de, baz istasyonu 02:30-04:00 Aşıklar Vadisi'nde, sweatshirt sabah yıkanmış, bölgeyi tanıyor (ATV rehberi), peri bacasına tırmanma kapasitesi var, ölüm penceresinde vadide. Motif: Defne, İpek'e "eski ilişkiyi" söyleyecekti — bu hem Alp'in İpek'le ilişkisini hem de itibarını yok edecekti. <strong>"Susturma" refleksi.</strong> ✓</div>
+      </div>
+    </div>
+
+    <textarea class="note-pad" placeholder="ANALIST NOTU — Düşüncelerini buraya yaz. Bu not lokal kalır, ekiple paylaşılmaz."></textarea>
+  </div>
+</section>
+
+<!-- ============ 10 SOLUTION ============ -->
+<section class="section" id="solution">
+  <div class="section-head">
+    <div class="section-num">10</div>
+    <h2 class="section-title">Çözüm Zarfı</h2>
+    <span class="section-sub">089-Z2 · Sınırlı Erişim</span>
+  </div>
+
+  <div class="gate" id="gate">
+    <div class="gate-seal">⬢ KAPALI ZARF · ANALİZ ÖNCESİ AÇMAYIN ⬢</div>
+    <h2 class="gate-title">Hazır mısın?</h2>
+    <p class="gate-warn">
+      Zarfı açmadan önce şu yedi soruya kendi çıkarımlarınla cevap vermiş olmalısın:<br><br>
+      <strong style="color:var(--kraft);">1.</strong> Defne gece neden telefonsuz çıktı?<br>
+      <strong style="color:var(--kraft);">2.</strong> Defne kiminle buluştu — ve nerede öldürüldü?<br>
+      <strong style="color:var(--kraft);">3.</strong> Cesedin çıplak bırakılmasının gerçek sebebi neydi?<br>
+      <strong style="color:var(--kraft);">4.</strong> Peri bacasının tepesine neden taşındı?<br>
+      <strong style="color:var(--kraft);">5.</strong> İki yalancı kim — ve her birinin gerçek yalanı ne?<br>
+      <strong style="color:var(--kraft);">6.</strong> İpek'in rolü tam olarak neydi?<br>
+      <strong style="color:var(--kraft);">7.</strong> Hangi belge, faili kesin olarak ispatlar?<br><br>
+      Yanıtların tutarsızsa zarfı açmak için <em>henüz hazır değilsin</em>.
+    </p>
+    <button class="gate-btn" id="openGate">▸ ZARFI AÇ</button>
+  </div>
+
+  <div class="solution-content" id="solution-content">
+    <article class="verdict">
+      <div class="verdict-stamp">CLASSIFIED</div>
+      <div class="doc-id" style="margin-bottom:12px;">089-Z2 · Resmi Çözüm Belgesi · 14.06.2024</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;margin:0 0 8px;">Failin Kimliği:</h3>
+      <div class="verdict-name">Alp Erdoğan</div>
+
+      <h3>Cinayet Saati ve Yöntemi</h3>
+      <p><strong>7 Haziran 2024, 03:30 — 04:00 arası</strong>, Aşıklar Vadisi yakını, açık arazide. Defne, Alp tarafından <strong>elle boğularak öldürüldü</strong>. Hiyoid kırığı, 21 cm avuç genişliği, tırnak altı DNA — tümü Alp'i gösteriyor.</p>
+
+      <h3>Olaylar Zinciri</h3>
+      <ol>
+        <li>İpek, Defne'nin "eski ilişki sırrını" açıklayacağını öğrenince <strong>panikle Alp'i çağırdı</strong> (01:18, "Vadiye gel").</li>
+        <li>Defne, 01:15'te otelden çıktı. Kartvizit notu: Hakan'la 01:00'da terasta buluşacaktı — <strong>buluşma gerçekleşti</strong> (Hakan bunu sakladı). Hakan terasta 15 dakika konuştu, Defne "başka bir yere gitmem lazım" dedi (Hakan'ın 2. oturumda itirafı bekleniyor). Defne terası terk etti.</li>
+        <li>Defne <strong>yürüyerek Aşıklar Vadisi yönüne</strong> gitti. İpek ona "vadide buluşalım, konuşalım" demiş olabilir (İpek-Defne arası silinen mesajlar var). Ya da Defne, Alp'in orada olduğunu İpek'ten duymuş ve yüzleşmek istemiş.</li>
+        <li>Alp 02:08'de Göreme'ye vardı. 02:30'da vadide. Defne ile <strong>yüzleşme 03:00-03:30 arası</strong> başladı. Defne "İpek'e her şeyi söyleyeceğim" dedi. Alp "susturma refleksiyle" boğdu.</li>
+        <li>Alp, DNA delili bırakmamak için <strong>Defne'nin kıyafetlerini tamamen çıkardı</strong> ve uzaklaştırdı. Kıyafetleri büyük olasılıkla aracında taşıdı ve sonradan yaktı/attı (arama sürüyor).</li>
+        <li>Alp, cesedi peri bacasına taşıdı (03:45-04:15). Bölgeyi ATV rehberi olarak ezbere biliyor. Ay ışığında tırmanma kapasitesi var. Cesedi <strong>sergileyerek</strong> yerleştirdi — kollar açık. Bunun nedeni: <strong>"kazaymış gibi gösterme" niyeti yok, tam tersine "bulunmasını istiyordu"</strong>. Alp, cesedi bulunamayacak bir yere (mağara, kayalık yarık) gizlemedi — peri bacasının tepesine koydu. Bunun psikolojik bir açıklaması var: Alp, Defne'yi <strong>"ulaşılmaz" bir konumda</strong>, dünyaya ilan ederek bıraktı. Obsesif kontrol: "eğer benim değilsen, kimsenin olamayacaksın — ama herkes görecek."</li>
+        <li>Alp 04:32'de Göreme'den ayrıldı. Eve döndü, sweatshirt'ünü 06:30'da yıkadı.</li>
+      </ol>
+
+      <h3>İki Yalancı</h3>
+      <p><strong>1. Tolga Kıvanç (takipçi):</strong> Tolga, Defne'den etkilenmiş ve bar kapanışından sonra onu <strong>takip etmiştir</strong>. Defne dışarı çıktığını gördü (veya onu lobide bekleyip izledi), Aşıklar Vadisi yönüne yürüdüğünü gördü ve peşine düştü. 02:10-03:00 arasında vadide bekledi ama Defne'ye ulaşamadı veya uzaktan gördü ve yaklaşamadı. Sigara içip döndü. Tolga'nın yalanı: "Eve gittim" — gerçeği takipçilik suçunu örtbas etmekti. Tolga cinayet işlemedi ama <strong>tanık olmuş olabilir</strong>.</p>
+      <p><strong>2. Hakan Orbay (teras buluşması):</strong> Hakan, Defne'yle 01:00'da terasta buluştu (VIP balkondan çıktı, kart gerektirmedi). 15-20 dakikalık bir "iş teklifi" konuşması yaptı. Defne gidince Hakan odaya döndü. Hakan'ın yalanı: "23:00'da odama çıktım, sabaha kadar kaldım" — gerçeği teras buluşmasını (ve potansiyel uygunsuz teklif) örtbas etmekti. Hakan cinayet işlemedi.</p>
+
+      <h3>İpek'in Rolü</h3>
+      <p>İpek Sarıhan <strong>suç ortağıdır</strong>. Alp'i Kapadokya'ya kasıtlı olarak çağırmış, Defne'nin vadiye gitmesini dolaylı olarak sağlamış ve Alp'i "vadiye gel" diyerek yönlendirmiştir. İpek'in cinayeti bilip bilmediği belirsiz — ancak İpek, Defne'nin sırrını açıklamasını engellemek için <strong>Alp'i Defne'yle karşılaştırmıştır</strong>. Bu, azmettirme veya suça teşvik teşkil eder.</p>
+
+      <h3>Dayandığı Kritik Belgeler</h3>
+      <ol>
+        <li><strong>089-U:</strong> Tırnak altı DNA — Alp (%99.7)</li>
+        <li><strong>089-T:</strong> GPS — Alp'in aracı 02:08-04:32 Göreme'de</li>
+        <li><strong>089-S:</strong> GSM — Alp 02:30-04:00 Aşıklar Vadisi'nde</li>
+        <li><strong>089-K:</strong> İpek → Alp: "Vadiye gel" (01:18)</li>
+        <li><strong>089-B:</strong> Avuç genişliği 21cm → Alp (22cm, uyumlu)</li>
+        <li><strong>089-U:</strong> Lif — Alp'in sweatshirt'ü (%94 eşleşme)</li>
+        <li><strong>089-F2:</strong> Alp'in 2. oturumda ayakkabı toprağı doğrulaması</li>
+        <li><strong>089-A:</strong> Olay yeri — fail bölgeyi biliyor (ATV rehberi profili)</li>
+      </ol>
+
+      <h3>Kırmızı Ringalar</h3>
+      <p><strong>Tolga:</strong> Vadide bulundu ama cinayet saatinden önce ayrıldı. Ayakkabı izi ve sigara onu orada konumlandırıyor — fakat DNA'sı mağdurda yok. Yalanı takipçilik suçunu kapatmaktı.</p>
+      <p><strong>Hakan:</strong> Teras buluşmasını sakladı. VIP balkon çıkışı teorik olarak alibiyi boşa çıkarıyor ama fiziksel delil bağlantısı yok. Yalanı, uygunsuz teklifin ortaya çıkmasını önlemekti.</p>
+      <p><strong>İpek:</strong> En tehlikeli yanıltıcı. Alp'i yönlendirdi ama fiziksel olarak vadide değildi. Fail değil — ama failin yolunu açtı.</p>
+
+      <p style="background:rgba(107,22,32,0.12);padding:16px;border-left:3px solid var(--bordeaux);margin-top:24px;">
+        <strong>SONUÇ:</strong> Alp Erdoğan, Defne Karataş'ı 7 Haziran 2024 sabaha karşı Aşıklar Vadisi'nde elle boğarak öldürdü. Cesedi peri bacasının tepesine taşıdı. Kıyafetleri delil temizliği amacıyla uzaklaştırdı. Motif: Defne'nin, İpek'e Alp ile olan geçmiş ilişkisini açıklamasını engellemek — obsesif kontrol ve "susturma."<br><br>
+        <strong>Suç ortağı:</strong> İpek Sarıhan — azmettirme/yönlendirme.<br>
+        <strong>İkinci soruşturma:</strong> Tolga Kıvanç — takipçilik.<br>
+        <strong>Üçüncü soruşturma:</strong> Hakan Orbay — uygunsuz teklif ve ifade gizleme.
+      </p>
+
+      <p style="margin-top:18px;"><strong>Tutuklama emri:</strong> 14 Haziran 2024 · Alp Erdoğan, Ürgüp ikametgahı.</p>
+
+      <div class="doc-signature">
+        <div class="sig-line">Kıdemli Kriminal Analist · Jandarma</div>
+        <div class="sig-name">Onaylı</div>
+      </div>
+    </article>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  D.A.K.T. · <em>Division of Analytic Knowledge & Testimonies</em> · dakt.app · @dakt.app · jointhedakt@gmail.com
+</footer>
+
+<script>
+function tick(){const d=new Date();const h=String(d.getHours()).padStart(2,'0');const m=String(d.getMinutes()).padStart(2,'0');const s=String(d.getSeconds()).padStart(2,'0');document.getElementById('clock').textContent=`${h}:${m}:${s} · UTC+3`}
+tick();setInterval(tick,1000);
+document.querySelectorAll('.nav-item').forEach(btn=>{btn.addEventListener('click',()=>{const tab=btn.dataset.tab;document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));btn.classList.add('active');document.getElementById(tab).classList.add('active');window.scrollTo({top:0,behavior:'smooth'})})});
+document.querySelectorAll('.stamp-btn').forEach(btn=>{btn.addEventListener('click',(e)=>{const doc=e.target.closest('.doc');const type=btn.dataset.stamp;const existing=doc.querySelector('.stamp');if(existing&&existing.dataset.type===type){existing.remove();return}if(existing)existing.remove();const stamp=document.createElement('div');stamp.className=`stamp stamp-${type}`;stamp.dataset.type=type;stamp.textContent={approved:'APPROVED',denied:'DENIED',classified:'CLASSIFIED',cross:'CROSS-REF'}[type];doc.appendChild(stamp)})});
+document.querySelectorAll('.suspect-card').forEach(card=>{card.addEventListener('click',(e)=>{if(e.target.classList.contains('suspect-flag')||e.target===card){card.classList.toggle('flagged')}})});
+document.getElementById('openGate').addEventListener('click',()=>{document.getElementById('gate').style.display='none';const sol=document.getElementById('solution-content');sol.classList.add('revealed');sol.scrollIntoView({behavior:'smooth'})});
+const wf=document.getElementById('waveform');if(wf){for(let i=0;i<80;i++){const bar=document.createElement('div');bar.className='waveform-bar';let h=20+Math.random()*50;if(i>50&&i<60)h=70+Math.random()*20;bar.style.height=h+'%';wf.appendChild(bar)}}
+const pad=document.querySelector('.note-pad');if(pad){pad.value=''}
+</script>
+
+</body>
+</html>
