@@ -3,7 +3,7 @@
 /* === HEADER === */
 .bar {
   position: sticky;
-  top: 0;
+  top: var(--site-nav-offset);
   z-index: 100;
   background: var(--ink);
   border-bottom: 1px solid var(--rule);
@@ -61,7 +61,7 @@
 /* === NAV TABS === */
 .nav {
   position: sticky;
-  top: 47px;
+  top: calc(var(--site-nav-offset) + 47px);
   z-index: 90;
   background: var(--ink);
   border-bottom: 1px solid var(--rule);

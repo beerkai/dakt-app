@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import "./vaka-042.css";
 import { Vaka042Bar } from "./Vaka042Bar";
 import { Vaka042Nav } from "./Vaka042Nav";
+import { Vaka042SoloTease } from "./Vaka042SoloTease";
 
 export const metadata = {
   title: "D.A.K.T. · Vaka 042",
@@ -20,6 +21,7 @@ export default function Vaka042Layout({ children }: { children: ReactNode }) {
         <em>Division of Analytic Knowledge & Testimonies</em> · dakt.app ·
         @dakt.app · jointhedakt@gmail.com
       </footer>
+      <Vaka042SoloTease />
     </div>
   );
 }

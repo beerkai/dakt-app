@@ -4,6 +4,7 @@ import {
   JetBrains_Mono,
   Special_Elite,
 } from "next/font/google";
+import { SiteNav } from "@/components/SiteNav";
 import "./globals.css";
 
 const cormorantGaramond = Cormorant_Garamond({
@@ -25,9 +26,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "D.A.K.T. // VAKA-042 // KARAAĞAÇ",
+  title: "D.A.K.T. — Division of Analytic Knowledge & Testimonies",
   description:
-    "Caferağa vaka dosyası — analist gerektiren sınıflandırılmış kayıt.",
+    "Analist olarak sınıflandırılmış dosyaları aç: ifadeler, deliller, co-op çözüm.",
 };
 
 export default function RootLayout({
@@ -40,7 +41,12 @@ export default function RootLayout({
       lang="tr"
       className={`${cormorantGaramond.variable} ${specialElite.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <SiteNav />
+        <div className="relative z-[1] flex min-h-0 flex-1 flex-col">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }

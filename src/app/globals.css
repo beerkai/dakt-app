@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 :root {
+  /* Sticky vaka başlığı / sekme şeridi için — SiteNav yüksekliğiyle eşleşmeli */
+  --site-nav-offset: 3.5rem;
   --ink: #0e0f10;
   --anthracite: #1a1c1f;
   --anthracite-2: #232629;
@@ -22,6 +24,12 @@
 
   --background: var(--ink);
   --foreground: var(--body-text);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --site-nav-offset: 4.75rem;
+  }
 }
 
 @theme inline {
@@ -79,6 +87,48 @@ body::after {
   mix-blend-mode: overlay;
   pointer-events: none;
   z-index: 999;
+}
+
+@keyframes site-nav-logout-toast {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  12% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  78% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+.site-nav-logout-toast {
+  position: fixed;
+  top: calc(var(--site-nav-offset) + 10px);
+  right: 1rem;
+  z-index: 250;
+  pointer-events: none;
+  border: 2px solid var(--bordeaux);
+  background: var(--anthracite);
+  padding: 10px 16px;
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--kraft-light);
+  box-shadow: var(--shadow);
+  animation: site-nav-logout-toast 3s ease forwards;
+}
+
+@media (min-width: 768px) {
+  .site-nav-logout-toast {
+    right: 1.75rem;
+  }
 }
 
 /* === HERO (D.A.K.T.) === */
