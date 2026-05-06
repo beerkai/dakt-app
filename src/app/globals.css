@@ -25,6 +25,15 @@
   --post-it-shadow: rgba(180, 140, 30, 0.3);
   --post-it-text: #2a2419;
 
+  --analyst-blue: #4a90e2;
+  --analyst-yellow: #f4d568;
+  --analyst-green: #7cb342;
+  --analyst-purple: #9c5fb3;
+  --analyst-orange: #e07a3c;
+
+  --solved: #4a6b3a;
+  --solved-bg: rgba(74, 107, 58, 0.15);
+
   --background: var(--ink);
   --foreground: var(--body-text);
 }
@@ -320,4 +329,20 @@ body::after {
 .hero-enter-btn:hover {
   background: var(--bordeaux-bright);
   letter-spacing: 0.38em;
+}
+
+/* Davalar — çözülmüş vaka rozeti */
+.case-solved-badge {
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--solved);
+  background: var(--solved-bg);
+  border: 1px solid rgba(74, 107, 58, 0.45);
+  padding: 4px 8px;
+}
+
+.case-card--solved {
+  opacity: 0.92;
 }

@@ -2,13 +2,28 @@ import type { Metadata } from "next";
 
 import { DavalarCatalog } from "./DavalarCatalog";
 import { getAllCases } from "@/lib/case-helpers";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
   title: "Aktif Dosyalar · D.A.K.T.",
   description: "Erişimine açık sınıflandırılmış vaka dosyaları.",
 };
 
-export default function DavalarPage() {
+export default async function DavalarPage() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  let solvedCaseIds: string[] = [];
+  if (user) {
+    const { data: solved } = await supabase
+      .from("solved_cases")
+      .select("case_id")
+      .eq("user_id", user.id);
+    solvedCaseIds = solved?.map((s) => s.case_id) ?? [];
+  }
+
   const cases = getAllCases();
 
   return (
@@ -24,7 +39,7 @@ export default function DavalarPage() {
         </p>
       </header>
 
-      <DavalarCatalog cases={cases} />
+      <DavalarCatalog cases={cases} solvedCaseIds={solvedCaseIds} />
     </div>
   );
 }

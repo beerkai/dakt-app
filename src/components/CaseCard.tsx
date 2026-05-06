@@ -19,6 +19,8 @@ export type CaseCardProps = {
   onCtaClick?: () => void;
   /** Oturum yüklenirken buton kilitlenir (ör. useAuth loading). */
   ctaBusy?: boolean;
+  /** Kayıtlı kullanıcı bu vakayı çözdüyse rozet + hafif solukluk */
+  isSolved?: boolean;
   status: CaseStatus;
 };
 
@@ -40,13 +42,17 @@ export function CaseCard({
   href,
   onCtaClick,
   ctaBusy,
+  isSolved,
   status,
 }: CaseCardProps) {
   const active = status === "DOSYA AÇIK";
   const busy = Boolean(ctaBusy);
+  const solved = Boolean(isSolved && active);
 
   return (
-    <article className="group relative flex flex-col overflow-hidden border border-[var(--kraft-dark)] bg-[var(--anthracite)] shadow-[var(--shadow)]">
+    <article
+      className={`group relative flex flex-col overflow-hidden border border-[var(--kraft-dark)] bg-[var(--anthracite)] shadow-[var(--shadow)]${solved ? " case-card--solved" : ""}`}
+    >
       <div
         className="pointer-events-none absolute inset-0 opacity-100"
         style={{
@@ -65,14 +71,29 @@ export function CaseCard({
             Dosya №{caseNumber}
           </p>
           <p
-            className={`${mono} flex items-center gap-2 text-[9px] uppercase tracking-[0.28em] ${
+            className={`${mono} flex flex-wrap items-center justify-end gap-2 text-[9px] uppercase tracking-[0.28em] ${
               active
-                ? "text-[var(--kraft)]"
+                ? solved
+                  ? "text-[var(--solved)]"
+                  : "text-[var(--kraft)]"
                 : "text-[var(--meta-label)]"
             }`}
           >
-            <span aria-hidden>{active ? "●" : "○"}</span>
-            {status}
+            {active ? (
+              solved ? (
+                <span className="case-solved-badge">✓ ÇÖZÜLDÜ</span>
+              ) : (
+                <>
+                  <span aria-hidden>●</span>
+                  DOSYA AÇIK
+                </>
+              )
+            ) : (
+              <>
+                <span aria-hidden>○</span>
+                {status}
+              </>
+            )}
           </p>
         </div>
 

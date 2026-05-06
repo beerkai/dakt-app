@@ -19,6 +19,8 @@ import {
   readCaseStartTimestamp,
 } from "@/lib/case-playthrough-storage";
 import { readGuestUsernameTrimmed } from "@/lib/guest-session";
+import { createClient } from "@/lib/supabase/client";
+import { useAuth } from "@/components/AuthProvider";
 // Aşama 4 (SSR sertifika): Certificate + formatCertificateDate yeniden eklenecek.
 // import { Certificate, type CertificateHandle } from "@/components/Certificate";
 import {
@@ -69,6 +71,8 @@ export function CozumClient({
   verdict: VerdictData;
 }) {
   const router = useRouter();
+  const { user } = useAuth();
+  const hasRecordedSolved = useRef(false);
   const baseVoteSuspects: VoteSuspect[] = useMemo(
     () =>
       suspects.map((s) => ({
@@ -149,8 +153,35 @@ export function CozumClient({
 
   useEffect(() => {
     setSuccessMeta(null);
+    hasRecordedSolved.current = false;
     // Aşama 4: setCertModalOpen(false);
   }, [caseId]);
+
+  useEffect(() => {
+    if (view !== "result" || !isCorrect || !user || !successMeta) return;
+    if (hasRecordedSolved.current) return;
+    hasRecordedSolved.current = true;
+
+    const supabase = createClient();
+    const durationSeconds = Math.floor(successMeta.durationMs / 1000);
+
+    void (async () => {
+      const { error } = await supabase.from("solved_cases").upsert(
+        {
+          user_id: user.id,
+          case_id: caseId,
+          accuracy: successMeta.accuracy,
+          attempt_count: successMeta.attempts,
+          duration_seconds: durationSeconds,
+          solved_at: new Date().toISOString(),
+        },
+        { onConflict: "user_id,case_id" },
+      );
+      if (error) {
+        console.error("Vaka kaydı hatası:", error);
+      }
+    })();
+  }, [view, isCorrect, user, successMeta, caseId]);
 
   /* Aşama 4: sertifika modal — Escape ile kapatma
   useEffect(() => {

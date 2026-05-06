@@ -39,7 +39,13 @@ const mono =
 const typewriter =
   "[font-family:var(--font-special-elite),monospace]";
 
-export function DavalarCatalog({ cases }: { cases: CaseData[] }) {
+export function DavalarCatalog({
+  cases,
+  solvedCaseIds = [],
+}: {
+  cases: CaseData[];
+  solvedCaseIds?: string[];
+}) {
   const router = useRouter();
   const { user, loading: authLoading } = useAuth();
   const modalTitleId = useId();
@@ -135,6 +141,7 @@ export function DavalarCatalog({ cases }: { cases: CaseData[] }) {
         {cases.map((c) => {
           const active = c.status === "active";
           const briefHref = active ? caseTabHref(c.id, "brief") : "";
+          const solved = active && solvedCaseIds.includes(c.id);
           return (
             <CaseCard
               key={c.id}
@@ -148,6 +155,7 @@ export function DavalarCatalog({ cases }: { cases: CaseData[] }) {
               docCount={countDocuments(c)}
               suspectCount={c.suspects.length}
               status={active ? "DOSYA AÇIK" : "YAKINDA"}
+              isSolved={solved}
               href={active ? briefHref : undefined}
               onCtaClick={
                 active ? () => requestOpenBrief(briefHref) : undefined

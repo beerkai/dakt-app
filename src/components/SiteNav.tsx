@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { signOut } from "@/app/auth/actions";
 import { useAuth } from "@/components/AuthProvider";
+import { UserDropdown } from "@/components/UserDropdown";
+import { ANALYST_COLOR_HEX } from "@/lib/colors";
 import {
   DAKT_GUEST_USERNAME_KEY,
   DAKT_USER_COLOR_KEY,
@@ -14,14 +16,6 @@ import {
 } from "@/lib/guest-session";
 import type { AnalystColor } from "@/lib/supabase/types";
 
-const SWATCH: Record<AnalystColor, string> = {
-  mavi: "#4a90d9",
-  sari: "#d4c04a",
-  yesil: "#5a9f6e",
-  mor: "#8b6fad",
-  turuncu: "#c67d4a",
-};
-
 const mono =
   "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace]";
 
@@ -29,6 +23,9 @@ export function SiteNav() {
   const pathname = usePathname();
   const { user, profile, loading: authLoading } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [accountMenuOpen, setAccountMenuOpen] = useState(false);
+  const accountMenuDesktopRef = useRef<HTMLDivElement>(null);
+  const accountMenuMobileRef = useRef<HTMLDivElement>(null);
   const [menuSlideIn, setMenuSlideIn] = useState(false);
   const [guestUsername, setGuestUsername] = useState<string | null>(null);
   const [guestColor, setGuestColor] = useState<AnalystColor | null>(null);
@@ -73,7 +70,37 @@ export function SiteNav() {
   }, [pathname, readGuest]);
 
   useEffect(() => {
-    const id = requestAnimationFrame(() => setMenuOpen(false));
+    if (menuOpen) setAccountMenuOpen(false);
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (!accountMenuOpen) return;
+    function handleClickOutside(e: MouseEvent) {
+      const t = e.target as Node;
+      const inDesktop = accountMenuDesktopRef.current?.contains(t);
+      const inMobile = accountMenuMobileRef.current?.contains(t);
+      if (!inDesktop && !inMobile) {
+        setAccountMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [accountMenuOpen]);
+
+  useEffect(() => {
+    if (!accountMenuOpen) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setAccountMenuOpen(false);
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [accountMenuOpen]);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => {
+      setMenuOpen(false);
+      setAccountMenuOpen(false);
+    });
     return () => cancelAnimationFrame(id);
   }, [pathname]);
 
@@ -112,6 +139,7 @@ export function SiteNav() {
 
   const handleShare = useCallback(async () => {
     setMenuOpen(false);
+    setAccountMenuOpen(false);
     const url =
       typeof window !== "undefined" ? window.location.origin : "";
     try {
@@ -221,7 +249,55 @@ export function SiteNav() {
               ↗
             </button>
 
-            {showUserChip ? (
+            {isRegistered ? (
+              profile ? (
+                <div className="relative" ref={accountMenuDesktopRef}>
+                  <button
+                    type="button"
+                    aria-expanded={accountMenuOpen}
+                    aria-haspopup="menu"
+                    onClick={() => setAccountMenuOpen((v) => !v)}
+                    className={`inline-flex min-h-0 cursor-pointer items-center gap-2 rounded-none border border-[var(--kraft-dark)] bg-transparent px-3 py-1.5 transition-[border-color,box-shadow] hover:border-[var(--bordeaux-bright)] hover:shadow-[0_0_14px_rgba(168,36,47,0.28)] ${mono}`}
+                  >
+                    <span
+                      className="site-nav-user-pulse shrink-0 rounded-full site-nav-user-pulse--analist"
+                      aria-hidden
+                    />
+                    {analystColor ? (
+                      <span
+                        className="size-2 shrink-0 rounded-sm border border-[var(--rule)]"
+                        style={{
+                          backgroundColor: ANALYST_COLOR_HEX[analystColor],
+                        }}
+                        aria-hidden
+                      />
+                    ) : null}
+                    <span className="max-w-[min(200px,18vw)] truncate text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--kraft)]">
+                      {profile.username}
+                    </span>
+                    <span
+                      className="shrink-0 text-[10px] leading-none text-[var(--kraft-dark)]"
+                      aria-hidden
+                    >
+                      ▾
+                    </span>
+                  </button>
+                  {accountMenuOpen ? (
+                    <UserDropdown
+                      profile={profile}
+                      email={user?.email}
+                      onClose={() => setAccountMenuOpen(false)}
+                    />
+                  ) : null}
+                </div>
+              ) : (
+                <span
+                  className={`${mono} px-2 text-[10px] uppercase tracking-[0.2em] text-[var(--meta-label)]`}
+                >
+                  …
+                </span>
+              )
+            ) : guestUsername ? (
               <div className="group relative inline-flex min-h-0 items-center">
                 <button
                   type="button"
@@ -230,21 +306,21 @@ export function SiteNav() {
                   className={`inline-flex min-h-0 cursor-pointer items-center gap-2 rounded-none border border-[var(--kraft-dark)] bg-transparent px-3 py-1.5 transition-[border-color,box-shadow] hover:border-[var(--bordeaux-bright)] hover:shadow-[0_0_14px_rgba(168,36,47,0.28)] ${mono}`}
                 >
                   <span
-                    className={`site-nav-user-pulse shrink-0 rounded-full ${isRegistered ? "site-nav-user-pulse--analist" : "site-nav-user-pulse--misafir"}`}
+                    className="site-nav-user-pulse shrink-0 rounded-full site-nav-user-pulse--misafir"
                     aria-hidden
                   />
                   {analystColor ? (
                     <span
                       className="size-2 shrink-0 rounded-sm border border-[var(--rule)]"
                       style={{
-                        backgroundColor: SWATCH[analystColor],
+                        backgroundColor: ANALYST_COLOR_HEX[analystColor],
                       }}
                       title={analystColor}
                       aria-hidden
                     />
                   ) : null}
                   <span className="max-w-[min(200px,18vw)] truncate text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--kraft)]">
-                    {displayName}
+                    {guestUsername}
                   </span>
                   <span
                     className="shrink-0 text-[14px] leading-none text-[var(--kraft-dark)]"
@@ -289,23 +365,69 @@ export function SiteNav() {
               D.A.K.T.
             </Link>
             <div className="flex min-w-0 shrink-0 items-center gap-3">
-              {showUserChip ? (
+              {isRegistered ? (
+                profile ? (
+                  <div className="relative" ref={accountMenuMobileRef}>
+                    <button
+                      type="button"
+                      aria-expanded={accountMenuOpen}
+                      aria-haspopup="menu"
+                      onClick={() => setAccountMenuOpen((v) => !v)}
+                      className={`group relative m-0 flex max-w-[120px] min-w-0 cursor-pointer items-center gap-1 border border-[var(--kraft-dark)] bg-transparent px-2 py-1 text-left ${mono} text-[11px] font-medium uppercase tracking-[0.1em] text-[var(--kraft)]`}
+                      title={profile.username}
+                    >
+                      <span
+                        className="site-nav-user-pulse shrink-0 rounded-full site-nav-user-pulse--analist"
+                        aria-hidden
+                      />
+                      {analystColor ? (
+                        <span
+                          className="size-1.5 shrink-0 rounded-sm border border-[var(--rule)]"
+                          style={{
+                            backgroundColor: ANALYST_COLOR_HEX[analystColor],
+                          }}
+                          aria-hidden
+                        />
+                      ) : null}
+                      <span className="min-w-0 truncate">{profile.username}</span>
+                      <span className="shrink-0 text-[9px] text-[var(--kraft-dark)]" aria-hidden>
+                        ▾
+                      </span>
+                    </button>
+                    {accountMenuOpen ? (
+                      <UserDropdown
+                        profile={profile}
+                        email={user?.email}
+                        onClose={() => setAccountMenuOpen(false)}
+                      />
+                    ) : null}
+                  </div>
+                ) : (
+                  <span
+                    className={`${mono} text-[11px] text-[var(--meta-label)]`}
+                  >
+                    …
+                  </span>
+                )
+              ) : guestUsername ? (
                 <p
                   className={`group relative m-0 flex max-w-[100px] min-w-0 items-center gap-1 ${mono} text-[11px] font-medium uppercase tracking-[0.1em] text-[var(--kraft)]`}
-                  title={displayName}
+                  title={guestUsername}
                 >
                   <span
-                    className={`site-nav-user-pulse shrink-0 rounded-full ${isRegistered ? "site-nav-user-pulse--analist" : "site-nav-user-pulse--misafir"}`}
+                    className="site-nav-user-pulse shrink-0 rounded-full site-nav-user-pulse--misafir"
                     aria-hidden
                   />
                   {analystColor ? (
                     <span
                       className="size-1.5 shrink-0 rounded-sm border border-[var(--rule)]"
-                      style={{ backgroundColor: SWATCH[analystColor] }}
+                      style={{
+                        backgroundColor: ANALYST_COLOR_HEX[analystColor],
+                      }}
                       aria-hidden
                     />
                   ) : null}
-                  <span className="min-w-0 truncate">{displayName}</span>
+                  <span className="min-w-0 truncate">{guestUsername}</span>
                   <span className="site-nav-live-tooltip">{roleLabel}</span>
                 </p>
               ) : null}
@@ -393,6 +515,15 @@ export function SiteNav() {
               >
                 ▸ Paylaş
               </button>
+              {isRegistered && profile ? (
+                <Link
+                  href="/profil"
+                  className={`border-0 border-b border-[rgba(255,255,255,0.06)] bg-transparent py-4 text-left text-[16px] font-medium uppercase tracking-[0.18em] text-[var(--kraft)] transition-colors hover:text-[var(--bordeaux-bright)] ${mono}`}
+                  onClick={closeMobileMenu}
+                >
+                  ▸ Profilim
+                </Link>
+              ) : null}
             </nav>
 
             <div
