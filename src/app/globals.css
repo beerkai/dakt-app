@@ -21,6 +21,9 @@
   --body-text: #e8e4d8;
   --subtitle-text: #9c9588;
   --meta-label: #6a665b;
+  --post-it: #f4d568;
+  --post-it-shadow: rgba(180, 140, 30, 0.3);
+  --post-it-text: #2a2419;
 
   --background: var(--ink);
   --foreground: var(--body-text);

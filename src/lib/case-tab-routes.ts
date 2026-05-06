@@ -22,7 +22,7 @@ export const TAB_LABEL: Record<TabId, string> = {
   belgeler: "Belgeler",
   teknik: "Teknik",
   "zaman-cizelgesi": "Zaman Çizelgesi",
-  deduction: "Deduction",
+  deduction: "PANO",
   cozum: "Çözüm",
 };
 

@@ -2,17 +2,47 @@
 
 import { useCallback, useEffect, useState } from "react";
 
+const SOLO_VARIANTS = [
+  "{codename} davası dört gözle daha hızlı çözülür.",
+  "Solo bir analist iyi düşünür. İki analist çapraz okur.",
+  "Bu dosyada birden fazla yalan var. İkinci bir göz iyi gelir.",
+  "Co-op modunda her oyuncu kendi rengiyle çizer. Sen tek başınasın.",
+  "{victim} davası açık. Yardım çağırmak zayıflık değildir.",
+  "Bu vakada herkes bir şey saklıyor. İki analist iki kat dikkat eder.",
+] as const;
+
+function victimFirstName(victim: string): string {
+  const t = victim.trim();
+  if (!t) return "";
+  return t.split(/\s+/)[0] ?? t;
+}
+
+function formatVariant(
+  template: string,
+  codename: string,
+  victim: string,
+): string {
+  return template
+    .replaceAll("{codename}", codename)
+    .replaceAll("{victim}", victimFirstName(victim));
+}
+
 export function VakaCaseSoloTease({
   caseId,
   codename,
   fullTitle,
+  victim,
 }: {
   caseId: string;
   codename: string;
   fullTitle: string;
+  victim: string;
 }) {
   const [visible, setVisible] = useState(false);
   const [feedback, setFeedback] = useState("");
+  const [variantIdx] = useState(() =>
+    Math.floor(Math.random() * SOLO_VARIANTS.length),
+  );
 
   useEffect(() => {
     const id = requestAnimationFrame(() => {
@@ -70,6 +100,12 @@ export function VakaCaseSoloTease({
 
   if (!visible) return null;
 
+  const teaserLine = formatVariant(
+    SOLO_VARIANTS[variantIdx] ?? SOLO_VARIANTS[0],
+    codename,
+    victim,
+  );
+
   return (
     <div
       className="vaka042-solo-tease pointer-events-auto fixed bottom-5 right-4 z-[160] max-w-[min(100vw-2rem,320px)] border-2 border-[var(--bordeaux)] bg-[var(--anthracite)] p-4 shadow-[var(--shadow)] md:bottom-8 md:right-8"
@@ -86,7 +122,7 @@ export function VakaCaseSoloTease({
         </span>{" "}
         Şu an tek başınasın.
         <br />
-        {codename} davası dört gözle daha hızlı çözülür.
+        {teaserLine}
       </p>
 
       {feedback ? (

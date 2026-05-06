@@ -11,12 +11,12 @@ import {
 } from "react";
 
 import { CaseCard } from "@/components/CaseCard";
+import { countDocuments } from "@/lib/case-helpers";
 import { readGuestUsernameTrimmed, writeGuestUsername } from "@/lib/guest-session";
 import { caseTabHref } from "@/lib/case-tab-routes";
 import type { CaseData } from "@/lib/case-types";
 
 const PLACEHOLDER_CARDS = [
-  { n: "069", label: "○ Yakında — Dosya №069" },
   { n: "070", label: "○ Yakında — Dosya №070" },
   { n: "071", label: "○ Yakında — Dosya №071" },
 ] as const;
@@ -119,7 +119,10 @@ export function DavalarCatalog({ cases }: { cases: CaseData[] }) {
               summary={c.shortSummary}
               recommendedPlayers={c.recommendedPlayers}
               difficulty={c.difficulty}
-              status={active ? "AKTİF" : "YAKINDA"}
+              tabCount={c.enabledTabs.length}
+              docCount={countDocuments(c)}
+              suspectCount={c.suspects.length}
+              status={active ? "DOSYA AÇIK" : "YAKINDA"}
               href={active ? briefHref : undefined}
               onCtaClick={
                 active ? () => requestOpenBrief(briefHref) : undefined

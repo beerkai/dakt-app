@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export type CaseStatus = "AKTİF" | "YAKINDA";
+export type CaseStatus = "DOSYA AÇIK" | "YAKINDA";
 
 export type CaseCardProps = {
   caseNumber: string;
@@ -9,6 +9,10 @@ export type CaseCardProps = {
   summary: string;
   recommendedPlayers: string;
   difficulty: string;
+  /** Sekme / belge / şüpheli özeti (Davalar grid) */
+  tabCount: number;
+  docCount: number;
+  suspectCount: number;
   /** Yoksa veya pasif kartta buton gösterilmez */
   href?: string;
   /** Varsa CTA `Link` yerine tıklanınca bu çağrılır (ör. misafir takma adı modalı). */
@@ -28,11 +32,14 @@ export function CaseCard({
   summary,
   recommendedPlayers,
   difficulty,
+  tabCount,
+  docCount,
+  suspectCount,
   href,
   onCtaClick,
   status,
 }: CaseCardProps) {
-  const active = status === "AKTİF";
+  const active = status === "DOSYA AÇIK";
 
   return (
     <article className="group relative flex flex-col overflow-hidden border border-[var(--kraft-dark)] bg-[var(--anthracite)] shadow-[var(--shadow)]">
@@ -56,7 +63,7 @@ export function CaseCard({
           <p
             className={`${mono} flex items-center gap-2 text-[9px] uppercase tracking-[0.28em] ${
               active
-                ? "text-[var(--approved)]"
+                ? "text-[var(--kraft)]"
                 : "text-[var(--meta-label)]"
             }`}
           >
@@ -88,6 +95,12 @@ export function CaseCard({
         >
           Önerilen: {recommendedPlayers} analist · Zorluk: {difficulty}
         </p>
+
+        <div
+          className={`${mono} mb-4 border-t border-[var(--rule)] py-2 text-[10px] uppercase tracking-[0.22em] text-[var(--kraft-dark)]`}
+        >
+          {tabCount} SEKME · {docCount} BELGE · {suspectCount} ŞÜPHELİ
+        </div>
 
         {active && href ? (
           onCtaClick ? (

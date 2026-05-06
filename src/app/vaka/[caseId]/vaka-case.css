@@ -266,29 +266,23 @@ a.nav-item {
   min-width: 0;
 }
 
+/* Uzun metin belgeleri — tek kolon, dar okuma genişliği */
 .case-doc-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
+  gap: 32px;
   align-items: start;
+  width: 100%;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .case-doc-grid > .doc {
   margin-bottom: 0;
 }
 .case-doc-grid .doc {
-  max-width: 600px;
+  max-width: 100%;
   width: 100%;
-}
-@media (min-width: 768px) {
-  .case-doc-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-@media (min-width: 1024px) {
-  .case-doc-grid {
-    grid-template-columns: repeat(2, minmax(0, 600px));
-    justify-content: start;
-  }
 }
 .case-doc-grid-cell {
   min-width: 0;

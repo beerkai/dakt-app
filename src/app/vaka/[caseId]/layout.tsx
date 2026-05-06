@@ -56,6 +56,7 @@ export default async function CaseLayout({
         caseId={caseData.id}
         codename={caseData.codename}
         fullTitle={caseData.fullTitle}
+        victim={caseData.victim}
       />
     </div>
   );

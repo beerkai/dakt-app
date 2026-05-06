@@ -225,65 +225,6 @@ const timelineInitialOrder = TL089_SHUFFLE_IDX.map(
   (i) => payload.timeline[i]!.id,
 );
 
-const deduction089 = {
-  contradictions: [
-    {
-      pin: true,
-      text: `<strong>İpek, Alp'i çağırdı:</strong> 5 Haziran'da "Defne yarın geliyor" mesajı. İpek bunu sakladı (1. oturum). Defne'nin "her şeyi söyleyeceğini" öğrenince panikle Alp'i vadiye yönlendirdi (01:18).`,
-    },
-    {
-      pin: true,
-      text: `<strong>Tolga yalan söyledi:</strong> "Eve gittim" dedi ama GSM sinyali Aşıklar Vadisi'nde. 02:10-03:00 arası vadide. Neden? 42 numara ayakkabı izi onun, sigara izmariti DNA'sı onun.`,
-    },
-    {
-      pin: true,
-      text: `<strong>Hakan'ın teras daveti:</strong> Defne 01:00'da terasta buluşmak istedi. Hakan "23:00'da odama çıktım" dedi ama VIP balkondan çıkabilir. Kart logu bunu yakalayamaz.`,
-    },
-    {
-      pin: true,
-      text: `<strong>Defne telefonsuz çıktı:</strong> 01:15'te dışarı çıkarken telefon yok. Ya birisi onu çağırdı (yüz yüze) ya da önceden planlanmış bir buluşma. Kartvizit notu: "01:00, teras."`,
-    },
-    {
-      pin: true,
-      text: `<strong>Tırnak altı DNA:</strong> Alp'in DNA'sı mağdurun tırnaklarında. ATV turu açıklaması (24 saat önce) zayıf — tırnak altı DNA günlük yıkama ile temizlenir.`,
-    },
-    {
-      pin: true,
-      text: `<strong>İki kişi vadide:</strong> Hem Alp (03:15) hem Tolga (02:10-03:00). Tolga daha önce orada, Alp daha sonra. Ölüm penceresi: 03:30-05:00. Tolga ayrıldığında (03:50), Alp hâlâ vadide (04:00'a kadar).`,
-    },
-    {
-      pin: true,
-      text: `<strong>Cesedin tepeye taşınması:</strong> 15-20 dk efor. Bölgeyi bilen biri — Alp, ATV rehberi olarak araziye hâkim. Tolga da yerel ama tırmanma profili zayıf.`,
-    },
-  ],
-  elimination: [
-    {
-      pin: true,
-      text: `<strong>Ceren Aksoy:</strong> 22:48'de oda, kulak tıkacı. Kart logu 06:42'ye kadar çıkış yok. GSM otel içi sabit. Fiziksel alibisi sağlam. Bilgi saklıyor (WhatsApp) ama fail değil. ✗`,
-    },
-    {
-      pin: true,
-      text: `<strong>Elif Mertoğlu:</strong> Otel müdiresi. Motif yok. Çatı katında kalmış. Kameral logları teslim etmiş. Tolga hakkında bilgi verdi. Tanık. ✗`,
-    },
-    {
-      pin: true,
-      text: `<strong>İpek Sarıhan:</strong> Alp'i çağırmış, Defne'yi "vadiye yönlendirme" planı yapmış. Ancak 01:35'ten itibaren otelde — fiziksel olarak vadide değil. GSM doğruladı. Motif (arkadaşlık ihaneti, sır ortaya çıkma korkusu) güçlü ama <strong>fiziksel temas yok</strong>. Şüpheli olarak suç ortağı profili — <strong>fail değil, yönlendirici</strong>. ⚠`,
-    },
-    {
-      pin: true,
-      text: `<strong>Hakan Orbay:</strong> Teras daveti var ama oda kartı çıkmamış. VIP balkon çıkışı teorik ama fiziksel delil (DNA, lif, ayakkabı) Hakan'a bağlanmıyor. Sabıka taciz odaklı, fiziksel şiddet profili yok. Motif: "reddedilme" — ama Defne kabul etmişti (DM). Hakan'ın ikinci yalanı: teras buluşmasını sakladı — muhtemelen başka bir suçu örtüyor (uygunsuz teklif). ✗ (cinayet değil ama yalancı)`,
-    },
-    {
-      pin: true,
-      text: `<strong>Tolga Kıvanç:</strong> Vadide bulundu (DNA + iz + GSM). Ama ölüm penceresi (03:30-05:00) başlamadan 30 dk önce ayrılmış (03:50). 42 numara ayakkabı izi orada olduğunu kanıtlıyor ama cinayet anında değildi. Tolga'nın yalanı: Defne'yi takip etti (bar sonrası saplantılı davranış), ama öldürmedi. Tolga <strong>ikinci yalancı</strong> — cinayeti değil, takipçilik suçunu gizliyor. ✗`,
-    },
-    {
-      pin: true,
-      text: `<strong>Alp Erdoğan:</strong> Tırnak altı DNA (%99.7), lif eşleşmesi (%94), avuç genişliği uyumu, GPS 02:08-04:32 Göreme'de, baz istasyonu 02:30-04:00 Aşıklar Vadisi'nde, sweatshirt sabah yıkanmış, bölgeyi tanıyor (ATV rehberi), peri bacasına tırmanma kapasitesi var, ölüm penceresinde vadide. Motif: Defne, İpek'e "eski ilişkiyi" söyleyecekti — bu hem Alp'in İpek'le ilişkisini hem de itibarını yok edecekti. <strong>"Susturma" refleksi.</strong> ✓`,
-    },
-  ],
-};
-
 export const case089: CaseData = {
   id: "089",
   codename: "Peri Bacası",
@@ -326,7 +267,7 @@ export const case089: CaseData = {
   technical,
   timeline,
   timelineInitialOrder,
-  deduction: deduction089,
+  deduction: { contradictions: [], elimination: [] },
   tabSectionSub: {
     brief: "089-A · Olay Yeri",
     supheliler: "Gizli · 06 Profil",
@@ -336,7 +277,7 @@ export const case089: CaseData = {
     belgeler: "089-K → 089-R",
     teknik: "089-S · 089-T · 089-U",
     "zaman-cizelgesi": "6 — 7 Haziran 2024",
-    deduction: "Çelişkiler · Eleme · İki Yalancı",
+    deduction: "Notlar · Sadece sana özel",
     cozum: "089-Z2 · Sınırlı Erişim",
   },
   verdict: {

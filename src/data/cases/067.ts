@@ -164,8 +164,8 @@ export const case067: CaseData = {
   timeline,
   timelineInitialOrder,
   deduction: {
-    contradictions: extra.deduction.c,
-    elimination: extra.deduction.e,
+    contradictions: [],
+    elimination: [],
   },
   tabSectionSub: {
     brief: "067-A · Olay Yeri",
@@ -176,7 +176,7 @@ export const case067: CaseData = {
     belgeler: "067-K → 067-Q",
     teknik: "067-R · 067-S · 067-T · 067-U · 067-V",
     "zaman-cizelgesi": "13 — 14 Mart 2024",
-    deduction: "Çelişkiler · Eleme · Bağlantılar",
+    deduction: "Notlar · Sadece sana özel",
     cozum: "067-Z2 · Sınırlı Erişim",
   },
   verdict: {

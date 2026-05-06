@@ -367,20 +367,8 @@ export const case042: CaseData = {
     "tl-5",
   ],
   deduction: {
-    contradictions: [
-      { pin: true, text: `<strong>23:08–23:17 boşluğu:</strong> Aylin evinde, Emir henüz yok. Bu 9 dakikada Kat 4'e çıkıp inen kim?` },
-      { pin: true, text: `<strong>Burak'ın anahtarı:</strong> Aylin'in kapısına uyuyor. Kapıyı çalıp neden kullanmadı? — Belki içeri girdi.` },
-      { pin: true, text: `<strong>Meryem'in ifadesi:</strong> "23:00'ü geçmişti, Burak'ın kapıya yöneldiğini gördüm." Ama Burak'ın telefonu 22:06'da bina içinde, 22:14'te susuyor — Meryem'in tanıkladığı saatten önce ölmüş.` },
-      { pin: true, text: `<strong>22:19 "okundu":</strong> Burak öldükten sonra mesajı kim açtı? Telefon failin elindeydi.` },
-      { pin: true, text: `<strong>Lavanta havlusu:</strong> Burak'ın evinden, Aylin'in çöpünde. DNA: Burak. Havlu cesetle birlikte taşındı mı?` },
-    ],
-    elimination: [
-      { pin: true, text: `<strong>Sinem:</strong> Olay gecesi Fenerbahçe'de, anne tanıklığı. Fiziksel temas imkansız. ✗` },
-      { pin: true, text: `<strong>Emir:</strong> 01:00–03:00 arası Aylin'in evinde. Ölüm 22:30–00:30. Zaman uyuşmuyor. Polaroid hırsızlığı motif değil. ✗` },
-      { pin: true, text: `<strong>Şükrü:</strong> Tanık. Topuklu kadın gördüğünü beyan etti, kendi kadın değil. ✗` },
-      { pin: true, text: `<strong>Aylin:</strong> 23:00'te Burak'ı içeri almadı (kendi beyanı). Savunma izi yok — Burak kıza arkadan yaklaşmadı. Ev ortamı ölüm yeri değil (yer bulgusu yok). Daha çok <strong>tuzaklayıcı değil tuzaklanan</strong> profili. ⚠` },
-      { pin: true, text: `<strong>Meryem:</strong> Kendisi binada bulunduğunu kabul ediyor. 23:00 sonrasında olduğunu söylüyor — fakat Burak 22:14'te ölmüştü. Yani <strong>22:00–22:30 arasında Burak'la binada karşılaştığını gizliyor.</strong> Tehdit mesajı motif. Saplantı dosyaları profil. <strong>Saçları açık + topuklu kadın = Şükrü tanıklığı.</strong> ✓` },
-    ],
+    contradictions: [],
+    elimination: [],
   },
   tabSectionSub: {
     brief: "042-A · Olay Yeri",
@@ -390,7 +378,7 @@ export const case042: CaseData = {
     deliller: "3 Adet Delil Fişi",
     teknik: "042-H · 042-I · 042-J · GSM",
     "zaman-cizelgesi": "12-13 Mayıs 2025",
-    deduction: "Çelişkiler · Bağlantılar",
+    deduction: "Notlar · Sadece sana özel",
     cozum: "Failin Tahmini Tespiti",
   },
   verdict: {
