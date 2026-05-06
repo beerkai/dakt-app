@@ -143,11 +143,19 @@ export function ProfilClient({
             </p>
           </div>
         </div>
-        <p className={`text-[10px] uppercase tracking-[0.18em] text-[var(--meta-label)] ${mono}`}>
-          Detaylı istatistikler için{" "}
-          <span className="text-[var(--kraft-dark)]">
-            Başarılarım ○ YAKINDA
-          </span>
+        <p className={`mb-4 flex flex-wrap gap-x-3 gap-y-2 text-[10px] uppercase tracking-[0.18em] text-[var(--meta-label)] ${mono}`}>
+          <Link
+            href="/profil/basarilar"
+            className="border-b border-[var(--kraft-dark)] text-[var(--kraft)] transition-colors hover:border-[var(--bordeaux-bright)] hover:text-[var(--bordeaux-bright)]"
+          >
+            Detaylı istatistikler → Başarılar
+          </Link>
+          <Link
+            href="/profil/gecmis"
+            className="border-b border-[var(--kraft-dark)] text-[var(--kraft)] transition-colors hover:border-[var(--bordeaux-bright)] hover:text-[var(--bordeaux-bright)]"
+          >
+            Geçmiş kaydını gör →
+          </Link>
         </p>
       </section>
 

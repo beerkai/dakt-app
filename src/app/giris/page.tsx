@@ -12,6 +12,11 @@ import {
   writeGuestColor,
   writeGuestUsername,
 } from "@/lib/guest-session";
+import {
+  clearLocalSolvedRecords,
+  readLocalSolvedRecords,
+} from "@/lib/local-solved-storage";
+import { createClient } from "@/lib/supabase/client";
 import type { AnalystColor } from "@/lib/supabase/types";
 
 type Tab = "misafir" | "kayit" | "giris";
@@ -92,6 +97,50 @@ export default function GirisPage() {
       setSignUpLoading(false);
       return;
     }
+
+    let transferred = 0;
+    try {
+      const localSolved = readLocalSolvedRecords();
+      if (localSolved.length > 0) {
+        const supabase = createClient();
+        let u = (await supabase.auth.getSession()).data.session?.user ?? null;
+        if (!u) {
+          await new Promise((r) => setTimeout(r, 150));
+          u = (await supabase.auth.getUser()).data.user;
+        }
+        if (u) {
+          const records = localSolved.map((s) => ({
+            user_id: u!.id,
+            case_id: s.case_id,
+            accuracy: s.accuracy,
+            attempt_count: s.attempt_count,
+            duration_seconds: s.duration_seconds,
+            solved_at: s.solved_at,
+          }));
+          const { error: upErr } = await supabase
+            .from("solved_cases")
+            .upsert(records, { onConflict: "user_id,case_id" });
+          if (!upErr) {
+            transferred = records.length;
+            clearLocalSolvedRecords();
+          } else {
+            console.error("Misafir çözüm aktarımı:", upErr);
+          }
+        }
+      }
+    } catch (e) {
+      console.error("Misafir çözüm aktarımı:", e);
+    }
+
+    if (transferred > 0) {
+      try {
+        sessionStorage.setItem("dakt_welcome_transfer", String(transferred));
+      } catch {
+        /* ignore */
+      }
+    }
+
+    setSignUpLoading(false);
     router.refresh();
     router.push("/");
   }

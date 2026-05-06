@@ -31,6 +31,8 @@ export function SiteNav() {
   const [guestColor, setGuestColor] = useState<AnalystColor | null>(null);
   const [logoutToastKey, setLogoutToastKey] = useState(0);
   const [shareToastKey, setShareToastKey] = useState(0);
+  const [welcomeToastKey, setWelcomeToastKey] = useState(0);
+  const [welcomeTransferCount, setWelcomeTransferCount] = useState(0);
 
   const readGuest = useCallback(() => {
     try {
@@ -105,6 +107,22 @@ export function SiteNav() {
   }, [pathname]);
 
   useEffect(() => {
+    try {
+      const raw = sessionStorage.getItem("dakt_welcome_transfer");
+      if (raw) {
+        const n = parseInt(raw, 10);
+        sessionStorage.removeItem("dakt_welcome_transfer");
+        if (Number.isFinite(n) && n > 0) {
+          setWelcomeTransferCount(n);
+          setWelcomeToastKey((k) => k + 1);
+        }
+      }
+    } catch {
+      /* ignore */
+    }
+  }, [pathname]);
+
+  useEffect(() => {
     if (!menuOpen) {
       setMenuSlideIn(false);
       document.body.style.overflow = "";
@@ -136,6 +154,12 @@ export function SiteNav() {
     const id = window.setTimeout(() => setShareToastKey(0), 3000);
     return () => window.clearTimeout(id);
   }, [shareToastKey]);
+
+  useEffect(() => {
+    if (welcomeToastKey === 0) return;
+    const id = window.setTimeout(() => setWelcomeToastKey(0), 5000);
+    return () => window.clearTimeout(id);
+  }, [welcomeToastKey]);
 
   const handleShare = useCallback(async () => {
     setMenuOpen(false);
@@ -579,6 +603,18 @@ export function SiteNav() {
           aria-live="polite"
         >
           ● Çıkış yapıldı
+        </div>
+      ) : null}
+
+      {welcomeToastKey > 0 ? (
+        <div
+          key={welcomeToastKey}
+          className="site-nav-logout-toast"
+          role="status"
+          aria-live="polite"
+        >
+          ● Hoş geldin! Misafirken çözdüğün {welcomeTransferCount} vaka hesabına
+          aktarıldı.
         </div>
       ) : null}
 

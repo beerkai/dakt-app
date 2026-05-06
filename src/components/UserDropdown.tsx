@@ -66,22 +66,22 @@ export function UserDropdown({
         >
           ▸ Profilim
         </Link>
-        <div
+        <Link
+          href="/profil/basarilar"
           role="menuitem"
-          className="cursor-not-allowed border-b border-[var(--rule)] px-4 py-3 text-[11px] uppercase tracking-[0.32em] text-[var(--meta-label)]"
-          aria-disabled="true"
+          className="block border-b border-[var(--rule)] px-4 py-3 text-[11px] uppercase tracking-[0.32em] text-[var(--kraft)] transition-colors hover:bg-[var(--bordeaux)] hover:text-[var(--kraft-light)]"
+          onClick={onClose}
         >
-          ▸ Başarılarım{" "}
-          <span className="text-[9px] tracking-[0.14em]">○ YAKINDA</span>
-        </div>
-        <div
+          ▸ Başarılarım
+        </Link>
+        <Link
+          href="/profil/gecmis"
           role="menuitem"
-          className="cursor-not-allowed px-4 py-3 text-[11px] uppercase tracking-[0.32em] text-[var(--meta-label)]"
-          aria-disabled="true"
+          className="block border-b border-[var(--rule)] px-4 py-3 text-[11px] uppercase tracking-[0.32em] text-[var(--kraft)] transition-colors hover:bg-[var(--bordeaux)] hover:text-[var(--kraft-light)]"
+          onClick={onClose}
         >
-          ▸ Geçmiş{" "}
-          <span className="text-[9px] tracking-[0.14em]">○ YAKINDA</span>
-        </div>
+          ▸ Geçmiş
+        </Link>
       </div>
 
       <div className="border-t border-[var(--rule)]">

@@ -1,4 +1,10 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
+
+import { useAuth } from "@/components/AuthProvider";
+import { DAKT_LOCAL_SOLVED_KEY } from "@/lib/local-solved-storage";
 
 export type CaseStatus = "DOSYA AÇIK" | "YAKINDA";
 
@@ -19,7 +25,7 @@ export type CaseCardProps = {
   onCtaClick?: () => void;
   /** Oturum yüklenirken buton kilitlenir (ör. useAuth loading). */
   ctaBusy?: boolean;
-  /** Kayıtlı kullanıcı bu vakayı çözdüyse rozet + hafif solukluk */
+  /** Kayıtlı kullanıcı: sunucudan gelen çözüm durumu */
   isSolved?: boolean;
   status: CaseStatus;
 };
@@ -45,9 +51,62 @@ export function CaseCard({
   isSolved,
   status,
 }: CaseCardProps) {
+  const { user } = useAuth();
+  const [localSolvedIds, setLocalSolvedIds] = useState<string[]>([]);
+
+  useEffect(() => {
+    function readLocal() {
+      if (typeof window === "undefined") return;
+      if (user) {
+        setLocalSolvedIds([]);
+        return;
+      }
+      try {
+        const raw = localStorage.getItem(DAKT_LOCAL_SOLVED_KEY);
+        if (!raw) {
+          setLocalSolvedIds([]);
+          return;
+        }
+        const parsed = JSON.parse(raw) as unknown;
+        if (!Array.isArray(parsed)) {
+          setLocalSolvedIds([]);
+          return;
+        }
+        const ids = parsed
+          .map((x) =>
+            x && typeof x === "object" && typeof (x as { case_id?: string }).case_id === "string"
+              ? (x as { case_id: string }).case_id
+              : null,
+          )
+          .filter((x): x is string => x != null);
+        setLocalSolvedIds(ids);
+      } catch {
+        setLocalSolvedIds([]);
+      }
+    }
+
+    readLocal();
+
+    function onLocal() {
+      readLocal();
+    }
+    function onStorage(e: StorageEvent) {
+      if (e.key === DAKT_LOCAL_SOLVED_KEY || e.key === null) readLocal();
+    }
+
+    window.addEventListener("dakt_local_solved_changed", onLocal);
+    window.addEventListener("storage", onStorage);
+    return () => {
+      window.removeEventListener("dakt_local_solved_changed", onLocal);
+      window.removeEventListener("storage", onStorage);
+    };
+  }, [user]);
+
   const active = status === "DOSYA AÇIK";
   const busy = Boolean(ctaBusy);
-  const solved = Boolean(isSolved && active);
+  const serverSolved = Boolean(isSolved);
+  const guestSolved = !user && localSolvedIds.includes(caseNumber);
+  const solved = active && (serverSolved || guestSolved);
 
   return (
     <article

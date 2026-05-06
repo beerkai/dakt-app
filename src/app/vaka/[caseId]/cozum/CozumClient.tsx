@@ -19,6 +19,9 @@ import {
   readCaseStartTimestamp,
 } from "@/lib/case-playthrough-storage";
 import { readGuestUsernameTrimmed } from "@/lib/guest-session";
+import {
+  upsertLocalSolvedRecord,
+} from "@/lib/local-solved-storage";
 import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/components/AuthProvider";
 // Aşama 4 (SSR sertifika): Certificate + formatCertificateDate yeniden eklenecek.
@@ -158,29 +161,43 @@ export function CozumClient({
   }, [caseId]);
 
   useEffect(() => {
-    if (view !== "result" || !isCorrect || !user || !successMeta) return;
+    if (view !== "result" || !isCorrect || !successMeta) return;
     if (hasRecordedSolved.current) return;
-    hasRecordedSolved.current = true;
 
-    const supabase = createClient();
     const durationSeconds = Math.floor(successMeta.durationMs / 1000);
 
-    void (async () => {
-      const { error } = await supabase.from("solved_cases").upsert(
-        {
-          user_id: user.id,
-          case_id: caseId,
-          accuracy: successMeta.accuracy,
-          attempt_count: successMeta.attempts,
-          duration_seconds: durationSeconds,
-          solved_at: new Date().toISOString(),
-        },
-        { onConflict: "user_id,case_id" },
-      );
-      if (error) {
-        console.error("Vaka kaydı hatası:", error);
-      }
-    })();
+    if (user) {
+      hasRecordedSolved.current = true;
+      const supabase = createClient();
+      void (async () => {
+        const { error } = await supabase.from("solved_cases").upsert(
+          {
+            user_id: user.id,
+            case_id: caseId,
+            accuracy: successMeta.accuracy,
+            attempt_count: successMeta.attempts,
+            duration_seconds: durationSeconds,
+            solved_at: new Date().toISOString(),
+          },
+          { onConflict: "user_id,case_id" },
+        );
+        if (error) {
+          console.error("Vaka kaydı hatası:", error);
+        }
+      })();
+      return;
+    }
+
+    if (readGuestUsernameTrimmed()) {
+      hasRecordedSolved.current = true;
+      upsertLocalSolvedRecord({
+        case_id: caseId,
+        accuracy: successMeta.accuracy,
+        attempt_count: successMeta.attempts,
+        duration_seconds: durationSeconds,
+        solved_at: new Date().toISOString(),
+      });
+    }
   }, [view, isCorrect, user, successMeta, caseId]);
 
   /* Aşama 4: sertifika modal — Escape ile kapatma
