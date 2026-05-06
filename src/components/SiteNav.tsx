@@ -4,19 +4,34 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
+import { signOut } from "@/app/auth/actions";
+import { useAuth } from "@/components/AuthProvider";
 import {
   DAKT_GUEST_USERNAME_KEY,
+  DAKT_USER_COLOR_KEY,
   clearGuestUsername,
+  readGuestColor,
 } from "@/lib/guest-session";
+import type { AnalystColor } from "@/lib/supabase/types";
+
+const SWATCH: Record<AnalystColor, string> = {
+  mavi: "#4a90d9",
+  sari: "#d4c04a",
+  yesil: "#5a9f6e",
+  mor: "#8b6fad",
+  turuncu: "#c67d4a",
+};
 
 const mono =
   "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace]";
 
 export function SiteNav() {
   const pathname = usePathname();
+  const { user, profile, loading: authLoading } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuSlideIn, setMenuSlideIn] = useState(false);
   const [guestUsername, setGuestUsername] = useState<string | null>(null);
+  const [guestColor, setGuestColor] = useState<AnalystColor | null>(null);
   const [logoutToastKey, setLogoutToastKey] = useState(0);
   const [shareToastKey, setShareToastKey] = useState(0);
 
@@ -25,8 +40,10 @@ export function SiteNav() {
       const raw = localStorage.getItem(DAKT_GUEST_USERNAME_KEY);
       const v = raw?.trim();
       setGuestUsername(v && v.length > 0 ? v : null);
+      setGuestColor(readGuestColor());
     } catch {
       setGuestUsername(null);
+      setGuestColor(null);
     }
   }, []);
 
@@ -35,7 +52,13 @@ export function SiteNav() {
       readGuest();
     });
     function onStorage(e: StorageEvent) {
-      if (e.key === DAKT_GUEST_USERNAME_KEY || e.key === null) readGuest();
+      if (
+        e.key === DAKT_GUEST_USERNAME_KEY ||
+        e.key === DAKT_USER_COLOR_KEY ||
+        e.key === null
+      ) {
+        readGuest();
+      }
     }
     function onLocalGuestChange() {
       readGuest();
@@ -112,11 +135,17 @@ export function SiteNav() {
   }, []);
 
   const handleLogout = useCallback(() => {
+    if (user) {
+      void signOut();
+      setMenuOpen(false);
+      return;
+    }
     clearGuestUsername();
     setGuestUsername(null);
+    setGuestColor(null);
     setLogoutToastKey((n) => n + 1);
     setMenuOpen(false);
-  }, []);
+  }, [user]);
 
   const closeMobileMenu = useCallback(() => setMenuOpen(false), []);
 
@@ -125,8 +154,20 @@ export function SiteNav() {
   const outlineBtn =
     "inline-flex shrink-0 items-center justify-center border border-[var(--kraft)] bg-transparent font-medium uppercase tracking-[0.2em] text-[var(--kraft-light)] transition-colors [font-family:var(--font-jetbrains-mono),ui-monospace,monospace] hover:border-[var(--kraft-light)] hover:bg-[var(--anthracite-2)]";
 
-  const loggedIn = guestUsername !== null;
+  const primaryBtn =
+    "inline-flex shrink-0 items-center justify-center border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] font-medium uppercase tracking-[0.2em] text-[var(--kraft-light)] transition-colors [font-family:var(--font-jetbrains-mono),ui-monospace,monospace] hover:bg-[var(--bordeaux-bright)]";
+
+  const isRegistered = Boolean(user);
+  const showUserChip = isRegistered || guestUsername !== null;
+  const displayName =
+    profile?.username ??
+    (user?.email ? (user.email.split("@")[0] ?? user.email) : null) ??
+    guestUsername ??
+    "";
+  const analystColor = profile?.color ?? guestColor;
+  const roleLabel = isRegistered ? "ANALIST" : "MİSAFİR";
   const guestUpper = guestUsername?.toLocaleUpperCase("tr-TR") ?? "";
+  const identityUpper = displayName.toLocaleUpperCase("tr-TR");
 
   return (
     <>
@@ -169,7 +210,7 @@ export function SiteNav() {
           </nav>
 
           {/* —— Masaüstü: sağ —— */}
-          <div className="hidden items-center gap-4 md:flex">
+          <div className="hidden items-center gap-3 md:flex">
             <button
               type="button"
               title="Bağlantıyı paylaş"
@@ -180,34 +221,61 @@ export function SiteNav() {
               ↗
             </button>
 
-            {loggedIn ? (
-              <button
-                type="button"
-                title="Çıkış yap"
-                onClick={handleLogout}
-                className={`inline-flex min-h-0 cursor-pointer items-center gap-2 rounded-none border border-[var(--kraft-dark)] bg-transparent px-3 py-1.5 transition-[border-color,box-shadow] hover:border-[var(--bordeaux-bright)] hover:shadow-[0_0_14px_rgba(168,36,47,0.28)] ${mono}`}
-              >
-                <span
-                  className="site-nav-user-pulse shrink-0 rounded-full"
-                  aria-hidden
-                />
-                <span className="max-w-[min(200px,18vw)] truncate text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--kraft)]">
-                  {guestUsername}
-                </span>
-                <span
-                  className="shrink-0 text-[14px] leading-none text-[var(--kraft-dark)]"
-                  aria-hidden
+            {showUserChip ? (
+              <div className="group relative inline-flex min-h-0 items-center">
+                <button
+                  type="button"
+                  title={roleLabel}
+                  onClick={handleLogout}
+                  className={`inline-flex min-h-0 cursor-pointer items-center gap-2 rounded-none border border-[var(--kraft-dark)] bg-transparent px-3 py-1.5 transition-[border-color,box-shadow] hover:border-[var(--bordeaux-bright)] hover:shadow-[0_0_14px_rgba(168,36,47,0.28)] ${mono}`}
                 >
-                  ×
-                </span>
-              </button>
+                  <span
+                    className={`site-nav-user-pulse shrink-0 rounded-full ${isRegistered ? "site-nav-user-pulse--analist" : "site-nav-user-pulse--misafir"}`}
+                    aria-hidden
+                  />
+                  {analystColor ? (
+                    <span
+                      className="size-2 shrink-0 rounded-sm border border-[var(--rule)]"
+                      style={{
+                        backgroundColor: SWATCH[analystColor],
+                      }}
+                      title={analystColor}
+                      aria-hidden
+                    />
+                  ) : null}
+                  <span className="max-w-[min(200px,18vw)] truncate text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--kraft)]">
+                    {displayName}
+                  </span>
+                  <span
+                    className="shrink-0 text-[14px] leading-none text-[var(--kraft-dark)]"
+                    aria-hidden
+                  >
+                    ×
+                  </span>
+                </button>
+                <span className="site-nav-live-tooltip">{roleLabel}</span>
+              </div>
+            ) : !authLoading ? (
+              <>
+                <Link
+                  href="/giris"
+                  className={`${outlineBtn} px-4 py-2.5 text-[10px]`}
+                >
+                  Giriş Yap
+                </Link>
+                <Link
+                  href="/giris?tab=kayit"
+                  className={`${primaryBtn} px-4 py-2.5 text-[10px]`}
+                >
+                  Kayıt Ol
+                </Link>
+              </>
             ) : (
-              <Link
-                href="/giris"
-                className={`${outlineBtn} px-4 py-2.5 text-[10px]`}
+              <span
+                className={`${mono} px-2 text-[10px] uppercase tracking-[0.2em] text-[var(--meta-label)]`}
               >
-                Giriş Yap
-              </Link>
+                …
+              </span>
             )}
           </div>
 
@@ -221,16 +289,24 @@ export function SiteNav() {
               D.A.K.T.
             </Link>
             <div className="flex min-w-0 shrink-0 items-center gap-3">
-              {loggedIn ? (
+              {showUserChip ? (
                 <p
-                  className={`m-0 flex max-w-[100px] min-w-0 items-center gap-1 ${mono} text-[11px] font-medium uppercase tracking-[0.1em] text-[var(--kraft)]`}
-                  title={guestUsername ?? undefined}
+                  className={`group relative m-0 flex max-w-[100px] min-w-0 items-center gap-1 ${mono} text-[11px] font-medium uppercase tracking-[0.1em] text-[var(--kraft)]`}
+                  title={displayName}
                 >
                   <span
-                    className="site-nav-user-pulse shrink-0 rounded-full"
+                    className={`site-nav-user-pulse shrink-0 rounded-full ${isRegistered ? "site-nav-user-pulse--analist" : "site-nav-user-pulse--misafir"}`}
                     aria-hidden
                   />
-                  <span className="min-w-0 truncate">{guestUsername}</span>
+                  {analystColor ? (
+                    <span
+                      className="size-1.5 shrink-0 rounded-sm border border-[var(--rule)]"
+                      style={{ backgroundColor: SWATCH[analystColor] }}
+                      aria-hidden
+                    />
+                  ) : null}
+                  <span className="min-w-0 truncate">{displayName}</span>
+                  <span className="site-nav-live-tooltip">{roleLabel}</span>
                 </p>
               ) : null}
               <button
@@ -325,12 +401,13 @@ export function SiteNav() {
             />
 
             <div className="mt-auto flex flex-col gap-4 pt-4">
-              {loggedIn ? (
+              {showUserChip ? (
                 <>
                   <p
                     className={`m-0 text-center text-[10px] font-medium uppercase tracking-[0.16em] text-[var(--meta-label)] ${mono}`}
                   >
-                    ● ÇEVRİMİÇİ OLARAK: {guestUpper}
+                    ● ÇEVRİMİÇİ OLARAK:{" "}
+                    {isRegistered ? identityUpper : guestUpper}
                   </p>
                   <button
                     type="button"
@@ -340,15 +417,24 @@ export function SiteNav() {
                     Çıkış Yap
                   </button>
                 </>
-              ) : (
-                <Link
-                  href="/giris"
-                  onClick={closeMobileMenu}
-                  className={`inline-flex w-full items-center justify-center border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] py-4 text-[11px] font-medium uppercase tracking-[0.22em] text-[var(--paper)] transition-colors [font-family:var(--font-jetbrains-mono),ui-monospace,monospace] hover:bg-[var(--bordeaux-bright)]`}
-                >
-                  Giriş Yap
-                </Link>
-              )}
+              ) : !authLoading ? (
+                <div className="flex flex-col gap-3">
+                  <Link
+                    href="/giris"
+                    onClick={closeMobileMenu}
+                    className={`${outlineBtn} w-full py-4 text-[11px]`}
+                  >
+                    Giriş Yap
+                  </Link>
+                  <Link
+                    href="/giris?tab=kayit"
+                    onClick={closeMobileMenu}
+                    className={`${primaryBtn} w-full py-4 text-[11px]`}
+                  >
+                    Kayıt Ol
+                  </Link>
+                </div>
+              ) : null}
             </div>
           </div>
         </div>

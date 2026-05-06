@@ -160,9 +160,17 @@ body::after {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--bordeaux-bright);
-  animation: nav-live-pulse 1.6s ease-in-out infinite;
   flex-shrink: 0;
+}
+
+.site-nav-user-pulse--analist {
+  background: var(--kraft);
+  animation: nav-live-pulse 1.6s ease-in-out infinite;
+}
+
+.site-nav-user-pulse--misafir {
+  background: rgba(139, 133, 124, 0.75);
+  animation: none;
 }
 
 .site-nav-live-tooltip {

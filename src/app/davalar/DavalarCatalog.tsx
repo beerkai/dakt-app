@@ -10,6 +10,7 @@ import {
   type FormEvent,
 } from "react";
 
+import { useAuth } from "@/components/AuthProvider";
 import { CaseCard } from "@/components/CaseCard";
 import { countDocuments } from "@/lib/case-helpers";
 import { readGuestUsernameTrimmed, writeGuestUsername } from "@/lib/guest-session";
@@ -40,6 +41,7 @@ const typewriter =
 
 export function DavalarCatalog({ cases }: { cases: CaseData[] }) {
   const router = useRouter();
+  const { user, loading: authLoading } = useAuth();
   const modalTitleId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -65,11 +67,34 @@ export function DavalarCatalog({ cases }: { cases: CaseData[] }) {
         router.push(briefHref);
         return;
       }
+      if (!authLoading && user) {
+        router.push(briefHref);
+        return;
+      }
+      if (authLoading) {
+        setPendingBriefHref(briefHref);
+        return;
+      }
       setPendingBriefHref(briefHref);
       setGuestModalOpen(true);
     },
-    [router],
+    [router, authLoading, user],
   );
+
+  useEffect(() => {
+    if (authLoading || !pendingBriefHref) return;
+    if (readGuestUsernameTrimmed()) {
+      router.push(pendingBriefHref);
+      setPendingBriefHref(null);
+      return;
+    }
+    if (user) {
+      router.push(pendingBriefHref);
+      setPendingBriefHref(null);
+      return;
+    }
+    setGuestModalOpen(true);
+  }, [authLoading, user, pendingBriefHref, router]);
 
   useEffect(() => {
     if (!guestModalOpen) return;

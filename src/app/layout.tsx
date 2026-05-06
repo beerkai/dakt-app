@@ -4,6 +4,7 @@ import {
   JetBrains_Mono,
   Special_Elite,
 } from "next/font/google";
+import { AuthProvider } from "@/components/AuthProvider";
 import { SiteNav } from "@/components/SiteNav";
 import "./globals.css";
 
@@ -42,10 +43,12 @@ export default function RootLayout({
       className={`${cormorantGaramond.variable} ${specialElite.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <SiteNav />
-        <div className="relative z-[1] flex min-h-0 flex-1 flex-col">
-          {children}
-        </div>
+        <AuthProvider>
+          <SiteNav />
+          <div className="relative z-[1] flex min-h-0 flex-1 flex-col">
+            {children}
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );

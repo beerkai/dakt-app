@@ -1,13 +1,18 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 
+import { signIn, signUp } from "@/app/auth/actions";
 import {
   DAKT_GUEST_USERNAME_KEY,
+  DAKT_USER_COLOR_KEY,
   clearGuestUsername,
+  readGuestColor,
+  writeGuestColor,
   writeGuestUsername,
 } from "@/lib/guest-session";
+import type { AnalystColor } from "@/lib/supabase/types";
 
 type Tab = "misafir" | "kayit" | "giris";
 
@@ -20,12 +25,69 @@ const labelMono =
 const inputClass =
   "w-full border border-[var(--kraft-dark)] bg-[var(--anthracite)] px-4 py-3 text-[13px] text-[var(--body-text)] [font-family:var(--font-special-elite),monospace] placeholder:text-[var(--meta-label)] focus:border-[var(--kraft)] focus:outline-none";
 
+const COLOR_OPTIONS: { id: AnalystColor; fill: string; label: string }[] = [
+  { id: "mavi", fill: "#4a90d9", label: "Mavi" },
+  { id: "sari", fill: "#d4c04a", label: "Sarı" },
+  { id: "yesil", fill: "#5a9f6e", label: "Yeşil" },
+  { id: "mor", fill: "#8b6fad", label: "Mor" },
+  { id: "turuncu", fill: "#c67d4a", label: "Turuncu" },
+];
+
+function ColorSquares({
+  value,
+  onChange,
+  name,
+}: {
+  value: AnalystColor;
+  onChange: (c: AnalystColor) => void;
+  name?: string;
+}) {
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      {name ? <input type="hidden" name={name} value={value} /> : null}
+      {COLOR_OPTIONS.map((c) => (
+        <button
+          key={c.id}
+          type="button"
+          title={c.label}
+          aria-label={c.label}
+          aria-pressed={value === c.id}
+          onClick={() => onChange(c.id)}
+          className={`size-9 shrink-0 border-2 transition-[border-color,box-shadow] ${
+            value === c.id
+              ? "border-[var(--bordeaux)] shadow-[0_0_0_1px_var(--bordeaux-bright)]"
+              : "border-[var(--rule)] hover:border-[var(--kraft-dark)]"
+          }`}
+          style={{ backgroundColor: c.fill }}
+        />
+      ))}
+    </div>
+  );
+}
+
 export default function GirisPage() {
   const router = useRouter();
   const [tab, setTab] = useState<Tab>("misafir");
+  const [tabLocked, setTabLocked] = useState(false);
   const [guestName, setGuestName] = useState("");
+  const [guestColor, setGuestColor] = useState<AnalystColor>("mavi");
   const [guestError, setGuestError] = useState(false);
   const [sessionGuest, setSessionGuest] = useState<string | null>(null);
+
+  const [signUpState, signUpAction, signUpPending] = useActionState(signUp, null);
+  const [signInState, signInAction, signInPending] = useActionState(signIn, null);
+
+  const [regColor, setRegColor] = useState<AnalystColor>("mavi");
+
+  useEffect(() => {
+    if (tabLocked) return;
+    if (typeof window === "undefined") return;
+    const q = new URLSearchParams(window.location.search).get("tab");
+    if (q === "kayit" || q === "giris" || q === "misafir") {
+      setTab(q);
+      setTabLocked(true);
+    }
+  }, [tabLocked]);
 
   useEffect(() => {
     function readSession() {
@@ -38,6 +100,8 @@ export default function GirisPage() {
           setSessionGuest(null);
           setGuestName("");
         }
+        const gc = readGuestColor();
+        if (gc) setGuestColor(gc);
       } catch {
         setSessionGuest(null);
         setGuestName("");
@@ -45,7 +109,13 @@ export default function GirisPage() {
     }
     readSession();
     function onStorage(e: StorageEvent) {
-      if (e.key === DAKT_GUEST_USERNAME_KEY || e.key === null) readSession();
+      if (
+        e.key === DAKT_GUEST_USERNAME_KEY ||
+        e.key === DAKT_USER_COLOR_KEY ||
+        e.key === null
+      ) {
+        readSession();
+      }
     }
     function onLocalGuestChange() {
       readSession();
@@ -62,6 +132,7 @@ export default function GirisPage() {
     clearGuestUsername();
     setSessionGuest(null);
     setGuestName("");
+    setGuestColor("mavi");
   }
 
   function handleGuestContinue() {
@@ -72,6 +143,7 @@ export default function GirisPage() {
     }
     setGuestError(false);
     writeGuestUsername(t);
+    writeGuestColor(guestColor);
     router.push("/davalar");
   }
 
@@ -101,7 +173,10 @@ export default function GirisPage() {
                 ? "border-[var(--kraft)] bg-[var(--anthracite-2)] text-[var(--kraft-light)]"
                 : "border-[var(--rule)] bg-transparent text-[var(--subtitle-text)] hover:border-[var(--kraft-dark)] hover:text-[var(--body-text)]"
             }`}
-            onClick={() => setTab(id)}
+            onClick={() => {
+              setTab(id);
+              setTabLocked(true);
+            }}
           >
             {label}
           </button>
@@ -150,6 +225,11 @@ export default function GirisPage() {
             ) : null}
           </div>
 
+          <div className="mb-8">
+            <span className={labelMono}>Analist rengi</span>
+            <ColorSquares value={guestColor} onChange={setGuestColor} />
+          </div>
+
           {sessionGuest ? (
             <div className="mb-6 border-2 border-[var(--bordeaux)] bg-[var(--anthracite-2)] p-4 md:p-5">
               <p className="text-[12px] leading-[1.75] tracking-[0.05em] text-[var(--body-text)] [font-family:var(--font-special-elite),monospace]">
@@ -195,9 +275,6 @@ export default function GirisPage() {
           role="tabpanel"
           aria-labelledby="tab-kayit"
         >
-          <div className="mb-6 border border-[var(--rule)] bg-[var(--anthracite-2)] px-4 py-3 text-center text-[9px] uppercase tracking-[0.2em] text-[var(--subtitle-text)] [font-family:var(--font-jetbrains-mono),monospace]">
-            ○ Yakında — Hesap sistemi yakında aktif olacak
-          </div>
           <h1 className="mb-3 text-3xl font-semibold text-[var(--paper)] [font-family:var(--font-cormorant),serif] md:text-4xl">
             Kayıt Ol
           </h1>
@@ -206,47 +283,72 @@ export default function GirisPage() {
             ilerlemen aktarılır.
           </p>
 
-          <form className="space-y-5 opacity-70" aria-disabled="true">
+          <form className="space-y-5" action={signUpAction}>
             <div>
               <label htmlFor="reg-email" className={labelMono}>
                 E-posta
               </label>
               <input
                 id="reg-email"
-                className={inputClass}
-                disabled
+                name="email"
+                type="email"
+                required
+                autoComplete="email"
+                disabled={signUpPending}
                 placeholder="analist@buro.gov"
+                className={inputClass}
               />
             </div>
             <div>
               <label htmlFor="reg-pass" className={labelMono}>
-                Şifre
+                Şifre (en az 6 karakter)
               </label>
               <input
                 id="reg-pass"
+                name="password"
                 type="password"
-                className={inputClass}
-                disabled
+                required
+                minLength={6}
+                autoComplete="new-password"
+                disabled={signUpPending}
                 placeholder="••••••••"
+                className={inputClass}
               />
             </div>
             <div>
               <label htmlFor="reg-analyst" className={labelMono}>
-                Analist adı
+                Analist takma adı
               </label>
               <input
                 id="reg-analyst"
-                className={inputClass}
-                disabled
+                name="username"
+                type="text"
+                required
+                autoComplete="nickname"
+                disabled={signUpPending}
                 placeholder="Çağrı kodun"
+                className={inputClass}
               />
             </div>
+            <div>
+              <span className={labelMono}>Analist rengi</span>
+              <ColorSquares
+                value={regColor}
+                onChange={setRegColor}
+                name="color"
+              />
+            </div>
+            {signUpState?.error ? (
+              <p className="text-[11px] tracking-[0.06em] text-[var(--bordeaux-bright)] [font-family:var(--font-jetbrains-mono),monospace]">
+                {signUpState.error}
+              </p>
+            ) : null}
             <button
-              type="button"
-              disabled
-              className="w-full cursor-not-allowed border border-[var(--rule)] bg-[var(--anthracite-2)] py-4 text-[10px] font-medium uppercase tracking-[0.24em] text-[var(--meta-label)] [font-family:var(--font-jetbrains-mono),monospace]"
+              type="submit"
+              disabled={signUpPending}
+              className="w-full cursor-pointer border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] py-4 text-[10px] font-medium uppercase tracking-[0.24em] text-[var(--kraft-light)] transition-colors [font-family:var(--font-jetbrains-mono),monospace] hover:bg-[var(--bordeaux-bright)] disabled:cursor-not-allowed disabled:opacity-60"
             >
-              Kaydı Tamamla
+              {signUpPending ? "Bekleniyor..." : "Hesap Oluştur"}
             </button>
           </form>
 
@@ -254,7 +356,10 @@ export default function GirisPage() {
             Şimdilik{" "}
             <button
               type="button"
-              onClick={() => setTab("misafir")}
+              onClick={() => {
+                setTab("misafir");
+                setTabLocked(true);
+              }}
               className="border-b border-[var(--kraft-dark)] text-[var(--kraft)] hover:border-[var(--kraft)]"
             >
               Misafir
@@ -270,9 +375,6 @@ export default function GirisPage() {
           role="tabpanel"
           aria-labelledby="tab-giris"
         >
-          <div className="mb-6 border border-[var(--rule)] bg-[var(--anthracite-2)] px-4 py-3 text-center text-[9px] uppercase tracking-[0.2em] text-[var(--subtitle-text)] [font-family:var(--font-jetbrains-mono),monospace]">
-            ○ Yakında — Giriş yakında aktif olacak
-          </div>
           <h1 className="mb-3 text-3xl font-semibold text-[var(--paper)] [font-family:var(--font-cormorant),serif] md:text-4xl">
             Giriş Yap
           </h1>
@@ -280,16 +382,20 @@ export default function GirisPage() {
             Kayıtlı analist hesabınla dosyalarına eriş.
           </p>
 
-          <form className="space-y-5 opacity-70" aria-disabled="true">
+          <form className="space-y-5" action={signInAction}>
             <div>
               <label htmlFor="login-email" className={labelMono}>
                 E-posta
               </label>
               <input
                 id="login-email"
-                className={inputClass}
-                disabled
+                name="email"
+                type="email"
+                required
+                autoComplete="email"
+                disabled={signInPending}
                 placeholder="analist@buro.gov"
+                className={inputClass}
               />
             </div>
             <div>
@@ -298,25 +404,36 @@ export default function GirisPage() {
               </label>
               <input
                 id="login-pass"
+                name="password"
                 type="password"
-                className={inputClass}
-                disabled
+                required
+                autoComplete="current-password"
+                disabled={signInPending}
                 placeholder="••••••••"
+                className={inputClass}
               />
             </div>
+            {signInState?.error ? (
+              <p className="text-[11px] tracking-[0.06em] text-[var(--bordeaux-bright)] [font-family:var(--font-jetbrains-mono),monospace]">
+                {signInState.error}
+              </p>
+            ) : null}
             <button
-              type="button"
-              disabled
-              className="w-full cursor-not-allowed border border-[var(--rule)] bg-[var(--anthracite-2)] py-4 text-[10px] font-medium uppercase tracking-[0.24em] text-[var(--meta-label)] [font-family:var(--font-jetbrains-mono),monospace]"
+              type="submit"
+              disabled={signInPending}
+              className="w-full cursor-pointer border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] py-4 text-[10px] font-medium uppercase tracking-[0.24em] text-[var(--kraft-light)] transition-colors [font-family:var(--font-jetbrains-mono),monospace] hover:bg-[var(--bordeaux-bright)] disabled:cursor-not-allowed disabled:opacity-60"
             >
-              Giriş Yap
+              {signInPending ? "Bekleniyor..." : "Giriş Yap"}
             </button>
           </form>
 
           <p className="mt-8 text-center text-[11px] text-[var(--meta-label)] [font-family:var(--font-special-elite),monospace]">
             <button
               type="button"
-              onClick={() => setTab("misafir")}
+              onClick={() => {
+                setTab("misafir");
+                setTabLocked(true);
+              }}
               className="border-b border-[var(--kraft-dark)] text-[var(--kraft)] hover:border-[var(--kraft)]"
             >
               Misafir
@@ -324,7 +441,10 @@ export default function GirisPage() {
             olarak veya{" "}
             <button
               type="button"
-              onClick={() => setTab("kayit")}
+              onClick={() => {
+                setTab("kayit");
+                setTabLocked(true);
+              }}
               className="border-b border-[var(--kraft-dark)] text-[var(--kraft)] hover:border-[var(--kraft)]"
             >
               kayıt
