@@ -1,0 +1,483 @@
+{
+  "forensics": [
+    {
+      "id": "067-autopsy",
+      "docId": "067-B · İstanbul Adli Tıp Kurumu — 1. İhtisas Kurulu",
+      "title": "Otopsi Raporu",
+      "stamps": [
+        "approved",
+        "classified"
+      ],
+      "meta": [
+        {
+          "label": "Olay Tarihi",
+          "value": "14.03.2024"
+        },
+        {
+          "label": "Rapor Tarihi",
+          "value": "15.03.2024"
+        },
+        {
+          "label": "Hazırlayan",
+          "value": "Uzm. Dr. N. Aytaç · ATK-2024-1147"
+        }
+      ],
+      "body": "<h3>Dış Muayene</h3>\n    <ul>\n      <li>Cilt rengi belirgin <strong>kiraz kırmızısı</strong> (siyanür intoksikasyonu klasik bulgusu)</li>\n      <li>Burun ve ağız çevresinde köpük kalıntısı</li>\n      <li>Tırnak yataklarında siyanoz değil, parlak pembe-kırmızı</li>\n      <li>Travmatik yaralanma yok, savunma izi yok</li>\n    </ul>\n\n    <h3>İç Muayene</h3>\n    <ul>\n      <li>Kan rengi parlak kırmızı — oksijensiz dokulardaki kan, oksijen taşıyamayan hemoglobin nedeniyle açık renkli kalmıştır</li>\n      <li>Mide içeriğinde <strong>92 mg potasyum siyanür</strong> tespit edildi</li>\n      <li>Mide mukozasında karakteristik korozyon bulguları</li>\n      <li>Akciğer ödemi belirgin</li>\n      <li>Kanda etanol yok, başka madde yok</li>\n    </ul>\n\n    <h3>Ölüm Sebebi</h3>\n    <p><strong>Akut potasyum siyanür zehirlenmesi.</strong> Oral alım yoluyla. Hücresel solunum durması (sitokrom-c oksidaz inhibisyonu) sonucu sistemik hipoksi → kardiyak arrest.</p>\n\n    <h3>Ölüm Zamanı & Sonuç</h3>\n    <p>Mide içeriğine göre alım <strong>11:00 — 11:30 arası</strong>. Klinik ölüm hastanede 15:08'de gerçekleşmiştir, fakat geri dönüşsüz nörolojik hasar 12:00 civarında oluşmuştur.</p>\n    <p>Mağdur kendisine sunulan zehri büyük olasılıkla <strong>kendisi tüketmiştir</strong> — yani fail, mağdurun rutinine güvenerek (sabah çayı), zehri önceden hazırladığı bir maddenin içine yerleştirmiştir. Zorlama veya travma izi yoktur.</p>",
+      "signature": {
+        "role": "Uzm. Dr.",
+        "name": "N. Aytaç"
+      }
+    },
+    {
+      "id": "067-scene",
+      "docId": "067-A · Olay Yeri İnceleme",
+      "title": "Olay Yeri Raporu",
+      "stamps": [
+        "approved",
+        "cross"
+      ],
+      "meta": [],
+      "body": "<h3>Bulgular</h3>\n    <ol>\n      <li>Mağdur, mutfak zemininde sırt üstü, ağzı hafif açık. Sol kolu altında <strong>devrilmiş mavi çiçekli porselen çay fincanı</strong>.</li>\n      <li>Tezgah üzerinde aynı desenden <strong>ikinci bir fincan</strong> (boş, yıkanmış izlenimi).</li>\n      <li>Çaydanlık sıcak, içinde temiz çay. Çaydanlık çayında KCN <strong>tespit edilmedi</strong> — zehir doğrudan fincana konulmuş.</li>\n      <li>Mutfak tezgahı silme bezinde <strong>KCN izi var</strong> — silme girişimi var.</li>\n      <li>Çöp kovasında 6 parçaya yırtılmış not kağıdı (067-N belgesi olarak yeniden birleştirildi).</li>\n      <li>Devrilmiş bir parfüm şişesi rafta — <strong>kiraz badem aromalı</strong>. Siyanürün acı badem kokusunu maskelemek için kullanılmış olabilir.</li>\n      <li>Restorasyon atölyesi kapısı kilitli. Kimyasal dolabı kilidi <strong>çizilmemiş</strong> — şifreyle açılmış.</li>\n      <li>Çay tabağı: KCN izi yok. Yani zehir <strong>fincana konulurken</strong> tabağa düşmemiş — özenli bir yerleştirme.</li>\n    </ol>\n\n    <p style=\"background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux);\"><strong>Ön Not:</strong> Cinayet aleti = potasyum siyanür. Olay yeri = mutfak. Ancak zehir <strong>mutfakta hazırlanmadı</strong>; restorasyon atölyesinden alınıp mutfağa getirildi. Atölyeye şifresiz giren yok — fail şifreyi <strong>biliyordu</strong>.</p>",
+      "signature": {
+        "role": "Komiser Yardımcısı",
+        "name": "G. Aras"
+      }
+    },
+    {
+      "id": "067-biochem",
+      "docId": "067-J · Adli Biyokimya Uzman Görüşü",
+      "title": "Zehrin Hazırlanışı & Zaman Penceresi",
+      "stamps": [
+        "approved",
+        "classified"
+      ],
+      "meta": [
+        {
+          "label": "Hazırlayan",
+          "value": "Prof. Dr. Fatma Güneş · İTÜ Kimya"
+        },
+        {
+          "label": "Tarih",
+          "value": "18.03.2024"
+        }
+      ],
+      "body": "<h3>Konsantrasyon Analizi</h3>\n    <p>Fincanda 84 mg/L KCN. Mide içeriği: 92 mg. Bu, fincanda <strong>~1 gram KCN</strong> çözüldüğü anlamına gelir. Stok defterindeki açıklanamayan eksilme: <strong>72 gram</strong> — yani fail, gerekenden çok daha fazla almıştır. Bu önemlidir: fail tek seferlik bir kullanım yapmamış, <strong>ek miktarı saklamıştır</strong>.</p>\n\n    <h3>Çözünme Hızı & Zaman Penceresi</h3>\n    <p>KCN sıcak çayda 2-3 dakikada tamamen çözülür. Ancak <strong>çay sıcaklığı 60°C altına düşmeden</strong> renk ve koku belirgindir. Bu nedenle fail çayı <strong>henüz hazırlanma aşamasındayken</strong> ya da hazırlandıktan en geç 5 dakika sonrasında zehirlemiştir.</p>\n\n    <h3>Kritik Çıkarım</h3>\n    <p style=\"background:rgba(107,22,32,0.15);padding:14px 18px;border:1px solid var(--bordeaux);\">\n      <strong>Çay servisi rutini:</strong> Avcıoğlu Müzayede'de sabah çayını <strong>asistanı Selin Çelik</strong> hazırlar (bu, çalışanların ortak bilgisi). 14 Mart sabahı bu rutin değişmedi. Selin Hanım çayı 11:00 civarında demlemiştir. Mağdur 11:25-11:30'da çayı içmeye başlamıştır.<br><br>\n      <strong>Bu pencerede mutfağa giren tek dış kişi: Emre Öztürk değildir — o 11:30'da içeri girmiştir. Selin Çelik o pencerede mutfaktadır.</strong>\n    </p>",
+      "signature": {
+        "role": "Prof. Dr.",
+        "name": "F. Güneş"
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "067-emails",
+      "docId": "067-K · İç Posta Sunucu Kayıtları",
+      "title": "E-posta Yazışması — Ferhat & Kerem",
+      "stamps": [
+        "approved",
+        "cross"
+      ],
+      "meta": [],
+      "body": "<div class=\"email-thread\">\n      <div class=\"email-msg\">\n        <dl class=\"email-head\">\n          <dt>Kimden</dt><dd>ferhat@avcioglumuzayede.com</dd>\n          <dt>Kime</dt><dd>kerem@avcioglumuzayede.com</dd>\n          <dt>Tarih</dt><dd>28.02.2024 · 11:47</dd>\n          <dt>Konu</dt><dd>Hesap Yetkilendirmesi — SON CEVAP BEKLİYORUM</dd>\n        </dl>\n        <div class=\"email-body\">\n          <p>Kerem,</p>\n          <p>Dördüncü kez yazıyorum. Bu konu daha fazla ertelenemez. İstiyorum ki:</p>\n          <p>1) B hesabı için ortak imza yetkisi verilsin<br>2) Mart sonu kâr payı yeniden hesaplansın<br>3) Madde 18 yeniden müzakereye açılsın</p>\n          <p>Avukatımı devreye sokabilirim.</p>\n          <p>— Ferhat</p>\n        </div>\n      </div>\n      <div class=\"email-msg\">\n        <dl class=\"email-head\">\n          <dt>Kimden</dt><dd>kerem@avcioglumuzayede.com</dd>\n          <dt>Kime</dt><dd>ferhat@avcioglumuzayede.com</dd>\n          <dt>Tarih</dt><dd>01.03.2024 · 09:12</dd>\n          <dt>Konu</dt><dd>Re: Hesap Yetkilendirmesi</dd>\n        </dl>\n        <div class=\"email-body\">\n          <p>Ferhat,</p>\n          <p>Tartışmayı kapatıyorum. Ortaklık yapısı değişmeyecek. Madde 18 zaten lehine — ben ölünce her şey senin. Bunu sevmiyor musun?</p>\n          <p>Avukatın ne istersen yapsın.</p>\n          <p>— K.</p>\n        </div>\n      </div>\n      <div class=\"email-msg\">\n        <dl class=\"email-head\">\n          <dt>Kimden</dt><dd>ferhat@avcioglumuzayede.com</dd>\n          <dt>Kime</dt><dd>kerem@avcioglumuzayede.com</dd>\n          <dt>Tarih</dt><dd>13.03.2024 · 23:51</dd>\n          <dt>Konu</dt><dd>Yarın</dd>\n        </dl>\n        <div class=\"email-body\">\n          <p>Yarın sabah konuşalım. Geç kalma.</p>\n        </div>\n      </div>\n    </div>\n\n    <p style=\"margin-top:18px;\"><strong>Çıkarsama:</strong> Ferhat'ın motifi belgesellenmiş. Madde 18 sözlü tehdit. Ancak bu motif fırsat değildir.</p>",
+      "signature": {
+        "role": "İT Adli Birim",
+        "name": "M. Sezer"
+      }
+    },
+    {
+      "id": "067-will",
+      "docId": "067-L · Av. Cengiz Doğan Hukuk Bürosu",
+      "title": "Vasiyetname Güncelleme Talebi",
+      "stamps": [
+        "approved",
+        "classified"
+      ],
+      "meta": [
+        {
+          "label": "Müvekkil",
+          "value": "Kerem Avcıoğlu"
+        },
+        {
+          "label": "Tarih",
+          "value": "11.03.2024 (olaydan 3 gün önce)"
+        },
+        {
+          "label": "Durum",
+          "value": "İmzalanmadı — taslak"
+        }
+      ],
+      "body": "<p>Sayın Av. Doğan,</p>\n    <p>Vasiyetnamemdeki aşağıdaki değişikliklerin bir an önce düzenlenmesini talep ediyorum.</p>\n\n    <h3>Mevcut Düzenleme</h3>\n    <ul>\n      <li>Nilüfer Avcıoğlu (eş): Taşınmazların %60'ı + iş varlığının %40'ı</li>\n      <li>Ortak Ferhat Yıldırım: Madde 18 uyarınca iş varlığının kalan kısmı</li>\n    </ul>\n\n    <h3>Talep Edilen Yeni Düzenleme</h3>\n    <ul>\n      <li>Nilüfer Avcıoğlu: <strong>Yalnızca Antalya evi</strong></li>\n      <li>Avcıoğlu Müzayede hisselerinin tamamı: <strong>S.Ç.</strong> (kişi adına emanet)</li>\n      <li>Madde 18 hükümsüz kılınacak — Ferhat Yıldırım pay alamayacak</li>\n      <li>Doğmamış çocuk için ayrı vesayet hükmü ekleyeceğim, ayrı görüşelim</li>\n    </ul>\n\n    <p>Lütfen bu talebi <strong>tam gizli</strong> tutunuz. Pazartesi (18 Mart) imzalamak istiyorum.</p>\n\n    <p style=\"background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux);\"><strong>Avukat Notu (kenarda el yazısı):</strong> \"Müvekkil 11 Mart Pazartesi. Pazartesiye kadar gizli kalmalı. Kimse bilmiyor — ben, müvekkil, sekreterim. <em>Ama müvekkil ofiste de bu konuda not tutuyor olabilir mi?</em>\"</p>",
+      "signature": {
+        "role": "Av. C. Doğan",
+        "name": "İmza yok"
+      }
+    },
+    {
+      "id": "067-letter",
+      "docId": "067-M · Arama Kararı / Selin Çelik dairesi",
+      "title": "El Yazısı Mektup — Postalanmamış",
+      "stamps": [
+        "approved",
+        "cross"
+      ],
+      "meta": [
+        {
+          "label": "Bulunma Yeri",
+          "value": "Selin Çelik dairesi · Cihangir"
+        },
+        {
+          "label": "Tarih",
+          "value": "17.03.2024 araması"
+        },
+        {
+          "label": "Konum",
+          "value": "Yatak komodininde, kapalı zarfta — postalanmamış"
+        }
+      ],
+      "body": "<div class=\"handwritten\">\n      <p>Kerem,</p>\n      <p>Bu kadar yeter. Üç yıl boyunca her şeyi sana verdim. Şimdi ise beni yok sayıyorsun, sanki hiçbir şey olmamış gibi. Avukatına gittiğini biliyorum. Vasiyeti değiştirdiğini biliyorum. Beni hisse sahibi mi yapacaksın yoksa bana sus payı mı veriyorsun, anlamadım.</p>\n      <p>Pazartesi günü o belgeyi imzalayacaksan, benimle önce konuşacaksın. Konuşmazsan — Nilüfer'e söyleyeceğim. Kültür Bakanlığı'na söyleyeceğim. Çocukla ilgili adım atacağım.</p>\n      <p>Sen beni yok saydın ama ben seni YOK SAYAMAM.</p>\n      <p style=\"text-align:right;\"><strong>S.</strong></p>\n    </div>\n\n    <p style=\"margin-top:18px;\"><strong>Adli not:</strong> Mektup el yazısı analizi → Selin Çelik. Mavi jel kalem kullanımı, çöp kovasındaki yırtık notla aynı kalem ailesinden. Mektup zarflanmış ama postalanmamış. Tarih atılmamış — yazılış zamanı ≥ 11 Mart (vasiyet talebi öğrenilmiş, yani Selin'in vasiyetin içeriğini bildiği kanıtlanır).</p>",
+      "signature": {
+        "role": "Adli Yazı Uzmanı",
+        "name": "L. Akın"
+      }
+    },
+    {
+      "id": "067-note",
+      "docId": "067-N · Yeniden Birleştirilen Belge",
+      "title": "Çöp Kovasından Çıkan Yırtık Not",
+      "stamps": [
+        "approved",
+        "classified"
+      ],
+      "meta": [
+        {
+          "label": "Bulunma Yeri",
+          "value": "Mağdurun masasının çöp kovası"
+        },
+        {
+          "label": "Birleştirme",
+          "value": "6 parça, sekiz kenarda eşleşme"
+        },
+        {
+          "label": "Mürekkep",
+          "value": "Mavi jel — büro kalemiyle uyumlu"
+        }
+      ],
+      "body": "<div class=\"handwritten\">\n      <p>\"...söylediklerimi ciddiye almalıydın. Her şeyi <span class=\"torn\">[YIRTIK]</span></p>\n      <p>biliyorum. Nikah belgesi, Antalya, ve en önemlisi <span class=\"torn\">[YIRTIK]</span></p>\n      <p><span class=\"torn\">[YIRTIK]</span> ...eğer Pazartesiye kadar imzalamazsan</p>\n      <p><span class=\"torn\">[YIRTIK]</span> o zaman ben de susmam. Bu iş <span class=\"torn\">[YIRTIK]</span></p>\n      <p>sona erdi.\"</p>\n      <p style=\"text-align:right;font-size:36px;\"><strong>S.</strong></p>\n    </div>\n\n    <p style=\"margin-top:18px;\"><strong>Çıkarsama:</strong> Bu not Selin'den Kerem'e iletilmiş, Kerem yırtıp atmıştır. \"Pazartesiye kadar imzalamazsan\" ifadesi <strong>vasiyetnameyi</strong> kasteder. Yani <strong>Selin, vasiyetnamenin imza tarihini biliyordu</strong>. Kerem ise vasiyetnamenin gizli kalmasını istemişti. Demek ki Selin, mağdurun masasından öğrendi ya da Kerem ona söyledi.</p>",
+      "signature": {
+        "role": "Belge Onarım Uzmanı",
+        "name": "İ. Sönmez"
+      }
+    },
+    {
+      "id": "067-bank",
+      "docId": "067-O · Mahkeme Kararıyla — Türkiye Finans",
+      "title": "Banka Hesap Hareketleri — Selin Çelik",
+      "stamps": [
+        "approved",
+        "classified"
+      ],
+      "meta": [
+        {
+          "label": "Hesap Sahibi",
+          "value": "Selin Çelik"
+        },
+        {
+          "label": "Dönem",
+          "value": "Ocak — Mart 2024"
+        },
+        {
+          "label": "Aylık Maaş",
+          "value": "18.000 TL"
+        }
+      ],
+      "body": "<table class=\"bank-table\">\n      <thead>\n        <tr><th>Tarih</th><th>Açıklama</th><th>Tutar</th></tr>\n      </thead>\n      <tbody>\n        <tr><td>15.01.2024</td><td>EFT Gelen — kaynak: ANONIM kurumsal hesap</td><td class=\"credit\">+45.000 TL</td></tr>\n        <tr><td>22.01.2024</td><td>ATM Çekim</td><td class=\"debit\">-5.000 TL</td></tr>\n        <tr><td>10.02.2024</td><td>EFT Gelen — kaynak: ANONIM kurumsal hesap</td><td class=\"credit\">+45.000 TL</td></tr>\n        <tr><td>28.02.2024</td><td>ATM Çekim</td><td class=\"debit\">-10.000 TL</td></tr>\n        <tr><td>05.03.2024</td><td>EFT Gelen — kaynak: ANONIM kurumsal hesap</td><td class=\"credit\">+45.000 TL</td></tr>\n        <tr><td>10.03.2024</td><td>Online alışveriş — özel hediye satıcısı</td><td class=\"debit\">-3.400 TL</td></tr>\n        <tr class=\"alert\"><td>13.03.2024</td><td>ATM Çekim · 23:47 · GECE YARISI</td><td>-20.000 TL</td></tr>\n        <tr class=\"alert\"><td>14.03.2024</td><td>ATM Çekim · 13:20 · BÜRO YAKINI</td><td>-15.000 TL</td></tr>\n      </tbody>\n    </table>\n\n    <p style=\"margin-top:18px;\"><strong>Çıkarsama:</strong> Anonim EFT'ler aylık 45.000 TL — Selin'in maaşının 2.5 katı. Kaynak hesap araştırması: hesap, <strong>Avcıoğlu Müzayede'nin yan ofis hesabı</strong> (Ferhat'ın bilmediği bir hesap, Kerem tek imza yetkisi). Yani <strong>Kerem, Selin'e gizli ödeme yapıyordu</strong>. Vasiyetnamede \"S.Ç.\" kısaltması bu ödeme akışıyla örtüşür. <strong>13 Mart geceyarısı 20.000 TL çekimi → 14 Mart sabahı kaçış parası mı?</strong></p>",
+      "signature": {
+        "role": "Mali Suçlar Birimi",
+        "name": "D. Kara"
+      }
+    },
+    {
+      "id": "067-ledger",
+      "docId": "067-P · Restorasyon Atölyesi Kayıtları",
+      "title": "Kimyasal Stok Defteri — KCN",
+      "stamps": [
+        "cross",
+        "classified"
+      ],
+      "meta": [
+        {
+          "label": "Madde",
+          "value": "Potasyum Siyanür (KCN)"
+        },
+        {
+          "label": "Kullanım",
+          "value": "Metal temizleme, eski sikke restorasyonu"
+        },
+        {
+          "label": "Erişim",
+          "value": "Şifreli dolap · 4 haneli kod"
+        }
+      ],
+      "body": "<table class=\"ledger-table\">\n      <thead>\n        <tr><th>Tarih</th><th>İşlem</th><th>Miktar</th><th>Kalan</th><th>İmza</th></tr>\n      </thead>\n      <tbody>\n        <tr><td>12.01.2024</td><td>Giriş — yeni şişe</td><td>+250g</td><td>250g</td><td>Tarık Coşar</td></tr>\n        <tr><td>28.01.2024</td><td>Kullanım — sikke 1842</td><td>-18g</td><td>232g</td><td>Tarık Coşar</td></tr>\n        <tr><td>15.02.2024</td><td>Kullanım — gümüş set</td><td>-12g</td><td>220g</td><td>Tarık Coşar</td></tr>\n        <tr><td>01.03.2024</td><td>Kullanım — bronz sikke</td><td>-8g</td><td>212g</td><td>Tarık Coşar</td></tr>\n        <tr class=\"missing\"><td>04.03.2024</td><td>İŞLEM YOK — defterde boşluk</td><td>?</td><td>?</td><td>—</td></tr>\n        <tr class=\"alert\"><td>12.03.2024</td><td>\"Kontrol — kapak gevşek görüldü, kapatıldı\"</td><td>—</td><td>178g</td><td>S. Çelik</td></tr>\n        <tr class=\"alert\"><td>15.03.2024</td><td>OLAY SONRASI YENİDEN SAYIM</td><td>—</td><td>106g</td><td>Polis</td></tr>\n      </tbody>\n    </table>\n\n    <p style=\"margin-top:18px;\"><strong>Çıkarsama:</strong> 04 Mart sonrası 34g, 12 Mart sonrası 72g daha eksilme. Toplam <strong>106g açıklanamayan kayıp</strong>.</p>\n    <p>12 Mart imzası: <strong>Selin Çelik</strong>. Kendi ifadesinde \"Tarık'ı bulamadım, dolap açıktı, kapattım\" demiş. Ancak dolap <strong>şifreli</strong>. \"Açık\" görmesi için şifre çözülmüş olmalı — yani <strong>kendisi şifreyi biliyor olmalı</strong> (Tarık ifadesinde doğrulandı). Bu, KCN'ye erişim fırsatının somut kanıtıdır.</p>",
+      "signature": {
+        "role": "Restorasyon Sorumlusu (vekaleten)",
+        "name": "Polis Tutanağı"
+      }
+    },
+    {
+      "id": "067-ministry",
+      "docId": "067-Q · T.C. Kültür ve Turizm Bakanlığı",
+      "title": "Kaçak Eser Soruşturma Bildirimi",
+      "stamps": [
+        "approved",
+        "classified"
+      ],
+      "meta": [
+        {
+          "label": "Belge No",
+          "value": "KM-2024-0234"
+        },
+        {
+          "label": "Tarih",
+          "value": "08.03.2024 (olaydan 6 gün önce)"
+        },
+        {
+          "label": "Yanıt Süresi",
+          "value": "21.03.2024"
+        }
+      ],
+      "body": "<p>Sayın Kerem Avcıoğlu,</p>\n    <p>Avcıoğlu Müzayede bünyesinde gerçekleştirildiği değerlendirilen bazı mal alım-satım işlemlerine ilişkin <strong>ön soruşturma başlatılmıştır</strong>.</p>\n    <p>Kapsam: \"Fatih Divanı\" el yazması menşei, 2022-2023 dönemi 14 adet parçanın çıkış-giriş belgeleri.</p>\n\n    <p style=\"background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux);\"><strong>Mağdurun el yazısı not (dosya kapağında):</strong><br>\"Emre'yi uyarmalıyım — bu sefer atlatamayız. Pazartesi vasiyet imzasıyla aynı gün avukatla buluşacağım, Selin'i de kapı dışı edeceğim. Bakanlığa Ferhat'ı suçlu çıkarırım, alacağım kefaretle iş kurtulur.\"</p>\n\n    <p><strong>Çıkarsama:</strong> Mağdur, Pazartesi (18 Mart) günü için üç eylem planlamıştı:</p>\n    <ol>\n      <li>Vasiyetnameyi imzalamak (Nilüfer'i ve Ferhat'ı dışarıda bırakacak)</li>\n      <li>Selin'i işten çıkarmak</li>\n      <li>Bakanlığa Ferhat'ı sorumlu olarak göstermek</li>\n    </ol>\n    <p>Yani <strong>Pazartesi günü 4 kişi için ölümcül bir gündü</strong>: Nilüfer, Ferhat, Selin, Emre. Bunlardan üçü o ana kadar planı bilmiyordu (Nilüfer, Ferhat, Emre). <strong>Selin biliyordu</strong> (067-N notu, 067-M mektubu).</p>",
+      "signature": {
+        "role": "Kültür Müşaviri",
+        "name": "A. Tunalı"
+      }
+    }
+  ],
+  "technical": [
+    {
+      "id": "067-cctv",
+      "docId": "067-R · Kriminal Görüntü İnceleme",
+      "title": "CCTV Analizi — Avcıoğlu Müzayede",
+      "stamps": [
+        "approved",
+        "cross"
+      ],
+      "meta": [],
+      "body": "<h3>Kanal 1 — Büro Girişi</h3>\n    <ul>\n      <li><strong>08:35</strong> — Ferhat Yıldırım giriş ✓</li>\n      <li><strong>09:20</strong> — Ferhat Yıldırım çıkış ✓ (otoparkta arabasına biniyor — 09:18)</li>\n      <li><strong>10:40</strong> — KİMLİĞİ BELİRSİZ giriş — kadın silüeti, atkı, şapka, yüz görünmüyor</li>\n      <li><strong>10:45</strong> — Burcu Yaman giriş ✓ (resepsiyonda kimse yok, kapıyı çaldığı duyuluyor)</li>\n      <li><strong>10:58</strong> — Burcu Yaman çıkış ✓</li>\n      <li><strong>11:29</strong> — Emre Öztürk giriş ✓</li>\n      <li><strong>11:55</strong> — Emre Öztürk çıkış ✓</li>\n      <li><strong>12:14</strong> — Zehra Hanım (temizlik) giriş ✓</li>\n      <li><strong>12:16</strong> — Zehra Hanım çığlık, 112 araması</li>\n    </ul>\n\n    <h3>Kanal 3 — Mutfak Önü Koridoru</h3>\n    <ul>\n      <li><strong>10:48</strong> — KİMLİĞİ BELİRSİZ kişi mutfağa girer — yüz açısı yok, atkıyla saç tamamen örtülü</li>\n      <li><strong>10:52</strong> — kişi mutfaktan çıkar, elinde fincan yok (önemli)</li>\n      <li><strong>10:54</strong> — kişi binadan çıkar, merdivenlere yönelir</li>\n    </ul>\n\n    <h3>Kanal 5 — Restorasyon Atölyesi</h3>\n    <p style=\"background:rgba(107,22,32,0.15);padding:14px 18px;border:1px solid var(--bordeaux);\">\n      <strong>SİSTEM ARIZASI:</strong> 14 Mart 09:00 — 12:00 arası kayıt yok. \"Sistem yeniden başlatma\" log'u var, kim tarafından yapıldığı belirsiz. Atölye anahtarı + şifre çift güvenlik nedeniyle bu pencerede atölyeye giriş <strong>ancak iç personel</strong> tarafından yapılabilir.<br><br>\n      Yetkili personel listesi: Tarık Coşar (kovuldu — avukatta tanıklı), Ferhat Yıldırım (otoparkta), Selin Çelik (Beyoğlu sinyali), Kerem Avcıoğlu (büroda).<br>\n      <strong>Atölyeden zehri alan kişi yalnızca Selin Çelik olabilir.</strong> Ferhat'ın 09:18-10:38 sinyal kapalılığı da sorgulanmalı; ancak Ferhat KCN dolap şifresini bilmemektedir (Tarık ifadesi onaylı).\n    </p>",
+      "signature": {
+        "role": "Kriminal Görüntü Analisti",
+        "name": "S. Kurt"
+      }
+    },
+    {
+      "id": "067-gsm",
+      "docId": "067-S · GSM Adli İşlem",
+      "title": "Baz İstasyonu Sinyal Geçmişi — 14 Mart",
+      "stamps": [
+        "approved",
+        "cross"
+      ],
+      "meta": [],
+      "body": "<p><strong>SELİN ÇELİK</strong> · 0532-XXX-XX47</p>\n    <table class=\"signal-table\">\n      <thead><tr><th>Saat</th><th>Konum / Olay</th><th>Tip</th></tr></thead>\n      <tbody>\n        <tr><td>09:55</td><td>Nişantaşı baz istasyonu</td><td>Aktif</td></tr>\n        <tr class=\"alert\"><td>10:22</td><td>Nişantaşı → Beyoğlu geçişi</td><td>Hareket</td></tr>\n        <tr class=\"alert\"><td>10:43</td><td>Beyoğlu — büroya 380m</td><td>Sabit</td></tr>\n        <tr class=\"alert\"><td>11:05</td><td>Beyoğlu — büroya 80m (BİNA İÇİ olası)</td><td>Sabit</td></tr>\n        <tr class=\"alert\"><td>11:38</td><td>Bina ve civarı — Nişantaşı geçişi</td><td>Hareket</td></tr>\n        <tr><td>11:58</td><td>Nişantaşı baz istasyonu</td><td>Aktif</td></tr>\n      </tbody>\n    </table>\n\n    <p style=\"margin-top:24px;\"><strong>FERHAT YILDIRIM</strong> · 0533-XXX-XX12</p>\n    <table class=\"signal-table\">\n      <thead><tr><th>Saat</th><th>Konum / Olay</th><th>Tip</th></tr></thead>\n      <tbody>\n        <tr><td>08:33</td><td>Büro konumu</td><td>Aktif</td></tr>\n        <tr><td>09:17</td><td>Büro otopark</td><td>Aktif</td></tr>\n        <tr class=\"alert\"><td>09:22</td><td>VERİ YOK — telefon kapalı / uçak modu</td><td>OFFLINE</td></tr>\n        <tr><td>10:38</td><td>Büro konumu (geri dönüş)</td><td>Aktif</td></tr>\n        <tr><td>12:20</td><td>Büro konumu</td><td>Aktif</td></tr>\n      </tbody>\n    </table>\n\n    <p style=\"margin-top:24px;\"><strong>EMRE ÖZTÜRK</strong> · 0542-XXX-XX88</p>\n    <table class=\"signal-table\">\n      <thead><tr><th>Saat</th><th>Konum / Olay</th><th>Tip</th></tr></thead>\n      <tbody>\n        <tr><td>11:28</td><td>Büro konumu (giriş)</td><td>Aktif</td></tr>\n        <tr><td>11:53</td><td>Büro konumu (çıkış)</td><td>Aktif</td></tr>\n      </tbody>\n    </table>\n\n    <p style=\"margin-top:24px;\"><strong>NİLÜFER AVCIOĞLU</strong> · 0535-XXX-XX19</p>\n    <table class=\"signal-table\">\n      <thead><tr><th>Saat</th><th>Konum / Olay</th><th>Tip</th></tr></thead>\n      <tbody>\n        <tr><td>09-12</td><td>Antalya/Konyaaltı baz istasyonu — sabit</td><td>Doğrulandı</td></tr>\n        <tr><td>10:47</td><td>Kerem'in büro hattını arıyor — cevap yok</td><td>Çağrı</td></tr>\n      </tbody>\n    </table>\n\n    <p style=\"margin-top:18px;background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux);\"><strong>Kritik:</strong> Selin Çelik'in 11:05'te büroya 80m mesafede olması, kameradaki 10:48-10:52 mutfak ziyaretiyle hizalanır. Kanal 1 kameradaki 10:40 atkılı kadın = Selin Çelik. 11:38'de hızla bölgeden ayrılmıştır.</p>",
+      "signature": {
+        "role": "GSM Adli İşlem",
+        "name": "G. Akar"
+      }
+    },
+    {
+      "id": "067-appt",
+      "docId": "067-U · Resepsiyon Defteri — 14 Mart",
+      "title": "Randevu Defteri Sayfası",
+      "stamps": [
+        "cross",
+        "classified"
+      ],
+      "meta": [],
+      "body": "<p style=\"font-family:'Special Elite',monospace;font-size:14px;background:rgba(138,119,79,0.1);padding:18px;border-left:3px solid var(--bordeaux);\">\n      <strong>09:00</strong> — [BOŞ]<br>\n      <strong>10:00</strong> — [BOŞ]<br>\n      <strong>10:45</strong> — Burcu Yaman · sanat danışmanlığı görüşmesi (yazılı, mavi mürekkep)<br>\n      <strong>11:00</strong> — <span style=\"text-decoration:line-through;color:#a8242f;\">Selin — özel</span> <em style=\"color:#6b1620;\">[üzeri kalemle çizilmiş — sonradan]</em><br>\n      <strong>11:30</strong> — Emre Öztürk · gayri resmi (Kerem'in el yazısı)<br>\n      <strong>14:00</strong> — Muzaffer Kozan · iptal (faks geldi)\n    </p>\n\n    <p style=\"margin-top:18px;\"><strong>Çıkarsama:</strong> 11:00 saatinde \"Selin — özel\" yazılı bir randevu sonradan kalemle çizilmiş. Defter ortak masada duruyor; çiziği <strong>Selin'in kendisi yapmış olabilir</strong> (suç sonrası). Bu, Selin'in olay sabahı 11:00'da büroda olduğunu kabul ettiği bir kayıttı — silmeye çalışmıştır. Kalem izi altta hâlâ okunabilir.</p>",
+      "signature": {
+        "role": "Resepsiyon Defteri Saklayıcısı",
+        "name": "Şule Erdem"
+      }
+    },
+    {
+      "id": "067-doorman",
+      "docId": "067-V · Bina Yönetim Defteri — Kapıcı Hasan Usta",
+      "title": "Tanık İfadesi — Kapıcı Hasan",
+      "stamps": [
+        "approved",
+        "cross"
+      ],
+      "meta": [],
+      "body": "<p>\"14 Mart sabahı kim geldi mi diyorsunuz? Ferhat Bey çok erken, normal. Sonra saat 10 civarı atkılı bir kadın geldi. Yüzünü göremedim, ama yürüyüşünden tanıyacağım galiba — Selin Hanım gibi yürüyordu. Kabaca onun gibiydi. Garipti çünkü o gün geleceğini bilmiyordum, normalde defterde yazar.\"</p>\n    <p>\"Asansöre binmedi. Direkt merdivene yöneldi. Çıkışta da merdivenden indi. Bu garipti. Sonra Burcu Hanım geldi 10:45 gibi. Sonra adam gelip gitti — Emre Bey. Sonra Zehra Hanım çığlık attı.\"</p>\n    <p>\"Bir de... saat 11 sıralarında iki kişinin koridorda kısa bir süre konuştuğunu duydum. Bir kadın sesi vardı. 'Yapma Kerem, lütfen' dedi gibi. Sonra ses kesildi. Ondan sonra ses çıkmadı.\"</p>\n\n    <p style=\"margin-top:18px;background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux);\"><strong>Çıkarsama:</strong> 11:00 sıralarındaki \"Yapma Kerem, lütfen\" cümlesi kritik. Selin, mutfaktayken Kerem'le karşılaşmış olabilir; yüz yüze kısa tartışma yaşandı. Selin çayı önceden hazırlayıp gitmedi — <strong>Kerem'in mutfağa gelişini bekledi, kısa konuşma sonrası Kerem'e zehirli çayı verdi, sonra hızla çıktı</strong>.</p>",
+      "signature": {
+        "role": "Tanık · Bina kapıcısı",
+        "name": "H. Usta"
+      }
+    }
+  ],
+  "testimonies": [
+    {
+      "id": "067-C",
+      "dataDocKey": "ferhat",
+      "suspectName": "Ferhat Yıldırım",
+      "headerDocId": "067-C · Beyoğlu İlçe Emniyet Müdürlüğü",
+      "title": "İfade — Ferhat Yıldırım (1. + 2. Oturum)",
+      "stamps": [
+        "approved",
+        "denied",
+        "cross"
+      ],
+      "date": "15.03.2024 — iki oturum",
+      "birth": "22.07.1979",
+      "occupation": "Avcıoğlu Müzayede Müdürü · Ortak",
+      "address": "Cihangir Mah. Susam Sok. No:11 D:6",
+      "paragraphs": [
+        "<p><strong>1. Oturum (14:00):</strong> Sabah 8'de büroya geldim. Kerem henüz yoktu. Arşiv odasında çalıştım, saat 10:15'e kadar oradaydım.</p>",
+        "<p>S: Güvenlik kamerası sizi <strong>09:20'de</strong> çıkarken gösteriyor.<br>C: Ah evet, kısa bir şey almak için aşağı çıktım, geri döndüm. Yanlış hatırlamışım.</p>",
+        "<p>S: Araç kaydınız sizi <strong>09:18'de otoparktaki arabanıza giriş yaparken</strong> gösteriyor.<br>C: <em>[uzun sessizlik]</em> Belki biraz hava almaya çıktım. Net hatırlamıyorum.</p>",
+        "<p>S: Telefon sinyaliniz <strong>09:22'de kapanıyor</strong>, 10:38'e kadar görünmüyorsunuz.<br>C: Telefonum bozuldu. Şarj sıkıntısı.</p>",
+        "<p style=\"background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux);\"><strong>2. Oturum (16 Mart, 10:00):</strong> Tamam. Kerem'le sabah büyük bir tartışmamız oldu. Sözleşmenin Madde 18'ini son cevap olarak yüzüme okudu — \"ben ölünce zaten her şey senin, sabret biraz daha\" dedi. Çok sinirlendim. Bir saat boyunca arabamda oturup sigara içtim. Konuşmadığımız iyi olmuştur.</p>"
+      ],
+      "signature": "F. Yıldırım"
+    },
+    {
+      "id": "067-D",
+      "dataDocKey": "selin",
+      "suspectName": "Selin Çelik",
+      "headerDocId": "067-D · Beyoğlu İlçe Emniyet Müdürlüğü",
+      "title": "İfade — Selin Çelik",
+      "stamps": [
+        "approved",
+        "denied",
+        "cross"
+      ],
+      "date": "15.03.2024 · 16:30",
+      "birth": "04.04.1992",
+      "occupation": "Sekreter · Asistan (5 yıl)",
+      "address": "Cihangir Mah. Akarsu Cad. No:34 D:7",
+      "paragraphs": [
+        "<p>Saat 10:00'da Nişantaşı'nda diş randevum vardı. Dr. Ahmet Sarı Kliniği. Çıktıktan sonra biraz yürüdüm.</p>",
+        "<p>S: Kliniği aradık — o gün randevu kaydı bulamadılar. Sistem yedeklerinde de yok.<br>C: Belki yanlış klinik ismi söyledim. O an aklım karışmış olabilir.</p>",
+        "<p>S: Telefonunuzdan <strong>10:43'te Beyoğlu</strong>, <strong>11:05'te büroya 80 metre</strong> mesafede sinyal var. Büroya gittiniz mi?<br>C: Yürüyüştü. Tesadüf.</p>",
+        "<p>S: Stok defterinde <strong>12 Mart'ta sizin imzanızla</strong> KCN kontrolü yapılmış. Sizin bu yetkiniz yok.<br>C: Tarık'ı aramıştım, bulamadım. Stoğun açık olduğunu görüp kapattım, defteri imzaladım. Yanlış yaptım.</p>",
+        "<p>S: Çantanızdan kullanılmış lateks eldiven çıktı.<br>C: Ev temizliği için. Hâlâ orada olduğunu unutmuşum.</p>",
+        "<p>S: 14 Mart sabahı şapka ve atkıyla yürüdünüz mü?<br>C: <em>[sessizlik]</em> Hava soğuktu.</p>",
+        "<p>S: Selin Hanım, Kerem Bey'le ilişkiniz var mıydı?<br>C: <em>[uzun sessizlik]</em> Bu davayla alakası yok. Yok.</p>"
+      ],
+      "signature": "S. Çelik"
+    },
+    {
+      "id": "067-E",
+      "dataDocKey": "emre",
+      "suspectName": "Emre Öztürk",
+      "headerDocId": "067-E · Beyoğlu İlçe Emniyet Müdürlüğü",
+      "title": "İfade — Emre Öztürk",
+      "stamps": [
+        "approved",
+        "denied",
+        "cross"
+      ],
+      "date": "15.03.2024 · 19:00",
+      "birth": "30.05.1985",
+      "occupation": "Antika tedarikçisi · \"Bağımsız\" aracı",
+      "address": "Üsküdar · Çengelköy",
+      "paragraphs": [
+        "<p>Saat 11:30 sularında büroya gittim. Önceden randevumuz vardı; Kerem Bey'in defterinde de yazıyor olmalı.</p>",
+        "<p>Mutfağa geçtik. Kerem Bey kendi çayını <strong>zaten içiyordu</strong>, ben yeni bir çay istemedim. Yarım kalmıştı. Bana \"Bakanlık dosyası beni bitirecek, sen sıkı dur\" dedi. Yorgun ve solgun görünüyordu ama o sabah gerginliğe verdim.</p>",
+        "<p>S: Onunla aranızda son haftalarda gerginlik var mıydı?<br>C: Vardı. Beni aralarına almak istemediğini söyledi. Yani Bakanlık geldiğinde ben yokmuşum gibi davranacaktı. Bu da benim için ölüm demek değil mi?</p>",
+        "<p>S: Kerem Bey'in çayına bir şey kattınız mı?<br>C: Hayır. Ben girdiğimde o çayı zaten içmişti. Belki biraz sersemdi. Çıkarken \"kendine iyi bak\" dedim, çıkıp gittim. 11:55'te oradaydım. Telefon sinyalim, kamera kaydı, hepsi var.</p>"
+      ],
+      "signature": "E. Öztürk"
+    },
+    {
+      "id": "067-F",
+      "dataDocKey": "muzaffer",
+      "suspectName": "Muzaffer Kozan",
+      "headerDocId": "067-F · Beyoğlu İlçe Emniyet Müdürlüğü",
+      "title": "İfade — Muzaffer Kozan",
+      "stamps": [
+        "approved",
+        "denied",
+        "cross"
+      ],
+      "date": "16.03.2024 · 11:00",
+      "birth": "09.02.1957",
+      "occupation": "Antika koleksiyoncusu · Kozan Galeri sahibi",
+      "address": "Nişantaşı · Şakayık Sok.",
+      "paragraphs": [
+        "<p>14 Mart günü Ankara'daydım. Sabah 09:00 uçağıyla gittim, akşam 19:00 dönüşüm vardı. Müzayede Yıldız Sanat'taydı. Salona girdim, programı aldım, oturdum.</p>",
+        "<p>S: Salon görevlileri ve diğer alıcılar oturduğunuz yerde sizi gördüklerini hatırlamıyor. Telefon sinyaliniz Kavaklıdere'den çıkmıyor. Müzayede salonu ise Çankaya'da.<br>C: Bir kahve alıp dışarı çıkmış olabilirim. Hatırlamıyorum.</p>",
+        "<p>S: Kerem Bey'le aranızdaki \"Fatih Divanı\" anlaşmazlığı için ne diyorsunuz?<br>C: Adamcağız beni 250.000 dolarlık bir parçayı kaçırmamla suçluyordu. Davam mahkemede. Ölmesini istemedim — kazanmasını istemedim. Çok farklı şeyler.</p>",
+        "<p>S: 14 Mart'ta İstanbul'da olabilir miydiniz?<br>C: Hayır. Ankara'daydım. Uçak biletim ortada.</p>"
+      ],
+      "signature": "M. Kozan"
+    },
+    {
+      "id": "067-G",
+      "dataDocKey": "nilufer",
+      "suspectName": "Nilüfer Avcıoğlu",
+      "headerDocId": "067-G · Antalya İl Emniyet — Telefonla İfade",
+      "title": "İfade — Nilüfer Avcıoğlu",
+      "stamps": [
+        "approved",
+        "cross"
+      ],
+      "date": "15.03.2024 · 22:00",
+      "birth": "11.10.1969",
+      "occupation": "Ev hanımı",
+      "address": "Antalya · Konyaaltı (annesi)",
+      "paragraphs": [
+        "<p>Annem üç ay önce felç geçirdi. O zamandan beri Antalya'dayım. 14 Mart'ta evdeydim. Komşu Hayriye Hanım her sabah çorba getirir, o gün de geldi. Kerem'i öğleden sonra arayıp aramadığımı hatırlamıyorum — herhalde aramışımdır.</p>",
+        "<p>S: Vasiyetnamede yapılmak istenen değişiklikten haberiniz var mıydı?<br>C: Yoktu. Avukat Doğan dün aradı, donup kaldım.</p>",
+        "<p>S: Kerem Bey'in son altı ayında ev hayatınız nasıldı?<br>C: <em>[duraksama]</em> Aramız iyi değildi. Beni Antalya'ya o yolladı sayılır. Annem bahaneydi.</p>",
+        "<p>S: Selin Çelik'i tanıyor muydunuz?<br>C: Asistan kız mı? Düğün hediyesi göndermişti bir kere. O kadar.</p>",
+        "<p>S: 14 Mart sabahı saat 10-12 arası kayıt cihazıyla aranan numaralarda Kerem Bey'in büro hattı görünüyor — siz mi aradınız?<br>C: Cevap vermedi, evet. Ama işte... her zamanki gibi.</p>"
+      ],
+      "signature": "N. Avcıoğlu"
+    },
+    {
+      "id": "067-H",
+      "dataDocKey": "tarik",
+      "suspectName": "Tarık Coşar",
+      "headerDocId": "067-H · Beyoğlu İlçe Emniyet Müdürlüğü",
+      "title": "İfade — Tarık Coşar",
+      "stamps": [
+        "approved",
+        "denied",
+        "cross"
+      ],
+      "date": "16.03.2024",
+      "birth": "23.01.1995",
+      "occupation": "Eski stajyer · İşsiz · Avukat tutuldu",
+      "address": "Kadıköy · Caferağa",
+      "paragraphs": [
+        "<p>2 gün önce kovuldum, evet. Kerem Bey'e bağırdım, evet. Ölmesini istemedim, hayır. O gün bütün sabah Kadıköy'de avukatımdaydım — saat 09:30'dan 13:00'a kadar masa üstünde sözleşmemi maddeleştiriyorduk. Sekreter Hanım, üç müvekkil, bir muhasebeci tanık.</p>",
+        "<p>S: KCN stoğuna kim erişebiliyordu sizden başka?<br>C: Atölye anahtarı bende, Kerem Bey'de, Ferhat Bey'de vardı. Ama atölye dolabı için ayrı şifre var. Şifreyi sadece ben ve Kerem Bey biliyorduk. <strong>Kovulduğum gün şifre değişmedi.</strong></p>",
+        "<p>S: Şifreyi başkasına verdiniz mi?<br>C: <em>[duraksama]</em> Bir keresinde Selin'e söyledim. Üç ay önce Kerem Bey atölyeden bir şey istemişti, ben dışarıdaydım, ona söyledim ki Selin alıp götürsün. O gün öğrendi.</p>"
+      ],
+      "signature": "T. Coşar"
+    },
+    {
+      "id": "067-I",
+      "dataDocKey": "burcu",
+      "suspectName": "Burcu Yaman",
+      "headerDocId": "067-I · Beyoğlu İlçe Emniyet Müdürlüğü",
+      "title": "İfade — Burcu Yaman",
+      "stamps": [
+        "approved",
+        "cross"
+      ],
+      "date": "16.03.2024",
+      "birth": "08.08.1976",
+      "occupation": "Bağımsız sanat danışmanı",
+      "address": "Beşiktaş · Akaretler",
+      "paragraphs": [
+        "<p>10:45 randevum vardı. Tam vaktinde geldim. Resepsiyonda kimse yoktu. Kerem Bey'in kapısı kapalıydı, ışık yandığı için içeride sandım, kapıyı çaldım. Açan olmadı. 10 dakika kadar bekledim. Sonra çıktım. İmza kâğıdı resepsiyonun üstünde duruyordu, imzalamaya gerek görmedim çünkü görüşme olmamıştı.</p>",
+        "<p>S: O sırada koridorda birini gördünüz mü?<br>C: Mutfak tarafından bir kadın çıktı. Şapka, atkı. Yüzünü görmedim. Bana arkasını döndü, asansöre yönelmiyordu, merdivenlerden indi.</p>",
+        "<p>S: Bu kadını tanıyabilir misiniz, Selin Çelik olabilir mi?<br>C: Boy ve yürüyüş olarak benziyordu — ama emin değilim.</p>",
+        "<p>S: Komisyon davanız hakkında ne söyleyebilirsiniz?<br>C: 180.000 TL haklı alacak. Kerem Bey öldü diye davadan vazgeçmem. Mirasçılarına yazacağım. Ama zehir koymak için sıraya girmiş kuyruğun arkasındayım galiba.</p>"
+      ],
+      "signature": "B. Yaman"
+    }
+  ]
+}

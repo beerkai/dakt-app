@@ -1,0 +1,280 @@
+{
+  "suspects_raw": [
+    {
+      "slug": "ferhat",
+      "code": "SUSP-01 · BYG-AVC/02",
+      "name": "Ferhat Yıldırım",
+      "role": "Ortak · 12 yıllık iş partneri · 44",
+      "quote": "\"Sabah kısa bir hava almak için aşağı indim. Yanlış hatırlamışım.\""
+    },
+    {
+      "slug": "selin",
+      "code": "SUSP-02 · BYG-AVC/SK",
+      "name": "Selin Çelik",
+      "role": "Sekreter · 5 yıllık asistan · 31",
+      "quote": "\"Diş randevumdan sonra biraz yürümek istedim. Tesadüfen Beyoğlu'ndaydım.\""
+    },
+    {
+      "slug": "muzaffer",
+      "code": "SUSP-03 · KOZ-ANT/67",
+      "name": "Muzaffer Kozan",
+      "role": "Rakip koleksiyoncu · 67",
+      "quote": "\"Ankara'daydım, müzayedede. Bilet kopyam dosyada — oturduğum yere bakmayın.\""
+    },
+    {
+      "slug": "emre",
+      "code": "SUSP-04 · OZT-TED/88",
+      "name": "Emre Öztürk",
+      "role": "Tedarikçi · Kaçak eser ağı · 38",
+      "quote": "\"11:30'da çay içmek için içeri girdim. Adam keyifliydi. Sonra çıktım.\""
+    },
+    {
+      "slug": "nilufer",
+      "code": "SUSP-05 · AVC-EŞ/54",
+      "name": "Nilüfer Avcıoğlu",
+      "role": "Eş · Antalya'da · 54",
+      "quote": "\"Annemin yanındaydım. Vasiyetnameyi değiştirdiğini bilmiyordum.\""
+    },
+    {
+      "slug": "tarik",
+      "code": "SUSP-06 · COS-RST/29",
+      "name": "Tarık Coşar",
+      "role": "Eski stajyer · Restorasyon uzmanı · 29",
+      "quote": "\"Beni haksız yere kovdu. Kimyasal stoğa hâlâ erişimim var sanmıyordum.\""
+    },
+    {
+      "slug": "burcu",
+      "code": "SUSP-07 · YAM-DAN/47",
+      "name": "Burcu Yaman",
+      "role": "Sanat danışmanı · Komisyon davası · 47",
+      "quote": "\"10:45 randevum vardı. Ofiste yoktu. Bekledim, sonra çıktım. İmza atmadım.\""
+    }
+  ],
+  "timeline": [
+    {
+      "id": "tl067-0",
+      "time": "13.03 · 18:30",
+      "event": "Kerem Avcıoğlu büroda yalnız çalışıyor. Vasiyetname taslağı masasında.",
+      "source": "Kapıcı tanıklığı",
+      "critical": false
+    },
+    {
+      "id": "tl067-1",
+      "time": "13.03 · 23:47",
+      "event": "Selin Çelik 20.000 TL nakit çekiyor. Geceyarısı işlemi.",
+      "source": "067-O · Banka",
+      "critical": true
+    },
+    {
+      "id": "tl067-2",
+      "time": "13.03 · 23:51",
+      "event": "Selin → Kerem'e tehdit içerikli sesli mesaj: \"Yarın çayını sakin iç.\"",
+      "source": "067-T",
+      "critical": true
+    },
+    {
+      "id": "tl067-3",
+      "time": "14.03 · 08:35",
+      "event": "Ferhat Yıldırım büroya girer. Kerem'le tartışacak.",
+      "source": "067-R",
+      "critical": false
+    },
+    {
+      "id": "tl067-4",
+      "time": "09:18",
+      "event": "Ferhat otoparkta — sigara molası. Telefon kapatılır 09:22.",
+      "source": "067-S",
+      "critical": false
+    },
+    {
+      "id": "tl067-5",
+      "time": "09:55 — 10:22",
+      "event": "Selin Çelik Nişantaşı'ndan Beyoğlu'na geçer. Diş randevusu kaydı yok.",
+      "source": "067-S · 067-D",
+      "critical": true
+    },
+    {
+      "id": "tl067-6",
+      "time": "10:40",
+      "event": "ATKILI KADIN binaya girer (yüz görünmüyor). Merdivenden çıkar.",
+      "source": "067-R · Kapıcı",
+      "critical": true
+    },
+    {
+      "id": "tl067-7",
+      "time": "10:45 — 10:55",
+      "event": "Selin restorasyon atölyesine girer (Kanal 5 kapalı). KCN şişesinden ek miktar alır.",
+      "source": "067-P · Çıkarım",
+      "critical": true
+    },
+    {
+      "id": "tl067-8",
+      "time": "10:45",
+      "event": "Burcu Yaman gelir, kapıyı çalar, açan olmaz. 10:58'de çıkar.",
+      "source": "067-I",
+      "critical": false
+    },
+    {
+      "id": "tl067-9",
+      "time": "10:48 — 10:52",
+      "event": "Atkılı kadın mutfağa girer, çıkar. Çay fincanına KCN konuldu.",
+      "source": "067-R · Kanal 3",
+      "critical": true
+    },
+    {
+      "id": "tl067-10",
+      "time": "11:00",
+      "event": "Kerem mutfağa gelir. Hasan Usta \"Yapma Kerem, lütfen\" cümlesini duyar.",
+      "source": "067-V",
+      "critical": true
+    },
+    {
+      "id": "tl067-11",
+      "time": "11:05",
+      "event": "Kerem zehirli çayı içer. Selin binadan çıkar (sinyal 80m → uzaklaşır).",
+      "source": "067-S · 067-J",
+      "critical": true
+    },
+    {
+      "id": "tl067-12",
+      "time": "11:29 — 11:55",
+      "event": "Emre Öztürk büroya gelir. Kerem yorgun ve solgun. \"Çay yarım kalmış.\"",
+      "source": "067-E",
+      "critical": false
+    },
+    {
+      "id": "tl067-13",
+      "time": "11:38",
+      "event": "Selin Beyoğlu'ndan Nişantaşı'na hızla geçer.",
+      "source": "067-S",
+      "critical": false
+    },
+    {
+      "id": "tl067-14",
+      "time": "~12:00",
+      "event": "Kerem'de geri dönüşsüz nörolojik hasar oluşur.",
+      "source": "067-B · Otopsi",
+      "critical": true
+    },
+    {
+      "id": "tl067-15",
+      "time": "12:14",
+      "event": "Zehra Hanım girer. 12:16'da Kerem'i bulur, 112 arar.",
+      "source": "067-A",
+      "critical": false
+    },
+    {
+      "id": "tl067-16",
+      "time": "13:20",
+      "event": "Selin büro yakınında 15.000 TL daha çeker.",
+      "source": "067-O",
+      "critical": false
+    },
+    {
+      "id": "tl067-17",
+      "time": "15:08",
+      "event": "Kerem Avcıoğlu hastanede hayatını kaybeder.",
+      "source": "067-B",
+      "critical": false
+    }
+  ],
+  "deduction": {
+    "c": [
+      {
+        "pin": true,
+        "text": "<strong>Selin'in diş randevusu yok:</strong> Klinikte kayıt yok. Telefon sinyali Beyoğlu'nda. Diş randevusu = uydurma alibi."
+      },
+      {
+        "pin": true,
+        "text": "<strong>Stok defteri imzası:</strong> Selin'in 12 Mart \"kontrol\" imzası, KCN dolabının şifresine erişimini ifşa eder. Tarık ifadesi de bunu doğrular."
+      },
+      {
+        "pin": true,
+        "text": "<strong>Banka EFT'leri:</strong> Anonim kurumsal hesap = Kerem'in gizli ödeme hesabı. Aylık 45.000 TL gizli ödeme. Vasiyet \"S.Ç.\" ile örtüşüyor."
+      },
+      {
+        "pin": true,
+        "text": "<strong>Postalanmamış mektup:</strong> Selin vasiyet değişikliğini biliyordu (gizli olmasına rağmen)."
+      },
+      {
+        "pin": true,
+        "text": "<strong>Randevu defteri \"Selin — özel\" çizilmesi:</strong> Selin sabah 11:00 randevusunu silmeye çalışmış. Kalem izi okunabilir."
+      },
+      {
+        "pin": true,
+        "text": "<strong>Sesli mesaj:</strong> \"Yarın sabah çayını sakin iç\" — fail kurbanı sabah çayı rutiniyle vurmayı önceden ima etmiş."
+      },
+      {
+        "pin": true,
+        "text": "<strong>Atkılı kadın = Selin:</strong> Kapıcı tanıklığı, kamera silüeti, yürüyüş, sinyal mesafesi. 10:40-10:54 penceresi."
+      }
+    ],
+    "e": [
+      {
+        "pin": true,
+        "text": "<strong>Muzaffer Kozan:</strong> Ankara, müzayede salonunda görünmüyor. Sinyali Çankaya'da değil ama İstanbul'da da değil. Yetersiz fırsat. ✗"
+      },
+      {
+        "pin": true,
+        "text": "<strong>Nilüfer Avcıoğlu:</strong> Antalya sinyali doğrulandı. Vasiyetten haberdar değildi (avukat sırrı). Uzaktan zehir koymak imkânsız. ✗"
+      },
+      {
+        "pin": true,
+        "text": "<strong>Tarık Coşar:</strong> Avukat ofisinde, üç tanıklı. KCN'ye erişim mümkün ama olay anında orada değil. Şifreyi bilse de zamansal alibisi sağlam. ✗"
+      },
+      {
+        "pin": true,
+        "text": "<strong>Burcu Yaman:</strong> 10:45'te geldi, kapı açılmadı, 10:58'de çıktı. Mutfağa girmedi. Mutfaktan çıkan atkılı kadını <strong>tanık</strong> olarak gördü. ✗"
+      },
+      {
+        "pin": true,
+        "text": "<strong>Emre Öztürk:</strong> 11:29-11:55 büroda. Kerem zaten zehirli çayı içmişti. Bakanlık baskısı motif ama Pazartesi'ye kadar tehdit altında değildi. ✗"
+      },
+      {
+        "pin": true,
+        "text": "<strong>Ferhat Yıldırım:</strong> Madde 18 motifi güçlü, sinyal 09:22-10:38 kapalı. Ancak <strong>KCN dolap şifresini bilmiyor</strong>. Atölyeye giremezdi. Motif evet, fırsat hayır. ✗"
+      },
+      {
+        "pin": true,
+        "text": "<strong>Selin Çelik:</strong> 3 yıllık gizli ilişki, gizli aylık 45.000 TL ödeme, vasiyetten haberdar, KCN şifresine erişim, atölyede 10:48-10:52 penceresi, atkılı kadın tanıklığı, 11:00 mutfak konuşması, sesli mesajda \"sabah çayı\" referansı, çantada KCN bulaşıklı eldiven, randevu defteri silme girişimi, kaçış parası çekimi. <strong>Motif + Fırsat + Yöntem + İmza.</strong> ✓"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "tag": "Toksik",
+      "code": "KRM-FNC01",
+      "title": "Mavi Çiçekli Çay Fincanı",
+      "desc": "Mağdurun düşürdüğü porselen fincan. <strong>84 mg/L KCN</strong>. Çay içinde, çay tabağında değil.",
+      "detail_html": "<span>▸ Parmak izi:</span> Mağdurun + 2 kısmi iz (analiz sürüyor)<br>\n        <span>▸ Renk testi:</span> Çay rengi normal — fail tat farkı yaratmadı<br>\n        <span>▸ Soru:</span> İkinci fincan kimin, kim yıkadı?"
+    },
+    {
+      "tag": "Kimyasal",
+      "code": "RST-KCN01",
+      "title": "Atölye KCN Şişesi",
+      "desc": "250g kapasiteli kahverengi cam şişe. <strong>72g açıklanamayan eksilme.</strong> Kapakta 2 kısmi parmak izi.",
+      "detail_html": "<span>▸ Erişim:</span> Şifreli dolap (Tarık + Kerem)<br>\n        <span>▸ Çelişki:</span> Tarık 2 gündür kovuldu, şifre değişmedi<br>\n        <span>▸ Tarık ifadesi:</span> \"Selin de şifreyi biliyordu — 3 ay önce verdim\""
+    },
+    {
+      "tag": "DNA",
+      "code": "SLN-ELD01",
+      "title": "Kullanılmış Lateks Eldiven",
+      "desc": "Selin Çelik'in çantasında bulunan açık tip lateks eldiven, sağ tek. Buruşmuş, içi terli.",
+      "detail_html": "<span>▸ İç DNA:</span> Selin Çelik (terden)<br>\n        <span>▸ Dış yüzey:</span> KCN izi <strong>POZİTİF</strong> (eser miktar)<br>\n        <span>▸ Açıklama:</span> \"Ev temizliği için\" — çelişiyor"
+    },
+    {
+      "tag": "Kasıtlı",
+      "code": "RST-PRF01",
+      "title": "Devrilmiş Parfüm Şişesi",
+      "desc": "Mutfak rafından düşmüş 50ml flakon. <strong>Kiraz badem</strong> notası. KCN'in acı badem kokusunu maskeleyen aroma.",
+      "detail_html": "<span>▸ Marka:</span> Eski tarzda küçük niş üretici<br>\n        <span>▸ Sahibi:</span> Selin Çelik'in masasında benzer şişe var<br>\n        <span>▸ Strateji:</span> Aromayı normalleştirmek"
+    },
+    {
+      "tag": "Belge",
+      "code": "CKP-NOT01",
+      "title": "Çöp Kovasından Çıkan Not",
+      "desc": "6 parçaya yırtılmış kâğıt. Mağdurun masasındaki mavi jel kalemle yazılmış. 067-N belgesinde tam metni.",
+      "detail_html": "<span>▸ Kalem:</span> Bürodaki mavi jel kalem<br>\n        <span>▸ Yazı:</span> El analizi sürüyor<br>\n        <span>▸ Anahtar:</span> Alt köşede tek harf \"S\""
+    }
+  ]
+}

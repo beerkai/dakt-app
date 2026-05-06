@@ -29,7 +29,9 @@ export function SiteNav() {
   }, []);
 
   useEffect(() => {
-    readGuest();
+    const id = requestAnimationFrame(() => {
+      readGuest();
+    });
     function onStorage(e: StorageEvent) {
       if (e.key === GUEST_KEY || e.key === null) readGuest();
     }
@@ -39,13 +41,15 @@ export function SiteNav() {
     window.addEventListener("storage", onStorage);
     window.addEventListener("dakt_guest_changed", onLocalGuestChange);
     return () => {
+      cancelAnimationFrame(id);
       window.removeEventListener("storage", onStorage);
       window.removeEventListener("dakt_guest_changed", onLocalGuestChange);
     };
   }, [pathname, readGuest]);
 
   useEffect(() => {
-    setOpen(false);
+    const id = requestAnimationFrame(() => setOpen(false));
+    return () => cancelAnimationFrame(id);
   }, [pathname]);
 
   useEffect(() => {

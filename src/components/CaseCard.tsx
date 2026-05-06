@@ -9,7 +9,8 @@ export type CaseCardProps = {
   summary: string;
   recommendedPlayers: string;
   difficulty: string;
-  href: string;
+  /** Yoksa veya pasif kartta buton gösterilmez */
+  href?: string;
   status: CaseStatus;
 };
 
@@ -85,12 +86,20 @@ export function CaseCard({
           Önerilen: {recommendedPlayers} analist · Zorluk: {difficulty}
         </p>
 
-        <Link
-          href={href}
-          className={`${mono} inline-flex w-full items-center justify-center border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] py-4 text-[10px] font-medium uppercase tracking-[0.26em] text-[var(--kraft-light)] transition-colors hover:bg-[var(--bordeaux-bright)] md:w-auto md:self-start md:px-10`}
-        >
-          Dosyayı aç →
-        </Link>
+        {active && href ? (
+          <Link
+            href={href}
+            className={`${mono} inline-flex w-full items-center justify-center border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] py-4 text-[10px] font-medium uppercase tracking-[0.26em] text-[var(--kraft-light)] transition-colors hover:bg-[var(--bordeaux-bright)] md:w-auto md:self-start md:px-10`}
+          >
+            Dosyayı aç →
+          </Link>
+        ) : (
+          <div
+            className={`${mono} flex w-full items-center justify-center border border-dashed border-[var(--rule)] py-4 text-[9px] uppercase tracking-[0.2em] text-[var(--meta-label)] md:w-auto md:self-start md:px-10`}
+          >
+            Kilitli
+          </div>
+        )}
       </div>
     </article>
   );
