@@ -55,14 +55,12 @@ const testimonies: Testimony[] = gen.testimonies.map((t) => ({
   signatureRole: TESTIMONY_SIG_LINE[t.id],
   headerDocId: t.headerDocId,
   title: t.title,
-  stamps: t.stamps as Testimony["stamps"],
 }));
 
 const forensics: Document[] = gen.forensics.map((d) => ({
   id: d.id,
   docId: d.docId,
   title: d.title,
-  stamps: d.stamps as Document["stamps"],
   meta: d.meta,
   body: d.body,
   signature: d.signature,
@@ -72,7 +70,6 @@ const documents: Document[] = gen.documents.map((d) => ({
   id: d.id,
   docId: d.docId,
   title: d.title,
-  stamps: d.stamps as Document["stamps"],
   meta: d.meta,
   body: d.body,
   signature: d.signature,
@@ -82,7 +79,6 @@ const technical: Document[] = gen.technical.map((d) => ({
   id: d.id,
   docId: d.docId,
   title: d.title,
-  stamps: d.stamps as Document["stamps"],
   meta: d.meta,
   body: d.body,
   signature: d.signature,
@@ -134,7 +130,6 @@ export const case067: CaseData = {
   ],
   brief: {
     subtitle: "067-A · Olay Yeri",
-    stamps: ["approved", "denied", "classified"],
     metaPairs: briefVerdict.brief_meta.map((m) => ({
       label: m.label,
       value: m.value,

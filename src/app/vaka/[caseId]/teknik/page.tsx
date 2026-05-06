@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { getCase, isTabEnabled } from "@/lib/case-helpers";
 import { notFound } from "next/navigation";
 import { sectionNumForTab } from "@/lib/case-section-utils";
@@ -26,28 +25,30 @@ export default async function TeknikPage({
         <span className="section-sub">{sub}</span>
       </div>
 
-      {caseData.technical.map((doc) => (
-        <Fragment key={doc.id}>
-          <RenderCaseDocument doc={doc} />
-          {audio && doc.id.endsWith("gsm") ? (
-            <div className="audio-unit">
-              <div className="audio-head">
-                <span className="audio-label">{audio.label}</span>
-                <span className="audio-duration">{audio.durationLine}</span>
+      <div className="case-doc-grid">
+        {caseData.technical.map((doc) => (
+          <div key={doc.id} className="case-doc-grid-cell">
+            <RenderCaseDocument caseId={caseId} doc={doc} />
+            {audio && doc.id.endsWith("gsm") ? (
+              <div className="audio-unit">
+                <div className="audio-head">
+                  <span className="audio-label">{audio.label}</span>
+                  <span className="audio-duration">{audio.durationLine}</span>
+                </div>
+                <WaveformClient />
+                <div className="transcript">
+                  {audio.transcript.map((line, i) => (
+                    <p
+                      key={`${doc.id}-tr-${i}`}
+                      dangerouslySetInnerHTML={{ __html: line }}
+                    />
+                  ))}
+                </div>
               </div>
-              <WaveformClient />
-              <div className="transcript">
-                {audio.transcript.map((line, i) => (
-                  <p
-                    key={`${doc.id}-tr-${i}`}
-                    dangerouslySetInnerHTML={{ __html: line }}
-                  />
-                ))}
-              </div>
-            </div>
-          ) : null}
-        </Fragment>
-      ))}
+            ) : null}
+          </div>
+        ))}
+      </div>
     </section>
   );
 }

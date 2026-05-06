@@ -1,6 +1,7 @@
 import { getCase, isTabEnabled } from "@/lib/case-helpers";
 import { notFound } from "next/navigation";
 import { sectionNumForTab } from "@/lib/case-section-utils";
+import { MarkedSuspectsCallout } from "../MarkedSuspectsCallout";
 import { DeductionNotePad } from "../DeductionNotePad";
 
 export default async function DeductionPage({
@@ -22,6 +23,11 @@ export default async function DeductionPage({
         <h2 className="section-title">Deduction Board</h2>
         <span className="section-sub">{sub}</span>
       </div>
+
+      <MarkedSuspectsCallout
+        caseId={caseId}
+        suspects={caseData.suspects.map((s) => ({ id: s.id, name: s.name }))}
+      />
 
       <div className="board">
         <div className="board-grid">

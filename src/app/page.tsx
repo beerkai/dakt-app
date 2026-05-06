@@ -8,7 +8,7 @@ export default function Home() {
     <main className="relative z-[1] flex min-h-full flex-1 flex-col">
       {/* —— A) Hero —— */}
       <section
-        className="relative mx-auto w-full max-w-[1280px] px-5 pb-8 pt-8 md:px-7 md:pb-12 md:pt-10"
+        className="relative mx-auto w-full max-w-[1440px] px-5 pb-8 pt-8 md:px-7 md:pb-12 md:pt-10"
         aria-labelledby="landing-hero-heading"
       >
         <div
@@ -21,7 +21,7 @@ export default function Home() {
         />
 
         <div className="relative z-[1]">
-          <div className="classification-strip mb-6 md:mb-8">
+          <div className="classification-strip mb-6 md:mb-8" lang="en">
             EYES ONLY · CLASSIFIED · ANALYST CLEARANCE REQUIRED
           </div>
 
@@ -59,13 +59,13 @@ export default function Home() {
 
       {/* —— B) Özellik şeridi —— */}
       <section
-        className="relative z-[1] mx-auto w-full max-w-[1280px] px-5 py-12 md:px-7 md:py-16"
+        className="relative z-[1] mx-auto w-full max-w-[1440px] px-5 py-12 md:px-7 md:py-16"
         aria-labelledby="landing-features-heading"
       >
         <h2 id="landing-features-heading" className="sr-only">
           Oyun özellikleri
         </h2>
-        <div className="grid gap-6 md:grid-cols-3 md:gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-6">
           <article className="relative overflow-hidden border border-[var(--kraft-dark)] bg-[var(--anthracite)] p-6 shadow-[var(--shadow)] md:p-7">
             <div
               className="pointer-events-none absolute inset-0 opacity-[0.12]"
@@ -148,7 +148,7 @@ export default function Home() {
       </section>
 
       {/* —— C) Dosya peek —— */}
-      <section className="relative z-[1] mx-auto w-full max-w-[1280px] px-5 pb-16 md:px-7 md:pb-24">
+      <section className="relative z-[1] mx-auto w-full max-w-[1440px] px-5 pb-16 md:px-7 md:pb-24">
         <div className="relative overflow-hidden border-2 border-[var(--kraft-dark)] bg-[linear-gradient(165deg,var(--paper)_0%,var(--paper-dim)_100%)] p-6 text-[var(--ink)] shadow-[var(--shadow)] md:p-10">
           <div
             className="pointer-events-none absolute -right-8 -top-6 rotate-12 border-4 border-[var(--bordeaux)] px-4 py-2 opacity-[0.35] [font-family:var(--font-jetbrains-mono),monospace] text-[10px] font-bold uppercase tracking-[0.35em] text-[var(--bordeaux)]"
@@ -174,8 +174,11 @@ export default function Home() {
             <p className="mb-1 text-[10px] uppercase tracking-[0.3em] text-[var(--meta-label)] [font-family:var(--font-jetbrains-mono),monospace]">
               Dosya №042 · Karaağaç
             </p>
-            <p className="mb-4 text-xs uppercase tracking-[0.28em] text-[var(--bordeaux)] [font-family:var(--font-jetbrains-mono),monospace]">
-              Eyes only · analyst clearance
+            <p
+              className="mb-4 text-xs tracking-[0.28em] text-[var(--bordeaux)] [font-family:var(--font-jetbrains-mono),monospace]"
+              lang="en"
+            >
+              EYES ONLY · ANALYST CLEARANCE
             </p>
             <p className="mb-3 text-3xl font-semibold italic leading-tight text-[var(--ink)] [font-family:var(--font-cormorant),serif] md:text-4xl">
               Operasyon özeti
@@ -197,9 +200,18 @@ export default function Home() {
 
       {/* —— D) Alt footer —— */}
       <footer className="relative z-[1] mt-auto border-t border-[var(--rule)] px-5 py-10 md:px-7">
-        <div className="mx-auto flex max-w-[1280px] flex-col gap-2 text-center md:text-left">
+        <div className="mx-auto flex max-w-[1440px] flex-col gap-2 text-center md:text-left">
           <p className="text-[11px] uppercase tracking-[0.22em] text-[var(--subtitle-text)] [font-family:var(--font-jetbrains-mono),monospace]">
-            D.A.K.T. · @dakt.app · jointhedakt@gmail.com
+            D.A.K.T. ·{" "}
+            <a
+              href="https://instagram.com/dakt.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cursor-pointer normal-case transition-colors hover:text-[var(--kraft-light)]"
+            >
+              @dakt.app
+            </a>{" "}
+            · jointhedakt@gmail.com
           </p>
           <p className="text-[10px] uppercase tracking-[0.2em] text-[var(--meta-label)] [font-family:var(--font-jetbrains-mono),monospace]">
             © 2026

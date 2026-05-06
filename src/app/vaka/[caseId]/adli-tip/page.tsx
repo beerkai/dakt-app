@@ -23,9 +23,11 @@ export default async function AdliTipPage({
         <span className="section-sub">{sub}</span>
       </div>
 
-      {caseData.forensics.map((doc) => (
-        <RenderCaseDocument key={doc.id} doc={doc} />
-      ))}
+      <div className="case-doc-grid">
+        {caseData.forensics.map((doc) => (
+          <RenderCaseDocument key={doc.id} caseId={caseId} doc={doc} />
+        ))}
+      </div>
     </section>
   );
 }

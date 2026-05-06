@@ -2,11 +2,17 @@ import { Fragment } from "react";
 import { ClientDocArticle } from "./ClientDocArticle";
 import type { Document as CaseDocument } from "@/lib/case-types";
 
-export function RenderCaseDocument({ doc }: { doc: CaseDocument }) {
+export function RenderCaseDocument({
+  caseId,
+  doc,
+}: {
+  caseId: string;
+  doc: CaseDocument;
+}) {
   return (
     <ClientDocArticle
-      dataDoc={doc.id}
-      stamps={doc.stamps}
+      caseId={caseId}
+      itemId={doc.id}
       headerMain={
         <>
           {doc.docId ? <div className="doc-id">{doc.docId}</div> : null}

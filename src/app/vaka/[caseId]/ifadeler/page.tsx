@@ -24,7 +24,7 @@ export default async function IfadelerPage({
       </div>
 
       {caseData.testimonies.map((t) => (
-        <TestimonyArticle key={t.id} t={t} />
+        <TestimonyArticle key={t.id} caseId={caseId} t={t} />
       ))}
     </section>
   );

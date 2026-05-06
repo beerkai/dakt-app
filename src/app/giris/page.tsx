@@ -3,14 +3,13 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import {
+  DAKT_GUEST_USERNAME_KEY,
+  clearGuestUsername,
+  writeGuestUsername,
+} from "@/lib/guest-session";
+
 type Tab = "misafir" | "kayit" | "giris";
-
-const GUEST_KEY = "dakt_guest_username";
-
-function dispatchGuestChanged() {
-  if (typeof window === "undefined") return;
-  window.dispatchEvent(new Event("dakt_guest_changed"));
-}
 
 const tabBtn =
   "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace] flex-1 border px-3 py-3 text-[9px] font-medium uppercase tracking-[0.18em] transition-colors sm:flex-none sm:px-5";
@@ -31,7 +30,7 @@ export default function GirisPage() {
   useEffect(() => {
     function readSession() {
       try {
-        const v = localStorage.getItem(GUEST_KEY)?.trim();
+        const v = localStorage.getItem(DAKT_GUEST_USERNAME_KEY)?.trim();
         if (v && v.length > 0) {
           setSessionGuest(v);
           setGuestName(v);
@@ -46,7 +45,7 @@ export default function GirisPage() {
     }
     readSession();
     function onStorage(e: StorageEvent) {
-      if (e.key === GUEST_KEY || e.key === null) readSession();
+      if (e.key === DAKT_GUEST_USERNAME_KEY || e.key === null) readSession();
     }
     function onLocalGuestChange() {
       readSession();
@@ -60,12 +59,7 @@ export default function GirisPage() {
   }, []);
 
   function clearGuestSession() {
-    try {
-      localStorage.removeItem(GUEST_KEY);
-    } catch {
-      /* ignore */
-    }
-    dispatchGuestChanged();
+    clearGuestUsername();
     setSessionGuest(null);
     setGuestName("");
   }
@@ -77,12 +71,7 @@ export default function GirisPage() {
       return;
     }
     setGuestError(false);
-    try {
-      localStorage.setItem(GUEST_KEY, t);
-    } catch {
-      /* ignore */
-    }
-    dispatchGuestChanged();
+    writeGuestUsername(t);
     router.push("/davalar");
   }
 

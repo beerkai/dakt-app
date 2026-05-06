@@ -29,7 +29,11 @@ export default async function BelgelerPage({
           Bu dosya için belge sekmesi tanımlanmadı.
         </p>
       ) : (
-        docs.map((doc) => <RenderCaseDocument key={doc.id} doc={doc} />)
+        <div className="case-doc-grid">
+          {docs.map((doc) => (
+            <RenderCaseDocument key={doc.id} caseId={caseId} doc={doc} />
+          ))}
+        </div>
       )}
     </section>
   );

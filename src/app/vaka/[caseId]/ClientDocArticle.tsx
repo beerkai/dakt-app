@@ -1,64 +1,56 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
-
-export type StampKind = "approved" | "denied" | "classified" | "cross";
-
-const STAMP_LABEL: Record<StampKind, string> = {
-  approved: "Approved",
-  denied: "Denied",
-  classified: "Classified",
-  cross: "Cross-Ref",
-};
-
-const STAMP_TEXT: Record<StampKind, string> = {
-  approved: "APPROVED",
-  denied: "DENIED",
-  classified: "CLASSIFIED",
-  cross: "CROSS-REF",
-};
+import { type ReactNode } from "react";
+import {
+  PLAYER_STAMP_BTN_LABEL,
+  PLAYER_STAMP_ORDER,
+  PLAYER_STAMP_OVERLAY,
+} from "@/lib/case-types";
+import { useCaseItemStamp } from "@/hooks/useCaseItemStamp";
 
 export function ClientDocArticle({
-  dataDoc,
-  stamps,
+  caseId,
+  itemId,
+  enableStamps = true,
   headerMain,
   body,
 }: {
-  dataDoc?: string;
-  stamps: StampKind[];
+  caseId: string;
+  itemId: string;
+  /** Brief vb. sayfalarda damga kapalı */
+  enableStamps?: boolean;
   headerMain: ReactNode;
   body: ReactNode;
 }) {
-  const [active, setActive] = useState<StampKind | null>(null);
-
-  function toggle(kind: StampKind) {
-    setActive((prev) => (prev === kind ? null : kind));
-  }
+  const { active, select } = useCaseItemStamp(enableStamps, caseId, itemId);
 
   return (
-    <article className="doc" data-doc={dataDoc}>
-      {active !== null ? (
+    <article className="doc" data-doc={itemId}>
+      {enableStamps && active !== null ? (
         <div className={`stamp stamp-${active}`} data-type={active}>
-          {STAMP_TEXT[active]}
+          {PLAYER_STAMP_OVERLAY[active]}
         </div>
       ) : null}
       <div className="doc-header">
         <div>{headerMain}</div>
-        <div className="doc-stamp-area">
-          <div className="stamp-controls">
-            {stamps.map((s) => (
-              <button
-                key={s}
-                type="button"
-                className="stamp-btn"
-                data-stamp={s}
-                onClick={() => toggle(s)}
-              >
-                {STAMP_LABEL[s]}
-              </button>
-            ))}
+        {enableStamps ? (
+          <div className="doc-stamp-area">
+            <div className="stamp-controls" role="group" aria-label="Damgalar">
+              {PLAYER_STAMP_ORDER.map((kind) => (
+                <button
+                  key={kind}
+                  type="button"
+                  className={`stamp-btn stamp-btn-${kind}${active === kind ? " is-active" : ""}`}
+                  data-stamp={kind}
+                  onClick={() => select(kind)}
+                  aria-pressed={active === kind}
+                >
+                  {PLAYER_STAMP_BTN_LABEL[kind]}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
       {body}
     </article>

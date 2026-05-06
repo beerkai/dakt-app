@@ -6,10 +6,29 @@ import {
   useCallback,
   useEffect,
   useLayoutEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
 import type { Suspect, VerdictData } from "@/lib/case-types";
+import {
+  accuracyPercentForAttempts,
+  formatCertificateDate,
+  formatDurationMs,
+  incrementAttemptCount,
+  readAttemptCount,
+  readCaseStartTimestamp,
+} from "@/lib/case-playthrough-storage";
+import { readGuestUsernameTrimmed } from "@/lib/guest-session";
+import {
+  Certificate,
+  type CertificateHandle,
+} from "@/components/Certificate";
+import {
+  MARKED_SUSPECTS_CHANGED_EVENT,
+  markedSuspectsStorageKey,
+  readMarkedSuspects,
+} from "@/lib/marked-suspects-storage";
 
 type ViewState = "voting" | "envelope" | "result";
 
@@ -27,13 +46,6 @@ type VoteSuspect = {
   quote: string;
 };
 
-function formatAnalysisDuration(ms: number): string {
-  const s = Math.max(0, Math.floor(ms / 1000));
-  const m = Math.floor(s / 60);
-  const sec = s % 60;
-  return `${m} dakika ${sec} saniye`;
-}
-
 function VerdictDocumentHtml({
   verdict,
 }: {
@@ -50,21 +62,65 @@ function VerdictDocumentHtml({
 
 export function CozumClient({
   caseId,
+  codename,
   suspects,
   verdict,
 }: {
   caseId: string;
+  codename: string;
   suspects: Suspect[];
   verdict: VerdictData;
 }) {
   const router = useRouter();
-  const voteSuspects: VoteSuspect[] = suspects.map((s) => ({
-    suspectId: s.id,
-    idLine: s.code,
-    name: s.name,
-    role: s.role,
-    quote: s.quote,
-  }));
+  const baseVoteSuspects: VoteSuspect[] = useMemo(
+    () =>
+      suspects.map((s) => ({
+        suspectId: s.id,
+        idLine: s.code,
+        name: s.name,
+        role: s.role,
+        quote: s.quote,
+      })),
+    [suspects],
+  );
+
+  const [markedSuspectIds, setMarkedSuspectIds] = useState<string[]>([]);
+
+  useEffect(() => {
+    function syncMarked() {
+      setMarkedSuspectIds(readMarkedSuspects(caseId));
+    }
+    syncMarked();
+    window.addEventListener(MARKED_SUSPECTS_CHANGED_EVENT, syncMarked);
+    function onStorage(e: StorageEvent) {
+      if (e.key === markedSuspectsStorageKey(caseId) || e.key === null) {
+        syncMarked();
+      }
+    }
+    window.addEventListener("storage", onStorage);
+    return () => {
+      window.removeEventListener(MARKED_SUSPECTS_CHANGED_EVENT, syncMarked);
+      window.removeEventListener("storage", onStorage);
+    };
+  }, [caseId]);
+
+  const voteSuspects: VoteSuspect[] = useMemo(() => {
+    const marked = new Set(markedSuspectIds);
+    const order = new Map(
+      baseVoteSuspects.map((v, i) => [v.suspectId, i] as const),
+    );
+    return [...baseVoteSuspects].sort((a, b) => {
+      const aM = marked.has(a.suspectId) ? 0 : 1;
+      const bM = marked.has(b.suspectId) ? 0 : 1;
+      if (aM !== bM) return aM - bM;
+      return (order.get(a.suspectId) ?? 0) - (order.get(b.suspectId) ?? 0);
+    });
+  }, [baseVoteSuspects, markedSuspectIds]);
+
+  const markedSet = useMemo(
+    () => new Set(markedSuspectIds),
+    [markedSuspectIds],
+  );
 
   const correctId = verdict.perpetratorId;
 
@@ -75,15 +131,41 @@ export function CozumClient({
   const [envelopeOpen, setEnvelopeOpen] = useState(false);
   const [showVerdictDoc, setShowVerdictDoc] = useState(false);
 
-  const analysisStartedAt = useRef(0);
-  const [analysisElapsed, setAnalysisElapsed] = useState(0);
+  type SuccessMeta = { durationMs: number; attempts: number; accuracy: number };
+  const [successMeta, setSuccessMeta] = useState<SuccessMeta | null>(null);
+  const [certModalOpen, setCertModalOpen] = useState(false);
+  const certRef = useRef<CertificateHandle>(null);
+  const [analystDisplay, setAnalystDisplay] = useState("Misafir Analist");
+
+  useEffect(() => {
+    function readName() {
+      const v = readGuestUsernameTrimmed();
+      setAnalystDisplay(v ?? "Misafir Analist");
+    }
+    readName();
+    function onGuest() {
+      readName();
+    }
+    window.addEventListener("dakt_guest_changed", onGuest);
+    return () => window.removeEventListener("dakt_guest_changed", onGuest);
+  }, []);
+
+  useEffect(() => {
+    setSuccessMeta(null);
+    setCertModalOpen(false);
+  }, [caseId]);
+
+  useEffect(() => {
+    if (!certModalOpen) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setCertModalOpen(false);
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [certModalOpen]);
   const frontSizerRef = useRef<HTMLDivElement>(null);
   const flipInnerRef = useRef<HTMLDivElement>(null);
   const [flipMinH, setFlipMinH] = useState(MIN_FLIP_H);
-
-  useEffect(() => {
-    analysisStartedAt.current = performance.now();
-  }, [caseId]);
 
   useEffect(() => {
     try {
@@ -116,6 +198,7 @@ export function CozumClient({
 
   function handleConfirmVote() {
     if (!selectedSuspect) return;
+    incrementAttemptCount(caseId);
     setVoteConfirmed(true);
     window.setTimeout(() => {
       setVoteConfirmed(false);
@@ -137,7 +220,12 @@ export function CozumClient({
     setView("result");
     setIsCorrect(ok);
     if (ok) {
-      setAnalysisElapsed(performance.now() - analysisStartedAt.current);
+      const start = readCaseStartTimestamp(caseId);
+      const durationMs =
+        start != null ? Math.max(0, Date.now() - start) : 0;
+      const attempts = readAttemptCount(caseId);
+      const accuracy = accuracyPercentForAttempts(attempts);
+      setSuccessMeta({ durationMs, attempts, accuracy });
     }
   }
 
@@ -171,6 +259,15 @@ export function CozumClient({
                     }
                   }}
                 >
+                  {markedSet.has(s.suspectId) ? (
+                    <span
+                      className="suspect-vote-marked-pref"
+                      aria-hidden
+                      title="Şüphelendiklerinde"
+                    >
+                      ⚐
+                    </span>
+                  ) : null}
                   <div className="suspect-id">{s.idLine}</div>
                   <h3 className="suspect-name">{s.name}</h3>
                   <div className="suspect-role">{s.role}</div>
@@ -278,7 +375,7 @@ export function CozumClient({
           />
 
           <div
-            className="mb-10 grid gap-6 text-left sm:grid-cols-3"
+            className="mb-10 grid gap-6 text-left sm:grid-cols-2 lg:grid-cols-4"
             style={{
               fontFamily: "var(--font-jetbrains-mono), monospace",
               fontSize: 11,
@@ -295,12 +392,22 @@ export function CozumClient({
                 Analiz süresi
               </div>
               <div className="normal-case tracking-normal text-[var(--ink)]">
-                {formatAnalysisDuration(analysisElapsed)}
+                {successMeta
+                  ? formatDurationMs(successMeta.durationMs)
+                  : "—"}
+              </div>
+            </div>
+            <div>
+              <div className="mb-2 text-[var(--meta-label)]">Deneme</div>
+              <div className="normal-case tracking-normal text-[var(--ink)]">
+                {successMeta ? `${successMeta.attempts}. deneme` : "—"}
               </div>
             </div>
             <div>
               <div className="mb-2 text-[var(--meta-label)]">Doğruluk</div>
-              <div className="text-[var(--ink)]">100%</div>
+              <div className="text-[var(--ink)]">
+                {successMeta ? `${successMeta.accuracy}%` : "—"}
+              </div>
             </div>
           </div>
 
@@ -318,26 +425,78 @@ export function CozumClient({
             >
               Davalara Dön
             </Link>
-            <div className="relative">
-              <span
-                className="absolute -top-2 right-3 z-10 text-[8px] uppercase tracking-[0.2em] text-[var(--meta-label)]"
-                style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
-              >
-                ○ Yakında
-              </span>
-              <button
-                type="button"
-                disabled
-                className={`${btnMono} w-full cursor-not-allowed border border-[var(--rule)] bg-[var(--anthracite-2)] py-4 text-[var(--meta-label)] opacity-70`}
-              >
-                Sertifikayı İndir
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={() => setCertModalOpen(true)}
+              disabled={!successMeta}
+              className={`${btnMono} border-2 border-[var(--kraft-light)] bg-[var(--anthracite-2)] py-4 font-semibold text-[var(--paper)] shadow-[0_2px_12px_rgba(0,0,0,0.35)] transition-colors hover:border-[var(--bordeaux-bright)] hover:bg-[var(--bordeaux)] hover:text-[var(--paper)] disabled:cursor-not-allowed disabled:border-[var(--rule)] disabled:bg-[var(--anthracite-2)] disabled:text-[var(--meta-label)] disabled:opacity-55 disabled:shadow-none`}
+            >
+              Sertifikayı İndir
+            </button>
           </div>
 
           {showVerdictDoc ? <VerdictDocumentHtml verdict={verdict} /> : null}
         </div>
       )}
+
+      {certModalOpen && successMeta ? (
+        <div
+          className="fixed inset-0 z-[280] flex items-center justify-center p-3 md:p-6"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="cert-modal-title"
+        >
+          <button
+            type="button"
+            className="absolute inset-0 border-0 bg-[var(--ink)]/80 backdrop-blur-sm"
+            aria-label="Pencereyi kapat"
+            onClick={() => setCertModalOpen(false)}
+          />
+          <div
+            className="relative z-[1] flex max-h-[min(96vh,940px)] w-full max-w-[880px] flex-col overflow-hidden rounded border-2 border-[var(--kraft-dark)] bg-[var(--paper)] shadow-[var(--shadow)]"
+            style={{ boxSizing: "border-box" }}
+          >
+            <h3
+              id="cert-modal-title"
+              className="border-b border-[var(--rule)] px-4 py-3 text-center text-[13px] font-semibold tracking-[0.12em] text-[var(--ink)] [font-family:var(--font-cormorant),serif]"
+            >
+              Dosya kapama sertifikası
+            </h3>
+            <div className="min-h-0 flex-1 overflow-auto p-3 md:p-5">
+              <div className="flex min-w-0 justify-center">
+                <div className="origin-top scale-[0.72] sm:scale-[0.85] md:scale-100">
+                  <Certificate
+                    ref={certRef}
+                    analystName={analystDisplay}
+                    caseNumber={caseId}
+                    codename={codename}
+                    date={formatCertificateDate()}
+                    analysisTime={formatDurationMs(successMeta.durationMs)}
+                    attemptCount={successMeta.attempts}
+                    accuracy={successMeta.accuracy}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col gap-2 border-t border-[var(--rule)] bg-[var(--anthracite)] p-3 sm:flex-row sm:justify-end sm:gap-3">
+              <button
+                type="button"
+                onClick={() => setCertModalOpen(false)}
+                className={`${btnMono} border border-[var(--kraft)] px-4 py-3 text-[var(--kraft-light)] hover:border-[var(--kraft-light)]`}
+              >
+                Kapat
+              </button>
+              <button
+                type="button"
+                onClick={() => void certRef.current?.downloadPng()}
+                className={`${btnMono} border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] px-4 py-3 text-[var(--paper)] hover:bg-[var(--bordeaux-bright)]`}
+              >
+                PNG İndir
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
 
       {view === "result" && !isCorrect && (
         <div className="cozum-result-fail">

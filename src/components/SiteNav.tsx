@@ -4,12 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
-const GUEST_KEY = "dakt_guest_username";
-
-function dispatchGuestChanged() {
-  if (typeof window === "undefined") return;
-  window.dispatchEvent(new Event("dakt_guest_changed"));
-}
+import {
+  DAKT_GUEST_USERNAME_KEY,
+  clearGuestUsername,
+} from "@/lib/guest-session";
 
 export function SiteNav() {
   const pathname = usePathname();
@@ -18,9 +16,11 @@ export function SiteNav() {
   const [logoutToastKey, setLogoutToastKey] = useState(0);
   const [shareToastKey, setShareToastKey] = useState(0);
 
+  const [clock, setClock] = useState("--:--:-- · UTC+3");
+
   const readGuest = useCallback(() => {
     try {
-      const raw = localStorage.getItem(GUEST_KEY);
+      const raw = localStorage.getItem(DAKT_GUEST_USERNAME_KEY);
       const v = raw?.trim();
       setGuestUsername(v && v.length > 0 ? v : null);
     } catch {
@@ -29,11 +29,24 @@ export function SiteNav() {
   }, []);
 
   useEffect(() => {
+    function tick() {
+      const d = new Date();
+      const h = String(d.getHours()).padStart(2, "0");
+      const m = String(d.getMinutes()).padStart(2, "0");
+      const s = String(d.getSeconds()).padStart(2, "0");
+      setClock(`${h}:${m}:${s} · UTC+3`);
+    }
+    tick();
+    const id = window.setInterval(tick, 1000);
+    return () => window.clearInterval(id);
+  }, []);
+
+  useEffect(() => {
     const id = requestAnimationFrame(() => {
       readGuest();
     });
     function onStorage(e: StorageEvent) {
-      if (e.key === GUEST_KEY || e.key === null) readGuest();
+      if (e.key === DAKT_GUEST_USERNAME_KEY || e.key === null) readGuest();
     }
     function onLocalGuestChange() {
       readGuest();
@@ -98,12 +111,7 @@ export function SiteNav() {
   }, []);
 
   const handleLogout = useCallback(() => {
-    try {
-      localStorage.removeItem(GUEST_KEY);
-    } catch {
-      /* ignore */
-    }
-    dispatchGuestChanged();
+    clearGuestUsername();
     setGuestUsername(null);
     setLogoutToastKey((n) => n + 1);
   }, []);
@@ -125,7 +133,7 @@ export function SiteNav() {
         className="sticky top-0 z-[200] border-b border-[var(--rule)] bg-[var(--ink)]/95 backdrop-blur-sm"
         style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.35)" }}
       >
-        <div className="mx-auto flex max-w-[1280px] items-center gap-3 px-4 py-2.5 md:gap-4 md:px-7 md:py-3">
+        <div className="mx-auto flex max-w-[1360px] items-center gap-3 px-4 py-2.5 md:gap-4 md:px-7 md:py-3">
           <Link
             href="/"
             className="shrink-0 [font-family:var(--font-cormorant),serif] text-xl italic tracking-[0.12em] text-[var(--kraft)] md:text-2xl md:tracking-[0.18em]"
@@ -134,12 +142,33 @@ export function SiteNav() {
           </Link>
 
           <p className="hidden min-w-0 flex-1 md:block">
-            <span className="block max-w-[280px] text-[9px] uppercase leading-snug tracking-[0.14em] text-[var(--meta-label)] [font-family:var(--font-jetbrains-mono),ui-monospace,monospace]">
-              Division of Analytic Knowledge &amp; Testimonies
+            <span
+              lang="en"
+              className="block max-w-[min(100%,320px)] text-[9px] leading-snug tracking-[0.14em] text-[var(--meta-label)] [font-family:var(--font-jetbrains-mono),ui-monospace,monospace]"
+            >
+              DIVISION OF ANALYTIC KNOWLEDGE &amp; TESTIMONIES
             </span>
           </p>
 
-          <div className="hidden flex-1 md:block" aria-hidden />
+          <div
+            className="group relative hidden shrink-0 cursor-pointer items-center gap-2 md:flex"
+            title="D.A.K.T. operasyon merkezine bağlısın"
+            tabIndex={0}
+          >
+            <span className="site-nav-live-dot" aria-hidden />
+            <span className="whitespace-nowrap text-[9px] uppercase tracking-[0.2em] text-[var(--subtitle-text)] [font-family:var(--font-jetbrains-mono),ui-monospace,monospace]">
+              BAĞLANTI · CANLI
+            </span>
+            <span
+              className="whitespace-nowrap tabular-nums text-[9px] uppercase tracking-[0.1em] text-[var(--meta-label)] [font-family:var(--font-jetbrains-mono),ui-monospace,monospace]"
+              suppressHydrationWarning
+            >
+              {clock}
+            </span>
+            <span className="site-nav-live-tooltip" role="tooltip">
+              D.A.K.T. operasyon merkezine bağlısın
+            </span>
+          </div>
 
           <nav
             className="hidden items-center gap-7 md:flex"
@@ -277,7 +306,7 @@ export function SiteNav() {
             className="border-t border-[var(--rule)] bg-[var(--anthracite)] px-4 py-2 md:hidden"
           >
             <nav
-              className="mx-auto flex max-w-[1280px] flex-col"
+              className="mx-auto flex max-w-[1360px] flex-col"
               aria-label="Mobil menü"
             >
               <Link href="/davalar" className={navLinkClass}>
@@ -294,7 +323,7 @@ export function SiteNav() {
                 Paylaş
               </button>
             </nav>
-            <div className="mx-auto flex max-w-[1280px] flex-col gap-2 border-t border-[var(--rule)] pt-3 pb-4">
+            <div className="mx-auto flex max-w-[1360px] flex-col gap-2 border-t border-[var(--rule)] pt-3 pb-4">
               {loggedIn ? (
                 <button
                   type="button"

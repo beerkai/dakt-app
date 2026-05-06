@@ -14,7 +14,25 @@ export type TabId =
   | "deduction"
   | "cozum";
 
-export type StampKind = "approved" | "denied" | "classified" | "cross";
+export type PlayerStampKind = "supheli" | "ele-alindi" | "elendi";
+
+export const PLAYER_STAMP_ORDER: PlayerStampKind[] = [
+  "supheli",
+  "ele-alindi",
+  "elendi",
+];
+
+export const PLAYER_STAMP_BTN_LABEL: Record<PlayerStampKind, string> = {
+  supheli: "● ŞÜPHELİ",
+  "ele-alindi": "✓ ELE ALINDI",
+  elendi: "× ELENDİ",
+};
+
+export const PLAYER_STAMP_OVERLAY: Record<PlayerStampKind, string> = {
+  supheli: "● ŞÜPHELİ",
+  "ele-alindi": "✓ ELE ALINDI",
+  elendi: "× ELENDİ",
+};
 
 export interface Suspect {
   id: string;
@@ -41,7 +59,6 @@ export interface Testimony {
   signatureRole?: string;
   headerDocId: string;
   title: string;
-  stamps: StampKind[];
 }
 
 export interface Evidence {
@@ -59,7 +76,6 @@ export interface Document {
   meta: Array<{ label: string; value: string }>;
   body: string;
   signature?: { role: string; name: string };
-  stamps: StampKind[];
 }
 
 export interface TimelineEvent {
@@ -111,7 +127,6 @@ export interface CaseData {
     subtitle: string;
     metaPairs: Array<{ label: string; value: string }>;
     sections: Array<{ title: string; body: string }>;
-    stamps: StampKind[];
     signature?: { role: string; name: string };
   };
   suspects: Suspect[];

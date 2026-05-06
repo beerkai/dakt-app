@@ -25,7 +25,6 @@ export const case042: CaseData = {
   ],
   brief: {
     subtitle: "042-A · Olay Yeri",
-    stamps: ["approved", "denied", "classified"],
     metaPairs: [
       ["Vaka No", "042"],
       ["Dosya Tipi", "Şüpheli Ölüm — Yüksek Öncelik"],
@@ -95,7 +94,6 @@ export const case042: CaseData = {
       suspectName: "Aylin Yalçın",
       headerDocId: "042-C · Kadıköy İlçe Emniyet Müdürlüğü",
       title: "İfade — Aylin Yalçın",
-      stamps: ["approved", "denied", "cross"],
       date: "14.05.2025",
       birth: "18.09.2000",
       occupation: "Öğrenci · Freelance içerik",
@@ -116,7 +114,6 @@ export const case042: CaseData = {
       suspectName: "Emir Sezer",
       headerDocId: "042-D · Kadıköy İlçe Emniyet Müdürlüğü",
       title: "İfade — Emir Sezer",
-      stamps: ["approved", "denied", "cross"],
       date: "14.05.2025",
       birth: "11.02.2000",
       occupation: "Freelance Reklam Metin Yazarı",
@@ -136,7 +133,6 @@ export const case042: CaseData = {
       suspectName: "Meryem Güldağ",
       headerDocId: "042-E · Kadıköy İlçe Emniyet Müdürlüğü",
       title: "İfade — Meryem Güldağ",
-      stamps: ["approved", "denied", "cross"],
       date: "14.05.2025",
       birth: "02.11.1983",
       occupation: "Emekli akademisyen · Bağımsız psikolojik danışman",
@@ -157,7 +153,6 @@ export const case042: CaseData = {
       suspectName: "Şükrü Aydın",
       headerDocId: "042-F · Kadıköy İlçe Emniyet Müdürlüğü",
       title: "İfade — Şükrü Aydın",
-      stamps: ["approved", "denied", "cross"],
       date: "14.05.2025",
       birth: "04.06.1969",
       occupation: "Apartman görevlisi (11 yıl)",
@@ -175,7 +170,6 @@ export const case042: CaseData = {
       suspectName: "Sinem Gürbüz",
       headerDocId: "042-G · Kadıköy İlçe Emniyet Müdürlüğü",
       title: "İfade — Sinem Gürbüz",
-      stamps: ["approved", "denied", "cross"],
       date: "14.05.2025",
       birth: "26.12.1999",
       occupation: "Moda asistanı",
@@ -195,7 +189,6 @@ export const case042: CaseData = {
       id: "042-B",
       docId: "042-B · İstanbul Adli Tıp Kurumu — 1. İhtisas Kurulu",
       title: "Otopsi Raporu",
-      stamps: ["approved", "classified"],
       meta: [
         { label: "Olay Tarihi", value: "13.05.2025" },
         { label: "Rapor Tarihi", value: "14.05.2025" },
@@ -226,7 +219,6 @@ export const case042: CaseData = {
       id: "042-A",
       docId: "042-A · Olay Yeri İnceleme",
       title: "Olay Yeri Raporu",
-      stamps: ["approved", "cross"],
       meta: [],
       body: `<h3>Bulgular</h3>
 <ol>
@@ -292,7 +284,6 @@ export const case042: CaseData = {
       id: "042-gsm",
       docId: "Telsimcell · GSM Adli İşlem",
       title: "Baz İstasyonu Sinyal Geçmişi",
-      stamps: ["approved", "cross"],
       meta: [],
       body: `<p><strong>SIM:</strong> Burak Karaağaç · 0588 957 23 12</p>
 <table class="signal-table">
@@ -314,7 +305,6 @@ export const case042: CaseData = {
       id: "042-H",
       docId: "042-H · Kriminal Görüntü İnceleme",
       title: "CCTV Analizi & Saat Sapması",
-      stamps: ["cross", "classified"],
       meta: [],
       body: `<h3>Görüntü Tespiti — 12 Mayıs Gecesi</h3>
 <ul>

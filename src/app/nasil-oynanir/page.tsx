@@ -18,7 +18,7 @@ const STEPS = [
     num: "02",
     title: "İncele",
     body:
-      "İfadeleri oku, delilleri damgala (APPROVED/DENIED/CLASSIFIED), zaman çizelgesini diz, deduction board'da notlar al.",
+      "İfadeleri oku, delilleri damgala (şüpheli / ele alındı / elendi), zaman çizelgesini diz, deduction board'da notlar al.",
   },
   {
     num: "03",
@@ -39,39 +39,34 @@ const btnMono =
 
 export default function NasilOynanirPage() {
   return (
-    <div className="relative z-[1] mx-auto w-full max-w-[720px] flex-1 px-5 py-10 md:px-7 md:py-14">
-      <header className="mb-12 md:mb-16">
+    <div className="relative z-[1] mx-auto w-full max-w-[1440px] flex-1 px-5 py-10 md:px-7 md:py-14">
+      <header className="mb-10 md:mb-12">
         <h1 className="mb-3 text-4xl font-semibold text-[var(--paper)] [font-family:var(--font-cormorant),serif] md:text-5xl">
           Nasıl Oynanır?
         </h1>
-        <p className="text-[13px] tracking-[0.06em] text-[var(--subtitle-text)] [font-family:var(--font-special-elite),monospace]">
+        <p className="max-w-xl text-[13px] tracking-[0.06em] text-[var(--subtitle-text)] [font-family:var(--font-special-elite),monospace]">
           Hızlı bir analiz brifi.
         </p>
       </header>
 
-      <ol className="mb-12 flex list-none flex-col gap-10 md:mb-16 md:gap-12">
+      <ol className="mb-12 grid list-none grid-cols-1 gap-6 md:mb-14 md:grid-cols-2 md:gap-6 lg:grid-cols-4 lg:gap-6">
         {STEPS.map((step) => (
-          <li key={step.num} className="relative pl-5 md:pl-7">
+          <li
+            key={step.num}
+            className="relative flex flex-col border border-[var(--kraft-dark)] bg-[var(--anthracite)] p-6 shadow-[var(--shadow)] md:p-7"
+          >
             <span
-              className="absolute left-0 top-0 bottom-0 w-0.5 bg-[var(--bordeaux)]"
+              className="mb-4 text-[clamp(2.5rem,8vw,3.5rem)] font-semibold italic leading-none text-[var(--bordeaux-bright)] [font-family:var(--font-cormorant),serif]"
               aria-hidden
-            />
-            <div className="flex flex-col gap-3 md:flex-row md:items-start md:gap-8">
-              <span
-                className="shrink-0 text-[clamp(3.5rem,12vw,5rem)] font-semibold italic leading-none text-[var(--bordeaux-bright)] [font-family:var(--font-cormorant),serif]"
-                aria-hidden
-              >
-                {step.num}
-              </span>
-              <div className="min-w-0 pt-1">
-                <h2 className="mb-3 text-2xl font-semibold text-[var(--kraft-light)] [font-family:var(--font-cormorant),serif] md:text-[1.75rem]">
-                  {step.title}
-                </h2>
-                <p className="text-[13px] leading-[1.8] tracking-[0.05em] text-[var(--body-text)] [font-family:var(--font-special-elite),monospace]">
-                  {step.body}
-                </p>
-              </div>
-            </div>
+            >
+              {step.num}
+            </span>
+            <h2 className="mb-3 text-xl font-semibold text-[var(--kraft-light)] [font-family:var(--font-cormorant),serif] md:text-[1.35rem]">
+              {step.title}
+            </h2>
+            <p className="flex-1 text-[13px] leading-[1.8] tracking-[0.05em] text-[var(--body-text)] [font-family:var(--font-special-elite),monospace]">
+              {step.body}
+            </p>
           </li>
         ))}
       </ol>

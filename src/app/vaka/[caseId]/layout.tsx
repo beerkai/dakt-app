@@ -2,8 +2,7 @@ import type { ReactNode } from "react";
 import "./vaka-case.css";
 import { getCase } from "@/lib/case-helpers";
 import { notFound } from "next/navigation";
-import { VakaCaseBar } from "./VakaCaseBar";
-import { VakaCaseNav } from "./VakaCaseNav";
+import { VakaCaseInnerNav } from "./VakaCaseInnerNav";
 import { VakaCaseSoloTease } from "./VakaCaseSoloTease";
 
 export async function generateMetadata({
@@ -33,13 +32,21 @@ export default async function CaseLayout({
 
   return (
     <div className="relative z-[1] flex min-h-full flex-1 flex-col">
-      <VakaCaseBar caseId={caseData.id} codename={caseData.codename} />
-      <VakaCaseNav caseId={caseId} caseData={caseData} />
+      <VakaCaseInnerNav caseId={caseId} caseData={caseData} />
       <main className="workspace flex-1">{children}</main>
       <footer className="foot">
         D.A.K.T. ·{" "}
-        <em>Division of Analytic Knowledge & Testimonies</em> · dakt.app ·
-        @dakt.app · jointhedakt@gmail.com
+        <em lang="en">DIVISION OF ANALYTIC KNOWLEDGE &amp; TESTIMONIES</em> ·
+        dakt.app ·{" "}
+        <a
+          href="https://instagram.com/dakt.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="foot-instagram"
+        >
+          @dakt.app
+        </a>{" "}
+        · jointhedakt@gmail.com
       </footer>
       <VakaCaseSoloTease
         caseId={caseData.id}

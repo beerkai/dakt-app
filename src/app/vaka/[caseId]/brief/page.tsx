@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { BriefPlayStartMount } from "../BriefPlayStartMount";
 import { ClientDocArticle } from "../ClientDocArticle";
 import { getCase } from "@/lib/case-helpers";
 import { notFound } from "next/navigation";
@@ -18,6 +19,7 @@ export default async function BriefPage({
 
   return (
     <section id="brief">
+      <BriefPlayStartMount caseId={caseId} />
       <div className="section-head">
         <div className="section-num">{num}</div>
         <h2 className="section-title">Vaka Özeti</h2>
@@ -25,8 +27,9 @@ export default async function BriefPage({
       </div>
 
       <ClientDocArticle
-        dataDoc="brief"
-        stamps={caseData.brief.stamps}
+        caseId={caseId}
+        itemId="brief"
+        enableStamps={false}
         headerMain={
           <>
             <div className="doc-id">
@@ -37,31 +40,37 @@ export default async function BriefPage({
         }
         body={
           <>
-            <dl className="doc-meta">
-              {caseData.brief.metaPairs.map((row) => (
-                <Fragment key={`${row.label}-${row.value}`}>
-                  <dt>{row.label}</dt>
-                  <dd>{row.value}</dd>
-                </Fragment>
-              ))}
-            </dl>
-            {caseData.brief.sections.map((sec) => (
-              <section key={sec.title}>
-                <h3>{sec.title}</h3>
-                <div dangerouslySetInnerHTML={{ __html: sec.body }} />
-              </section>
-            ))}
-            {caseData.brief.signature ? (
-              <div className="doc-signature">
-                <div
-                  className="sig-line"
-                  style={{ whiteSpace: "pre-line" }}
-                >
-                  {caseData.brief.signature.role}
-                </div>
-                <div className="sig-name">{caseData.brief.signature.name}</div>
+            <div className="brief-two-col">
+              <dl className="doc-meta">
+                {caseData.brief.metaPairs.map((row) => (
+                  <Fragment key={`${row.label}-${row.value}`}>
+                    <dt>{row.label}</dt>
+                    <dd>{row.value}</dd>
+                  </Fragment>
+                ))}
+              </dl>
+              <div className="brief-two-col-main">
+                {caseData.brief.sections.map((sec) => (
+                  <section key={sec.title}>
+                    <h3>{sec.title}</h3>
+                    <div dangerouslySetInnerHTML={{ __html: sec.body }} />
+                  </section>
+                ))}
+                {caseData.brief.signature ? (
+                  <div className="doc-signature">
+                    <div
+                      className="sig-line"
+                      style={{ whiteSpace: "pre-line" }}
+                    >
+                      {caseData.brief.signature.role}
+                    </div>
+                    <div className="sig-name">
+                      {caseData.brief.signature.name}
+                    </div>
+                  </div>
+                ) : null}
               </div>
-            ) : null}
+            </div>
           </>
         }
       />

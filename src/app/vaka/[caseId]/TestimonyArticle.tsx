@@ -3,11 +3,17 @@ import { ClientDocArticle } from "./ClientDocArticle";
 import { testimonialParagraphHtml } from "@/lib/html-sanitize";
 import type { Testimony } from "@/lib/case-types";
 
-export function TestimonyArticle({ t }: { t: Testimony }) {
+export function TestimonyArticle({
+  caseId,
+  t,
+}: {
+  caseId: string;
+  t: Testimony;
+}) {
   return (
     <ClientDocArticle
-      dataDoc={t.id}
-      stamps={t.stamps}
+      caseId={caseId}
+      itemId={t.id}
       headerMain={
         <>
           <div className="doc-id">{t.headerDocId}</div>

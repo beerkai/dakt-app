@@ -23,7 +23,7 @@ export default async function SuphelilerPage({
         <span className="section-sub">{sub}</span>
       </div>
 
-      <SuspectGridClient suspects={caseData.suspects} />
+      <SuspectGridClient caseId={caseId} suspects={caseData.suspects} />
 
       <p
         style={{
@@ -35,7 +35,7 @@ export default async function SuphelilerPage({
           padding: 24,
         }}
       >
-        ▸ Bir şüpheliyi işaretle ve ifadelerle çapraz okuma yap.
+        ▸ Kartlarda ⚐ ŞÜPHELENDİKLERİME EKLE; deduction ve oylamada öne çıkar.
       </p>
     </section>
   );
