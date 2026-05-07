@@ -15,14 +15,18 @@ async function ensureAdmin() {
 
 export async function setTester(userId: string, value: boolean) {
   await ensureAdmin();
-  const supabase = await createClient();
 
-  const { error } = await supabase
+  const adminDb = createAdminClient();
+
+  const { error } = await adminDb
     .from("profiles")
     .update({ is_tester: value })
     .eq("id", userId);
 
-  if (error) return { error: error.message };
+  if (error) {
+    console.error("[setTester] Update error:", error);
+    return { error: "Güncelleme başarısız: " + error.message };
+  }
 
   await logAdminAction({
     action: value ? "grant_tester" : "revoke_tester",
@@ -37,14 +41,17 @@ export async function setTester(userId: string, value: boolean) {
 
 export async function resetUserProgress(userId: string, username: string) {
   await ensureAdmin();
-  const supabase = await createClient();
+  const adminDb = createAdminClient();
 
-  const { error } = await supabase
+  const { error } = await adminDb
     .from("solved_cases")
     .delete()
     .eq("user_id", userId);
 
-  if (error) return { error: error.message };
+  if (error) {
+    console.error("[resetUserProgress] Delete error:", error);
+    return { error: error.message };
+  }
 
   await logAdminAction({
     action: "reset_user_progress",
@@ -63,9 +70,9 @@ export async function suspendUser(
   reason: string,
 ) {
   await ensureAdmin();
-  const supabase = await createClient();
+  const adminDb = createAdminClient();
 
-  const { error } = await supabase
+  const { error } = await adminDb
     .from("profiles")
     .update({
       suspended_at: new Date().toISOString(),
@@ -73,7 +80,10 @@ export async function suspendUser(
     })
     .eq("id", userId);
 
-  if (error) return { error: error.message };
+  if (error) {
+    console.error("[suspendUser] Update error:", error);
+    return { error: error.message };
+  }
 
   await logAdminAction({
     action: "suspend_user",
@@ -89,9 +99,9 @@ export async function suspendUser(
 
 export async function unsuspendUser(userId: string, username: string) {
   await ensureAdmin();
-  const supabase = await createClient();
+  const adminDb = createAdminClient();
 
-  const { error } = await supabase
+  const { error } = await adminDb
     .from("profiles")
     .update({
       suspended_at: null,
@@ -99,7 +109,10 @@ export async function unsuspendUser(userId: string, username: string) {
     })
     .eq("id", userId);
 
-  if (error) return { error: error.message };
+  if (error) {
+    console.error("[unsuspendUser] Update error:", error);
+    return { error: error.message };
+  }
 
   await logAdminAction({
     action: "unsuspend_user",
@@ -176,20 +189,23 @@ export async function deleteUser(userId: string, username: string) {
 
 export async function setCaseStatus(caseId: string, newStatus: string) {
   await ensureAdmin();
-  const supabase = await createClient();
+  const adminDb = createAdminClient();
 
-  const updates: Record<string, unknown> = { status: newStatus };
+  const updates: Record<string, string> = { status: newStatus };
   if (newStatus === "published")
     updates.published_at = new Date().toISOString();
   if (newStatus === "archived")
     updates.archived_at = new Date().toISOString();
 
-  const { error } = await supabase
+  const { error } = await adminDb
     .from("cases_metadata")
     .update(updates)
     .eq("case_id", caseId);
 
-  if (error) return { error: error.message };
+  if (error) {
+    console.error("[setCaseStatus] Update error:", error);
+    return { error: error.message };
+  }
 
   await logAdminAction({
     action: "change_case_status",
@@ -210,15 +226,18 @@ export async function resetSingleCaseProgress(
   caseId: string,
 ) {
   await ensureAdmin();
-  const supabase = await createClient();
+  const adminDb = createAdminClient();
 
-  const { error } = await supabase
+  const { error } = await adminDb
     .from("solved_cases")
     .delete()
     .eq("user_id", userId)
     .eq("case_id", caseId);
 
-  if (error) return { error: error.message };
+  if (error) {
+    console.error("[resetSingleCaseProgress] Delete error:", error);
+    return { error: error.message };
+  }
 
   await logAdminAction({
     action: "reset_single_case",
@@ -247,9 +266,9 @@ export async function changeUsername(
     return { error: "Username sadece harf, rakam, _ içerebilir" };
   }
 
-  const supabase = await createClient();
+  const adminDb = createAdminClient();
 
-  const { data: existing } = await supabase
+  const { data: existing } = await adminDb
     .from("profiles")
     .select("id")
     .eq("username", trimmed)
@@ -260,12 +279,15 @@ export async function changeUsername(
     return { error: "Bu username zaten kullanımda" };
   }
 
-  const { error } = await supabase
+  const { error } = await adminDb
     .from("profiles")
     .update({ username: trimmed })
     .eq("id", userId);
 
-  if (error) return { error: error.message };
+  if (error) {
+    console.error("[changeUsername] Update error:", error);
+    return { error: error.message };
+  }
 
   await logAdminAction({
     action: "change_username",
