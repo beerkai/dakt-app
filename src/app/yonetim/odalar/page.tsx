@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { getAllUserEmails } from "@/lib/admin";
 import { createClient } from "@/lib/supabase/server";
 
@@ -45,6 +47,18 @@ export default async function OdalarPage() {
           <span className="gm-live-dot" />
           Bölüm I — Şu An Aktif ({rooms?.length ?? 0})
         </h1>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginBottom: 16,
+        }}
+      >
+        <Link href="/yonetim/odalar/gecmis" className="gm-topnav-back">
+          Geçmiş Odalar →
+        </Link>
       </div>
 
       <p

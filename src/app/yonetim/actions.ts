@@ -128,9 +128,33 @@ export async function deleteUser(userId: string, username: string) {
 
   const adminClient = createAdminClient();
 
-  await adminClient.from("profiles").delete().eq("id", userId);
-  await adminClient.from("solved_cases").delete().eq("user_id", userId);
-  await adminClient.from("room_players").delete().eq("user_id", userId);
+  const { error: solvedErr } = await adminClient
+    .from("solved_cases")
+    .delete()
+    .eq("user_id", userId);
+  if (solvedErr) console.error("[deleteUser] solved_cases:", solvedErr);
+
+  const { error: roomPlayersErr } = await adminClient
+    .from("room_players")
+    .delete()
+    .eq("user_id", userId);
+  if (roomPlayersErr) console.error("[deleteUser] room_players:", roomPlayersErr);
+
+  await adminClient
+    .from("rooms")
+    .update({
+      status: "archived",
+      archived_at: new Date().toISOString(),
+      finished_at: new Date().toISOString(),
+    })
+    .eq("host_user_id", userId)
+    .in("status", ["waiting", "playing"]);
+
+  const { error: profileErr } = await adminClient
+    .from("profiles")
+    .delete()
+    .eq("id", userId);
+  if (profileErr) console.error("[deleteUser] profiles:", profileErr);
 
   const { error: authError } = await adminClient.auth.admin.deleteUser(userId);
 
@@ -260,36 +284,56 @@ export async function adminTerminateRoom(roomId: string) {
   await ensureAdmin();
   const supabase = await createClient();
 
-  const { data: room } = await supabase
+  const { data: room, error: fetchError } = await supabase
     .from("rooms")
     .select("code, case_id, status")
     .eq("id", roomId)
-    .single();
+    .maybeSingle();
 
-  if (!room) return { error: "Oda bulunamadı" };
-
-  if (room.status !== "waiting" && room.status !== "playing") {
-    return { error: "Oda zaten aktif değil" };
+  if (fetchError) {
+    console.error("[adminTerminateRoom] Fetch error:", fetchError);
+    return { error: "Oda okunamadı: " + fetchError.message };
   }
 
-  const { error } = await supabase
+  if (!room) {
+    return { error: "Oda bulunamadı (silinmiş olabilir)" };
+  }
+
+  const now = new Date().toISOString();
+  const roomUpdate: Record<string, string> = {
+    status: "archived",
+    archived_at: now,
+  };
+  if (room.status !== "archived") {
+    roomUpdate.finished_at = now;
+  }
+
+  const { error: updateError } = await supabase
     .from("rooms")
-    .update({
-      status: "solved",
-      finished_at: new Date().toISOString(),
-    })
+    .update(roomUpdate)
     .eq("id", roomId);
 
-  if (error) return { error: error.message };
+  if (updateError) {
+    console.error("[adminTerminateRoom] Update error:", updateError);
+    return { error: "Sonlandırma başarısız: " + updateError.message };
+  }
+
+  await supabase
+    .from("room_players")
+    .update({ left_at: now })
+    .eq("room_id", roomId)
+    .is("left_at", null);
 
   await logAdminAction({
     action: "admin_terminate_room",
     targetType: "room",
     targetId: roomId,
     targetLabel: `Oda ${room.code} (Vaka ${room.case_id})`,
+    payload: { previous_status: room.status },
   });
 
   revalidatePath("/yonetim/odalar");
   revalidatePath("/yonetim");
+  revalidatePath("/yonetim/odalar/gecmis");
   return { success: true };
 }

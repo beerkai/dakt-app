@@ -127,12 +127,9 @@ export default function LobbyClient({
             router.push(dest);
             return;
           }
-          if (updated.status === "solved") {
+          if (updated.status === "solved" || updated.status === "archived") {
             router.push(`/oda/${updated.code}/sonlandirildi`);
             return;
-          }
-          if (updated.status === "archived") {
-            router.push("/davalar?error=archived");
           }
         },
       )
