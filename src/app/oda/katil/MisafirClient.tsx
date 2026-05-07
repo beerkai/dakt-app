@@ -110,45 +110,71 @@ export function MisafirClient() {
     setBusy(true);
     setError(null);
 
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
+    try {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
 
-    if (!session?.user) {
-      const { error: authError } = await supabase.auth.signInAnonymously({
-        options: {
-          data: { username: trimmed, color },
-        },
-      });
-      if (authError) {
-        setError(authError.message || "Misafir girişi başarısız");
-        setBusy(false);
+      if (!session?.user) {
+        const { error: authError } = await supabase.auth.signInAnonymously({
+          options: {
+            data: { username: trimmed, color },
+          },
+        });
+        if (authError) {
+          setError(authError.message || "Misafir girişi başarısız");
+          return;
+        }
+      }
+
+      await runAfterAuth();
+
+      const ensured = await ensureAnonProfile(trimmed, color);
+      if ("error" in ensured) {
+        setError(ensured.error);
         return;
       }
-    }
 
-    await runAfterAuth();
+      const result = await joinRoom(codeFromUrl);
 
-    const ensured = await ensureAnonProfile(trimmed, color);
-    if ("error" in ensured) {
-      setError(ensured.error);
+      if (process.env.NODE_ENV === "development") {
+        // eslint-disable-next-line no-console
+        console.log("joinRoom result (misafir):", result);
+      }
+
+      if (result == null || typeof result !== "object") {
+        setError("Beklenmeyen bir yanıt, tekrar dene");
+        return;
+      }
+
+      if ("requiresGuestSetup" in result && result.requiresGuestSetup) {
+        setError("Oturum senkronize edilemedi, sayfayı yenileyip tekrar dene.");
+        return;
+      }
+      if ("error" in result && result.error) {
+        setError(result.error);
+        return;
+      }
+      if (
+        "success" in result &&
+        result.success === true &&
+        typeof result.code === "string" &&
+        result.code.length > 0
+      ) {
+        router.refresh();
+        router.push(`/oda/${result.code}`);
+        return;
+      }
+
+      setError("Beklenmeyen bir hata oluştu");
+    } catch (err) {
+      if (process.env.NODE_ENV === "development") {
+        // eslint-disable-next-line no-console
+        console.error("misafir join error:", err);
+      }
+      setError("Bağlantı hatası, tekrar dene");
+    } finally {
       setBusy(false);
-      return;
-    }
-
-    const result = await joinRoom(codeFromUrl);
-    setBusy(false);
-
-    if ("requiresGuestSetup" in result) {
-      setError("Oturum senkronize edilemedi, sayfayı yenileyip tekrar dene.");
-      return;
-    }
-    if ("error" in result) {
-      setError(result.error);
-      return;
-    }
-    if (result.success) {
-      router.push(`/oda/${result.code}`);
     }
   }
 

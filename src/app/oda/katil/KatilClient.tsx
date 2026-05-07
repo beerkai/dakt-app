@@ -48,23 +48,53 @@ export function KatilClient() {
       }
       setBusy(true);
       setError(null);
-      const result = await joinRoom(trimmed);
-      setBusy(false);
 
-      if ("requiresGuestSetup" in result && result.requiresGuestSetup) {
-        router.push(
-          `/oda/katil/misafir?code=${encodeURIComponent(result.code)}${autojoin ? "&autojoin=true" : ""}`,
-        );
-        return;
-      }
+      try {
+        const result = await joinRoom(trimmed);
 
-      if ("error" in result) {
-        setError(result.error);
-        return;
-      }
+        if (process.env.NODE_ENV === "development") {
+          // eslint-disable-next-line no-console
+          console.log("joinRoom result:", result);
+        }
 
-      if ("success" in result && result.success) {
-        router.push(`/oda/${result.code}`);
+        if (result == null || typeof result !== "object") {
+          setError("Beklenmeyen bir yanıt, tekrar dene");
+          return;
+        }
+
+        if ("requiresGuestSetup" in result && result.requiresGuestSetup) {
+          router.push(
+            `/oda/katil/misafir?code=${encodeURIComponent(result.code)}${autojoin ? "&autojoin=true" : ""}`,
+          );
+          return;
+        }
+
+        if ("error" in result && result.error) {
+          setError(result.error);
+          return;
+        }
+
+        if (
+          "success" in result &&
+          result.success === true &&
+          typeof result.code === "string" &&
+          result.code.length > 0
+        ) {
+          const dest = `/oda/${result.code}`;
+          router.refresh();
+          router.push(dest);
+          return;
+        }
+
+        setError("Beklenmeyen bir hata oluştu");
+      } catch (err) {
+        if (process.env.NODE_ENV === "development") {
+          // eslint-disable-next-line no-console
+          console.error("joinRoom error:", err);
+        }
+        setError("Bağlantı hatası, tekrar dene");
+      } finally {
+        setBusy(false);
       }
     },
     [autojoin, router],
