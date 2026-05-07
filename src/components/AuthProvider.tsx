@@ -86,6 +86,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
   }, [pathname, supabase]);
 
+  useEffect(() => {
+    if (!user) return;
+    const userId = user.id;
+
+    async function ping() {
+      const { error: rpcErr } = await supabase.rpc("update_last_seen");
+      if (rpcErr) {
+        await supabase
+          .from("profiles")
+          .update({ last_seen_at: new Date().toISOString() })
+          .eq("id", userId);
+      }
+    }
+
+    void ping();
+    const interval = setInterval(() => void ping(), 5 * 60 * 1000);
+
+    return () => clearInterval(interval);
+  }, [user, supabase]);
+
   return (
     <AuthContext.Provider value={{ user, profile, loading }}>
       {children}

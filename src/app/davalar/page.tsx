@@ -22,6 +22,33 @@ export default async function DavalarPage({
     data: { user },
   } = await supabase.auth.getUser();
 
+  const { data: profile } = user
+    ? await supabase
+        .from("profiles")
+        .select("is_tester, role")
+        .eq("id", user.id)
+        .single()
+    : { data: null };
+
+  const isTester = !!(profile?.is_tester || profile?.role === "admin");
+
+  const { data: caseMetadata } = await supabase
+    .from("cases_metadata")
+    .select("*");
+
+  const metaById = new Map(
+    caseMetadata?.map((c) => [c.case_id as string, c]) ?? [],
+  );
+
+  const allCases = getAllCases();
+  const cases = allCases.filter((c) => {
+    const meta = metaById.get(c.id);
+    if (!meta) return true;
+    if (meta.status === "published") return true;
+    if (meta.status === "test" && isTester) return true;
+    return false;
+  });
+
   let solvedCaseIds: string[] = [];
   if (user) {
     const { data: solved } = await supabase
@@ -30,8 +57,6 @@ export default async function DavalarPage({
       .eq("user_id", user.id);
     solvedCaseIds = solved?.map((s) => s.case_id) ?? [];
   }
-
-  const cases = getAllCases();
 
   return (
     <div className="relative z-[1] mx-auto w-full max-w-[1440px] flex-1 px-5 py-10 md:px-7 md:py-14">

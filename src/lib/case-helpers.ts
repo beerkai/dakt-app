@@ -21,6 +21,23 @@ export function getAllCases(): CaseData[] {
   );
 }
 
+/** Yönetim listesi: statik dosyalardan özet satırları */
+export interface CaseAdminSummary {
+  id: string;
+  codename: string;
+  suspectCount: number;
+  documentCount: number;
+}
+
+export function getAllCaseAdminSummaries(): CaseAdminSummary[] {
+  return getAllCases().map((c) => ({
+    id: c.id,
+    codename: c.codename,
+    suspectCount: c.suspects?.length ?? 0,
+    documentCount: countDocuments(c),
+  }));
+}
+
 /** Kart özetleri için: tüm “belge benzeri” parçaların sayısı */
 export function countDocuments(c: CaseData): number {
   return (
