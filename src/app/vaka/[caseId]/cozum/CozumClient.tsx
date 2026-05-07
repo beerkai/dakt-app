@@ -18,6 +18,7 @@ import {
   readAttemptCount,
   readCaseStartTimestamp,
 } from "@/lib/case-playthrough-storage";
+import { clearActiveSession } from "@/lib/active-session";
 import { readGuestUsernameTrimmed } from "@/lib/guest-session";
 import {
   upsertLocalSolvedRecord,
@@ -199,6 +200,12 @@ export function CozumClient({
       });
     }
   }, [view, isCorrect, user, successMeta, caseId]);
+
+  useEffect(() => {
+    if (view !== "result" || !isCorrect) return;
+    clearActiveSession();
+    window.dispatchEvent(new Event("dakt-session-change"));
+  }, [view, isCorrect]);
 
   /* Aşama 4: sertifika modal — Escape ile kapatma
   useEffect(() => {

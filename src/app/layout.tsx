@@ -4,6 +4,9 @@ import {
   JetBrains_Mono,
   Special_Elite,
 } from "next/font/google";
+import { Suspense } from "react";
+
+import ActiveSessionChip from "@/components/ActiveSessionChip";
 import { AuthProvider } from "@/components/AuthProvider";
 import { SiteNav } from "@/components/SiteNav";
 import "./globals.css";
@@ -48,6 +51,9 @@ export default function RootLayout({
           <div className="relative z-[1] flex min-h-0 flex-1 flex-col">
             {children}
           </div>
+          <Suspense fallback={null}>
+            <ActiveSessionChip />
+          </Suspense>
         </AuthProvider>
       </body>
     </html>

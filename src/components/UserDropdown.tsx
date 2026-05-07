@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import type { MouseEvent } from "react";
 
 import { signOut } from "@/app/auth/actions";
 import { ANALYST_COLOR_HEX, ANALYST_COLOR_LABEL_TR } from "@/lib/colors";
@@ -13,10 +14,13 @@ export function UserDropdown({
   profile,
   email,
   onClose,
+  onBeforeProfileNav,
 }: {
   profile: Profile;
   email: string | undefined;
   onClose: () => void;
+  /** Varsa: href ile dışarı çıkmadan önce (vaka/lobi çıkış onayı) */
+  onBeforeProfileNav?: (e: MouseEvent<HTMLAnchorElement>, href: string) => void;
 }) {
   const hex = ANALYST_COLOR_HEX[profile.color];
   const label = ANALYST_COLOR_LABEL_TR[profile.color];
@@ -62,7 +66,11 @@ export function UserDropdown({
           href="/profil"
           role="menuitem"
           className="block border-b border-[var(--rule)] px-4 py-3 text-[11px] uppercase tracking-[0.32em] text-[var(--kraft)] transition-colors hover:bg-[var(--bordeaux)] hover:text-[var(--kraft-light)]"
-          onClick={onClose}
+          onClick={(e) => {
+            onBeforeProfileNav?.(e, "/profil");
+            if (e.defaultPrevented) return;
+            onClose();
+          }}
         >
           ▸ Profilim
         </Link>
@@ -70,7 +78,11 @@ export function UserDropdown({
           href="/profil/basarilar"
           role="menuitem"
           className="block border-b border-[var(--rule)] px-4 py-3 text-[11px] uppercase tracking-[0.32em] text-[var(--kraft)] transition-colors hover:bg-[var(--bordeaux)] hover:text-[var(--kraft-light)]"
-          onClick={onClose}
+          onClick={(e) => {
+            onBeforeProfileNav?.(e, "/profil/basarilar");
+            if (e.defaultPrevented) return;
+            onClose();
+          }}
         >
           ▸ Başarılarım
         </Link>
@@ -78,7 +90,11 @@ export function UserDropdown({
           href="/profil/gecmis"
           role="menuitem"
           className="block border-b border-[var(--rule)] px-4 py-3 text-[11px] uppercase tracking-[0.32em] text-[var(--kraft)] transition-colors hover:bg-[var(--bordeaux)] hover:text-[var(--kraft-light)]"
-          onClick={onClose}
+          onClick={(e) => {
+            onBeforeProfileNav?.(e, "/profil/gecmis");
+            if (e.defaultPrevented) return;
+            onClose();
+          }}
         >
           ▸ Geçmiş
         </Link>

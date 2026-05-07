@@ -6,6 +6,13 @@ import { useEffect, useId, useState } from "react";
 
 import { createRoom } from "@/app/oda/actions";
 import { useAuth } from "@/components/AuthProvider";
+import ConfirmModal from "@/components/ConfirmModal";
+import {
+  clearActiveSession,
+  getActiveSession,
+  getReturnUrl,
+  type ActiveSession,
+} from "@/lib/active-session";
 import { DAKT_LOCAL_SOLVED_KEY } from "@/lib/local-solved-storage";
 import { readGuestUsernameTrimmed } from "@/lib/guest-session";
 
@@ -64,6 +71,13 @@ export function CaseCard({
   const choiceTitleId = useId();
   const [localSolvedIds, setLocalSolvedIds] = useState<string[]>([]);
   const [choiceModalOpen, setChoiceModalOpen] = useState(false);
+  const [solvedBrowseOpen, setSolvedBrowseOpen] = useState(false);
+  const [overwriteOpen, setOverwriteOpen] = useState(false);
+  const [pendingAction, setPendingAction] = useState<"solo" | "coop" | null>(
+    null,
+  );
+  const [overwriteSession, setOverwriteSession] =
+    useState<ActiveSession | null>(null);
   const [creating, setCreating] = useState(false);
   const [createError, setCreateError] = useState<string | null>(null);
 
@@ -137,6 +151,10 @@ export function CaseCard({
       onGuestGate?.();
       return;
     }
+    if (solved) {
+      setSolvedBrowseOpen(true);
+      return;
+    }
     setCreateError(null);
     setChoiceModalOpen(true);
   }
@@ -146,7 +164,7 @@ export function CaseCard({
     setCreateError(null);
   }
 
-  async function handleCreateRoom() {
+  async function performCreateRoom() {
     if (!user) return;
     setCreating(true);
     setCreateError(null);
@@ -165,8 +183,57 @@ export function CaseCard({
 
   function handleSolo() {
     if (!briefHref) return;
+    const existing = getActiveSession();
+    if (existing && existing.caseId !== caseNumber) {
+      setOverwriteSession(existing);
+      setPendingAction("solo");
+      setOverwriteOpen(true);
+      return;
+    }
+    if (existing && existing.caseId === caseNumber) {
+      closeChoiceModal();
+      router.push(briefHref);
+      return;
+    }
     closeChoiceModal();
     router.push(briefHref);
+  }
+
+  function handleOverwriteConfirm() {
+    clearActiveSession();
+    window.dispatchEvent(new Event("dakt-session-change"));
+    const action = pendingAction;
+    setOverwriteOpen(false);
+    setPendingAction(null);
+    setOverwriteSession(null);
+    if (action === "solo" && briefHref) {
+      closeChoiceModal();
+      router.push(briefHref);
+      return;
+    }
+    if (action === "coop") {
+      void performCreateRoom();
+    }
+  }
+
+  function handleOverwriteCancel() {
+    const s = overwriteSession;
+    setOverwriteOpen(false);
+    setPendingAction(null);
+    setOverwriteSession(null);
+    if (s) router.push(getReturnUrl(s));
+  }
+
+  function handleCreateRoom() {
+    if (!user) return;
+    const existing = getActiveSession();
+    if (existing) {
+      setOverwriteSession(existing);
+      setPendingAction("coop");
+      setOverwriteOpen(true);
+      return;
+    }
+    void performCreateRoom();
   }
 
   return (
@@ -426,6 +493,41 @@ export function CaseCard({
           </div>
         </div>
       ) : null}
+
+      <ConfirmModal
+        open={solvedBrowseOpen}
+        onClose={() => setSolvedBrowseOpen(false)}
+        onConfirm={() => {
+          setSolvedBrowseOpen(false);
+          if (briefHref) router.push(briefHref);
+        }}
+        title={`${codename.toLocaleUpperCase("tr-TR")} dosyasını tekrar açıyorsun`}
+        description="Bu vakayı çözmüştün. Şu an sadece belgeleri inceleyebilirsin. Yeniden çözüm denemek için profil > geçmiş'ten 'Yeniden Başlat' diyebilirsin."
+        confirmText="Belgeleri İncele"
+        cancelText="Vazgeç"
+      />
+
+      <ConfirmModal
+        open={overwriteOpen}
+        onClose={() => {
+          setOverwriteOpen(false);
+          setPendingAction(null);
+          setOverwriteSession(null);
+        }}
+        onConfirm={handleOverwriteConfirm}
+        onCancel={handleOverwriteCancel}
+        title="Aktif vakan var"
+        description={
+          overwriteSession
+            ? `${overwriteSession.caseName} vakasında bir oturumun açık. Devam edersen bu dosyadan yeni başlarsın; önceki oturum kapanır (best record'un saklanır).`
+            : ""
+        }
+        confirmText={
+          pendingAction === "coop" ? "Yeni Odaya Geç" : "Yeni Vakaya Geç"
+        }
+        cancelText="Mevcut Vakaya Dön"
+        variant="warning"
+      />
     </article>
   );
 }

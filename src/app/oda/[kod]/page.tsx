@@ -41,24 +41,27 @@ export default async function LobiPage({
 
   const roomRow = room as unknown as Room;
 
-  if (room.status === "playing") {
-    redirect(`/vaka/${room.case_id}/brief?room=${room.id}`);
-  }
-
   if (room.status === "archived" || room.status === "solved") {
     redirect("/davalar?error=archived");
   }
 
-  const { data: playerInRoom } = await supabase
+  const { data: playerRecord } = await supabase
     .from("room_players")
-    .select("id")
+    .select("*")
     .eq("room_id", room.id)
     .eq("user_id", user.id)
-    .is("left_at", null)
     .maybeSingle();
 
-  if (!playerInRoom) {
+  if (playerRecord && playerRecord.left_at) {
+    redirect(`/oda/${code}/tekrar-katil`);
+  }
+
+  if (!playerRecord) {
     redirect("/davalar?error=not-in-room");
+  }
+
+  if (room.status === "playing") {
+    redirect(`/vaka/${room.case_id}/brief?room=${room.id}`);
   }
 
   const caseData = getCase(room.case_id);

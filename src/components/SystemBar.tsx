@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { useRoomActivePlayers } from "@/hooks/useRoomActivePlayers";
+import { createClient } from "@/lib/supabase/client";
 
 /** Sadece vaka dosyaları: operasyon şeridi (canlı saat, UTC+3). */
 export function SystemBar() {
@@ -12,6 +13,9 @@ export function SystemBar() {
   const roomId = searchParams.get("room");
   const { players, count: activePlayerCount } =
     useRoomActivePlayers(roomId);
+
+  const [roomCode, setRoomCode] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     function tick() {
@@ -26,6 +30,31 @@ export function SystemBar() {
     const id = window.setInterval(tick, 1000);
     return () => window.clearInterval(id);
   }, []);
+
+  useEffect(() => {
+    if (!roomId) {
+      setRoomCode(null);
+      return;
+    }
+
+    const supabase = createClient();
+    async function fetchCode() {
+      const { data } = await supabase
+        .from("rooms")
+        .select("code")
+        .eq("id", roomId)
+        .single();
+      if (data?.code) setRoomCode(String(data.code));
+    }
+    void fetchCode();
+  }, [roomId]);
+
+  function handleCopy() {
+    if (!roomCode) return;
+    void navigator.clipboard.writeText(roomCode);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 2000);
+  }
 
   const { h, m, s } = parts;
   const playersTooltip = players.map((p) => p.username).join(", ");
@@ -70,6 +99,24 @@ export function SystemBar() {
                 {activePlayerCount} analist çevrimiçi
               </span>
             </span>
+          </>
+        ) : null}
+        {roomCode ? (
+          <>
+            <span aria-hidden className="opacity-60">
+              ·
+            </span>
+            <button
+              type="button"
+              onClick={handleCopy}
+              className="system-bar-room"
+              title="Kodu kopyala"
+            >
+              ODA: {roomCode}
+              <span className="system-bar-copy" aria-hidden>
+                {copied ? "✓" : "📋"}
+              </span>
+            </button>
           </>
         ) : null}
       </p>

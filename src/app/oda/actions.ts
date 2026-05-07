@@ -91,7 +91,8 @@ export async function createRoom(caseId: string) {
 export type JoinRoomResult =
   | { success: true; code: string }
   | { error: string }
-  | { requiresGuestSetup: true; code: string };
+  | { requiresGuestSetup: true; code: string }
+  | { needsRejoin: true; code: string };
 
 /** Misafir anon oturumu: profil tetikleyicide yoksa veya eksikse tamamla. */
 export async function ensureAnonProfile(
@@ -161,6 +162,21 @@ export async function joinRoom(code: string): Promise<JoinRoomResult> {
     return { error: "Oda bulunamadı veya başlamış" };
   }
 
+  const { data: myMembership } = await supabase
+    .from("room_players")
+    .select("left_at")
+    .eq("room_id", room.id)
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  if (myMembership && !myMembership.left_at) {
+    return { success: true, code: normalizedCode };
+  }
+
+  if (myMembership?.left_at) {
+    return { needsRejoin: true, code: normalizedCode };
+  }
+
   const { data: existingPlayers } = await supabase
     .from("room_players")
     .select("user_id, color")
@@ -169,11 +185,6 @@ export async function joinRoom(code: string): Promise<JoinRoomResult> {
 
   if (!existingPlayers) {
     return { error: "Oda bilgileri alınamadı" };
-  }
-
-  const alreadyIn = existingPlayers.find((p) => p.user_id === user.id);
-  if (alreadyIn) {
-    return { success: true, code: normalizedCode };
   }
 
   if (existingPlayers.length >= 5) {

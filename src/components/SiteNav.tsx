@@ -1,13 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import type { MouseEvent as ReactMouseEvent } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { signOut } from "@/app/auth/actions";
+import ConfirmModal from "@/components/ConfirmModal";
 import { useAuth } from "@/components/AuthProvider";
 import { UserDropdown } from "@/components/UserDropdown";
 import { ANALYST_COLOR_HEX } from "@/lib/colors";
+import { getActiveSession } from "@/lib/active-session";
 import {
   DAKT_GUEST_USERNAME_KEY,
   DAKT_USER_COLOR_KEY,
@@ -21,6 +24,7 @@ const mono =
 
 export function SiteNav() {
   const pathname = usePathname();
+  const router = useRouter();
   const { user, profile, loading: authLoading } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
@@ -33,6 +37,13 @@ export function SiteNav() {
   const [shareToastKey, setShareToastKey] = useState(0);
   const [welcomeToastKey, setWelcomeToastKey] = useState(0);
   const [welcomeTransferCount, setWelcomeTransferCount] = useState(0);
+  const [exitModalOpen, setExitModalOpen] = useState(false);
+  const [pendingHref, setPendingHref] = useState<string | null>(null);
+  const [exitIsCoop, setExitIsCoop] = useState(false);
+
+  const isInCase = pathname?.startsWith("/vaka/") ?? false;
+  const isInLobby =
+    Boolean(pathname?.startsWith("/oda/") && !pathname.includes("/katil"));
 
   const readGuest = useCallback(() => {
     try {
@@ -201,6 +212,22 @@ export function SiteNav() {
 
   const closeMobileMenu = useCallback(() => setMenuOpen(false), []);
 
+  function handleNavClick(e: ReactMouseEvent<HTMLAnchorElement>, href: string) {
+    if (!isInCase && !isInLobby) return;
+    e.preventDefault();
+    setAccountMenuOpen(false);
+    setMenuOpen(false);
+    setExitIsCoop(getActiveSession()?.mode === "coop");
+    setPendingHref(href);
+    setExitModalOpen(true);
+  }
+
+  function handleConfirmExit() {
+    if (pendingHref) router.push(pendingHref);
+    setPendingHref(null);
+    setExitModalOpen(false);
+  }
+
   const navMidLinkClass = `${mono} text-[10px] font-medium uppercase tracking-[0.22em] text-[var(--kraft)] transition-colors duration-200 hover:text-[var(--bordeaux-bright)]`;
 
   const outlineBtn =
@@ -236,6 +263,7 @@ export function SiteNav() {
               href="/"
               title="Division of Analytic Knowledge & Testimonies"
               className="shrink-0 text-[22px] italic leading-none tracking-[0.4em] text-[var(--kraft)] [font-family:var(--font-cormorant),serif] transition-colors hover:text-[var(--kraft-light)]"
+              onClick={(e) => handleNavClick(e, "/")}
             >
               D.A.K.T.
             </Link>
@@ -243,6 +271,7 @@ export function SiteNav() {
               href="/"
               className="shrink-0 text-[15px] font-normal leading-none text-[var(--kraft)] transition-colors hover:text-[var(--bordeaux-bright)]"
               aria-label="Ana sayfa"
+              onClick={(e) => handleNavClick(e, "/")}
             >
               /
             </Link>
@@ -253,10 +282,18 @@ export function SiteNav() {
             className="hidden items-center gap-6 md:flex"
             aria-label="Site bölümleri"
           >
-            <Link href="/davalar" className={navMidLinkClass}>
+            <Link
+              href="/davalar"
+              className={navMidLinkClass}
+              onClick={(e) => handleNavClick(e, "/davalar")}
+            >
               Davalar
             </Link>
-            <Link href="/nasil-oynanir" className={navMidLinkClass}>
+            <Link
+              href="/nasil-oynanir"
+              className={navMidLinkClass}
+              onClick={(e) => handleNavClick(e, "/nasil-oynanir")}
+            >
               Nasıl Oynanır
             </Link>
           </nav>
@@ -311,6 +348,9 @@ export function SiteNav() {
                       profile={profile}
                       email={user?.email}
                       onClose={() => setAccountMenuOpen(false)}
+                      onBeforeProfileNav={(e, href) =>
+                        handleNavClick(e, href)
+                      }
                     />
                   ) : null}
                 </div>
@@ -385,6 +425,7 @@ export function SiteNav() {
               href="/"
               title="Division of Analytic Knowledge & Testimonies"
               className="min-w-0 shrink truncate text-[18px] italic tracking-[0.28em] text-[var(--kraft)] [font-family:var(--font-cormorant),serif]"
+              onClick={(e) => handleNavClick(e, "/")}
             >
               D.A.K.T.
             </Link>
@@ -423,6 +464,9 @@ export function SiteNav() {
                         profile={profile}
                         email={user?.email}
                         onClose={() => setAccountMenuOpen(false)}
+                        onBeforeProfileNav={(e, href) =>
+                          handleNavClick(e, href)
+                        }
                       />
                     ) : null}
                   </div>
@@ -521,14 +565,20 @@ export function SiteNav() {
               <Link
                 href="/davalar"
                 className={`border-0 border-b border-[rgba(255,255,255,0.06)] bg-transparent py-4 text-left text-[16px] font-medium uppercase tracking-[0.18em] text-[var(--kraft)] transition-colors hover:text-[var(--bordeaux-bright)] ${mono}`}
-                onClick={closeMobileMenu}
+                onClick={(e) => {
+                  handleNavClick(e, "/davalar");
+                  closeMobileMenu();
+                }}
               >
                 ▸ Davalar
               </Link>
               <Link
                 href="/nasil-oynanir"
                 className={`border-0 border-b border-[rgba(255,255,255,0.06)] bg-transparent py-4 text-left text-[16px] font-medium uppercase tracking-[0.18em] text-[var(--kraft)] transition-colors hover:text-[var(--bordeaux-bright)] ${mono}`}
-                onClick={closeMobileMenu}
+                onClick={(e) => {
+                  handleNavClick(e, "/nasil-oynanir");
+                  closeMobileMenu();
+                }}
               >
                 ▸ Nasıl Oynanır
               </Link>
@@ -543,7 +593,10 @@ export function SiteNav() {
                 <Link
                   href="/profil"
                   className={`border-0 border-b border-[rgba(255,255,255,0.06)] bg-transparent py-4 text-left text-[16px] font-medium uppercase tracking-[0.18em] text-[var(--kraft)] transition-colors hover:text-[var(--bordeaux-bright)] ${mono}`}
-                  onClick={closeMobileMenu}
+                  onClick={(e) => {
+                    handleNavClick(e, "/profil");
+                    closeMobileMenu();
+                  }}
                 >
                   ▸ Profilim
                 </Link>
@@ -628,6 +681,25 @@ export function SiteNav() {
           ● Bağlantı kopyalandı
         </div>
       ) : null}
+
+      <ConfirmModal
+        open={exitModalOpen}
+        onClose={() => {
+          setExitModalOpen(false);
+          setPendingHref(null);
+        }}
+        onConfirm={handleConfirmExit}
+        title={
+          exitIsCoop ? "Biraz mola mı vereceksin?" : "Vakadan çıkmak istiyor musun?"
+        }
+        description={
+          exitIsCoop
+            ? "Vakadan ayrılırsan oda devam eder, kod ile geri katılabilirsin. Yarım kalan oturumun sağ alt köşede görünecek."
+            : "Sayfayı terk edersen yarım kalan vakanın görüneceği bir göstergeci sağ altta kalır. Vakaya istediğin zaman dönebilirsin."
+        }
+        confirmText={exitIsCoop ? "Mola Ver" : "Çık"}
+        cancelText="Vakaya Geri Dön"
+      />
     </>
   );
 }
