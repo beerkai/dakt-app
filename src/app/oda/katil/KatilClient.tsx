@@ -41,40 +41,62 @@ export function KatilClient() {
 
   const runJoin = useCallback(
     async (raw: string) => {
-      const trimmed = raw.toUpperCase().trim();
+      const trimmed = raw.toUpperCase().trim().replace(/[^A-Z0-9]/g, "");
       if (trimmed.length !== 6) {
-        setError("Kod 6 karakter olmalı");
+        setError("6 haneli kod gir");
         return;
       }
       setBusy(true);
       setError(null);
       const result = await joinRoom(trimmed);
       setBusy(false);
-      if (result?.error) {
+
+      if ("requiresGuestSetup" in result && result.requiresGuestSetup) {
+        router.push(
+          `/oda/katil/misafir?code=${encodeURIComponent(result.code)}${autojoin ? "&autojoin=true" : ""}`,
+        );
+        return;
+      }
+
+      if ("error" in result) {
         setError(result.error);
         return;
       }
-      if (result?.success && result.code) {
+
+      if ("success" in result && result.success) {
         router.push(`/oda/${result.code}`);
       }
     },
-    [router],
+    [autojoin, router],
   );
 
   useEffect(() => {
     if (!autojoin || !normalizedFromUrl || normalizedFromUrl.length !== 6) {
       return;
     }
-    if (authLoading || !user || autojoinTried.current) return;
+    if (authLoading || autojoinTried.current) return;
+
+    if (!user) {
+      autojoinTried.current = true;
+      router.replace(
+        `/oda/katil/misafir?code=${encodeURIComponent(normalizedFromUrl)}&autojoin=true`,
+      );
+      return;
+    }
+
     autojoinTried.current = true;
     void runJoin(normalizedFromUrl);
-  }, [autojoin, authLoading, user, normalizedFromUrl, runJoin]);
+  }, [autojoin, authLoading, user, normalizedFromUrl, runJoin, router]);
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     if (busy || authLoading) return;
-    if (!user) return;
-    await runJoin(code);
+    const trimmed = code.toUpperCase().trim().replace(/[^A-Z0-9]/g, "");
+    if (trimmed.length !== 6) {
+      setError("6 haneli kod gir");
+      return;
+    }
+    await runJoin(trimmed);
   }
 
   if (authLoading) {
@@ -85,70 +107,74 @@ export function KatilClient() {
     );
   }
 
-  if (!user) {
-    return (
-      <div className="space-y-6">
-        <p
-          className={`${typewriter} text-[13px] leading-relaxed tracking-[0.05em] text-[var(--body-text)]`}
-        >
-          Co-op odaları için kayıtlı hesabınla giriş yapman gerekir.
-        </p>
-        <Link
-          href="/giris"
-          className={`${mono} inline-flex min-h-[48px] items-center justify-center border-2 border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] px-8 py-3 text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--kraft-light)] transition-colors hover:bg-[var(--bordeaux-bright)]`}
-        >
-          Giriş yap →
-        </Link>
-      </div>
-    );
-  }
-
   return (
-    <form onSubmit={onSubmit} className="space-y-8">
-      <div>
-        <label
-          htmlFor="dakt-room-code"
-          className={`${mono} mb-3 block text-[9px] uppercase tracking-[0.22em] text-[var(--meta-label)]`}
-        >
-          Oda kodu
-        </label>
-        <input
-          id="dakt-room-code"
-          name="roomCode"
-          inputMode="text"
-          autoCapitalize="characters"
-          autoComplete="off"
-          maxLength={6}
-          value={code}
-          disabled={busy}
-          onChange={(e) => {
-            const next = e.target.value
-              .toUpperCase()
-              .replace(/[^A-Z0-9]/g, "")
-              .slice(0, 6);
-            setCode(next);
-            if (error) setError(null);
-          }}
-          className={`${mono} box-border w-full max-w-md border-2 border-[var(--kraft-dark)] bg-[var(--anthracite-2)] px-4 py-4 text-center text-[1.75rem] uppercase tracking-[0.35em] text-[var(--paper)] outline-none transition-colors focus:border-[var(--kraft)] disabled:opacity-60`}
-          placeholder="──────"
-        />
-      </div>
-
-      {error ? (
-        <p
-          className={`${mono} text-[10px] uppercase tracking-[0.14em] text-[var(--bordeaux-bright)]`}
-        >
-          {error}
-        </p>
-      ) : null}
-
-      <button
-        type="submit"
-        disabled={busy || code.length !== 6}
-        className={`${mono} inline-flex min-h-[52px] items-center justify-center border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] px-10 py-4 text-[10px] font-medium uppercase tracking-[0.24em] text-[var(--kraft-light)] transition-colors hover:bg-[var(--bordeaux-bright)] disabled:cursor-not-allowed disabled:opacity-50`}
+    <div className="relative z-[2] pointer-events-auto">
+      <p
+        className={`${typewriter} mb-8 max-w-md text-[13px] leading-relaxed tracking-[0.05em] text-[var(--subtitle-text)]`}
       >
-        {busy ? "Katılıyorsun…" : "Katıl"}
-      </button>
-    </form>
+        {!user
+          ? "Kodu girip katıl: bir sonraki adımda misafir analist olarak takma ad ve renk seçersin."
+          : "Kayıtlı hesabınla doğrudan odaya gir."}
+      </p>
+
+      <form onSubmit={(ev) => void onSubmit(ev)} className="space-y-8">
+        <div>
+          <label
+            htmlFor="dakt-room-code"
+            className={`${mono} mb-3 block text-[9px] uppercase tracking-[0.22em] text-[var(--meta-label)]`}
+          >
+            Oda kodu
+          </label>
+          <input
+            id="dakt-room-code"
+            name="roomCode"
+            type="text"
+            inputMode="text"
+            autoCapitalize="characters"
+            autoComplete="off"
+            maxLength={6}
+            autoFocus
+            value={code}
+            disabled={busy}
+            placeholder="K7M2X9"
+            onChange={(e) => {
+              const next = e.target.value
+                .toUpperCase()
+                .replace(/[^A-Z0-9]/g, "")
+                .slice(0, 6);
+              setCode(next);
+              if (error) setError(null);
+            }}
+            className="box-border w-full max-w-md border-2 border-[var(--kraft-dark)] bg-transparent py-4 pl-6 pr-6 text-center text-3xl uppercase tracking-[0.4em] text-[var(--paper)] outline-none [font-family:var(--font-jetbrains-mono),ui-monospace,monospace] placeholder:text-[var(--kraft-dark)]/40 focus:border-[var(--bordeaux-bright)] disabled:opacity-60"
+          />
+        </div>
+
+        {error ? (
+          <p
+            className={`${mono} text-[10px] uppercase tracking-[0.14em] text-[var(--bordeaux-bright)]`}
+          >
+            {error}
+          </p>
+        ) : null}
+
+        <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
+          <button
+            type="submit"
+            disabled={busy || code.replace(/[^A-Z0-9]/g, "").length !== 6}
+            className={`${mono} inline-flex min-h-[52px] items-center justify-center border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] px-10 py-4 text-[10px] font-medium uppercase tracking-[0.24em] text-[var(--kraft-light)] transition-colors hover:bg-[var(--bordeaux-bright)] disabled:cursor-not-allowed disabled:opacity-50`}
+          >
+            {busy ? "Katılıyorsun…" : "Katıl"}
+          </button>
+          {!user ? (
+            <Link
+              href="/giris"
+              className={`${mono} text-[9px] uppercase tracking-[0.2em] text-[var(--kraft)] underline-offset-4 hover:text-[var(--kraft-light)] hover:underline`}
+            >
+              Kayıtlı hesapla giriş →
+            </Link>
+          ) : null}
+        </div>
+      </form>
+    </div>
   );
 }

@@ -274,25 +274,34 @@ export function CaseCard({
           <button
             type="button"
             aria-label="Kapat"
-            className="absolute inset-0 bg-[var(--ink)]/85"
+            className="absolute inset-0 z-0 bg-[var(--ink)]/90"
             onClick={closeChoiceModal}
           />
           <div
             role="dialog"
             aria-modal="true"
             aria-labelledby={choiceTitleId}
-            className="relative z-[1] flex min-h-full w-full flex-col border-[var(--kraft-dark)] bg-[var(--paper)] text-[var(--ink)] shadow-[var(--shadow)] md:min-h-0 md:max-w-[480px] md:rounded-sm md:border-2"
+            className="relative z-[2] flex max-h-[min(92vh,920px)] min-h-full w-full max-w-[480px] flex-col overflow-hidden border border-[var(--kraft-dark)] bg-[var(--anthracite)] shadow-[var(--shadow)] md:min-h-0 md:rounded-sm pointer-events-auto"
+            style={{
+              backgroundImage: `repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 3px,
+                rgba(255,255,255,0.02) 3px,
+                rgba(255,255,255,0.02) 4px
+              )`,
+            }}
           >
             <div className="flex flex-1 flex-col gap-6 overflow-y-auto p-6 md:p-8">
-              <div className="space-y-2">
+              <div className="space-y-3 text-center md:text-left">
                 <p
-                  className={`${mono} text-[9px] uppercase tracking-[0.28em] text-[var(--meta-label)]`}
+                  className="text-[clamp(1.35rem,4vw,1.75rem)] font-semibold italic leading-tight tracking-[0.06em] text-[var(--kraft)] [font-family:var(--font-cormorant),serif]"
                 >
-                  {codename.toUpperCase()}
+                  {codename}
                 </p>
                 <h2
                   id={choiceTitleId}
-                  className="text-2xl font-semibold italic text-[var(--ink)] [font-family:var(--font-cormorant),serif]"
+                  className="text-lg font-semibold italic leading-snug text-[var(--paper)] [font-family:var(--font-cormorant),serif] md:text-[18px]"
                 >
                   Bu vakayı nasıl açmak istersin?
                 </h2>
@@ -302,13 +311,18 @@ export function CaseCard({
                 <button
                   type="button"
                   onClick={handleSolo}
-                  className={`${mono} flex w-full flex-col items-start gap-1 border-2 border-[var(--ink)]/16 bg-[var(--ink)]/[0.06] px-5 py-4 text-left text-[10px] uppercase tracking-[0.2em] text-[var(--ink)] transition-colors hover:border-[var(--kraft)]`}
+                  className="group flex w-full flex-col items-start gap-1 border border-[var(--kraft-dark)] bg-[var(--anthracite-2)]/50 px-5 py-4 text-left transition-[border-color,box-shadow] hover:border-[var(--bordeaux-bright)] hover:shadow-[0_0_24px_rgba(107,22,32,0.25)]"
                 >
-                  <span>▸ Tek başına oyna</span>
+                  <span className={`${mono} text-[13px] uppercase tracking-[0.14em] text-[var(--kraft)]`}>
+                    <span aria-hidden className="mr-2 inline-block">
+                      ◉
+                    </span>
+                    Tek başına oyna
+                  </span>
                   <span
-                    className={`${typewriter} text-[11px] normal-case tracking-[0.06em] text-[var(--subtitle-text)]`}
+                    className={`${typewriter} text-[12px] leading-relaxed tracking-[0.06em] text-[var(--kraft-dark)]`}
                   >
-                    Kendi başına çöz
+                    Solo analist olarak çöz
                   </span>
                 </button>
 
@@ -317,18 +331,63 @@ export function CaseCard({
                     type="button"
                     disabled={creating}
                     onClick={() => void handleCreateRoom()}
-                    className={`${mono} flex w-full flex-col items-start gap-1 border-2 border-[var(--bordeaux)] bg-[var(--bordeaux)]/12 px-5 py-4 text-left text-[10px] uppercase tracking-[0.2em] text-[var(--ink)] transition-colors hover:border-[var(--bordeaux-bright)] disabled:cursor-wait disabled:opacity-70`}
+                    className="group flex w-full flex-col items-start gap-2 border border-[var(--kraft-dark)] bg-[var(--anthracite-2)]/50 px-5 py-4 text-left transition-[border-color,box-shadow] hover:border-[var(--bordeaux-bright)] hover:shadow-[0_0_24px_rgba(107,22,32,0.25)] disabled:cursor-wait disabled:opacity-60"
                   >
-                    <span>
-                      {creating ? "Oda hazırlanıyor..." : "▸ Oda kur — ekibinle"}
+                    <span className={`${mono} text-[13px] uppercase tracking-[0.14em] text-[var(--kraft)]`}>
+                      <span aria-hidden className="mr-2 inline-block">
+                        ⊕
+                      </span>
+                      {creating ? "Oda hazırlanıyor..." : "Oda kur"}
                     </span>
                     <span
-                      className={`${typewriter} text-[11px] normal-case tracking-[0.06em] text-[var(--subtitle-text)]`}
+                      className={`${typewriter} text-[12px] leading-relaxed tracking-[0.06em] text-[var(--kraft-dark)]`}
                     >
-                      4 kişiye kadar co-op
+                      5 kişiye kadar ekiple oyna
+                    </span>
+                    <span
+                      className={`${mono} border border-[var(--bordeaux)]/40 bg-[var(--bordeaux)]/15 px-2 py-1 text-[9px] uppercase tracking-[0.2em] text-[var(--bordeaux-bright)]`}
+                    >
+                      ★ Host sen olursun
                     </span>
                   </button>
-                ) : null}
+                ) : (
+                  <>
+                    <div
+                      className="pointer-events-none flex w-full flex-col items-start gap-2 border border-dashed border-[var(--rule)] bg-[var(--ink)]/20 px-5 py-4 text-left opacity-75"
+                      aria-disabled="true"
+                    >
+                      <span
+                        className={`${mono} text-[13px] uppercase tracking-[0.14em] text-[var(--meta-label)]`}
+                      >
+                        <span aria-hidden className="mr-2 inline-block">
+                          ⊕
+                        </span>
+                        Oda kur
+                      </span>
+                      <span
+                        className={`${typewriter} text-[12px] text-[var(--meta-label)]`}
+                      >
+                        5 kişiye kadar ekiple oyna
+                      </span>
+                    </div>
+                    <div className="case-modal-guest-warning">
+                      <p
+                        className={`${typewriter} text-[12px] leading-relaxed tracking-[0.05em] text-[var(--body-text)]`}
+                      >
+                        Co-op için <strong className="text-[var(--paper)]">hesap gerekli</strong>.
+                        Arkadaşlarınla birlikte çözmek istersen:
+                      </p>
+                      <div className="case-modal-cta-row">
+                        <Link href="/giris?tab=kayit" onClick={closeChoiceModal}>
+                          Kayıt ol
+                        </Link>
+                        <Link href="/giris?tab=giris" onClick={closeChoiceModal}>
+                          Giriş yap
+                        </Link>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
 
               {createError ? (
@@ -339,23 +398,27 @@ export function CaseCard({
                 </p>
               ) : null}
 
-              <p
-                className={`${typewriter} text-[12px] leading-relaxed tracking-[0.05em] text-[var(--subtitle-text)]`}
-              >
-                Bir odaya katılmak istiyorsan{" "}
-                <Link
-                  href="/oda/katil"
-                  onClick={closeChoiceModal}
-                  className={`${mono} text-[11px] uppercase tracking-[0.14em] text-[var(--bordeaux)] underline-offset-4 hover:underline`}
+              <div className="border-t border-[var(--rule)] pt-6">
+                <p
+                  className={`${typewriter} mb-4 text-center text-[12px] tracking-[0.05em] text-[var(--subtitle-text)] md:text-left`}
                 >
-                  ▸ Kod ile katıl
-                </Link>
-              </p>
+                  Bir odaya katılmak istersen:
+                </p>
+                <div className="flex justify-center md:justify-start">
+                  <Link
+                    href="/oda/katil"
+                    onClick={closeChoiceModal}
+                    className={`${mono} inline-flex border border-[var(--kraft)] px-5 py-3 text-[11px] uppercase tracking-[0.2em] text-[var(--kraft-light)] transition-colors hover:border-[var(--bordeaux-bright)] hover:bg-[var(--bordeaux)]/15`}
+                  >
+                    ▸ Kod ile katıl
+                  </Link>
+                </div>
+              </div>
 
               <button
                 type="button"
                 onClick={closeChoiceModal}
-                className={`${mono} mt-auto inline-flex min-h-[44px] items-center justify-center border border-[var(--ink)]/28 bg-[var(--ink)]/[0.07] px-6 py-3 text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--ink)]/85 transition-colors hover:bg-[var(--ink)]/12`}
+                className={`${mono} inline-flex min-h-[44px] items-center justify-center border border-[var(--kraft-dark)] bg-transparent px-6 py-3 text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--kraft)] transition-colors hover:border-[var(--kraft)] hover:text-[var(--kraft-light)]`}
               >
                 İptal
               </button>

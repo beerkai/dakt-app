@@ -1,0 +1,43 @@
+import { Suspense } from "react";
+
+import { MisafirClient } from "../MisafirClient";
+
+const mono =
+  "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace]";
+const typewriter =
+  "[font-family:var(--font-special-elite),monospace]";
+
+export default function OdaKatilMisafirPage() {
+  return (
+    <div className="relative z-[1] mx-auto w-full max-w-[560px] flex-1 px-5 py-10 md:px-7 md:py-14">
+      <header className="mb-12 border-b border-[var(--kraft-dark)] pb-10">
+        <p
+          className={`${mono} mb-4 text-[10px] uppercase tracking-[0.32em] text-[var(--kraft)]`}
+        >
+          Co-op · misafir
+        </p>
+        <h1 className="mb-4 text-3xl font-semibold italic text-[var(--paper)] [font-family:var(--font-cormorant),serif] md:text-4xl">
+          Odaya katıl
+        </h1>
+        <p
+          className={`${typewriter} max-w-md text-[13px] leading-relaxed tracking-[0.06em] text-[var(--subtitle-text)]`}
+        >
+          Takma adını ve rengini seç; seans için anonim bir analist oturumu
+          açılır.
+        </p>
+      </header>
+
+      <Suspense
+        fallback={
+          <p
+            className={`${mono} text-[10px] uppercase tracking-[0.22em] text-[var(--kraft)]`}
+          >
+            Yükleniyor…
+          </p>
+        }
+      >
+        <MisafirClient />
+      </Suspense>
+    </div>
+  );
+}

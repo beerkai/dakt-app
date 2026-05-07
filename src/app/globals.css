@@ -346,3 +346,75 @@ body::after {
 .case-card--solved {
   opacity: 0.92;
 }
+
+/* Anasayfa — ikincil co-op CTA */
+.hero-secondary-cta {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+
+.hero-cta-prompt {
+  font-family: var(--font-special-elite), "Special Elite", monospace;
+  font-size: 13px;
+  color: var(--kraft-dark);
+  margin-bottom: 16px;
+  letter-spacing: 0.05em;
+}
+
+.hero-join-button {
+  display: inline-block;
+  padding: 14px 32px;
+  border: 2px solid var(--bordeaux);
+  background: rgba(107, 22, 32, 0.1);
+  color: var(--paper);
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    transform 0.2s;
+}
+
+.hero-join-button:hover {
+  background: var(--bordeaux);
+  color: var(--paper);
+  transform: translateY(-1px);
+}
+
+/* CaseCard — co-op modal misafir uyarısı */
+.case-modal-guest-warning {
+  border: 1px solid rgba(201, 180, 138, 0.35);
+  background: rgba(107, 22, 32, 0.12);
+  padding: 14px 16px;
+}
+
+.case-modal-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.case-modal-cta-row a {
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--kraft-light);
+  border: 1px solid var(--kraft-dark);
+  padding: 10px 16px;
+  text-decoration: none;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.case-modal-cta-row a:hover {
+  border-color: var(--bordeaux-bright);
+  background: rgba(107, 22, 32, 0.25);
+}

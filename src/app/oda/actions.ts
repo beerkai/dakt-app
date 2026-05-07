@@ -88,18 +88,67 @@ export async function createRoom(caseId: string) {
   return { success: true, code };
 }
 
-// 2. KODA KATIL
-export async function joinRoom(code: string) {
+export type JoinRoomResult =
+  | { success: true; code: string }
+  | { error: string }
+  | { requiresGuestSetup: true; code: string };
+
+/** Misafir anon oturumu: profil tetikleyicide yoksa veya eksikse tamamla. */
+export async function ensureAnonProfile(
+  username: string,
+  color: AnalystColor,
+): Promise<{ success: true } | { error: string }> {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
   if (!user) {
-    return { error: "Co-op için giriş yapmalısın" };
+    return { error: "Oturum bulunamadı" };
   }
 
-  const normalizedCode = code.toUpperCase().trim();
+  const trimmed = username.trim();
+  if (!trimmed) {
+    return { error: "Takma ad gerekli" };
+  }
+
+  const { error } = await supabase.from("profiles").upsert(
+    {
+      id: user.id,
+      username: trimmed,
+      color,
+      updated_at: new Date().toISOString(),
+    },
+    { onConflict: "id" },
+  );
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  revalidatePath("/", "layout");
+  return { success: true };
+}
+
+// 2. KODA KATIL
+export async function joinRoom(code: string): Promise<JoinRoomResult> {
+  const supabase = await createClient();
+
+  const normalizedCode = code
+    .toUpperCase()
+    .trim()
+    .replace(/[^A-Z0-9]/g, "");
+  if (normalizedCode.length !== 6) {
+    return { error: "6 haneli kod gir" };
+  }
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { requiresGuestSetup: true, code: normalizedCode };
+  }
 
   const { data: room } = await supabase
     .from("rooms")

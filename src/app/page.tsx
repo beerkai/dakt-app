@@ -55,16 +55,13 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="mt-8">
-            <p className="max-w-lg text-[12px] tracking-[0.06em] text-[var(--subtitle-text)] [font-family:var(--font-special-elite),monospace]">
-              Arkadaşının kurduğu odaya mı katılıyorsun?{" "}
-              <Link
-                href="/oda/katil"
-                className={`${btnMono} text-[var(--kraft)] underline-offset-4 hover:text-[var(--kraft-light)] hover:underline`}
-              >
-                Kod ile Katıl →
-              </Link>
+          <div className="hero-secondary-cta">
+            <p className="hero-cta-prompt">
+              Arkadaşının kurduğu odaya mı katılıyorsun?
             </p>
+            <Link href="/oda/katil" className="hero-join-button">
+              ▸ Kod ile katıl
+            </Link>
           </div>
         </div>
       </section>
