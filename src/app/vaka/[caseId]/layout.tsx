@@ -33,9 +33,9 @@ export async function generateMetadata({
 }) {
   const { caseId } = await params;
   const c = getCase(caseId);
-  if (!c) return { title: "D.A.K.T." };
+  if (!c) return { title: { absolute: "D.A.K.T." } };
   return {
-    title: `D.A.K.T. · Vaka ${c.id}`,
+    title: c.codename,
     description: c.shortSummary,
   };
 }

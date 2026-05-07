@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import {
   Cormorant_Garamond,
   JetBrains_Mono,
@@ -30,9 +30,78 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "D.A.K.T. — Division of Analytic Knowledge & Testimonies",
-  description:
-    "Analist olarak sınıflandırılmış dosyaları aç: ifadeler, deliller, co-op çözüm.",
+  metadataBase: new URL("https://dakt.app"),
+  title: {
+    default: "D.A.K.T. — Division of Analytic Knowledge & Testimonies",
+    template: "%s · D.A.K.T.",
+  },
+  description: "Co-op suç çözme oyunu. Belgeler, ifadeler, çözüm.",
+  applicationName: "D.A.K.T.",
+  authors: [{ name: "Berkay Aytekin" }],
+  keywords: ["dakt", "suç çözme", "co-op oyun", "detective", "türkçe"],
+
+  // Favicon ve icon yapılandırması
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
+
+  // PWA manifest
+  manifest: "/site.webmanifest",
+
+  // Apple Web App
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "D.A.K.T.",
+  },
+
+  // Format detection (telefon numarası vs. otomatik linklemeyi kapat)
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
+  },
+
+  // Open Graph (sosyal medya paylaşımları için)
+  openGraph: {
+    type: "website",
+    locale: "tr_TR",
+    url: "https://dakt.app",
+    title: "D.A.K.T. — Division of Analytic Knowledge & Testimonies",
+    description: "Co-op suç çözme oyunu. Belgeler, ifadeler, çözüm.",
+    siteName: "D.A.K.T.",
+    images: [
+      {
+        url: "/web-app-manifest-512x512.png",
+        width: 512,
+        height: 512,
+        alt: "D.A.K.T.",
+      },
+    ],
+  },
+
+  // Twitter Card
+  twitter: {
+    card: "summary",
+    title: "D.A.K.T.",
+    description: "Co-op suç çözme oyunu.",
+    images: ["/web-app-manifest-512x512.png"],
+  },
+};
+
+// Viewport ayrı export — Next.js 14+ best practice
+export const viewport: Viewport = {
+  themeColor: "#1a1a1a",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({
