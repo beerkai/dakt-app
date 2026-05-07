@@ -1,27 +1,34 @@
-import Link from "next/link";
-
-import { getAllUserEmails } from "@/lib/admin";
 import { createClient } from "@/lib/supabase/server";
-
-import GMPageFooter from "../components/GMPageFooter";
+import { getAllUserEmails } from "@/lib/admin";
 import GMPageHeader from "../components/GMPageHeader";
+import GMPageFooter from "../components/GMPageFooter";
+import AnalistlerSearch from "./AnalistlerSearch";
 
-export const metadata = {
-  title: "Analistler · Genel Müdürlük",
-};
+interface Profile {
+  id: string;
+  username: string;
+  color: string;
+  role: string;
+  is_tester: boolean;
+  last_seen_at: string | null;
+  suspended_at: string | null;
+  created_at: string;
+}
+
+interface ProfileWithMeta extends Profile {
+  email: string | null;
+  solvedCount: number;
+}
 
 export default async function AnalistlerPage() {
   const supabase = await createClient();
 
-  const [{ data: profiles }, emailMap] = await Promise.all([
-    supabase
-      .from("profiles")
-      .select(
-        "id, username, color, role, is_tester, last_seen_at, suspended_at, created_at",
-      )
-      .order("created_at", { ascending: false }),
-    getAllUserEmails(),
-  ]);
+  const { data: profiles } = await supabase
+    .from("profiles")
+    .select(
+      "id, username, color, role, is_tester, last_seen_at, suspended_at, created_at",
+    )
+    .order("created_at", { ascending: false });
 
   const { data: solvedCounts } = await supabase
     .from("solved_cases")
@@ -32,11 +39,19 @@ export default async function AnalistlerPage() {
     solvedMap.set(s.user_id, (solvedMap.get(s.user_id) ?? 0) + 1);
   });
 
-  function isOnline(lastSeen: string | null): boolean {
-    if (!lastSeen) return false;
-    const diff = Date.now() - new Date(lastSeen).getTime();
-    return diff < 5 * 60 * 1000;
-  }
+  const emailMap = await getAllUserEmails();
+
+  // Profilleri zenginleştir
+  const enriched: ProfileWithMeta[] = (profiles ?? []).map((p) => ({
+    ...p,
+    email: emailMap.get(p.id) ?? null,
+    solvedCount: solvedMap.get(p.id) ?? 0,
+  }));
+
+  // Üç gruba ayır (öncelik: admin > tester > analist)
+  const yoneticiler = enriched.filter((p) => p.role === "admin");
+  const testerlar = enriched.filter((p) => p.role !== "admin" && p.is_tester);
+  const analistler = enriched.filter((p) => p.role !== "admin" && !p.is_tester);
 
   return (
     <>
@@ -46,80 +61,17 @@ export default async function AnalistlerPage() {
         reference="02-RANK"
       />
 
-      <div className="gm-section-heading">
-        <span className="gm-section-bar" />
-        <h1 className="gm-section-title">
-          Bölüm I — Tüm Analistler ({profiles?.length ?? 0})
-        </h1>
-      </div>
-
-      {profiles && profiles.length > 0 ? (
-        <div className="gm-list">
-          {profiles.map((p, idx) => {
-            const solved = solvedMap.get(p.id) ?? 0;
-            const online = isOnline(p.last_seen_at);
-            const suspended = !!p.suspended_at;
-
-            return (
-              <div key={p.id} className="gm-list-row">
-                <span className="gm-list-index">
-                  {String(idx + 1).padStart(3, "0")}.
-                </span>
-                <Link
-                  href={`/yonetim/analistler/${p.id}`}
-                  style={{ color: "inherit", textDecoration: "none" }}
-                >
-                  <span
-                    className={`gm-list-name ${p.role === "admin" ? "gm-list-name-accent" : ""}`}
-                  >
-                    {online && <span className="gm-live-dot" />}@{p.username}
-                    {p.role === "admin" && (
-                      <span className="gm-off-record">DİREKTÖR</span>
-                    )}
-                    {p.is_tester && (
-                      <span
-                        className="gm-off-record"
-                        style={{
-                          color: "var(--gm-stamp-blue)",
-                          borderColor: "var(--gm-stamp-blue)",
-                        }}
-                      >
-                        TEST
-                      </span>
-                    )}
-                    {suspended && (
-                      <span
-                        className="gm-off-record"
-                        style={{ color: "var(--gm-stamp-red)" }}
-                      >
-                        ASKIDA
-                      </span>
-                    )}
-                  </span>
-                </Link>
-                <span className="gm-list-detail">
-                  {emailMap.get(p.id) ?? (
-                    <em style={{ color: "var(--gm-meta)" }}>misafir</em>
-                  )}
-                  {" · "}
-                  {solved} vaka
-                </span>
-                <span className="gm-list-meta-box">
-                  {new Date(p.created_at).toLocaleDateString("tr-TR", {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "2-digit",
-                  })}
-                </span>
-              </div>
-            );
-          })}
-        </div>
-      ) : (
-        <p>Analist yok.</p>
-      )}
+      <AnalistlerSearch
+        yoneticiler={yoneticiler}
+        testerlar={testerlar}
+        analistler={analistler}
+      />
 
       <GMPageFooter section="RANK" page="02" />
     </>
   );
 }
+
+export const metadata = {
+  title: "Analistler · Genel Müdürlük",
+};

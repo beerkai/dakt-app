@@ -15,6 +15,8 @@ const ACTION_LABELS: Record<string, string> = {
   delete_user: "Hesap Silindi",
   grant_tester: "Tester Yetkisi Verildi",
   revoke_tester: "Tester Yetkisi Alındı",
+  promote_to_admin: "Yönetici Yapıldı",
+  demote_from_admin: "Yöneticilik Kaldırıldı",
   change_case_status: "Vaka Durumu Değişti",
   change_username: "Username Değiştirildi",
   admin_terminate_room: "Oda Zorla Sonlandırıldı",

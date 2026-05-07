@@ -361,3 +361,62 @@ export async function adminTerminateRoom(roomId: string) {
 
   return { success: true };
 }
+
+export async function changeUserRole(
+  userId: string,
+  username: string,
+  newRole: "admin" | "user",
+) {
+  await ensureAdmin();
+
+  // Güvenlik 1: Kendine rol değiştirme yapamaz
+  const supabase = await createClient();
+  const {
+    data: { user: currentUser },
+  } = await supabase.auth.getUser();
+  if (currentUser?.id === userId) {
+    return {
+      error:
+        "Kendi rolünü değiştiremezsin. Başka bir admin hesabı tanımla.",
+    };
+  }
+
+  const adminDb = createAdminClient();
+
+  // Güvenlik 2: Son admin'i indirme engeli
+  if (newRole === "user") {
+    const { data: adminRows } = await adminDb
+      .from("profiles")
+      .select("id")
+      .eq("role", "admin");
+
+    if ((adminRows?.length ?? 0) <= 1) {
+      return {
+        error:
+          "Son yöneticiyi indiremezsin. Önce başka bir yönetici tanımla.",
+      };
+    }
+  }
+
+  const { error } = await adminDb
+    .from("profiles")
+    .update({ role: newRole })
+    .eq("id", userId);
+
+  if (error) {
+    console.error("[changeUserRole] Update error:", error);
+    return { error: "Rol değiştirme başarısız: " + error.message };
+  }
+
+  await logAdminAction({
+    action: newRole === "admin" ? "promote_to_admin" : "demote_from_admin",
+    targetType: "user",
+    targetId: userId,
+    targetLabel: `@${username}`,
+    payload: { new_role: newRole },
+  });
+
+  revalidatePath(`/yonetim/analistler/${userId}`);
+  revalidatePath("/yonetim/analistler");
+  return { success: true };
+}

@@ -13,6 +13,8 @@ interface Props {
   isTester: boolean;
   isSuspended: boolean;
   solvedCount: number;
+  isSelf: boolean;
+  isLastAdmin: boolean;
 }
 
 export default function AnalystActions({
@@ -22,6 +24,8 @@ export default function AnalystActions({
   isTester,
   isSuspended,
   solvedCount,
+  isSelf,
+  isLastAdmin,
 }: Props) {
   const router = useRouter();
   const [loading, setLoading] = useState<string | null>(null);
@@ -76,6 +80,28 @@ export default function AnalystActions({
           }
         >
           {isTester ? "Tester Rolünü Kaldır" : "Tester Yap"}
+        </button>
+
+        <button
+          type="button"
+          className="gm-button gm-button-accent"
+          disabled={
+            loading !== null ||
+            isSelf ||
+            (currentRole === "admin" && isLastAdmin)
+          }
+          onClick={() =>
+            setModal(currentRole === "admin" ? "demote" : "promote")
+          }
+          title={
+            isSelf
+              ? "Kendi rolünü değiştiremezsin"
+              : currentRole === "admin" && isLastAdmin
+                ? "Son yöneticisin, indirilemezsin"
+                : ""
+          }
+        >
+          {currentRole === "admin" ? "Yöneticiliği Kaldır" : "Yönetici Yap"}
         </button>
 
         <button
@@ -171,6 +197,36 @@ export default function AnalystActions({
         description="Bu kullanıcı artık 'test' durumundaki vakaları göremez. Yayında olan vakalara erişimi devam eder."
         confirmText="Rolü Kaldır"
         cancelText="İptal"
+      />
+
+      <ConfirmModal
+        open={modal === "promote"}
+        onClose={() => setModal(null)}
+        onConfirm={() =>
+          handle("promote", () =>
+            actions.changeUserRole(userId, username, "admin"),
+          )
+        }
+        title={`@${username} — Yönetici yap?`}
+        description="Bu kullanıcı tüm Genel Müdürlük yetkilerine sahip olacak: kullanıcı silme, vaka durumu değiştirme, oda sonlandırma. Dikkatli ver."
+        confirmText="Yönetici Yap"
+        cancelText="İptal"
+        variant="warning"
+      />
+
+      <ConfirmModal
+        open={modal === "demote"}
+        onClose={() => setModal(null)}
+        onConfirm={() =>
+          handle("demote", () =>
+            actions.changeUserRole(userId, username, "user"),
+          )
+        }
+        title={`@${username} — Yöneticiliği kaldır?`}
+        description="Bu kullanıcı normal analist olacak. Genel Müdürlük'e erişimi sona erecek. Tester rolü varsa korunur."
+        confirmText="Yöneticiliği Kaldır"
+        cancelText="İptal"
+        variant="danger"
       />
 
       <ConfirmModal

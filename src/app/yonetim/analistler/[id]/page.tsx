@@ -29,6 +29,21 @@ export default async function AnalystDetailPage({
 
   if (!profile) notFound();
 
+  // isSelf — bu profile şu an giriş yapan admin'in kendisi mi
+  const {
+    data: { user: currentUser },
+  } = await supabase.auth.getUser();
+  const isSelf = currentUser?.id === id;
+
+  // isLastAdmin — bu kullanıcı tek admin mi
+  const { count: adminCount } = await supabase
+    .from("profiles")
+    .select("id", { count: "exact", head: true })
+    .eq("role", "admin");
+
+  const isLastAdmin =
+    profile.role === "admin" && (adminCount ?? 0) <= 1;
+
   const { data: solves } = await supabase
     .from("solved_cases")
     .select("*")
@@ -213,6 +228,8 @@ export default async function AnalystDetailPage({
         isTester={!!profile.is_tester}
         isSuspended={!!profile.suspended_at}
         solvedCount={solves?.length ?? 0}
+        isSelf={isSelf}
+        isLastAdmin={isLastAdmin}
       />
 
       <div className="gm-section-heading">
