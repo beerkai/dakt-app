@@ -84,6 +84,26 @@ export async function signIn(formData: FormData): Promise<AuthActionResult> {
     return { error: error.message };
   }
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (user) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("suspended_at")
+      .eq("id", user.id)
+      .maybeSingle();
+
+    if (profile?.suspended_at) {
+      await supabase.auth.signOut();
+      return {
+        error:
+          "Bu hesap askıya alınmış. Detay için: jointhedakt@gmail.com",
+      };
+    }
+  }
+
   revalidatePath("/", "layout");
   return { success: true };
 }

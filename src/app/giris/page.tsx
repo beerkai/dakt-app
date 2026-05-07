@@ -83,6 +83,7 @@ export default function GirisPage() {
   const [signInError, setSignInError] = useState<string | null>(null);
   const [signUpLoading, setSignUpLoading] = useState(false);
   const [signInLoading, setSignInLoading] = useState(false);
+  const [suspendedRedirect, setSuspendedRedirect] = useState(false);
 
   const [regColor, setRegColor] = useState<AnalystColor>("mavi");
 
@@ -163,6 +164,15 @@ export default function GirisPage() {
   useEffect(() => {
     if (tabLocked) return;
     if (typeof window === "undefined") return;
+    const suspended =
+      new URLSearchParams(window.location.search).get("error") ===
+      "suspended";
+    setSuspendedRedirect(suspended);
+    if (suspended) {
+      setTab("giris");
+      setTabLocked(true);
+      return;
+    }
     const q = new URLSearchParams(window.location.search).get("tab");
     if (q === "kayit" || q === "giris" || q === "misafir") {
       setTab(q);
@@ -230,6 +240,23 @@ export default function GirisPage() {
 
   return (
     <div className="relative z-[1] mx-auto w-full max-w-[480px] flex-1 px-5 py-10 md:px-7 md:py-14">
+      {suspendedRedirect ? (
+        <div
+          style={{
+            padding: "12px 16px",
+            border: "1px solid var(--bordeaux)",
+            background: "rgba(107, 22, 32, 0.1)",
+            color: "var(--bordeaux-bright)",
+            fontFamily: "var(--font-jetbrains-mono), monospace",
+            fontSize: 11,
+            letterSpacing: "0.1em",
+            marginBottom: 16,
+          }}
+          role="alert"
+        >
+          ◉ Bu hesap askıya alınmış. Detay için iletişime geç: jointhedakt@gmail.com
+        </div>
+      ) : null}
       <div
         className="mb-10 flex flex-col gap-2 border border-[var(--rule)] sm:flex-row sm:flex-wrap sm:gap-0"
         role="tablist"

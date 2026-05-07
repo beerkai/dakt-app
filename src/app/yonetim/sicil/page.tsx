@@ -8,13 +8,15 @@ export const metadata = {
 };
 
 const ACTION_LABELS: Record<string, string> = {
-  reset_user_progress: "Çözüm Sıfırlandı",
+  reset_user_progress: "Tüm Çözümler Sıfırlandı",
+  reset_single_case: "Tek Vaka Sıfırlandı",
   suspend_user: "Hesap Askıya Alındı",
   unsuspend_user: "Askı Kaldırıldı",
   delete_user: "Hesap Silindi",
   grant_tester: "Tester Yetkisi Verildi",
   revoke_tester: "Tester Yetkisi Alındı",
   change_case_status: "Vaka Durumu Değişti",
+  change_username: "Username Değiştirildi",
 };
 
 export default async function SicilPage() {
@@ -52,6 +54,12 @@ export default async function SicilPage() {
               second: "2-digit",
             });
 
+            const targetDisplay =
+              log.target_label ??
+              (log.action === "delete_user" && log.target_id
+                ? `deleted_user_${String(log.target_id).slice(0, 8)}`
+                : null);
+
             return (
               <div key={log.id} className="gm-list-row">
                 <span className="gm-list-index">
@@ -59,7 +67,7 @@ export default async function SicilPage() {
                 </span>
                 <span className="gm-list-name">
                   {ACTION_LABELS[log.action] ?? log.action}
-                  {log.target_label && (
+                  {targetDisplay && (
                     <span
                       style={{
                         color: "var(--gm-meta)",
@@ -68,7 +76,7 @@ export default async function SicilPage() {
                         fontSize: 11,
                       }}
                     >
-                      → {log.target_label}
+                      → {targetDisplay}
                     </span>
                   )}
                 </span>

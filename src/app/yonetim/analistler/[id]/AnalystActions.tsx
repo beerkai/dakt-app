@@ -26,6 +26,8 @@ export default function AnalystActions({
   const router = useRouter();
   const [loading, setLoading] = useState<string | null>(null);
   const [modal, setModal] = useState<string | null>(null);
+  const [usernameModalOpen, setUsernameModalOpen] = useState(false);
+  const [newUsername, setNewUsername] = useState("");
 
   async function handle(
     actionKey: string,
@@ -76,6 +78,18 @@ export default function AnalystActions({
           }
         >
           {isTester ? "Tester Rolünü Kaldır" : "Tester Yap"}
+        </button>
+
+        <button
+          type="button"
+          className="gm-button"
+          disabled={loading !== null}
+          onClick={() => {
+            setNewUsername(username);
+            setUsernameModalOpen(true);
+          }}
+        >
+          Username Değiştir
         </button>
 
         <button
@@ -156,11 +170,83 @@ export default function AnalystActions({
           handle("delete", () => actions.deleteUser(userId, username))
         }
         title={`@${username} — hesabı SİL?`}
-        description="Bu işlem GERİ ALINAMAZ. Profil + tüm çözüm kayıtları + co-op kayıtları silinir. Auth kaydı kalır (Supabase Dashboard'dan ayrıca silmen gerek)."
+        description="Bu işlem GERİ ALINAMAZ. Profil + tüm ilişkili kayıtlar ve Supabase Auth kullanıcısı tamamen silinir."
         confirmText="Hesabı Sil"
         cancelText="İptal"
         variant="danger"
       />
+
+      {usernameModalOpen ? (
+        <div
+          className="confirm-modal-backdrop"
+          onClick={() => setUsernameModalOpen(false)}
+        >
+          <div
+            className="confirm-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="confirm-modal-corner" />
+            <h3 className="confirm-modal-title">Username değiştir</h3>
+            <p className="confirm-modal-description">
+              Yeni username 2-24 karakter, sadece harf/rakam/alt çizgi.
+            </p>
+            <input
+              type="text"
+              value={newUsername}
+              onChange={(e) => setNewUsername(e.target.value)}
+              autoFocus
+              style={{
+                width: "100%",
+                padding: "10px 12px",
+                border: "1px solid var(--gm-rule)",
+                background: "var(--gm-paper-bright)",
+                color: "var(--gm-ink)",
+                fontFamily: "var(--font-jetbrains-mono), monospace",
+                fontSize: 13,
+                marginBottom: 24,
+              }}
+            />
+            <div className="confirm-modal-actions">
+              <button
+                type="button"
+                onClick={() => setUsernameModalOpen(false)}
+                className="confirm-btn confirm-btn-cancel"
+              >
+                İptal
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  void (async () => {
+                    setLoading("change_username");
+                    try {
+                      const result = await actions.changeUsername(
+                        userId,
+                        username,
+                        newUsername,
+                      );
+                      if (result?.error) {
+                        alert("Hata: " + result.error);
+                      } else {
+                        setUsernameModalOpen(false);
+                        router.refresh();
+                      }
+                    } catch (err) {
+                      console.error(err);
+                      alert("Beklenmeyen hata");
+                    } finally {
+                      setLoading(null);
+                    }
+                  })();
+                }}
+                className="confirm-btn confirm-btn-primary"
+              >
+                Değiştir
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </>
   );
 }
