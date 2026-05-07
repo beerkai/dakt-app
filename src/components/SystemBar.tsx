@@ -13,7 +13,7 @@ export function SystemBar() {
   const [parts, setParts] = useState({ h: "--", m: "--", s: "--" });
   const searchParams = useSearchParams();
   const roomId = searchParams.get("room");
-  const { players, count: activePlayerCount } =
+  const { players, count: activePlayerCount, loading: playersLoading } =
     useRoomActivePlayers(roomId);
 
   const [roomCode, setRoomCode] = useState<string | null>(null);
@@ -116,7 +116,7 @@ export function SystemBar() {
         <span className="hidden md:inline tabular-nums">
           {h}:{m}:{s} · UTC+3
         </span>
-        {roomId && activePlayerCount > 0 ? (
+        {roomId && !playersLoading && activePlayerCount > 0 ? (
           <>
             <span aria-hidden className="opacity-60">
               ·

@@ -1,5 +1,6 @@
 "use client";
 
+import { getActiveSession } from "@/lib/active-session";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
@@ -42,6 +43,7 @@ export function VakaCaseSoloTease({
   const searchParams = useSearchParams();
   const roomId = searchParams.get("room");
 
+  const [coopBlocked, setCoopBlocked] = useState(false);
   const [visible, setVisible] = useState(false);
   const [feedback, setFeedback] = useState("");
   const [variantIdx] = useState(() =>
@@ -49,7 +51,42 @@ export function VakaCaseSoloTease({
   );
 
   useEffect(() => {
-    if (roomId) {
+    function checkCoopSession() {
+      // URL'de room varsa zaten co-op modda, toast asla görünmesin
+      if (roomId) {
+        setCoopBlocked(true);
+        return;
+      }
+
+      // URL'de room YOKSA, active session co-op mu kontrol et
+      const session = getActiveSession();
+      if (session?.mode === "coop") {
+        // Co-op session var ama URL'de room yok
+        // (büyük ihtimal navigation sırasında kayıp) → toast gösterme
+        setCoopBlocked(true);
+        return;
+      }
+
+      setCoopBlocked(false);
+    }
+
+    checkCoopSession();
+
+    function handleSessionChange() {
+      checkCoopSession();
+    }
+
+    window.addEventListener("dakt-session-change", handleSessionChange);
+    window.addEventListener("storage", handleSessionChange);
+
+    return () => {
+      window.removeEventListener("dakt-session-change", handleSessionChange);
+      window.removeEventListener("storage", handleSessionChange);
+    };
+  }, [roomId]);
+
+  useEffect(() => {
+    if (roomId || coopBlocked) {
       setVisible(false);
       return;
     }
@@ -64,7 +101,7 @@ export function VakaCaseSoloTease({
       setVisible(true);
     });
     return () => cancelAnimationFrame(id);
-  }, [caseId, roomId]);
+  }, [caseId, roomId, coopBlocked]);
 
   const dismiss = useCallback(() => {
     try {
@@ -107,7 +144,7 @@ export function VakaCaseSoloTease({
     }
   }
 
-  if (roomId) return null;
+  if (roomId || coopBlocked) return null;
   if (!visible) return null;
 
   const teaserLine = formatVariant(
