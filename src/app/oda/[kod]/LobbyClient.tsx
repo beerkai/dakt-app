@@ -46,7 +46,7 @@ type LobbyClientProps = {
 };
 
 export default function LobbyClient({
-  room,
+  room: roomProp,
   caseData,
   currentUserId,
   initialPlayers,
@@ -55,6 +55,7 @@ export default function LobbyClient({
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
 
+  const [roomState, setRoomState] = useState<Room>(roomProp);
   const [players, setPlayers] = useState<RoomPlayer[]>(initialPlayers);
   const [copied, setCopied] = useState(false);
   const [startBusy, setStartBusy] = useState(false);
@@ -75,18 +76,30 @@ export default function LobbyClient({
   }, [colorReassignMessage]);
 
   useEffect(() => {
+    const rid = roomState.id;
+
+    async function refreshPlayers() {
+      const { data } = await supabase
+        .from("room_players")
+        .select("*")
+        .eq("room_id", rid)
+        .is("left_at", null)
+        .order("joined_at", { ascending: true });
+      if (data) setPlayers(data as RoomPlayer[]);
+    }
+
     const channel = supabase
-      .channel(`room:${room.id}`)
+      .channel(`room-lobby:${rid}`)
       .on(
         "postgres_changes",
         {
           event: "*",
           schema: "public",
           table: "room_players",
-          filter: `room_id=eq.${room.id}`,
+          filter: `room_id=eq.${rid}`,
         },
         () => {
-          router.refresh();
+          void refreshPlayers();
         },
       )
       .on(
@@ -95,14 +108,23 @@ export default function LobbyClient({
           event: "UPDATE",
           schema: "public",
           table: "rooms",
-          filter: `id=eq.${room.id}`,
+          filter: `id=eq.${rid}`,
         },
         (payload) => {
           const updated = payload.new as Room;
-          if (updated.status === "playing") {
-            router.push(
-              `/vaka/${updated.case_id}/brief?room=${room.id}`,
-            );
+          if (process.env.NODE_ENV === "development") {
+            // eslint-disable-next-line no-console
+            console.log("Lobby rooms UPDATE:", updated.status);
+          }
+          setRoomState(updated);
+
+          if (updated.status === "playing" && updated.case_id) {
+            const dest = `/vaka/${updated.case_id}/brief?room=${updated.id}`;
+            if (process.env.NODE_ENV === "development") {
+              // eslint-disable-next-line no-console
+              console.log("Lobby redirect:", dest);
+            }
+            router.push(dest);
             return;
           }
           if (updated.status === "archived" || updated.status === "solved") {
@@ -110,14 +132,21 @@ export default function LobbyClient({
           }
         },
       )
-      .subscribe();
+      .subscribe((status) => {
+        if (process.env.NODE_ENV === "development") {
+          // eslint-disable-next-line no-console
+          console.log("Lobby subscription:", status);
+        }
+      });
+
+    void refreshPlayers();
 
     return () => {
       void supabase.removeChannel(channel);
     };
-  }, [room.id, room.case_id, router, supabase]);
+  }, [roomState.id, router, supabase]);
 
-  const hostId = room.host_user_id;
+  const hostId = roomState.host_user_id;
   const isHost = currentUserId === hostId;
 
   const me = players.find((p) => p.user_id === currentUserId);
@@ -126,7 +155,7 @@ export default function LobbyClient({
 
   async function copyCode() {
     try {
-      await navigator.clipboard.writeText(room.code);
+      await navigator.clipboard.writeText(roomState.code);
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -137,41 +166,76 @@ export default function LobbyClient({
   const handleToggleReady = useCallback(async () => {
     if (readyBusy) return;
     setReadyBusy(true);
-    const result = await toggleReady(room.id);
+    const result = await toggleReady(roomState.id);
     setReadyBusy(false);
     if (result?.error) {
       setStartError(result.error);
       return;
     }
-    router.refresh();
-  }, [readyBusy, room.id, router]);
+  }, [readyBusy, roomState.id]);
 
   const handleStart = useCallback(async () => {
-    if (startBusy || !allReady) return;
+    if (startBusy || !allReady || !isHost) return;
     setStartError(null);
     setStartBusy(true);
-    const result = await startCase(room.id);
-    setStartBusy(false);
-    if (result?.error) {
-      setStartError(result.error);
-      return;
+
+    try {
+      const result = await startCase(roomState.id);
+
+      if (process.env.NODE_ENV === "development") {
+        // eslint-disable-next-line no-console
+        console.log("startCase result:", result);
+      }
+
+      if (!result || typeof result !== "object") {
+        setStartError("Beklenmeyen bir yanıt");
+        setStartBusy(false);
+        return;
+      }
+
+      if ("error" in result && result.error) {
+        setStartError(result.error);
+        setStartBusy(false);
+        return;
+      }
+
+      if (
+        "success" in result &&
+        result.success &&
+        typeof result.caseId === "string" &&
+        result.caseId.length > 0
+      ) {
+        const rid =
+          "roomId" in result && typeof result.roomId === "string"
+            ? result.roomId
+            : roomState.id;
+        router.push(`/vaka/${result.caseId}/brief?room=${rid}`);
+        return;
+      }
+
+      setStartError("Başlatma başarısız oldu");
+      setStartBusy(false);
+    } catch (e) {
+      if (process.env.NODE_ENV === "development") {
+        // eslint-disable-next-line no-console
+        console.error("startCase error:", e);
+      }
+      setStartError("Başlatma başarısız oldu");
+      setStartBusy(false);
     }
-    if (result?.success && result.caseId) {
-      router.push(`/vaka/${result.caseId}/brief?room=${room.id}`);
-    }
-  }, [allReady, room.id, router, startBusy]);
+  }, [allReady, isHost, roomState.id, router, startBusy]);
 
   const handleLeave = useCallback(async () => {
     if (leaveBusy) return;
     setLeaveBusy(true);
-    const result = await leaveRoom(room.id);
+    const result = await leaveRoom(roomState.id);
     setLeaveBusy(false);
     if (result?.error) {
       setStartError(result.error);
       return;
     }
     router.push("/davalar");
-  }, [leaveBusy, room.id, router]);
+  }, [leaveBusy, roomState.id, router]);
 
   const slots: ({ player: RoomPlayer } | null)[] = useMemo(() => {
     const row: ({ player: RoomPlayer } | null)[] = players.map(
@@ -214,7 +278,7 @@ export default function LobbyClient({
             <span
               className={`${mono} text-2xl uppercase tracking-[0.4em] text-[var(--kraft)] md:text-3xl`}
             >
-              {room.code}
+              {roomState.code}
             </span>
             <button
               type="button"
@@ -346,9 +410,7 @@ export default function LobbyClient({
             className={`${typewriter} mt-2 text-[10px] leading-relaxed tracking-[0.08em] text-[var(--meta-label)]`}
           >
             Renk:{" "}
-            {me
-              ? `${COLOR_LABEL[me.color]} · ${me.color}`
-              : "—"}
+            {me ? `${COLOR_LABEL[me.color]} · ${me.color}` : "—"}
           </p>
         </aside>
       </div>

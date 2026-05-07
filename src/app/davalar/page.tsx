@@ -16,6 +16,7 @@ export default async function DavalarPage({
 }) {
   const sp = (await searchParams) ?? {};
   const archivedRoomClosed = sp.error === "archived";
+  const notInRoomNotice = sp.error === "not-in-room";
   const supabase = await createClient();
   const {
     data: { user },
@@ -49,6 +50,7 @@ export default async function DavalarPage({
         cases={cases}
         solvedCaseIds={solvedCaseIds}
         archivedRoomClosed={archivedRoomClosed}
+        notInRoomNotice={notInRoomNotice}
       />
     </div>
   );

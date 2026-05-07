@@ -343,5 +343,9 @@ export async function startCase(roomId: string) {
   if (room.code) {
     revalidatePath(`/oda/${room.code}`);
   }
-  return { success: true, caseId: room.case_id };
+  return {
+    success: true as const,
+    caseId: room.case_id,
+    roomId,
+  };
 }

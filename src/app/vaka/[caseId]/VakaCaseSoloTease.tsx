@@ -3,8 +3,6 @@
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
-import { useRoomActivePlayers } from "@/hooks/useRoomActivePlayers";
-
 const SOLO_VARIANTS = [
   "{codename} davası dört gözle daha hızlı çözülür.",
   "Solo bir analist iyi düşünür. İki analist çapraz okur.",
@@ -43,8 +41,6 @@ export function VakaCaseSoloTease({
 }) {
   const searchParams = useSearchParams();
   const roomId = searchParams.get("room");
-  const { count: roomPlayerCount, loading: roomLoading } =
-    useRoomActivePlayers(roomId);
 
   const [visible, setVisible] = useState(false);
   const [feedback, setFeedback] = useState("");
@@ -52,16 +48,8 @@ export function VakaCaseSoloTease({
     Math.floor(Math.random() * SOLO_VARIANTS.length),
   );
 
-  const hideForCoopParty =
-    Boolean(roomId) && !roomLoading && roomPlayerCount > 1;
-
   useEffect(() => {
-    if (hideForCoopParty) {
-      setVisible(false);
-      return;
-    }
-
-    if (roomId && roomLoading) {
+    if (roomId) {
       setVisible(false);
       return;
     }
@@ -76,7 +64,7 @@ export function VakaCaseSoloTease({
       setVisible(true);
     });
     return () => cancelAnimationFrame(id);
-  }, [caseId, roomId, roomLoading, hideForCoopParty]);
+  }, [caseId, roomId]);
 
   const dismiss = useCallback(() => {
     try {
@@ -119,8 +107,7 @@ export function VakaCaseSoloTease({
     }
   }
 
-  if (hideForCoopParty) return null;
-  if (roomId && roomLoading) return null;
+  if (roomId) return null;
   if (!visible) return null;
 
   const teaserLine = formatVariant(

@@ -42,10 +42,12 @@ export function DavalarCatalog({
   cases,
   solvedCaseIds = [],
   archivedRoomClosed = false,
+  notInRoomNotice = false,
 }: {
   cases: CaseData[];
   solvedCaseIds?: string[];
   archivedRoomClosed?: boolean;
+  notInRoomNotice?: boolean;
 }) {
   const { loading: authLoading } = useAuth();
   const modalTitleId = useId();
@@ -120,6 +122,15 @@ export function DavalarCatalog({
         >
           Bu oda kapatıldı veya arşivlendi. Yeni bir oda kurabilir veya başka bir
           koda katılabilirsin.
+        </p>
+      ) : null}
+      {notInRoomNotice ? (
+        <p
+          className={`${mono} mb-8 border border-[var(--kraft-dark)] bg-[var(--anthracite)] px-4 py-3 text-[10px] uppercase tracking-[0.14em] text-[var(--kraft)]`}
+          role="status"
+        >
+          Bu lobide kayıtlı değilsin veya oturumun eşleşmedi. Oda koduyla tekrar
+          katılmayı dene.
         </p>
       ) : null}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-6">

@@ -1,4 +1,3 @@
-import { joinRoom as joinRoomAction } from "@/app/oda/actions";
 import { createClient } from "@/lib/supabase/server";
 import { getCase } from "@/lib/case-helpers";
 import type { AnalystColor, Room, RoomPlayer } from "@/lib/supabase/types";
@@ -50,7 +49,7 @@ export default async function LobiPage({
     redirect("/davalar?error=archived");
   }
 
-  let { data: playerInRoom } = await supabase
+  const { data: playerInRoom } = await supabase
     .from("room_players")
     .select("id")
     .eq("room_id", room.id)
@@ -59,24 +58,7 @@ export default async function LobiPage({
     .maybeSingle();
 
   if (!playerInRoom) {
-    const joinResult = await joinRoomAction(room.code);
-    if ("requiresGuestSetup" in joinResult) {
-      redirect(`/oda/katil/misafir?code=${encodeURIComponent(code)}`);
-    }
-    if ("error" in joinResult) {
-      redirect(`/oda/katil?code=${encodeURIComponent(code)}`);
-    }
-    ({ data: playerInRoom } = await supabase
-      .from("room_players")
-      .select("id")
-      .eq("room_id", room.id)
-      .eq("user_id", user.id)
-      .is("left_at", null)
-      .maybeSingle());
-  }
-
-  if (!playerInRoom) {
-    redirect(`/oda/katil?code=${encodeURIComponent(code)}`);
+    redirect("/davalar?error=not-in-room");
   }
 
   const caseData = getCase(room.case_id);
