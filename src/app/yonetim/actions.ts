@@ -255,3 +255,41 @@ export async function changeUsername(
   revalidatePath("/yonetim/analistler");
   return { success: true };
 }
+
+export async function adminTerminateRoom(roomId: string) {
+  await ensureAdmin();
+  const supabase = await createClient();
+
+  const { data: room } = await supabase
+    .from("rooms")
+    .select("code, case_id, status")
+    .eq("id", roomId)
+    .single();
+
+  if (!room) return { error: "Oda bulunamadı" };
+
+  if (room.status !== "waiting" && room.status !== "playing") {
+    return { error: "Oda zaten aktif değil" };
+  }
+
+  const { error } = await supabase
+    .from("rooms")
+    .update({
+      status: "solved",
+      finished_at: new Date().toISOString(),
+    })
+    .eq("id", roomId);
+
+  if (error) return { error: error.message };
+
+  await logAdminAction({
+    action: "admin_terminate_room",
+    targetType: "room",
+    targetId: roomId,
+    targetLabel: `Oda ${room.code} (Vaka ${room.case_id})`,
+  });
+
+  revalidatePath("/yonetim/odalar");
+  revalidatePath("/yonetim");
+  return { success: true };
+}

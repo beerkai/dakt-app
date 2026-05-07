@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 
 import GMPageFooter from "./components/GMPageFooter";
 import GMPageHeader from "./components/GMPageHeader";
+import LiveRoomCount from "./components/LiveRoomCount";
 
 export const metadata = {
   title: "Operasyon Durumu · Genel Müdürlük",
@@ -90,17 +91,11 @@ export default async function YonetimDashboardPage() {
           <div className="gm-stat-sub">tüm zamanlar</div>
         </div>
 
-        <div className="gm-stat-card">
-          <span className="gm-stat-label">Aktif Oda</span>
-          <div className="gm-stat-value">
-            <span className="gm-live-dot" />
-            {activeRooms?.length ?? 0}
-          </div>
-          <div className="gm-stat-sub">
-            {playingRooms.length} oynanıyor · {waitingRooms.length}{" "}
-            bekliyor
-          </div>
-        </div>
+        <LiveRoomCount
+          initialActiveRooms={activeRooms?.length ?? 0}
+          initialPlaying={playingRooms.length}
+          initialWaiting={waitingRooms.length}
+        />
 
         <div className="gm-stat-card">
           <span className="gm-stat-label">Yayında Vaka</span>

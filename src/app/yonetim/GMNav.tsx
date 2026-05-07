@@ -9,6 +9,7 @@ interface GMNavProps {
 
 const navLinks = [
   { href: "/yonetim", label: "Operasyon" },
+  { href: "/yonetim/odalar", label: "Aktif Odalar" },
   { href: "/yonetim/analistler", label: "Analistler" },
   { href: "/yonetim/vakalar", label: "Vaka Dosyaları" },
   { href: "/yonetim/sicil", label: "Sicil" },

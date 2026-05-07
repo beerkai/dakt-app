@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin-client";
 
 const SUPER_ADMIN_EMAIL = "beerkai@outlook.com";
 
@@ -71,4 +72,50 @@ export async function logAdminAction(params: {
     target_label: params.targetLabel ?? null,
     payload: params.payload ?? null,
   });
+}
+
+/**
+ * Tüm auth.users satırlarını sayfalayarak userId → email eşlemesi.
+ * Service role gerekir — sadece server.
+ */
+export async function getAllUserEmails(): Promise<
+  Map<string, string | null>
+> {
+  const adminClient = createAdminClient();
+  const emailMap = new Map<string, string | null>();
+
+  let page = 1;
+  const perPage = 100;
+
+  while (true) {
+    const { data, error } = await adminClient.auth.admin.listUsers({
+      page,
+      perPage,
+    });
+
+    if (error) {
+      console.error("listUsers error:", error);
+      break;
+    }
+
+    if (!data?.users || data.users.length === 0) break;
+
+    for (const u of data.users) {
+      emailMap.set(u.id, u.email ?? null);
+    }
+
+    if (data.users.length < perPage) break;
+    page += 1;
+  }
+
+  return emailMap;
+}
+
+/** Tek kullanıcının e-postası (auth.users). */
+export async function getUserEmail(userId: string): Promise<string | null> {
+  const adminClient = createAdminClient();
+  const { data, error } = await adminClient.auth.admin.getUserById(userId);
+
+  if (error || !data?.user) return null;
+  return data.user.email ?? null;
 }

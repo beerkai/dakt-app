@@ -17,6 +17,7 @@ const ACTION_LABELS: Record<string, string> = {
   revoke_tester: "Tester Yetkisi Alındı",
   change_case_status: "Vaka Durumu Değişti",
   change_username: "Username Değiştirildi",
+  admin_terminate_room: "Oda Zorla Sonlandırıldı",
 };
 
 export default async function SicilPage() {

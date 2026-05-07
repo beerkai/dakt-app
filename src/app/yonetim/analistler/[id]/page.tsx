@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { getUserEmail } from "@/lib/admin";
 import { createClient } from "@/lib/supabase/server";
 
 import GMPageFooter from "../../components/GMPageFooter";
@@ -19,11 +20,12 @@ export default async function AnalystDetailPage({
   const { id } = await params;
   const supabase = await createClient();
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("*")
-    .eq("id", id)
-    .maybeSingle();
+  const [profileRes, email] = await Promise.all([
+    supabase.from("profiles").select("*").eq("id", id).maybeSingle(),
+    getUserEmail(id),
+  ]);
+
+  const profile = profileRes.data;
 
   if (!profile) notFound();
 
@@ -99,6 +101,28 @@ export default async function AnalystDetailPage({
             {profile.is_tester
               ? "Evet — kapalı vaka erişimi var"
               : "Hayır"}
+          </dd>
+
+          <dt
+            style={{
+              color: "var(--gm-meta)",
+              letterSpacing: "0.15em",
+              fontSize: 10,
+              textTransform: "uppercase",
+            }}
+          >
+            E-posta
+          </dt>
+          <dd
+            style={{
+              margin: 0,
+              fontFamily: "var(--font-jetbrains-mono), monospace",
+              fontSize: 12,
+            }}
+          >
+            {email ?? (
+              <em style={{ color: "var(--gm-meta)" }}>— misafir hesap</em>
+            )}
           </dd>
 
           <dt

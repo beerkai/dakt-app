@@ -72,9 +72,7 @@ export default function AnalystActions({
           className="gm-button"
           disabled={loading !== null}
           onClick={() =>
-            handle("toggle_tester", () =>
-              actions.setTester(userId, !isTester),
-            )
+            setModal(isTester ? "revoke_tester" : "grant_tester")
           }
         >
           {isTester ? "Tester Rolünü Kaldır" : "Tester Yap"}
@@ -148,6 +146,31 @@ export default function AnalystActions({
         confirmText="Askıya Al"
         cancelText="İptal"
         variant="warning"
+      />
+
+      <ConfirmModal
+        open={modal === "grant_tester"}
+        onClose={() => setModal(null)}
+        onConfirm={() =>
+          handle("grant_tester", () => actions.setTester(userId, true))
+        }
+        title={`@${username} — Tester rolü ver?`}
+        description="Bu kullanıcı 'test' durumundaki vakaları görebilecek ve oynayabilecek. İstediğin zaman geri alabilirsin."
+        confirmText="Tester Yap"
+        cancelText="İptal"
+        variant="default"
+      />
+
+      <ConfirmModal
+        open={modal === "revoke_tester"}
+        onClose={() => setModal(null)}
+        onConfirm={() =>
+          handle("revoke_tester", () => actions.setTester(userId, false))
+        }
+        title={`@${username} — Tester rolünü kaldır?`}
+        description="Bu kullanıcı artık 'test' durumundaki vakaları göremez. Yayında olan vakalara erişimi devam eder."
+        confirmText="Rolü Kaldır"
+        cancelText="İptal"
       />
 
       <ConfirmModal

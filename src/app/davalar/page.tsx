@@ -25,12 +25,12 @@ export default async function DavalarPage({
   const { data: profile } = user
     ? await supabase
         .from("profiles")
-        .select("is_tester, role")
+        .select("is_tester")
         .eq("id", user.id)
         .single()
     : { data: null };
 
-  const isTester = !!(profile?.is_tester || profile?.role === "admin");
+  const isTester = profile?.is_tester === true;
 
   const { data: caseMetadata } = await supabase
     .from("cases_metadata")

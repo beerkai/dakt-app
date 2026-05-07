@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { getAllUserEmails } from "@/lib/admin";
 import { createClient } from "@/lib/supabase/server";
 
 import GMPageFooter from "../components/GMPageFooter";
@@ -12,12 +13,15 @@ export const metadata = {
 export default async function AnalistlerPage() {
   const supabase = await createClient();
 
-  const { data: profiles } = await supabase
-    .from("profiles")
-    .select(
-      "id, username, color, role, is_tester, last_seen_at, suspended_at, created_at",
-    )
-    .order("created_at", { ascending: false });
+  const [{ data: profiles }, emailMap] = await Promise.all([
+    supabase
+      .from("profiles")
+      .select(
+        "id, username, color, role, is_tester, last_seen_at, suspended_at, created_at",
+      )
+      .order("created_at", { ascending: false }),
+    getAllUserEmails(),
+  ]);
 
   const { data: solvedCounts } = await supabase
     .from("solved_cases")
@@ -94,7 +98,11 @@ export default async function AnalistlerPage() {
                   </span>
                 </Link>
                 <span className="gm-list-detail">
-                  {solved} vaka çözmüş · {p.color}
+                  {emailMap.get(p.id) ?? (
+                    <em style={{ color: "var(--gm-meta)" }}>misafir</em>
+                  )}
+                  {" · "}
+                  {solved} vaka
                 </span>
                 <span className="gm-list-meta-box">
                   {new Date(p.created_at).toLocaleDateString("tr-TR", {
