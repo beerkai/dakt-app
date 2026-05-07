@@ -1,10 +1,17 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+
+import { useRoomActivePlayers } from "@/hooks/useRoomActivePlayers";
 
 /** Sadece vaka dosyaları: operasyon şeridi (canlı saat, UTC+3). */
 export function SystemBar() {
   const [parts, setParts] = useState({ h: "--", m: "--", s: "--" });
+  const searchParams = useSearchParams();
+  const roomId = searchParams.get("room");
+  const { players, count: activePlayerCount } =
+    useRoomActivePlayers(roomId);
 
   useEffect(() => {
     function tick() {
@@ -21,6 +28,7 @@ export function SystemBar() {
   }, []);
 
   const { h, m, s } = parts;
+  const playersTooltip = players.map((p) => p.username).join(", ");
 
   return (
     <div
@@ -45,6 +53,25 @@ export function SystemBar() {
         <span className="hidden md:inline tabular-nums">
           {h}:{m}:{s} · UTC+3
         </span>
+        {roomId && activePlayerCount > 0 ? (
+          <>
+            <span aria-hidden className="opacity-60">
+              ·
+            </span>
+            <span
+              className="system-bar-analysts inline-flex items-center gap-1"
+              title={playersTooltip || undefined}
+            >
+              <span
+                className="live-dot live-dot-green mb-px inline-block shrink-0 align-middle"
+                aria-hidden
+              />
+              <span className="tabular-nums">
+                {activePlayerCount} analist çevrimiçi
+              </span>
+            </span>
+          </>
+        ) : null}
       </p>
     </div>
   );
