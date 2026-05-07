@@ -26,33 +26,42 @@ export function RejoinClient({
     setLoading(true);
     setError(null);
 
-    const supabase = createClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+    try {
+      const supabase = createClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
 
-    if (!user) {
-      setError("Oturum bulunamadı");
+      if (!user) {
+        setError("Giriş gerekli");
+        setLoading(false);
+        return;
+      }
+
+      const { error: updateError } = await supabase
+        .from("room_players")
+        .update({ left_at: null })
+        .eq("room_id", room.id)
+        .eq("user_id", user.id);
+
+      if (updateError) {
+        setError(`Tekrar katılım başarısız: ${updateError.message}`);
+        setLoading(false);
+        return;
+      }
+
+      if (room.status === "playing") {
+        router.push(`/vaka/${room.case_id}/brief?room=${room.id}`);
+      } else if (room.status === "waiting") {
+        router.push(`/oda/${room.code}`);
+      } else {
+        router.push("/davalar?error=archived");
+      }
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error("Rejoin failed:", err);
+      setError("Bir hata oluştu");
       setLoading(false);
-      return;
-    }
-
-    const { error: updateError } = await supabase
-      .from("room_players")
-      .update({ left_at: null })
-      .eq("room_id", room.id)
-      .eq("user_id", user.id);
-
-    if (updateError) {
-      setError("Tekrar katılım başarısız");
-      setLoading(false);
-      return;
-    }
-
-    if (room.status === "playing") {
-      router.push(`/vaka/${room.case_id}/brief?room=${room.id}`);
-    } else {
-      router.push(`/oda/${room.code}`);
     }
   }
 

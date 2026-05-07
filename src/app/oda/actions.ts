@@ -92,7 +92,7 @@ export type JoinRoomResult =
   | { success: true; code: string }
   | { error: string }
   | { requiresGuestSetup: true; code: string }
-  | { needsRejoin: true; code: string };
+  | { requiresRejoin: true; code: string };
 
 /** Misafir anon oturumu: profil tetikleyicide yoksa veya eksikse tamamla. */
 export async function ensureAnonProfile(
@@ -155,39 +155,48 @@ export async function joinRoom(code: string): Promise<JoinRoomResult> {
     .from("rooms")
     .select("*")
     .eq("code", normalizedCode)
-    .eq("status", "waiting")
     .maybeSingle();
 
   if (!room) {
-    return { error: "Oda bulunamadı veya başlamış" };
+    return { error: "Oda bulunamadı" };
   }
 
-  const { data: myMembership } = await supabase
+  if (room.status === "archived" || room.status === "solved") {
+    return { error: "Bu oda artık aktif değil" };
+  }
+
+  const { data: existingPlayer } = await supabase
     .from("room_players")
-    .select("left_at")
+    .select("*")
     .eq("room_id", room.id)
     .eq("user_id", user.id)
     .maybeSingle();
 
-  if (myMembership && !myMembership.left_at) {
-    return { success: true, code: normalizedCode };
+  if (existingPlayer) {
+    if (!existingPlayer.left_at) {
+      return { success: true, code: normalizedCode };
+    }
+    return { requiresRejoin: true, code: normalizedCode };
   }
 
-  if (myMembership?.left_at) {
-    return { needsRejoin: true, code: normalizedCode };
+  if (room.status !== "waiting") {
+    return {
+      error:
+        "Oda zaten başlamış. Daha önce oda üyesi değilsen katılamazsın.",
+    };
   }
 
-  const { data: existingPlayers } = await supabase
+  const { data: activePlayers } = await supabase
     .from("room_players")
     .select("user_id, color")
     .eq("room_id", room.id)
     .is("left_at", null);
 
-  if (!existingPlayers) {
+  if (!activePlayers) {
     return { error: "Oda bilgileri alınamadı" };
   }
 
-  if (existingPlayers.length >= 5) {
+  if (activePlayers.length >= 5) {
     return { error: "Oda dolu (5/5)" };
   }
 
@@ -201,7 +210,7 @@ export async function joinRoom(code: string): Promise<JoinRoomResult> {
     return { error: "Profil bulunamadı" };
   }
 
-  const usedColors = existingPlayers.map((p) => p.color as AnalystColor);
+  const usedColors = activePlayers.map((p) => p.color as AnalystColor);
   let assignedColor: AnalystColor = profile.color;
 
   if (usedColors.includes(profile.color)) {
@@ -228,7 +237,7 @@ export async function joinRoom(code: string): Promise<JoinRoomResult> {
   });
 
   if (joinError) {
-    return { error: "Odaya katılınamadı" };
+    return { error: `Odaya katılınamadı: ${joinError.message}` };
   }
 
   revalidatePath(`/oda/${normalizedCode}`);
@@ -283,7 +292,7 @@ export async function leaveRoom(roomId: string) {
 
   const { data: room } = await supabase
     .from("rooms")
-    .select("host_user_id, code")
+    .select("host_user_id")
     .eq("id", roomId)
     .single();
 
@@ -297,10 +306,59 @@ export async function leaveRoom(roomId: string) {
       .eq("id", roomId);
   }
 
-  if (room?.code) {
-    revalidatePath(`/oda/${room.code}`);
-  }
   return { success: true };
+}
+
+export async function terminateCase(roomId: string) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) return { error: "Giriş yapılmamış" };
+
+  const { data: room } = await supabase
+    .from("rooms")
+    .select("host_user_id, case_id, status, started_at, code")
+    .eq("id", roomId)
+    .single();
+
+  if (!room) return { error: "Oda bulunamadı" };
+  if (room.host_user_id !== user.id) {
+    return { error: "Sadece host vakayı sonlandırabilir" };
+  }
+  if (room.status !== "playing") {
+    return { error: "Bu oda zaten aktif değil" };
+  }
+
+  const { error } = await supabase
+    .from("rooms")
+    .update({
+      status: "solved",
+      finished_at: new Date().toISOString(),
+    })
+    .eq("id", roomId);
+
+  if (error) return { error: error.message };
+
+  let durationSeconds = 0;
+  if (room.started_at) {
+    durationSeconds = Math.floor(
+      (Date.now() - new Date(room.started_at).getTime()) / 1000,
+    );
+  }
+
+  const roomCode = String(room.code ?? "").toUpperCase();
+  if (roomCode) {
+    revalidatePath(`/oda/${roomCode}`);
+  }
+
+  return {
+    success: true as const,
+    caseId: room.case_id,
+    durationSeconds,
+    code: roomCode,
+  };
 }
 
 // 5. VAKAYI BAŞLAT (Sadece host)

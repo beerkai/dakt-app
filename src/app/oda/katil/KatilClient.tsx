@@ -81,7 +81,7 @@ export function KatilClient() {
           return;
         }
 
-        if ("needsRejoin" in result && result.needsRejoin) {
+        if ("requiresRejoin" in result && result.requiresRejoin) {
           router.push(`/oda/${result.code}/tekrar-katil`);
           return;
         }

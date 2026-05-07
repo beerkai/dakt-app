@@ -1,13 +1,15 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { useRoomActivePlayers } from "@/hooks/useRoomActivePlayers";
 import { createClient } from "@/lib/supabase/client";
+import type { Room } from "@/lib/supabase/types";
 
 /** Sadece vaka dosyaları: operasyon şeridi (canlı saat, UTC+3). */
 export function SystemBar() {
+  const router = useRouter();
   const [parts, setParts] = useState({ h: "--", m: "--", s: "--" });
   const searchParams = useSearchParams();
   const roomId = searchParams.get("room");
@@ -48,6 +50,38 @@ export function SystemBar() {
     }
     void fetchCode();
   }, [roomId]);
+
+  useEffect(() => {
+    if (!roomId) return;
+
+    const supabase = createClient();
+    const channel = supabase
+      .channel(`room-status-bar:${roomId}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "UPDATE",
+          schema: "public",
+          table: "rooms",
+          filter: `id=eq.${roomId}`,
+        },
+        (payload) => {
+          const updated = payload.new as Room;
+          if (updated.status === "solved") {
+            router.push(`/oda/${updated.code}/sonlandirildi`);
+            return;
+          }
+          if (updated.status === "archived") {
+            router.push("/davalar?error=archived");
+          }
+        },
+      )
+      .subscribe();
+
+    return () => {
+      void supabase.removeChannel(channel);
+    };
+  }, [roomId, router]);
 
   function handleCopy() {
     if (!roomCode) return;
