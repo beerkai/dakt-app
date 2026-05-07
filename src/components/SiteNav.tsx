@@ -18,7 +18,7 @@ import {
   clearGuestUsername,
   readGuestColor,
 } from "@/lib/guest-session";
-import type { AnalystColor } from "@/lib/supabase/types";
+import type { AnalystColor, Profile } from "@/lib/supabase/types";
 
 const mono =
   "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace]";
@@ -27,6 +27,7 @@ export function SiteNav() {
   const pathname = usePathname();
   const router = useRouter();
   const { user, profile, loading: authLoading } = useAuth();
+  const [stableProfile, setStableProfile] = useState<Profile | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const accountMenuDesktopRef = useRef<HTMLDivElement>(null);
@@ -82,6 +83,14 @@ export function SiteNav() {
       window.removeEventListener("dakt_guest_changed", onLocalGuestChange);
     };
   }, [pathname, readGuest]);
+
+  useEffect(() => {
+    if (profile) setStableProfile(profile);
+  }, [profile]);
+
+  useEffect(() => {
+    if (!user) setStableProfile(null);
+  }, [user]);
 
   useEffect(() => {
     if (menuOpen) setAccountMenuOpen(false);
@@ -265,13 +274,14 @@ export function SiteNav() {
     "inline-flex shrink-0 items-center justify-center border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] font-medium uppercase tracking-[0.2em] text-[var(--kraft-light)] transition-colors [font-family:var(--font-jetbrains-mono),ui-monospace,monospace] hover:bg-[var(--bordeaux-bright)]";
 
   const isRegistered = Boolean(user);
+  const effectiveProfile = profile ?? stableProfile;
   const showUserChip = isRegistered || guestUsername !== null;
   const displayName =
-    profile?.username ??
+    effectiveProfile?.username ??
     (user?.email ? (user.email.split("@")[0] ?? user.email) : null) ??
     guestUsername ??
     "";
-  const analystColor = profile?.color ?? guestColor;
+  const analystColor = effectiveProfile?.color ?? guestColor;
   const roleLabel = isRegistered ? "ANALIST" : "MİSAFİR";
   const guestUpper = guestUsername?.toLocaleUpperCase("tr-TR") ?? "";
   const identityUpper = displayName.toLocaleUpperCase("tr-TR");
@@ -339,7 +349,7 @@ export function SiteNav() {
             </button>
 
             {isRegistered ? (
-              profile ? (
+              effectiveProfile ? (
                 <div className="relative" ref={accountMenuDesktopRef}>
                   <button
                     type="button"
@@ -362,7 +372,7 @@ export function SiteNav() {
                       />
                     ) : null}
                     <span className="max-w-[min(200px,18vw)] truncate text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--kraft)]">
-                      {profile.username}
+                      {effectiveProfile.username}
                     </span>
                     <span
                       className="shrink-0 text-[10px] leading-none text-[var(--kraft-dark)]"
@@ -373,7 +383,7 @@ export function SiteNav() {
                   </button>
                   {accountMenuOpen ? (
                     <UserDropdown
-                      profile={profile}
+                      profile={effectiveProfile}
                       email={user?.email}
                       onClose={() => setAccountMenuOpen(false)}
                       onBeforeProfileNav={(e, href) =>
@@ -384,10 +394,10 @@ export function SiteNav() {
                 </div>
               ) : (
                 <span
-                  className={`${mono} px-2 text-[10px] uppercase tracking-[0.2em] text-[var(--meta-label)]`}
-                >
-                  …
-                </span>
+                  className="inline-block shrink-0 align-middle"
+                  style={{ width: 120, minHeight: 36 }}
+                  aria-hidden
+                />
               )
             ) : guestUsername ? (
               <div className="group relative inline-flex min-h-0 items-center">
@@ -440,10 +450,10 @@ export function SiteNav() {
               </>
             ) : (
               <span
-                className={`${mono} px-2 text-[10px] uppercase tracking-[0.2em] text-[var(--meta-label)]`}
-              >
-                …
-              </span>
+                className="inline-block shrink-0"
+                style={{ width: 168, minHeight: 36 }}
+                aria-hidden
+              />
             )}
           </div>
 
@@ -459,7 +469,7 @@ export function SiteNav() {
             </Link>
             <div className="flex min-w-0 shrink-0 items-center gap-3">
               {isRegistered ? (
-                profile ? (
+                effectiveProfile ? (
                   <div className="relative" ref={accountMenuMobileRef}>
                     <button
                       type="button"
@@ -467,7 +477,7 @@ export function SiteNav() {
                       aria-haspopup="menu"
                       onClick={() => setAccountMenuOpen((v) => !v)}
                       className={`group relative m-0 flex max-w-[120px] min-w-0 cursor-pointer items-center gap-1 border border-[var(--kraft-dark)] bg-transparent px-2 py-1 text-left ${mono} text-[11px] font-medium uppercase tracking-[0.1em] text-[var(--kraft)]`}
-                      title={profile.username}
+                      title={effectiveProfile.username}
                     >
                       <span
                         className="site-nav-user-pulse shrink-0 rounded-full site-nav-user-pulse--analist"
@@ -482,14 +492,16 @@ export function SiteNav() {
                           aria-hidden
                         />
                       ) : null}
-                      <span className="min-w-0 truncate">{profile.username}</span>
+                      <span className="min-w-0 truncate">
+                        {effectiveProfile.username}
+                      </span>
                       <span className="shrink-0 text-[9px] text-[var(--kraft-dark)]" aria-hidden>
                         ▾
                       </span>
                     </button>
                     {accountMenuOpen ? (
                       <UserDropdown
-                        profile={profile}
+                        profile={effectiveProfile}
                         email={user?.email}
                         onClose={() => setAccountMenuOpen(false)}
                         onBeforeProfileNav={(e, href) =>
@@ -500,10 +512,10 @@ export function SiteNav() {
                   </div>
                 ) : (
                   <span
-                    className={`${mono} text-[11px] text-[var(--meta-label)]`}
-                  >
-                    …
-                  </span>
+                    className="inline-block shrink-0"
+                    style={{ width: 96, minHeight: 28 }}
+                    aria-hidden
+                  />
                 )
               ) : guestUsername ? (
                 <p
@@ -617,7 +629,7 @@ export function SiteNav() {
               >
                 ▸ Paylaş
               </button>
-              {isRegistered && profile ? (
+              {isRegistered && effectiveProfile ? (
                 <Link
                   href="/profil"
                   className={`border-0 border-b border-[rgba(255,255,255,0.06)] bg-transparent py-4 text-left text-[16px] font-medium uppercase tracking-[0.18em] text-[var(--kraft)] transition-colors hover:text-[var(--bordeaux-bright)] ${mono}`}

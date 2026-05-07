@@ -17,6 +17,7 @@ export default async function DavalarPage({
   const sp = (await searchParams) ?? {};
   const archivedRoomClosed = sp.error === "archived";
   const notInRoomNotice = sp.error === "not-in-room";
+
   const supabase = await createClient();
   const {
     data: { user },
@@ -27,25 +28,29 @@ export default async function DavalarPage({
         .from("profiles")
         .select("is_tester")
         .eq("id", user.id)
-        .single()
+        .maybeSingle()
     : { data: null };
 
   const isTester = profile?.is_tester === true;
 
   const { data: caseMetadata } = await supabase
     .from("cases_metadata")
-    .select("*");
+    .select("case_id, status");
 
-  const metaById = new Map(
-    caseMetadata?.map((c) => [c.case_id as string, c]) ?? [],
-  );
+  const metaMap = new Map<string, string>();
+  caseMetadata?.forEach((m) => {
+    metaMap.set(m.case_id, m.status);
+  });
 
   const allCases = getAllCases();
-  const cases = allCases.filter((c) => {
-    const meta = metaById.get(c.id);
-    if (!meta) return true;
-    if (meta.status === "published") return true;
-    if (meta.status === "test" && isTester) return true;
+
+  const visibleCases = allCases.filter((c) => {
+    const status = metaMap.get(c.id);
+
+    if (!status) return false;
+    if (status === "published") return true;
+    if (status === "test") return isTester;
+
     return false;
   });
 
@@ -72,7 +77,7 @@ export default async function DavalarPage({
       </header>
 
       <DavalarCatalog
-        cases={cases}
+        cases={visibleCases}
         solvedCaseIds={solvedCaseIds}
         archivedRoomClosed={archivedRoomClosed}
         notInRoomNotice={notInRoomNotice}

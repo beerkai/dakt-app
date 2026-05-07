@@ -56,14 +56,30 @@ export default async function CaseLayout({
     data: { user },
   } = await supabase.auth.getUser();
 
+  const { data: profile } = user
+    ? await supabase
+        .from("profiles")
+        .select("username, is_tester")
+        .eq("id", user.id)
+        .maybeSingle()
+    : { data: null };
+
+  const isTester = profile?.is_tester === true;
+
+  const { data: caseMeta } = await supabase
+    .from("cases_metadata")
+    .select("status")
+    .eq("case_id", caseId)
+    .maybeSingle();
+
+  const caseMetaStatus = caseMeta?.status;
+  if (!caseMetaStatus) notFound();
+  if (caseMetaStatus === "draft" || caseMetaStatus === "archived") notFound();
+  if (caseMetaStatus === "test" && !isTester) notFound();
+
   let username = "MİSAFİR";
   let serverMarksSolved = false;
   if (user) {
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("username")
-      .eq("id", user.id)
-      .single();
     const u = profile?.username?.trim();
     username = u && u.length > 0 ? u : "ANALİST";
     const { data: solvedRow } = await supabase

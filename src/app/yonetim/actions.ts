@@ -282,9 +282,10 @@ export async function changeUsername(
 
 export async function adminTerminateRoom(roomId: string) {
   await ensureAdmin();
-  const supabase = await createClient();
 
-  const { data: room, error: fetchError } = await supabase
+  const adminDb = createAdminClient();
+
+  const { data: room, error: fetchError } = await adminDb
     .from("rooms")
     .select("code, case_id, status")
     .eq("id", roomId)
@@ -308,7 +309,7 @@ export async function adminTerminateRoom(roomId: string) {
     roomUpdate.finished_at = now;
   }
 
-  const { error: updateError } = await supabase
+  const { error: updateError } = await adminDb
     .from("rooms")
     .update(roomUpdate)
     .eq("id", roomId);
@@ -318,7 +319,7 @@ export async function adminTerminateRoom(roomId: string) {
     return { error: "Sonlandırma başarısız: " + updateError.message };
   }
 
-  await supabase
+  await adminDb
     .from("room_players")
     .update({ left_at: now })
     .eq("room_id", roomId)
@@ -333,7 +334,8 @@ export async function adminTerminateRoom(roomId: string) {
   });
 
   revalidatePath("/yonetim/odalar");
-  revalidatePath("/yonetim");
   revalidatePath("/yonetim/odalar/gecmis");
+  revalidatePath("/yonetim");
+
   return { success: true };
 }

@@ -29,11 +29,18 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const path = request.nextUrl.pathname;
-  const protectedPaths = ["/yonetim", "/vaka", "/oda", "/profil", "/davalar"];
-  const isProtected =
-    path === "/" ||
-    protectedPaths.some((p) => path === p || path.startsWith(`${p}/`));
+  const protectedPathPrefixes = [
+    "/yonetim",
+    "/vaka",
+    "/oda",
+    "/profil",
+    "/davalar",
+  ];
+
+  const pathname = request.nextUrl.pathname;
+  const isProtected = protectedPathPrefixes.some(
+    (p) => pathname === p || pathname.startsWith(`${p}/`),
+  );
 
   if (user && isProtected) {
     const { data: profile } = await supabase
