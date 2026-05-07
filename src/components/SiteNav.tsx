@@ -6,11 +6,12 @@ import type { MouseEvent as ReactMouseEvent } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { signOut } from "@/app/auth/actions";
+import { leaveRoom } from "@/app/oda/actions";
 import ConfirmModal from "@/components/ConfirmModal";
 import { useAuth } from "@/components/AuthProvider";
 import { UserDropdown } from "@/components/UserDropdown";
 import { ANALYST_COLOR_HEX } from "@/lib/colors";
-import { getActiveSession } from "@/lib/active-session";
+import { clearActiveSession, getActiveSession } from "@/lib/active-session";
 import {
   DAKT_GUEST_USERNAME_KEY,
   DAKT_USER_COLOR_KEY,
@@ -222,11 +223,38 @@ export function SiteNav() {
     setExitModalOpen(true);
   }
 
-  function handleConfirmExit() {
-    if (pendingHref) router.push(pendingHref);
+  const handleTakeBreak = useCallback(() => {
+    if (pendingHref) {
+      router.push(pendingHref);
+    }
     setPendingHref(null);
     setExitModalOpen(false);
-  }
+  }, [pendingHref, router]);
+
+  const handlePermanentExit = useCallback(async () => {
+    const session = getActiveSession();
+    const href = pendingHref;
+
+    if (session?.mode === "coop" && session.roomId) {
+      try {
+        const result = await leaveRoom(session.roomId);
+        if (result && "error" in result && result.error) {
+          // eslint-disable-next-line no-console
+          console.error("Leave room error:", result.error);
+        }
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.error("Leave room error:", err);
+      }
+    }
+
+    clearActiveSession();
+    window.dispatchEvent(new Event("dakt-session-change"));
+
+    if (href) {
+      router.push(href);
+    }
+  }, [pendingHref, router]);
 
   const navMidLinkClass = `${mono} text-[10px] font-medium uppercase tracking-[0.22em] text-[var(--kraft)] transition-colors duration-200 hover:text-[var(--bordeaux-bright)]`;
 
@@ -688,17 +716,21 @@ export function SiteNav() {
           setExitModalOpen(false);
           setPendingHref(null);
         }}
-        onConfirm={handleConfirmExit}
+        onConfirm={handleTakeBreak}
         title={
-          exitIsCoop ? "Biraz mola mı vereceksin?" : "Vakadan çıkmak istiyor musun?"
+          exitIsCoop ? "Vakadan ayrılıyor musun?" : "Vakadan çıkıyor musun?"
         }
         description={
           exitIsCoop
-            ? "Vakadan ayrılırsan oda devam eder, kod ile geri katılabilirsin. Yarım kalan oturumun sağ alt köşede görünecek."
-            : "Sayfayı terk edersen yarım kalan vakanın görüneceği bir göstergeci sağ altta kalır. Vakaya istediğin zaman dönebilirsin."
+            ? "Mola: oda devam eder, kolayca dönersin. Ayrıl: kod ile tekrar katılırsın."
+            : "Mola: chip ile geri gelirsin. Çık: davalardan baştan girersin."
         }
-        confirmText={exitIsCoop ? "Mola Ver" : "Çık"}
+        confirmText="Biraz Mola"
+        altActionText={exitIsCoop ? "Vakadan Ayrıl" : "Çık"}
+        onAltAction={handlePermanentExit}
+        altActionVariant="danger"
         cancelText="Vakaya Geri Dön"
+        variant="warning"
       />
     </>
   );

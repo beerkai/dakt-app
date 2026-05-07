@@ -14,7 +14,8 @@ interface ConfirmModalProps {
   cancelText?: string;
   variant?: ConfirmVariant;
   altActionText?: string;
-  onAltAction?: () => void;
+  onAltAction?: (() => void) | (() => Promise<void>);
+  altActionVariant?: ConfirmVariant;
   /** Cancel / secondary: defaults to onClose when omitted */
   onCancel?: () => void;
 }
@@ -30,6 +31,7 @@ export default function ConfirmModal({
   variant = "default",
   altActionText,
   onAltAction,
+  altActionVariant = "default",
   onCancel,
 }: ConfirmModalProps) {
   useEffect(() => {
@@ -58,6 +60,13 @@ export default function ConfirmModal({
       : variant === "warning"
         ? "confirm-btn confirm-btn-warning"
         : "confirm-btn confirm-btn-primary";
+
+  const altClassName =
+    altActionVariant === "danger"
+      ? "confirm-btn confirm-btn-danger-outline"
+      : altActionVariant === "warning"
+        ? "confirm-btn confirm-btn-warning-outline"
+        : "confirm-btn confirm-btn-alt";
 
   const handleCancel = () => {
     (onCancel ?? onClose)();
@@ -90,10 +99,15 @@ export default function ConfirmModal({
             <button
               type="button"
               onClick={() => {
-                onAltAction();
-                onClose();
+                void (async () => {
+                  try {
+                    await Promise.resolve(onAltAction());
+                  } finally {
+                    onClose();
+                  }
+                })();
               }}
-              className="confirm-btn confirm-btn-alt"
+              className={altClassName}
             >
               {altActionText}
             </button>

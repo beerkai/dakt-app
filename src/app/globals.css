@@ -563,6 +563,28 @@ body::after {
   border-color: #b89030;
 }
 
+.confirm-btn-danger-outline {
+  border-color: #c44545;
+  color: #c44545;
+  background: transparent;
+}
+
+.confirm-btn-danger-outline:hover {
+  background: #c44545;
+  color: var(--paper);
+}
+
+.confirm-btn-warning-outline {
+  border-color: #d4a843;
+  color: #d4a843;
+  background: transparent;
+}
+
+.confirm-btn-warning-outline:hover {
+  background: #d4a843;
+  color: var(--ink);
+}
+
 @media (max-width: 540px) {
   .confirm-modal {
     padding: 24px;
