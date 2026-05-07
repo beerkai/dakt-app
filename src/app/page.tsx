@@ -54,6 +54,18 @@ export default function Home() {
               Davaları Gör
             </Link>
           </div>
+
+          <div className="mt-8">
+            <p className="max-w-lg text-[12px] tracking-[0.06em] text-[var(--subtitle-text)] [font-family:var(--font-special-elite),monospace]">
+              Arkadaşının kurduğu odaya mı katılıyorsun?{" "}
+              <Link
+                href="/oda/katil"
+                className={`${btnMono} text-[var(--kraft)] underline-offset-4 hover:text-[var(--kraft-light)] hover:underline`}
+              >
+                Kod ile Katıl →
+              </Link>
+            </p>
+          </div>
         </div>
       </section>
 

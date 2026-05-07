@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import {
   useCallback,
   useEffect,
@@ -13,7 +12,7 @@ import {
 import { useAuth } from "@/components/AuthProvider";
 import { CaseCard } from "@/components/CaseCard";
 import { countDocuments } from "@/lib/case-helpers";
-import { readGuestUsernameTrimmed, writeGuestUsername } from "@/lib/guest-session";
+import { writeGuestUsername } from "@/lib/guest-session";
 import { caseTabHref } from "@/lib/case-tab-routes";
 import type { CaseData } from "@/lib/case-types";
 
@@ -42,65 +41,38 @@ const typewriter =
 export function DavalarCatalog({
   cases,
   solvedCaseIds = [],
+  archivedRoomClosed = false,
 }: {
   cases: CaseData[];
   solvedCaseIds?: string[];
+  archivedRoomClosed?: boolean;
 }) {
-  const router = useRouter();
-  const { user, loading: authLoading } = useAuth();
+  const { loading: authLoading } = useAuth();
   const modalTitleId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [guestModalOpen, setGuestModalOpen] = useState(false);
   const [guestNameDraft, setGuestNameDraft] = useState("");
   const [guestNameError, setGuestNameError] = useState(false);
-  const [pendingBriefHref, setPendingBriefHref] = useState<string | null>(
+  const [pendingGuestCaseId, setPendingGuestCaseId] = useState<string | null>(
     null,
   );
+  const [choiceAfterGuestCaseId, setChoiceAfterGuestCaseId] = useState<
+    string | null
+  >(null);
   const [guestNamePlaceholder, setGuestNamePlaceholder] = useState<string>(
     GUEST_NAME_PLACEHOLDER_OPTIONS[0],
   );
 
   const closeGuestModal = useCallback(() => {
     setGuestModalOpen(false);
-    setPendingBriefHref(null);
+    setPendingGuestCaseId(null);
     setGuestNameError(false);
   }, []);
 
-  const requestOpenBrief = useCallback(
-    (briefHref: string) => {
-      if (readGuestUsernameTrimmed()) {
-        router.push(briefHref);
-        return;
-      }
-      if (!authLoading && user) {
-        router.push(briefHref);
-        return;
-      }
-      if (authLoading) {
-        setPendingBriefHref(briefHref);
-        return;
-      }
-      setPendingBriefHref(briefHref);
-      setGuestModalOpen(true);
-    },
-    [router, authLoading, user],
-  );
-
-  useEffect(() => {
-    if (authLoading || !pendingBriefHref) return;
-    if (readGuestUsernameTrimmed()) {
-      router.push(pendingBriefHref);
-      setPendingBriefHref(null);
-      return;
-    }
-    if (user) {
-      router.push(pendingBriefHref);
-      setPendingBriefHref(null);
-      return;
-    }
-    setGuestModalOpen(true);
-  }, [authLoading, user, pendingBriefHref, router]);
+  const clearChoiceSignal = useCallback(() => {
+    setChoiceAfterGuestCaseId(null);
+  }, []);
 
   useEffect(() => {
     if (!guestModalOpen) return;
@@ -129,14 +101,27 @@ export function DavalarCatalog({
       return;
     }
     writeGuestUsername(trimmed);
-    const dest = pendingBriefHref;
-    closeGuestModal();
+    const cid = pendingGuestCaseId;
     setGuestNameDraft("");
-    if (dest) router.push(dest);
+    setGuestModalOpen(false);
+    setGuestNameError(false);
+    setPendingGuestCaseId(null);
+    if (cid) {
+      setChoiceAfterGuestCaseId(cid);
+    }
   }
 
   return (
     <>
+      {archivedRoomClosed ? (
+        <p
+          className={`${mono} mb-8 border border-[var(--bordeaux-bright)]/40 bg-[var(--anthracite)] px-4 py-3 text-[10px] uppercase tracking-[0.14em] text-[var(--bordeaux-bright)]`}
+          role="status"
+        >
+          Bu oda kapatıldı veya arşivlendi. Yeni bir oda kurabilir veya başka bir
+          koda katılabilirsin.
+        </p>
+      ) : null}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-6">
         {cases.map((c) => {
           const active = c.status === "active";
@@ -156,10 +141,17 @@ export function DavalarCatalog({
               suspectCount={c.suspects.length}
               status={active ? "DOSYA AÇIK" : "YAKINDA"}
               isSolved={solved}
-              href={active ? briefHref : undefined}
-              onCtaClick={
-                active ? () => requestOpenBrief(briefHref) : undefined
+              briefHref={active ? briefHref : undefined}
+              onGuestGate={
+                active
+                  ? () => {
+                      setPendingGuestCaseId(c.id);
+                      setGuestModalOpen(true);
+                    }
+                  : undefined
               }
+              choiceAfterGuestCaseId={choiceAfterGuestCaseId}
+              onConsumeGuestChoiceOpen={clearChoiceSignal}
               ctaBusy={active ? authLoading : false}
             />
           );

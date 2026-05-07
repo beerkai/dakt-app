@@ -9,7 +9,13 @@ export const metadata: Metadata = {
   description: "Erişimine açık sınıflandırılmış vaka dosyaları.",
 };
 
-export default async function DavalarPage() {
+export default async function DavalarPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ error?: string }>;
+}) {
+  const sp = (await searchParams) ?? {};
+  const archivedRoomClosed = sp.error === "archived";
   const supabase = await createClient();
   const {
     data: { user },
@@ -39,7 +45,11 @@ export default async function DavalarPage() {
         </p>
       </header>
 
-      <DavalarCatalog cases={cases} solvedCaseIds={solvedCaseIds} />
+      <DavalarCatalog
+        cases={cases}
+        solvedCaseIds={solvedCaseIds}
+        archivedRoomClosed={archivedRoomClosed}
+      />
     </div>
   );
 }

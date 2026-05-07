@@ -1,10 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useId, useState } from "react";
 
+import { createRoom } from "@/app/oda/actions";
 import { useAuth } from "@/components/AuthProvider";
 import { DAKT_LOCAL_SOLVED_KEY } from "@/lib/local-solved-storage";
+import { readGuestUsernameTrimmed } from "@/lib/guest-session";
 
 export type CaseStatus = "DOSYA AÇIK" | "YAKINDA";
 
@@ -19,10 +22,13 @@ export type CaseCardProps = {
   tabCount: number;
   docCount: number;
   suspectCount: number;
-  /** Yoksa veya pasif kartta buton gösterilmez */
-  href?: string;
-  /** Varsa CTA `Link` yerine tıklanınca bu çağrılır (ör. misafir takma adı modalı). */
-  onCtaClick?: () => void;
+  /** Solo brief rotası; sadece aktif kartlarda */
+  briefHref?: string;
+  /** Kayıtsız misafir: takma ad modalına yönlendir (parent) */
+  onGuestGate?: () => void;
+  /** Misafir takma adı kaydettikten sonra seçim modalını aç */
+  choiceAfterGuestCaseId?: string | null;
+  onConsumeGuestChoiceOpen?: () => void;
   /** Oturum yüklenirken buton kilitlenir (ör. useAuth loading). */
   ctaBusy?: boolean;
   /** Kayıtlı kullanıcı: sunucudan gelen çözüm durumu */
@@ -45,14 +51,21 @@ export function CaseCard({
   tabCount,
   docCount,
   suspectCount,
-  href,
-  onCtaClick,
+  briefHref,
+  onGuestGate,
+  choiceAfterGuestCaseId,
+  onConsumeGuestChoiceOpen,
   ctaBusy,
   isSolved,
   status,
 }: CaseCardProps) {
+  const router = useRouter();
   const { user } = useAuth();
+  const choiceTitleId = useId();
   const [localSolvedIds, setLocalSolvedIds] = useState<string[]>([]);
+  const [choiceModalOpen, setChoiceModalOpen] = useState(false);
+  const [creating, setCreating] = useState(false);
+  const [createError, setCreateError] = useState<string | null>(null);
 
   useEffect(() => {
     function readLocal() {
@@ -102,11 +115,59 @@ export function CaseCard({
     };
   }, [user]);
 
+  useEffect(() => {
+    if (!choiceAfterGuestCaseId || choiceAfterGuestCaseId !== caseNumber) {
+      return;
+    }
+    setChoiceModalOpen(true);
+    onConsumeGuestChoiceOpen?.();
+  }, [choiceAfterGuestCaseId, caseNumber, onConsumeGuestChoiceOpen]);
+
   const active = status === "DOSYA AÇIK";
   const busy = Boolean(ctaBusy);
   const serverSolved = Boolean(isSolved);
   const guestSolved = !user && localSolvedIds.includes(caseNumber);
   const solved = active && (serverSolved || guestSolved);
+
+  function handleCaseClick() {
+    if (!active || !briefHref) return;
+    if (busy) return;
+    const guestNameLive = readGuestUsernameTrimmed();
+    if (!user && !guestNameLive) {
+      onGuestGate?.();
+      return;
+    }
+    setCreateError(null);
+    setChoiceModalOpen(true);
+  }
+
+  function closeChoiceModal() {
+    setChoiceModalOpen(false);
+    setCreateError(null);
+  }
+
+  async function handleCreateRoom() {
+    if (!user) return;
+    setCreating(true);
+    setCreateError(null);
+    const result = await createRoom(caseNumber);
+    if (result?.error) {
+      setCreateError(result.error);
+      setCreating(false);
+      return;
+    }
+    if (result?.success && result.code) {
+      router.push(`/oda/${result.code}`);
+      return;
+    }
+    setCreating(false);
+  }
+
+  function handleSolo() {
+    if (!briefHref) return;
+    closeChoiceModal();
+    router.push(briefHref);
+  }
 
   return (
     <article
@@ -186,28 +247,16 @@ export function CaseCard({
           {tabCount} SEKME · {docCount} BELGE · {suspectCount} ŞÜPHELİ
         </div>
 
-        {active && href ? (
-          onCtaClick ? (
-            <button
-              type="button"
-              onClick={() => {
-                if (busy) return;
-                onCtaClick();
-              }}
-              disabled={busy}
-              aria-busy={busy}
-              className={`${mono} inline-flex w-full items-center justify-center border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] py-4 text-[10px] font-medium uppercase tracking-[0.26em] text-[var(--kraft-light)] transition-colors hover:bg-[var(--bordeaux-bright)] md:w-auto md:self-start md:px-10 ${busy ? "cursor-wait opacity-75" : "cursor-pointer"}`}
-            >
-              {busy ? "Yükleniyor..." : "Dosyayı aç →"}
-            </button>
-          ) : (
-            <Link
-              href={href}
-              className={`${mono} inline-flex w-full items-center justify-center border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] py-4 text-[10px] font-medium uppercase tracking-[0.26em] text-[var(--kraft-light)] transition-colors hover:bg-[var(--bordeaux-bright)] md:w-auto md:self-start md:px-10`}
-            >
-              Dosyayı aç →
-            </Link>
-          )
+        {active && briefHref ? (
+          <button
+            type="button"
+            onClick={handleCaseClick}
+            disabled={busy}
+            aria-busy={busy}
+            className={`${mono} inline-flex w-full items-center justify-center border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] py-4 text-[10px] font-medium uppercase tracking-[0.26em] text-[var(--kraft-light)] transition-colors hover:bg-[var(--bordeaux-bright)] md:w-auto md:self-start md:px-10 ${busy ? "cursor-wait opacity-75" : "cursor-pointer"}`}
+          >
+            {busy ? "Yükleniyor..." : "Dosyayı aç →"}
+          </button>
         ) : (
           <div
             className={`${mono} flex w-full items-center justify-center border border-dashed border-[var(--rule)] py-4 text-[9px] uppercase tracking-[0.2em] text-[var(--meta-label)] md:w-auto md:self-start md:px-10`}
@@ -216,6 +265,104 @@ export function CaseCard({
           </div>
         )}
       </div>
+
+      {choiceModalOpen ? (
+        <div
+          className="fixed inset-0 z-[240] flex min-h-0 flex-col md:items-center md:justify-center md:p-6"
+          role="presentation"
+        >
+          <button
+            type="button"
+            aria-label="Kapat"
+            className="absolute inset-0 bg-[var(--ink)]/85"
+            onClick={closeChoiceModal}
+          />
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={choiceTitleId}
+            className="relative z-[1] flex min-h-full w-full flex-col border-[var(--kraft-dark)] bg-[var(--paper)] text-[var(--ink)] shadow-[var(--shadow)] md:min-h-0 md:max-w-[480px] md:rounded-sm md:border-2"
+          >
+            <div className="flex flex-1 flex-col gap-6 overflow-y-auto p-6 md:p-8">
+              <div className="space-y-2">
+                <p
+                  className={`${mono} text-[9px] uppercase tracking-[0.28em] text-[var(--meta-label)]`}
+                >
+                  {codename.toUpperCase()}
+                </p>
+                <h2
+                  id={choiceTitleId}
+                  className="text-2xl font-semibold italic text-[var(--ink)] [font-family:var(--font-cormorant),serif]"
+                >
+                  Bu vakayı nasıl açmak istersin?
+                </h2>
+              </div>
+
+              <div className="flex flex-col gap-4">
+                <button
+                  type="button"
+                  onClick={handleSolo}
+                  className={`${mono} flex w-full flex-col items-start gap-1 border-2 border-[var(--ink)]/16 bg-[var(--ink)]/[0.06] px-5 py-4 text-left text-[10px] uppercase tracking-[0.2em] text-[var(--ink)] transition-colors hover:border-[var(--kraft)]`}
+                >
+                  <span>▸ Tek başına oyna</span>
+                  <span
+                    className={`${typewriter} text-[11px] normal-case tracking-[0.06em] text-[var(--subtitle-text)]`}
+                  >
+                    Kendi başına çöz
+                  </span>
+                </button>
+
+                {user ? (
+                  <button
+                    type="button"
+                    disabled={creating}
+                    onClick={() => void handleCreateRoom()}
+                    className={`${mono} flex w-full flex-col items-start gap-1 border-2 border-[var(--bordeaux)] bg-[var(--bordeaux)]/12 px-5 py-4 text-left text-[10px] uppercase tracking-[0.2em] text-[var(--ink)] transition-colors hover:border-[var(--bordeaux-bright)] disabled:cursor-wait disabled:opacity-70`}
+                  >
+                    <span>
+                      {creating ? "Oda hazırlanıyor..." : "▸ Oda kur — ekibinle"}
+                    </span>
+                    <span
+                      className={`${typewriter} text-[11px] normal-case tracking-[0.06em] text-[var(--subtitle-text)]`}
+                    >
+                      4 kişiye kadar co-op
+                    </span>
+                  </button>
+                ) : null}
+              </div>
+
+              {createError ? (
+                <p
+                  className={`${mono} text-[10px] uppercase tracking-[0.12em] text-[var(--bordeaux-bright)]`}
+                >
+                  {createError}
+                </p>
+              ) : null}
+
+              <p
+                className={`${typewriter} text-[12px] leading-relaxed tracking-[0.05em] text-[var(--subtitle-text)]`}
+              >
+                Bir odaya katılmak istiyorsan{" "}
+                <Link
+                  href="/oda/katil"
+                  onClick={closeChoiceModal}
+                  className={`${mono} text-[11px] uppercase tracking-[0.14em] text-[var(--bordeaux)] underline-offset-4 hover:underline`}
+                >
+                  ▸ Kod ile katıl
+                </Link>
+              </p>
+
+              <button
+                type="button"
+                onClick={closeChoiceModal}
+                className={`${mono} mt-auto inline-flex min-h-[44px] items-center justify-center border border-[var(--ink)]/28 bg-[var(--ink)]/[0.07] px-6 py-3 text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--ink)]/85 transition-colors hover:bg-[var(--ink)]/12`}
+              >
+                İptal
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </article>
   );
 }

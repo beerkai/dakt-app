@@ -17,3 +17,28 @@ export interface SolvedCase {
   duration_seconds: number;
   solved_at: string;
 }
+
+export type RoomStatus = "waiting" | "playing" | "solved" | "archived";
+
+export interface Room {
+  id: string;
+  code: string;
+  case_id: string;
+  host_user_id: string;
+  status: RoomStatus;
+  created_at: string;
+  started_at?: string;
+  finished_at?: string;
+  archived_at?: string;
+}
+
+export interface RoomPlayer {
+  id: string;
+  room_id: string;
+  user_id: string;
+  username: string;
+  color: AnalystColor;
+  is_ready: boolean;
+  joined_at: string;
+  left_at?: string;
+}
