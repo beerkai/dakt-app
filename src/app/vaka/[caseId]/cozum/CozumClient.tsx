@@ -18,7 +18,7 @@ import {
   readAttemptCount,
   readCaseStartTimestamp,
 } from "@/lib/case-playthrough-storage";
-import { clearActiveSession } from "@/lib/active-session";
+import { clearActiveSession, getActiveSession } from "@/lib/active-session";
 import { readGuestUsernameTrimmed } from "@/lib/guest-session";
 import {
   upsertLocalSolvedRecord,
@@ -203,8 +203,14 @@ export function CozumClient({
 
   useEffect(() => {
     if (view !== "result" || !isCorrect) return;
-    clearActiveSession();
-    window.dispatchEvent(new Event("dakt-session-change"));
+
+    const session = getActiveSession();
+    const isCoop = session?.mode === "coop" && !!session?.roomId;
+
+    if (!isCoop) {
+      clearActiveSession();
+      window.dispatchEvent(new Event("dakt-session-change"));
+    }
   }, [view, isCorrect]);
 
   /* Aşama 4: sertifika modal — Escape ile kapatma
