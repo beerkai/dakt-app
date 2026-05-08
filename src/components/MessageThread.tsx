@@ -42,6 +42,17 @@ function PlatformBadge({ platform }: { platform: MessagePlatform }) {
       </div>
     );
   }
+  if (platform === "twitch") {
+    return (
+      <div
+        className="flex size-9 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white"
+        style={{ background: "#9146FF" }}
+        aria-hidden
+      >
+        TV
+      </div>
+    );
+  }
   return (
     <div
       className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#555] text-[14px] font-bold text-[var(--paper)]"
@@ -290,9 +301,13 @@ export function MessageThread({ thread }: { thread: MessageThreadT }) {
                   ? alignRight
                     ? { background: "#007aff" }
                     : { background: "#3b3b3d" }
-                  : alignRight
-                    ? { background: "#005c4b" }
-                    : { background: "#1f2c33" };
+                  : platform === "twitch"
+                    ? alignRight
+                      ? { background: "#9146FF" }
+                      : { background: "#18181B" }
+                    : alignRight
+                      ? { background: "#005c4b" }
+                      : { background: "#1f2c33" };
 
             return (
               <div key={msg.id} className="space-y-2">

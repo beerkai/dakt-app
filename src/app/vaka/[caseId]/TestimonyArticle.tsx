@@ -11,7 +11,7 @@ export function TestimonyArticle({
   t: Testimony;
 }) {
   const headingTitle =
-    t.session != null && !/\([12]\.\s*Oturum\)/.test(t.title)
+    t.session != null && !/\([123]\.\s*Oturum\)/.test(t.title)
       ? `${t.title} (${t.session}. Oturum)`
       : t.title;
 

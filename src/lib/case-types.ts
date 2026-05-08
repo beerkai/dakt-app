@@ -60,7 +60,7 @@ export interface Testimony {
   headerDocId: string;
   title: string;
   /** Çift oturum ifadeleri — sıralama ve (isteğe bağlı) başlık için */
-  session?: 1 | 2;
+  session?: 1 | 2 | 3;
   /** 2. oturum gibi özel meta satırları (varsayılan Tarih/Doğum/Meslek/Adres yerine) */
   metaRows?: Array<{ label: string; value: string }>;
 }
@@ -104,7 +104,8 @@ export type MessagePlatform =
   | "whatsapp"
   | "imessage"
   | "instagram"
-  | "email";
+  | "email"
+  | "twitch";
 
 export interface MessageParticipant {
   name: string;
