@@ -30,28 +30,6 @@ export function attemptsStorageKey(caseId: string): string {
   return `dakt_attempts_${caseId}`;
 }
 
-/** Kayıtlı kullanıcı: son başarılı solve Supabase'e işlendi mi (yerel bayrak). */
-export function serverSolvedRecordedStorageKey(caseId: string): string {
-  return `dakt_case_server_recorded_${caseId}`;
-}
-
-export function cozumSessionStorageKey(caseId: string): string {
-  return `dakt_v${caseId}_cozum_session`;
-}
-
-/** GM sıfırlaması vb. — sunucuda kayıt yokken kalan yerel ilerlemeyi temizler. */
-export function clearPlaythroughProgressForCase(caseId: string): void {
-  if (typeof window === "undefined") return;
-  try {
-    localStorage.removeItem(attemptsStorageKey(caseId));
-    localStorage.removeItem(caseStartStorageKey(caseId));
-    localStorage.removeItem(serverSolvedRecordedStorageKey(caseId));
-    localStorage.removeItem(cozumSessionStorageKey(caseId));
-  } catch {
-    /* ignore */
-  }
-}
-
 export function readAttemptCount(caseId: string): number {
   if (typeof window === "undefined") return 0;
   try {
