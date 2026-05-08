@@ -255,7 +255,7 @@ export default function GirisPage() {
           }}
           role="alert"
         >
-          ◉ Bu hesap askıya alınmış. Detay için iletişime geç: jointhedakt@gmail.com
+          ◉ Bu hesap askıya alınmış. Detay için iletişime geç: destek@dakt.app
         </div>
       ) : null}
       <div

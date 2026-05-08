@@ -248,10 +248,10 @@ export default function KullanimKosullariPage() {
       <p>
         Sorularınız için:{" "}
         <a
-          href="mailto:jointhedakt@gmail.com"
+          href="mailto:destek@dakt.app"
           style={{ color: "var(--kraft)" }}
         >
-          jointhedakt@gmail.com
+          destek@dakt.app
         </a>
       </p>
     </div>

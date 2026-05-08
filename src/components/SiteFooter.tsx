@@ -52,7 +52,10 @@ function SiteFooterBrandRow() {
       >
         @dakt.app
       </a>{" "}
-      · jointhedakt@gmail.com
+      ·{" "}
+      <a href="mailto:join@dakt.app" className="foot-email">
+        join@dakt.app
+      </a>
     </div>
   );
 }

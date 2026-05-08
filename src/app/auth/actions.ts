@@ -98,7 +98,7 @@ export async function signIn(formData: FormData): Promise<AuthActionResult> {
       await supabase.auth.signOut();
       return {
         error:
-          "Bu hesap askıya alınmış. Detay için: jointhedakt@gmail.com",
+          "Bu hesap askıya alınmış. Detay için: destek@dakt.app",
       };
     }
   }

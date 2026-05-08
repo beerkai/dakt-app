@@ -76,10 +76,10 @@ export default function AydinlatmaMetniPage() {
         (beta) ürün olarak Berkay Aytekin tarafından bireysel olarak
         işletilmektedir. İletişim:{" "}
         <a
-          href="mailto:jointhedakt@gmail.com"
+          href="mailto:destek@dakt.app"
           style={{ color: "var(--kraft)" }}
         >
-          jointhedakt@gmail.com
+          destek@dakt.app
         </a>
       </p>
 
@@ -190,10 +190,10 @@ export default function AydinlatmaMetniPage() {
       <p>
         Bu hakları kullanmak için{" "}
         <a
-          href="mailto:jointhedakt@gmail.com"
+          href="mailto:destek@dakt.app"
           style={{ color: "var(--kraft)" }}
         >
-          jointhedakt@gmail.com
+          destek@dakt.app
         </a>{" "}
         adresinden bizimle iletişime geçebilirsiniz. Talebiniz
         <strong style={{ color: "var(--kraft)" }}> 30 gün içinde </strong>

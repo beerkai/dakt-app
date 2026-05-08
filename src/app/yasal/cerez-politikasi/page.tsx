@@ -170,10 +170,10 @@ export default function CerezPolitikasiPage() {
       <p>
         Çerez kullanımı hakkında sorularınız için:{" "}
         <a
-          href="mailto:jointhedakt@gmail.com"
+          href="mailto:destek@dakt.app"
           style={{ color: "var(--kraft)" }}
         >
-          jointhedakt@gmail.com
+          destek@dakt.app
         </a>
       </p>
     </div>

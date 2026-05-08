@@ -1617,13 +1617,15 @@ body::after {
   letter-spacing: 0.2em;
   color: var(--kraft-dark);
 }
-.foot-instagram {
+.foot-instagram,
+.foot-email {
   cursor: pointer;
   color: inherit;
   text-decoration: none;
   text-transform: none;
   transition: color 0.2s ease;
 }
-.foot-instagram:hover {
+.foot-instagram:hover,
+.foot-email:hover {
   color: var(--kraft-light);
 }
