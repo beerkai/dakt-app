@@ -13,10 +13,13 @@ import {
 import type { Suspect, VerdictData } from "@/lib/case-types";
 import {
   accuracyPercentForAttempts,
+  clearPlaythroughProgressForCase,
+  cozumSessionStorageKey,
   formatDurationMs,
   incrementAttemptCount,
   readAttemptCount,
   readCaseStartTimestamp,
+  serverSolvedRecordedStorageKey,
 } from "@/lib/case-playthrough-storage";
 import { clearActiveSession } from "@/lib/active-session";
 import { readGuestUsernameTrimmed } from "@/lib/guest-session";
@@ -32,12 +35,11 @@ import {
   markedSuspectsStorageKey,
   readMarkedSuspects,
 } from "@/lib/marked-suspects-storage";
+import type { RealtimeChannel } from "@supabase/supabase-js";
+import { useRoomActivePlayers } from "@/hooks/useRoomActivePlayers";
+import { useRoomVoting } from "@/hooks/useRoomVoting";
 
 type ViewState = "voting" | "envelope" | "result";
-
-function cozumSessionKey(caseId: string) {
-  return `dakt_v${caseId}_cozum_session`;
-}
 
 const MIN_FLIP_H = 260;
 
@@ -63,20 +65,327 @@ function VerdictDocumentHtml({
   );
 }
 
+export type CozumCoopMeta = {
+  roomId: string;
+  myUserId: string;
+  myUsername: string;
+  myColor: string | null;
+  isHost: boolean;
+  hostBypassEnabled: boolean;
+};
+
+function analystChipBackground(color: string | null): string {
+  switch (color) {
+    case "mavi":
+      return "var(--analyst-blue)";
+    case "sari":
+      return "var(--analyst-yellow)";
+    case "yesil":
+      return "var(--analyst-green)";
+    case "mor":
+      return "var(--analyst-purple)";
+    case "turuncu":
+      return "var(--analyst-orange)";
+    default:
+      return "var(--kraft)";
+  }
+}
+
+function CoopVotingSection({
+  voteSuspects,
+  markedSet,
+  coopMeta,
+  voting,
+  activePlayerCount,
+  btnMono,
+  onOpenEnvelopeForAll,
+}: {
+  voteSuspects: VoteSuspect[];
+  markedSet: Set<string>;
+  coopMeta: CozumCoopMeta;
+  voting: ReturnType<typeof useRoomVoting>;
+  activePlayerCount: number;
+  btnMono: string;
+  onOpenEnvelopeForAll: (suspectId: string) => void | Promise<void>;
+}) {
+  const voteCounts = voteSuspects.reduce<Record<string, number>>((acc, s) => {
+    acc[s.suspectId] = voting.votes.filter(
+      (v) => v.voted_suspect_id === s.suspectId,
+    ).length;
+    return acc;
+  }, {});
+
+  const totalVotes = voting.votes.length;
+  const allVoted = activePlayerCount > 0 && totalVotes >= activePlayerCount;
+  const uniqueSuspectsVoted = new Set(
+    voting.votes.map((v) => v.voted_suspect_id),
+  );
+  const isUnanimous = allVoted && uniqueSuspectsVoted.size === 1;
+  const consensusSuspectId = isUnanimous
+    ? (voting.votes[0]?.voted_suspect_id ?? null)
+    : null;
+
+  return (
+    <>
+      <div className="cozum-callout-warn">
+        ◎ CO-OP — Ekibin aynı şüpheliye oy vermesi gerekir. Oy sayısı güncellenir;
+        zarf yalnızca oy birliği (veya host bypass kuralı) ile açılır.
+      </div>
+
+      <div style={{ textAlign: "center", marginBottom: 20 }}>
+        <p
+          className={`${btnMono} text-[10px] text-[var(--kraft-dark)]`}
+        >
+          CO-OP · {totalVotes}/{activePlayerCount || "—"} OY
+          {coopMeta.hostBypassEnabled && coopMeta.isHost
+            ? " · HOST BYPASS AKTİF"
+            : ""}
+        </p>
+      </div>
+
+      <div className="suspect-grid">
+        {voteSuspects.map((s) => {
+          const myVoteIs = voting.myVote?.voted_suspect_id === s.suspectId;
+          const voteCount = voteCounts[s.suspectId] ?? 0;
+          const votersForThis = voting.votes.filter(
+            (v) => v.voted_suspect_id === s.suspectId,
+          );
+
+          return (
+            <div
+              key={s.suspectId}
+              role="button"
+              tabIndex={0}
+              className={`relative suspect-card${myVoteIs ? " suspect-card--vote-selected" : ""}${voting.loading ? " opacity-80" : ""}`}
+              onClick={() => {
+                void voting.castVote(
+                  s.suspectId,
+                  coopMeta.myUsername,
+                  coopMeta.myColor,
+                );
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  void voting.castVote(
+                    s.suspectId,
+                    coopMeta.myUsername,
+                    coopMeta.myColor,
+                  );
+                }
+              }}
+            >
+              {markedSet.has(s.suspectId) ? (
+                <span
+                  className="suspect-vote-marked-pref"
+                  aria-hidden
+                  title="Şüphelendiklerinde"
+                >
+                  ⚐
+                </span>
+              ) : null}
+              {myVoteIs ? (
+                <span
+                  className={`${btnMono} absolute right-2 top-2 rounded border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] px-1.5 py-0.5 text-[8px] text-[var(--paper)]`}
+                >
+                  OYUM
+                </span>
+              ) : null}
+              <div className="suspect-id">{s.idLine}</div>
+              <h3 className="suspect-name">{s.name}</h3>
+              <div className="suspect-role">{s.role}</div>
+              <p className="suspect-quote">{s.quote}</p>
+              {voteCount > 0 ? (
+                <div
+                  className="mt-3 flex flex-wrap gap-1 border-t border-dashed border-[var(--rule)] pt-2"
+                  style={{ marginTop: 12 }}
+                  onClick={(e) => e.stopPropagation()}
+                  onKeyDown={(e) => e.stopPropagation()}
+                >
+                  {votersForThis.map((v) => (
+                    <span
+                      key={v.id}
+                      className="text-[9px] uppercase tracking-[0.08em]"
+                      style={{
+                        background: analystChipBackground(v.user_color),
+                        color: "var(--ink)",
+                        padding: "2px 8px",
+                        fontFamily: "var(--font-jetbrains-mono), monospace",
+                      }}
+                    >
+                      ★ {v.username}
+                    </span>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          );
+        })}
+      </div>
+
+      <div
+        className="flex flex-col items-stretch gap-4 pb-8 pt-2"
+        style={{
+          border: "1px solid var(--rule)",
+          padding: 20,
+          background: "var(--anthracite-2)",
+        }}
+      >
+        {!voting.myVote ? (
+          <p
+            className={`text-center text-[13px] text-[var(--kraft-light)] [font-family:var(--font-special-elite),monospace]`}
+          >
+            Şüpheli kartına tıklayarak oy ver.
+          </p>
+        ) : !allVoted ? (
+          <>
+            <p
+              className={`text-center text-[13px] text-[var(--kraft-light)] [font-family:var(--font-special-elite),monospace]`}
+            >
+              Diğer analistler oylamayı tamamlasın…
+            </p>
+            <button
+              type="button"
+              onClick={() => void voting.retractVote()}
+              className={`${btnMono} border border-[var(--rule)] bg-transparent py-3 text-[var(--kraft)] hover:border-[var(--kraft)]`}
+            >
+              ◂ Oyumu Geri Çek
+            </button>
+          </>
+        ) : isUnanimous && consensusSuspectId ? (
+          <>
+            <p
+              className={`text-center text-[18px] italic text-[var(--paper)] [font-family:var(--font-cormorant),serif]`}
+            >
+              Oy birliği sağlandı.
+            </p>
+            <button
+              type="button"
+              onClick={() => void onOpenEnvelopeForAll(consensusSuspectId)}
+              className={`${btnMono} border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] py-4 text-[var(--paper)] hover:bg-[var(--bordeaux-bright)] md:py-[18px]`}
+            >
+              ▸ Zarfı Aç
+            </button>
+          </>
+        ) : (
+          <>
+            <p
+              className={`text-center text-[18px] italic text-[var(--bordeaux-bright)] [font-family:var(--font-cormorant),serif]`}
+            >
+              Anlaşılamadı. Oylar farklı.
+            </p>
+            <p
+              className={`text-center text-[12px] text-[var(--kraft)] [font-family:var(--font-special-elite),monospace]`}
+            >
+              Tartışın ve oylarınızı değiştirin; host bypass kapalıysa oy birliği
+              şart.
+            </p>
+            <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+              <button
+                type="button"
+                onClick={() => void voting.retractVote()}
+                className={`${btnMono} border border-[var(--rule)] bg-transparent py-3 text-[var(--kraft)]`}
+              >
+                ◂ Oyumu Geri Çek
+              </button>
+              {coopMeta.hostBypassEnabled && coopMeta.isHost && voting.myVote ? (
+                <button
+                  type="button"
+                  onClick={() =>
+                    void onOpenEnvelopeForAll(
+                      voting.myVote!.voted_suspect_id,
+                    )
+                  }
+                  className={`${btnMono} border border-[var(--bordeaux-bright)] bg-transparent py-3 text-[var(--bordeaux-bright)]`}
+                >
+                  ▸ Yine de Aç (Host)
+                </button>
+              ) : null}
+            </div>
+          </>
+        )}
+      </div>
+    </>
+  );
+}
+
 export function CozumClient({
   caseId,
   codename,
   suspects,
   verdict,
+  serverHasSolvedRecord = false,
+  coopMeta = null,
 }: {
   caseId: string;
   codename: string;
   suspects: Suspect[];
   verdict: VerdictData;
+  /** Kayıtlı kullanıcı: bu vaka için solved_cases satırı var mı (profil senkronu). */
+  serverHasSolvedRecord?: boolean;
+  coopMeta?: CozumCoopMeta | null;
 }) {
   const router = useRouter();
   const { user } = useAuth();
   const hasRecordedSolved = useRef(false);
+  const coopChannelRef = useRef<RealtimeChannel | null>(null);
+  const viewRef = useRef<ViewState>("voting");
+
+  const inCoopSolution = Boolean(coopMeta);
+  const roomIdForCoop = coopMeta?.roomId ?? null;
+  const userIdForCoop = coopMeta?.myUserId ?? null;
+  const voting = useRoomVoting(roomIdForCoop, userIdForCoop);
+  const { count: activePlayerCount } = useRoomActivePlayers(roomIdForCoop);
+
+  const openCoopEnvelope = useCallback(
+    async (suspectId: string) => {
+      const ch = coopChannelRef.current;
+      if (ch) {
+        await ch.send({
+          type: "broadcast",
+          event: "goto_envelope",
+          payload: { suspectId },
+        });
+        return;
+      }
+      if (viewRef.current === "voting") {
+        incrementAttemptCount(caseId);
+        setSelectedSuspect(suspectId);
+        setVoteConfirmed(false);
+        setView("envelope");
+        setEnvelopeOpen(false);
+      }
+    },
+    [caseId],
+  );
+
+  useEffect(() => {
+    if (!coopMeta?.roomId || !user) return;
+    const supabase = createClient();
+    const ch = supabase.channel(`coop_cozum:${coopMeta.roomId}`, {
+      config: { broadcast: { self: true } },
+    });
+    ch.on("broadcast", { event: "goto_envelope" }, ({ payload }) => {
+      const p = payload as { suspectId?: string };
+      const sid = p?.suspectId;
+      if (!sid || typeof sid !== "string") return;
+      if (viewRef.current !== "voting") return;
+      incrementAttemptCount(caseId);
+      setSelectedSuspect(sid);
+      setVoteConfirmed(false);
+      setView("envelope");
+      setEnvelopeOpen(false);
+    });
+    ch.subscribe((status) => {
+      if (status === "SUBSCRIBED") {
+        coopChannelRef.current = ch;
+      }
+    });
+    return () => {
+      coopChannelRef.current = null;
+      void supabase.removeChannel(ch);
+    };
+  }, [coopMeta?.roomId, user, caseId]);
   const baseVoteSuspects: VoteSuspect[] = useMemo(
     () =>
       suspects.map((s) => ({
@@ -142,6 +451,8 @@ export function CozumClient({
   // Aşama 4: const certRef = useRef<CertificateHandle>(null);
   const [analystDisplay, setAnalystDisplay] = useState("Misafir Analist");
 
+  viewRef.current = view;
+
   useEffect(() => {
     function readName() {
       const v = readGuestUsernameTrimmed();
@@ -184,6 +495,12 @@ export function CozumClient({
         );
         if (error) {
           console.error("Vaka kaydı hatası:", error);
+        } else {
+          try {
+            localStorage.setItem(serverSolvedRecordedStorageKey(caseId), "1");
+          } catch {
+            /* ignore */
+          }
         }
       })();
       return;
@@ -223,11 +540,33 @@ export function CozumClient({
 
   useEffect(() => {
     try {
-      localStorage.removeItem(cozumSessionKey(caseId));
+      localStorage.removeItem(cozumSessionStorageKey(caseId));
     } catch {
       /* ignore */
     }
   }, [caseId]);
+
+  useEffect(() => {
+    if (!user) return;
+    const flagKey = serverSolvedRecordedStorageKey(caseId);
+    let hadFlag = false;
+    try {
+      hadFlag = localStorage.getItem(flagKey) === "1";
+    } catch {
+      /* ignore */
+    }
+    if (!serverHasSolvedRecord && hadFlag) {
+      clearPlaythroughProgressForCase(caseId);
+      return;
+    }
+    if (serverHasSolvedRecord && !hadFlag) {
+      try {
+        localStorage.setItem(flagKey, "1");
+      } catch {
+        /* ignore */
+      }
+    }
+  }, [user, caseId, serverHasSolvedRecord]);
 
   const measureFlip = useCallback(() => {
     const h = frontSizerRef.current?.offsetHeight ?? 0;
@@ -290,66 +629,81 @@ export function CozumClient({
     <>
       {view === "voting" && (
         <>
-          <div className="cozum-callout-warn">
-            ⚠ DİKKAT — Tek hakkın var. Şüpheli listesinden faili işaret et.
-            Yanlış tahmin: dosya kapanır, fail kaçar. Doğru tahmin: dava çözülür.
-          </div>
+          {inCoopSolution && coopMeta ? (
+            <CoopVotingSection
+              voteSuspects={voteSuspects}
+              markedSet={markedSet}
+              coopMeta={coopMeta}
+              voting={voting}
+              activePlayerCount={activePlayerCount}
+              btnMono={btnMono}
+              onOpenEnvelopeForAll={openCoopEnvelope}
+            />
+          ) : (
+            <>
+              <div className="cozum-callout-warn">
+                ⚠ DİKKAT — Tek hakkın var. Şüpheli listesinden faili işaret et.
+                Yanlış tahmin: dosya kapanır, fail kaçar. Doğru tahmin: dava
+                çözülür.
+              </div>
 
-          <div className="suspect-grid">
-            {voteSuspects.map((s) => {
-              const sel = selectedSuspect === s.suspectId;
-              return (
-                <div
-                  key={s.suspectId}
-                  role="radio"
-                  aria-checked={sel}
-                  tabIndex={0}
-                  className={`suspect-card${sel ? " suspect-card--vote-selected" : ""}${voteConfirmed && sel ? " suspect-card--vote-confirm" : ""}`}
-                  onClick={() => setSelectedSuspect(s.suspectId)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setSelectedSuspect(s.suspectId);
-                    }
-                  }}
-                >
-                  {markedSet.has(s.suspectId) ? (
-                    <span
-                      className="suspect-vote-marked-pref"
-                      aria-hidden
-                      title="Şüphelendiklerinde"
+              <div className="suspect-grid">
+                {voteSuspects.map((s) => {
+                  const sel = selectedSuspect === s.suspectId;
+                  return (
+                    <div
+                      key={s.suspectId}
+                      role="radio"
+                      aria-checked={sel}
+                      tabIndex={0}
+                      className={`suspect-card${sel ? " suspect-card--vote-selected" : ""}${voteConfirmed && sel ? " suspect-card--vote-confirm" : ""}`}
+                      onClick={() => setSelectedSuspect(s.suspectId)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          setSelectedSuspect(s.suspectId);
+                        }
+                      }}
                     >
-                      ⚐
-                    </span>
-                  ) : null}
-                  <div className="suspect-id">{s.idLine}</div>
-                  <h3 className="suspect-name">{s.name}</h3>
-                  <div className="suspect-role">{s.role}</div>
-                  <p className="suspect-quote">{s.quote}</p>
-                </div>
-              );
-            })}
-          </div>
+                      {markedSet.has(s.suspectId) ? (
+                        <span
+                          className="suspect-vote-marked-pref"
+                          aria-hidden
+                          title="Şüphelendiklerinde"
+                        >
+                          ⚐
+                        </span>
+                      ) : null}
+                      <div className="suspect-id">{s.idLine}</div>
+                      <h3 className="suspect-name">{s.name}</h3>
+                      <div className="suspect-role">{s.role}</div>
+                      <p className="suspect-quote">{s.quote}</p>
+                    </div>
+                  );
+                })}
+              </div>
 
-          <div className="flex flex-col items-stretch gap-4 pb-8 pt-2">
-            {!selectedSuspect ? (
-              <button
-                type="button"
-                disabled
-                className={`${btnMono} cursor-not-allowed border border-[var(--rule)] bg-[var(--anthracite-2)] py-4 text-[var(--meta-label)]`}
-              >
-                ▸ Bir şüpheli seç
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={handleConfirmVote}
-                className={`${btnMono} border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] py-4 text-[var(--paper)] hover:bg-[var(--bordeaux-bright)] md:py-[18px]`}
-              >
-                ▸ Oyumu Onayla — {selectedName}
-              </button>
-            )}
-          </div>
+              <div className="flex flex-col items-stretch gap-4 pb-8 pt-2">
+                {!selectedSuspect ? (
+                  <button
+                    type="button"
+                    disabled
+                    className={`${btnMono} cursor-not-allowed border border-[var(--rule)] bg-[var(--anthracite-2)] py-4 text-[var(--meta-label)]`}
+                  >
+                    ▸ Bir şüpheli seç
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={handleConfirmVote}
+                    className={`${btnMono} border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] py-4 text-[var(--paper)] hover:bg-[var(--bordeaux-bright)] md:py-[18px]`}
+                  >
+                    ▸ Oyumu Onayla — {selectedName}
+                  </button>
+                )}
+              </div>
+            </>
+          )}
         </>
       )}
 

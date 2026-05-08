@@ -13,6 +13,7 @@ const navLinks = [
   { href: "/yonetim/analistler", label: "Analistler" },
   { href: "/yonetim/vakalar", label: "Vaka Dosyaları" },
   { href: "/yonetim/sicil", label: "Sicil" },
+  { href: "/yonetim/ayarlar", label: "Ayarlar" },
 ];
 
 export default function GMNav({ username }: GMNavProps) {

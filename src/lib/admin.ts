@@ -41,6 +41,14 @@ export async function checkAdmin(): Promise<AdminCheck> {
   };
 }
 
+/** Sunucu aksiyonlarında — yetkisizse hata fırlatır. */
+export async function ensureAdmin() {
+  const { isAdmin } = await checkAdmin();
+  if (!isAdmin) {
+    throw new Error("Yetkisiz işlem");
+  }
+}
+
 /**
  * Audit log'a kayıt yaz.
  */

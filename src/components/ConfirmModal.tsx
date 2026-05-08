@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { createPortal } from "react-dom";
 
 export type ConfirmVariant = "default" | "warning" | "danger";
 
@@ -53,6 +54,7 @@ export default function ConfirmModal({
   }, [open]);
 
   if (!open) return null;
+  if (typeof document === "undefined") return null;
 
   const confirmClassName =
     variant === "danger"
@@ -72,7 +74,7 @@ export default function ConfirmModal({
     (onCancel ?? onClose)();
   };
 
-  return (
+  return createPortal(
     <div className="confirm-modal-backdrop" onClick={handleCancel}>
       <div
         className="confirm-modal"
@@ -124,6 +126,7 @@ export default function ConfirmModal({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

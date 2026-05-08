@@ -196,8 +196,12 @@ export function VakaCaseInnerNav({
           <div className="vaka-case-strip-tabs-row">
             <div className="vaka-case-strip-tabs">
               {tabs.map((tab) => {
-                const href = caseTabHref(caseId, tab);
-                const active = pathname === href;
+                const baseHref = caseTabHref(caseId, tab);
+                const href =
+                  roomId != null && roomId !== ""
+                    ? `${baseHref}?room=${encodeURIComponent(roomId)}`
+                    : baseHref;
+                const active = pathname === baseHref;
                 const num = sectionNumForTab(caseData, tab);
                 return (
                   <Link
