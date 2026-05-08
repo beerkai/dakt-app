@@ -74,6 +74,25 @@ export default async function BriefPage({
           </>
         }
       />
+      <div
+        style={{
+          marginTop: 48,
+          paddingTop: 24,
+          borderTop: "1px dashed var(--rule)",
+          fontFamily: "var(--font-jetbrains-mono), monospace",
+          fontSize: 10,
+          letterSpacing: "0.15em",
+          color: "var(--kraft-dark)",
+          textAlign: "center",
+          opacity: 0.7,
+          fontStyle: "italic",
+          lineHeight: 1.7,
+        }}
+      >
+        ◉ KURMACA · Tüm karakterler ve olaylar hayalidir.
+        <br />
+        Gerçek kişiler veya olaylarla benzerlik tamamen tesadüfidir.
+      </div>
     </section>
   );
 }

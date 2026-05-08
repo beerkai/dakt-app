@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, type FormEvent } from "react";
 
@@ -451,6 +452,110 @@ export default function GirisPage() {
                 {signUpError}
               </p>
             ) : null}
+
+            <div
+              style={{
+                marginTop: 24,
+                marginBottom: 16,
+                display: "grid",
+                gap: 12,
+              }}
+            >
+              <label
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: 10,
+                  cursor: "pointer",
+                  fontSize: 12,
+                  lineHeight: 1.6,
+                  color: "var(--kraft-light)",
+                  fontFamily: "var(--font-jetbrains-mono), monospace",
+                }}
+              >
+                <input
+                  type="checkbox"
+                  name="age_consent"
+                  required
+                  style={{ marginTop: 4, accentColor: "var(--bordeaux)" }}
+                />
+                <span>
+                  <strong>16 yaşımdan büyüğüm</strong> ve{" "}
+                  {"D.A.K.T.'ın"} cinayet/şiddet temalı içerik barındırdığını
+                  anlıyorum.
+                </span>
+              </label>
+
+              <label
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: 10,
+                  cursor: "pointer",
+                  fontSize: 12,
+                  lineHeight: 1.6,
+                  color: "var(--kraft-light)",
+                  fontFamily: "var(--font-jetbrains-mono), monospace",
+                }}
+              >
+                <input
+                  type="checkbox"
+                  name="kvkk_consent"
+                  required
+                  style={{ marginTop: 4, accentColor: "var(--bordeaux)" }}
+                />
+                <span>
+                  <Link
+                    href="/yasal/aydinlatma-metni"
+                    target="_blank"
+                    style={{
+                      color: "var(--kraft)",
+                      textDecoration: "underline",
+                    }}
+                  >
+                    Aydınlatma Metni
+                  </Link>
+                  {"'ni"} okudum, kişisel verilerimin işlenmesini kabul ediyorum.
+                  Verilerimin{" "}
+                  <strong>Almanya&apos;da (Supabase)</strong> işlenmesini
+                  onaylıyorum.
+                </span>
+              </label>
+
+              <label
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: 10,
+                  cursor: "pointer",
+                  fontSize: 12,
+                  lineHeight: 1.6,
+                  color: "var(--kraft-light)",
+                  fontFamily: "var(--font-jetbrains-mono), monospace",
+                }}
+              >
+                <input
+                  type="checkbox"
+                  name="terms_consent"
+                  required
+                  style={{ marginTop: 4, accentColor: "var(--bordeaux)" }}
+                />
+                <span>
+                  <Link
+                    href="/yasal/kullanim-kosullari"
+                    target="_blank"
+                    style={{
+                      color: "var(--kraft)",
+                      textDecoration: "underline",
+                    }}
+                  >
+                    Kullanım Koşulları
+                  </Link>
+                  {"'nı"} okudum, kabul ediyorum.
+                </span>
+              </label>
+            </div>
+
             <button
               type="submit"
               disabled={signUpLoading}

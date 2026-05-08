@@ -4,6 +4,7 @@ import "./vaka-case.css";
 import { getCase } from "@/lib/case-helpers";
 import { notFound } from "next/navigation";
 import GuestSessionBanner from "@/components/GuestSessionBanner";
+import SiteFooter from "@/components/SiteFooter";
 import SessionTracker from "@/components/SessionTracker";
 import { SystemBar } from "@/components/SystemBar";
 import { createClient } from "@/lib/supabase/server";
@@ -113,20 +114,7 @@ export default async function CaseLayout({
       </Suspense>
       <GuestSessionBanner />
       <main className="workspace flex-1">{children}</main>
-      <footer className="foot">
-        D.A.K.T. ·{" "}
-        <em lang="en">DIVISION OF ANALYTIC KNOWLEDGE &amp; TESTIMONIES</em> ·
-        dakt.app ·{" "}
-        <a
-          href="https://instagram.com/dakt.app"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="foot-instagram"
-        >
-          @dakt.app
-        </a>{" "}
-        · jointhedakt@gmail.com
-      </footer>
+      <SiteFooter variant="case" />
       <Suspense fallback={null}>
         <VakaCaseSoloTease
           caseId={caseData.id}

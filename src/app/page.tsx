@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import SiteFooter from "@/components/SiteFooter";
+
 const btnMono =
   "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace] text-[10px] font-medium uppercase tracking-[0.26em] transition-colors";
 
@@ -208,25 +210,7 @@ export default function Home() {
       </section>
 
       {/* —— D) Alt footer —— */}
-      <footer className="relative z-[1] mt-auto border-t border-[var(--rule)] px-5 py-10 md:px-7">
-        <div className="mx-auto flex max-w-[1440px] flex-col gap-2 text-center md:text-left">
-          <p className="text-[11px] uppercase tracking-[0.22em] text-[var(--subtitle-text)] [font-family:var(--font-jetbrains-mono),monospace]">
-            D.A.K.T. ·{" "}
-            <a
-              href="https://instagram.com/dakt.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cursor-pointer normal-case transition-colors hover:text-[var(--kraft-light)]"
-            >
-              @dakt.app
-            </a>{" "}
-            · jointhedakt@gmail.com
-          </p>
-          <p className="text-[10px] uppercase tracking-[0.2em] text-[var(--meta-label)] [font-family:var(--font-jetbrains-mono),monospace]">
-            © 2026
-          </p>
-        </div>
-      </footer>
+      <SiteFooter variant="marketing" />
     </main>
   );
 }

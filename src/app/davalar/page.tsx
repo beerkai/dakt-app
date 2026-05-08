@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import SiteFooter from "@/components/SiteFooter";
+
 import { DavalarCatalog } from "./DavalarCatalog";
 import { getAllCases } from "@/lib/case-helpers";
 import { createClient } from "@/lib/supabase/server";
@@ -64,24 +66,27 @@ export default async function DavalarPage({
   }
 
   return (
-    <div className="relative z-[1] mx-auto w-full max-w-[1440px] flex-1 px-5 py-10 md:px-7 md:py-14">
-      <header className="mb-10 md:mb-12">
-        <h1 className="mb-3 text-4xl font-semibold italic text-[var(--paper)] [font-family:var(--font-cormorant),serif] md:text-5xl">
-          <em className="text-[var(--kraft)]">Aktif</em> Dosyalar
-        </h1>
-        <p
-          className="max-w-xl text-[13px] tracking-[0.06em] text-[var(--subtitle-text)] [font-family:var(--font-special-elite),monospace]"
-        >
-          Erişimine açık vakalar.
-        </p>
-      </header>
+    <div className="relative z-[1] flex min-h-full flex-1 flex-col">
+      <div className="mx-auto w-full max-w-[1440px] flex-1 px-5 py-10 md:px-7 md:py-14">
+        <header className="mb-10 md:mb-12">
+          <h1 className="mb-3 text-4xl font-semibold italic text-[var(--paper)] [font-family:var(--font-cormorant),serif] md:text-5xl">
+            <em className="text-[var(--kraft)]">Aktif</em> Dosyalar
+          </h1>
+          <p
+            className="max-w-xl text-[13px] tracking-[0.06em] text-[var(--subtitle-text)] [font-family:var(--font-special-elite),monospace]"
+          >
+            Erişimine açık vakalar.
+          </p>
+        </header>
 
-      <DavalarCatalog
-        cases={visibleCases}
-        solvedCaseIds={solvedCaseIds}
-        archivedRoomClosed={archivedRoomClosed}
-        notInRoomNotice={notInRoomNotice}
-      />
+        <DavalarCatalog
+          cases={visibleCases}
+          solvedCaseIds={solvedCaseIds}
+          archivedRoomClosed={archivedRoomClosed}
+          notInRoomNotice={notInRoomNotice}
+        />
+      </div>
+      <SiteFooter variant="marketing" />
     </div>
   );
 }
