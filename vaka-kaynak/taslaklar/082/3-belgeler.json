@@ -1,0 +1,478 @@
+{
+  "id": "082",
+  "_not": "Aşama 3 — Belgeler + Deliller. 2-ifadeler.json üzerine eklenir.",
+
+  "forensics": {
+
+    "autopsy": {
+      "docCode": "082-B",
+      "title": "Otopsi Raporu",
+      "date": "24.02.2025",
+      "author": "Uzm. Dr. Gülsüm Topal · İstanbul Adli Tıp Kurumu, Morfoloji Birimi",
+      "externalExam": [
+        "Boyun: bilateral boyun ön-yan bölgede belirgin kontüzyon — beş parmak genişliğini çağrıştıran düzensiz oval basınç izleri, sol taraf daha derin. Trakea üzerinde palpasyonla hassasiyet.",
+        "Yüz: sklera ve alt kapak konjonktivalarında yoğun peteşiyal kanama. Yüz derisinde siyanoz ve yüzeyel kapiler rüptür izleri.",
+        "Baş: sol temporal bölgede yaklaşık 4 cm çaplı epikranyal hematom. Saç kökü hasarı — 3-4 tel travmatik koparılma izleriyle.",
+        "Eller: sağ elde tırnak kırığı ve kırkılma (3. ve 4. parmak, savunma mücadelesi). Sol ön kolda lineer ekimoz (10 cm, tutunma veya itme izine uyumlu).",
+        "Gövde: ön yüzde terminal zeminden düşmeye bağlı yüzeyel abrazyon. Başka darp izi yok.",
+        "Alt ekstremite: sol diz kapağında ekimoz (düşme sırasında oluşmuş olabilir). Ayak bileklerinde iz yok."
+      ],
+      "internalExam": [
+        "Hiyoid kemik: corpus'ta tam kırık — yüksek kuvvetli manuel boğmaya özgü. Lateral horn'larda deplasman.",
+        "Tiroid kıkırdak: sağ lamina'da inkomplet kırık çizgisi. Yoğun el kuvveti gerektiriyor.",
+        "Trakea: iç yüzde peteşiyal hemoraji. Trakeal lümen izi korunmuş.",
+        "Beyin: serebral konjesyon, ödeme bağlı beyin ağırlığı artışı (1.530 g). Asfiksi ile uyumlu.",
+        "Akciğerler: bilateral peteşiyal kanama, subplevral hemoraji odakları. Asfiksi bulguları.",
+        "Kardiyovasküler: aort ve koroner arterlerde belirgin patoloji yok. Kalp ağırlığı normal sınırda.",
+        "Toksikoloji: kan alkol düzeyi 0,00 g/L. Toksik madde taraması (opioid, benzodiazepine, uyarıcı) — negatif.",
+        "Mide içeriği: kısmen sindirilmiş gıda — son yemek tahminen 5-6 saat önce."
+      ],
+      "causeOfDeath": "Bilateral boyun kompresyonu (manuel boğma) sonucu gelişen mekanik asfiksi. Yardımcı etken: hiyoid kırığı kaynaklı trakeal kapanma.",
+      "timeOfDeath": "02:45 — 03:15 (rigor mortis ve livor mortis verilerine göre tahmini)",
+      "criticalFindings": [
+        "Bilateral basınç izleri büyük elin kuvvetli kavramasıyla uyumlu — fail kurbanın boğazını her iki eliyle tutmuş.",
+        "Sağ elde savunma tırnak izi: Hasan mücadele etti. Fail DNA bırakmış olabilir (sol temporal saç kök hasarı ile örtüşüyor).",
+        "Hiyoid kırığı: ciddi kuvvet gerektirir. Kısa süreli değil, sürdürülmüş baskı.",
+        "Toksikoloji negatif: Hasan baygınlaştırılmadı, direndi.",
+        "Sol temporal hematom ve saç kökü hasarı: kurban yere düşerken ya da boğuşma sırasında kafasını çarptı — konveyörün metal çerçevesiyle uyumlu.",
+        "Mortalite süresi tahmini 3-5 dakika: fail olay yerinde en az bu süre kaldı."
+      ]
+    },
+
+    "sceneReport": {
+      "docCode": "082-A",
+      "title": "Olay Yeri Raporu",
+      "author": "Bşçvş. Sibel Çakır · İstanbul Emniyet Müdürlüğü, Olay Yeri İnceleme",
+      "findings": [
+        "1. Olay yeri: IGA Kargo Terminali, Hat-4 konveyör bandı iç bölümü, yaklaşık 47. metre noktası. Alan, terminal ana koridorundan görünmez — yük bantlarının dönüşü nedeniyle 'kör nokta' oluşuyor.",
+        "2. Kurban konumu: Hasan Aydın yüzüstü yatıyor, sol yanı konveyör bandının alt çerçevesine yaslı, başı bant kenarına 20 cm yakın. Kollar vücudun yan tarafında.",
+        "3. Termos: kurbanın kafasından yaklaşık 1.5 metre kuzeybatıda devrilmiş. İçindeki sıcak su (muhtemelen çay) 1.8 m²'lik alanda dağılmış. Damla izi doğrultusu 'aniden düşme' ile uyumlu.",
+        "4. Sağ iş eldiveni: zeminde, termos ile kurban arasında. Kısmen ıslanmış (termos döküntüsüyle). Kurbanın sağ eline ait.",
+        "5. Sol iş eldiveni (sarı, IGA standardı): konveyör alt bölümünde, 12 cm içeride, sıkışmış. Kurbanın değil — boyut ve kirlilik paterni farklı. Olay yeri inceleme ekibi DNA için ayırdı.",
+        "6. Kısmen silinmiş ayakkabı izi: zemin yüzeyinde (epoksi kaplama), konveyör solunda. Kauçuk taban, yaklaşık 42-43 numara, sağ ayak. Elliptik silinme — bilinçli silme girişimi ya da sürtünme.",
+        "7. Kargo masası: hat ortasındaki kargo masasının (polipropilen yüzey) kuzeybatı köşesinde silinme izi. Ancak yüzeyde parsiyel parmak izi kaldı — adli ekip çıkardı.",
+        "8. Hat-4 iç kamera (son kayıt 02:47): Hasan Aydın'ın kargo masasına yürüdüğü görülüyor. Sonrasında 02:50–02:55 kaydı yok.",
+        "9. Mobil telefon: kurbanın kişisel eşyaları arasında yok. İş dolabı, tulum cepleri, zemin — bulunamadı.",
+        "10. USB belleği: iş dolabının arka rafında, bir termal ceketin altında. Kasıtlı olarak örtülmüş izlenimi — standart eşya yerleşimi değil.",
+        "11. Kargo bölümü kapısı: otomatik kapı loglama sistemine göre 02:49'da içeriden açıldı, 02:53'te kapandı. Kodu kullanan: tanımlanamadı (kamera boşluğuyla örtüşüyor)."
+      ],
+      "preliminaryNote": "Olay yeri bilinçli bir cinayet sahnesini yansıtmıyor — kurgunun işaretleri yok. Ancak bazı delil silme girişimleri var: ayakkabı izi, yüzey silinmesi, mobil telefon yokluğu. Fail panikle hareket etmiş, sistematik değil."
+    }
+
+  },
+
+  "evidence": [
+
+    {
+      "code": "HAS-DNA01",
+      "tag": "DNA",
+      "title": "Saç Teli — Sol Temporal Bölge",
+      "description": "Hasan Aydın'ın sol temporal bölgesindeki hematom yakınında, konveyör metal çerçevesinde bulunan 3 saç teli. Kökten koparılmış.",
+      "details": [
+        "▸ Buluntu yeri: Hat-4 konveyörün metal yan çerçevesi, zemine 85 cm yükseklikte",
+        "▸ Tel sayısı: 3, tamamı kökten koparılmış (folikül materyali mevcut)",
+        "▸ DNA analizi: Hasan Aydın DNA profiliyle eşleşme YOK — başka kişiye ait",
+        "▸ Referans karşılaştırma: Selim Karaoğlan (28.02.2025) — TAM EŞLEŞME",
+        "▸ Yorum: Selim boğuşma sırasında kafasını konveyöre çarptı ya da kurban mücadelede saçından tuttu"
+      ]
+    },
+
+    {
+      "code": "HAS-PRK01",
+      "tag": "Parmak İzi",
+      "title": "Parmak İzi — Kargo Masası Kuzeybatı Köşesi",
+      "description": "Hat-4 kargo masasının kuzeybatı köşesinde parsiyel parmak izi. Yüzey kısmen silinmiş, iz bölgesel olarak korunmuş.",
+      "details": [
+        "▸ Buluntu yeri: Polipropilen kargo masası yüzeyi, kuzeybatı köşesi",
+        "▸ İz kalitesi: parsiyel (%62 eşleşme noktası), yeterli tanımlama için",
+        "▸ Parmak: sağ el işaret parmağı",
+        "▸ Referans karşılaştırma: Selim Karaoğlan — POZİTİF EŞLEŞME",
+        "▸ Yorum: El eldivensiz bırakılmış. 'Eldivenlerimi çıkarırım' savunması mevcut — ancak iz tazeliği (yüzey saatler önce temizlenmişti) olay gecesine işaret ediyor"
+      ]
+    },
+
+    {
+      "code": "HAS-USB01",
+      "tag": "Dijital",
+      "title": "USB Belleği — Hasan Aydın'ın İş Dolabı",
+      "description": "Hasan Aydın'ın iş dolabının arka rafında, termal ceketin altında bulunan USB belleği. 18 fotoğraf içeriyor.",
+      "details": [
+        "▸ Buluntu yeri: İş dolabı arka rafı, termal ceketle örtülü (kasıtlı saklama izlenimi)",
+        "▸ Kapasite: 16 GB, 18 fotoğraf, başka içerik yok",
+        "▸ Fotoğraf içeriği: Şüpheli bir kargo bagajının iç bölümü — farklı açılardan 18 kare",
+        "▸ Metadata: Çekim tarihi 03.02.2025, saat 02:11–02:23 (gece vardiyası)",
+        "▸ Cihaz: iPhone kamera meta verisi (gizli çekim, flaş kapalı)",
+        "▸ Yorum: Hasan, 3 hafta önce şüpheli bagajı belgeledi. Bu bilgiyi kim ya da ne amaçla kullanmayı planladığı bilinmiyor"
+      ]
+    },
+
+    {
+      "code": "HAS-TEL01",
+      "tag": "Telefon",
+      "title": "Hasan Aydın'ın Cep Telefonu — Selim'in Çantasında",
+      "description": "Hasan Aydın'a kayıtlı iPhone 13. Olay yeri yerine Selim Karaoğlan'ın kiracı çantasında bulundu (28.02.2025, ikametgah araması).",
+      "details": [
+        "▸ Buluntu yeri: Selim Karaoğlan ikametgahı — yatak odası dolap üstündeki kiracı çantası",
+        "▸ Cihaz: iPhone 13, siyah, Hasan Aydın adına kayıtlı SIM",
+        "▸ Durum: Ekran kırık (sağ alt köşe), arka cam sağlam",
+        "▸ Metadata kritik: 'El konulma saati' — 02:58 (iOS son konum kilidi). Hasan bu saatte ya hâlâ yaşıyordu ya da tam ölüyordu",
+        "▸ İçerik: WhatsApp mesaj geçmişi, arama kayıtları, USB çekimlerinin orijinalleri — erişim için şifre kırma başlatıldı",
+        "▸ Yorum: Selim'in 'kaybettim' iddiası çöküyor. Telefon çantasında saklanmış, iade edilmemiş"
+      ]
+    },
+
+    {
+      "code": "HAS-ELD01",
+      "tag": "Fiziksel",
+      "title": "Sarı İş Eldiveni — Konveyör Altı",
+      "description": "Hat-4 konveyörün alt bölümünde, 12 cm içeride sıkışmış sarı IGA standardı iş eldiveni. Kurbanın değil.",
+      "details": [
+        "▸ Buluntu yeri: Hat-4 konveyör alt bölümü, 12 cm içeride sıkışmış",
+        "▸ Renk ve tip: Sarı, IGA standart iş eldiveni, sol el",
+        "▸ Beden: L — Hasan Aydın M beden giyer (eşleşme yok)",
+        "▸ DNA analizi: iç yüzeyde ter izi — Selim Karaoğlan DNA eşleşmesi",
+        "▸ Yorum: Selim boğuşma sırasında sol eldivenini çıkardı ya da düştü. Konveyör altına sıkıştı, fark etmedi. Sağ eldiveni çıkararak masaya parmak izi bıraktı"
+      ]
+    },
+
+    {
+      "code": "HAS-TRM01",
+      "tag": "Sahne",
+      "title": "Devrilmiş Termos — Kurban Kafasının Yanı",
+      "description": "Kurbanın kafasından 1.5 m kuzeybatıda devrilmiş termos. Damla izi düşme vektörünü gösteriyor.",
+      "details": [
+        "▸ Eşya: 1 litrelik çelik termos, IGA logosuz (kişisel eşya)",
+        "▸ İçerik: Yaklaşık 350 ml sıcak sıvı (çay kalıntısı) dökülmüş",
+        "▸ Damla dağılımı: 1.8 m² alan, vektör analizi 'ani düşme' ile uyumlu — kurban ayaktayken termosu bıraktı",
+        "▸ Parmak izi: Hasan Aydın (gövde), başka iz yok",
+        "▸ Yorum: Hasan saldırı anında termosa tutunmaya ya da onu düşürmeye çalışmış olabilir. Termos olay anının 'başlangıç noktası'"
+      ]
+    },
+
+    {
+      "code": "HAS-AYK01",
+      "tag": "İz",
+      "title": "Kısmen Silinmiş Ayakkabı İzi",
+      "description": "Konveyör sol tarafı zeminde kısmen silinmiş kauçuk taban izi. Sağ ayak, 42-43 numara.",
+      "details": [
+        "▸ Buluntu yeri: Hat-4 konveyör sol kenarı, zemin epoksi kaplama",
+        "▸ Taban deseni: kauçuk, zigzag deseni (iş ayakkabısı — Hasan'ın iş ayakkabısından farklı desen)",
+        "▸ Numara tahmini: 42-43",
+        "▸ Silinme: Eliptik sürtünme — bilinçli silme girişimi ya da ayak sürüme",
+        "▸ Karşılaştırma: Selim Karaoğlan 43 numara iş ayakkabısı giyiyor (ikametgah aramasında tespit edildi)",
+        "▸ Yorum: Kısmen silinen iz panikle yapılmış bir örtbas girişimine işaret ediyor"
+      ]
+    },
+
+    {
+      "code": "HAS-KAP01",
+      "tag": "Dijital",
+      "title": "Hat-4 İç Kamera — 02:47 Son Kare",
+      "description": "Hat-4 iç kamerasının son kaydı: 02:47'de Hasan Aydın kargo masasına yürüyor. 02:50–02:55 arası kayıt yok.",
+      "details": [
+        "▸ Son kare: 22.02.2025 saat 02:47:32 — Hasan Aydın kargo masasına yaklaşıyor, sırtı kameraya dönük",
+        "▸ Sonraki kare: 02:55:07 — boş sahne, Hasan görünmüyor",
+        "▸ Kayıp süre: 7 dakika 35 saniye (02:47:33 – 02:55:06)",
+        "▸ IT logu: 02:49:58'de 'otomatik yazılım güncelleme' kaydı — ancak bu güncelleme diğer kameralar için yapılmadı",
+        "▸ Güvenlik kodu: 02:49'da Hat-4 kapısı içeriden açıldı — kameranın kesilmesiyle 2 dakika örtüşüyor",
+        "▸ Yorum: Güncelleme selektif — sadece Hat-4 kamerası etkilenmiş. Yazılım güncellemesi bu kısıtla normal değil"
+      ]
+    }
+
+  ],
+
+  "documents": [
+
+    {
+      "docCode": "082-I",
+      "title": "Vardiya Takvimi Değişiklik Belgesi — 03 Şubat 2025",
+      "type": "Kurum İçi Yazışma",
+      "content": "### IGA Kargo Terminali — Vardiya Yönetimi\n**Belge No:** VRD-2025-0203-14\n**Tarih:** 03.02.2025\n**İmzalayan:** Vardiya Amiri Mehmet Erdal\n\n---\n\n**KONU:** Hat-4 Gece Vardiyası Revizyon\n\nOperasyonel gereklilik kapsamında, 22 Şubat 2025 tarihli gece vardiyasında Hat-4 bölüm sorumluluğu **Hasan Aydın**'a (Sicil: IGA-2024-0847) verilmiştir. Hat-4 ve Hat-5 çapraz rotasyonu bu tarih itibarıyla sonlandırılmıştır.\n\nGerekçe: Hat-7 ekibi artırımı nedeniyle Hat-4 tek operatöre düşürülmüştür.\n\n---\n\n**Onay:** M. Erdal\n\n---\n\n*Kriminal Not: Bu değişiklik, 03 Şubat'taki soyunma odası görüşmesinin hemen ardından yapılmış. İki çalışan bu görüşmeyi doğruladı — Mehmet Erdal ile Selim Karaoğlan. Direktif kaynağı henüz açıklanmadı.*"
+    },
+
+    {
+      "docCode": "082-J",
+      "title": "Hasan Aydın — Banka Transfer Kayıtları (Aralık 2024 – Şubat 2025)",
+      "type": "Mali Kayıt",
+      "content": "### Ziraat Bankası — Hesap Özeti\n**Hesap Sahibi:** Hasan Aydın\n**Dönem:** 01.12.2024 – 21.02.2025\n**Talep Eden:** İstanbul Emniyet Müdürlüğü, soruşturma kapsamında\n\n---\n\n| Tarih | İşlem | Tutar | Açıklama |\n|-------|-------|-------|----------|\n| 05.12.2024 | Çıkış | 4.500 TL | Ayşe Aydın IBAN'ına havale |\n| 10.12.2024 | Giriş | 8.000 TL | Nakit yatırma — şube |\n| 15.12.2024 | Çıkış | 6.000 TL | Ayşe Aydın IBAN'ına havale |\n| 08.01.2025 | Giriş | 7.500 TL | Nakit yatırma — ATM |\n| 12.01.2025 | Çıkış | 5.500 TL | Ayşe Aydın IBAN'ına havale |\n| 20.01.2025 | Giriş | 9.000 TL | Nakit yatırma — şube |\n| 01.02.2025 | Çıkış | 7.000 TL | Ayşe Aydın IBAN'ına havale |\n| 14.02.2025 | Giriş | 6.500 TL | Nakit yatırma — ATM |\n\n---\n\n**IGA Kargo Terminali Maaş Girişleri (aynı dönem):** Aylık net 18.400 TL\n\n---\n\n*Kriminal Not: Nakit yatırmaların toplamı (yaklaşık 31.000 TL) maaş dışı bir gelir kaynağına işaret ediyor. Kaynak belgesiz — organize bir ödeme değil, düzensiz nakit. Hasan'ın 'paydan' taleplerini karşılıyor mu yoksa başka bir kaynaktan mı geliyor? Soruşturma devam ediyor.*"
+    },
+
+    {
+      "docCode": "082-L",
+      "title": "Güney Marmara Lojistik A.Ş. — Şoför Giriş-Çıkış Kayıtları",
+      "type": "Lojistik Kayıt",
+      "content": "### IGA Kargo Terminali — Tedarikçi Araç Giriş-Çıkış Logu\n**Tedarikçi:** Güney Marmara Lojistik A.Ş.\n**Şoför:** Volkan Şenel (Ehliyet: 34 ABC 4421)\n**Talep Eden:** Soruşturma kapsamında\n\n---\n\n**22 Şubat 2025:**\n\n| Saat | İşlem | Kapı | Açıklama |\n|------|-------|------|----------|\n| 02:31 | Giriş | K-3 (Kargo) | Gece girişi |\n| 03:08 | Çıkış | K-3 (Kargo) | — |\n\n**Planlı teslimat:** 22 Şubat 2025 için Güney Marmara kayıtlarında **tamamlanmamış teslimat bulunmadı.** Bir önceki tamamlanmış teslimat: 20 Şubat 2025, saat 14:30.\n\n---\n\n**Son 30 Günlük Terminal Girişleri (Volkan Şenel):**\n\n| Tarih | Giriş | Çıkış | Planlı mı? |\n|-------|-------|-------|------------|\n| 25.01.2025 | 14:15 | 15:40 | Evet |\n| 28.01.2025 | 09:30 | 10:45 | Evet |\n| 04.02.2025 | 02:18 | 03:02 | **Hayır** |\n| 10.02.2025 | 15:00 | 16:20 | Evet |\n| 17.02.2025 | 02:45 | 03:30 | **Hayır** |\n| 22.02.2025 | 02:31 | 03:08 | **Hayır** |\n\n*Kriminal Not: Son 30 günde 3 plansız gece girişi. Tüm plansız girişler 02:00–04:00 arasında. Belge dışı sevkiyat örüntüsüyle örtüşüyor.*"
+    },
+
+    {
+      "docCode": "082-M",
+      "title": "IT Sistem Logu — Hat-4 Kamera Güncelleme Kaydı",
+      "type": "Teknik Analiz",
+      "content": "### IGA Kargo Terminali — CCTV Sistem Yönetim Logu\n**Analiz Eden:** IGA IT Departmanı (soruşturma talebi)\n**Tarih:** 27.02.2025\n\n---\n\n**İncelenen Olay:** 22.02.2025, 02:50:01 – 02:55:06 arasındaki kayıp.\n\n**Tespit:**\n\n- Saat 02:49:58'de Hat-4 iç kamerasında 'yazılım güncelleme' komutu tetiklendi.\n- Bu komut **uzak bir terminal üzerinden** verildi (IP: 192.168.1.47).\n- 192.168.1.47 → Terminal güvenlik ofisi iş istasyonuna atanmış dahili IP.\n- Güncelleme diğer 14 terminal kamerasını etkilemedi — **sadece Hat-4 iç kamerasına uygulandı.**\n- Aynı güncelleme paketi 6 gün önce tüm kameralara zaten uygulanmıştı (16.02.2025).\n\n**Sonuç:** Güncelleme otomatik değil, manuel tetiklemeli. Hat-4'e özgü ve o geceye özgü olması tesadüf olasılığını ortadan kaldırıyor.\n\n---\n\n*Kriminal Not: Sarp Yılmaz 'otomatik sistem güncellemesi' açıklamasını yaptı. IT logu bunu çürüttü. Güvenlik ofisi iş istasyonuna o saat 02:49'da kimin eriştiği araştırılıyor. Kart okuyucu kaydı: Sarp Yılmaz'ın güvenlik kartı 02:44'te ofis kapısını açtı.*"
+    },
+
+    {
+      "docCode": "082-N",
+      "title": "Cemal Bektaş — Sendika Görüşme Not Defteri (Fotokopi)",
+      "type": "El Yazısı Belge",
+      "content": "### IGA İşçi Sendikası — Temsilci Görüşme Notları\n**Fotokopi talep eden:** İstanbul Emniyet Müdürlüğü\n**Orijinal:** Cemal Bektaş kişisel not defteri, Şubat 2025 sayfaları\n\n---\n\n**10.02.2025 — H.A. görüşmesi (10:30)**\n\n> Bağlam sordu — gece vardiyası, yalnız çalışma koşulları. İş kazasında sorumluluk kime düşer? Standart bilgi verdim. Ama sorularının tonu farklıydı.\n> Not: *sevkiyat biliyor mu?*\n\n---\n\n**18.02.2025 — H.A. görüşmesi (14:00)**\n\n> Tekrar geldi. Bu kez daha net sordu:\n> "Bir şey bildirirsem — yasadışı bir şey — beni korur mu devlet? İşimi kaybeder miyim?"\n> Tanık koruma mevzuatı hakkında bilgi istedim, ilgili birime danışacağım dedim.\n> **NOT: H.A. — sevk. / ihbar / kim koruyor?**\n> Bir sonraki hafta randevu ayarlanmadı. H.A. gelmedi.\n\n---\n\n*Kriminal Not: Cemal Bektaş bu notların içeriğini ilk ifadesinde 'genel sorular' olarak tanımladı. Fotokopi ibraz edildiğinde ikinci bir ifadeye davet edilmesi planlanıyor.*"
+    },
+
+    {
+      "docCode": "082-O",
+      "title": "Selim Karaoğlan — GSM Kayıtları, 21–22 Şubat 2025",
+      "type": "GSM-DNA",
+      "content": "### Turkcell Abone Kaydı — Mahkeme Kararıyla Alındı\n**Abone:** Selim Karaoğlan (0532 xxx xx71)\n**Dönem:** 21.02.2025 19:00 – 22.02.2025 06:00\n\n---\n\n| Saat | Tür | Karşı Taraf | Baz İstasyonu | Süre |\n|------|-----|-------------|---------------|------|\n| 21.02 / 21:14 | Arama | Volkan Şenel | Arnavutköy-12 | 4dk 22sn |\n| 21.02 / 23:30 | SMS | Volkan Şenel | Arnavutköy-12 | — |\n| 22.02 / 01:47 | Gelen SMS | Volkan Şenel | Arnavutköy-12 | — |\n| 22.02 / 01:49 | SMS yanıt | Volkan Şenel | Arnavutköy-12 | — |\n| 22.02 / 02:11 | Arama | — (cevaplanmadı) | Arnavutköy-12 | 0sn |\n| 22.02 / 03:15 | Arama | Volkan Şenel | Arnavutköy-12 | 1dk 08sn |\n| 22.02 / 04:51 | Arama | Volkan Şenel | Arnavutköy-12 | 2dk 34sn |\n\n**Baz istasyonu analizi:** Selim Karaoğlan 22 Şubat boyunca Arnavutköy-12 baz istasyonuna bağlı. Bu istasyon IGA Kargo Terminali dahil 2 km çaplı alanı kapsıyor — ikametgahı değil (ikametgah Esenyurt, 18 km).\n\n---\n\n*Kriminal Not: Selim'in telefonu olay boyunca terminal bölgesinde. 03:15 araması — cinayetten yaklaşık 15-30 dakika sonra Volkan'ı aradı. 04:51'de ikinci arama — Sarp Yılmaz'ın cesedi bulmasından 34 dakika sonra.*"
+    },
+
+    {
+      "docCode": "082-P",
+      "title": "IGA Kargo Terminali — Hasan Aydın Özlük Dosyası",
+      "type": "Kurum Kaydı",
+      "content": "### IGA Kargo Terminali İnsan Kaynakları\n**Dosya No:** IGA-2024-0847\n**Ad:** Hasan Aydın\n**İşe Başlama:** 17.09.2024\n\n---\n\n**Mesleki Geçmiş (IGA öncesi):**\n- 2004–2022: Aydın & Ortakları Gümrük Müşavirlik A.Ş. (ortak)\n- 2022: Şirket iflası (ticaret sicili kaydı mevcut)\n\n**Performans Notu (Vardiya Amiri Mehmet Erdal, 10.01.2025):**\n> "Hasan Bey çalışkandır, dakiktir. Ancak zaman zaman kendi bölümü dışındaki hatlara ilgi gösterdiği gözlemlenmiştir. Uyarıldı. Gümrük geçmişi kargo süreçlerine hâkimiyeti artırsa da bölüm dışına müdahale beklenmemektedir."\n\n**Disiplin:** Kayıt yok.\n\n**Acil İrtibat:** Ayşe Aydın (eski eş), 0542 xxx xx83 — velayeti devam eden çocuklar için birincil irtibat.\n\n---\n\n*Kriminal Not: Mehmet Erdal Hasan'ın 'kendi bölümü dışına ilgi gösterdiğini' 10 Ocak'ta not düştü — bu, Hasan'ın USB fotoğraflarını çektiği 3 Şubat'tan önce. Ya Hasan daha önce de bir şeyler fark etmişti, ya da Mehmet başka birinin gözlemini kayıt altına aldı.*"
+    }
+
+  ],
+
+  "messageThreads": [
+
+    {
+      "id": "082-K",
+      "docCode": "082-K",
+      "title": "WhatsApp — Selim Karaoğlan ↔ Volkan Şenel (Ocak–Şubat 2025)",
+      "platform": "whatsapp",
+      "participants": [
+        { "name": "Selim Karaoğlan", "isPerpetrator": true },
+        { "name": "Volkan Şenel" }
+      ],
+      "messages": [
+        {
+          "id": "msg-001",
+          "sender": "Selim Karaoğlan",
+          "text": "Bu hafta hazır mısın",
+          "time": "21:14",
+          "date": "25.01.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-002",
+          "sender": "Volkan Şenel",
+          "text": "hazırım aynı yer mi",
+          "time": "21:19",
+          "date": "25.01.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-003",
+          "sender": "Selim Karaoğlan",
+          "text": "Evet. R-12 arkası. Çarşamba 03:00.",
+          "time": "21:21",
+          "date": "25.01.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-004",
+          "sender": "Volkan Şenel",
+          "text": "tamam",
+          "time": "21:22",
+          "date": "25.01.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-005",
+          "sender": "Volkan Şenel",
+          "text": "bir sorun var. hasan bey hat-4te beklediğimiz yerden geçti. fotoğraf çekmiş gibi gördüm bence",
+          "time": "02:34",
+          "date": "05.02.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-006",
+          "sender": "Selim Karaoğlan",
+          "text": "Ne",
+          "time": "02:36",
+          "date": "05.02.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-007",
+          "sender": "Volkan Şenel",
+          "text": "uzun baktı bagaja. eminim. telefon çıkardı",
+          "time": "02:37",
+          "date": "05.02.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-008",
+          "sender": "Selim Karaoğlan",
+          "text": "Hallederim",
+          "time": "02:39",
+          "date": "05.02.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-009",
+          "sender": "Selim Karaoğlan",
+          "text": "Hasan benimle konuşmak istedi. ne taşıyorsunuz dedi",
+          "time": "15:42",
+          "date": "10.02.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-010",
+          "sender": "Volkan Şenel",
+          "text": "ne dedin",
+          "time": "15:45",
+          "date": "10.02.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-011",
+          "sender": "Selim Karaoğlan",
+          "text": "Normal paket dedim. ama sormaya devam etti. hissettirdi.",
+          "time": "15:47",
+          "date": "10.02.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-012",
+          "sender": "Volkan Şenel",
+          "text": "tehlikeli bu ne yapacaksın",
+          "time": "15:49",
+          "date": "10.02.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-013",
+          "sender": "Selim Karaoğlan",
+          "text": "Bilmiyorum henüz",
+          "time": "15:51",
+          "date": "10.02.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-014",
+          "sender": "Selim Karaoğlan",
+          "text": "Hasan para istedi. ben de payı alırım yoksa ihbar ederim dedi",
+          "time": "22:03",
+          "date": "18.02.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-015",
+          "sender": "Volkan Şenel",
+          "text": "yok artık",
+          "time": "22:07",
+          "date": "18.02.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-016",
+          "sender": "Selim Karaoğlan",
+          "text": "Sendikaya da gitmiş. ne yapacağı belli değil.",
+          "time": "22:09",
+          "date": "18.02.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-017",
+          "sender": "Volkan Şenel",
+          "text": "çözmen lazım bunu",
+          "time": "22:11",
+          "date": "18.02.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-018",
+          "sender": "Selim Karaoğlan",
+          "text": "Biliyorum",
+          "time": "22:14",
+          "date": "18.02.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-019",
+          "sender": "Selim Karaoğlan",
+          "text": "Yarın sevkiyat var. Mehmet halletti. Hat-4 boş kalacak o saatlerde.",
+          "time": "21:14",
+          "date": "21.02.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-020",
+          "sender": "Volkan Şenel",
+          "text": "hasan da hat-4e denk gelecek mi",
+          "time": "21:18",
+          "date": "21.02.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-021",
+          "sender": "Selim Karaoğlan",
+          "text": "Öyle göründü program. Tesadüf.",
+          "time": "21:20",
+          "date": "21.02.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-022",
+          "sender": "Volkan Şenel",
+          "text": "anladım",
+          "time": "21:21",
+          "date": "21.02.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-023",
+          "sender": "Volkan Şenel",
+          "text": "o saatlendi mi",
+          "time": "01:47",
+          "date": "22.02.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-024",
+          "sender": "Selim Karaoğlan",
+          "text": "Evet",
+          "time": "01:49",
+          "date": "22.02.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-025",
+          "type": "system",
+          "sender": "sistem",
+          "text": "Volkan Şenel mesajları okudu · 01:51",
+          "time": "01:51",
+          "date": "22.02.2025"
+        },
+        {
+          "id": "msg-026",
+          "sender": "Volkan Şenel",
+          "text": "neredesin",
+          "time": "04:23",
+          "date": "22.02.2025",
+          "status": "read"
+        },
+        {
+          "id": "msg-027",
+          "type": "system",
+          "sender": "sistem",
+          "text": "Selim Karaoğlan bu mesajı okudu · 04:51",
+          "time": "04:51",
+          "date": "22.02.2025"
+        }
+      ],
+      "meta": {
+        "extractedDate": "28.02.2025",
+        "deviceInfo": "Volkan Şenel telefonu (Samsung Galaxy A54) — ikametgah aramasında el konuldu",
+        "forensicNote": "Mesajlar Volkan Şenel'in telefonundan çıkarıldı. Selim Karaoğlan'ın kendi telefonu henüz ele geçirilmedi (kayıp bildirimi). Mesaj zinciri 5 Ocak–22 Şubat 2025 dönemini kapsıyor; bu belgede yalnızca kritik mesajlar yer almaktadır. <strong>'Tesadüf'</strong> ve <strong>'o saatlendi mi'</strong> ifadeleri koordinasyonun açık göstergesi. Volkan'ın 04:23 mesajı — cesedi bulunmasından 6 dakika sonra — ve Selim'in yanıtsız kalması kritik."
+      },
+      "footerSignature": {
+        "role": "Dijital Adli Analiz · İstanbul Emniyet Müdürlüğü",
+        "name": "Uzm. Tarık Esmer"
+      }
+    }
+
+  ]
+}

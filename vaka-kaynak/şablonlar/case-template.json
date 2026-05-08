@@ -1,0 +1,223 @@
+{
+    "_yorum": "Bu boş bir vaka şablonudur. Yeni vaka oluştururken bu yapıyı doldur. Tüm alanları korumak zorundasın — eksik alanlar build'i kırar. _yorum başlayan alanlar JSON yorumudur, builder onları görmezden gelir.",
+    
+    "id": "[3-haneli ID — örn 167]",
+    "codename": "[Tek kelimelik kod adı — örn Bagaj, Hisar, Volta]",
+    "fullTitle": "[Tam başlık — örn 'Bagaj Dosyası']",
+    "classification": "[Yüksek Öncelik / Standart / Soğuk Dosya]",
+    "caseCode": "[DAKT-[id]-[3 harf kısaltma] — örn DAKT-167-BGJ]",
+    
+    "victim": {
+      "name": "[Tam ad]",
+      "description": "[yaş, cinsiyet, meslek, kısa profil — tek satır]",
+      "_alternatif": "Otopsi raporunda 'kurban' olarak referans verilecek bilgi"
+    },
+    
+    "location": "[İl · İlçe · Mahalle · Sokak/Bina/Daire detayı]",
+    "dateRange": "[Olay tarihi ve saat aralığı — örn '3 Kasım 2024 · Gece 01:00 — 02:00']",
+    
+    "brief": {
+      "summary": "[3-5 paragraf vaka özeti. Bulunma anı, sahne, ilk bulgular. Resmi dilde başlasın, sonra insani detaya düşsün. En az 200 kelime.]",
+      "victimProfile": "[Kurbanın 2-3 paragraflık detaylı profili. Aile, iş, sosyal çevre, alışkanlıklar.]",
+      "streamRecord": "[Eğer dijital iz varsa — yayın kaydı, arama dökümü, kamera, vs. Yoksa boş bırakılabilir veya 'Olay anına dair dijital iz' başlığı altında ne varsa.]",
+      "mission": "[Analiste verilen görev — dosyada bulunması gereken belgelerin sayısı, neyi araştırması gerektiği.]",
+      "warning": "[Kritik bir uyarı veya not — failin kapıyı zorlamadığı, kurbanın direnmediği, vb. tek satır psikolojik vurgu]",
+      "documentCount": "[Toplam belge sayısı — sayı, örn 22, 25, 28]",
+      "suspectCount": 6,
+      "timeOfIncident": "[Olay zamanı kısa form — örn 'Gece 01:00 — 02:00 (tahmini)']"
+    },
+    
+    "suspects": [
+      {
+        "id": "[lowercase tek kelime — örn 'berk', 'meryem', 'aliveli']",
+        "name": "[Tam ad]",
+        "age": 30,
+        "role": "[Meslek + ilişki — örn 'Yayıncılık menajeri']",
+        "tag": "[Etiket kodu — örn 'BŞK-YNC/BS' (semt-meslek/baş harfler)]",
+        "quote": "[Tek cümlelik karakteristik söz — şüphelinin kendi sözüyle, mağdurla ilişkisini ifşa eden]",
+        "isFail": false,
+        "_yorum": "Sadece bir şüphelide isFail: true olabilir. Diğerleri false."
+      }
+    ],
+    
+    "_testimonies_yorum": "10-12 ifade dokümanı. Failin 2 veya 3 oturum, 1-2 yan şüphelinin 2 oturumu, kalanı tek oturum. Format her ifadede aynı.",
+    "testimonies": [
+      {
+        "id": "[suspectId]-[oturum-no]",
+        "docCode": "[id]-[harf]",
+        "suspectId": "[şüpheli ID'si — suspects.id ile eşleşmeli]",
+        "session": 1,
+        "title": "İfade — [Ad Soyad] ([Oturum]. Oturum)",
+        "date": "[GG.AA.YYYY · HH:MM]",
+        "meta": [
+          { "label": "Doğum", "value": "[GG.AA.YYYY]" },
+          { "label": "Meslek", "value": "[Meslek detayı]" },
+          { "label": "Adres", "value": "[Semt/Adres]" }
+        ],
+        "note": "[Sadece 2. veya 3. oturumda — hangi yeni delil sonrası ifade alındığı]",
+        "content": "[Tam ifade metni. S/C formatı. En az 200, en fazla 500 kelime. Duraksamalar parantezli.]",
+        "signature": "[Şüpheli imzası — A. Soyad formatı, örn 'B. Savaş']",
+        "criticalNote": "[Sadece bazı ifadelerde — kritik bulguların özetlendiği soruşturma notu, kırmızı arka planlı]"
+      }
+    ],
+    
+    "forensics": {
+      "autopsy": {
+        "docCode": "[id]-B",
+        "title": "Otopsi Raporu",
+        "date": "[Olay sonrası 1-2 gün]",
+        "author": "[Uzm. Dr. Ad Soyad · İstanbul/Ankara/vs Adli Tıp Kurumu]",
+        "externalExam": [
+          "[Boyun, baş, gövde, eller — fiziksel bulgular her biri ayrı satır]"
+        ],
+        "internalExam": [
+          "[Hiyoid, organlar, kanama, toksikoloji — her bulgu ayrı satır]"
+        ],
+        "causeOfDeath": "[Tıbbi terimler + sade açıklama — '...sonucu mekanik asfiksi' gibi]",
+        "timeOfDeath": "[Saat aralığı — örn '01:00 — 02:00']",
+        "criticalFindings": [
+          "[Soruşturma için kritik 4-6 bulgu, her biri ayrı satır — örneğin parmak izi paterni, savunma izleri, eksik delil]"
+        ]
+      },
+      "sceneReport": {
+        "docCode": "[id]-A",
+        "title": "Olay Yeri Raporu",
+        "author": "[Bşçvş./Komiser Ad · Olay Yeri İnceleme]",
+        "findings": [
+          "[Numbered list — kurban pozisyonu, eşya durumu, kapı, eksik nesneler, sahne kurguları, ayakkabı izleri]"
+        ],
+        "preliminaryNote": "[Olay yeri sorumlusunun ön notu — şüpheli detayların yorumu]"
+      }
+    },
+    
+    "evidence": [
+      {
+        "code": "[KURBAN_KIS]-[TIP][NO] — örn 'ZYN-USB01']",
+        "tag": "[Dijital / Biyoloji / Eksik / Sahne / İz / DNA / Telefon / Belge]",
+        "title": "[Delilin başlığı]",
+        "description": "[1-2 cümle açıklama]",
+        "details": [
+          "▸ [Kategori]: [değer/açıklama]",
+          "▸ [Kategori]: [değer/açıklama]"
+        ]
+      }
+    ],
+    
+    "_documents_yorum": "6-10 ek belge. Sözleşmeler, mali kayıtlar, mektup, kamera log, GSM/DNA, e-posta. Mesaj zincirleri ayrı (messageThreads alanı).",
+    "documents": [
+      {
+        "docCode": "[id]-[harf]",
+        "title": "[Belge başlığı]",
+        "type": "[Sözleşme / Mali / Mektup / Kamera / GSM-DNA / Günlük / E-posta]",
+        "content": "[Belge tam içeriği — markdown formatında, h3 alt başlıklar kullanılabilir]"
+      }
+    ],
+    
+    "_messageThreads_yorum": "En az 1 mesaj zinciri. Vakaya uygun platform seçilir.",
+    "messageThreads": [
+      {
+        "id": "[id]-[harf]",
+        "docCode": "[id]-[harf]",
+        "title": "[Başlık — örn 'Twitch Sohbet Logu — Son 48 Saat']",
+        "platform": "[twitch / whatsapp / instagram / imessage / email]",
+        "participants": [
+          { "id": "user1", "name": "[isim/handle]", "role": "kurban" },
+          { "id": "user2", "name": "[isim/handle]", "role": "şüpheli" }
+        ],
+        "messages": [
+          {
+            "id": "msg-001",
+            "senderId": "user1",
+            "type": "text",
+            "text": "[Mesaj içeriği]",
+            "timestamp": "[GG.AA.YYYY HH:MM]"
+          },
+          {
+            "id": "msg-002",
+            "type": "system",
+            "text": "[Sistem mesajı — 'Kullanıcı yasaklandı', 'Bağlantı kesildi' vb.]",
+            "timestamp": "[GG.AA.YYYY HH:MM]"
+          }
+        ]
+      }
+    ],
+    
+    "technical": {
+      "items": [
+        {
+          "docCode": "[id]-[harf]",
+          "title": "[Teknik analiz başlığı — örn 'OBS Yazılımı — Kapatma Logu']",
+          "content": "[Teknik analiz içeriği. Markdown formatında.]"
+        }
+      ]
+    },
+    
+    "_timeline_yorum": "10-20 satır zaman çizelgesi. Olaydan ÖNCE (motivasyon, hazırlık) + olay anı + olay SONRASI (kaçış, hata, keşif).",
+    "timeline": [
+      {
+        "time": "[Saat veya tarih+saat — '23:00' veya '2 Kasım 23:00']",
+        "event": "[Olay açıklaması — bir cümle]",
+        "source": "[Hangi belgeden çıkıyor — '053-Q kamera' / '053-D2 ifade']",
+        "isCritical": false,
+        "_yorum": "isCritical: true sadece olay anına dair veya failin kritik hatasına dair satırlar için. 3-5 tane olabilir."
+      }
+    ],
+    
+    "board": {
+      "_yorum": "Deduction board — analistin kendi düşünce şeması. İki kolon.",
+      "contradictions": [
+        "[Kim ne dedi vs delil ne gösteriyor — örn 'Berk: \"Evimdeydim\" → Kamera: 00:47 binada']"
+      ],
+      "eliminations": [
+        "[Şüpheli niye elenir — örn 'Kaan: Bağcılar baz istasyonu sabit, fiziksel olarak orada değildi']"
+      ]
+    },
+    
+    "solution": {
+      "fail": {
+        "suspectId": "[suspects.id ile eşleşen — failin id'si]",
+        "name": "[Failin tam adı]"
+      },
+      "questions": [
+        "[7 analiz sorusu — vakaya özgü, jenerik değil]"
+      ],
+      "summary": "[Cinayet saatinin dakika dakika anlatımı. Failin binaya girişinden çıkışına kadar.]",
+      "streamShutdown": "[Eğer dijital ize müdahale varsa — yayın kapatma, kamera silme, vs. Yoksa boş.]",
+      "mirrorMessage": "[Eğer sahne kurgusu varsa — bir mesaj, bir nesne, bir poz. Yoksa boş.]",
+      "criticalMistake": "[Failin yaptığı kritik hata. Kanıt zincirinin kapanış halkası.]",
+      "twoLiars": [
+        {
+          "suspect": "[Yalan söyleyen 1 — fail]",
+          "lies": "[Hangi yalanlar söyledi, hangi oturumda yakalandı]"
+        },
+        {
+          "suspect": "[Yalan söyleyen 2 — başkası]",
+          "lies": "[Niye yalan söyledi, neyi sakladı, suç işlemediği halde]"
+        }
+      ],
+      "redHerrings": [
+        {
+          "suspect": "[Şüpheli adı]",
+          "explanation": "[Niye şüphe çekti, niye fail değil]"
+        }
+      ],
+      "keyEvidence": [
+        "[id]-[kod]: [Kanıtın özet açıklaması]"
+      ],
+      "conclusion": "[Sonuç paragrafı — motivasyon + sonuç + ek soruşturmalar]",
+      "arrestDate": "[Tutuklama tarihi + lokasyon — örn '12 Kasım 2024 · Berk Savaş, Nişantaşı ikametgahı.']"
+    },
+    
+    "_diversityReport_yorum": "Aşama 1'de bu alan doldurulur. Berkay'a gösterilir, vakanın çeşitliliği nasıl sağlandığı anlatılır.",
+    "diversityReport": {
+      "city": "[Bu vaka şehri vs son 5 vakanın şehri]",
+      "socioeconomic": "[Sosyo-ekonomik sınıf farklılaşması]",
+      "victimAge": "[Yaş aralığı vs son vakalar]",
+      "motive": "[Motiv tipi vs son vakalar]",
+      "locationType": "[Mekân tipi — ev/iş/dış/kırsal — vs son vakalar]",
+      "method": "[Cinayet yöntemi vs son vakalar]",
+      "victimProfession": "[Meslek tipi vs son vakalar]",
+      "perpetratorType": "[Fail tipi (eski sevgili/iş ortağı/akraba/yabancı) vs son vakalar]",
+      "summary": "[Tek paragraf — bu vakanın hangi 3+ kriterde farklılaştığı]"
+    }
+  }

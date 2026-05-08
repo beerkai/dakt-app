@@ -1,0 +1,142 @@
+{
+  "id": "082",
+  "codename": "Bagaj",
+  "fullTitle": "Bagaj Dosyası",
+  "classification": "Yüksek Öncelik",
+  "caseCode": "DAKT-082-BGJ",
+
+  "victim": {
+    "name": "Hasan Aydın",
+    "description": "42 yaş, erkek, IGA Kargo Terminali bagaj görevlisi (5 ay) — eski gümrük müşaviri (18 yıl), 2 yıl önce iflas etmiş, boşanmış, 12 yaşında oğlu Eren ile annede"
+  },
+
+  "location": "İstanbul · Arnavutköy · İstanbul Havalimanı · IGA Kargo Terminali, Hat-4 Konveyör Bölümü",
+  "dateRange": "22 Şubat 2025 · Gece 02:45 — 03:30",
+
+  "brief": {
+    "summary": "22 Şubat 2025 sabahı 04:17'de, İstanbul Havalimanı IGA Kargo Terminali'nin Hat-4 konveyör bölümünde bir erkek cesedi bulundu. Cesedi bulan kişi aynı vardiyanın güvenlik görevlisi Sarp Yılmaz'dı — rutin tur atarken konveyörün alt bölümünde hareketsiz yatan Hasan Aydın'ı görmüştü.\n\nİlk bakışta iş kazası izlenimi veren sahne, olay yeri inceleme ekibinin 04:50'de ulaşmasıyla değişti. Hasan Aydın'ın boğazında belirgin parmak izi izleri ve yüzünde yoğun petekiyal kanama tespit edildi. Kafasının yanında dökülen bir termos, konveyörün altında sıkışmış bir iş eldiveni ve zeminde kısmen silinen bir ayakkabı izi. Bu bir iş kazası değildi.\n\nHasan Aydın, IGA'da beş aydır bagaj görevlisi olarak çalışıyordu. Öncesinde 18 yıl gümrük müşavirliği yapmış, 2 yıl önce şirketi iflas etmişti. Boşandı, on iki yaşındaki oğlu Eren annesinin yanına geçti. Son aylarda Eren'e düzenli para göndermeye başlamıştı — bagaj görevlisi maaşıyla bu meblağları karşılaması güç görünüyordu.\n\nOlay gecesi Hasan, Hat-4'te yalnız çalışıyordu. Üç hafta önce vardiya takviminde yapılan bir değişiklikle bu bölüme tek başına atanmıştı; değişikliği imzalayan vardiya amiri Mehmet Erdal'dı. Gece 02:30 civarında, kargo bölgesine planlanmamış bir ziyaretle giren Volkan Şenel adlı kargo şoförü güvenlik kameralarına yansımıştı. Bu girişin hemen ardından, 02:50–02:55 arasında terminal kamera kayıtlarında 5 dakikalık boşluk oluştu. Güvenlik görevlisi Sarp Yılmaz bu boşluk için 'sistem güncellemesi' açıklamasını verdi.\n\nSoruşturmayı Başkomiser Selen Özer devraldı. Hasan'ın iş dolabında bulunan USB belleğinde, üç hafta önce çekilmiş kargo bagajı iç fotoğrafları tespit edildi. Hasan son iki haftada sendika temsilcisi Cemal Bektaş'ı ziyaret etmiş, 'iş güvenliği üzerine sorular' sormuştu. O sorular tam olarak ne anlama geliyordu?",
+
+    "victimProfile": "Hasan Aydın, 1983 doğumlu, İstanbul Üniversitesi İktisat Fakültesi mezunu. Yirmi yıl boyunca gümrük müşavirliği yaptı — önce stajyer, sonra kıdemli uzman, sonunda ortak. Altı kişilik firmanın yarı hissesini elinde tutuyordu.\n\n2022 yılında firma ağır bir borç yükü ve başarısız bir büyük sözleşmeyle çöktü. Toplam 1.4 milyon TL borç bıraktı arkasında; Hasan şahsi iflas sürecini de yaşadı. Bu dönemde eşi Ayşe Aydın ayrılık kararı verdi, velayet için mahkemeye başvurdu. On iki yaşındaki oğlu Eren annesiyle Bursa'ya taşındı.\n\nIGA Kargo Terminali'ne başvurduğunda 42 yaşındaydı. İş arkadaşları onu 'sessiz, kendi işini yapan, kimsenin üzerine gitmeyen biri' olarak tanımlıyor. Ama 18 yıllık gümrük müşavirliği geçmişi, kargo mantığını iyi bildiği anlamına geliyordu — belki fazlasıyla. Son haftalarda telefonuna sık baktığı gözlemlenmiş, bazı geceler terminalin ıssız köşelerinde zaman geçirdiği belirtilmiş.\n\nHasan kahraman değildi. Oğluna para lazımdı ve bir şans gördüğünde elini uzattı. Ama o şans, başkalarının işine karışmaktı.",
+
+    "streamRecord": "Terminal kamera kayıtları kısmen eksik: 02:50–02:55 arası (5 dakika, Hat-4 iç kamera). Hasan Aydın'ın kişisel eşyaları arasında bulunan USB belleğinde 18 fotoğraf tespit edildi — meta veriler 03 Şubat 2025 gecesi çekildiğine işaret ediyor. Hasan'ın cep telefonu olay yerinde bulunmadı.",
+
+    "mission": "Analiste görev: 22 Şubat 2025 gece 02:45–03:30 arasında IGA Kargo Terminali Hat-4'te kimin, neden Hasan Aydın'ı öldürdüğünü tespit et. Dosyada 22 belge mevcut: 6 şüpheli ifadesi (birinin 3, birinin 2 oturum), otopsi raporu, olay yeri raporu, 6 fiziksel delil kartı, WhatsApp mesaj zinciri, 6 ek belge, teknik analizler.",
+
+    "warning": "Sahne kısmen temizlenmiş görünüyor — ama planlı bir cinayet sahnesi değil. Fail panikle hareket etmiş, bazı izleri kapatmaya çalışmış, bazılarını fark etmemiş.",
+
+    "documentCount": 22,
+    "suspectCount": 6,
+    "timeOfIncident": "Gece 02:45 — 03:30 (tahmini)"
+  },
+
+  "suspects": [
+    {
+      "id": "selim",
+      "name": "Selim Karaoğlan",
+      "age": 38,
+      "role": "IGA Kargo Terminali bagaj görevlisi, Hasan'ın vardiya arkadaşı (1 yıl) — eski gümrük sektörü bağlantısı",
+      "tag": "HAV-BGJ/SK",
+      "quote": "Hasan iyi bir adamdı. Ama bazı şeylere karışmaması gerekirdi — bunu kendisi de bilirdi.",
+      "isFail": true
+    },
+    {
+      "id": "mehmet",
+      "name": "Mehmet Erdal",
+      "age": 51,
+      "role": "IGA Kargo Terminali vardiya amiri, hat sorumlusu — Hasan'ı olay gecesi Hat-4'e yalnız atan kişi",
+      "tag": "HAV-AMD/ME",
+      "quote": "Vardiya programı operasyonel ihtiyaca göre yapılır. Hasan Bey'i yalnız bırakmak yönetimsel bir kararıydı, başka bir şey aramayın.",
+      "isFail": false
+    },
+    {
+      "id": "ayse",
+      "name": "Ayşe Aydın",
+      "age": 39,
+      "role": "Hasan Aydın'ın eski eşi, velayet davası devam ediyor — olay gecesi Bursa'daydı",
+      "tag": "BRS-OEŞ/AA",
+      "quote": "Son zamanlarda para gönderiyordu, bunu biliyorum. Ama bu beni rahatlatmıyordu. Tersine, bir şeylerin yanlış gittiğini hissediyordum.",
+      "isFail": false
+    },
+    {
+      "id": "volkan",
+      "name": "Volkan Şenel",
+      "age": 33,
+      "role": "Güney Marmara Lojistik A.Ş. kargo şoförü — olay gecesi 02:30'da terminale plansız giriş yaptı",
+      "tag": "HAV-LJK/VŞ",
+      "quote": "Kâğıt almaya geldim. Terminale böyle gelirim, büyük mevzu değil. Her şoför bilir bu işi.",
+      "isFail": false
+    },
+    {
+      "id": "sarp",
+      "name": "Sarp Yılmaz",
+      "age": 29,
+      "role": "IGA Havalimanı Güvenlik, Hat-4 gece vardiyası sorumlusu — kamera sistemine erişimi var, cesedi bulan kişi",
+      "tag": "HAV-GVN/SY",
+      "quote": "Sistem güncellemesi otomatik çalışıyor. 5 dakika boşluk büyük şey değil — benim elimde değil bu.",
+      "isFail": false
+    },
+    {
+      "id": "cemal",
+      "name": "Cemal Bektaş",
+      "age": 45,
+      "role": "IGA İşçi Sendikası temsilcisi — Hasan Aydın'ın son iki haftada iki kez ziyaret ettiği kişi",
+      "tag": "SNK-TMS/CB",
+      "quote": "Hasan geldi, birkaç şey sordu. İş güvenliği dedi. Ben de standart bilgileri verdim. Herkes benden aynı şeyleri sorar.",
+      "isFail": false
+    }
+  ],
+
+  "perpetratorDetail": {
+    "id": "selim",
+    "name": "Selim Karaoğlan",
+    "primaryMotive": {
+      "category": "Korunma",
+      "specific": "Hasan, Selim ve Volkan'ın aylardır organize ettiği uyuşturucu kargo sevkiyatını fark etti. Paydan talep etti (oğluna para lazımdı). Selim 'ortağa hayat' istemedi.",
+      "trigger": "Hasan'ın sendikaya gitmesi ve 'ihbar edersem devlet koruma verir mi' sorusu — Selim bunu öğrendi, zaman daralıyordu."
+    },
+    "secondaryMotive": {
+      "category": "Pragmatik",
+      "specific": "Aylık 40-50 bin TL gelir sağlayan sevkiyat ağının ifşa olması hem Selim hem Volkan için hapis anlamına gelirdi."
+    },
+    "innerLogic": "Selim planlamadı — panikle hareket etti. Hasan onu köşeye sıkıştırdığında 'başka çıkış yok' diye düşündü. Soğukkanlı değil, acemi bir adam.",
+    "criticalMistake": "Hasan'ı boğarken iş eldivenini çıkardı — kargo masasında parmak izi bıraktı. Ayrıca Hasan'ın telefonu boğuşmada düştü; Selim aldı, gizledi, ama telefonun metadata'sı 'alındığı saat'i ele veriyor."
+  },
+
+  "redHerrings": [
+    {
+      "suspect": "Ayşe Aydın",
+      "why_suspicious": "Hasan'ın ölümünden en çok maddi çıkar sağlayan kişi — velayet davası kapanır, nafaka yükümlülüğü düşer. 'Yeni hayat' sözleri onu rahatsız ediyordu.",
+      "why_innocent": "Olay gecesi Bursa'da kız kardeşi Feyza'nın evindeydi. Telefon kayıtları ve komşu tanıklığı örtüşüyor. Cinayetle fiziksel bağlantısı yok.",
+      "actualSecret": "Kız kardeşinin evi değil — o gece boşanma kararını vicdanında tartışmak için oraya gitmişti. Hasan'ın para göndermesini 'şüpheli para' olarak düşünmüştü ama kimseye söylememişti."
+    },
+    {
+      "suspect": "Volkan Şenel",
+      "why_suspicious": "Olay gecesi 02:30'da terminale plansız geldi. Açıklaması tutarsız. Organize suçla ilişkili.",
+      "why_innocent": "Cinayeti işlemedi. Sevkiyatı organize etmekte Selim'le ortaktı ama o gece Selim'in ne yapacağını bilmiyordu — ve sonradan öğrenince suskunluğu tercih etti.",
+      "actualSecret": "O gece gerçekten Hasan'ı uyarmaya mı, yoksa caydırmaya mı geldiği belirsiz. Telefon kayıtlarında Selim'e '\"o\" saatlendi mi?' mesajı var."
+    }
+  ],
+
+  "keyEvidence": [
+    "USB belleği — Hasan'ın gizlice çektiği kargo bagajı fotoğrafları (03 Şubat 2025)",
+    "Kargo masası parmak izi — Selim Karaoğlan eşleşmesi (eldiven çıkarıldığı an)",
+    "Saç teli (DNA) — konveyör kenarında, Selim DNA eşleşmesi",
+    "Hasan'ın telefonu — Selim tarafından alındı, saklandı; metadata 'el konulma saati' veriyor",
+    "Sendika not defteri — Cemal Bektaş'ın Hasan'la yaptığı görüşmenin notları",
+    "Volkan Şenel kargo şoför kayıtları — o gece 'plansız' gelişin belge dışı bırakılan gerçek sebebi",
+    "Vardiya takvimi değişikliği — Mehmet Erdal imzalı, Hasan'ı Hat-4'e yalnız atan karar",
+    "Kamera eksikliği (02:50–02:55) — Sarp Yılmaz'ın 'sistem güncellemesi' açıklaması"
+  ],
+
+  "diversityReport": {
+    "city": "İstanbul (tekrar — 5 vakadan 4'ü İstanbul). UYARI: Bu İstanbul vakası olmasına rağmen havalimanı kargo terminali (Arnavutköy, endüstriyel bölge) önceki İstanbul vakalarından (Kadıköy konut, Beşiktaş stüdyo, Bebek lüks, Levent gökdelen) atmosferik ve coğrafi olarak tamamen farklı.",
+    "socioeconomic": "Mavi yaka — saatlik ücretli IGA işçisi. Önceki 5 vakanın tamamında orta-üst veya üst sınıf kurban (finans danışmanı, yayıncı, koleksiyoner, turist, yönetici). İlk kez ücretli işçi kurban.",
+    "victimAge": "42 yaş — önceki kurbanlar 21 (053) ve 34 (042) yaşında; bu vaka 40+ yaş hedefini karşılıyor. Yaş aralığı genişliyor.",
+    "motive": "Sırlar + Korunma kategorisi — uyuşturucu sevkiyatını fark eden kurban, paydan talep etti, örgüt onu sustururdu. Önceki vakalar: Romantik takıntı (042), Pragmatik/sahiplik (053), Gizli geçmiş (067), Arazi+önceki suç (089), Finansal (114). Bu motif kategorisi ilk kez kullanılıyor.",
+    "locationType": "Endüstriyel — kargo terminali, konveyör bandı hattı, gece vardiyası izolasyonu. Önceki vakalar: ev ×3, ofis ×1, dış mekân ×1. İlk endüstriyel mekân.",
+    "method": "Manuel boğma (çıplak el, el kuvvetiyle) — 053'te USB-C kablo boğma kullanılmıştı. Hem araç hem sosyal bağlam tamamen farklı.",
+    "victimProfession": "Bagaj görevlisi / eski gümrük müşaviri — fiziksel mavi yaka iş. Önceki vakalar: finans danışmanı, Twitch yayıncısı, koleksiyoner, turist, kurumsal yönetici.",
+    "perpetratorType": "Vardiya arkadaşı + organize suç ağı üyesi — önceki failler: eski sevgili ×2, yayıncılık menajeri, iş ortağı, otelci. İlk kez organize suç ilişkisi içinde fail.",
+    "summary": "Vaka 082, 7/8 çeşitlilik kriterini karşılıyor: (1) mavi yaka kurban — ilk kez, (2) endüstriyel mekân — ilk kez, (3) Sırlar+Korunma motifi — ilk kez, (4) organize suç bağlantılı fail — ilk kez, (5) 40+ yaş kurban, (6) gri ahlak profili (kahraman değil kurban), (7) 'gece vardiyası izolasyonu' atmosferi. İstanbul tekrarı not edildi; endüstriyel mekân bu tekrarı çeşitlilik açısından kısmen telafi ediyor."
+  }
+}

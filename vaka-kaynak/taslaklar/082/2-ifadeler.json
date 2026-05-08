@@ -1,0 +1,179 @@
+{
+  "id": "082",
+  "_not": "Aşama 2 — İfadeler. 1-iskelet.json üzerine eklenir. Toplam 10 ifade dokümanı.",
+
+  "testimonies": [
+
+    {
+      "id": "sarp-1",
+      "docCode": "082-C",
+      "suspectId": "sarp",
+      "session": 1,
+      "title": "İfade — Sarp Yılmaz (1. Oturum)",
+      "date": "22.02.2025 · 07:15",
+      "meta": [
+        { "label": "Doğum", "value": "17.08.1995" },
+        { "label": "Meslek", "value": "IGA Havalimanı Güvenlik Görevlisi, Hat-4 Gece Vardiyası" },
+        { "label": "Adres", "value": "Başakşehir, İstanbul" }
+      ],
+      "content": "Sarp Yılmaz, göreve devam ederken ilk ifadesini saat 07:15'te verdi. Genç, biraz gergin, kelimeleri ölçüp biçiyordu.\n\nS: Hasan Aydın'ı siz buldunuz. Anlat bakalım.\nC: Sabah 04:15 civarında, rutin tur atıyordum. Hat-4'ten geçerken konveyörün alt bölümünde bir şey gördüm — önce takılan bir mal sandım. Yaklaştım. Hasan Bey'di. Hareketsizdi. Hemen merkeze bağlandım.\n\nS: O saate kadar terminalde olağandışı bir şey fark ettiniz mi?\nC: [düşünür] Gece 02:30'da Volkan Şenel girdi. Girişleri onaylıyorum — biliyordum. Ama gece yarısı girişler çok nadir değil, şoförler bazen geri döner.\n\nS: 02:50 ile 02:55 arasındaki kamera kaydı eksik. Açıklar mısınız?\nC: Sistem güncellemesi. Otomatik işliyor — programlı bir yenileme.\n\nS: Tam o gece, tam o saatte.\nC: [savunmacı] Zamanlamasını ben seçmiyorum. Sistem belirliyor. IT bölümüne bakılabilir.\n\nS: Bu güncellemeye ait log var mı?\nC: [duraksama] Olmalı. IT'ye sormak gerek.\n\nS: Selim Karaoğlan'ı o gece gördünüz mü?\nC: Başlangıçta gördüm, Hat-7 bölümünde. Sonra görmesem de normaldi — herkes kendi hattında.\n\nS: Hat-4 tarafından o gece ses duydunuz mu?\nC: Terminal büyük. Konveyörler çalışıyor, metal sesler var. Ama... [duraksama] 03:00 civarında sert bir ses duydum. Bir şey düşer gibi. Dikkat etmedim — iş kazası çok olur.",
+      "signature": "S. Yılmaz",
+      "criticalNote": "Sarp Yılmaz 03:00 civarında 'sert bir düşme sesi' duyduğunu belirtti. Cinayet saat aralığıyla örtüşüyor. IT'den kamera güncelleme logu talep edildi — 28.02'ye kadar cevap bekleniyor."
+    },
+
+    {
+      "id": "selim-1",
+      "docCode": "082-D",
+      "suspectId": "selim",
+      "session": 1,
+      "title": "İfade — Selim Karaoğlan (1. Oturum)",
+      "date": "22.02.2025 · 09:30",
+      "meta": [
+        { "label": "Doğum", "value": "14.07.1986" },
+        { "label": "Meslek", "value": "IGA Kargo Terminali Bagaj Görevlisi" },
+        { "label": "Adres", "value": "Esenyurt, İstanbul" }
+      ],
+      "content": "Selim Karaoğlan avukatsız ifade vermeyi kabul etti. Oturuma girdiğinde sakin görünüyordu, ellerini masaya düzgünce koymuştu.\n\nS: O gece vardiyada mıydınız?\nC: Evet. 22:00 başlayıp sabah 06:00'a kadardı. Standart rotasyonum.\n\nS: Hasan Aydın ile o gece görüştünüz mü?\nC: Başlangıçta gördüm. Vardiya başında kısa bir selamlama. Sonra herkes kendi hattına dağıldı. Hat-4 onundu, benim bölümüm Hat-7.\n\nS: Gece boyunca Hat-4'e gittiniz mi?\nC: Hayır. Neden gideyim? İşim kendi hattımda.\n\nS: Hasan ile ilişkiniz nasıldı?\nC: [duraksama] Normal bir iş arkadaşlığı. Fazla yakın değildik. Kimseyle yakın biri değildi zaten — sessiz, kendi işine bakardı.\n\nS: Hasan'ı sektörden önceden tanıyor muydunuz?\nC: Gümrük sektörü küçüktür, tanıyordum. Ama burada tesadüfen bir araya geldik — ikimiz de iş değiştirdik, ikimiz de IGA'ya başvurduk.\n\nS: Son haftalarda Hasan'da farklı bir davranış fark ettiniz mi?\nC: Telefona fazla bakıyordu. Ama bu beni ilgilendirmezdi. Herkesin derdi olur.\n\nS: Volkan Şenel'i tanıyor musunuz?\nC: Kargo şoförü, evet. Terminal içinde zaman zaman görürüm. Yüzeysel bir tanışıklık.\n\nS: Bu gece telefonunuzu kaybettiniz?\nC: Vardiya biterken fark ettim. Düşürmüş olabilirim. Soyunma odasına baktım, yoktu.",
+      "signature": "S. Karaoğlan"
+    },
+
+    {
+      "id": "mehmet-1",
+      "docCode": "082-E",
+      "suspectId": "mehmet",
+      "session": 1,
+      "title": "İfade — Mehmet Erdal (1. Oturum)",
+      "date": "22.02.2025 · 10:45",
+      "meta": [
+        { "label": "Doğum", "value": "03.03.1973" },
+        { "label": "Meslek", "value": "IGA Kargo Terminali Vardiya Amiri, Hat Sorumlusu" },
+        { "label": "Adres", "value": "Güneşli, İstanbul" }
+      ],
+      "content": "Mehmet Erdal ilk ifadesini oturuma bürokratik bir tavırla girdi. Sorulara hazırlıklıydı, cevapları kısa ve mesafeliydi.\n\nS: Hasan Aydın'ı o gece Hat-4'e yalnız koydunuz. Neden?\nC: Operasyonel karar. O gece başka bir vardiyada eksiklik vardı, yeniden düzenleme yaptık. Hasan o hattı bilir — beş aydır orada.\n\nS: Bu karar ne zaman alındı?\nC: Üç hafta önce vardiya listesi güncellendi. Normal prosedür.\n\nS: Hasan daha önce size şikâyette bulundu mu? Endişe, rahatsızlık?\nC: Hayır. Sessiz bir çalışandı, gelmezdi.\n\nS: Volkan Şenel'i tanıyor musunuz?\nC: Terminal içinde tanınır biridir. Güney Marmara Lojistik şoförü. Belgeleri düzgün, sorunsuz bir tedarikçi.\n\nS: O gece 02:30'da terminale girmesi sizi şaşırttı mı?\nC: Bana bildirilmedi. Terminal girişleri güvenliğin sorumluluğunda.\n\nS: Hasan'ın son aylarda bagajlara fazla ilgi gösterdiği söylendi. Kim söyledi bunu?\nC: [avukatla fısıldaşma] Bir çalışanım. İsim vermek zorunda değilim şu aşamada.\n\nS: Bu bilgiyi aldıktan sonra ne yaptınız?\nC: Dikkat etmesini istedim — yani, çalışanlarımın kendi işlerine bakmasını isterim.",
+      "signature": "M. Erdal"
+    },
+
+    {
+      "id": "volkan-1",
+      "docCode": "082-F",
+      "suspectId": "volkan",
+      "session": 1,
+      "title": "İfade — Volkan Şenel (1. Oturum)",
+      "date": "22.02.2025 · 11:30",
+      "meta": [
+        { "label": "Doğum", "value": "09.05.1991" },
+        { "label": "Meslek", "value": "Güney Marmara Lojistik A.Ş., Kargo Şoförü" },
+        { "label": "Adres", "value": "Bayrampaşa, İstanbul" }
+      ],
+      "content": "Volkan Şenel ilk ifadesini vermeye geldiğinde ayağa kalkmadan merhaba dedi. Kısa cevaplar, göz temasından kaçınma.\n\nS: O gece terminale neden geldiniz?\nC: Kâğıt almaya. Teslimat belgesi. Bazen unutursunuz, geri dönersiniz.\n\nS: Saat 02:30. Hangi teslimatın belgesi?\nC: Bir önceki. Eksik kalmıştı.\n\nS: Eksik belge için gece 02:30'da terminale mi döndünüz?\nC: [sinirli] Evet. Sabah gelseydim üstlerim sorardı.\n\nS: O gece terminalde kimi gördünüz?\nC: Güvenlikte Sarp Bey vardı girişte. Başka kimseyi görmedim.\n\nS: Hasan Aydın'ı gördünüz mü?\nC: Hayır.\n\nS: Selim Karaoğlan'ı?\nC: Hayır.\n\nS: Selim Karaoğlan ile ilişkiniz ne düzeyde?\nC: [duraksama] Terminal tanışıklığı. Bagaj çalışanı. Zaman zaman görürüm.\n\nS: Ona son bir ayda mesaj attınız mı?\nC: [duraksama] Olabilir. İş koordinasyonu.\n\nS: O gece o mesajı neden attınız?\nC: [sinirli] Hangi mesajı kastediyorsunuz?",
+      "signature": "V. Şenel",
+      "criticalNote": "Volkan Şenel o gece 'kâğıt almaya' geldiğini söylüyor. Ancak Güney Marmara Lojistik kayıtlarında o tarihe ait tamamlanmamış teslimat bulunmadı. Giriş-çıkış süresi: 02:31 — 03:08. 37 dakika."
+    },
+
+    {
+      "id": "ayse-1",
+      "docCode": "082-G",
+      "suspectId": "ayse",
+      "session": 1,
+      "title": "İfade — Ayşe Aydın (1. Oturum)",
+      "date": "23.02.2025 · 14:00",
+      "meta": [
+        { "label": "Doğum", "value": "22.11.1985" },
+        { "label": "Meslek", "value": "İlkokul Öğretmeni, Bursa Nilüfer İlçesi" },
+        { "label": "Adres", "value": "Nilüfer, Bursa" }
+      ],
+      "content": "Ayşe Aydın Bursa'dan İstanbul'a döner dönmez ifade verdi. Gözleri kırmızıydı ama sakin konuştu.\n\nS: Olay gecesi neredeydiniz?\nC: Bursa'da, kız kardeşim Feyza'nın evinde. Birkaç gündür oradaydım. Düşünmem gereken şeyler vardı.\n\nS: Hasan ile son ne zaman konuştunuz?\nC: On iki, belki on üç gün önce. Eren için aramıştı. Hasan Eren ile konuştu, sonra kapattı. Benimle konuşmak istemiyordu artık.\n\nS: Hasan'ın son aylarda para göndermesi hakkında ne düşünüyordunuz?\nC: [duraksama] İlk ay gönderdiğinde şaşırdım. Bagaj görevlisi maaşından bu kadar gönderemez diye düşündüm. Sordum, 'geçici iş yapıyorum' dedi. İnanmadım ama üstüne gitmedim.\n\nS: Neden gitmediniz?\nC: Çünkü sormak o paraları geri almak anlamına gelebilirdi. Eren'in ihtiyacı vardı.\n\nS: Velayet davasının Hasan'ın ölümüyle avantajınıza sonuçlanacağını düşündünüz mü?\nC: [ağlama] Bu soruyu sormak zorunda mısınız? Hasan çocuğumun babasıydı. Eren on iki yaşında ve artık babası yok. Bunun benim için avantaj olduğunu düşünüyorsanız yanılıyorsunuz.\n\nS: Hasan'ın eski gümrük sektöründen biriyle temasa geçtiğini biliyor muydunuz?\nC: Hayır. O dünyadan kaçmak istediğini biliyordum. Orası onu mahvetmişti.\n\nS: Son aylarda Hasan sizi endişelendiren bir şey söyledi mi?\nC: 'Bir şeyler değişecek' dedi. 'Eren her şeyi alacak' dedi. Ne demek istediğini bilmiyordum. Şimdi soruyorum kendime.",
+      "signature": "A. Aydın"
+    },
+
+    {
+      "id": "cemal-1",
+      "docCode": "082-H",
+      "suspectId": "cemal",
+      "session": 1,
+      "title": "İfade — Cemal Bektaş (1. Oturum)",
+      "date": "23.02.2025 · 16:30",
+      "meta": [
+        { "label": "Doğum", "value": "28.02.1979" },
+        { "label": "Meslek", "value": "IGA İşçi Sendikası Temsilcisi" },
+        { "label": "Adres", "value": "Küçükçekmece, İstanbul" }
+      ],
+      "content": "Cemal Bektaş sendika ofisinde ifade verdi. Kelimeleri tartarak konuştu — temsilci refleksi.\n\nS: Hasan Aydın sizi ziyaret etti. Kaç kez ve ne konuştunuz?\nC: İki kez. 10 Şubat ve 18 Şubat. Her ikisinde de ofisimde görüştük.\n\nS: Ne konuştuğunuzu anlatır mısınız?\nC: İş güvenliği. Gece vardiyasında yalnız çalışma, iş kazası sorumluluğu. Standart sorular.\n\nS: Standart mıydı gerçekten?\nC: [duraksama] Ne demek istiyorsunuz?\n\nS: Not defterinizde 'ihbar prosedürü' ve 'tanık koruma' notları var. Hasan bunları mı sordu?\nC: [uzun sessizlik] Ben... herkes farklı şeyler soruyor. Bazen iş güvenliği sorusu başka şeylerle iç içe geçiyor.\n\nS: Hasan size bir suçu ihbar etmek istediğini söyledi mi?\nC: Kesin bir şey söylemedi. 'Eğer biri bir şey fark ederse devlet koruyor mu?' diye sordu. Bu genel bir soru.\n\nS: Bu soruyu duyunca ne hissettiniz?\nC: Endişelendim. Ama ne yapacağımı bilemedim — net bir şey söylemedi. Bir sonraki ziyaretini bekliyordum.\n\nS: Bir sonraki ziyaret olmadı.\nC: [sessizlik] Hayır. Olmadı.\n\nS: Bu görüşmeleri neden üstlerinize veya güvenlik birimine bildirmediniz?\nC: [sinirli] Ben işçilerin temsilcisiyim. Çalışanların bana anlattıkları gizli kalır. Bu temel sendikal prensip.",
+      "signature": "C. Bektaş",
+      "criticalNote": "Cemal Bektaş not defterindeki kayıtları 'genel soru' olarak nitelendirdi. Ancak defterden çıkarılan 18 Şubat notunda şu ifade yer alıyor: 'H.A. — sevk. / ihbar / kim koruyor?' Hasan Aydın'ın asıl sorusunun ne olduğu netleşiyor."
+    },
+
+    {
+      "id": "selim-2",
+      "docCode": "082-D2",
+      "suspectId": "selim",
+      "session": 2,
+      "title": "İfade — Selim Karaoğlan (2. Oturum)",
+      "date": "25.02.2025 · 14:00",
+      "meta": [
+        { "label": "Tarih", "value": "25.02.2025 · 14:00" },
+        { "label": "Sebep", "value": "Hat-4 kargo masasında Selim Karaoğlan parmak izinin tespit edilmesi ve DNA analizi başlatılması" },
+        { "label": "Avukat", "value": "Hazır (Av. Murat Çelik)" }
+      ],
+      "note": "Parmak izi raporu Selim Karaoğlan'a ibraz edildi.",
+      "content": "İkinci oturum başladığında Selim Karaoğlan yanında avukatıyla oturuyordu. İlk oturumdaki sakinlik yerini hesaplı bir gerginliğe bırakmıştı.\n\nS: Hat-4 kargo masasında parmak iziniz çıktı. Orada olmadığınızı söylemiştiniz.\nC: [duraksama] O masaya bazen gidiyorum. İş kapsamında — bir şey almak, bırakmak.\n\nS: Hat-4 sizin bölümünüz değil. Ne almaya gidiyordunuz?\nC: Termos bırakıyorum bazen. Veya form. Net söylemem zor — her gece farklı.\n\nS: O geceye özgü bir şey hatırlıyor musunuz?\nC: [avukatla fısıldaşma] Belki o gece de uğradım. Ama tam emin değilim.\n\nS: Eldivenlerinizi neden çıkardınız?\nC: [uzun sessizlik] Bazen çıkarırım. Eller yoruluyor.\n\nS: Hasan Aydın size son haftalarda bir teklifte bulundu mu?\nC: [sinirli] Tekliften ne anlıyorsunuz?\n\nS: Bir şeyden pay istemek. Para.\nC: [avukatla fısıldaşma] Bu soruya cevap vermek istemiyorum.\n\nS: Volkan Şenel ile ne tür bir koordinasyonunuz var?\nC: Terminal içi iletişim. Teslimat zamanları, belge işleri.\n\nS: 'Teslimat' kelimesini kullanıyorsunuz. Hangi teslimat?\nC: [avukat araya girer] Müvekkilim bu soruya cevap vermeyecek.",
+      "signature": "S. Karaoğlan",
+      "criticalNote": "Parmak izi için üretilen 'bazen giderim' açıklaması saatlerle örtüşmüyor — kargo masası yüzeyi aynı gece temizlenmiş, iz sadece taze baskıda bu netlikte çıkabilir. DNA sonucu bekleniyor."
+    },
+
+    {
+      "id": "mehmet-2",
+      "docCode": "082-E2",
+      "suspectId": "mehmet",
+      "session": 2,
+      "title": "İfade — Mehmet Erdal (2. Oturum)",
+      "date": "26.02.2025 · 11:00",
+      "meta": [
+        { "label": "Tarih", "value": "26.02.2025 · 11:00" },
+        { "label": "Sebep", "value": "Bir çalışan tanıklığı: vardiya değişikliğinin sözlü talimatla yapıldığı bilgisi" },
+        { "label": "Avukat", "value": "Hazır (Av. Filiz Aksoy)" }
+      ],
+      "note": "Vardiya değişikliğini sözlü talimatla yaptığına dair çalışan beyanı ibraz edildi.",
+      "content": "Mehmet Erdal ikinci oturuma avukatıyla geldi. İlk oturumdaki bürokratik sakinlik kırılmaya başlıyordu.\n\nS: Bir çalışanınız, Hat-4 vardiya değişikliğini sözlü talimat üzerine yaptığınızı söylüyor. Doğru mu?\nC: [duraksama] Rutin iletişim. Operasyonel direktifler bazen sözlü olur.\n\nS: Bu direktif kimden geldi?\nC: [avukatla fısıldaşma] ...Bir üstümden.\n\nS: İsim?\nC: Kesin hatırlamıyorum. Çok şey oluyor bu terminalde.\n\nS: Mehmet Bey, bu değişikliğin amacı Hasan Aydın'ı Hat-4'te yalnız bırakmak mıydı?\nC: [sinirli] Bu suçlama yanlış. Ben ne olacağını bilmiyordum.\n\nS: 'Ne olacağını' bilmek için önce 'bir şey olacağını' bilmeniz gerekir.\nC: [uzun sessizlik]\n\nS: Selim Karaoğlan ile son bir ayda özel görüşme yaptınız mı?\nC: [avukat araya girer] Müvekkilim bu soruya cevap vermeyecek.\n\nS: Volkan Şenel'i terminale davet eden siz miydiniz?\nC: [avukat araya girer] Cevap yok.",
+      "signature": "M. Erdal",
+      "criticalNote": "Mehmet Erdal, direktifin kaynağını 'hatırlamıyorum' diyerek geçiştirdi. Ancak vardiya değişikliğinin aynı hafta Selim Karaoğlan ile uzun bir soyunma odası konuşması yapıldıktan sonra oluştuğu, iki ayrı çalışan tarafından doğrulandı."
+    },
+
+    {
+      "id": "volkan-2",
+      "docCode": "082-F2",
+      "suspectId": "volkan",
+      "session": 2,
+      "title": "İfade — Volkan Şenel (2. Oturum)",
+      "date": "26.02.2025 · 15:30",
+      "meta": [
+        { "label": "Tarih", "value": "26.02.2025 · 15:30" },
+        { "label": "Sebep", "value": "Volkan'ın telefonunda 22.02 saat 01:47'de Selim Karaoğlan'a gönderilen 'o saatlendi mi?' mesajının tespit edilmesi" },
+        { "label": "Avukat", "value": "Hazır (Av. Ozan Kara)" }
+      ],
+      "note": "'O saatlendi mi?' mesajı Volkan Şenel'e ibraz edildi.",
+      "content": "Volkan Şenel ikinci oturuma avukatıyla geldi. Sandalyeye çöktü, öne eğildi.\n\nS: Selim Karaoğlan'a 22 Şubat saat 01:47'de 'o saatlendi mi?' mesajı attınız. Ne anlama geliyor?\nC: [avukatla fısıldaşma] ...Cevap vermek istemiyorum.\n\nS: Bu mesaj, Hasan Aydın'ın o gece Hat-4'te yalnız olup olmayacağına dair koordinasyon için mi gönderildi?\nC: [sessizlik]\n\nS: Volkan Bey, cinayeti planlamadıysanız bile suç ortaklığına zemin hazırladınız. Bunu konuşmak sizin lehinize olur.\nC: [uzun sessizlik] ...Ben kimseyi öldürmedim. Yemin ederim.\n\nS: Bunu kabul ediyoruz. Ama Selim ile ne koordinasyonu yapıyordunuz?\nC: [titrek sesle] ...Bir sevkiyat vardı. Birkaç aydır yapıyorduk. Hasan bir şeyler fark etmişti. Biz endişelendik. Ben sadece 'zaman ayarı tamam mı' diye sordum. Selim'in ne yapacağını bilmiyordum. Yemin ederim, bilmiyordum.\n\nS: 'Sevkiyat' derken?\nC: [avukat araya girer] Müvekkilim bu soruya cevap vermeyecek. Ama şunu kaydettirin: Volkan Şenel'in cinayetten önceden haberi yoktu.",
+      "signature": "V. Şenel",
+      "criticalNote": "Volkan Şenel uyuşturucu sevkiyatını dolaylı olarak kabul etti. Cinayetten önceden haberdar olmadığını iddia ediyor. 01:47 mesajı ve 02:31 terminal girişinin kombinasyonu, Selim'e zaman penceresi açıldığını teyit ediyor."
+    },
+
+    {
+      "id": "selim-3",
+      "docCode": "082-D3",
+      "suspectId": "selim",
+      "session": 3,
+      "title": "İfade — Selim Karaoğlan (3. Oturum)",
+      "date": "28.02.2025 · 10:00",
+      "meta": [
+        { "label": "Tarih", "value": "28.02.2025 · 10:00" },
+        { "label": "Sebep", "value": "DNA eşleşmesi (saç teli — Selim Karaoğlan), Hasan Aydın'a ait telefonun Selim'in kiracı çantasında bulunması" },
+        { "label": "Avukat", "value": "Hazır (Av. Murat Çelik)" }
+      ],
+      "note": "DNA raporu ve Hasan Aydın'a ait telefon Selim Karaoğlan'a ibraz edildi.",
+      "content": "Üçüncü oturumda Selim Karaoğlan'ın her hareketi kontrollü olmaya çalışıyordu ama titremesi durdurulamıyordu.\n\nS: Hasan Aydın'ın telefonu kiracı çantanızda bulundu. Açıklamanız?\nC: [uzun sessizlik] ...Buldum. Düşmüştü.\n\nS: Nerede buldunuz?\nC: Hat-4 civarında. Topladım. İade etmeyi düşündüm.\n\nS: Neden o anda bildirmediniz?\nC: [sinirli] Unuttum. Stresliydim.\n\nS: Telefonun metadata'sı 02:58'de el konulduğunu gösteriyor. Hasan Aydın o saat hayattaydı — ya da tam o anda hayatta kalmayı bırakıyordu. DNA raporumuz geldi. Konveyör kenarındaki saç teli sizinle eşleşiyor.\nC: [uzun sessizlik]\n\nS: Selim Bey, o gece Hat-4'te ne oldu?\nC: [avukatla fısıldaşma] ...Ben... oradaydım.\n\nS: Devam edin.\nC: [düşük sesle] Hasan beni üç haftadır sıkıştırıyordu. Para istedi. 'Seni ihbar ederim' dedi. Ben de... bir şey oldu. Tartışma büyüdü.\n\nS: Hasan Aydın'ı siz mi öldürdünüz?\nC: [avukat araya girer] Müvekkilim bu soruyu cevaplamayacak. Ancak şunu bildiririm: müvekkil ifade vermek istemiyor, haklarını kullanıyor.\n\nS: Bir şey daha söylemek istiyor musunuz?\nC: [ağlama] Hasan iyi bir adamdı. Ben de... bilmiyorum. Bilmiyorum artık.",
+      "signature": "S. Karaoğlan",
+      "criticalNote": "Selim Karaoğlan 'oradaydım' ve 'tartışma büyüdü' ifadelerini kullandı. Tam itiraf yok, ama olay yeri varlığı artık inkâr edilmiyor. Tutuklama kararı talep edildi."
+    }
+
+  ]
+}
