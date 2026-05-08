@@ -420,3 +420,37 @@ export async function changeUserRole(
   revalidatePath("/yonetim/analistler");
   return { success: true };
 }
+
+export type CoopSolutionModeSetting =
+  | "unanimous"
+  | "unanimous_with_host_bypass";
+
+export async function updateCoopSolutionMode(
+  mode: CoopSolutionModeSetting,
+): Promise<{ success: true } | { error: string }> {
+  await ensureAdmin();
+
+  const adminDb = createAdminClient();
+  const { error } = await adminDb.from("app_settings").upsert(
+    {
+      key: "coop_solution_mode",
+      value: { mode },
+      updated_at: new Date().toISOString(),
+    },
+    { onConflict: "key" },
+  );
+
+  if (error) {
+    console.error("[updateCoopSolutionMode]", error);
+    return { error: error.message };
+  }
+
+  await logAdminAction({
+    action: "coop_solution_mode_change",
+    targetType: "system",
+    payload: { mode },
+  });
+
+  revalidatePath("/yonetim/ayarlar");
+  return { success: true };
+}

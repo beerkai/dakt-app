@@ -1,5 +1,6 @@
 import { getCase, isTabEnabled } from "@/lib/case-helpers";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { sectionNumForTab } from "@/lib/case-section-utils";
 import { CozumClient } from "./CozumClient";
 
@@ -22,12 +23,14 @@ export default async function CozumPage({
         <h2 className="section-title">Çözüm Zarfı</h2>
         <span className="section-sub">{sub}</span>
       </div>
-      <CozumClient
-        caseId={caseData.id}
-        codename={caseData.codename}
-        suspects={caseData.suspects}
-        verdict={caseData.verdict}
-      />
+      <Suspense fallback={null}>
+        <CozumClient
+          caseId={caseData.id}
+          codename={caseData.codename}
+          suspects={caseData.suspects}
+          verdict={caseData.verdict}
+        />
+      </Suspense>
     </section>
   );
 }
