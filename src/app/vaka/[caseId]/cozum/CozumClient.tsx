@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   useCallback,
   useEffect,
@@ -25,6 +25,8 @@ import {
 } from "@/lib/local-solved-storage";
 import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/components/AuthProvider";
+import { useRoomActivePlayers } from "@/hooks/useRoomActivePlayers";
+import { useRoomVoting } from "@/hooks/useRoomVoting";
 // Aşama 4 (SSR sertifika): Certificate + formatCertificateDate yeniden eklenecek.
 // import { Certificate, type CertificateHandle } from "@/components/Certificate";
 import {
@@ -75,6 +77,10 @@ export function CozumClient({
   verdict: VerdictData;
 }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const roomIdFromUrl = searchParams.get("room");
+  const [roomId, setRoomId] = useState<string | null>(roomIdFromUrl);
+
   const { user } = useAuth();
   const hasRecordedSolved = useRef(false);
   const baseVoteSuspects: VoteSuspect[] = useMemo(
@@ -141,6 +147,13 @@ export function CozumClient({
   // Aşama 4: const [certModalOpen, setCertModalOpen] = useState(false);
   // Aşama 4: const certRef = useRef<CertificateHandle>(null);
   const [analystDisplay, setAnalystDisplay] = useState("Misafir Analist");
+  const [coopSolutionMode, setCoopSolutionMode] = useState<
+    "unanimous" | "unanimous_with_host_bypass"
+  >("unanimous");
+  const [coopIsHost, setCoopIsHost] = useState(false);
+  const [playerDir, setPlayerDir] = useState<
+    Map<string, { username: string; color: string }>
+  >(() => new Map());
 
   useEffect(() => {
     function readName() {
@@ -154,6 +167,110 @@ export function CozumClient({
     window.addEventListener("dakt_guest_changed", onGuest);
     return () => window.removeEventListener("dakt_guest_changed", onGuest);
   }, []);
+
+  useEffect(() => {
+    function syncRoomId() {
+      if (roomIdFromUrl) {
+        setRoomId(roomIdFromUrl);
+        return;
+      }
+      const session = getActiveSession();
+      setRoomId(session?.roomId ?? null);
+    }
+
+    syncRoomId();
+    window.addEventListener("dakt-session-change", syncRoomId);
+    window.addEventListener("storage", syncRoomId);
+
+    return () => {
+      window.removeEventListener("dakt-session-change", syncRoomId);
+      window.removeEventListener("storage", syncRoomId);
+    };
+  }, [roomIdFromUrl]);
+
+  const isCoop = Boolean(roomId);
+
+  const { count: activePlayerCount } = useRoomActivePlayers(roomId);
+
+  const {
+    votes: roomVotes,
+    myVote: roomMyVote,
+    castVote,
+    unanimousSuspect,
+    status: roomVoteStatus,
+  } = useRoomVoting({
+    roomId,
+    userId: user?.id ?? null,
+    playerCount: roomId ? activePlayerCount : 0,
+  });
+
+  useEffect(() => {
+    function syncHost() {
+      setCoopIsHost(Boolean(getActiveSession()?.isHost));
+    }
+    syncHost();
+    window.addEventListener("dakt-session-change", syncHost);
+    return () => window.removeEventListener("dakt-session-change", syncHost);
+  }, []);
+
+  useEffect(() => {
+    if (!isCoop) return;
+    const supabase = createClient();
+    void supabase
+      .from("app_settings")
+      .select("value")
+      .eq("key", "coop_solution_mode")
+      .maybeSingle()
+      .then(({ data }) => {
+        const m = (data?.value as { mode?: string } | null)?.mode;
+        setCoopSolutionMode(
+          m === "unanimous_with_host_bypass"
+            ? "unanimous_with_host_bypass"
+            : "unanimous",
+        );
+      });
+  }, [isCoop]);
+
+  useEffect(() => {
+    if (!roomId || !isCoop) {
+      setPlayerDir(new Map());
+      return;
+    }
+    const supabase = createClient();
+
+    async function loadDir() {
+      const { data, error } = await supabase
+        .from("room_players")
+        .select("user_id, username, color")
+        .eq("room_id", roomId)
+        .is("left_at", null);
+
+      if (error) return;
+
+      setPlayerDir(
+        new Map(
+          (data ?? []).map((p) => {
+            const row = p as {
+              user_id: string;
+              username: string | null;
+              color: string | null;
+            };
+            return [
+              row.user_id,
+              {
+                username: String(row.username ?? ""),
+                color: String(row.color ?? "#888"),
+              },
+            ] as const;
+          }),
+        ),
+      );
+    }
+
+    void loadDir();
+    const intervalId = window.setInterval(() => void loadDir(), 15_000);
+    return () => clearInterval(intervalId);
+  }, [roomId, isCoop]);
 
   useEffect(() => {
     setSuccessMeta(null);
@@ -267,6 +384,15 @@ export function CozumClient({
     }, 800);
   }
 
+  function handleCoopOpenEnvelope(pick: string) {
+    if (!pick) return;
+    incrementAttemptCount(caseId);
+    setVoteConfirmed(false);
+    setSelectedSuspect(pick);
+    setView("envelope");
+    setEnvelopeOpen(false);
+  }
+
   function handleOpenEnvelope() {
     measureFlip();
     setEnvelopeOpen(true);
@@ -292,9 +418,15 @@ export function CozumClient({
   const btnMono =
     "[font-family:var(--font-jetbrains-mono),monospace] text-[10px] font-medium uppercase tracking-[0.26em] transition-colors duration-300 ease-in-out";
 
+  const roomUnanimousName =
+    unanimousSuspect != null
+      ? (voteSuspects.find((x) => x.suspectId === unanimousSuspect)?.name ??
+        "—")
+      : "—";
+
   return (
     <>
-      {view === "voting" && (
+      {view === "voting" && !isCoop && (
         <>
           <div className="cozum-callout-warn">
             ⚠ DİKKAT — Tek hakkın var. Şüpheli listesinden faili işaret et.
@@ -355,6 +487,180 @@ export function CozumClient({
                 ▸ Oyumu Onayla — {selectedName}
               </button>
             )}
+          </div>
+        </>
+      )}
+
+      {view === "voting" && isCoop && (
+        <>
+          <div className="cozum-callout-warn">
+            ● CO-OP — Her analist bir şüpheliye oy verir. Oy birliği sağlanınca
+            zarf açılır.
+          </div>
+
+          {!user ? (
+            <p
+              className={`${btnMono} mb-6 border border-[var(--rule)] bg-[var(--anthracite-2)] p-4 text-[var(--meta-label)]`}
+            >
+              Oylamaya katılmak için oturum gerekir.
+            </p>
+          ) : null}
+
+          <div className="suspect-grid">
+            {voteSuspects.map((s) => {
+              const votersHere = [...roomVotes.entries()].filter(
+                ([, sid]) => sid === s.suspectId,
+              );
+              const myPickHere = roomMyVote === s.suspectId;
+              return (
+                <div
+                  key={s.suspectId}
+                  role="button"
+                  tabIndex={0}
+                  className={`suspect-card relative${myPickHere ? " suspect-card--vote-selected" : ""}`}
+                  onClick={() => {
+                    if (!user) return;
+                    void castVote(s.suspectId).catch(() => {
+                      /* toast optional */
+                    });
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      if (!user) return;
+                      void castVote(s.suspectId).catch(() => {});
+                    }
+                  }}
+                >
+                  {myPickHere ? (
+                    <span
+                      className="absolute left-3 top-3 rounded px-2 py-0.5 text-[8px] font-semibold uppercase tracking-[0.2em] text-[var(--paper)]"
+                      style={{ background: "var(--bordeaux)" }}
+                    >
+                      Oyum
+                    </span>
+                  ) : null}
+                  {markedSet.has(s.suspectId) ? (
+                    <span
+                      className="suspect-vote-marked-pref"
+                      aria-hidden
+                      title="Şüphelendiklerinde"
+                    >
+                      ⚐
+                    </span>
+                  ) : null}
+                  <div className="suspect-id">{s.idLine}</div>
+                  <h3 className="suspect-name">{s.name}</h3>
+                  <div className="suspect-role">{s.role}</div>
+                  <p className="suspect-quote mb-3">{s.quote}</p>
+                  {votersHere.length > 0 ? (
+                    <div className="flex flex-wrap gap-2 border-t border-[var(--rule)] pt-3">
+                      {votersHere.map(([uid]) => {
+                        if (uid === user?.id) return null;
+                        const info = playerDir.get(uid);
+                        const label = info?.username?.trim() || "Analist";
+                        const initial = label.slice(0, 1).toUpperCase();
+                        return (
+                          <span
+                            key={uid}
+                            title={label}
+                            className="inline-flex items-center gap-1.5 rounded border border-[var(--kraft-dark)] px-2 py-1 text-[9px] uppercase tracking-[0.14em] text-[var(--kraft-light)]"
+                            style={{
+                              fontFamily:
+                                "var(--font-jetbrains-mono), monospace",
+                            }}
+                          >
+                            <span
+                              className="flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-bold text-[var(--ink)]"
+                              style={{
+                                background: info?.color || "var(--gold)",
+                              }}
+                            >
+                              {initial}
+                            </span>
+                            {label}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  ) : null}
+                </div>
+              );
+            })}
+          </div>
+
+          <div
+            className="mb-4 rounded-sm border px-4 py-3"
+            style={{
+              background: "var(--ink)",
+              borderColor: "var(--bordeaux)",
+            }}
+          >
+            <p
+              className="m-0 text-[10px] uppercase tracking-[0.18em] text-[var(--paper)]"
+              style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
+            >
+              {roomVotes.size}/{Math.max(activePlayerCount, 1)} analist oy verdi
+            </p>
+          </div>
+
+          {roomVoteStatus === "all_voted_agree" && unanimousSuspect ? (
+            <div
+              className="mb-4 rounded-sm border px-4 py-3"
+              style={{
+                background: "rgba(46, 90, 64, 0.35)",
+                borderColor: "var(--bordeaux)",
+              }}
+            >
+              <p
+                className="m-0 text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--paper)]"
+                style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
+              >
+                ✓ Oy birliği — {roomUnanimousName}
+              </p>
+            </div>
+          ) : null}
+
+          {roomVoteStatus === "all_voted_disagree" ? (
+            <div
+              className="mb-4 rounded-sm border px-4 py-3"
+              style={{
+                background: "rgba(107, 22, 32, 0.25)",
+                borderColor: "var(--bordeaux)",
+              }}
+            >
+              <p
+                className="m-0 text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--paper)]"
+                style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
+              >
+                ✗ Anlaşılamadı — oyları değiştirin
+              </p>
+            </div>
+          ) : null}
+
+          <div className="flex flex-col items-stretch gap-4 pb-8 pt-2">
+            {roomVoteStatus === "all_voted_agree" && unanimousSuspect ? (
+              <button
+                type="button"
+                onClick={() => handleCoopOpenEnvelope(unanimousSuspect)}
+                className={`${btnMono} animate-pulse border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] py-4 text-[var(--paper)] hover:bg-[var(--bordeaux-bright)] md:py-[18px]`}
+              >
+                ▸ ZARFI AÇ
+              </button>
+            ) : null}
+
+            {roomVoteStatus === "all_voted_disagree" &&
+            coopSolutionMode === "unanimous_with_host_bypass" &&
+            coopIsHost &&
+            roomMyVote ? (
+              <button
+                type="button"
+                onClick={() => handleCoopOpenEnvelope(roomMyVote)}
+                className={`${btnMono} border border-[var(--gold)] bg-[var(--anthracite)] py-4 text-[var(--gold)] hover:border-[var(--bordeaux-bright)] md:py-[18px]`}
+              >
+                ▸ Yine de Aç (Host)
+              </button>
+            ) : null}
           </div>
         </>
       )}

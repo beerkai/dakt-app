@@ -41,7 +41,8 @@ export function VakaCaseSoloTease({
   victim: string;
 }) {
   const searchParams = useSearchParams();
-  const roomId = searchParams.get("room");
+  const roomIdFromUrl = searchParams.get("room");
+  const [roomId, setRoomId] = useState<string | null>(roomIdFromUrl);
 
   const [coopBlocked, setCoopBlocked] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -51,18 +52,39 @@ export function VakaCaseSoloTease({
   );
 
   useEffect(() => {
+    function syncRoomIdFromSession() {
+      if (roomIdFromUrl) {
+        setRoomId(roomIdFromUrl);
+        return;
+      }
+      const session = getActiveSession();
+      if (session?.roomId) {
+        setRoomId(session.roomId);
+      } else {
+        setRoomId(null);
+      }
+    }
+
+    syncRoomIdFromSession();
+    window.addEventListener("dakt-session-change", syncRoomIdFromSession);
+    window.addEventListener("storage", syncRoomIdFromSession);
+
+    return () => {
+      window.removeEventListener("dakt-session-change", syncRoomIdFromSession);
+      window.removeEventListener("storage", syncRoomIdFromSession);
+    };
+  }, [roomIdFromUrl, caseId]);
+
+  useEffect(() => {
     function checkCoopSession() {
-      // URL'de room varsa zaten co-op modda, toast asla görünmesin
+      // Çözümlü roomId (URL veya active session) varsa co-op say, toast yok
       if (roomId) {
         setCoopBlocked(true);
         return;
       }
 
-      // URL'de room YOKSA, active session co-op mu kontrol et
       const session = getActiveSession();
       if (session?.mode === "coop") {
-        // Co-op session var ama URL'de room yok
-        // (büyük ihtimal navigation sırasında kayıp) → toast gösterme
         setCoopBlocked(true);
         return;
       }
