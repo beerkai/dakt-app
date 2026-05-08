@@ -4,7 +4,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { useRoomActivePlayers } from "@/hooks/useRoomActivePlayers";
-import { getActiveSession } from "@/lib/active-session";
 import { createClient } from "@/lib/supabase/client";
 import type { Room } from "@/lib/supabase/types";
 
@@ -13,33 +12,7 @@ export function SystemBar() {
   const router = useRouter();
   const [parts, setParts] = useState({ h: "--", m: "--", s: "--" });
   const searchParams = useSearchParams();
-  const roomIdFromUrl = searchParams.get("room");
-  const [roomId, setRoomId] = useState<string | null>(roomIdFromUrl);
-
-  useEffect(() => {
-    function syncRoomId() {
-      if (roomIdFromUrl) {
-        setRoomId(roomIdFromUrl);
-        return;
-      }
-      const session = getActiveSession();
-      if (session?.roomId) {
-        setRoomId(session.roomId);
-      } else {
-        setRoomId(null);
-      }
-    }
-
-    syncRoomId();
-    window.addEventListener("dakt-session-change", syncRoomId);
-    window.addEventListener("storage", syncRoomId);
-
-    return () => {
-      window.removeEventListener("dakt-session-change", syncRoomId);
-      window.removeEventListener("storage", syncRoomId);
-    };
-  }, [roomIdFromUrl]);
-
+  const roomId = searchParams.get("room");
   const { players, count: activePlayerCount, loading: playersLoading } =
     useRoomActivePlayers(roomId);
 

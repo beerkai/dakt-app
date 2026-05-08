@@ -5,14 +5,14 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 export type RoomPlayerStrip = { username: string; color: string };
 
-const POLLING_INTERVAL_MS = 10_000;
-const CHANNEL_RETRY_MS = 3000;
+const POLLING_INTERVAL_MS = 8000;
 
 export function useRoomActivePlayers(roomId: string | null) {
   const supabase = useMemo(() => createClient(), []);
   const [players, setPlayers] = useState<RoomPlayerStrip[]>([]);
   const [loading, setLoading] = useState(Boolean(roomId));
 
+  // Stable load function — referans değişmesin
   const cancelledRef = useRef(false);
   const roomIdRef = useRef(roomId);
   roomIdRef.current = roomId;
@@ -34,10 +34,11 @@ export function useRoomActivePlayers(roomId: string | null) {
       .is("left_at", null);
 
     if (cancelledRef.current) return;
-    if (currentRoomId !== roomIdRef.current) return;
+    if (currentRoomId !== roomIdRef.current) return; // race condition guard
 
     if (error) {
       console.warn("[useRoomActivePlayers] fetch error:", error.message);
+      // Hata durumunda mevcut state'i KORU, sıfırlama
       if (initial) setLoading(false);
       return;
     }
@@ -48,9 +49,6 @@ export function useRoomActivePlayers(roomId: string | null) {
 
   useEffect(() => {
     cancelledRef.current = false;
-    let retryTimer: number | undefined;
-    let channelGen = 0;
-    let activeChannel: ReturnType<typeof supabase.channel> | null = null;
 
     if (!roomId) {
       setPlayers([]);
@@ -58,60 +56,37 @@ export function useRoomActivePlayers(roomId: string | null) {
       return;
     }
 
+    // İlk yükleme
     void load(true);
 
-    function teardownChannel() {
-      if (activeChannel) {
-        void supabase.removeChannel(activeChannel);
-        activeChannel = null;
-      }
-    }
+    // KATMAN 1: Real-time subscription
+    const channel = supabase
+      .channel(`room-presence-vaka:${roomId}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "room_players",
+          filter: `room_id=eq.${roomId}`,
+        },
+        () => {
+          void load(false);
+        },
+      )
+      .subscribe((status) => {
+        // Subscription error veya timeout durumunda log
+        if (status === "CHANNEL_ERROR" || status === "TIMED_OUT") {
+          console.warn(`[useRoomActivePlayers] subscription ${status}, polling will recover`);
+        }
+      });
 
-    function subscribeChannel() {
-      if (cancelledRef.current) return;
-      if (roomIdRef.current !== roomId) return;
-
-      teardownChannel();
-      channelGen += 1;
-      const tag = channelGen;
-
-      const ch = supabase
-        .channel(`room-presence-vaka:${roomId}:${tag}`)
-        .on(
-          "postgres_changes",
-          {
-            event: "*",
-            schema: "public",
-            table: "room_players",
-            filter: `room_id=eq.${roomId}`,
-          },
-          () => {
-            void load(false);
-          },
-        )
-        .subscribe((status) => {
-          if (cancelledRef.current) return;
-          if (roomIdRef.current !== roomId) return;
-          if (status === "CHANNEL_ERROR" || status === "TIMED_OUT") {
-            console.warn(
-              `[useRoomActivePlayers] subscription ${status}, retry in ${CHANNEL_RETRY_MS / 1000}s`,
-            );
-            teardownChannel();
-            retryTimer = window.setTimeout(
-              () => subscribeChannel(),
-              CHANNEL_RETRY_MS,
-            );
-          }
-        });
-      activeChannel = ch;
-    }
-
-    subscribeChannel();
-
+    // KATMAN 2: Polling fallback (real-time kaçırırsa yakalar)
     const pollInterval = window.setInterval(() => {
       void load(false);
     }, POLLING_INTERVAL_MS);
 
+    // KATMAN 3: Visibility change — sekme aktif olunca hemen refresh
     function handleVisibilityChange() {
       if (document.visibilityState === "visible") {
         void load(false);
@@ -119,6 +94,7 @@ export function useRoomActivePlayers(roomId: string | null) {
     }
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
+    // KATMAN 4: Window focus — focus alındığında refresh
     function handleFocus() {
       void load(false);
     }
@@ -126,11 +102,10 @@ export function useRoomActivePlayers(roomId: string | null) {
 
     return () => {
       cancelledRef.current = true;
-      if (retryTimer) window.clearTimeout(retryTimer);
       window.clearInterval(pollInterval);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       window.removeEventListener("focus", handleFocus);
-      teardownChannel();
+      void supabase.removeChannel(channel);
     };
   }, [roomId, supabase, load]);
 
