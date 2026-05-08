@@ -5,7 +5,6 @@ import { usePathname, useRouter } from "next/navigation";
 import type { MouseEvent as ReactMouseEvent } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { signOut } from "@/app/auth/actions";
 import { leaveRoom } from "@/app/oda/actions";
 import ConfirmModal from "@/components/ConfirmModal";
 import { useAuth } from "@/components/AuthProvider";
@@ -26,7 +25,13 @@ const mono =
 export function SiteNav() {
   const pathname = usePathname();
   const router = useRouter();
-  const { user, profile, loading: authLoading } = useAuth();
+  const {
+    user,
+    profile,
+    loading: authLoading,
+    signingOut,
+    signOutAndRedirect,
+  } = useAuth();
   const [stableProfile, setStableProfile] = useState<Profile | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
@@ -35,11 +40,12 @@ export function SiteNav() {
   const [menuSlideIn, setMenuSlideIn] = useState(false);
   const [guestUsername, setGuestUsername] = useState<string | null>(null);
   const [guestColor, setGuestColor] = useState<AnalystColor | null>(null);
-  const [logoutToastKey, setLogoutToastKey] = useState(0);
   const [shareToastKey, setShareToastKey] = useState(0);
   const [welcomeToastKey, setWelcomeToastKey] = useState(0);
   const [welcomeTransferCount, setWelcomeTransferCount] = useState(0);
   const [exitModalOpen, setExitModalOpen] = useState(false);
+  const [logoutModalOpen, setLogoutModalOpen] = useState(false);
+  const [farewellVisible, setFarewellVisible] = useState(false);
   const [pendingHref, setPendingHref] = useState<string | null>(null);
   const [exitIsCoop, setExitIsCoop] = useState(false);
 
@@ -85,12 +91,19 @@ export function SiteNav() {
   }, [pathname, readGuest]);
 
   useEffect(() => {
-    if (profile) setStableProfile(profile);
-  }, [profile]);
+    if (signingOut) {
+      setStableProfile(null);
+      return;
+    }
 
-  useEffect(() => {
-    if (!user) setStableProfile(null);
-  }, [user]);
+    if (user && profile) {
+      setStableProfile(profile);
+    }
+
+    if (!user && !authLoading) {
+      setStableProfile(null);
+    }
+  }, [user, profile, authLoading, signingOut]);
 
   useEffect(() => {
     if (menuOpen) setAccountMenuOpen(false);
@@ -165,12 +178,6 @@ export function SiteNav() {
   }, [menuOpen]);
 
   useEffect(() => {
-    if (logoutToastKey === 0) return;
-    const id = window.setTimeout(() => setLogoutToastKey(0), 3000);
-    return () => window.clearTimeout(id);
-  }, [logoutToastKey]);
-
-  useEffect(() => {
     if (shareToastKey === 0) return;
     const id = window.setTimeout(() => setShareToastKey(0), 3000);
     return () => window.clearTimeout(id);
@@ -208,17 +215,29 @@ export function SiteNav() {
   }, []);
 
   const handleLogout = useCallback(() => {
-    if (user) {
-      void signOut();
-      setMenuOpen(false);
-      return;
-    }
-    clearGuestUsername();
-    setGuestUsername(null);
-    setGuestColor(null);
-    setLogoutToastKey((n) => n + 1);
     setMenuOpen(false);
-  }, [user]);
+    setAccountMenuOpen(false);
+    setLogoutModalOpen(true);
+  }, []);
+
+  async function handleConfirmLogout() {
+    setLogoutModalOpen(false);
+
+    clearGuestUsername();
+    clearActiveSession();
+    window.dispatchEvent(new Event("dakt-session-change"));
+    window.dispatchEvent(new Event("dakt_guest_changed"));
+
+    setFarewellVisible(true);
+
+    window.setTimeout(() => {
+      void (async () => {
+        await signOutAndRedirect();
+        setFarewellVisible(false);
+        setStableProfile(null);
+      })();
+    }, 1500);
+  }
 
   const closeMobileMenu = useCallback(() => setMenuOpen(false), []);
 
@@ -386,6 +405,7 @@ export function SiteNav() {
                       profile={effectiveProfile}
                       email={user?.email}
                       onClose={() => setAccountMenuOpen(false)}
+                      onRequestSignOut={() => setLogoutModalOpen(true)}
                       onBeforeProfileNav={(e, href) =>
                         handleNavClick(e, href)
                       }
@@ -504,6 +524,7 @@ export function SiteNav() {
                         profile={effectiveProfile}
                         email={user?.email}
                         onClose={() => setAccountMenuOpen(false)}
+                        onRequestSignOut={() => setLogoutModalOpen(true)}
                         onBeforeProfileNav={(e, href) =>
                           handleNavClick(e, href)
                         }
@@ -688,17 +709,6 @@ export function SiteNav() {
         </div>
       ) : null}
 
-      {logoutToastKey > 0 ? (
-        <div
-          key={logoutToastKey}
-          className="site-nav-logout-toast"
-          role="status"
-          aria-live="polite"
-        >
-          ● Çıkış yapıldı
-        </div>
-      ) : null}
-
       {welcomeToastKey > 0 ? (
         <div
           key={welcomeToastKey}
@@ -719,6 +729,89 @@ export function SiteNav() {
           aria-live="polite"
         >
           ● Bağlantı kopyalandı
+        </div>
+      ) : null}
+
+      <ConfirmModal
+        open={logoutModalOpen}
+        onClose={() => setLogoutModalOpen(false)}
+        onConfirm={handleConfirmLogout}
+        title="Çıkış yapmak istediğine emin misin?"
+        description="Oturumun kapatılacak. Yarım kalan vakaların ve oda üyeliklerin korunmaz, dosyaların kalır."
+        confirmText="Çıkış Yap"
+        cancelText="Vazgeç"
+        variant="warning"
+      />
+
+      {farewellVisible ? (
+        <div
+          className="fixed inset-0 z-[300] flex items-center justify-center"
+          style={{
+            background: "rgba(0, 0, 0, 0.85)",
+            backdropFilter: "blur(8px)",
+            animation: "fadeIn 0.3s ease",
+          }}
+          aria-live="polite"
+        >
+          <div
+            style={{
+              background: "var(--anthracite)",
+              border: "1px solid var(--bordeaux)",
+              padding: "40px 48px",
+              maxWidth: 460,
+              textAlign: "center",
+              position: "relative",
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                top: "-1px",
+                left: "-1px",
+                width: 24,
+                height: 24,
+                borderTop: "3px solid var(--bordeaux-bright)",
+                borderLeft: "3px solid var(--bordeaux-bright)",
+              }}
+            />
+
+            <div
+              style={{
+                fontFamily: "var(--font-jetbrains-mono), monospace",
+                fontSize: 10,
+                letterSpacing: "0.3em",
+                color: "var(--kraft-dark)",
+                textTransform: "uppercase",
+                marginBottom: 16,
+              }}
+            >
+              ◉ OTURUM KAPATILIYOR
+            </div>
+
+            <div
+              style={{
+                fontFamily: "var(--font-cormorant), serif",
+                fontStyle: "italic",
+                fontSize: 28,
+                color: "var(--paper)",
+                lineHeight: 1.3,
+                marginBottom: 12,
+              }}
+            >
+              Görüşürüz, Analist.
+            </div>
+
+            <div
+              style={{
+                fontFamily: "var(--font-special-elite), monospace",
+                fontSize: 13,
+                color: "var(--kraft-light)",
+                opacity: 0.8,
+              }}
+            >
+              Dosyaların güvende.
+            </div>
+          </div>
         </div>
       ) : null}
 

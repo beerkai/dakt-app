@@ -1,9 +1,10 @@
 "use client";
 
 import type { User } from "@supabase/supabase-js";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -18,37 +19,75 @@ interface AuthContextType {
   user: User | null;
   profile: Profile | null;
   loading: boolean;
+  signingOut: boolean;
+  signOutAndRedirect: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
   profile: null,
   loading: true,
+  signingOut: false,
+  signOutAndRedirect: async () => {},
 });
 
-export function AuthProvider({ children }: { children: ReactNode }) {
+export function AuthProvider({
+  children,
+  initialUser = null,
+  initialProfile = null,
+  initialAuthLoaded = false,
+}: {
+  children: ReactNode;
+  initialUser?: User | null;
+  initialProfile?: Profile | null;
+  /** Sunucuda auth okunduysa true; ilk frame’de loading=false (SSR ile nav çubuğu flicker’sız) */
+  initialAuthLoaded?: boolean;
+}) {
   const pathname = usePathname();
-  const [user, setUser] = useState<User | null>(null);
-  const [profile, setProfile] = useState<Profile | null>(null);
-  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+  const [user, setUser] = useState<User | null>(initialUser);
+  const [profile, setProfile] = useState<Profile | null>(initialProfile);
+  const [loading, setLoading] = useState(!initialAuthLoaded);
+  const [signingOut, setSigningOut] = useState(false);
   const supabase = useMemo(() => createClient(), []);
+
+  const signOutAndRedirect = useCallback(async () => {
+    if (signingOut) return;
+    setSigningOut(true);
+
+    setUser(null);
+    setProfile(null);
+
+    try {
+      const { signOut: serverSignOut } = await import("@/app/auth/actions");
+      await serverSignOut();
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error("[signOutAndRedirect] error:", err);
+    }
+
+    router.push("/");
+    router.refresh();
+  }, [router, signingOut]);
 
   useEffect(() => {
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      const u = session?.user ?? null;
-      setUser(u);
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === "SIGNED_OUT" || !session) {
+        setUser(null);
+        setProfile(null);
+        return;
+      }
 
-      if (u) {
+      setUser(session.user);
+      if (session.user) {
         const { data: profileData } = await supabase
           .from("profiles")
           .select("*")
-          .eq("id", u.id)
-          .single();
-        setProfile(profileData as Profile | null);
-      } else {
-        setProfile(null);
+          .eq("id", session.user.id)
+          .maybeSingle();
+        setProfile(profileData ?? null);
       }
     });
 
@@ -70,8 +109,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           .from("profiles")
           .select("*")
           .eq("id", u.id)
-          .single();
-        if (!cancelled) setProfile(profileData as Profile | null);
+          .maybeSingle();
+        if (!cancelled) setProfile((profileData as Profile | null) ?? null);
       } else if (!cancelled) {
         setProfile(null);
       }
@@ -105,7 +144,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [user, supabase]);
 
   return (
-    <AuthContext.Provider value={{ user, profile, loading }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        profile,
+        loading,
+        signingOut,
+        signOutAndRedirect,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

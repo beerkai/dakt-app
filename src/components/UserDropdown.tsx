@@ -3,7 +3,6 @@
 import Link from "next/link";
 import type { MouseEvent } from "react";
 
-import { signOut } from "@/app/auth/actions";
 import { ANALYST_COLOR_HEX, ANALYST_COLOR_LABEL_TR } from "@/lib/colors";
 import type { Profile } from "@/lib/supabase/types";
 
@@ -15,19 +14,22 @@ export function UserDropdown({
   email,
   onClose,
   onBeforeProfileNav,
+  onRequestSignOut,
 }: {
   profile: Profile;
   email: string | undefined;
   onClose: () => void;
   /** Varsa: href ile dışarı çıkmadan önce (vaka/lobi çıkış onayı) */
   onBeforeProfileNav?: (e: MouseEvent<HTMLAnchorElement>, href: string) => void;
+  /** Çıkış onayı SiteNav’daki ConfirmModal’a delege */
+  onRequestSignOut: () => void;
 }) {
   const hex = ANALYST_COLOR_HEX[profile.color];
   const label = ANALYST_COLOR_LABEL_TR[profile.color];
 
-  async function handleSignOut() {
+  function handleSignOut() {
     onClose();
-    await signOut();
+    onRequestSignOut();
   }
 
   return (
@@ -105,7 +107,7 @@ export function UserDropdown({
           type="button"
           role="menuitem"
           className="w-full cursor-pointer border-0 bg-transparent px-4 py-3 text-left text-[11px] uppercase tracking-[0.28em] text-[var(--bordeaux-bright)] transition-colors hover:bg-[var(--bordeaux)] hover:text-[var(--paper)]"
-          onClick={() => void handleSignOut()}
+          onClick={handleSignOut}
         >
           ◂ Çıkış Yap
         </button>

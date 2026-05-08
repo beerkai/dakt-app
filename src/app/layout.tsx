@@ -9,6 +9,8 @@ import { Suspense } from "react";
 import ActiveSessionChip from "@/components/ActiveSessionChip";
 import { AuthProvider } from "@/components/AuthProvider";
 import { SiteNav } from "@/components/SiteNav";
+import { createClient } from "@/lib/supabase/server";
+import type { Profile } from "@/lib/supabase/types";
 import "./globals.css";
 
 const cormorantGaramond = Cormorant_Garamond({
@@ -104,18 +106,37 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const supabase = await createClient();
+  const {
+    data: { user: initialUser },
+  } = await supabase.auth.getUser();
+
+  let initialProfile: Profile | null = null;
+  if (initialUser) {
+    const { data } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("id", initialUser.id)
+      .maybeSingle();
+    initialProfile = (data as Profile | null) ?? null;
+  }
+
   return (
     <html
       lang="tr"
       className={`${cormorantGaramond.variable} ${specialElite.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <AuthProvider>
+        <AuthProvider
+          initialAuthLoaded
+          initialUser={initialUser}
+          initialProfile={initialProfile}
+        >
           <SiteNav />
           <div className="relative z-[1] flex min-h-0 flex-1 flex-col">
             {children}
