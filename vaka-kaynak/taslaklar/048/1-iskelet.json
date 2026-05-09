@@ -1,0 +1,164 @@
+{
+  "id": "048",
+  "codename": "Tezgâh",
+  "fullTitle": "Tezgâh Dosyası",
+  "classification": "Yüksek Öncelik",
+  "caseCode": "DAKT-048-TZG",
+
+  "victim": {
+    "name": "Necati Balcı",
+    "description": "61 yaş, erkek, Kemeraltı Çarşısı kuyumcu ustası (40 yıl) — çarşının patriği, saygın ama geçmişi karanlık, eşiyle ayrılık aşamasında, çocuksuz"
+  },
+
+  "location": "İzmir · Konak · Kemeraltı Çarşısı · Altın Sokak No:14, Balcı Kuyumculuk — arka oda",
+  "dateRange": "17 Mart 2025 · Akşam 19:30 — 21:00 (tahmini)",
+
+  "brief": {
+    "summary": "18 Mart 2025 sabahı saat 08:45'te, İzmir Kemeraltı Çarşısı'nın en eski kuyumcu dükkanlarından birinin çırağı Cemre Erkan kepenklerini açtığında, ustası Necati Balcı'yı arka odada masasının başında ölü buldu. Necati yarı oturur pozisyonda, başı tezgâha yaslanmış, sağ elinde yarısı dolu bir çay bardağı duruyordu.\n\nİlk müdahale ekibi kalp krizi ön tanısı koydu — 61 yaşında, aşırı kilolu, stresli bir esnaf. Ama Ege Üniversitesi Adli Tıp Kurumu'nun 19 Mart'ta açıkladığı toksikoloji raporu tabloyu değiştirdi: Necati Balcı'nın kanında yüksek konsantrasyonda etilen glikol tespit edildi. Çayına karıştırılmıştı. Bu bir cinayet.\n\nNecati Balcı, Kemeraltı'da 40 yıldır kuyumculuk yapan, çarşının 'ağabeyi' olarak bilinen bir isimdi. Dükkanı 1985'te babasından devralmış, iki nesil boyunca İzmir'in en güvenilir kuyumcularından biri olmuştu. Ama son yıllarda işler zorlaşmıştı: altın fiyatlarının dalgalanması, çarşının yenileme projesi tartışmaları, komşu dükkanla rekabet. Ve eşi Sevda'nın ayrılık sinyalleri.\n\nDaha önemlisi, Necati'nin 15 yıl öncesine dayanan bir sırrı vardı. Eski ortağı Rıfat Erdem, sahte altın satışı skandalında suçlanmış, 4 yıl hapis yatmış, çıktıktan 2 yıl sonra intihar etmişti. Ama Rıfat gerçekten suçlu muydu? Necati'nin tezgâhının altındaki kilitli çekmecede 2009 tarihli bir muhasebe defteri duruyordu — ve o defterin varlığını bilen biri, 8 aydır onun yanında çalışıyordu.\n\nSoruşturmayı Başkomiser Ertan Koç devraldı.",
+
+    "victimProfile": "Necati Balcı, 1964 doğumlu, İzmir Konak'ta büyümüş, babası Hikmet Balcı'nın yanında 14 yaşında çıraklığa başlamış. 1985'te babası emekli olunca dükkanı devraldı. İlk on yıl boyunca Rıfat Erdem'le ortaktı — ikisi birlikte 'Erdem & Balcı Kuyumculuk' tabelasıyla çalıştı.\n\n2009'da dükkanın satışlarında sahte altın alaşımı kullanıldığı ortaya çıktığında, tüm suç Rıfat'ın üzerine yıkıldı. Necati ifadesinde 'haberim yoktu, Rıfat tek başına yaptı' demişti. Rıfat mahkûm oldu, Necati tabelayı 'Balcı Kuyumculuk' olarak değiştirdi ve tek başına devam etti.\n\nNecati sessiz, hesapçı, çarşının deneyimli sesiydi. Esnaf derneğinde sözü dinlenirdi. Ama yakın arkadaşı yoktu — herkes onu tanırdı, kimse onu gerçekten bilmezdi. Eşi Sevda ile son 3 yılda ilişkileri bozulmuştu; Sevda 'artık bu dükkanın karısı olmak istemiyorum' demişti yakınlarına. Necati'nin üzerinde 500 bin TL'lik hayat sigortası poliçesi vardı.\n\nSon aylarda yeni çırağı Cemre'ye mesleği öğretmekle meşguldü — Cemre'nin zekâsından ve öğrenme hızından etkilenmişti. Kimse bilmiyordu ki Cemre aslında Rıfat Erdem'in kızıydı.",
+
+    "streamRecord": "Necati Balcı'nın 3 hafta önce taktırdığı gizli güvenlik kamerası (arka oda, 720p, bulut kayıt) olay akşamına ait görüntü içeriyor. Kamera varlığından çırağı Cemre dahil hiç kimsenin haberi yoktu — Necati bunu şüphelendiği bir hırsızlık girişimi için taktırmıştı. Ayrıca Necati'nin son haftadaki telefon kayıtlarında bir özel dedektiflik bürosuna yapılmış 3 arama tespit edildi.",
+
+    "mission": "Analiste görev: 17 Mart 2025 akşamı Kemeraltı Çarşısı'ndaki Balcı Kuyumculuk arka odasında kimin, neden Necati Balcı'yı zehirlediğini tespit et. Dosyada 24 belge mevcut: 6 şüpheli ifadesi (birinin 3, birinin 2 oturumu), otopsi raporu, olay yeri raporu, 7 fiziksel delil kartı, WhatsApp mesaj zinciri, 5 ek belge, teknik analizler.",
+
+    "warning": "Sahne doğal ölüm izlenimi veriyor — fail bu izlenimi bilinçli olarak kurguladı. Çay bardağı pozisyonu, masanın düzeni, kapının kilitli olması: hepsi 'kalp krizi' senaryosunu destekler görünüyor. Ama zehir yalan söylemez.",
+
+    "documentCount": 24,
+    "suspectCount": 6,
+    "timeOfIncident": "Akşam 19:30 — 21:00 (tahmini)"
+  },
+
+  "suspects": [
+    {
+      "id": "cemre",
+      "name": "Cemre Erkan",
+      "age": 29,
+      "role": "Kuyumcu çırağı, 8 aydır Necati'nin yanında çalışıyor — asıl adı Cemre Erdem, Rıfat Erdem'in kızı",
+      "tag": "KMR-ÇRK/CE",
+      "quote": "Necati Usta benim için bir baba gibiydi. Bu mesleği ondan öğrendim. Onu kaybetmek... anlatamam.",
+      "isFail": true
+    },
+    {
+      "id": "levent",
+      "name": "Levent Aksoy",
+      "age": 47,
+      "role": "Komşu kuyumcu (Aksoy Gold), 10 yıllık rakip — son aylarda Necati'nin büyük müşterilerini kapmış",
+      "tag": "KMR-KYM/LA",
+      "quote": "Necati'yle aramız ticari rekabetin ötesine geçmedi. Adam kendi müşterisini tutamıyordu, ben mi suçluyum?",
+      "isFail": false
+    },
+    {
+      "id": "sevda",
+      "name": "Sevda Balcı",
+      "age": 58,
+      "role": "Necati'nin eşi, 35 yıllık evlilik — son aylarda ayrılık konuşuluyor, 500 bin TL hayat sigortası lehdarı",
+      "tag": "KNK-EŞ/SB",
+      "quote": "Artık bu dükkanın karısı olmak istemiyordum. Ama öldürmek mi? Ben 35 yıl dayanmış bir kadınım, bir gece daha dayanırdım.",
+      "isFail": false
+    },
+    {
+      "id": "tarik",
+      "name": "Tarık Gündüz",
+      "age": 36,
+      "role": "Necati'nin eski çırağı, 3 yıl önce kendi dükkanını açtı — Necati'nin çarşıdaki nüfuzu yüzünden müşteri bulamıyor",
+      "tag": "KMR-EÇR/TG",
+      "quote": "Necati Usta bana her şeyi öğretti. Sonra kendi ayaklarımın üstünde durmamı engelledi. Buna ne denir bilmiyorum.",
+      "isFail": false
+    },
+    {
+      "id": "riza",
+      "name": "Rıza Karadağ",
+      "age": 53,
+      "role": "Kemeraltı Esnaf Derneği başkanı — çarşı yenileme projesinde Necati'yle rant kavgası, milyonluk ihale askıda",
+      "tag": "KMR-EDR/RK",
+      "quote": "Çarşının geleceği için çalışıyorum. Necati karşı çıktı, bu onun hakkı. Ama beni cinayet işleyecek biri sanıyorsanız, çarşıyı tanımıyorsunuz.",
+      "isFail": false
+    },
+    {
+      "id": "pelin",
+      "name": "Pelin Yüce",
+      "age": 34,
+      "role": "Altın toptancısı (Yüce Gold Toptan), Necati'ye 180 bin TL borçlu — icra başlatılmış, iflasla karşı karşıya",
+      "tag": "BRN-TPT/PY",
+      "quote": "Ödeyecektim. Son taksiti geciktirdim, Necati Bey hemen icraya verdi. Acımasızdı bu konuda. Ama borç yüzünden adam mı öldürülür?",
+      "isFail": false
+    }
+  ],
+
+  "perpetratorDetail": {
+    "id": "cemre",
+    "name": "Cemre Erkan (gerçek adı: Cemre Erdem)",
+    "primaryMotive": {
+      "category": "İntikam",
+      "specific": "Babası Rıfat Erdem, 15 yıl önce Necati tarafından sahte altın skandalında suçlanarak hapse gönderildi. Rıfat hapisten çıktıktan 2 yıl sonra intihar etti. Cemre babasının masumiyetini biliyordu — Necati'nin sakladığı eski muhasebe defteri bunu kanıtlıyordu.",
+      "trigger": "Cemre defterleri buldu ve fotoğrafladı. Ama Necati son hafta Cemre'nin gerçek kimliğini öğrendi (dedektife araştırttı) ve onu kapıya koymak üzereydi — defterleri de yok edecekti."
+    },
+    "secondaryMotive": {
+      "category": "Korunma",
+      "specific": "Necati, Cemre'nin kim olduğunu öğrenince onu ihbar etmekle tehdit etti — 'kimliğini gizleyerek benim yanıma girmişsin, polisi ararım' dedi. Cemre hem babasının belgelerini kaybedecekti hem de kendisi suçlanacaktı."
+    },
+    "innerLogic": "Cemre 8 ay boyunca sabredip belgeleri aradı — niyeti cinayet değildi, ispat etmekti. Ama Necati onu köşeye sıkıştırınca 'ya şimdi ya hiç' diye düşündü. Planlı bir zehirleme ama duygusal bir kararla tetiklendi.",
+    "criticalMistake": "Zehir şişesini (etilen glikol, arabasının antifriz bidonundan aktardığı küçük şişe) atölyenin deposuna sakladı — polisin bulması kolay. Ayrıca Necati'nin gizlice taktırdığı arka oda güvenlik kamerasından haberi yoktu: kamera Cemre'nin olay akşamı çayı hazırlayışını ve masaya koyuşunu net şekilde gösteriyor."
+  },
+
+  "redHerrings": [
+    {
+      "suspect": "Levent Aksoy",
+      "why_suspicious": "Necati'yle 10 yıllık ticari rekabet, son aylarda büyük müşteri kayıpları. Necati'nin 'onu bitireceğim' dediği birden fazla tanık tarafından doğrulandı. Olay gecesi kendi dükkanına geç saatte geldiği kamerada görüldü.",
+      "why_innocent": "Cinayet yöntemiyle uyumsuz — Levent zehirleme yapacak profilde değil, dükkan anahtarı yok, arka odaya girişi çarşı kameralarında yok. O gece dükkanına gelme sebebi tamamen farklı.",
+      "actualSecret": "O gece dükkanına gizlice geldi çünkü eşinden sakladığı bir ilişkisi var — çarşıdaki kadın terzisi ile buluşmak için dükkanı kullanıyordu. Bunu itiraf etmek istemediği için geç saatteki varlığını açıklayamıyor."
+    },
+    {
+      "suspect": "Tarık Gündüz",
+      "why_suspicious": "Cinayet öncesi gün Necati'yle sesli tartıştığı en az 3 esnaf tarafından duyuldu. 'Bedelini ödersin' dediği iddia ediliyor. Eski çırak olarak dükkanın düzenini, arka odayı, Necati'nin alışkanlıklarını iyi biliyor.",
+      "why_innocent": "Tartışma iş referansı yüzündendi — yeni bir müşteri Necati'den referans istemiş, Necati kötü referans vermişti. Tarık sadece kızgındı, cinayet motivasyonu yok. Olay gecesi İzmir dışında — Manisa'da bir düğündeydi, 40+ tanık ve sosyal medya paylaşımları var.",
+      "actualSecret": "Aslında Necati'nin kendisine karşı yürüttüğü sistematik kara listeyi belgelemişti — bunu avukatıyla paylaştığı e-postalar gösteriyor. Haksız rekabet davası açmak üzereydi ama bunu polise söylemekten çekiniyor çünkü 'motiv gibi görünür' diye korkuyor."
+    }
+  ],
+
+  "twoLiars": [
+    {
+      "liar": "Cemre Erkan (fail)",
+      "lies": [
+        "Gerçek kimliğini gizliyor — adının Cemre Erdem olduğunu, Rıfat Erdem'in kızı olduğunu saklıyor",
+        "Olay akşamı dükkanı 19:00'da kapattığını söylüyor — aslında 20:30'a kadar arka odadaydı",
+        "Necati'nin çayını hazırlamadığını iddia ediyor — güvenlik kamerası aksini gösteriyor",
+        "2. oturumda kısmi itiraf: 'Evet, babasının kızıyım ama cinayet işlemedim' — 3. oturumda kamera deliliyle köşeye sıkıştırılıyor"
+      ]
+    },
+    {
+      "liar": "Levent Aksoy (suçsuz)",
+      "lies": [
+        "Olay gecesi evde olduğunu söylüyor — kamera dükkanına geldiğini gösteriyor",
+        "Geç saatte dükkanına gelme sebebini 'stok sayımı' olarak açıklıyor — aslında gizli ilişki buluşması",
+        "2. oturumda gizli ilişkiyi itiraf ediyor — cinayet bağlantısı düşüyor"
+      ]
+    }
+  ],
+
+  "keyEvidence": [
+    "Etilen glikol şişesi — arka depoda, Cemre'nin parmak izi",
+    "Necati'nin gizli güvenlik kamerası — olay akşamı çay hazırlama görüntüsü (Cemre)",
+    "Nüfus müdürlüğü sorgusu — Cemre Erkan = eski adı Cemre Erdem (ad değiştirme: 2023)",
+    "2009 tarihli muhasebe defteri — Necati'nin kilitli çekmecesinde, sahte altın skandalının gerçek sorumlusu",
+    "Cemre'nin telefonundaki silinen notlar — 'baba haklıydı' + fotoğraflanmış defter sayfaları",
+    "Necati'nin telefon kayıtları — son hafta dedektiflik bürosuna 3 arama (Cemre'yi araştırtıyordu)",
+    "WhatsApp mesajları — Cemre ↔ annesi Naime: 'buldum anne, defterler burada'",
+    "Toksikoloji raporu — çay bardağında etilen glikol kalıntısı",
+    "Çarşı giriş kameraları — Cemre'nin olay akşamı 20:45'te dükkanı son terk eden kişi olduğu",
+    "Otopsi — etilen glikol zehirlenmesi, ölüm saati 20:00-21:00 arası"
+  ],
+
+  "diversityReport": {
+    "city": "İzmir · Konak · Kemeraltı Çarşısı — 6 mevcut vakanın 5'i İstanbul, 1'i Nevşehir. İzmir ilk kez kullanılıyor, Ege bölgesinde ilk vaka.",
+    "socioeconomic": "Esnaf / zanaat sınıfı — ne beyaz yaka profesyonel ne mavi yaka işçi. 40 yıllık kuyumcu ustası, küçük işletme sahibi. Önceki vakalarda hiç esnaf kurban yoktu.",
+    "victimAge": "61 yaş — önceki kurbanlar: 21 (053), 34 (042), ~40 (067), 42 (082), ~30 (089), ~40 (114). İlk kez 60+ yaş kurban. Yaşlı esnaf arketipi.",
+    "motive": "İntikam (birincil) + Korunma (ikincil) — önceki vakalarda intikam kategorisi hiç kullanılmamıştı. 15 yıllık hesaplaşma, kuşaklar arası yük.",
+    "locationType": "Esnaf dükkanı / atölye (iç mekân, iş yeri) — önceki vakalar: ev ×3, ofis ×1, dış mekân ×1, endüstriyel ×1. İlk kez çarşı esnaf dükkanı.",
+    "method": "Zehirleme (etilen glikol) — önceki vakalar: boğma ×2, diğerleri bilinmiyor. Zehirleme ilk kez kullanılıyor.",
+    "victimProfession": "Kuyumcu ustası / esnaf — önceki vakalar: finans danışmanı, Twitch yayıncısı, koleksiyoner, turist, kurumsal yönetici, bagaj görevlisi. İlk kez zanaat esnafı.",
+    "perpetratorType": "Gizli akraba / intikamcı çırak — önceki failler: eski sevgili ×2, yayıncılık menajeri, iş ortağı, otelci, vardiya arkadaşı. İlk kez akraba bağlantılı fail, ilk kez gizli kimlikle yaklaşan fail, ikinci kadın fail (042 Meryem'den sonra).",
+    "summary": "Vaka 048, 8/8 çeşitlilik kriterinin 7'sini karşılıyor: (1) İzmir — ilk Ege vakası, (2) 61 yaş — ilk 60+ kurban, (3) İntikam motifi — ilk kez, (4) Esnaf dükkanı — ilk kez, (5) Zehirleme — ilk kez, (6) Zanaat esnafı kurban — ilk kez, (7) Gizli akraba/intikamcı fail — ilk kez. Kadın fail (ikinci kez — 042'den sonra). Çeşitlilik skoru çok yüksek."
+  }
+}

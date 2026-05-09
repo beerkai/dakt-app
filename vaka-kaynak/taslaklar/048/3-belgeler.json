@@ -1,0 +1,400 @@
+{
+  "forensics": {
+    "sceneReport": {
+      "docCode": "048-A",
+      "title": "Olay Yeri İnceleme Raporu",
+      "author": "Bşçvş. Koray Tuncer · İzmir Emniyet Müdürlüğü Olay Yeri İnceleme Şube Müdürlüğü",
+      "findings": [
+        "1. Olay yeri: İzmir · Konak · Kemeraltı Çarşısı · Altın Sokak No:14, Balcı Kuyumculuk. Dükkan giriş katında, vitrini Altın Sokak'a bakan, tek katlı taş yapı. Ön bölüm (satış alanı) + arka oda (atölye/çalışma) + küçük depo.",
+        "2. Kepenk: Tam kapalı, kilidi sağlam. Zorlanma izi yok. İçeriden kilitlenmiş — yedek anahtar tezgâhın altında mevcut.",
+        "3. Arka kapı: Kızlarağası Hanı avlusuna açılan ahşap kapı. Mandal kapalı ama kilit açık. Kapı üzerinde taze çizik izi yok.",
+        "4. Kurban pozisyonu: Arka odada, ahşap çalışma masasının başında yarı oturur vaziyette. Baş sağa doğru yaslanmış, tezgâh üzerinde. Sağ elde ince belli çay bardağı (yarısı dolu, koyu renkli sıvı). Sol el masada, avuç yukarı.",
+        "5. Masada bulunanlar: Çay bardağı (yarı dolu), çay tabağı, iki adet altın alaşım tartı, büyüteç, kalem, bir adet deri kaplı muhasebe defteri (kilitli çekmeceden çıkmış görünüyor — çekmece açık), cep telefonu (ekran karanlık).",
+        "6. Çay ocağı: Arka odanın köşesinde. Demlik ılık, içinde çay posası var. Ocağın yanında bir adet şekerlik, bir adet Rize çayı paketi. Başka sıvı veya madde yok.",
+        "7. Depo bölümü: Arka odanın sol tarafında, ahşap kapıyla ayrılmış 2×3 metrelik alan. İçinde kuyumculuk malzemeleri, eski kutular, temizlik malzemeleri. Üçüncü rafta, temizlik malzemelerinin arasında: bir adet 250 ml plastik şişe, etiksiz, içinde berrak sıvı (numune alındı).",
+        "8. Kilitli çekmece: Tezgâhın altında, sağ tarafta. Çekmece açık bulundu. İçinde 2009 tarihli deri kaplı muhasebe defteri, çeşitli eski faturalar, bir adet USB bellek. Çekmece anahtarı: tezgâhın arka tarafındaki çivide asılı.",
+        "9. Güvenlik kamerası: Arka odanın sağ üst köşesinde, tavana monte edilmiş küçük bir IP kamera tespit edildi. Marka: Xiaomi. Wi-Fi üzerinden bulut kayıt. Cihaz aktif ve kayıt yapıyor.",
+        "10. Vitrin ve satış alanı: Düzenli. Altın vitrini kapalı ve kilitli. Kasada 2.340 TL nakit. Hırsızlık belirtisi yok.",
+        "11. Dükkan önü (Altın Sokak): Kepenk izi, ayakkabı izi, yabancı cisim yok. Bitişik dükkan (Aksoy Gold) kepengi kapalı.",
+        "12. Parmak izi: Çay bardağı üzerinde tek set parmak izi (kurbanın sağ eli ile uyumlu). Çay ocağı musluğunda kısmi parmak izi. Depo rafındaki plastik şişe üzerinde parmak izi seti (numune alındı). Kilitli çekmece ve anahtar üzerinde çoklu parmak izi."
+      ],
+      "preliminaryNote": "Sahne doğal ölüm izlenimi veriyor — kapılar kilitli, hırsızlık yok, kavga izi yok. Kurbanın rahat pozisyonu (oturarak, çay içerken) ani bir saldırı değil, kademeli bir süreç olduğuna işaret edebilir. Depodaki etiketsiz şişe ve kilitli çekmecenin açık bulunması dikkat çekici. Güvenlik kamerasının varlığı — dükkan sahibinin bildiği ama çalışanlarına söylemediği düşünülüyor — kayıtları incelenecek."
+    },
+    "autopsy": {
+      "docCode": "048-B",
+      "title": "Otopsi Raporu",
+      "date": "19.03.2025",
+      "author": "Uzm. Dr. Ferhat Özkan · Ege Üniversitesi Adli Tıp Anabilim Dalı",
+      "externalExam": [
+        "Erkek, tahmini 60-65 yaş, 174 cm boy, 89 kg ağırlık. Obezite eğilimli.",
+        "Yüz: Siyanoz (morarma) belirgin. Dudaklarda hafif kuruluk.",
+        "Gözler: Konjunktivalar konjesyone. Pupiller dilate, bilateral.",
+        "Boyun: Dıştan herhangi bir lezyon, sıyrık, çizik veya boğma izi yok.",
+        "Gövde: Belirgin dış travma yok. Karın şiş.",
+        "Üst ekstremiteler: Eller temiz. Tırnaklar kısa, altlarında yabancı madde yok. Savunma yaralanması yok.",
+        "Alt ekstremiteler: Hafif ödem, bilateral. Travma yok.",
+        "Genel: Herhangi bir delici, kesici veya künt travma bulgusu mevcut değil."
+      ],
+      "internalExam": [
+        "Beyin: Ödem mevcut. Herhangi bir kanama yok.",
+        "Akciğerler: Bilateral pulmoner ödem. Konjesyon belirgin.",
+        "Kalp: Hafif sol ventrikül hipertrofisi. Koroner arterler açık, %30 ateroskleroz (yaşla uyumlu, akut olay oluşturacak düzeyde değil).",
+        "Karaciğer: Büyük (1840 g). Yağlı karaciğer bulguları. Hafif konjesyon.",
+        "Böbrekler: Bilateral böbrek tübüler nekrozu tespit edildi. Böbrek korteksinde oksalat kristal birikimi gözlemlendi — etilen glikol zehirlenmesiyle uyumlu.",
+        "Mide: İçerikte çay kalıntısı, hafif yiyecek artığı. Mide mukozasında erozyon yok.",
+        "Mesane: Yüksek miktarda kalsiyum oksalat kristali içeren idrar."
+      ],
+      "causeOfDeath": "Etilen glikol zehirlenmesine bağlı akut böbrek yetmezliği ve metabolik asidoz. Oral yoldan alınmış.",
+      "timeOfDeath": "17 Mart 2025 · 20:30 — 21:30 arası (tahmini — vücut sıcaklığı ve rigor mortis bulgularına göre)",
+      "criticalFindings": [
+        "Kanda etilen glikol seviyesi: 285 mg/dL (letal doz üzeri). Tahmini alım miktarı: 80-120 ml (tek doz).",
+        "Böbrek tübüler nekrozu ve oksalat kristal birikimi — etilen glikol metabolizmasının patolojik bulgusu.",
+        "Mide içeriğinde çay kalıntısı — zehrin çayla birlikte alınmış olması kuvvetle muhtemel.",
+        "Herhangi bir savunma yaralanması, dış travma veya fiziksel müdahale bulgusu yok — kurban saldırıya uğramamış, zehri bilmeden içmiş.",
+        "Kalp bulguları (hafif ateroskleroz) ölüme neden olacak düzeyde değil — doğal ölüm ön tanısı çürütüldü.",
+        "Ölüm süreci: Etilen glikol alımından sonra 1-3 saat içinde semptomlar (baş ağrısı, bulantı, sersemlik), 4-8 saatte metabolik kriz, 8-12 saatte organ yetmezliği. Alım saati tahmini: 19:30-20:00 arası."
+      ]
+    }
+  },
+
+  "evidence": [
+    {
+      "code": "NCT-ÇAY01",
+      "tag": "Toksikoloji",
+      "title": "Çay Bardağı — Toksikoloji Numunesi",
+      "description": "Kurbanın sağ elinde bulunan ince belli çay bardağı. İçindeki sıvıdan alınan numunede etilen glikol tespit edildi.",
+      "details": [
+        "▸ Bulgu yeri: Arka oda çalışma masası, kurbanın sağ elinde",
+        "▸ İçerik: ~80 ml koyu renkli çay + etilen glikol (konsantrasyon: 14.2 g/L)",
+        "▸ Parmak izi: Tek set — kurbanın sağ eli ile uyumlu",
+        "▸ Çay tabağı: Temiz, parmak izi yok (silinmiş olabilir)",
+        "▸ Not: Etilen glikol tatlı, renksiz ve kokusuz — çayla karıştırıldığında farkedilmesi çok güç"
+      ]
+    },
+    {
+      "code": "NCT-ZHR01",
+      "tag": "Kimyasal",
+      "title": "Etiketsiz Plastik Şişe — Etilen Glikol",
+      "description": "Arka depo rafında, temizlik malzemeleri arasında bulunan 250 ml plastik şişe. İçindeki berrak sıvı etilen glikol olarak tanımlandı.",
+      "details": [
+        "▸ Bulgu yeri: Depo, 3. raf, temizlik malzemeleri arasında",
+        "▸ Şişe tipi: 250 ml PET su şişesi, etiketi sökülmüş",
+        "▸ İçerik: ~170 ml berrak sıvı — etilen glikol (%95+ saflık, ticari antifriz ile uyumlu)",
+        "▸ Parmak izi: Tam set — Cemre Erkan ile eşleşme (AFIS doğrulandı)",
+        "▸ Not: Şişenin kapağında da aynı parmak izi seti mevcut. Kurbanın parmak izi yok."
+      ]
+    },
+    {
+      "code": "NCT-DFT01",
+      "tag": "Belge",
+      "title": "2009 Tarihli Muhasebe Defteri",
+      "description": "Tezgâh altındaki kilitli çekmecede bulunan deri kaplı muhasebe defteri. Sahte altın alaşım siparişlerini ve tedarikçi faturalarını içeriyor — tümü Necati Balcı'nın el yazısıyla.",
+      "details": [
+        "▸ Bulgu yeri: Tezgâh altı kilitli çekmece (çekmece açık bulundu)",
+        "▸ Tarih aralığı: Ocak 2009 — Kasım 2009",
+        "▸ İçerik: 47 sayfa. Sahte alaşım tedarikçisi 'Gökhan Ticaret' ile yazışma notları, sipariş miktarları, ödeme kayıtları",
+        "▸ El yazısı: Necati Balcı'nın bilinen el yazısıyla uyumlu (karşılaştırma: dükkan fatura defterleri)",
+        "▸ Kritik: 2009 davasında tüm suç Rıfat Erdem'e atılmıştı — bu defter Necati'nin aktif katılımını gösteriyor",
+        "▸ Parmak izi: Çoklu — Necati Balcı (baskın), Cemre Erkan (kısmi, birkaç sayfada)"
+      ]
+    },
+    {
+      "code": "NCT-KAM01",
+      "tag": "Dijital",
+      "title": "Gizli Güvenlik Kamerası Kaydı",
+      "description": "Arka odada tavana monte edilmiş Xiaomi IP kamera. Necati Balcı'nın 3 hafta önce taktırdığı, çalışanlarından habersiz. Olay akşamına ait kritik kayıt mevcut.",
+      "details": [
+        "▸ Cihaz: Xiaomi Mi Home Security Camera 1080p, Wi-Fi, bulut kayıt (Mi Home uygulaması)",
+        "▸ Kurulum tarihi: 25.02.2025 (Konak Güvenlik firması kurulum faturası)",
+        "▸ Kayıt: Sürekli, hareket algılamalı yüksek kaliteye geçiş",
+        "▸ Olay akşamı kaydı: 17.03.2025 — 19:12'den itibaren arka oda görüntüsü mevcut",
+        "▸ 19:48: Cemre Erkan arka odaya giriyor, çay ocağına yöneliyor",
+        "▸ 19:50-19:54: Cemre çay ocağı tezgâhında çay hazırlıyor. Tezgâhın sol tarafı depo rafının arkasında kalıyor — kamera açısı kısmen engelli. Cemre'nin elleri ve tezgâh üzeri 19:50-19:52 arası görünmüyor. 19:53'te bardağı alıp masaya taşıdığı net görünüyor.",
+        "▸ 19:53: Cemre çay bardağını Necati'nin masasına koyuyor. Necati başını kaldırıyor, teşekkür eder gibi baş sallıyor.",
+        "▸ 20:08: Necati çayı yudumluyor",
+        "▸ 20:35: Necati başını masaya koyuyor, eli göğsüne gidiyor (rahatsızlık belirtisi)",
+        "▸ 20:42: Cemre arka odaya bakıyor, Necati'nin yanına gidiyor, 30 saniye duruyor, sonra geri çekiliyor",
+        "▸ 20:48: Cemre depoya giriyor (2 dakika), çıkıyor",
+        "▸ 20:52: Cemre çay ocağını kapatıyor, arka kapıdan çıkıyor",
+        "▸ Not: Kamera açısı masayı net gösteriyor ancak çay ocağı tezgâhının sol kısmı depo rafı tarafından engelleniyor. Cemre'nin çay hazırlama süreci (19:50-19:52) kısmen görüntü dışında. Çay hazırladığı ve Necati'ye taşıdığı kesin — ancak hazırlık anının tamamı görünmüyor."
+      ]
+    },
+    {
+      "code": "NCT-TEL01",
+      "tag": "Telefon",
+      "title": "Necati Balcı — Telefon Kayıtları (Son 30 Gün)",
+      "description": "Necati Balcı'nın cep telefonundan çıkarılan arama ve mesaj dökümü. Son hafta özel dedektiflik bürosuna yapılan aramalar dikkat çekici.",
+      "details": [
+        "▸ Cihaz: Samsung Galaxy A54, şifresiz (yüz tanıma devre dışı)",
+        "▸ 06.03.2025 — 14:22: Giden arama → Ege Dedektiflik (0232-XXX-XX-XX), 8 dk",
+        "▸ 10.03.2025 — 09:45: Giden arama → Ege Dedektiflik, 12 dk",
+        "▸ 13.03.2025 — 16:30: Giden arama → Ege Dedektiflik, 6 dk (son arama)",
+        "▸ 14.03.2025 — 11:00: Gelen arama → Ege Dedektiflik, 4 dk (rapor teslimi olabilir)",
+        "▸ 15.03.2025 — 09:00: Giden arama → Av. Serkan Polat (aile avukatı), 15 dk",
+        "▸ 17.03.2025 — 18:45: Son giden arama → Sevda Balcı (eşi), 2 dk — 'geç geleceğim'",
+        "▸ WhatsApp: Son 30 günde aktif sohbet yok. Cemre Erkan ile mesajlaşma yok.",
+        "▸ Not: Ege Dedektiflik ile yapılan aramaların tarihleri, Cemre'nin kimliğinin araştırılma süreciyle uyumlu."
+      ]
+    },
+    {
+      "code": "NCT-PIZ01",
+      "tag": "İz",
+      "title": "Parmak İzi Karşılaştırma Raporu",
+      "description": "Olay yerinde tespit edilen parmak izlerinin AFIS karşılaştırma sonuçları.",
+      "details": [
+        "▸ Çay bardağı: Necati Balcı (sağ el, 4 parmak) — tek set",
+        "▸ Çay tabağı: Temiz — parmak izi yok (silinmiş)",
+        "▸ Çay ocağı musluğu: Kısmi parmak izi — Cemre Erkan sol baş parmak (%87 eşleşme)",
+        "▸ Etilen glikol şişesi (NCT-ZHR01): Cemre Erkan (tam set, sağ ve sol el) — tek set",
+        "▸ Muhasebe defteri (NCT-DFT01): Necati Balcı (baskın) + Cemre Erkan (kısmi, 4 sayfada)",
+        "▸ Çekmece anahtarı: Necati Balcı + Cemre Erkan",
+        "▸ Depo kapı kolu: Necati Balcı + Cemre Erkan + tanımlanamayan kısmi iz (muhtemelen eski)",
+        "▸ Arka kapı mandal: Cemre Erkan (tek set — son kullanan)",
+        "▸ Not: Çay tabağının silinmiş olması dikkat çekici. Bardakta sadece kurbanın izi var — çayı hazırlayan kişi bardağı tutarken eldiven kullanmış veya tabakla taşımış olabilir."
+      ]
+    },
+    {
+      "code": "NCT-DIJ01",
+      "tag": "Dijital",
+      "title": "Cemre Erkan — Telefon Dijital Analizi",
+      "description": "Cemre Erkan'ın cep telefonundan yapılan dijital adli inceleme. Silinen dosyalar ve notlar kurtarıldı.",
+      "details": [
+        "▸ Cihaz: iPhone 13, Face ID korumalı (şüpheliden şifre alındı)",
+        "▸ Fotoğraflar: 23 adet silinen fotoğraf kurtarıldı (tarihi: 25.02.2025). Tümü muhasebe defteri sayfaları — NCT-DFT01 ile aynı defter.",
+        "▸ Notlar uygulaması — silinen not (28.02.2025): 'baba haklıydı. defterler burada. necati her şeyi kendi yapmış. tedarikçi faturaları onun el yazısı. rıfat erdem masum.'",
+        "▸ Notlar uygulaması — silinen not (14.03.2025): 'necati biliyor. dedektife araştırtmış. yarın konuşacağız diyor. ne yapacağım'",
+        "▸ Notlar uygulaması — silinen not (17.03.2025 · 06:14): 'bugün son gün. defterleri ne yapacağım. orijinalleri almalıyım yoksa yok edecek'",
+        "▸ Arama geçmişi: 10.03.2025 · 23:12 — Google araması: 'etilen glikol nedir', 'antifriz bileşenleri'. 12.03.2025 · 01:05 — 'etilen glikol belirtileri ne zaman başlar', 'klinik toksikoloji etilen glikol'. Aramalar olay gününden 5-7 gün önce, tarayıcı geçmişinden silinmiş, sistem loglarından kurtarılmış.",
+        "▸ Harita: 17.03.2025 · 07:30 — Bornova OTO Çıkış noktası (arabasının park yeri). Aracının bagajında yarım antifriz bidonu tespit edildi.",
+        "▸ WhatsApp: Cemre ↔ 'Anne' (Naime Erdem) mesaj zinciri — ayrı belgede (048-P)"
+      ]
+    }
+  ],
+
+  "documents": [
+    {
+      "docCode": "048-K",
+      "title": "Hayat Sigortası Poliçesi — Necati Balcı",
+      "type": "Mali",
+      "content": "### Anadolu Sigorta A.Ş. — Ferdi Kaza ve Hayat Sigortası\n\n**Poliçe No:** AH-2019-742865\n**Sigortalı:** Necati Balcı (T.C. 287XXXXXXXX)\n**Lehdar:** Sevda Balcı (eş)\n**Teminat:** 500.000 TL (vefat teminatı)\n**Başlangıç:** 01.06.2019\n**Yenileme:** Otomatik, yıllık\n**Son prim ödemesi:** 01.06.2024 (güncel)\n\n### Özel Şartlar\n- Doğal ölüm: %100 teminat\n- Kaza sonucu ölüm: %150 teminat\n- İntihar (ilk 2 yıl): Teminatsız\n- İntihar (2 yıl sonrası): %100 teminat\n- Cinayet: Lehdarın fail olmaması koşuluyla %100 teminat\n\n### Not\nSevda Balcı lehdar olarak kayıtlı. Boşanma durumunda lehdar değişikliği yapılmadığı sürece geçerli. Poliçe 2019'da yenilenmiş — boşanma konuşmalarının başladığı 2022'den 3 yıl önce.\n\n### Ek Soruşturma Notu\nSevda Balcı'nın 12.03.2025 tarihinde Av. Deniz Karaca ile görüşme yaptığı tespit edildi (avukat randevu defterinden). Avukat ifadesinde: 'Sevda Hanım boşanma şartlarını sordu. Ben de hayat sigortası poliçesinin boşanma sonrasında otomatik düşeceğini, eğer lehdar değişikliği yapılmazsa evlilik süresince geçerli olduğunu söyledim. Müvekkil tepki vermedi.' Bu görüşme cinayetten 5 gün önce."
+    },
+    {
+      "docCode": "048-L",
+      "title": "Nüfus Müdürlüğü — Ad Değiştirme Kararı",
+      "type": "Resmi",
+      "content": "### T.C. İzmir 4. Asliye Hukuk Mahkemesi\n**Esas No:** 2023/1847\n**Karar No:** 2023/2103\n**Karar Tarihi:** 14.07.2023\n\n**Başvuran:** Cemre Erdem (T.C. 415XXXXXXXX)\n**Talep:** Soyadı değişikliği\n\n### Karar\nBaşvuranın \"Erdem\" olan soyadının \"Erkan\" olarak değiştirilmesine karar verildi.\n\n**Gerekçe:** Başvuran, merhum babası Rıfat Erdem'in (ö. 2015) kamuoyu tarafından bilinen cezai geçmişi nedeniyle sosyal ve mesleki hayatında ciddi zorluklar yaşadığını beyan etmiştir. Mahkeme, başvuranın haklı nedenini kabul etmiştir.\n\n### Nüfus Kayıt Bilgileri\n- **Eski kayıt:** Cemre Erdem, 14.06.1996, İzmir/Konak\n- **Baba:** Rıfat Erdem (ö. 12.08.2015)\n- **Anne:** Naime Erdem (sağ)\n- **Yeni kayıt:** Cemre Erkan, 14.06.1996, İzmir/Konak\n\n### Soruşturma Notu\nRıfat Erdem: 2009 yılında İzmir 2. Ağır Ceza Mahkemesi'nde sahte altın alaşımı satışı, dolandırıcılık ve sahtecilik suçlarından 4 yıl hapis cezası almıştır. Cezasını 2013'te tamamlamış, 12.08.2015 tarihinde intihar etmiştir. Rıfat Erdem'in ortağı Necati Balcı davada tanık olarak dinlenmiş, suça katılımı bulunamamıştır."
+    },
+    {
+      "docCode": "048-M",
+      "title": "Ege Dedektiflik — Araştırma Raporu",
+      "type": "Özel",
+      "content": "### Ege Dedektiflik ve Araştırma Hizmetleri\n**Rapor No:** ED-2025/0341\n**Talep Eden:** Necati Balcı\n**Konu:** Çalışan arka plan araştırması — Cemre Erkan\n**Tarih:** 13.03.2025\n\n### Bulgular\n\n**Kimlik doğrulama:**\nCemre Erkan (T.C. 415XXXXXXXX) — nüfus kaydı incelendiğinde, 14.07.2023 tarihli İzmir 4. Asliye Hukuk Mahkemesi kararıyla soyadını \"Erdem\"den \"Erkan\"a değiştirdiği tespit edilmiştir.\n\n**Aile bağlantısı:**\nBaba: Rıfat Erdem (ö. 2015). Rıfat Erdem, 2009 yılında Balcı Kuyumculuk'un eski ortağı olarak sahte altın alaşımı davasında mahkûm olmuştur.\n\nAnne: Naime Erdem, İzmir · Bornova · Kazımdirik Mah. ikamet.\n\n**Eğitim ve iş geçmişi:**\nCemre Erkan, İzmir Ekonomi Üniversitesi Güzel Sanatlar Fakültesi mezunu (2019). 2019-2022 arası çeşitli kuyumcu dükkanlarında kısa süreli çalışmalar. 2023'te ad değiştirme sonrası Balcı Kuyumculuk'a başvuru (Temmuz 2024).\n\n**Sosyal medya:**\nInstagram hesabı (@cemre.erkn) — aktif değil, son paylaşım Mart 2023. Profilden Rıfat Erdem ile aile fotoğrafları silinmiş (web arşivinden tespit edildi).\n\n### Değerlendirme\nCemre Erkan, müvekkilinizin eski ortağı Rıfat Erdem'in kızıdır. Soyadını değiştirerek yanınıza çırak olarak girmiştir. Niyeti bilinmemektedir ancak aile bağlantısı kesindir.\n\n**Uyarı:** Bu bilgi kişisel veri niteliğindedir. Hukuki danışmanlık almanız önerilir."
+    },
+    {
+      "docCode": "048-N",
+      "title": "Çarşı Güvenlik Kamerası — Giriş/Çıkış Log Raporu",
+      "type": "Kamera",
+      "content": "### İzmir Büyükşehir Belediyesi — Kemeraltı Çarşısı Güvenlik Kamera Sistemi\n**Rapor Tarihi:** 20.03.2025\n**Talep Eden:** Başkomiser Ertan Koç, Konak İlçe Emniyet Müdürlüğü\n**Kapsam:** 17.03.2025, 17:00 — 18.03.2025, 09:00 arası, Altın Sokak giriş/çıkış kameraları\n\n### Tespit Edilen Hareketler\n\n| Saat | Yön | Kişi | Not |\n|------|-----|------|-----|\n| 17:15 | Çıkış | Rıza Karadağ | Karadağ Baharat'tan çıkış, dernek yönüne |\n| 18:20 | Çıkış | Levent Aksoy | Aksoy Gold kepenk kapatma |\n| 18:35 | Çıkış | Tanımlanamayan erkek | Çarşı müşterisi |\n| 19:12 | Giriş | Cemre Erkan | Altın Sokak'tan giriş (!) |\n| 19:14 | — | Cemre Erkan | Balcı Kuyumculuk kapısında (arka kapıdan giriş değil) |\n| 20:45 | Çıkış | Cemre Erkan | Anafartalar Caddesi yönüne hızlı yürüyüş |\n| 21:12 | Giriş | Levent Aksoy | Altın Sokak'tan giriş, Aksoy Gold'a |\n| 22:38 | Çıkış | Levent Aksoy | Aksoy Gold'dan çıkış |\n| 08:32 | Giriş | Cemre Erkan | Sabah, kepenk açma |\n\n### Kritik Not\nCemre Erkan'ın ilk ifadesinde dükkanı 19:00'da terk ettiğini beyan etmesi ile kamera kaydı uyumsuz:\n- **19:12'de çarşıya geri girmiş** (daha önce çıkmış olmalı)\n- **20:45'te çıkmış** — yani dükkanı 19:00'da değil 20:45'te terk etmiş\n- Beyan edilen çıkış saati ile gerçek çıkış arasında **1 saat 45 dakika** fark var\n\nLevent Aksoy'un da ilk ifadesinde beyan ettiği 'evdeydim' çürütüldü — 21:12'de çarşıya girişi görünüyor."
+    },
+    {
+      "docCode": "048-O",
+      "title": "İcra Takip Dosyası — Balcı vs. Yüce",
+      "type": "Mali",
+      "content": "### T.C. İzmir 7. İcra Dairesi\n**Dosya No:** 2025/2847\n**Alacaklı:** Necati Balcı\n**Borçlu:** Pelin Yüce (Yüce Gold Toptan)\n**Toplam Alacak:** 180.000 TL + faiz\n\n### Süreç\n- **02.02.2025:** Necati Balcı tarafından icra takibi başlatıldı\n- **10.02.2025:** Ödeme emri Pelin Yüce'ye tebliğ edildi\n- **17.02.2025:** Pelin Yüce itiraz etmedi, kesinleşti\n- **01.03.2025:** Pelin Yüce'nin banka hesaplarına haciz uygulandı (bakiye: 12.400 TL)\n- **15.03.2025:** Pelin Yüce tarafından kısmi ödeme: 30.000 TL (5. taksit)\n- **Kalan borç:** 120.000 TL + işleyen faiz\n\n### Soruşturma Notu\nPelin Yüce olay tarihinde İstanbul'daydı (uçak bileti doğrulandı: Pegasus PC2345, 17.03.2025, 14:30 İzmir-İstanbul). İcra takibi finansal motiv oluştursa da fiziksel erişim mümkün değildi."
+    }
+  ],
+
+  "messageThreads": [
+    {
+      "id": "048-P",
+      "docCode": "048-P",
+      "title": "WhatsApp Mesajları — Cemre Erkan ↔ Naime Erdem (Anne)",
+      "platform": "whatsapp",
+      "participants": [
+        { "id": "cemre", "name": "Cemre", "role": "şüpheli" },
+        { "id": "naime", "name": "Anne", "role": "tanık" }
+      ],
+      "messages": [
+        {
+          "id": "msg-001",
+          "senderId": "cemre",
+          "type": "text",
+          "text": "anne, dükkanın altında gerçekten bir çekmece var. babam haklıydı",
+          "timestamp": "25.02.2025 21:14"
+        },
+        {
+          "id": "msg-002",
+          "senderId": "naime",
+          "type": "text",
+          "text": "Ne buldun? Dikkatli ol kızım",
+          "timestamp": "25.02.2025 21:15"
+        },
+        {
+          "id": "msg-003",
+          "senderId": "cemre",
+          "type": "text",
+          "text": "muhasebe defteri. 2009. hepsi necatinin el yazısı. sahte alaşım siparişleri, faturalar, hepsi onda. babam hiçbir şey yapmamış anne",
+          "timestamp": "25.02.2025 21:17"
+        },
+        {
+          "id": "msg-004",
+          "senderId": "naime",
+          "type": "text",
+          "text": "Allah'ım. Rıfat hep söylerdi hapiste. Fotoğrafını çek her sayfanın",
+          "timestamp": "25.02.2025 21:18"
+        },
+        {
+          "id": "msg-005",
+          "senderId": "cemre",
+          "type": "text",
+          "text": "çektim. 23 sayfa. telefonumda. avukata gösteririz",
+          "timestamp": "25.02.2025 21:20"
+        },
+        {
+          "id": "msg-006",
+          "senderId": "naime",
+          "type": "text",
+          "text": "Savcılığa git. Babanın adını temizleyelim",
+          "timestamp": "25.02.2025 21:22"
+        },
+        {
+          "id": "msg-007",
+          "senderId": "cemre",
+          "type": "text",
+          "text": "biraz daha bekle anne. daha fazla kanıt lazım. necati beni tanımıyor, devam edeyim",
+          "timestamp": "25.02.2025 21:24"
+        },
+        {
+          "id": "msg-008",
+          "senderId": "naime",
+          "type": "text",
+          "text": "Dikkatli ol. O adam tehlikeli. Babanı hapse attı, kendine bir şey yapmasına izin verme",
+          "timestamp": "25.02.2025 21:26"
+        },
+        {
+          "id": "msg-009",
+          "senderId": "cemre",
+          "type": "text",
+          "text": "merak etme. o benim kim olduğumu bilmiyor",
+          "timestamp": "25.02.2025 21:27"
+        },
+        {
+          "id": "msg-010",
+          "senderId": "cemre",
+          "type": "text",
+          "text": "anne sorun var. necati bir şeyler sezmiş. dedektife araştırtmış beni. bugün yüzüme söyledi",
+          "timestamp": "14.03.2025 19:45"
+        },
+        {
+          "id": "msg-011",
+          "senderId": "naime",
+          "type": "text",
+          "text": "Ne?? Ne dedi?",
+          "timestamp": "14.03.2025 19:46"
+        },
+        {
+          "id": "msg-012",
+          "senderId": "cemre",
+          "type": "text",
+          "text": "\"sen rıfatın kızısın\" dedi. yarın git dedi. fotoğrafları sil yoksa polisi ararım dedi",
+          "timestamp": "14.03.2025 19:48"
+        },
+        {
+          "id": "msg-013",
+          "senderId": "naime",
+          "type": "text",
+          "text": "Git oradan Cemre. Hemen git. O fotoğraflar yeter, savcılığa ver",
+          "timestamp": "14.03.2025 19:49"
+        },
+        {
+          "id": "msg-014",
+          "senderId": "cemre",
+          "type": "text",
+          "text": "gidemem anne. necati defterleri yok edecek. o defterleri yakarsa elimde sadece fotoğraf kalır, orijinal olmadan mahkeme kabul etmez",
+          "timestamp": "14.03.2025 19:52"
+        },
+        {
+          "id": "msg-015",
+          "senderId": "naime",
+          "type": "text",
+          "text": "Cemre lütfen sakin ol. Avukatla konuş yarın. Bir yolunu buluruz",
+          "timestamp": "14.03.2025 19:54"
+        },
+        {
+          "id": "msg-016",
+          "senderId": "cemre",
+          "type": "text",
+          "text": "avukat ne yapacak anne? necati 15 yıl önce babamın hayatını çaldı. 15 yıl sessiz kaldık. artık susamam",
+          "timestamp": "14.03.2025 19:57"
+        },
+        {
+          "id": "msg-017",
+          "senderId": "naime",
+          "type": "text",
+          "text": "Kızım saçma bir şey yapma. Baban senin hayatını yaşamanı isterdi. Lütfen",
+          "timestamp": "14.03.2025 19:59"
+        },
+        {
+          "id": "msg-018",
+          "senderId": "cemre",
+          "type": "text",
+          "text": "merak etme anne. sadece defterleri alacağım. başka bir şey yapmayacağım",
+          "timestamp": "14.03.2025 20:02"
+        },
+        {
+          "id": "msg-019",
+          "senderId": "cemre",
+          "type": "text",
+          "text": "bitti anne.",
+          "timestamp": "17.03.2025 21:03"
+        },
+        {
+          "id": "msg-020",
+          "senderId": "naime",
+          "type": "text",
+          "text": "Ne bitti? Cemre ne yaptın?",
+          "timestamp": "17.03.2025 21:04"
+        },
+        {
+          "id": "msg-021",
+          "senderId": "naime",
+          "type": "text",
+          "text": "Cemre cevap ver",
+          "timestamp": "17.03.2025 21:10"
+        },
+        {
+          "id": "msg-022",
+          "senderId": "naime",
+          "type": "text",
+          "text": "Kızım lütfen cevap ver. Ne yaptın?",
+          "timestamp": "17.03.2025 21:15"
+        },
+        {
+          "id": "msg-023",
+          "senderId": "naime",
+          "type": "voice",
+          "text": "[Sesli mesaj]",
+          "voiceDuration": "0:47",
+          "timestamp": "17.03.2025 21:32"
+        },
+        {
+          "id": "msg-024",
+          "senderId": "cemre",
+          "type": "text",
+          "text": "eve geldim. yarın konuşuruz. iyi geceler",
+          "timestamp": "17.03.2025 22:18"
+        }
+      ]
+    }
+  ],
+
+  "technical": {
+    "items": [
+      {
+        "docCode": "048-S",
+        "title": "Toksikoloji Analiz Raporu — Detaylı Etilen Glikol Analizi",
+        "content": "### Ege Üniversitesi Adli Tıp Anabilim Dalı — Toksikoloji Laboratuvarı\n\n**Rapor No:** TOX-2025/0487\n**Tarih:** 20.03.2025\n**Uzman:** Doç. Dr. Aslı Narin\n\n### Numuneler\n1. Kurban kan numunesi (postmortem)\n2. Kurban idrar numunesi\n3. Çay bardağı içeriği (NCT-ÇAY01)\n4. Depo şişesi içeriği (NCT-ZHR01)\n\n### Bulgular\n\n**Kan numunesi:**\n- Etilen glikol: 285 mg/dL (letal eşik: >200 mg/dL)\n- Glikolik asit: 142 mg/dL (metabolit)\n- Oksalik asit: yüksek\n- Kan pH: 6.92 (ciddi metabolik asidoz)\n- Osmolalite açığı: 58 mOsm/kg (belirgin)\n\n**İdrar numunesi:**\n- Kalsiyum oksalat kristalleri: yoğun\n- Etilen glikol izleri mevcut\n\n**Çay bardağı içeriği:**\n- Siyah çay + etilen glikol (14.2 g/L konsantrasyon)\n- Tahmini toplam alım: 80-120 ml etilen glikol (bardaktaki kalan + içilen miktar)\n\n**Depo şişesi içeriği:**\n- Etilen glikol, %95+ saflık\n- Ticari antifriz ürünüyle uyumlu (renk giderici/koku giderici işlem görmemiş — ham ürün)\n- Şişe ile bardak içeriği kimyasal profil eşleşmesi: %99.2\n\n### Değerlendirme\nKurban, yaklaşık 80-120 ml etilen glikolü çay ile birlikte oral yoldan almıştır. Etilen glikol tatlı, renksiz ve neredeyse kokusuz olduğundan çaydaki varlığı farkedilmemiştir. Alım sonrası:\n- 0-30 dk: Hafif sarhoşluk hissi, sersemlik\n- 30-90 dk: Baş ağrısı, bulantı, kusma eğilimi\n- 2-4 saat: Taşikardi, hiperventilasyon, bilinç bulanıklığı\n- 4-8 saat: Metabolik asidoz, böbrek yetmezliği, ölüm\n\nKurbanın masada oturur pozisyonda bulunması, erken semptomların 'kalp krizi' veya 'baygınlık' ile karışmış olabileceğine işaret eder. Müdahale edilseydi (ilk 2 saat içinde fomepizol veya etanol antidotu) kurtarılabilirdi.\n\n### Sonuç\nÖlüm nedeni: Etilen glikol zehirlenmesine bağlı akut böbrek yetmezliği ve metabolik asidoz. Ölüm kasıtlı zehirleme sonucudur."
+      }
+    ]
+  }
+}

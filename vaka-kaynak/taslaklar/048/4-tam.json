@@ -1,0 +1,268 @@
+{
+  "timeline": [
+    {
+      "time": "2009",
+      "event": "Necati Balcı ve Rıfat Erdem ortaklığı: sahte altın alaşımı satışı başlıyor. Necati siparişleri veriyor, muhasebe defterine kaydediyor.",
+      "source": "NCT-DFT01 muhasebe defteri",
+      "isCritical": false
+    },
+    {
+      "time": "Kasım 2009",
+      "event": "Sahte altın skandalı patlıyor. Necati tüm suçu Rıfat'a yıkıyor, ifadesinde 'bilmiyordum' diyor. Rıfat mahkûm oluyor (4 yıl).",
+      "source": "048-L nüfus/mahkeme kaydı",
+      "isCritical": false
+    },
+    {
+      "time": "2015",
+      "event": "Rıfat Erdem, hapisten çıktıktan 2 yıl sonra intihar ediyor. Geride kızı Cemre (19) ve eşi Naime kalıyor.",
+      "source": "048-L nüfus kaydı",
+      "isCritical": false
+    },
+    {
+      "time": "Temmuz 2023",
+      "event": "Cemre Erdem, mahkeme kararıyla soyadını 'Erkan' olarak değiştiriyor.",
+      "source": "048-L ad değiştirme kararı",
+      "isCritical": false
+    },
+    {
+      "time": "Temmuz 2024",
+      "event": "Cemre Erkan, Balcı Kuyumculuk'a çırak olarak başlıyor. Necati onu tanımıyor.",
+      "source": "048-C Cemre 1. oturum",
+      "isCritical": false
+    },
+    {
+      "time": "25 Şubat 2025",
+      "event": "Cemre, tezgâh altındaki kilitli çekmecede 2009 tarihli muhasebe defterini buluyor. 23 sayfa fotoğraflıyor. Annesine WhatsApp'tan haber veriyor: 'baba haklıydı'.",
+      "source": "NCT-DIJ01 + 048-P WhatsApp",
+      "isCritical": true
+    },
+    {
+      "time": "25 Şubat 2025",
+      "event": "Necati, Rıza Karadağ'ın tavsiyesiyle Konak Güvenlik'ten arka odaya gizli kamera taktırıyor.",
+      "source": "NCT-KAM01 kurulum faturası + 048-G Rıza ifadesi",
+      "isCritical": false
+    },
+    {
+      "time": "6 Mart 2025",
+      "event": "Necati, Ege Dedektiflik'i arıyor — Cemre'nin arka plan araştırmasını başlatıyor.",
+      "source": "NCT-TEL01",
+      "isCritical": false
+    },
+    {
+      "time": "10-12 Mart 2025",
+      "event": "Cemre'nin telefonunda silinen Google aramaları: 'etilen glikol nedir', 'antifriz bileşenleri', 'etilen glikol belirtileri ne zaman başlar'.",
+      "source": "NCT-DIJ01",
+      "isCritical": true
+    },
+    {
+      "time": "12 Mart 2025",
+      "event": "Sevda Balcı, boşanma avukatı Deniz Karaca ile görüşüyor. Avukat hayat sigortasının boşanmayla düşeceğini söylüyor.",
+      "source": "048-K sigorta notu",
+      "isCritical": false
+    },
+    {
+      "time": "13-14 Mart 2025",
+      "event": "Ege Dedektiflik raporu hazır: Cemre Erkan = Cemre Erdem, Rıfat'ın kızı. Necati raporu alıyor.",
+      "source": "048-M dedektiflik raporu + NCT-TEL01",
+      "isCritical": true
+    },
+    {
+      "time": "14 Mart 2025",
+      "event": "Necati, Cemre'ye yüzüne söylüyor: 'Sen Rıfat'ın kızısın. Yarın git, fotoğrafları sil, yoksa polisi ararım.' Cemre annesine yazıyor: 'necati biliyor.'",
+      "source": "048-C2 Cemre 2. oturum + 048-P WhatsApp",
+      "isCritical": true
+    },
+    {
+      "time": "15 Mart 2025",
+      "event": "Necati, aile avukatı Serkan Polat'ı arıyor (15 dk). Pelin Yüce dükkana gelip icranın geri çekilmesini istiyor, reddediliyor.",
+      "source": "NCT-TEL01 + 048-H Pelin ifadesi",
+      "isCritical": false
+    },
+    {
+      "time": "16 Mart 2025",
+      "event": "Tarık Gündüz, Necati ile referans mektubu yüzünden tartışıyor. 'Bedelini ödersin' diyor. Çarşıda 3+ esnaf duyuyor.",
+      "source": "048-F Tarık ifadesi",
+      "isCritical": false
+    },
+    {
+      "time": "17 Mart · 06:14",
+      "event": "Cemre silinen not yazıyor: 'bugün son gün. defterleri ne yapacağım. orijinalleri almalıyım yoksa yok edecek.'",
+      "source": "NCT-DIJ01",
+      "isCritical": false
+    },
+    {
+      "time": "17 Mart · 07:30",
+      "event": "Cemre arabasına gidiyor (Bornova OTO Çıkış). Bagajdaki antifriz bidonundan küçük PET şişeye etilen glikol aktarıyor.",
+      "source": "NCT-DIJ01 harita + NCT-ZHR01",
+      "isCritical": true
+    },
+    {
+      "time": "17 Mart · 08:30-18:30",
+      "event": "Normal iş günü. Necati ve Cemre birlikte çalışıyor. Necati sessiz, Cemre'ye 'tuhaf' bakıyor (Levent'in gözlemi).",
+      "source": "048-D3 Levent 3. oturum",
+      "isCritical": false
+    },
+    {
+      "time": "17 Mart · 18:45",
+      "event": "Necati, eşi Sevda'yı arıyor: 'Geç geleceğim.' Son telefon görüşmesi.",
+      "source": "NCT-TEL01",
+      "isCritical": false
+    },
+    {
+      "time": "17 Mart · ~19:00",
+      "event": "Cemre dükkanı terk ediyor (beyanı). Ama çarşıdan çıkmıyor — kısa süre sonra geri dönüyor.",
+      "source": "048-C Cemre ifadesi + 048-N kamera logu",
+      "isCritical": false
+    },
+    {
+      "time": "17 Mart · 19:12",
+      "event": "Çarşı giriş kamerası: Cemre Altın Sokak'tan tekrar giriyor, Balcı Kuyumculuk'a yöneliyor.",
+      "source": "048-N kamera logu",
+      "isCritical": true
+    },
+    {
+      "time": "17 Mart · 19:48-19:54",
+      "event": "Gizli kamera: Cemre arka odada çay hazırlıyor. Tezgâhın sol tarafı kamera açısında engelli (depo rafı). Çay bardağını Necati'nin masasına taşıyor.",
+      "source": "NCT-KAM01",
+      "isCritical": true
+    },
+    {
+      "time": "17 Mart · 20:08",
+      "event": "Gizli kamera: Necati çayını yudumluyor.",
+      "source": "NCT-KAM01",
+      "isCritical": false
+    },
+    {
+      "time": "17 Mart · 20:35",
+      "event": "Gizli kamera: Necati başını masaya koyuyor, eli göğsüne gidiyor. Rahatsızlık belirtileri (etilen glikol erken semptomları).",
+      "source": "NCT-KAM01",
+      "isCritical": true
+    },
+    {
+      "time": "17 Mart · 20:42",
+      "event": "Gizli kamera: Cemre, Necati'nin yanına gidiyor, 30 saniye duruyor, geri çekiliyor. Yardım çağırmıyor.",
+      "source": "NCT-KAM01",
+      "isCritical": true
+    },
+    {
+      "time": "17 Mart · 20:48",
+      "event": "Gizli kamera: Cemre depoya giriyor (2 dk). Zehir şişesini rafa bırakıyor.",
+      "source": "NCT-KAM01 + NCT-ZHR01 bulgu yeri",
+      "isCritical": false
+    },
+    {
+      "time": "17 Mart · 20:52",
+      "event": "Gizli kamera: Cemre çay ocağını kapatıyor, arka kapıdan çıkıyor.",
+      "source": "NCT-KAM01",
+      "isCritical": false
+    },
+    {
+      "time": "17 Mart · 20:45",
+      "event": "Çarşı çıkış kamerası: Cemre Anafartalar Caddesi yönüne hızlı adımlarla çıkıyor.",
+      "source": "048-N kamera logu",
+      "isCritical": false
+    },
+    {
+      "time": "17 Mart · 21:03",
+      "event": "Cemre annesine WhatsApp mesajı: 'bitti anne.'",
+      "source": "048-P WhatsApp",
+      "isCritical": true
+    },
+    {
+      "time": "17 Mart · 21:12-21:20",
+      "event": "Levent Aksoy çarşıya geliyor. Necati'nin dükkanından arka tarafa ışık sızıyor. Boğuk bir öksürük sesi duyuyor. Çarşı çıkışında ince yapılı, koyu montlu, hızlı yürüyen birini görüyor.",
+      "source": "048-D3 Levent 3. oturum",
+      "isCritical": false
+    },
+    {
+      "time": "17 Mart · 20:30-21:30",
+      "event": "Necati Balcı ölüyor. Etilen glikol zehirlenmesine bağlı metabolik asidoz ve böbrek yetmezliği.",
+      "source": "048-B otopsi raporu",
+      "isCritical": true
+    },
+    {
+      "time": "18 Mart · 08:45",
+      "event": "Cemre sabah kepenkleri açıyor, Necati'yi masasında ölü buluyor. 112'yi arıyor.",
+      "source": "048-C Cemre 1. oturum",
+      "isCritical": false
+    }
+  ],
+
+  "board": {
+    "contradictions": [
+      "Cemre: '19:00'da çıktım' → Çarşı kamerası: 19:12'de giriş, 20:45'te çıkış (048-N). 1 saat 45 dakika fark.",
+      "Cemre: 'Çayı Necati Usta kendisi hazırlardı' → Gizli kamera: 19:50'de Cemre çay hazırlıyor ve masaya taşıyor (NCT-KAM01).",
+      "Cemre: 'İnternette ilan gördüm, başvurdum' → Nüfus kaydı: Cemre Erdem → Erkan (2023). Rıfat Erdem'in kızı (048-L).",
+      "Levent: 'Evdeydim, çıkmadım' → Çarşı kamerası: 21:15'te dükkanına giriyor (048-N). Gizli ilişki buluşması (048-D2).",
+      "Cemre: 'Necati Usta benim için bir baba gibiydi' → WhatsApp: 'necati her şeyi kendi yapmış. babam masum' (048-P). Cemre, babasını hapse gönderen adamın yanında 8 ay çalışmış.",
+      "Necati: Cemre'yi 'iyi öğreniyor' diye beğeniyor → Dedektife araştırtıyor, 'bu kız babası gibi' diyor eşine (048-E2 Sevda)."
+    ],
+    "eliminations": [
+      "Tarık Gündüz: Manisa'da kuzeninin düğünündeydi (17:00-01:00). Instagram paylaşımları, 40+ tanık. Fiziksel olarak İzmir'de değildi.",
+      "Rıza Karadağ: Esnaf Derneği toplantısında (18:00-21:30). 8 kişilik tanık listesi ve toplantı tutanağı mevcut.",
+      "Pelin Yüce: İstanbul'daydı (Pegasus 14:30 İzmir-İstanbul). Uçak bileti ve Kapalıçarşı toplantısı doğrulandı.",
+      "Levent Aksoy: 21:15'te çarşıya geldi ama Necati'nin dükkanına girmedi (kamera kaydı). Gizli ilişki buluşması (Esin Çevik teyit etti). Ölüm saati tahmini 20:30-21:30 — Levent geldiğinde Necati muhtemelen zaten zehirlenmiş veya ölmüştü.",
+      "Sevda Balcı: Hayat sigortası motivasyonu var (500K TL) ve alibisi teyitsiz. ANCAK: zehri temin etme, dükkana erişim ve çay hazırlama fırsatı — gizli kamerada Sevda görünmüyor, sadece Cemre ve Necati var."
+    ]
+  },
+
+  "solution": {
+    "fail": {
+      "suspectId": "cemre",
+      "name": "Cemre Erkan (gerçek adı: Cemre Erdem)"
+    },
+    "questions": [
+      "Necati Balcı neden son haftalarda tedirgin davranıyordu ve bir dedektife kimi araştırttı?",
+      "Necati'nin çayında bulunan etilen glikol nasıl ve ne zaman çaya karıştırıldı?",
+      "Cemre Erkan gerçekte kim ve Necati Balcı'nın yanına neden çırak olarak girdi?",
+      "Tezgâh altındaki kilitli çekmecedeki 2009 tarihli muhasebe defteri neyi kanıtlıyor?",
+      "Olay akşamı dükkanı gerçekten kim, saat kaçta terk etti — ve bu beyanlar kamera kayıtlarıyla uyuşuyor mu?",
+      "Levent Aksoy neden ilk ifadesinde yalan söyledi ve o gece çarşıda ne gördü?",
+      "Hangi iki kişi yalan söylüyor ve neden?"
+    ],
+    "summary": "17 Mart 2025 sabahı Cemre Erkan, arabasının bagajındaki antifriz bidonundan küçük bir PET şişeye etilen glikol aktardı. Gün boyunca Necati'yle normal çalıştı. Akşam saatlerinde dükkanı kısa süreliğine terk etti, sonra 19:12'de geri döndü. Arka odada Necati'ye çay hazırladı — çay ocağı tezgâhında, kameranın kısmen göremediği açıda, çaya etilen glikol ekledi. Bardağı 19:53'te Necati'nin masasına koydu.\n\nNecati çayını 20:08'de yudumlamaya başladı. 20:35'te baş ağrısı ve mide bulantısı belirtileri gösterdi, başını masaya koydu. Cemre 20:42'de yanına gitti, 30 saniye baktı, yardım çağırmadı. 20:48'de depoya girip zehir şişesini rafa sakladı. 20:52'de çay ocağını kapatıp arka kapıdan çıktı. Çarşı çıkış kamerası onu 20:45'te Anafartalar Caddesi yönünde hızlı adımlarla kaydetti.\n\n21:03'te annesine 'bitti anne' yazdı. Eve gitti. Ertesi sabah 08:45'te kepenkleri açıp Necati'yi ölü bulmuş gibi davrandı, 112'yi aradı.",
+    "streamShutdown": "",
+    "mirrorMessage": "Sahne kurgusu: Cemre, çay bardağını yarı dolu bıraktı, Necati'nin elinde — 'kalp krizi sırasında çay içiyordu' izlenimi için. Kapıları kilitledi, düzeni bozmadı. Doğal ölüm sahnelemesi.",
+    "criticalMistake": "Cemre'nin üç kritik hatası: (1) Necati'nin 3 hafta önce gizlice taktırdığı güvenlik kamerasından haberi yoktu — kamera çay hazırlamasını kaydetti. (2) Etilen glikol şişesini depoya sakladı, imha etmedi — üzerinde tam parmak izi seti kaldı. (3) Çarşı giriş/çıkış kameralarını hesaba katmadı — 19:12 girişi ve 20:45 çıkışı, '19:00'da gittim' yalanını çürüttü.",
+    "twoLiars": [
+      {
+        "suspect": "Cemre Erkan (fail)",
+        "lies": "1. Oturum: Gerçek kimliğini gizledi (Cemre Erdem değil Erkan olarak tanıttı). Dükkanı 19:00'da terk ettiğini söyledi (gerçek çıkış: 20:45). Çay hazırlamadığını iddia etti (kamera aksini gösteriyor). 2. Oturum: Kimliğini itiraf etti ama çıkış saati ve çay yalanlarını sürdürdü."
+      },
+      {
+        "suspect": "Levent Aksoy (suçsuz)",
+        "lies": "1. Oturum: Olay gecesi evde olduğunu söyledi — yalan. 2. Oturum: Çarşıdaki dükkanına geldiğini itiraf etti, sebebi gizli ilişki (Esin Çevik). Cinayet motivasyonu yok, yalan sebebi evlilik dışı ilişkiyi saklamak."
+      }
+    ],
+    "redHerrings": [
+      {
+        "suspect": "Sevda Balcı",
+        "explanation": "Hayat sigortası (500K TL), cinayetten 5 gün önce avukatla görüşme (boşanırsa sigorta düşecek bilgisi), teyitsiz alibi. Güçlü finansal motiv var ama gizli kamerada dükkanın içinde sadece Cemre ve Necati görünüyor — Sevda o akşam dükkanda değildi. Motivi gerçek ama fırsatı yoktu."
+      },
+      {
+        "suspect": "Levent Aksoy",
+        "explanation": "İlk ifadede yalan söyledi, olay gecesi cinayet mahallinin bitişiğindeydi (21:15-22:40), 10 yıllık ticari rekabet, Necati'nin 'onu bitireceğim' tehdidi. Ama Levent 21:15'te geldi — Necati zaten zehirlenmiş/ölmüştü. Necati'nin dükkanına girdiğine dair kamera kaydı yok. Yalanı gizli ilişkiyi saklamak içindi."
+      },
+      {
+        "suspect": "Tarık Gündüz",
+        "explanation": "Cinayetten bir gün önce Necati'yle sesli tartışma, 'bedelini ödersin' tehdidi, eski çırak olarak dükkanı iyi biliyor. Ama Manisa'da düğündeydi — 40+ tanık, Instagram paylaşımları, fiziksel olarak İzmir'de değildi."
+      }
+    ],
+    "keyEvidence": [
+      "048-N: Çarşı kamera logu — Cemre 19:12 giriş, 20:45 çıkış (19:00 beyanı yalan)",
+      "NCT-KAM01: Gizli güvenlik kamerası — Cemre 19:50'de çay hazırlıyor ve masaya taşıyor (inkarı çürütüyor)",
+      "NCT-ZHR01: Etilen glikol şişesi — depoda, Cemre'nin parmak izi",
+      "NCT-ÇAY01: Çay bardağı toksikolojisi — etilen glikol tespit",
+      "048-L: Nüfus müdürlüğü ad değiştirme — Cemre Erdem → Erkan (Rıfat Erdem'in kızı)",
+      "048-M: Ege Dedektiflik raporu — Necati, Cemre'nin kimliğini araştırtmış",
+      "NCT-DFT01: 2009 muhasebe defteri — sahte altın skandalının gerçek sorumlusu Necati (motiv kanıtı)",
+      "048-P: WhatsApp mesajları — 'baba haklıydı', 'necati biliyor', 'bitti anne'",
+      "NCT-DIJ01: Cemre'nin telefonu — silinen notlar, haftalardır etilen glikol araştırması",
+      "048-B: Otopsi — etilen glikol zehirlenmesi, alım saati 19:30-20:00 tahmini",
+      "048-D3: Levent 3. oturum — 21:15'te çarşıda ince yapılı, hızlı yürüyen birini gördü",
+      "048-E2: Sevda 2. oturum — Necati'nin 'bu kız babası gibi' sözü"
+    ],
+    "conclusion": "Cemre Erkan — gerçek adıyla Cemre Erdem — babasının intikamını almak için 8 ay boyunca Necati Balcı'nın yanında çalıştı. Amacı başlangıçta ispat etmekti: 2009'daki sahte altın skandalında babasının masumiyetini kanıtlayacak muhasebe defterlerini bulmak. Defterleri buldu, fotoğrafladı. Ama Necati dedektife araştırttırarak Cemre'nin kimliğini öğrendi ve onu ihbar etmekle, defterleri yok etmekle tehdit etti.\n\nCemre, babasının masumiyetinin yok edileceği korkusuyla zehirleme kararı aldı. Günlerce araştırma yaptı, etilen glikolün renksiz ve tatlı olduğunu, çayda farkedilmeyeceğini öğrendi. 17 Mart akşamı son çayını hazırladı.\n\nNecati Balcı, 40 yıl önce babasından devraldığı tezgâhta, 15 yıl önce ortağına yaptığı haksızlığın bedelini kendi çırağının elinden öldü. Kendi taktırdığı güvenlik kamerası, onu korumak yerine katilini kaydetti.\n\n### Ek Soruşturmalar\n- Naime Erdem (Cemre'nin annesi): Suça iştirak veya yardım yönünden ifadesi alınacak. WhatsApp mesajlarında 'saçma bir şey yapma' uyarısı var — cinayetten haberdar olmadığı değerlendirilmektedir.\n- Levent Aksoy: Yalan beyandan dolayı ayrı işlem.\n- 2009 sahte altın davası: Necati Balcı'nın suça aktif katılımı kanıtlandı — Rıfat Erdem'in beraat başvurusu (vefat sonrası aile tarafından) değerlendirilecek.",
+    "arrestDate": "24 Mart 2025 · Cemre Erkan, İzmir Konak İlçe Emniyet Müdürlüğü'nde gözaltına alındı."
+  }
+}

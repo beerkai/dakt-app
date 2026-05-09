@@ -47,6 +47,7 @@ Her vaka 4 aşamada üretilir. Her aşama AYRI bir JSON dosyasına kaydedilir, B
 Aşama 1'in üzerine ekleme yapar. İçerik:
 - Her şüpheli için 1 polis ifadesi (zorunlu)
 - Failin 2 veya 3 oturum ifadesi (yalanı sürekli yakalanan, sıkıştırılan)
+- En az bir yan şüphelinin de fail kadar veya daha fazla oturumu olmalı — sadece failin en çok oturuma sahip olması oyuncuya "en çok ifade veren = katil" kısayolunu verir, bu zorluk düşürür
 - Bir veya iki yan şüphelinin 2. oturum ifadesi (kırmızı ringa derinleştirme)
 - Her ifadede: tarih, doğum/meslek/adres metadatası, S/C diyalog formatı, kritik notlar
 - TOPLAM: 8-12 ifade dokümanı (vakanın boyutuna göre)
@@ -76,6 +77,8 @@ Aşama 1'in üzerine ekleme yapar. İçerik:
 - 7 analiz sorusu (analist çözmeden önce kendine sorması gereken)
 - Çözüm: failin ifşası, cinayet yöntemi, hata, motif, iki yalancı, kırmızı ringalar, kritik belgeler, sonuç paragrafı
 - Tutuklama tarihi
+
+> **NOT:** `"deduction"` tabı oyuncunun kişisel not panosu (PANO) — her zaman aktif, `enabledTabs`'a eklenir. `"cozum"` tabı da her zaman aktif. Zaman çizelgesi (timeline) ve çelişki/eleme (deduction board) **verileri** dosyada tutulur ama UI'da ayrı tab olarak gösterilmez — ileride aktif edilebilir, dosyadan silme.
 
 **Berkay'ın görevi:** Final okuma. Çözüm tutarlı mı, mantık çıkmazsız mı? Onay sonrası **Build** aşamasına geç.
 
@@ -154,6 +157,7 @@ Eğer 3'ten az farklılık varsa, vakayı yeniden tasarla. Berkay'a yaratıcı a
 - MessagePlatform: "instagram", "whatsapp", "imessage", "email", "twitch" değerlerinden biri
 - Testimony.session: 1 | 2 | 3 (sadece bu üç değer)
 - Tüm tarihler ISO veya "GG.AA.YYYY · HH:MM" formatı
+- **enabledTabs:** `"deduction"` (oyuncu not panosu) ve `"cozum"` her zaman aktif — enabledTabs'a eklenir. Zaman çizelgesi ve çelişki/eleme board verileri dosyada tutulur, UI'da ayrı tab olarak gösterilmez ama ileride aktif edilebilir.
 
 ## Kaçma rotası: zaten var olan vakaya benzeyen brief
 
