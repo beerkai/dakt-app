@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   useCallback,
   useEffect,
@@ -25,6 +25,9 @@ import {
 } from "@/lib/local-solved-storage";
 import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/components/AuthProvider";
+import { useRoomActivePlayers } from "@/hooks/useRoomActivePlayers";
+import { getCoopSettings, type CoopSettings } from "@/lib/get-coop-settings";
+import { CoopVotingOverlay } from "./CoopVotingOverlay";
 // Aşama 4 (SSR sertifika): Certificate + formatCertificateDate yeniden eklenecek.
 // import { Certificate, type CertificateHandle } from "@/components/Certificate";
 import {
@@ -142,6 +145,15 @@ export function CozumClient({
   // Aşama 4: const certRef = useRef<CertificateHandle>(null);
   const [analystDisplay, setAnalystDisplay] = useState("Misafir Analist");
 
+  // ═══ CO-OP STATE ═══
+  const searchParams = useSearchParams();
+  const roomIdFromUrl = searchParams.get("room");
+
+  const [roomId, setRoomId] = useState<string | null>(roomIdFromUrl);
+  const [coopVoteComplete, setCoopVoteComplete] = useState(false);
+  const [hostBypassEnabled, setHostBypassEnabled] = useState(false);
+  const [coopIsHost, setCoopIsHost] = useState(false);
+
   useEffect(() => {
     function readName() {
       const v = readGuestUsernameTrimmed();
@@ -158,6 +170,7 @@ export function CozumClient({
   useEffect(() => {
     setSuccessMeta(null);
     hasRecordedSolved.current = false;
+    setCoopVoteComplete(false);
     // Aşama 4: setCertModalOpen(false);
   }, [caseId]);
 
@@ -205,13 +218,53 @@ export function CozumClient({
     if (view !== "result" || !isCorrect) return;
 
     const session = getActiveSession();
-    const isCoop = session?.mode === "coop" && !!session?.roomId;
+    const sessionIsCoop = session?.mode === "coop" && !!session?.roomId;
 
-    if (!isCoop) {
+    if (!sessionIsCoop) {
       clearActiveSession();
       window.dispatchEvent(new Event("dakt-session-change"));
     }
   }, [view, isCorrect]);
+
+  // ═══ CO-OP: roomId sync (URL + active session fallback) ═══
+  useEffect(() => {
+    function syncRoom() {
+      const fromUrl = searchParams.get("room");
+      const session = getActiveSession();
+      setRoomId(fromUrl || session?.roomId || null);
+    }
+    syncRoom();
+    window.addEventListener("dakt-session-change", syncRoom);
+    window.addEventListener("storage", syncRoom);
+    return () => {
+      window.removeEventListener("dakt-session-change", syncRoom);
+      window.removeEventListener("storage", syncRoom);
+    };
+  }, [searchParams]);
+
+  const isCoop = Boolean(roomId);
+
+  const { count: activePlayerCount, loading: playersLoading } =
+    useRoomActivePlayers(isCoop ? roomId : null);
+
+  // ═══ CO-OP: host bypass ayarını oku ═══
+  useEffect(() => {
+    if (!isCoop) return;
+    void getCoopSettings().then((s: CoopSettings) =>
+      setHostBypassEnabled(s.hostBypassEnabled),
+    );
+  }, [isCoop]);
+
+  // ═══ CO-OP: host durumunu sync et ═══
+  useEffect(() => {
+    function syncHost() {
+      setCoopIsHost(Boolean(getActiveSession()?.isHost));
+    }
+    syncHost();
+    window.addEventListener("dakt-session-change", syncHost);
+    return () =>
+      window.removeEventListener("dakt-session-change", syncHost);
+  }, []);
 
   /* Aşama 4: sertifika modal — Escape ile kapatma
   useEffect(() => {
@@ -294,7 +347,49 @@ export function CozumClient({
 
   return (
     <>
-      {view === "voting" && (
+      {/* ═══ CO-OP OYLAMA OVERLAY ═══ */}
+      {isCoop && !coopVoteComplete && roomId && (
+        user?.id ? (
+          playersLoading || activePlayerCount < 1 ? (
+            <p
+              className={`${btnMono} mb-6 text-[var(--kraft)]`}
+              style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
+            >
+              {playersLoading
+                ? "Analistler yükleniyor…"
+                : "Odada aktif analist bekleniyor…"}
+            </p>
+          ) : (
+            <CoopVotingOverlay
+              roomId={roomId}
+              suspects={suspects.map((s) => ({
+                id: s.id,
+                name: s.name,
+                role: s.role,
+                code: s.code,
+              }))}
+              playerCount={activePlayerCount}
+              userId={user.id}
+              onVoteComplete={(suspectId: string) => {
+                setSelectedSuspect(suspectId);
+                setCoopVoteComplete(true);
+                incrementAttemptCount(caseId);
+                setView("envelope");
+                setEnvelopeOpen(false);
+              }}
+              hostBypassEnabled={hostBypassEnabled}
+              isHost={coopIsHost}
+            />
+          )
+        ) : (
+          <div className="cozum-callout-warn mb-6">
+            Co-op oylaması için oturum açmalısınız.
+          </div>
+        )
+      )}
+
+      {/* ═══ SOLO OYLAMA (mevcut akış) ═══ */}
+      {view === "voting" && (!isCoop || coopVoteComplete) && (
         <>
           <div className="cozum-callout-warn">
             ⚠ DİKKAT — Tek hakkın var. Şüpheli listesinden faili işaret et.

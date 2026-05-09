@@ -41,7 +41,11 @@ export function VakaCaseSoloTease({
   victim: string;
 }) {
   const searchParams = useSearchParams();
-  const roomId = searchParams.get("room");
+  const roomIdFromUrl = searchParams.get("room");
+
+  // URL'de room yoksa active session'dan kontrol et
+  const session = getActiveSession();
+  const roomId = roomIdFromUrl || (session?.roomId ?? null);
 
   const [coopBlocked, setCoopBlocked] = useState(false);
   const [visible, setVisible] = useState(false);
