@@ -113,7 +113,7 @@ export default async function CaseLayout({
         />
       </Suspense>
       <GuestSessionBanner />
-      <main className="workspace flex-1">{children}</main>
+      <main className="workspace min-w-0 flex-1">{children}</main>
       <SiteFooter variant="case" />
       <Suspense fallback={null}>
         <VakaCaseSoloTease

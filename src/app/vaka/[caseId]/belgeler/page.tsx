@@ -32,7 +32,7 @@ export default async function BelgelerPage({
           Bu dosya için belge sekmesi tanımlanmadı.
         </p>
       ) : (
-        <div className="flex flex-col gap-8">
+        <div className="flex min-w-0 flex-col gap-8">
           {docs.length > 0 ? (
             <div className="case-doc-grid">
               {docs.map((doc) => (

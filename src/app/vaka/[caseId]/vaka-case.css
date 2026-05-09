@@ -240,6 +240,13 @@ a.nav-item {
   padding: 60px 28px 120px;
   position: relative;
   z-index: 1;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.workspace > section {
+  min-width: 0;
 }
 
 @keyframes fadeIn {
@@ -309,6 +316,7 @@ a.nav-item {
   max-width: 760px;
   margin-left: auto;
   margin-right: auto;
+  min-width: 0;
 }
 .case-doc-grid > .doc {
   margin-bottom: 0;
@@ -337,6 +345,9 @@ a.nav-item {
   font-family: var(--font-special-elite), "Special Elite", monospace;
   font-size: 13px;
   line-height: 1.85;
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
   background-image:
     repeating-linear-gradient(
       0deg,
@@ -375,6 +386,25 @@ a.nav-item {
   overflow-x: auto;
 }
 
+.doc table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.doc th,
+.doc td {
+  overflow-wrap: break-word;
+  word-break: break-word;
+  vertical-align: top;
+  padding: 0.4em 0.55em;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+}
+
+.doc code {
+  overflow-wrap: break-word;
+}
+
 .doc::before {
   content: "";
   position: absolute;
@@ -397,6 +427,11 @@ a.nav-item {
   justify-content: space-between;
   align-items: flex-start;
   gap: 32px;
+}
+
+.doc-header > div:first-child {
+  min-width: 0;
+  flex: 1 1 auto;
 }
 .doc-id {
   font-size: 10px;
@@ -443,31 +478,6 @@ a.nav-item {
 }
 .doc-meta dd {
   color: var(--ink);
-}
-
-/* ═══ BELGE MOBİL FIX — 053-K taşma ═══ */
-@media (max-width: 720px) {
-  .doc-title {
-    font-size: 20px;
-    word-break: break-word;
-  }
-  .doc-meta {
-    grid-template-columns: 1fr;
-    gap: 2px 0;
-  }
-  .doc-meta dt {
-    margin-top: 10px;
-  }
-  .doc-meta dt:first-child {
-    margin-top: 0;
-  }
-  .doc-stamp-area {
-    min-width: unset;
-    width: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-  }
 }
 
 .doc h3 {
@@ -1541,12 +1551,53 @@ a.nav-item {
 }
 
 @media (max-width: 720px) {
-  .doc {
-    padding: 32px 24px;
-  }
   .doc-header {
     flex-direction: column;
     gap: 16px;
+  }
+  .doc-title {
+    font-size: 20px;
+    word-break: break-word;
+  }
+  .doc-meta {
+    grid-template-columns: 1fr;
+    gap: 2px 0;
+  }
+  .doc-meta dt {
+    margin-top: 10px;
+  }
+  .doc-meta dt:first-child {
+    margin-top: 0;
+  }
+  .doc-stamp-area {
+    min-width: unset;
+    width: 100%;
+    align-self: stretch;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .doc-stamp-area .stamp-controls {
+    justify-content: flex-start;
+  }
+  .doc-signature {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .sig-name {
+    min-width: unset;
+    max-width: 100%;
+    box-sizing: border-box;
+    transform: none;
+  }
+  .doc ol,
+  .doc ul {
+    margin: 10px 0 16px 18px;
+  }
+  .doc th,
+  .doc td {
+    overflow-wrap: anywhere;
   }
   .board-grid {
     grid-template-columns: 1fr;

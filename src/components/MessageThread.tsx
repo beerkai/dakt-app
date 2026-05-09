@@ -103,7 +103,7 @@ export function MessageThread({ thread }: { thread: MessageThreadT }) {
 
   return (
     <article
-      className="message-thread-outer border border-[var(--bordeaux)] bg-[var(--paper)]/5"
+      className="message-thread-outer max-w-full min-w-0 border border-[var(--bordeaux)] bg-[var(--paper)]/5"
       aria-label={title}
     >
       <div
