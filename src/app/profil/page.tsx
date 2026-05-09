@@ -30,15 +30,15 @@ export default async function ProfilPage() {
 
   const { data: solved } = await supabase
     .from("solved_cases")
-    .select("accuracy, duration_seconds")
+    .select("accuracy, attempt_count, duration_seconds")
     .eq("user_id", user.id);
 
   const totalSolved = solved?.length ?? 0;
+  const totalAttempts =
+    solved?.reduce((sum, row) => sum + (row.attempt_count ?? 1), 0) ?? 0;
   const avgAccuracy =
-    solved && solved.length > 0
-      ? Math.round(
-          solved.reduce((sum, row) => sum + row.accuracy, 0) / solved.length,
-        )
+    totalSolved > 0 && totalAttempts > 0
+      ? Math.round((totalSolved / totalAttempts) * 100)
       : 0;
   const fastestSolveSec =
     solved && solved.length > 0

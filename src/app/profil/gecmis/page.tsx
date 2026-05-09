@@ -7,6 +7,8 @@ import { getCase } from "@/lib/case-helpers";
 import { createClient } from "@/lib/supabase/server";
 import type { SolvedCase } from "@/lib/supabase/types";
 
+import { ResetHistoryButton } from "./ResetHistoryButton";
+
 export const metadata: Metadata = {
   title: "Geçmiş · D.A.K.T.",
   description: "Çözdüğün vakaların kronolojik kaydı.",
@@ -62,6 +64,8 @@ export default async function ProfilGecmisPage() {
             Davalara Git →
           </Link>
         </div>
+
+        <ResetHistoryButton />
       </div>
     );
   }
@@ -126,6 +130,8 @@ export default async function ProfilGecmisPage() {
           listelenecek.
         </p>
       </section>
+
+      <ResetHistoryButton />
     </div>
   );
 }
