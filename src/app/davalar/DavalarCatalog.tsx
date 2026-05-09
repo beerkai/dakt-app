@@ -11,7 +11,7 @@ import {
 
 import { useAuth } from "@/components/AuthProvider";
 import { CaseCard } from "@/components/CaseCard";
-import { countDocuments } from "@/lib/case-helpers";
+import { countDocuments, visibleTabCount } from "@/lib/case-helpers";
 import { writeGuestUsername } from "@/lib/guest-session";
 import { caseTabHref } from "@/lib/case-tab-routes";
 import type { CaseData } from "@/lib/case-types";
@@ -147,7 +147,7 @@ export function DavalarCatalog({
               summary={c.shortSummary}
               recommendedPlayers={c.recommendedPlayers}
               difficulty={c.difficulty}
-              tabCount={c.enabledTabs.length}
+              tabCount={visibleTabCount(c)}
               docCount={countDocuments(c)}
               suspectCount={c.suspects.length}
               status={active ? "DOSYA AÇIK" : "YAKINDA"}

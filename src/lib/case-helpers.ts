@@ -4,6 +4,7 @@ import { case067 } from "@/data/cases/067";
 import { case082 } from "@/data/cases/082";
 import { case089 } from "@/data/cases/089";
 import { case114 } from "@/data/cases/114";
+import { orderedEnabledTabs } from "./case-tab-routes";
 import type { CaseData, TabId } from "./case-types";
 
 const ALL_CASES: Record<string, CaseData> = {
@@ -56,4 +57,9 @@ export function countDocuments(c: CaseData): number {
 
 export function isTabEnabled(caseData: CaseData, tab: TabId): boolean {
   return caseData.enabledTabs.includes(tab);
+}
+
+/** Şeritte görünen sekme sayısı (`sectionNumForTab` ile aynı liste). */
+export function visibleTabCount(caseData: CaseData): number {
+  return orderedEnabledTabs(caseData.enabledTabs).length;
 }

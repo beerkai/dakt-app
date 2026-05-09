@@ -20,7 +20,6 @@ export const case082: CaseData = {
     "deliller",
     "belgeler",
     "teknik",
-    "zaman-cizelgesi",
     "deduction",
     "cozum"
   ],
