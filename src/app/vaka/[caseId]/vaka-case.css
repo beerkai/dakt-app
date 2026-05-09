@@ -445,6 +445,28 @@ a.nav-item {
   color: var(--ink);
 }
 
+/* ═══ BELGE MOBİL FIX ═══ */
+@media (max-width: 720px) {
+  .doc-title {
+    font-size: 20px;
+    word-break: break-word;
+  }
+  .doc-stamp-area {
+    min-width: unset;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .doc-meta {
+    grid-template-columns: 1fr;
+    gap: 4px 0;
+  }
+  .doc-meta dt {
+    margin-top: 8px;
+  }
+}
+
 .doc h3 {
   font-family: var(--font-cormorant), "Cormorant Garamond", serif;
   font-size: 18px;
