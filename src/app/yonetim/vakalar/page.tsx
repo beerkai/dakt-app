@@ -79,7 +79,7 @@ export default async function VakalarPage() {
                 <div className="gm-list-detail" style={{ marginTop: 4 }}>
                   {stats?.count ?? 0} çözüm ·
                   {stats
-                    ? ` ${Math.round(stats.avgAccuracy * 100)}% ort. doğruluk`
+                    ? ` ${Math.round(stats.avgAccuracy)}% ort. doğruluk`
                     : " henüz çözen yok"}
                 </div>
               </div>

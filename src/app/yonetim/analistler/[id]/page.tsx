@@ -246,7 +246,7 @@ export default async function AnalystDetailPage({
               </span>
               <span className="gm-list-name">Vaka {s.case_id}</span>
               <span className="gm-list-detail">
-                {Math.round(s.accuracy * 100)}% doğruluk · {s.attempt_count}{" "}
+                {Math.round(s.accuracy)}% doğruluk · {s.attempt_count}{" "}
                 deneme
               </span>
               <span className="gm-list-meta-box">

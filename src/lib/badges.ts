@@ -19,7 +19,6 @@ export function calculateBadges(
   activeCaseCount: number,
 ): Badge[] {
   const totalSolved = solved.length;
-  const perfect = solved.filter((s) => s.accuracy === 100).length;
   const firstTry = solved.filter((s) => s.attempt_count === 1).length;
   const fastSolves = solved.filter((s) => s.duration_seconds < 600).length;
 
@@ -52,8 +51,8 @@ export function calculateBadges(
       title: "Saf Doğruluk",
       description: "%100 doğruluk ile bir vaka çöz (ilk denemede)",
       icon: "⬢",
-      unlocked: perfect >= 1,
-      unlockedAt: solved.find((s) => s.accuracy === 100)?.solved_at,
+      unlocked: firstTry >= 1,
+      unlockedAt: solved.find((s) => s.attempt_count === 1)?.solved_at,
     },
     {
       id: "three-perfect",
@@ -100,7 +99,7 @@ export function calculateStats(solved: SolvedCaseMetrics[]) {
   const totalPlayTime = solved.reduce((sum, s) => sum + s.duration_seconds, 0);
   const firstTryCount = solved.filter((s) => s.attempt_count === 1).length;
   const firstTryRate = Math.round((firstTryCount / totalSolved) * 100);
-  const perfectScores = solved.filter((s) => s.accuracy === 100).length;
+  const perfectScores = solved.filter((s) => s.attempt_count === 1).length;
 
   return {
     totalSolved,

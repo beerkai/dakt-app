@@ -34,11 +34,12 @@ export default async function ProfilPage() {
     .eq("user_id", user.id);
 
   const totalSolved = solved?.length ?? 0;
-  const totalAttempts =
-    solved?.reduce((sum, row) => sum + (row.attempt_count ?? 1), 0) ?? 0;
   const avgAccuracy =
-    totalSolved > 0 && totalAttempts > 0
-      ? Math.round((totalSolved / totalAttempts) * 100)
+    solved && totalSolved > 0
+      ? Math.round(
+          solved.reduce((sum, row) => sum + (row.accuracy ?? 0), 0) /
+            totalSolved,
+        )
       : 0;
   const fastestSolveSec =
     solved && solved.length > 0

@@ -54,11 +54,12 @@ export function incrementAttemptCount(caseId: string): number {
   return next;
 }
 
-/** Onaylanan oy sayısına göre doğruluk: n denemede doğru → yaklaşık 100/n (%). */
-export function accuracyPercentForAttempts(attempts: number): number {
-  const n = Math.max(1, Math.floor(attempts));
-  if (n <= 1) return 100;
-  return Math.max(10, Math.round(100 / n));
+/**
+ * Veritabanında ve sonuç ekranında saklanan doğruluk: fail tespiti doğruysa %100.
+ * Kaç denemede kapandığı `attempt_count` ile tutulur (profil rozetleri / ilk deneme oranı).
+ */
+export function accuracyPercentForAttempts(_attempts: number): number {
+  return 100;
 }
 
 export function formatCertificateDate(d = new Date()): string {

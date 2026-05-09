@@ -80,6 +80,8 @@ export function CozumClient({
   const router = useRouter();
   const { user } = useAuth();
   const hasRecordedSolved = useRef(false);
+  const voteSubmitLockRef = useRef(false);
+  const flipHandledRef = useRef(false);
   const baseVoteSuspects: VoteSuspect[] = useMemo(
     () =>
       suspects.map((s) => ({
@@ -171,6 +173,8 @@ export function CozumClient({
     setSuccessMeta(null);
     hasRecordedSolved.current = false;
     setCoopVoteComplete(false);
+    voteSubmitLockRef.current = false;
+    flipHandledRef.current = false;
     // Aşama 4: setCertModalOpen(false);
   }, [caseId]);
 
@@ -306,11 +310,13 @@ export function CozumClient({
     voteSuspects.find((s) => s.suspectId === selectedSuspect)?.name ?? "—";
 
   function handleConfirmVote() {
-    if (!selectedSuspect) return;
+    if (!selectedSuspect || voteSubmitLockRef.current) return;
+    voteSubmitLockRef.current = true;
     incrementAttemptCount(caseId);
     setVoteConfirmed(true);
     window.setTimeout(() => {
       setVoteConfirmed(false);
+      flipHandledRef.current = false;
       setView("envelope");
       setEnvelopeOpen(false);
     }, 800);
@@ -325,6 +331,8 @@ export function CozumClient({
     if (e.propertyName !== "transform") return;
     if (e.target !== flipInnerRef.current) return;
     if (!envelopeOpen || view !== "envelope") return;
+    if (flipHandledRef.current) return;
+    flipHandledRef.current = true;
     const ok = selectedSuspect === correctId;
     setView("result");
     setIsCorrect(ok);
@@ -370,6 +378,7 @@ export function CozumClient({
                 setSelectedSuspect(suspectId);
                 setCoopVoteComplete(true);
                 incrementAttemptCount(caseId);
+                flipHandledRef.current = false;
                 setView("envelope");
                 setEnvelopeOpen(false);
               }}

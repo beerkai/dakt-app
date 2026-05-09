@@ -93,7 +93,7 @@ export default async function ProfilBasarilarPage() {
         <StatCard
           label="ORTALAMA DOĞRULUK"
           value={`%${stats.averageAccuracy}`}
-          sub="tüm vakalar üzerinden"
+          sub="dosya başına kayıtlı skor"
         />
         <StatCard
           label="EN HIZLI ÇÖZÜM"
@@ -112,7 +112,7 @@ export default async function ProfilBasarilarPage() {
         <StatCard
           label="MÜKEMMEL ÇÖZÜM"
           value={String(stats.perfectScores)}
-          sub="%100 doğruluk"
+          sub="ilk denemede kapanan dosya"
         />
         <StatCard
           label="TOPLAM SÜRE"
