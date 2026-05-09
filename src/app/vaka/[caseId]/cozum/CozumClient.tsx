@@ -23,11 +23,11 @@ import { readGuestUsernameTrimmed } from "@/lib/guest-session";
 import {
   upsertLocalSolvedRecord,
 } from "@/lib/local-solved-storage";
-import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/components/AuthProvider";
 import { useRoomActivePlayers } from "@/hooks/useRoomActivePlayers";
 import { getCoopSettings, type CoopSettings } from "@/lib/get-coop-settings";
 import { CoopVotingOverlay } from "./CoopVotingOverlay";
+import { recordSolvedCase } from "./actions";
 // Aşama 4 (SSR sertifika): Certificate + formatCertificateDate yeniden eklenecek.
 // import { Certificate, type CertificateHandle } from "@/components/Certificate";
 import {
@@ -181,22 +181,18 @@ export function CozumClient({
     const durationSeconds = Math.floor(successMeta.durationMs / 1000);
 
     if (user) {
-      hasRecordedSolved.current = true;
-      const supabase = createClient();
       void (async () => {
-        const { error } = await supabase.from("solved_cases").upsert(
-          {
-            user_id: user.id,
-            case_id: caseId,
-            accuracy: successMeta.accuracy,
-            attempt_count: successMeta.attempts,
-            duration_seconds: durationSeconds,
-            solved_at: new Date().toISOString(),
-          },
-          { onConflict: "user_id,case_id" },
-        );
-        if (error) {
-          console.error("Vaka kaydı hatası:", error);
+        const result = await recordSolvedCase({
+          caseId,
+          accuracy: successMeta.accuracy,
+          attemptCount: successMeta.attempts,
+          durationSeconds,
+        });
+        if (result.success) {
+          hasRecordedSolved.current = true;
+          router.refresh();
+        } else {
+          console.error("Vaka kaydı hatası:", result.error);
         }
       })();
       return;
@@ -212,7 +208,7 @@ export function CozumClient({
         solved_at: new Date().toISOString(),
       });
     }
-  }, [view, isCorrect, user, successMeta, caseId]);
+  }, [view, isCorrect, user, successMeta, caseId, router]);
 
   useEffect(() => {
     if (view !== "result" || !isCorrect) return;

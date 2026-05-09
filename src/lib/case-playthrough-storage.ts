@@ -54,11 +54,11 @@ export function incrementAttemptCount(caseId: string): number {
   return next;
 }
 
+/** Onaylanan oy sayısına göre doğruluk: n denemede doğru → yaklaşık 100/n (%). */
 export function accuracyPercentForAttempts(attempts: number): number {
-  if (attempts <= 1) return 100;
-  if (attempts === 2) return 66;
-  if (attempts === 3) return 33;
-  return 10;
+  const n = Math.max(1, Math.floor(attempts));
+  if (n <= 1) return 100;
+  return Math.max(10, Math.round(100 / n));
 }
 
 export function formatCertificateDate(d = new Date()): string {
