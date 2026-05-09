@@ -12,7 +12,8 @@ export const case082MessageThreads: MessageThread[] = [
         "isPerpetrator": true
       },
       {
-        "name": "Volkan Şenel"
+        "name": "Volkan Şenel",
+        "isUser": true
       }
     ],
     "messages": [
