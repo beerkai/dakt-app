@@ -1,0 +1,409 @@
+{
+  "_yorum": "Aşama 1 iskeleti dolduruldu. Diğer alanlar boş bırakıldı, şablon yapısı korundu.",
+  "id": "036",
+  "codename": "Bedel",
+  "fullTitle": "Bedel Dosyası",
+  "classification": "Standart",
+  "caseCode": "DAKT-036-BDL",
+  "victim": {
+    "name": "Cevher Şanlı",
+    "description": "62, Erkek, Kuyumcu ve tefeci, otoriter esnaf figürü",
+    "_alternatif": "Maktul"
+  },
+  "location": "Diyarbakır · Sur · Kuyumcular Çarşısı · Şanlı Kuyumculuk Arka Odası",
+  "dateRange": "18 Nisan 2025 · Gece 22:30 — 23:30",
+  "brief": {
+    "summary": "19 Nisan 2025 sabahı saat 08:30 sularında, Diyarbakır Sur içindeki tarihi Kuyumcular Çarşısı'nda yer alan Şanlı Kuyumculuk'un çırağı kepenkleri açtığında ustası Cevher Şanlı'nın cesediyle karşılaştı. Cevher, dükkanın arka tarafındaki muhasebe odasında, boynundan eski bir urgan/halı ipiyle boğulmuş halde yerde yatmaktaydı.\n\nİlk incelemelere göre dükkana zorla girilmemiş, vitrindeki ya da kasadaki altınlara dokunulmamıştı. Maktulün sadece masasının üzerindeki o güne ait alacak-verecek defterinin eksik olduğu belirlendi. Cinayetin bir hırsızlık vakasından ziyade, kurbanın tefecilik faaliyetleriyle ya da şahsi ilişkileriyle bağlantılı, kişisel bir infaz olduğu açıktı.\n\nCevher Şanlı, çarşıda saygı duyulan ama bir o kadar da korkulan bir isimdi. Dar boğaza düşen esnafa yüksek faizle borç verir, ödeyemeyenleri acımasızca sıkıştırırdı. Bu durum, onu öldürmek için geçerli nedeni olan geniş bir şüpheli havuzu yaratıyor. Soruşturma, kurbanın sadece alacaklılarını değil, aile içindeki çalkantılı ilişkilerini de mercek altına almak zorunda.",
+    "victimProfile": "Cevher Şanlı, 62 yaşında, eski usül bir esnaf. Dışarıdan bakıldığında geleneklerine bağlı, namazında niyazında, çarşının 'Cevher Abisi'. Ancak kapalı kapılar ardında, çaresiz kalmış insanlara gayriresmi borç veren, temerrüde düşenlerin mülklerine çöken acımasız bir tefeci.\n\nAile hayatında da benzer bir diktatörlük hüküm sürüyor. Eşi Saliha'ya psikolojik şiddet uygulayan, oğlu Mahmut'u dükkandan kovan ve onu mirastan men etmekle tehdit eden biri. Çevresindeki herkesle bir 'alacak-verecek' veya 'çıkar' ilişkisi kurmuş, sevgi bağı kalmamış bir adam.",
+    "streamRecord": "Olay anına dair dijital iz: Olay gecesi 22:35 ile 23:20 arasında çarşı girişindeki kamera kayıtlarında bir kesinti mevcut. Sadece dükkanın karşısındaki ATM kamerasından yansıyan sınırlı açılar incelenmekte.",
+    "mission": "Soruşturma ekibinden beklenen: Kayıp alacak-verecek defterinin kimin işine yarayacağını bulmak, şüphelilerin olay gecesine ait ifadelerindeki çelişkileri yakalamak ve kurbanın tefecilik faaliyetleri nedeniyle hedef aldığı kişileri tespit etmektir. Toplamda 22 belgelik bir dosya üzerinden çalışacaksınız.",
+    "warning": "Kurban direnmemiş ve kapı zorlanmamış. Maktul faili tanıyordu ve arka odaya girmesine müsaade etti.",
+    "documentCount": 22,
+    "suspectCount": 6,
+    "timeOfIncident": "Gece 22:30 — 23:30 (Tahmini)"
+  },
+  "suspects": [
+    {
+      "id": "civan",
+      "name": "Civan Diyarlı",
+      "age": 34,
+      "role": "Bakırcı Ustası (Borçlu esnaf)",
+      "tag": "SUR-BAK/CD",
+      "quote": "Bana olan borcunu namusuyla ödesin dedim, ben kimseden can almam.",
+      "isFail": true
+    },
+    {
+      "id": "ceren",
+      "name": "Ceren Diyarlı",
+      "age": 28,
+      "role": "Civan'ın kız kardeşi",
+      "tag": "SUR-AİL/BD",
+      "quote": "Cevher Amca bizim ailemizin dostuydu, neden böyle bir iftiraya uğrayayım ki?",
+      "isFail": false
+    },
+    {
+      "id": "mahmut",
+      "name": "Mahmut Şanlı",
+      "age": 38,
+      "role": "Kurbanın oğlu",
+      "tag": "AİL-OĞL/MŞ",
+      "quote": "Babamın parası vardı ama vicdanı yoktu. Ölmesi şaşırtıcı değil.",
+      "isFail": false
+    },
+    {
+      "id": "saliha",
+      "name": "Saliha Şanlı",
+      "age": 58,
+      "role": "Kurbanın eşi",
+      "tag": "AİL-EŞ/SŞ",
+      "quote": "Kırk yıllık kocam... Ne kadar zor bir adam olsa da, o benim efendimdi.",
+      "isFail": false
+    },
+    {
+      "id": "hozan",
+      "name": "Hozan Akpınar",
+      "age": 42,
+      "role": "Rakip Kuyumcu",
+      "tag": "SUR-KUY/HA",
+      "quote": "Çarşıda herkes Cevher'den illallah etmişti, benim onunla bir hesabım kalmamıştı.",
+      "isFail": false
+    },
+    {
+      "id": "yasin",
+      "name": "Yasin İskender",
+      "age": 25,
+      "role": "Kuyumcu Çırağı",
+      "tag": "SUR-ÇRK/Yİ",
+      "quote": "Ben sadece ekmeğimin peşindeyim, o gece dükkanı kilitleyip çıktım.",
+      "isFail": false
+    }
+  ],
+  "testimonies": [
+    {
+      "id": "yasin-1",
+      "docCode": "036-Y1",
+      "suspectId": "yasin",
+      "session": 1,
+      "title": "İfade — Yasin İskender (1. Oturum)",
+      "date": "19.04.2025 · 10:15",
+      "meta": [
+        {
+          "label": "Doğum",
+          "value": "12.03.2000"
+        },
+        {
+          "label": "Meslek",
+          "value": "Kuyumcu Çırağı"
+        },
+        {
+          "label": "Adres",
+          "value": "Bağlar, Diyarbakır"
+        }
+      ],
+      "content": "S: Başın sağ olsun Yasin. Olay sabahı dükkanı sen açmışsın, tam olarak ne gördün anlatır mısın?\n\nC: Sağ olun amirim. Ben her sabah 08:30'da gelir, dükkanın kepengini açarım. Cevher ustam benden her zaman önce gelir sanıyordum ama o gece belli ki dükkanda kalmış. Kepengi açtım, vitrin aynen duruyordu. Arka odaya, muhasebe tarafına geçtim çayı koymak için. Bir baktım ustam yerde yatıyor. [duraksama] Boynunda halı ipi gibi kalın bir şey vardı. Çok korktum, hemen dışarı fırlayıp çarşı bekçisi Remzi abiye haber verdim.\n\nS: Dün akşam dükkandan saat kaçta ayrıldın? Ustanın durumu nasıldı?\n\nC: Ben akşam ezanından sonra, 20:30 gibi dükkandan çıktım. Cevher ustam o gün sabahtan beri çok gergindi. Kırmızı kaplı meşhur alacak-verecek defterine bakıp duruyordu. Bana 'Sen çık koçum, benim çarşıdan biriyle hesabım var, onu bekleyeceğim' dedi. Ben de üstelemedim çıktım.\n\nS: Kiminle buluşacağını söylemedi mi? Çarşıda husumetli olduğu kimse var mıydı?\n\nC: Amirim, ustamın husumetli olmadığı esnaf yok gibiydi. Herkes ondan borç alırdı. Son zamanlarda özellikle şu köşedeki bakırcı Civan abiyle arası pek yoktu. Civan abinin işleri bozuk, ustama da epey borcu birikti. Birkaç gün önce dükkana gelip 'Usta mühlet ver, anamın evini satıp ödeyeceğim' diye yalvarmıştı. Ama ustam Nuh dedi peygamber demedi. \n\nS: Peki sen o gece dükkandan çıktıktan sonra nereye gittin?\n\nC: Doğruca eve, Bağlar'a gittim amirim. Annemle kız kardeşim şahittir, bütün gece evdeydim. Sabah kalkıp yine dükkana geldim.",
+      "signature": "Y. İskender"
+    },
+    {
+      "id": "saliha-1",
+      "docCode": "036-S1",
+      "suspectId": "saliha",
+      "session": 1,
+      "title": "İfade — Saliha Şanlı (1. Oturum)",
+      "date": "19.04.2025 · 11:30",
+      "meta": [
+        {
+          "label": "Doğum",
+          "value": "04.09.1967"
+        },
+        {
+          "label": "Meslek",
+          "value": "Ev Hanımı"
+        },
+        {
+          "label": "Adres",
+          "value": "Yenişehir, Diyarbakır"
+        }
+      ],
+      "content": "S: Saliha Hanım, eşinizin vefatı için başsağlığı dileriz. Olay gecesi eşiniz eve hiç gelmemiş, haberiniz var mıydı?\n\nC: [derin bir nefes alır] Eksik olmayın amirim. Cevher eve gelmediyse o kırmızı defterine gömülmüştür, çarşıda sabahlayacaktır derdim hep. Kırk yıllık kocam... Hiç arayıp sormazdım nerede kaldın diye, sorsam da terslerdi zaten.\n\nS: Aranız nasıldı? Son zamanlarda tehdit alıyor muydu veya canını sıkan özel bir durum var mıydı?\n\nC: Bizim aramız hiçbir zaman iyi olmadı ki evlat... O sadece altına, paraya, senede değer verirdi. Son haftalarda iyice huysuzlanmıştı. 'Bu devirde kimseye acımayacaksın, acırsan tepene binerler' deyip duruyordu evde. Kimden bahsettiğini bilmiyorum. Bana pek bir şey anlatmazdı.\n\nS: Oğlunuz Mahmut'la araları nasıldı? Dün gece eve geldi mi Mahmut?\n\nC: [Gözleri dolar] Ah Mahmut... Oğlum benim. Babası onu aylardır dükkandan kovmuştu. 'Hayırsız evlat, benim malımı çarçur edeceksin, seni mirasımdan da sileceğim' derdi. Mahmut dün gece eve geç geldi, saat 01:00'i geçiyordu. Neredeydin diye sordum, kahvede arkadaşlarla oturuyorduk dedi. \n\nS: Cevher Bey'in evdeki kasasında veya özel eşyaları arasında aradığımız kırmızı defterin yedeği falan bulunur mu?\n\nC: Sanmam. O defter onun canıydı, dükkanda yastığının altına koyar öyle uyurdu. Kime ne borç verdi, kimin tapusunu rehin aldı... Hepsi o defterdeydi. Onu alan, Cevher'in sadece parasını değil, gücünü de aldı.",
+      "signature": "S. Şanlı",
+      "criticalNote": "Kurbanın oğlu Mahmut'un gece 01:00'de eve döndüğünü ve aralarının miras yüzünden kötü olduğunu doğruladı."
+    },
+    {
+      "id": "hozan-1",
+      "docCode": "036-H1",
+      "suspectId": "hozan",
+      "session": 1,
+      "title": "İfade — Hozan Akpınar (1. Oturum)",
+      "date": "19.04.2025 · 13:00",
+      "meta": [
+        {
+          "label": "Doğum",
+          "value": "22.11.1983"
+        },
+        {
+          "label": "Meslek",
+          "value": "Kuyumcu"
+        },
+        {
+          "label": "Adres",
+          "value": "Sur, Diyarbakır"
+        }
+      ],
+      "content": "S: Hozan Bey, Cevher Şanlı ile dükkanlarınız çok yakın. Kendisiyle uzun süredir sürtüşmeli olduğunuz biliniyor. Olay gecesi 22:30 civarında dükkanınızın kepengini kapattığınızı gördük. Ne gördünüz?\n\nC: Amirim, Cevher'le anlaşamadığımız sır değildi. O tefecilik yapıp çarşının adını kirletiyordu, ben dürüst kuyumculuk yapıyorum. Müşterilerimi de kaçırıyordu sırf bana inat olsun diye. Ama benim onunla kan davam yok. O gece hesap kapatıyordum, malum ay sonu yaklaşıyor. Saat 22:45 gibi kepengi çekerken Cevher'in dükkanının ışığı yanıyordu.\n\nS: O saatte Cevher'in dükkanına giren çıkan birini gördünüz mü?\n\nC: Açıkçası sokak oldukça tenhaydı. Kepengi tam indirirken sokağın başından biri Cevher'in dükkanına doğru yürüdü. Yüzünü göremedim, sırtı dönüktü. Üzerinde koyu renk bir kaban vardı sanırım. Kapıyı tıklattı, Cevher içeriden bir şeyler söyledi ve kapıyı açtı. \n\nS: Giren kişinin boyu posu, yürüyüşü nasıldı? Tanıdık biri miydi?\n\nC: Vallahi karanlıktı amirim. Boylu poslu biri değildi ama. Cevher kapıyı öyle hemen açmaz gece vakti. Demek ki beklediği, tanıdığı biriydi. Ben de işime bakıp arabama atladım, eve gittim.\n\nS: Civan Diyarlı'yı tanır mısınız? Bakırcı.\n\nC: Civan iyi çocuktur ama Cevher'in eline düştü bir kere. Borç batağındaydı. Geçen gün dükkanın önünde Cevher ona ağza alınmayacak laflar etti. 'Kardeşinin malını mülkünü almasını bilirim' filan diyordu. Civan'ın gözü dönmüştü ama bir şey yapamadı.",
+      "signature": "H. Akpınar"
+    },
+    {
+      "id": "mahmut-1",
+      "docCode": "036-M1",
+      "suspectId": "mahmut",
+      "session": 1,
+      "title": "İfade — Mahmut Şanlı (1. Oturum)",
+      "date": "19.04.2025 · 14:30",
+      "meta": [
+        {
+          "label": "Doğum",
+          "value": "08.05.1987"
+        },
+        {
+          "label": "Meslek",
+          "value": "İşsiz"
+        },
+        {
+          "label": "Adres",
+          "value": "Yenişehir, Diyarbakır"
+        }
+      ],
+      "content": "S: Babanızın ölümüyle ilgili ifadenize başvuruyoruz. Babanızla aranızın bozuk olduğu, sizi mirastan men edeceğini söylediği doğru mu?\n\nC: [umursamaz bir tavırla] Doğru amirim. Babam para dışında hiçbir şeyi sevmezdi. Beni dükkandan kovalı aylar oldu. 'Sen bu işin adamı değilsin, altın sana göre değil' deyip duruyordu. Ben kendi yolumu çizmeye çalışıyorum.\n\nS: Dün gece neredeydiniz Mahmut? Saat 01:00'de eve dönmüşsünüz.\n\nC: Ofis semtinde, Dostlar Kahvesi'ndeydim. Gece yarısına kadar arkadaşlarla pişti oynadık. Sonra da kalkıp eve gittim.\n\nS: Babanızı o gece hiç gördünüz mü? Dükkana uğradınız mı?\n\nC: Hayır uğramadım. Biliyorsunuz beni dükkanda istemiyordu. Onu en son üç gün önce annemin yanında gördüm. Yine bana bağırıp çağırıyordu. Dün gece boyunca kahvedeydim, sorabilirsiniz. Olayla ilgim yok.\n\nS: Kırmızı alacak-verecek defterinin yerini bilir miydiniz?\n\nC: O defteri gözü gibi korurdu. Kime ne kadar geçirdiğini ancak oradan bilirdi. Ama ben o işlerle ilgilenmiyordum.",
+      "signature": "M. Şanlı"
+    },
+    {
+      "id": "mahmut-2",
+      "docCode": "036-M2",
+      "suspectId": "mahmut",
+      "session": 2,
+      "title": "İfade — Mahmut Şanlı (2. Oturum)",
+      "date": "20.04.2025 · 09:00",
+      "meta": [
+        {
+          "label": "Doğum",
+          "value": "08.05.1987"
+        },
+        {
+          "label": "Meslek",
+          "value": "İşsiz"
+        },
+        {
+          "label": "Adres",
+          "value": "Yenişehir, Diyarbakır"
+        }
+      ],
+      "content": "S: Mahmut, dün kahvedeydim dedin ama kahvehanedeki garson senin 22:30 civarında 'bir işim var' diyerek oradan ayrıldığını söylüyor. Yalan söylüyorsun.\n\nC: [panikler] Amirim... Ben... Ben öldürmedim babamı!\n\nS: Neredeydin o saatte? Neden dükkanın sokağındaki ATM kamerasında 23:15'te koşarak oradan uzaklaştığın görülüyor?\n\nC: [Terler, ellerini ovuşturur] Tamam, tamam anlatacağım. Borcum vardı benim. Kumar borcu. Babamdan son bir kez para istemek için dükkana gittim. Başka çarem yoktu. Gittiğimde dükkanın kepengi yarıya kadar inikti, kapı da aralıktı.\n\nS: İçeri girdin mi?\n\nC: Sadece başımı uzattım. Babamı o odanın zemininde yatarken gördüm. Boynunda bir ip vardı. Masasının üstü darmadağındı. O kadar korktum ki, hemen kaçtım. Polisi arasaydım kesin üzerime kalırdı diye düşündüm. Aranmızın bozuk olduğunu herkes biliyor.\n\nS: Masanın üzerinde veya etrafta defteri gördün mü?\n\nC: Hayır, hiçbir şeye dokunmadım. Sadece koşup uzaklaştım. Babamı ben öldürmedim amirim, yemin ederim içeri girdiğimde o zaten ölmüştü.",
+      "signature": "M. Şanlı",
+      "criticalNote": "Şüpheli yalanını itiraf etti. Olay anı olan 23:15'te olay yerinde olduğunu kabul ediyor ama fail olmadığını, cesedi bulup kaçtığını iddia ediyor."
+    },
+    {
+      "id": "ceren-1",
+      "docCode": "036-B1",
+      "suspectId": "ceren",
+      "session": 1,
+      "title": "İfade — Ceren Diyarlı (1. Oturum)",
+      "date": "20.04.2025 · 11:00",
+      "meta": [
+        {
+          "label": "Doğum",
+          "value": "17.08.1997"
+        },
+        {
+          "label": "Meslek",
+          "value": "Hemşire (Özel Poliklinik)"
+        },
+        {
+          "label": "Adres",
+          "value": "Kayapınar, Diyarbakır"
+        }
+      ],
+      "content": "S: Ceren Hanım, abiniz Civan'ın Cevher Şanlı'ya yüklü bir borcu olduğunu biliyoruz. Olay gecesi neredeydiniz?\n\nC: Amirim, abimin işleri kötüydü evet. Ama ben ayrı yaşıyorum. O gece evimde, Kayapınar'da nöbet çıkışı dinleniyordum. \n\nS: Cevher Şanlı'yı tanır mısınız? Sizinle kişisel bir husumeti var mıydı?\n\nC: Cevher Amca bizim ailemizin dostuydu. Rahmetli babamın arkadaşıydı. Abim borcunu ödeyemeyince biraz canımızı sıktı ama husumet denecek bir durum yoktu. Neden böyle bir iftiraya uğrayayım ki?\n\nS: Size ait Diclekent'teki arazi ipotek gösterilmiş doğru mu?\n\nC: Abim o dükkanı kurtarmak için benden ricada bulundu, ben de onay verdim. Cevher Amca o araziyi alacaktı borca karşılık. Üzüldük ama mal canın yongası değil sonuçta. Babasının ölümüyle benim veya abimin ilgisi yok.",
+      "signature": "B. Diyarlı"
+    },
+    {
+      "id": "ceren-2",
+      "docCode": "036-B2",
+      "suspectId": "ceren",
+      "session": 2,
+      "title": "İfade — Ceren Diyarlı (2. Oturum)",
+      "date": "20.04.2025 · 15:30",
+      "meta": [
+        {
+          "label": "Doğum",
+          "value": "17.08.1997"
+        },
+        {
+          "label": "Meslek",
+          "value": "Hemşire (Özel Poliklinik)"
+        },
+        {
+          "label": "Adres",
+          "value": "Kayapınar, Diyarbakır"
+        }
+      ],
+      "content": "S: Ceren, 'husumetimiz yoktu' diyorsun ama Cevher'in telefon kayıtlarında olay günü sana atılmış bir mesaj var: 'Eski kocasının nasıl öldüğünü polis bilmek ister, araziyi versen de o sırrı mezara götürmem' diyor. Bu ne demek?\n\nC: [Yüzü bembeyaz olur, sesi titrer] O adam bir iblisti amirim.\n\nS: Eski kocanın ölümüyle Cevher'in ne ilgisi var?\n\nC: Kocam... beş yıl önce ilaç zehirlenmesinden öldü. Kaza denildi, dosya kapandı. Ama Cevher benim çalıştığım klinikten bazı ilaçları aldığımı biliyordu. Beni o zamanlar korumuştu. Ama abim borcunu ödeyemeyince, sadece arazimi almakla kalmadı, bunu kullanarak benden başka taleplerde bulunmaya kalktı. Ahlaksız tekliflerde bulundu.\n\nS: Bunu abin Civan'a anlattın mı?\n\nC: [ağlamaya başlar] Olay günü gündüz anlattım. Dayanamadım. Abim çıldırdı. Onu öldüreceğini söyledi ama ben engel oldum, sakinleştirdim. Gece eve gitti sanıyordum. Amirim yemin ederim ben Cevher'in yanına gitmedim. Ama abim... Abim benim yüzümden bir delilik yaptıysa affetmem kendimi.",
+      "signature": "B. Diyarlı",
+      "criticalNote": "Kırmızı Ringa'nın ifşası: Ceren'ın Cevher tarafından şantaja uğradığı anlaşıldı. Motivasyon 'korunma ve sırları saklama' eksenine kaydı."
+    },
+    {
+      "id": "civan-1",
+      "docCode": "036-C1",
+      "suspectId": "civan",
+      "session": 1,
+      "title": "İfade — Civan Diyarlı (1. Oturum)",
+      "date": "21.04.2025 · 10:00",
+      "meta": [
+        {
+          "label": "Doğum",
+          "value": "10.10.1991"
+        },
+        {
+          "label": "Meslek",
+          "value": "Bakırcı Ustası"
+        },
+        {
+          "label": "Adres",
+          "value": "Sur, Diyarbakır"
+        }
+      ],
+      "content": "S: Civan, Cevher Şanlı'ya yüklü bir borcun var. Dükkanın batmak üzere. Olay gecesi neredeydin?\n\nC: Amirim, borç yiğidin kamçısıdır. Evet borcum var, ödeyecektim de. Bana olan borcunu namusuyla ödesin dedim Cevher ustaya, ben kimseden can almam. O gece kendi dükkanımdaydım. Sipariş yetiştirmem gerekiyordu, büyük bir bakır tepsi işliyordum.\n\nS: Yanında kimse var mıydı?\n\nC: Yoktu amirim, ben yalnız çalışırım gece vakti. Dükkanın kepengi yarı kapalıydı. Çekiç sesinden başka bir şey duyulmaz.\n\nS: Cevher'le son konuşmanız nasıl geçti?\n\nC: Bana biraz sert yaptı, 'Kardeşinin arsasına çökerim' dedi. Canım sıkıldı ama sonuçta adam haklı, alacaklı o. Bizim aramızdaki mevzu o arsada çözülecekti.",
+      "signature": "C. Diyarlı"
+    },
+    {
+      "id": "civan-2",
+      "docCode": "036-C2",
+      "suspectId": "civan",
+      "session": 2,
+      "title": "İfade — Civan Diyarlı (2. Oturum)",
+      "date": "21.04.2025 · 14:00",
+      "meta": [
+        {
+          "label": "Doğum",
+          "value": "10.10.1991"
+        },
+        {
+          "label": "Meslek",
+          "value": "Bakırcı Ustası"
+        },
+        {
+          "label": "Adres",
+          "value": "Sur, Diyarbakır"
+        }
+      ],
+      "content": "S: Civan, dükkanındaydım diyorsun ama yan komşun fırıncı Şehmus o gece senin kepenkin tamamen kapalı olduğunu, içeriden çekiç sesi filan gelmediğini söylüyor. Neden yalan söyledin?\n\nC: [Gergin bir şekilde yutkunur] Çekiç sallamadım evet. Yalan söyledim çünkü şüpheleri üzerime çekmek istemedim amirim. \n\nS: Neredeydin o zaman?\n\nC: Canım çok sıkkındı. Surlara doğru yürüdüm. Hevsel bahçelerine inen yolda saatlerce tek başıma sigara içtim, yürüdüm durdum. Aklımda borcu nasıl ödeyeceğim vardı.\n\nS: Yürüyüşün saat kaça kadar sürdü?\n\nC: Gece 1'i buldu herhalde. O yüzden beni dükkanda gören olmadı.\n\nS: Bu yürüyüşü doğrulayacak kimse var mı? Yolda kimseyi görmedin mi?\n\nC: Kimseyi görmedim amirim. Karanlıktı zaten. Biliyorum bana inanmıyorsunuz ama Cevher'in o iğrenç suratını görmeye bile tahammülüm yoktu, yanına niye gideyim?",
+      "signature": "C. Diyarlı"
+    },
+    {
+      "id": "civan-3",
+      "docCode": "036-C3",
+      "suspectId": "civan",
+      "session": 3,
+      "title": "İfade — Civan Diyarlı (3. Oturum)",
+      "date": "21.04.2025 · 17:00",
+      "meta": [
+        {
+          "label": "Doğum",
+          "value": "10.10.1991"
+        },
+        {
+          "label": "Meslek",
+          "value": "Bakırcı Ustası"
+        },
+        {
+          "label": "Adres",
+          "value": "Sur, Diyarbakır"
+        }
+      ],
+      "content": "S: Kız kardeşin Ceren her şeyi anlattı Civan. Cevher'in, kız kardeşinin geçmişiyle ilgili şantaj yaptığını ve ona ahlaksız bir teklifte bulunduğunu biliyorsun. O gece bunu Ceren'dan öğrenmişsin. Hala hevsel bahçelerinde yürüyordum mu diyeceksin?\n\nC: [Yüzü kızarır, elleri titremeye başlar] O... o şerefsiz. Kardeşimi bu işe karıştırmayın amirim. \n\nS: Cevher'in dükkanında bulunan ve onu boğmakta kullanılan o kalın halı ipi... Biz o ipin senin dükkanındaki bakır tepsileri paketlerken kullandığın iplerden olduğunu biliyoruz. Civan, Cevher'i susturmak için oraya gittin, yalan söyleme artık!\n\nC: [Gözünden bir damla yaş süzülür ama sesi öfkelidir] Ben oraya o defteri almaya gittim amirim! Defteri alırsam borç da biter, şantaj da biter sandım. \n\nS: Sonra ne oldu? Boğuştunuz mu?\n\nC: Gittiğimde dükkan açıktı. İçeri daldım, masasında deftere bakıyordu. Ama yemin ederim ben ona dokunmadım! İçeri girdiğimde bir ses duydum, korkup geri kaçtım. İpi benim dükkandan kim aldıysa, Cevher'i o öldürmüştür. Mahmut öldürmüş olmasın? O da oradaymış duydum. Bizim ailemizin şerefi temizdir, ben katil değilim!",
+      "signature": "C. Diyarlı",
+      "criticalNote": "Failin giderek köşeye sıkıştığı son ifade. Civan olay yerinde olduğunu ve motivasyonunu kabul etti ama cinayeti itiraf etmemekte direniyor."
+    },
+    {
+      "id": "ceren-3",
+      "docCode": "036-B3",
+      "suspectId": "ceren",
+      "session": 3,
+      "title": "İfade — Ceren Diyarlı (3. Oturum)",
+      "date": "22.04.2025 · 09:30",
+      "meta": [
+        {
+          "label": "Doğum",
+          "value": "17.08.1997"
+        },
+        {
+          "label": "Meslek",
+          "value": "Hemşire"
+        },
+        {
+          "label": "Adres",
+          "value": "Kayapınar, Diyarbakır"
+        }
+      ],
+      "content": "S: Ceren, abinin dükkanında paketleme için kullanılan iplerden biriyle işlenmiş cinayet. Abin olay yerinde olduğunu kabul etti. O ipleri senin de klinikteki eşyalarını taşırken kullandığını biliyoruz.\n\nC: Amirim, abim bunu benim için yaptıysa bile o cani o ölümü hak etmişti. Bizi mahvedecekti. Tüm şehre beni rezil edecek, eski eşimin ölümü yüzünden hapiste çürütecekti. Ben abime yapma dedim, bırak polise gidelim dedim ama beni dinlemedi.\n\nS: Polise giderseniz kendinizin de suçlu duruma düşeceğinizi bildiğiniz için gitmediniz değil mi?\n\nC: Ben eski eşimi öldürmedim, o kazaydı! Cevher bunu bana karşı kullanmak için uydurdu ve tehdit etti. Abimi hapse atmayın n'olur. Bizim başka kimsemiz yok.",
+      "signature": "B. Diyarlı"
+    }
+  ],
+  "forensics": {
+    "autopsy": {
+      "docCode": "036-B",
+      "title": "Otopsi Raporu",
+      "date": "19.04.2025",
+      "author": "Uzm. Dr. Ferit Çoruh · Adli Tıp Kurumu Diyarbakır Grup Başkanlığı",
+      "externalExam": [],
+      "internalExam": [],
+      "causeOfDeath": "",
+      "timeOfDeath": "",
+      "criticalFindings": []
+    },
+    "sceneReport": {
+      "docCode": "036-A",
+      "title": "Olay Yeri Raporu",
+      "author": "Komiser Hakan Yılmaz · Olay Yeri İnceleme",
+      "findings": [],
+      "preliminaryNote": ""
+    }
+  },
+  "evidence": [],
+  "documents": [],
+  "messageThreads": [],
+  "technical": {
+    "items": []
+  },
+  "timeline": [],
+  "board": {
+    "contradictions": [],
+    "eliminations": []
+  },
+  "solution": {
+    "fail": {
+      "suspectId": "",
+      "name": ""
+    },
+    "questions": [],
+    "summary": "",
+    "streamShutdown": "",
+    "mirrorMessage": "",
+    "criticalMistake": "",
+    "twoLiars": [],
+    "redHerrings": [],
+    "keyEvidence": [],
+    "conclusion": "",
+    "arrestDate": ""
+  },
+  "diversityReport": {
+    "city": "Diyarbakır (Güneydoğu Anadolu). Önceki vakaların 4'ü İstanbul, 1'i Nevşehir'di. Coğrafi ve kültürel olarak tamamen yeni.",
+    "socioeconomic": "Geleneksel esnaf ve taşra tüccarı. Önceki vakalar çoğunlukla metropol beyaz yaka veya üst düzey zengindi.",
+    "victimAge": "62 yaşında. Serinin ilk 60+ yaş kurbanı.",
+    "motive": "Korunma + Pragmatik. Sadece para değil, ailenin onurunu ve şantaj sırrını korumak için (Şantajdan kurtulma).",
+    "locationType": "Tarihi çarşı esnafı arka odası (Geleneksel iş yeri).",
+    "method": "Boğma (Eski halı ipiyle).",
+    "victimProfession": "Kuyumcu / Gayriresmi Tefeci.",
+    "perpetratorType": "Borçlu esnaf (Mahalle sakini).",
+    "summary": "Bu vaka önceki vakalardan coğrafya (Güneydoğu), kurban yaşı (60+), sosyo-ekonomik doku (geleneksel esnaf/tefeci) ve ana motivasyon (sırlar ve korunma) açısından 4 farklı boyutta net bir şekilde ayrışmaktadır."
+  }
+}

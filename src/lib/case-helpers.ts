@@ -1,5 +1,6 @@
 import { case027 } from "@/data/cases/027";
 import { case033 } from "@/data/cases/033";
+import { case036 } from "@/data/cases/036";
 import { case042 } from "@/data/cases/042";
 import { case048 } from "@/data/cases/048";
 import { case053 } from "@/data/cases/053";
@@ -13,6 +14,7 @@ import type { CaseData, TabId } from "./case-types";
 const ALL_CASES: Record<string, CaseData> = {
   "027": case027,
   "033": case033,
+  "036": case036,
   "042": case042,
   "048": case048,
   "053": case053,

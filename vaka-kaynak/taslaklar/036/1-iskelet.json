@@ -1,0 +1,155 @@
+{
+    "_yorum": "Aşama 1 iskeleti dolduruldu. Diğer alanlar boş bırakıldı, şablon yapısı korundu.",
+    
+    "id": "036",
+    "codename": "Bedel",
+    "fullTitle": "Bedel Dosyası",
+    "classification": "Standart",
+    "caseCode": "DAKT-036-BDL",
+    
+    "victim": {
+      "name": "Cevher Şanlı",
+      "description": "62, Erkek, Kuyumcu ve tefeci, otoriter esnaf figürü",
+      "_alternatif": "Maktul"
+    },
+    
+    "location": "Diyarbakır · Sur · Kuyumcular Çarşısı · Şanlı Kuyumculuk Arka Odası",
+    "dateRange": "18 Nisan 2025 · Gece 22:30 — 23:30",
+    
+    "brief": {
+      "summary": "19 Nisan 2025 sabahı saat 08:30 sularında, Diyarbakır Sur içindeki tarihi Kuyumcular Çarşısı'nda yer alan Şanlı Kuyumculuk'un çırağı kepenkleri açtığında ustası Cevher Şanlı'nın cesediyle karşılaştı. Cevher, dükkanın arka tarafındaki muhasebe odasında, boynundan eski bir urgan/halı ipiyle boğulmuş halde yerde yatmaktaydı.\n\nİlk incelemelere göre dükkana zorla girilmemiş, vitrindeki ya da kasadaki altınlara dokunulmamıştı. Maktulün sadece masasının üzerindeki o güne ait alacak-verecek defterinin eksik olduğu belirlendi. Cinayetin bir hırsızlık vakasından ziyade, kurbanın tefecilik faaliyetleriyle ya da şahsi ilişkileriyle bağlantılı, kişisel bir infaz olduğu açıktı.\n\nCevher Şanlı, çarşıda saygı duyulan ama bir o kadar da korkulan bir isimdi. Dar boğaza düşen esnafa yüksek faizle borç verir, ödeyemeyenleri acımasızca sıkıştırırdı. Bu durum, onu öldürmek için geçerli nedeni olan geniş bir şüpheli havuzu yaratıyor. Soruşturma, kurbanın sadece alacaklılarını değil, aile içindeki çalkantılı ilişkilerini de mercek altına almak zorunda.",
+      "victimProfile": "Cevher Şanlı, 62 yaşında, eski usül bir esnaf. Dışarıdan bakıldığında geleneklerine bağlı, namazında niyazında, çarşının 'Cevher Abisi'. Ancak kapalı kapılar ardında, çaresiz kalmış insanlara gayriresmi borç veren, temerrüde düşenlerin mülklerine çöken acımasız bir tefeci.\n\nAile hayatında da benzer bir diktatörlük hüküm sürüyor. Eşi Saliha'ya psikolojik şiddet uygulayan, oğlu Mahmut'u dükkandan kovan ve onu mirastan men etmekle tehdit eden biri. Çevresindeki herkesle bir 'alacak-verecek' veya 'çıkar' ilişkisi kurmuş, sevgi bağı kalmamış bir adam.",
+      "streamRecord": "Olay anına dair dijital iz: Olay gecesi 22:35 ile 23:20 arasında çarşı girişindeki kamera kayıtlarında bir kesinti mevcut. Sadece dükkanın karşısındaki ATM kamerasından yansıyan sınırlı açılar incelenmekte.",
+      "mission": "Soruşturma ekibinden beklenen: Kayıp alacak-verecek defterinin kimin işine yarayacağını bulmak, şüphelilerin olay gecesine ait ifadelerindeki çelişkileri yakalamak ve kurbanın tefecilik faaliyetleri nedeniyle hedef aldığı kişileri tespit etmektir. Toplamda 22 belgelik bir dosya üzerinden çalışacaksınız.",
+      "warning": "Kurban direnmemiş ve kapı zorlanmamış. Maktul faili tanıyordu ve arka odaya girmesine müsaade etti.",
+      "documentCount": 22,
+      "suspectCount": 6,
+      "timeOfIncident": "Gece 22:30 — 23:30 (Tahmini)"
+    },
+    
+    "suspects": [
+      {
+        "id": "civan",
+        "name": "Civan Diyarlı",
+        "age": 34,
+        "role": "Bakırcı Ustası (Borçlu esnaf)",
+        "tag": "SUR-BAK/CD",
+        "quote": "Bana olan borcunu namusuyla ödesin dedim, ben kimseden can almam.",
+        "isFail": true
+      },
+      {
+        "id": "ceren",
+        "name": "Ceren Diyarlı",
+        "age": 28,
+        "role": "Civan'ın kız kardeşi",
+        "tag": "SUR-AİL/BD",
+        "quote": "Cevher Amca bizim ailemizin dostuydu, neden böyle bir iftiraya uğrayayım ki?",
+        "isFail": false
+      },
+      {
+        "id": "mahmut",
+        "name": "Mahmut Şanlı",
+        "age": 38,
+        "role": "Kurbanın oğlu",
+        "tag": "AİL-OĞL/MŞ",
+        "quote": "Babamın parası vardı ama vicdanı yoktu. Ölmesi şaşırtıcı değil.",
+        "isFail": false
+      },
+      {
+        "id": "saliha",
+        "name": "Saliha Şanlı",
+        "age": 58,
+        "role": "Kurbanın eşi",
+        "tag": "AİL-EŞ/SŞ",
+        "quote": "Kırk yıllık kocam... Ne kadar zor bir adam olsa da, o benim efendimdi.",
+        "isFail": false
+      },
+      {
+        "id": "hozan",
+        "name": "Hozan Akpınar",
+        "age": 42,
+        "role": "Rakip Kuyumcu",
+        "tag": "SUR-KUY/HA",
+        "quote": "Çarşıda herkes Cevher'den illallah etmişti, benim onunla bir hesabım kalmamıştı.",
+        "isFail": false
+      },
+      {
+        "id": "yasin",
+        "name": "Yasin İskender",
+        "age": 25,
+        "role": "Kuyumcu Çırağı",
+        "tag": "SUR-ÇRK/Yİ",
+        "quote": "Ben sadece ekmeğimin peşindeyim, o gece dükkanı kilitleyip çıktım.",
+        "isFail": false
+      }
+    ],
+    
+    "testimonies": [],
+    
+    "forensics": {
+      "autopsy": {
+        "docCode": "036-B",
+        "title": "Otopsi Raporu",
+        "date": "19.04.2025",
+        "author": "Uzm. Dr. Ferit Çoruh · Adli Tıp Kurumu Diyarbakır Grup Başkanlığı",
+        "externalExam": [],
+        "internalExam": [],
+        "causeOfDeath": "",
+        "timeOfDeath": "",
+        "criticalFindings": []
+      },
+      "sceneReport": {
+        "docCode": "036-A",
+        "title": "Olay Yeri Raporu",
+        "author": "Komiser Hakan Yılmaz · Olay Yeri İnceleme",
+        "findings": [],
+        "preliminaryNote": ""
+      }
+    },
+    
+    "evidence": [],
+    
+    "documents": [],
+    
+    "messageThreads": [],
+    
+    "technical": {
+      "items": []
+    },
+    
+    "timeline": [],
+    
+    "board": {
+      "contradictions": [],
+      "eliminations": []
+    },
+    
+    "solution": {
+      "fail": {
+        "suspectId": "",
+        "name": ""
+      },
+      "questions": [],
+      "summary": "",
+      "streamShutdown": "",
+      "mirrorMessage": "",
+      "criticalMistake": "",
+      "twoLiars": [],
+      "redHerrings": [],
+      "keyEvidence": [],
+      "conclusion": "",
+      "arrestDate": ""
+    },
+    
+    "diversityReport": {
+      "city": "Diyarbakır (Güneydoğu Anadolu). Önceki vakaların 4'ü İstanbul, 1'i Nevşehir'di. Coğrafi ve kültürel olarak tamamen yeni.",
+      "socioeconomic": "Geleneksel esnaf ve taşra tüccarı. Önceki vakalar çoğunlukla metropol beyaz yaka veya üst düzey zengindi.",
+      "victimAge": "62 yaşında. Serinin ilk 60+ yaş kurbanı.",
+      "motive": "Korunma + Pragmatik. Sadece para değil, ailenin onurunu ve şantaj sırrını korumak için (Şantajdan kurtulma).",
+      "locationType": "Tarihi çarşı esnafı arka odası (Geleneksel iş yeri).",
+      "method": "Boğma (Eski halı ipiyle).",
+      "victimProfession": "Kuyumcu / Gayriresmi Tefeci.",
+      "perpetratorType": "Borçlu esnaf (Mahalle sakini).",
+      "summary": "Bu vaka önceki vakalardan coğrafya (Güneydoğu), kurban yaşı (60+), sosyo-ekonomik doku (geleneksel esnaf/tefeci) ve ana motivasyon (sırlar ve korunma) açısından 4 farklı boyutta net bir şekilde ayrışmaktadır."
+    }
+  }
