@@ -1,0 +1,200 @@
+{
+  "suspects_raw": [
+    {
+      "slug": "aylin",
+      "code": "SUSP-01 · URL-SMR/02",
+      "name": "Aylin Somer",
+      "role": "Ortağı · Kurbanın Kız Kardeşi · 48",
+      "quote": "\"Saat 17:30'da İzmir'de alışverişteydim. O saatte mahzende olmam imkansız.\""
+    },
+    {
+      "slug": "timur",
+      "code": "SUSP-02 · URL-ARC/59",
+      "name": "Timur Arıcan",
+      "role": "Komşu Bağ Sahibi · 59",
+      "quote": "\"Evet, arabasını parçaladım ve tehdit ettim. Ama mahzenine girecek şifrem yok.\""
+    },
+    {
+      "slug": "caner",
+      "code": "SUSP-03 · IST-SMR/26",
+      "name": "Caner Somer",
+      "role": "Oğul · Mirasçı · 26",
+      "quote": "\"Babamla yıllardır konuşmuyorum. Paraya ihtiyacım var evet, ama cinayet? Saçmalık.\""
+    },
+    {
+      "slug": "elif",
+      "code": "SUSP-04 · URL-KRA/32",
+      "name": "Elif Kara",
+      "role": "Eski Önolog (Şarap Uzmanı) · 32",
+      "quote": "\"Beni piyasadan sildi. Ama onu o mükemmel şarabıyla vurmak benim tarzım değil.\""
+    },
+    {
+      "slug": "riza",
+      "code": "SUSP-05 · URL-UST/62",
+      "name": "Rıza Usta",
+      "role": "Bağ Bekçisi ve Kahya · 62",
+      "quote": "\"Vedat Bey zor adamdı. O saatlerde Timur Bey'i çitlerin etrafında dolanırken gördüm.\""
+    },
+    {
+      "slug": "melis",
+      "code": "SUSP-06 · IST-SMR/45",
+      "name": "Melis Somer",
+      "role": "Eski Eş · Nafaka Alacaklısı · 45",
+      "quote": "\"Ölmesi işime gelir yalan yok, ama zehirle uğraşacak kadar sabırlı değilim.\""
+    },
+    {
+      "slug": "hakan",
+      "code": "SUSP-07 · IZM-YLM/38",
+      "name": "Hakan Yılmaz",
+      "role": "Şarap Dağıtımcısı · 38",
+      "quote": "\"Beni iflasa sürükledi. Dün kapısına dayandım ama içeri almadı.\""
+    }
+  ],
+  "timeline": [
+    {
+      "id": "tl104-0",
+      "time": "18.09 · 14:22",
+      "event": "Vedat, İsviçre'deki avukatına şirketin tüm nakdini transfer etme emri verir.",
+      "source": "104-N",
+      "critical": true
+    },
+    {
+      "id": "tl104-1",
+      "time": "19.09 · 16:00",
+      "event": "Timur Arıcan, Vedat'ın arabasının camını kırar ve onu herkesin içinde tehdit eder.",
+      "source": "Rıza Usta'nın ifadesi",
+      "critical": false
+    },
+    {
+      "id": "tl104-2",
+      "time": "20.09 · 16:30",
+      "event": "Aylin Somer'in telefonu İzmir merkezde sinyal vermeye başlar.",
+      "source": "104-O",
+      "critical": false
+    },
+    {
+      "id": "tl104-3",
+      "time": "20.09 · 17:00",
+      "event": "Mahzenin güvenlik kamerasında belirsiz bir silüet görünür. Kapı biyometrik olarak açılır.",
+      "source": "104-M",
+      "critical": true
+    },
+    {
+      "id": "tl104-4",
+      "time": "20.09 · 17:30",
+      "event": "Mahzenin iklim kontrol sistemi MANUEL olarak havalandırma moduna alınır.",
+      "source": "104-K",
+      "critical": true
+    },
+    {
+      "id": "tl104-5",
+      "time": "20.09 · 18:00",
+      "event": "Timur Arıcan bağın sınır çitlerinde görülür. Güvenlik sensörleri tetiklenir.",
+      "source": "104-A",
+      "critical": false
+    },
+    {
+      "id": "tl104-6",
+      "time": "20.09 · 19:00",
+      "event": "Vedat Somer mahzene girer. Akşam ritüelini başlatır.",
+      "source": "104-M",
+      "critical": true
+    },
+    {
+      "id": "tl104-7",
+      "time": "20.09 · 19:15",
+      "event": "Klinik ölümün gerçekleştiği tahmin edilen saat. Aconitine etkisi.",
+      "source": "104-B",
+      "critical": true
+    },
+    {
+      "id": "tl104-8",
+      "time": "20.09 · 19:45",
+      "event": "Rıza Usta, kırık kadeh sesini duyar ve mahzene zorla girerek cesedi bulur.",
+      "source": "İfade",
+      "critical": false
+    },
+    {
+      "id": "tl104-9",
+      "time": "20.09 · 20:30",
+      "event": "Aylin Somer telaşla bağ evine döner. Arabayı şoförü kullanmaktadır.",
+      "source": "Kamera",
+      "critical": true
+    }
+  ],
+  "deduction": {
+    "c": [
+      {
+        "pin": true,
+        "text": "<strong>Mahzen Erişimi:</strong> Biyometrik kapı sadece Vedat ve Aylin'in parmak iziyle açılıyor. Olay yeri incelemesinde zorlama yok. Timur veya başkasının içeri girmesi imkansız."
+      },
+      {
+        "pin": true,
+        "text": "<strong>Zaman Uyuşmazlığı:</strong> Aylin'in telefonu 17:30'da İzmir'de sinyal veriyor ama mahzen kapısı 17:00'de açılmış ve 17:30'da havalandırma manuel çalıştırılmış. Havalandırma panelinden Aylin'in parmak izi silinmiş."
+      },
+      {
+        "pin": true,
+        "text": "<strong>Motif:</strong> Vedat şirketin içini boşaltıp parayı Pazartesi İsviçre'ye aktarıyor. Aylin cinayeti işleyerek şirketi iflastan ve kendisini sokakta kalmaktan kurtarıyor."
+      },
+      {
+        "pin": true,
+        "text": "<strong>Cinayet Silahı:</strong> Kurtboğan (Aconitum) bitkisi aylar önce peyzaj faturasıyla Aylin tarafından \"süs bitkisi\" olarak satın alınmış. Planlı eylem."
+      }
+    ],
+    "e": [
+      {
+        "pin": true,
+        "text": "<strong>Timur Arıcan:</strong> Motivasyonu yüksek, tehdit etmiş ama mahzene biyometrik erişimi yok. Sadece dışarıdan bağırıp çağırıp şüpheyi üzerine çekti. Fırsat yok. ✗"
+      },
+      {
+        "pin": true,
+        "text": "<strong>Caner & Melis:</strong> Miras peşindeler ama zehir kimyasına hakim değiller ve mahzene erişimleri yok. ✗"
+      },
+      {
+        "pin": true,
+        "text": "<strong>Elif Kara & Hakan:</strong> Öfkeleri mesleki/maddi. Ancak bağın güvenlik sistemini aşacak olanakları ve cinayet silahına (bahçedeki bitki) doğrudan bağlantıları yok. ✗"
+      },
+      {
+        "pin": true,
+        "text": "<strong>Aylin Somer:</strong> Biyometrik erişimi var. İsviçre transferi en büyük motif. Aconitum onun siparişi. Telefonunu şoförle İzmir'e yollayıp sahte alibi yarattı. 17:30'da zehri koyup kokuyu gizlemek için havalandırmayı açtı. ✓"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "tag": "Adli",
+      "code": "SMR-KDH01",
+      "title": "Parçalanmış Tadım Kadehi",
+      "desc": "Mahzen zemininde bulunan kurbanın kadehi. Kalıntılarda yoğun miktarda Aconitine (Kurtboğan) ekstresi tespit edildi.",
+      "detail_html": "<span>▸ Zehir Kaynağı:</span> Şarap şişesinde değil, özel fıçıya enjekte edilmiş.<br>\n        <span>▸ Maskeleme:</span> Şarabın tanen yapısı zehrin acılığını %90 oranında örtmüş."
+    },
+    {
+      "tag": "Teknik",
+      "code": "SMR-HV02",
+      "title": "Mahzen Havalandırma Paneli",
+      "desc": "Mahzenin akıllı iklim kontrol paneli. Akıllı loglarda 17:30'da manuel müdahale görülüyor.",
+      "detail_html": "<span>▸ Olay Yeri:</span> Panelin üzeri mikrofiber bezle silinmiş. Parmak izi yok.<br>\n        <span>▸ Çıkarım:</span> Katil, zehrin konsantre kokusu mahzende kalmasın diye havalandırmayı çalıştırdı ve izini sildi."
+    },
+    {
+      "tag": "Botanik",
+      "code": "SMR-BTK03",
+      "title": "Bahçedeki Mor Çiçek",
+      "desc": "Bağevinin güney bahçesinde süs bitkisi olarak ekilmiş Aconitum Napellus türü bitki. Köklerinden ekstrakt çıkarıldığı belirlendi.",
+      "detail_html": "<span>▸ Sipariş:</span> 104-L faturasıyla Aylin Somer tarafından aylar önce alınmış.<br>\n        <span>▸ Ön Planlama:</span> Cinayet aylar öncesinden alternatif bir plan olarak düşünülmüş."
+    },
+    {
+      "tag": "Belge",
+      "code": "SMR-DKN04",
+      "title": "Yırtık İsviçre Transfer Dekontu",
+      "desc": "Kurbanın çalışma odasındaki çöp kutusundan çıkarılmış yırtık kopya.",
+      "detail_html": "<span>▸ Detay:</span> Aylin'in bu dekontu gördüğü ve şirketin içini boşaltma operasyonunu anladığı düşünülmektedir."
+    },
+    {
+      "tag": "Kasıtlı",
+      "code": "ARC-LV05",
+      "title": "Kırık Arabadaki Levye",
+      "desc": "Timur Arıcan'ın olaydan bir gün önce Vedat'ın arabasını parçalarken kullandığı metal levye.",
+      "detail_html": "<span>▸ Uyarı:</span> Timur'un öfkesini kanıtlar ama mahzene girmesini sağlayacak bir alet değildir. Yanıltıcı delil."
+    }
+  ]
+}

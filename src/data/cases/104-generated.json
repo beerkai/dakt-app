@@ -1,0 +1,213 @@
+{
+  "forensics": [
+    {
+      "id": "104-scene",
+      "docId": "104-A · Olay Yeri İnceleme",
+      "title": "Mahzen Olay Yeri Raporu",
+      "stamps": [
+        "approved",
+        "cross"
+      ],
+      "meta": [
+        {
+          "label": "Olay Tarihi",
+          "value": "20.09.2024"
+        },
+        {
+          "label": "Mekan",
+          "value": "Somer Bağları Yeraltı Mahzeni"
+        }
+      ],
+      "body": "<h3>Bulgular</h3>\n    <ol>\n      <li>Kurban mahzen zemininde, kendi özel üretim Cabernet/Shiraz fıçısının yanında sırtüstü yatmaktadır. Dudak çevresinde ve göğsünde dökülmüş şarap lekeleri mevcuttur.</li>\n      <li>Yanında parçalanmış bir tadım kadehi bulunmuştur. Kadeh diplerinde ve fıçının musluk kısmında <strong>yüksek oranda yabancı madde kalıntısı</strong> tespit edilmiştir.</li>\n      <li>Mahzenin ağır çelik kapısında herhangi bir zorlama, çizik veya maymuncuk izi yoktur.</li>\n      <li>İklimlendirme paneli mikrofiber bir bezle silinmiş, tüm parmak izleri yok edilmiştir.</li>\n      <li>Bağ evinin doğu sınırındaki çitlerde alarm sensörü saat 18:00 civarında tetiklenmiştir, ancak o bölgeden mahzene giriş imkanı bulunmamaktadır.</li>\n    </ol>\n\n    <p style=\"background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux);\"><strong>Ön Not:</strong> Mahzene biyometrik kapıdan girilmiştir. Bu kilit sadece Vedat ve Aylin Somer'in parmak izlerine tanımlıdır. Kapı sistemi hacklenmemiştir.</p>",
+      "signature": {
+        "role": "Olay Yeri İnceleme Amiri",
+        "name": "B. Demir"
+      }
+    },
+    {
+      "id": "104-autopsy",
+      "docId": "104-B · Adli Tıp Kurumu",
+      "title": "Otopsi Raporu",
+      "stamps": [
+        "approved",
+        "classified"
+      ],
+      "meta": [
+        {
+          "label": "Rapor Tarihi",
+          "value": "21.09.2024"
+        }
+      ],
+      "body": "<h3>Dış ve İç Muayene</h3>\n    <ul>\n      <li>Kurbanda darp, cebir veya boğuşma izine rastlanmamıştır.</li>\n      <li>Mide ve kan analizlerinde yüksek konsantrasyonda <strong>Aconitine (Kurtboğan bitkisi toksini)</strong> tespit edilmiştir.</li>\n      <li>Ölüm mekanizması: Aconitine'in voltaj kapılı sodyum kanallarını açık bırakması sonucu gelişen <strong>şiddetli ventriküler aritmi ve ani kardiyak arrest</strong>.</li>\n      <li>Bu toksin yutulduktan sonra dakikalar içinde (10-15 dk) kalp durmasına yol açar.</li>\n    </ul>\n\n    <h3>Ölüm Zamanı & Sonuç</h3>\n    <p>Klinik ölümün saat 19:15 dolaylarında gerçekleştiği saptanmıştır. Zehrin fıçıya daha önceden eklendiği ve kurbanın şarabı kadehe doldurup içtiği anda etki ettiği kesindir.</p>",
+      "signature": {
+        "role": "Adli Tıp Uzmanı",
+        "name": "Dr. E. Can"
+      }
+    },
+    {
+      "id": "104-tox",
+      "docId": "104-C · Toksikoloji Laboratuvarı",
+      "title": "Şarap ve Zehir Analizi",
+      "stamps": [
+        "approved",
+        "cross"
+      ],
+      "meta": [],
+      "body": "<h3>Zehir Maskelemesi</h3>\n    <p>Aconitine, saf haldeyken dile değdiği an şiddetli yanma, karıncalanma ve metalik-acı bir tat bırakır. Normal şartlarda kurbanın bunu yutup bitirmesi zordur.</p>\n    <p>Ancak seçilen şarap (özel üretim Cabernet/Shiraz harmanı), doğası gereği son derece yüksek tanenli, ağzı kurutan ve yoğun baharatlı bir profile sahiptir. Toksikoloji testleri, bu şarabın güçlü profilinin zehrin ilk andaki acılığını %90 oranında kamufle ettiğini kanıtlamıştır. Kurban, muhtemelen tadı şarabın agresif karakterine yormuştur.</p>\n    <p><strong>Çıkarım:</strong> Fail sadece zehir bilgisine değil, aynı zamanda kurbanın şarap alışkanlıklarına ve şarap kimyasına da hakimdir.</p>",
+      "signature": {
+        "role": "Toksikolog",
+        "name": "S. Uğur"
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "104-bank",
+      "docId": "104-N · İsviçre Bankası Transfer Yazışmaları",
+      "title": "Mali Suçlar Tespit Raporu",
+      "stamps": [
+        "classified"
+      ],
+      "meta": [],
+      "body": "<p>Kurbanın özel avukatı ile yapılan yazışmalar ve silinmiş bilgisayar kayıtlarından elde edilen verilerdir.</p>\n    <p>Vedat Somer, Somer Bağları'nın son ve en kârlı hasadından elde edilecek olan toplam nakit rezervini (şirket hesaplarındaki meblağı), Pazartesi sabah 09:00 itibarıyla tek taraflı imza yetkisini kullanarak İsviçre'deki UBS hesaplarına aktarma talimatı vermiştir.</p>\n    <p>E-postalarda açıkça: <em>\"Kız kardeşime hiçbir şekilde bilgi verilmeyecek. Şirket iflas edebilir, umurumda değil\"</em> ifadeleri geçmektedir.</p>\n    <p style=\"background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux);\">\n      <strong>Kritik:</strong> Cuma akşamı gerçekleşen ölüm, Pazartesi yapılacak olan bu yasadışı transferi otomatik olarak durdurmuş, varlıkları Türk Miras Hukuku kapsamında koruma altına almıştır. Aylin Somer, kardeşi ölmeseydi tüm emeklerini ve varlığını Pazartesi sabahı kaybedecekti.\n    </p>",
+      "signature": {
+        "role": "Mali Şube Amiri",
+        "name": "T. Yılmaz"
+      }
+    },
+    {
+      "id": "104-invoice",
+      "docId": "104-L · Peyzaj ve Botanik Faturası",
+      "title": "Satın Alma Kaydı",
+      "stamps": [
+        "approved"
+      ],
+      "meta": [
+        {
+          "label": "Alıcı",
+          "value": "Aylin Somer"
+        },
+        {
+          "label": "Tarih",
+          "value": "15.05.2024 (Cinayetten 4 ay önce)"
+        }
+      ],
+      "body": "<p>Somer Bağları güney bahçe peyzaj düzenlemesi için kesilmiş fatura detayı.</p>\n    <ul>\n      <li>100 Kök Lavanta</li>\n      <li>50 Kök Sardunya</li>\n      <li><strong>10 Kök Aconitum Napellus (Kurtboğan)</strong> - Özel İthalat</li>\n    </ul>\n    <p>Satın alan peyzaj şirketinin ifadesine göre, Aylin Somer bu 10 kök Aconitum'u bizzat katalogdan seçmiş ve \"mor renklerinin bağ evinin taşına çok yakışacağını\" belirterek özellikle istemiştir.</p>\n    <p>Bahçede yapılan incelemede, bu bitkilerden birkaçının kök kısmının bilinçli bir şekilde kazılıp söküldüğü tespit edilmiştir. Zehir ekstresi bu köklerden elde edilmiştir.</p>",
+      "signature": {
+        "role": "İnceleme Memuru",
+        "name": "C. Akın"
+      }
+    }
+  ],
+  "technical": [
+    {
+      "id": "104-hvac",
+      "docId": "104-K · Akıllı Bina İklim Logları",
+      "title": "Mahzen Havalandırma Sistemi Kaydı",
+      "stamps": [
+        "approved",
+        "cross"
+      ],
+      "meta": [],
+      "body": "<table class=\"signal-table\">\n      <thead><tr><th>Saat</th><th>Sistem Durumu</th><th>Tetikleyici</th></tr></thead>\n      <tbody>\n        <tr><td>16:00</td><td>Sabit Nem %65 - Isı 14°C</td><td>Otomatik</td></tr>\n        <tr><td>16:30</td><td>Sabit Nem %65 - Isı 14°C</td><td>Otomatik</td></tr>\n        <tr class=\"alert\"><td>17:32</td><td>MAKSİMUM EGZOZ HAVALANDIRMA BAŞLATILDI</td><td>MANUEL PANEL</td></tr>\n        <tr class=\"alert\"><td>17:45</td><td>NORMAL MODA DÖNÜŞ</td><td>MANUEL PANEL</td></tr>\n        <tr><td>19:00</td><td>Sabit Nem %65 - Isı 14°C</td><td>Otomatik</td></tr>\n      </tbody>\n    </table>\n    <p style=\"margin-top:18px;\"><strong>Çıkarsama:</strong> Mahzen şarapların korunması için sabit iklimde kalmalıdır. 17:32'de birisinin içerideki paneli kullanarak sistemi maksimum havalandırma moduna (egzoz) aldığı açıktır. Zehir eklendikten sonra ortamdaki kimyasal kokuyu/buharı tahliye etmek için yapılmıştır. Panelin silinmesi de bu müdahaleyi saklamak içindir. Fail, 17:30 dolaylarında içeridedir.</p>",
+      "signature": {
+        "role": "Siber Suçlar Birimi",
+        "name": "M. Koç"
+      }
+    },
+    {
+      "id": "104-door",
+      "docId": "104-M · Biyometrik Kapı Kayıtları",
+      "title": "Mahzen Giriş Logları",
+      "stamps": [
+        "approved",
+        "classified"
+      ],
+      "meta": [],
+      "body": "<table class=\"signal-table\">\n      <thead><tr><th>Saat</th><th>Kullanıcı</th><th>İşlem</th></tr></thead>\n      <tbody>\n        <tr><td>20.09 - 09:15</td><td>Aylin Somer</td><td>GİRİŞ ONAYLANDI</td></tr>\n        <tr class=\"missing\"><td>20.09 - 17:02</td><td>KİMLİĞİ BELİRSİZ (Log Hatası)</td><td>GİRİŞ ONAYLANDI</td></tr>\n        <tr class=\"alert\"><td>20.09 - 19:00</td><td>Vedat Somer</td><td>GİRİŞ ONAYLANDI</td></tr>\n        <tr class=\"alert\"><td>20.09 - 19:45</td><td>SİSTEM ZORLAMASI</td><td>ALARM / GİRİŞ REDDEDİLDİ (Rıza Usta'nın kapıyı kırma çabası)</td></tr>\n      </tbody>\n    </table>\n    <p style=\"margin-top:18px;\"><strong>Açıklama:</strong> Sistemde sadece iki kişinin (Vedat ve Aylin) biyometrik kaydı var. 17:02'deki \"Log Hatası\"nın sistemsel bir arıza mı yoksa kasıtlı bir müdahale mi olduğu araştırılıyor. Ancak kapı kırılmadan açıldığına göre, giriş yapan kişi biyometrik veriye sahip olmak zorundadır. Timur'un veya diğer şüphelilerin bu kapıdan geçmesi teknik olarak imkansızdır.</p>",
+      "signature": {
+        "role": "Güvenlik Sistemleri Uzmanı",
+        "name": "H. Çelik"
+      }
+    },
+    {
+      "id": "104-gsm",
+      "docId": "104-O · GSM Adli İşlem",
+      "title": "Baz İstasyonu Sinyal Geçmişi — 20 Eylül",
+      "stamps": [
+        "approved",
+        "cross"
+      ],
+      "meta": [],
+      "body": "<h3>Aylin Somer (0532-XXX-XX11)</h3>\n    <ul>\n      <li>15:00 - Urla Bağ Evi (Sabit)</li>\n      <li>16:30 - Urla -> İzmir Merkez Geçişi (Hareket halinde)</li>\n      <li>17:30 - İzmir Merkez / Konak (Sabit - Aylin'in alışverişte olduğunu iddia ettiği saat)</li>\n      <li>19:30 - İzmir -> Urla Dönüşü (Hareket halinde)</li>\n    </ul>\n    <p>Aylin'in alibisini destekleyen telefon sinyalleridir. Ancak güvenlik kamerası analizinde, 16:30'da bağdan çıkan VIP aracın arka camı filmlidir. <strong>Aracı şoför kullanmaktadır. Şoförün ifadesine başvurulmamıştır.</strong> Saat 17:30'da mahzende birisinin havalandırmayı çalıştırdığı gerçeğiyle çelişmektedir.</p>\n\n    <h3>Timur Arıcan (0533-XXX-XX22)</h3>\n    <ul>\n      <li>17:00 - Komşu Bağ (Sabit)</li>\n      <li>18:00 - Somer Bağları Sınırı (Kamera ve Rıza Usta ile eşleşiyor)</li>\n      <li>18:30 - Kendi evine dönüş</li>\n    </ul>",
+      "signature": {
+        "role": "GSM Adli İşlem",
+        "name": "A. Yıldız"
+      }
+    }
+  ],
+  "testimonies": [
+    {
+      "id": "104-D",
+      "dataDocKey": "aylin",
+      "suspectName": "Aylin Somer",
+      "headerDocId": "104-D · Urla İlçe Emniyet Müdürlüğü",
+      "title": "İfade — Aylin Somer",
+      "stamps": [
+        "approved",
+        "denied"
+      ],
+      "date": "21.09.2024",
+      "birth": "12.04.1976",
+      "occupation": "Somer Bağları Kurucu Ortak",
+      "address": "Urla · Somer Bağları Ana Ev",
+      "paragraphs": [
+        "<p>O gün abimle tartıştığımız doğru. Sürekli şirketin kaynaklarını kişisel zevkleri için kullanıyordu. Ancak onu öldürmedim, buna fırsatım da yoktu.</p>",
+        "<p>S: Olay saatlerinde neredeydiniz?<br>C: Saat 16:30 gibi şoförle İzmir merkeze, Konak'a alışverişe gittim. Saat 17:30 sularında Alsancak'ta mağazalarda dolaşıyordum. Telefon sinyallerim bunu doğrulayacaktır. Bağ evine döndüğümde her şey çoktan olmuştu.</p>",
+        "<p>S: Kredi kartı ekstrelerinizde o saatlere ait İzmir'den bir harcama görünmüyor.<br>C: Nakit kullandım veya vitrin baktım. Her dışarı çıktığımda bir şey almak zorunda değilim.</p>",
+        "<p>S: Mahzenin biyometrik kapısına sizden başka kim girebilir?<br>C: Sadece ben ve abim. Ama kapı bozulmuş olabilir, teknolojiye pek güvenmiyorum. Timur denilen adam sürekli sınırlarımızda dolaşıyor, o bir yolunu bulmuş olmalı.</p>"
+      ],
+      "signature": "A. Somer"
+    },
+    {
+      "id": "104-E",
+      "dataDocKey": "timur",
+      "suspectName": "Timur Arıcan",
+      "headerDocId": "104-E · Urla İlçe Emniyet Müdürlüğü",
+      "title": "İfade — Timur Arıcan",
+      "stamps": [
+        "approved"
+      ],
+      "date": "21.09.2024",
+      "birth": "05.11.1965",
+      "occupation": "Komşu Bağ Sahibi",
+      "address": "Urla · Arıcan Şarapçılık",
+      "paragraphs": [
+        "<p>Evet, o adamın arabasını ben parçaladım. Gururla da söylüyorum. Benim su kuyularımı kurutmak için dava üstüne dava açtı. Ölümle tehdit ettim mi? Ettim. Bütün Urla duydu.</p>",
+        "<p>S: Olay günü akşamüstü, saat 18:00 sularında sınır çitlerinde görülmüşsünüz.<br>C: Kendi arazimin sınırındaydım. Ne yaptıklarını izliyordum. Mahzene falan girmedim. Oraya girmek banka kasasına girmekten zor, benim o kilitleri açacak gücüm yok.</p>",
+        "<p>S: Onu zehirlemiş olabilir misiniz?<br>C: Ben zehir kullanmam komiser bey. Birini öldüreceksem yüzüne karşı ellerimle yapardım. Arabasını nasıl parçaladıysam öyle.</p>"
+      ],
+      "signature": "T. Arıcan"
+    },
+    {
+      "id": "104-F",
+      "dataDocKey": "riza",
+      "suspectName": "Rıza Usta",
+      "headerDocId": "104-F · Urla İlçe Emniyet Müdürlüğü",
+      "title": "İfade — Rıza Usta",
+      "stamps": [
+        "approved"
+      ],
+      "date": "21.09.2024",
+      "birth": "18.02.1962",
+      "occupation": "Bağ Bekçisi",
+      "address": "Urla · Somer Bağları Müştemilat",
+      "paragraphs": [
+        "<p>Akşam 19:45 gibi mahzenden kırık cam sesi duydum. Vedat Bey her akşam 7'de iner, 7 buçuk gibi çıkardı. Gecikince şüphelendim. Kapıyı açmaya çalıştım, kilitliydi. Parçalayamadım ama alttan baktığımda yerde yattığını gördüm.</p>",
+        "<p>S: Şüpheli birini gördünüz mü?<br>C: Öğleden sonra Timur Bey çitlerin oralardaydı. Sürekli bize küfür ederdi. Vedat Bey ona hiç cevap vermez, sadece gülerdi. Başka yabancı kimse yoktu.</p>",
+        "<p>S: Aylin Hanım ne zaman döndü?<br>C: Polisler geldikten sonra, saat 20:30 gibi arabasıyla kapıya yanaştı. Çok şaşkın görünüyordu.</p>"
+      ],
+      "signature": "R. Usta"
+    }
+  ]
+}
