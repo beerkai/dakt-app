@@ -1,0 +1,172 @@
+{
+  "id": "033",
+  "forensics": {
+    "autopsy": {
+      "docCode": "033-B",
+      "title": "Otopsi Raporu",
+      "date": "15.03.2025",
+      "author": "Uzm. Dr. Kenan Aydın · Trabzon Adli Tıp Kurumu",
+      "externalExam": [
+        "Ağız mukozası ve dudak çevresinde kimyasal temas izleri (kızarıklık, yüzeyel doku nekrozu).",
+        "Ellerde savunma izi YOK.",
+        "Gövdede düşmeye bağlı yüzeyel abrazyon (kurutma masasına düşme).",
+        "Parmak uçlarında siyanotik (morarma) değişimler."
+      ],
+      "internalExam": [
+        "Mide mukozasında yaygın erozyon ve kanamalı alanlar.",
+        "Akciğerlerde akut ödem, şiddetli alveoler hemoraji (kanama).",
+        "Kalpte iskemik bulgular (ikincil kardiyak arrest).",
+        "Toksikoloji Taraması: Mide sıvısı ve kanda letal dozda 'Paraquat' (zirai herbisit) tespit edilmiştir."
+      ],
+      "causeOfDeath": "Toksik dozda paraquat zehirlenmesine bağlı akut solunum ve çoklu organ yetmezliği.",
+      "timeOfDeath": "Sabah 05:30 — 06:30 arası.",
+      "criticalFindings": [
+        "Zehir (paraquat) sıvı formda oral yolla alınmıştır.",
+        "Ölüm süreci dakikalar içinde (30-45 dk) solunum güçlüğüyle gerçekleşmiştir.",
+        "Herhangi bir mekanik travma bulgusu yoktur."
+      ]
+    },
+    "sceneReport": {
+      "docCode": "033-A",
+      "title": "Olay Yeri Raporu",
+      "author": "Bşçvş. Murat Kılıç · Çaykara İlçe Jandarma",
+      "findings": [
+        "Kurban, atölye içindeki kurutma masasına yüzüstü yığılmış halde bulundu.",
+        "Yerde kurbana ait paslanmaz çelik termos (devrilmiş) ve kırık bir porselen kupa parçaları.",
+        "Termos içindeki sıvı (çay) zemine dökülmüş, az miktarda içinde kalmış.",
+        "Atölye giriş kapısı kilitli değil, zorlanma izi yok (mandal sistemi).",
+        "Atölye arka deposu kilitli, ancak anahtar depo kapısının üzerinde bırakılmış."
+      ],
+      "preliminaryNote": "Dışarıdan bir müdahale veya boğuşma izi yok. Kurban sabah rutinini gerçekleştirirken aniden fenalaşmış gibi görünüyor. Termos içindeki sıvının toksikolojiye gönderilmesi elzemdir."
+    }
+  },
+  "evidence": [
+    {
+      "code": "NÇ-TOX01",
+      "tag": "Toksikoloji",
+      "title": "Termos İçindeki Sıvı Analizi",
+      "description": "Olay yerinde devrilmiş bulunan çelik termosun dibinde kalan sıvının kimyasal analizi.",
+      "details": [
+        { "label": "İçerik", "value": "Siyah çay, şeker, %12 oranında Paraquat (herbisit) solüsyonu." },
+        { "label": "Özellik", "value": "Paraquat, ticari tarımda kullanılan, kokusuz ama acı tatlandırıcı eklenmiş bir zehirdir." },
+        { "label": "Yorum", "value": "Çay ile karıştığında sıcaklığın da etkisiyle tat maskelenmiş. Kurban birkaç yudum aldıktan sonra fark etmiş olabilir (kırık kupa bunu destekliyor)." }
+      ]
+    },
+    {
+      "code": "NÇ-ŞİŞ01",
+      "tag": "Fiziksel",
+      "title": "Paraquat Şişesi",
+      "description": "Atölyenin arka deposunda, zehirli maddeler rafında bulunan 1 litrelik ticari zirai ilaç şişesi.",
+      "details": [
+        { "label": "Buluntu Yeri", "value": "Depo 3. raf, yarı karanlık alan." },
+        { "label": "Durum", "value": "Kapağı tam sıkılmamış, dış yüzeyinde ince çay lekesi var." },
+        { "label": "Parmak İzi", "value": "Sağ el işaret ve başparmak — Fırat Çoruh ile pozitif eşleşme." },
+        { "label": "Yorum", "value": "Şişe cinayet silahı. Fail kullandıktan sonra panikle kendi yerine geri koymuş." }
+      ]
+    },
+    {
+      "code": "NÇ-DEF01",
+      "tag": "Belge",
+      "title": "Depo Giriş-Çıkış Defteri",
+      "description": "Zirai ilaç deposunun rutin kayıt defteri.",
+      "details": [
+        { "label": "Son Kayıt", "value": "13 Mart 2025 · 23:00" },
+        { "label": "İşlem", "value": "Giriş (Havalandırma Kontrolü)" },
+        { "label": "İmza", "value": "Fırat Çoruh" },
+        { "label": "Yorum", "value": "Fırat'ın gece 23:00'da depoya girdiğini belgeliyor. İlacın o saatte alındığı düşünülüyor." }
+      ]
+    },
+    {
+      "code": "NÇ-ENV01",
+      "tag": "Belge",
+      "title": "Zirai İlaç Envanter Fişi",
+      "description": "Kooperatiften alınan ilaçların kayıt fişi.",
+      "details": [
+        { "label": "Alım Tarihi", "value": "28 Şubat 2025" },
+        { "label": "Kalem", "value": "Paraquat 1L x 4 şişe" },
+        { "label": "Teslim Alan", "value": "Fırat Çoruh (imza)" },
+        { "label": "Yorum", "value": "Fırat'ın şişedeki parmak izini 'ben satın almıştım' diyerek açıklamasına zemin hazırlayan belge." }
+      ]
+    },
+    {
+      "code": "NÇ-VAS01",
+      "tag": "Belge",
+      "title": "Vasiyetname Değişikliği (Fotokopi)",
+      "description": "Necati Çoruh'un ofis çekmecesinde bulunan Çaykara Noterliği tasdikli belge.",
+      "details": [
+        { "label": "Tarih", "value": "21 Şubat 2025" },
+        { "label": "İçerik", "value": "Tüm gayrimenkul ve ticari varlıkların yegâne varisi olarak kızı Nurdan Çoruh tayin edilmiştir." },
+        { "label": "Önceki Durum", "value": "Önceki vasiyette yasal paylar geçerliydi (Kardeş Salih'e cüzi bir pay düşebiliyordu)." }
+      ]
+    },
+    {
+      "code": "NÇ-GSM01",
+      "tag": "Dijital",
+      "title": "Güler Aktepe HTS Kaydı",
+      "description": "Olay gecesi ve sabahı Güler Aktepe'nin telefon sinyalleri.",
+      "details": [
+        { "label": "Saat 04:00 - 08:00", "value": "Telefon kesintisiz olarak Taşkıran Köyü baz istasyonundan sinyal almış." },
+        { "label": "Konum", "value": "Dereiçi (olay yeri) baz istasyonuna geçiş YOK." },
+        { "label": "Yorum", "value": "Güler'in sabah erken saatte yürüyüşe çıktığı ifadesini doğruluyor, atölyeye inmediğini kanıtlıyor." }
+      ]
+    },
+    {
+      "code": "NÇ-BİLET01",
+      "tag": "Belge",
+      "title": "Otobüs Bilet Kaydı — Salih Çoruh",
+      "description": "Kamil Koç turizm sistem kaydı.",
+      "details": [
+        { "label": "Güzergah", "value": "Ankara (AŞTİ) -> Trabzon (Otogar)" },
+        { "label": "Varış", "value": "13 Mart 2025 · 18:30" },
+        { "label": "Yorum", "value": "Salih Çoruh'un olay gecesi Ankara'da değil Trabzon'da olduğunu kesin olarak kanıtlıyor." }
+      ]
+    },
+    {
+      "code": "NÇ-TER01",
+      "tag": "Fiziksel",
+      "title": "Termos Yüzeyi Parmak İzleri",
+      "description": "Zehirli çayın bulunduğu termos dış yüzeyindeki izler.",
+      "details": [
+        { "label": "Kavrama İzi", "value": "Necati Çoruh (gövdede)" },
+        { "label": "Kapak ve Kulp İzi", "value": "Fırat Çoruh (taze izler)" },
+        { "label": "Yorum", "value": "Fırat 'ben sadece çay dolduruyordum' diyerek bu taze izleri açıklamaya çalıştı ama amcasının kendi çayını demlediği gerçeğiyle çelişiyor." }
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "docCode": "033-I",
+      "title": "Kooperatif Borç Dökümü",
+      "type": "Mali Belge",
+      "content": "### Çaykara Çay Alım Kooperatifi\n\n**Üye:** Necati Çoruh\n**Durum:** Aktif\n\n**Açık Bakiye:** 45.000 TL (Gecikmedeki ödemeler)\n**Açıklama:** Kooperatif müdürü Serkan Dereli ile 05.03.2025 tarihinde yapılan görüşmede, Necati Çoruh borcun hasat sonrası kapatılacağını, ancak kooperatifin alım fiyatlarından memnun olmadığını ve sözleşme yenilemeyeceğini beyan etmiştir.\n\n<p style=\"background:rgba(107,22,32,.1);padding:12px;border-left:3px solid var(--bordeaux);\"><strong>Kriminal Not:</strong> 45 bin TL ticari bir işletme için cinayet sebebi olamayacak kadar küçük bir rakam. Serkan Dereli'nin motifi zayıf kalıyor.</p>"
+    }
+  ],
+  "messageThreads": [
+    {
+      "id": "033-K",
+      "docCode": "033-K",
+      "title": "WhatsApp — Fırat Çoruh ↔ Salih Çoruh",
+      "platform": "whatsapp",
+      "participants": [
+        { "id": "firat", "name": "Fırat Çoruh", "role": "şüpheli" },
+        { "id": "salih", "name": "Salih Çoruh", "role": "şüpheli" }
+      ],
+      "messages": [
+        { "id": "m1", "senderId": "firat", "type": "text", "text": "Baba duyduklarım doğru mu? Amcam notere gitmiş.", "timestamp": "25.02.2025 18:40" },
+        { "id": "m2", "senderId": "salih", "type": "text", "text": "Kimden duydun?", "timestamp": "25.02.2025 18:45" },
+        { "id": "m3", "senderId": "firat", "type": "text", "text": "Havva Teyze söyledi. Bütün araziyi Nurdan'a bırakmış. Biz ne olacağız?", "timestamp": "25.02.2025 18:46" },
+        { "id": "m4", "senderId": "salih", "type": "text", "text": "Sakin ol. Ben onunla konuşacağım.", "timestamp": "25.02.2025 19:00" },
+        { "id": "m5", "senderId": "firat", "type": "text", "text": "Baba 2 yıldır burada bedavaya çalışıyorum. Beni resmen amele niyetine kullanmış.", "timestamp": "25.02.2025 19:02" },
+        { "id": "m6", "senderId": "salih", "type": "text", "text": "Ağabeyimdir, yapar. Ben o arazinin yarısını ödedim zamanında. Yanına bırakmam. Sen karışma.", "timestamp": "25.02.2025 19:15" },
+        { "id": "m7", "senderId": "firat", "type": "text", "text": "Ne zaman geleceksin?", "timestamp": "10.03.2025 10:20" },
+        { "id": "m8", "senderId": "salih", "type": "text", "text": "Bilet aldım. Perşembe akşamı oradayım. Amcana söyleme, sürpriz yapacağım.", "timestamp": "10.03.2025 10:25" },
+        { "id": "m9", "senderId": "firat", "type": "text", "text": "Tamam.", "timestamp": "10.03.2025 10:26" },
+        { "id": "m10", "senderId": "salih", "type": "text", "text": "Ne oldu? Konuşabildiniz mi?", "timestamp": "14.03.2025 02:15" },
+        { "id": "m11", "senderId": "salih", "type": "system", "text": "Bu mesaj silindi.", "timestamp": "14.03.2025 02:16" }
+      ],
+      "meta": {
+        "forensicNote": "<strong>Kriminal Not:</strong> Fırat'ın öfkesi açıkça görülüyor. Salih'in Perşembe (13 Mart) akşamı köye geldiği kesinleşti. Gece 02:15'te Salih'in attığı mesaj ve silmesi, Salih'in o saatte uyumadığını ve Fırat'la iletişim kurmaya çalıştığını gösteriyor."
+      }
+    }
+  ]
+}

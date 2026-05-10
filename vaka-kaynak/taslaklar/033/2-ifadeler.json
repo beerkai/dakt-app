@@ -1,0 +1,233 @@
+{
+  "id": "033",
+  "testimonies": [
+    {
+      "id": "033-C",
+      "docCode": "033-C",
+      "suspectId": "firat",
+      "session": 1,
+      "title": "İfade — Fırat Çoruh (1. Oturum)",
+      "date": "14.03.2025 · 10:15",
+      "meta": [
+        {
+          "label": "Doğum",
+          "value": "12.06.1992"
+        },
+        {
+          "label": "Meslek",
+          "value": "Çoruh Çay Atölyesi Yöneticisi"
+        },
+        {
+          "label": "Adres",
+          "value": "Dereiçi Köyü, Çaykara"
+        }
+      ],
+      "content": "Fırat Çoruh, amcasını bulduktan birkaç saat sonra ifade verdi. Üzerinde atölye kıyafetleri vardı, elleri titriyordu.\n\n**S:** Başınız sağ olsun Fırat Bey. Amcanızı siz buldunuz. Anlatır mısınız?\n**C:** Sabah 06:45 gibi atölyeye indim. Çay hasadı yaklaşıyor, sabahları erken başlarız. İçeri girdiğimde... amcam kurutma masasının oraya yığılmıştı. Yüzüstü. Önce düştü sandım, veya kalp krizi. Yanına koştum. Nefes almıyordu.\n\n**S:** O saate kadar atölyede kimse yok muydu?\n**C:** Amcam hep herkesten erken iner. 05:00 gibi kalkar, çayını demler, aşağı geçer. Bu onun ritüeliydi.\n\n**S:** Onu en son ne zaman canlı gördünüz?\n**C:** Dün akşam. 21:00 civarıydı. Eve geçtiğini sanıyordum.\n\n**S:** Amcanızla aranız nasıldı? Son zamanlarda bir gerginlik var mıydı?\n**C:** *[duraksama]* Hayır, gerginlik yoktu. Amcam sert adamdır, otoriterdir ama benimle bir sorunu yoktu. İki yıldır buradayım, ona ben yardım ediyorum. O olmasa bu işler zor dönerdi.\n\n**S:** Köyde husumeti olan biri var mıydı?\n**C:** Herkes bilir, Güler Abla (Aktepe) ile sınır kavgası vardı. İki hafta önce köy meydanında epey yüksek sesle tartıştılar. Suyu kesmekle tehdit etmişti amcamı. Bir de kooperatifle, Serkan Ağabey'le borç meselesi vardı ama o kadar büyümez diye düşünüyorum.",
+      "signature": "F. Çoruh"
+    },
+    {
+      "id": "033-D",
+      "docCode": "033-D",
+      "suspectId": "guler",
+      "session": 1,
+      "title": "İfade — Güler Aktepe (1. Oturum)",
+      "date": "14.03.2025 · 11:30",
+      "meta": [
+        {
+          "label": "Doğum",
+          "value": "04.09.1976"
+        },
+        {
+          "label": "Meslek",
+          "value": "Çay Üreticisi"
+        },
+        {
+          "label": "Adres",
+          "value": "Dereiçi Köyü, Çaykara"
+        }
+      ],
+      "content": "Güler Aktepe Çaykara İlçe Jandarma Komutanlığına kendisi geldi. Oldukça gergin ama kendinden emin görünüyordu.\n\n**S:** Necati Çoruh'un vefatını ne zaman öğrendiniz?\n**C:** Sabah köy kahvesine haber gelmiş. Bizim eve de komşular söyledi, 08:00 civarıydı.\n\n**S:** Olay sabahı 05:00 ile 07:00 arası neredeydiniz?\n**C:** Evdeydim. Uyuyordum. Kızım Elif de evdeydi, ona sorabilirsiniz. Erken kalkarız ama o saatte daha yataktaydık.\n\n**S:** İki hafta önce köy meydanında Necati Bey ile tartıştınız. Konu neydi?\n**C:** *[sinirli]* Su hattı meselesi. Yukarı bahçeden gelen suyu kendi tarafına çevirmişti, bizim filizler kurumaya başladı. Gittim konuştum, anlamadı. Meydanda da sesimiz yükseldi. Köylük yer, herkes herkesin sesini duyar.\n\n**S:** Bu tartışma onu öldürmek için bir sebep olabilir mi?\n**C:** *[gülerek]* Komiserim, siz hiç köye gelmediniz herhalde? Arazi için, su için her gün kavga edilir burada. Ben kocamı toprağa verdim, bu bahçeyi tek başıma ayağa kaldırdım. Necati inatçıydı ama onu zehirleyecek kadar delirmedim. Benim işim çay yetiştirmek.\n\n**S:** Zehirlendiğini nereden biliyorsunuz?\n**C:** *[duraksama]* ...Sabah jandarma gelince köyde konuşuldu. İlaç demişler. Öyle duydum.\n\n<p style=\"background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux)\"><strong>Kritik:</strong> Otopsi raporu henüz çıkmadan 'zehirlenme' kelimesini kullandı. Ayrıca arazi kavgası açık bir motivasyon gibi görünüyor. İfadesi şüpheli, HTS (baz istasyonu) kaydı talep edildi.</p>",
+      "signature": "G. Aktepe"
+    },
+    {
+      "id": "033-F",
+      "docCode": "033-F",
+      "suspectId": "nurdan",
+      "session": 1,
+      "title": "İfade — Nurdan Çoruh (1. Oturum)",
+      "date": "15.03.2025 · 14:00",
+      "meta": [
+        {
+          "label": "Doğum",
+          "value": "21.05.1993"
+        },
+        {
+          "label": "Meslek",
+          "value": "Mimar"
+        },
+        {
+          "label": "Adres",
+          "value": "Kadıköy, İstanbul"
+        }
+      ],
+      "content": "Nurdan Çoruh, haberi alır almaz ilk uçakla Trabzon'a geldi. Yorgun ve bitkin görünüyordu.\n\n**S:** Başınız sağ olsun Nurdan Hanım. Babanızla son görüşmeniz ne zamandı?\n**C:** Dün akşam... Yani olaydan bir gece önce. Telefonla görüştük. 21:45 gibi.\n\n**S:** Konuşmanın içeriği neydi? Tartıştığınıza dair bilgiler var.\n**C:** *[ağlama]* Tartışmak denmez. Sadece... bazı kararları için ona kızgındım. Vasiyetini değiştirdiğini söyledi. Tüm araziyi benim üzerime yapacakmış.\n\n**S:** Bu neden bir tartışma konusu olsun ki?\n**C:** Çünkü o arazi sadece onun değildi! Babamın kardeşi Salih Amcamla ortak almışlardı zamanında. Ama tapuyu babam tek kendi üstüne yapmış. Yıllardır bu bir yaraydı ailede. Babam, amcama hiçbir pay vermeden her şeyi bana bırakmak istiyordu. Ben bunu istemediğimi, haksızlık olduğunu söyledim.\n\n**S:** Babanızın tepkisi ne oldu?\n**C:** 'Benim dediğim olacak' dedi. Her zamanki gibi. 'O arazi benim terimle büyüdü' dedi. Kapattık telefonu. Keşke... keşke öyle kapatmasaydım.\n\n**S:** Fırat'ın (yeğeni) bundan haberi var mıydı?\n**C:** Bilmiyorum. Babam söylememiştir. Ama köy küçük, bir şekilde duymuş olabilir.",
+      "signature": "N. Çoruh"
+    },
+    {
+      "id": "033-G",
+      "docCode": "033-G",
+      "suspectId": "serkan",
+      "session": 1,
+      "title": "İfade — Serkan Dereli (1. Oturum)",
+      "date": "14.03.2025 · 16:45",
+      "meta": [
+        {
+          "label": "Doğum",
+          "value": "11.10.1989"
+        },
+        {
+          "label": "Meslek",
+          "value": "Çay Alım Kooperatifi Müdürü"
+        },
+        {
+          "label": "Adres",
+          "value": "Merkez, Çaykara"
+        }
+      ],
+      "content": "Serkan Dereli, kooperatif ofisinde, kravatlı ve resmi bir tavırla ifade verdi.\n\n**S:** Necati Bey ile aranızdaki ticari anlaşmazlık neydi?\n**C:** Kooperatifin finansal döngüsüyle ilgili basit bir mesele. Geçen yılki hasattan kalan küçük bir ödeme gecikmesi vardı. Kendisi kooperatifin kurucu üyelerindendir, hakkı vardır.\n\n**S:** Kooperatiften ayrılmakla tehdit ettiği doğru mu?\n**C:** *[boğazını temizler]* Evet, bir ara böyle bir söylemi oldu. Necati Ağabey çabuk parlar ama çabuk sönerdi. Onu kaybetmek kooperatif için kötü bir imaj olurdu, yalan yok.\n\n**S:** Olay sabahı neredeydiniz?\n**C:** İlçe merkezinde, evimdeydim. Sabah 08:00'de kooperatifi açtım.\n\n**S:** Necati Bey'in atölyesindeki kimyasallara erişiminiz var mı?\n**C:** Hayır, neden olsun? Kooperatif sadece alım yapar, üretim araçlarına veya depolarına karışmayız. O işlere yeğeni Fırat bakardı. Asıl siz Fırat'a sorun, o çocuk iki yıldır orada ne idüğü belirsiz şekilde çalışıyor.",
+      "signature": "S. Dereli"
+    },
+    {
+      "id": "033-H",
+      "docCode": "033-H",
+      "suspectId": "havva",
+      "session": 1,
+      "title": "İfade — Havva Sürmeneli (1. Oturum)",
+      "date": "15.03.2025 · 09:30",
+      "meta": [
+        {
+          "label": "Doğum",
+          "value": "08.03.1963"
+        },
+        {
+          "label": "Meslek",
+          "value": "Emekli"
+        },
+        {
+          "label": "Adres",
+          "value": "Dereiçi Köyü, Çaykara"
+        }
+      ],
+      "content": "Havva Hanım köyün en eski evlerinden birinde, elinde tespihiyle sakin sakin konuştu.\n\n**S:** Başınız sağ olsun Havva Hanım. Necati Bey'i uzun zamandır tanıyormuşsunuz.\n**C:** Annesiyle ahrettiğim ben. Necati elimde büyüdü. İnatçı çocuktu, inatçı adam oldu. Ama içi temizdi.\n\n**S:** Son zamanlarda köyde farklı bir şey gördünüz mü?\n**C:** Köyde her şey farklıdır, her şey aynıdır komiser bey. Ama 21 Şubat'ta Necati'yi ilçeye inip notere girerken gördüm. Hastane dönüşümdü, tesadüf. Sonra dönüşte bana çay içmeye uğradı. Anlattı.\n\n**S:** Neyi anlattı?\n**C:** 'Kökü bağladım Havva Abla' dedi. 'Her şeyi Nurdan'a bıraktım.' Biliyordum ben dertlerini. Salih'in o arazide hakkı vardı. Necati bunu hep inkar etti ama vicdanı rahat değildi. Vasiyetle işi çözdüğünü sandı.\n\n**S:** Bunu başkasına söylediniz mi?\n**C:** Fırat sordu. Birkaç gün sonra. 'Amcam nereye gitti' dedi. Ben de söyledim. Notere gitti dedim, her şeyi kızına bıraktı dedim. Çocuğun yüzü kül gibi oldu.\n\n<p style=\"background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux)\"><strong>Kritik:</strong> Vasiyet değişikliği gizli kalmamış. Fırat bunu haftalar önceden öğrenmiş. Motif netleşiyor.</p>",
+      "signature": "H. Sürmeneli"
+    },
+    {
+      "id": "033-E",
+      "docCode": "033-E",
+      "suspectId": "salih",
+      "session": 1,
+      "title": "İfade — Salih Çoruh (1. Oturum)",
+      "date": "16.03.2025 · 10:00",
+      "meta": [
+        {
+          "label": "Doğum",
+          "value": "19.08.1968"
+        },
+        {
+          "label": "Meslek",
+          "value": "Emekli Memur"
+        },
+        {
+          "label": "Adres",
+          "value": "Keçiören, Ankara"
+        }
+      ],
+      "content": "Salih Çoruh cenaze için geldiği Trabzon'da ifade verdi. Sesi titrek, elleri terliydi.\n\n**S:** Salih Bey, ağabeyinizle aranız nasıldı?\n**C:** Uzaktık biz. Ben Ankara'ya yerleştim yıllar evvel. O toprağa bağlıydı. Kötü değildik ama çok görüşmezdik.\n\n**S:** Arazi meselesi nedir? O arazide hakkınız olduğu söyleniyor.\n**C:** *[iç çeker]* Eski defterler. 90'larda o araziyi alırken paramın çoğunu ben koymuştum. Ama memuriyete girerken sorun olmasın diye tapuyu onun üzerine yaptık. O da bir daha hiç konusu açılmamış gibi davrandı.\n\n**S:** Olay gecesi, 13 Mart'ı 14'e bağlayan gece neredeydiniz?\n**C:** Ankara'daydım evimde. Olayı sabah eşim haber verince öğrendim, televizyondan.\n\n**S:** Oğlu Fırat burada çalışıyordu. Onunla görüşüyor muydunuz?\n**C:** Oğlum kendi hayatını kurmak istedi. Ben ona 'gitme' dedim, 'o adam seni sömürür' dedim. Dinlemedi. Sonra... vasiyet meselesi çıkmış. Fırat bana mesaj attı, 'Baba bu adam bize hiçbir şey vermeyecek' diye.\n\n**S:** Siz ne dediniz?\n**C:** 'Sakin ol, ben konuşurum' dedim.\n\n<p style=\"background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux)\"><strong>Kritik:</strong> Otobüs firması bilet kayıtlarında Salih Çoruh'un 13 Mart sabahı Trabzon'a geldiği görünüyor. İfadesinde 'Ankara'daydım' yalanı söylüyor. İkinci oturuma çağrılacak.</p>",
+      "signature": "S. Çoruh"
+    },
+    {
+      "id": "033-D2",
+      "docCode": "033-D2",
+      "suspectId": "guler",
+      "session": 2,
+      "title": "İfade — Güler Aktepe (2. Oturum)",
+      "date": "16.03.2025 · 14:00",
+      "meta": [
+        {
+          "label": "Tarih",
+          "value": "16.03.2025 · 14:00"
+        },
+        {
+          "label": "Not",
+          "value": "Güler'in aslında kooperatif borcu ve Necati'nin kooperatiften ayrılma planıyla ilgili itirazlarının tespit edilmesinin ardından."
+        }
+      ],
+      "content": "Güler Aktepe bu kez daha gergindi. Ellerini kucağında sıkıca bağlamıştı.\n\n**S:** Güler Hanım, köy meydanındaki tartışmanızın aslında sadece arazi sınırıyla ilgili olmadığı, Necati Bey'in kooperatiften ayrılma kararını engellemeye çalıştığınız anlaşıldı. Neden sakladınız?\n**C:** *[iç çeker]* Kendi derdimi köye yaymak istemedim komiserim. Kocamdan kalan borçlar var. Necati ayrılırsa kooperatifin alım gücü düşer, benim çayım elimde kalır. Sınır meselesi bahaneydi, evet.\n\n**S:** Necati Bey size ne cevap verdi o gün?\n**C:** 'Kendi bacağından asıl Güler' dedi. 'Benim malım beni bağlar'. Çok kırıldım, çok öfkelendim.\n\n**S:** Atölyesinin anahtarının nerede durduğunu biliyor muydunuz?\n**C:** Herkes bilir, o kapı doğru dürüst kilitlenmez zaten. Mandalı çekip girersiniz.\n\n**S:** Olay sabahı evde olduğunuzu söylemiştiniz ama telefonunuz sabah 05:40'ta Taşkıran köyü baz istasyonundan sinyal vermiş.\n**C:** *[duraksama]* Evet... Çıktım evden. Uyuyamadım. Taşkıran tarafına, yukarıdaki yola kadar yürüdüm. Ama atölyeye inmedim, yemin ederim.",
+      "signatureRole": "İfade Sahibi",
+      "signature": "G. Aktepe"
+    },
+    {
+      "id": "033-E2",
+      "docCode": "033-E2",
+      "suspectId": "salih",
+      "session": 2,
+      "title": "İfade — Salih Çoruh (2. Oturum)",
+      "date": "17.03.2025 · 11:00",
+      "meta": [
+        {
+          "label": "Tarih",
+          "value": "17.03.2025 · 11:00"
+        },
+        {
+          "label": "Not",
+          "value": "Salih Çoruh'un 13 Mart günü Trabzon'a geldiğinin bilet kayıtlarıyla tespit edilmesinin ardından. Avukat hazır."
+        }
+      ],
+      "content": "**S:** Salih Bey, olay gecesi Ankara'da olduğunuzu söylemiştiniz. Ancak otobüs firmanız sizi 13 Mart akşamı Trabzon otogarına bırakmış.\n**C:** *[avukatla fısıldaşma]* Evet. Geldim. Yalan söyledim çünkü... korktum.\n\n**S:** Neyden korktunuz? Kardeşinizi öldürmekten mi?\n**C:** Hayır! Onu öldürmedim! Ben... konuşmaya geldim. Gece 21:30 gibi kapısını çaldım. Evdeydi.\n\n**S:** Ne konuştunuz?\n**C:** Vasiyeti sordum. Neden benim çocuğumu da dışlıyorsun, benim hakkım o arazide var dedim. 'O eskidendi' dedi. 'Ben işledim, ben büyüttüm, senin bir kovan bile toprağın yok burada' dedi.\n\n**S:** Sonra?\n**C:** Tartıştık. Beni evden kovdu. Kapıyı suratıma kapattı.\n\n**S:** O gece nerede kaldınız?\n**C:** Geri dönecek otobüs bulamadım o saatte. Havva Abla'nın kapısını çaldım. Geceyi onun misafir odasında geçirdim. O şahittir. Sabah da haber geldi zaten. Gitmeye korktum.\n\n<p style=\"background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux)\"><strong>Kritik:</strong> Havva Sürmeneli, Salih'in gece 22:30'da ağlayarak kapısına geldiğini ve sabah 08:00'e kadar evden çıkmadığını doğruladı. Salih'in cinayet saatinde (05:30-06:30) alibisi var.</p>",
+      "signatureRole": "İfade Sahibi · Avukat huzurunda",
+      "signature": "S. Çoruh"
+    },
+    {
+      "id": "033-C2",
+      "docCode": "033-C2",
+      "suspectId": "firat",
+      "session": 2,
+      "title": "İfade — Fırat Çoruh (2. Oturum)",
+      "date": "17.03.2025 · 15:30",
+      "meta": [
+        {
+          "label": "Tarih",
+          "value": "17.03.2025 · 15:30"
+        },
+        {
+          "label": "Not",
+          "value": "Toksikoloji raporunda paraquat zehirlenmesi çıkması ve depo defterinde Fırat'ın gece 23:00 imzasının bulunmasının ardından."
+        }
+      ],
+      "content": "**S:** Amcanız doğal yollarla ölmemiş. Termos çayına paraquat karıştırılmış. Zirai ilaç.\n**C:** *[gözleri fal taşı gibi açılır]* Zehir mi? Nasıl yani... İlaç mı içmiş?\n\n**S:** İçmiş mi sence, içirilmiş mi? Atölyede o ilaçtan nerede var?\n**C:** Arka depoda var. Ama amcam her sabah o çayı kendisi demler. Termosu kendisi doldurur.\n\n**S:** Depo giriş defterinde 13 Mart gece 23:00'da sizin imzanız var. Neden o saatte depoya girdiniz?\n**C:** *[duraksama]* Ben... havalandırmayı kapatmayı unutmuştum. Onu kontrol etmeye gittim. Bazen kalırım geç saatlere kadar.\n\n**S:** Babanızın o gece Trabzon'da olduğundan haberiniz var mıydı?\n**C:** Babam mı? Hayır, haberim yoktu. Bana bir şey söylemedi.\n\n**S:** Havva Hanım'ın size vasiyetle ilgili söylediği şey, amcanıza karşı öfke duymanıza sebep oldu mu?\n**C:** Öfke mi? Hayır... Kırıldım sadece. Ben burada ter döküyorum, o İstanbul'daki kızına veriyor her şeyi. Ama bu onu zehirleyeceğim anlamına gelmez. Ben sadece çay dolduruyordum.\n\n**S:** Çay dolduruyordun? Amcanın kendi demlediğini söylemiştin az önce.\n**C:** *[panikler]* Yani çayı hazırlamaya yardım ediyordum demek istedim. Sabahları bazen.\n\n<p style=\"background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux)\"><strong>Kritik:</strong> 'Ben sadece çay dolduruyordum' diyerek büyük bir gaf yaptı. 23:00 depo girişi ve termosu kimin doldurduğu çelişkili. Şişe üzerinde parmak izi analizi bekleniyor.</p>",
+      "signatureRole": "İfade Sahibi",
+      "signature": "F. Çoruh"
+    },
+    {
+      "id": "033-C3",
+      "docCode": "033-C3",
+      "suspectId": "firat",
+      "session": 3,
+      "title": "İfade — Fırat Çoruh (3. Oturum)",
+      "date": "18.03.2025 · 09:00",
+      "meta": [
+        {
+          "label": "Tarih",
+          "value": "18.03.2025 · 09:00"
+        },
+        {
+          "label": "Not",
+          "value": "Paraquat şişesi üzerinde Fırat'ın sağ işaret parmağı ve başparmak izinin tespit edilmesinin ardından. Avukat hazır."
+        }
+      ],
+      "content": "**S:** Fırat Bey, depodaki paraquat şişesinin üzerinde sağ elinizin baş ve işaret parmağı izi çıktı. Şişeyi siz almışsınız.\n**C:** *[uzun sessizlik, avukatıyla fısıldaşır]* İlacı ben satın aldım zaten. Benim izimin olması normal. Envanteri ben tutuyorum.\n\n**S:** Evet, 28 Şubat'ta siz almışsınız. Ama izler taze. O şişe son 48 saat içinde tutulmuş.\n**C:** *[sessizlik]*\n\n**S:** Gece 23:00'da depoya havalandırma için değil, o ilacı almak için girdiniz. Sabah 05:00'te amcanız inmeden önce de termosa karıştırdınız.\n**C:** *[ağlamaya başlar]* O beni kölesi gibi gördü... Kendi kanından, kardeşinin oğlunu hiç yerine koydu. 'Senin baban beceriksizdi, sen de aynısısın, burada sadece işçisin' dedi yüzüme. Babamın hakkı vardı o toprakta!\n\n**S:** Zehirlemeyi nasıl yaptınız?\n**C:** *[avukat araya girer]* Müvekkilim ifadeyi burada kesmek istiyor. Bu bir itiraf değildir, duygusal bir patlamadır.\n\n**S:** Son soru. Şişeyi neden silmediniz?\n**C:** *[düşük sesle]* Bilmiyorum. Sadece... ellerim titriyordu. Görmedim.\n\n<p style=\"background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux)\"><strong>Kritik:</strong> Cümleleri örtülü bir itiraf. Motivasyon tamamen ortaya çıktı: 2 yıllık sömürülme hissi, babasının gasp edilen hakkı ve son noktayı koyan aşağılama ('burada sadece işçisin'). Tutuklama talebi edildi.</p>",
+      "signatureRole": "İfade Sahibi · Avukat huzurunda",
+      "signature": "F. Çoruh"
+    }
+  ]
+}

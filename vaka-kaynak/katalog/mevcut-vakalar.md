@@ -2,6 +2,33 @@
 
 Yeni vaka oluşturmadan önce **mutlaka oku**. Bu dosya çeşitlilik kontrolünün temelidir.
 
+## Vaka 033 — Sis Vadisi
+
+**Codename:** Sis Vadisi
+**Status:** test
+
+### Özet
+- **Kurban:** Necati Çoruh, 58, çay üreticisi ve tüccar
+- **Konum:** Trabzon · Çaykara · Dereiçi Köyü · çay işleme atölyesi
+- **Tarih:** 14 Mart 2025, sabah 05:30—06:30
+- **Cinayet yöntemi:** Zehirleme (paraquat — termos çayı)
+- **Mekân tipi:** Kırsal iş yeri (çay atölyesi)
+
+### Fail
+- **Kim:** Fırat Çoruh, 32, yeğen
+- **İlişki:** Aile — atölye yöneticisi
+- **Motif:** Miras / babasının arazi hakkı + vasiyet değişikliği; "bedavaya çalışma" öfkesi
+- **Karakter:** Erkek, 32, köye taşınmış, köşeye sıkışmış
+
+### Yapısal özellikler
+- 6 şüpheli, 10 ifade (Fırat×3, Güler×2, Salih×2, Nurdan, Serkan, Havva)
+- **İlk Karadeniz vakası** (Trabzon · Çaykara)
+- WhatsApp zinciri (Fırat ↔ Salih)
+- 2 yalancı: Fırat (fail) + Salih (konum yalanı, fail değil)
+- Kırmızı ringalar: Güler Aktepe + Salih Çoruh
+
+---
+
 ## Vaka 042 — Karaağaç
 
 **Codename:** Karaağaç
@@ -97,7 +124,7 @@ Yeni vaka oluşturmadan önce **mutlaka oku**. Bu dosya çeşitlilik kontrolün�
 - **Motif:** Arazi ihtilafı + cinayet zinciri (ikinci cinayet, ilk cinayetin örtbası)
 
 ### Yapısal özellikler
-- **TEK TAŞRA VAKASI** — İstanbul dışında geçen tek vaka
+- Kapadokya / turistik dış mekân vakası (İstanbul dışı)
 - Turistik mekân (dış mekân, doğal)
 - Yerel-turist gerilimi
 - "Cinayet zinciri" arketipi (önceki sırrın korunması)
@@ -162,9 +189,9 @@ Yeni vaka oluşturmadan önce **mutlaka oku**. Bu dosya çeşitlilik kontrolün�
 Yeni vaka aşağıdaki **tekrarlardan kaçınmalı**:
 
 ## 🔁 Coğrafi tekrar
-- **5 vakanın 4'ü İstanbul** (042 Kadıköy, 053 Beşiktaş, 067 Bebek, 114 Levent)
-- **Sadece 1 taşra** vaka (089 Göreme)
-- **Anadolu, Ege, Karadeniz, Akdeniz, Marmara taşrası YOK**
+- **İstanbul ağırlığı yüksek** (042, 053, 067, 082, 114)
+- **İstanbul dışı:** 033 Çaykara (Karadeniz), 089 Göreme (İç Anadolu / turistik)
+- **Karadeniz:** 033 ile açıldı (Trabzon · Çaykara)
 
 → **Yeni vakalar için öncelik:**
 1. **İzmir** ve çevresi
@@ -188,22 +215,23 @@ Yeni vaka aşağıdaki **tekrarlardan kaçınmalı**:
 6. Sanatçı/zanaatkar (heykeltıraş, müzisyen, fotoğrafçı)
 
 ## 🔁 Yaş tekrarı
-- **Kurban yaş ortalaması: 21-42**
-- **Yaşlı kurban (50+) YOK**
+- **Kurban yaş ortalaması: 21-42 aralığı ağırlıklı**
+- **50+ kurban:** 033 (Necati Çoruh, 58)
 - **Genç yetişkin (18-21) sadece 053**
 
 → **Yeni vakalar için öncelik:**
-1. **50+ yaş** kurban (emekli, yaşlı esnaf)
+1. **50+ yaş** kurban (emekli, yaşlı esnaf) — 033 ile açıldı; farklı profil veya nesil gerilimi
 2. **40-55 arası** kurban
 3. Genç yetişkin (19-25) — bir tane var ama yine olabilir
 
 ## 🔁 Motif tekrarı
-- **5 vakadan 4'ünde "ilişki + finansal" karışım** (042 takıntı, 053 finansal+sahiplik, 067 sırlar, 114 finansal)
+- **033:** miras / vasiyet + aile yarası (yeni ana hat)
+- **Önceki 5 vakada** çoğunlukla ilişki + finansal karışım (042 takıntı, 053 finansal+sahiplik, 067 sırlar, 114 finansal)
 - **089 farklı**: arazi + cinayet zinciri
 
 → **Yeni motifler:**
 1. **İdeolojik/politik** (akademik kıskançlık, parti içi rekabet)
-2. **Miras/aile borcu** (vasiyet sırrı, gizli akrabalık)
+2. ~~**Miras/aile borcu**~~ → **033'te kullanıldı**; yeni vakada benzeri olacaksa nüansı güçlü farklılaştır
 3. **Şantaj** (gizli fotoğraf, eski sır, profesyonel skandal)
 4. **Hata/kazara** (çatışma sırasında olay büyüdü, plansız)
 5. **Korku temelli** (failin kurbandan korkması — tehdit altında öldürdü)
@@ -213,6 +241,7 @@ Yeni vaka aşağıdaki **tekrarlardan kaçınmalı**:
 - **3 vaka ev içi** (042, 053, 067)
 - **1 ofis** (114)
 - **1 dış mekân** (089)
+- **1 kırsal iş yeri / atölye** (033)
 
 → **Yeni mekânlar:**
 1. **İş yeri** (fabrika, dükkan, restoran, atölye)
@@ -223,10 +252,11 @@ Yeni vaka aşağıdaki **tekrarlardan kaçınmalı**:
 
 ## 🔁 Cinayet yöntemi tekrarı
 - **053 boğma** (kablo)
+- **033 zehirleme** (paraquat, gıda ile)
 - **042, 067, 114, 089 — bilinmiyor (TS dosyalarına bakılmalı)**
 
 → **Yeni yöntemler:**
-1. **Zehirleme** (gıda, ilaç, alkol)
+1. ~~**Zehirleme**~~ (gıda, ilaç, alkol) — **033'te kullanıldı**
 2. **Künt travma** (taş, sopa, ağır cisim, düşme süsü)
 3. **Bıçaklama** (mutfak bıçağı, ev kavgası gerçekçiliği)
 4. **Ateşli silah** (av tüfeği, ev silahı)
@@ -234,12 +264,13 @@ Yeni vaka aşağıdaki **tekrarlardan kaçınmalı**:
 6. **Trafik kazası süsü**
 
 ## 🔁 Fail tipi tekrarı
+- **033 akraba fail** (yeğen)
 - **2 eski sevgili** (042 Meryem, ve muhtemelen 067)
 - **2 iş ortağı** (053 Berk, 114 Vedat)
 - **1 yabancı/yerel** (089 Alp)
 
 → **Yeni fail tipleri:**
-1. **Akraba** (kardeş, çocuk, ebeveyn)
+1. ~~**Akraba** (kardeş, çocuk, ebeveyn)~~ — **033'te yeğen fail**
 2. **Üst/ast** (patron, çalışan, üst rütbeli)
 3. **Komşu/tanıdık** (yakın değil ama tanıyor)
 4. **Resmi rol** (öğretmen, doktor, polis)
@@ -267,7 +298,7 @@ Yeni vaka oluşturmadan önce **şu sorulara cevap ver**:
 # Vaka isim havuzu (kullanılmamış olanlar)
 
 İlerideki vakalar için fikir:
-- **Karadeniz**: Hamsi, Yamaç, Çay, Sis Vadisi
+- **Karadeniz**: Hamsi, Yamaç, Çay (Sis Vadisi → 033'te kullanıldı)
 - **Akademik**: Tez, Konferans, Arşiv, Hisar
 - **Endüstriyel**: Bagaj, Vardiya, Hat, Depo
 - **Tarihi**: Mahalle, Hisar, Sur, Ahşap

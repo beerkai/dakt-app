@@ -1,0 +1,142 @@
+{
+  "id": "033",
+  "codename": "Sis Vadisi",
+  "fullTitle": "Sis Vadisi Dosyası",
+  "classification": "Yüksek Öncelik",
+  "caseCode": "DAKT-033-SVD",
+
+  "victim": {
+    "name": "Necati Çoruh",
+    "description": "58 yaş, erkek, çay üreticisi ve tüccar — Trabzon Çaykara'da 40 dönüm çay bahçesi sahibi, küçük ölçekli çay işleme atölyesi işletmecisi. Eşi 5 yıl önce vefat etmiş, dul. Kızı Nurdan İstanbul'da mimar. Erkek kardeşi Salih Ankara'da emekli memur."
+  },
+
+  "location": "Trabzon · Çaykara · Dereiçi Köyü · Çoruh Çay İşleme Atölyesi",
+  "dateRange": "14 Mart 2025 · Sabah 05:30 — 06:30",
+
+  "brief": {
+    "summary": "14 Mart 2025 sabahı saat 07:10'da, Trabzon'un Çaykara ilçesine bağlı Dereiçi Köyü'nde, çay üreticisi Necati Çoruh kendi atölyesinin kurutma alanında ölü bulundu. Cesedi bulan kişi yeğeni Fırat Çoruh'tu — her sabah olduğu gibi atölyeye indiğinde amcasını kurutma masasına yığılmış halde görmüştü.\n\nİlk bakışta kalp krizi veya ani ölüm izlenimi veren sahne, Trabzon Adli Tıp'ın ön incelemesiyle değişti. Necati Çoruh'un ağız çevresinde kimyasal yanık izleri, akciğerlerinde ise akut solunum yetmezliği bulguları tespit edildi. Yanında devrilmiş çelik termos — içinde kalan çay artığında sonradan paraquat (zirai ilaç) kalıntısı saptandı. Bu bir doğal ölüm değildi.\n\nNecati Çoruh, Çaykara'da 40 dönüm çay bahçesiyle bölgenin saygın üreticilerinden biriydi. 25 yıl önce babasından devraldığı araziyi işletiyor, küçük ölçekli çay atölyesinde kendi markasını üretiyordu. Eşi Fatma'nın 5 yıl önce kanserden ölmesinin ardından yalnızlaşmıştı. Kızı Nurdan İstanbul'da mimarlık yapıyordu, erkek kardeşi Salih Ankara'da emekli memurdu. İki yıl önce yeğeni Fırat köye taşınmış, 'amcaya yardım edeceğim' diyerek atölyeyi yönetmeye başlamıştı.\n\nSon üç haftada Necati sessizce bir noter randevusu almıştı. Çaykara'da herkes birbirinin işini bilir — ama bu randevuyu kimse bilmiyordu. Necati, tüm arazisini kızı Nurdan'a bırakacak şekilde vasiyetini değiştirmişti. Kardeşi Salih'e ve yeğeni Fırat'a hiçbir pay düşmüyordu. Bu karar, eski bir aile yarası üzerine alınmıştı: 30 yıl önce iki kardeş araziyi birlikte almıştı ama tapu yalnızca Necati adına geçmişti. Bu meselenin üzerine gidilmemiş, ama unutulmamıştı.\n\nKöydeki herkesin bir sebebi var gibi görünüyor. Ama sisli sabahın ardında gerçek sadece bir kişiye ait.",
+
+    "victimProfile": "Necati Çoruh, 1967 doğumlu, Çaykara'nın yerleşik ailelerinden. Babası Rıfat Çoruh'tan 40 dönüm çay bahçesi ve taş duvarlı atölyeyi devraldı. Lise mezunu, ama iş zekâsıyla bölgedeki birçok büyük üreticiden daha iyi sonuçlar alıyordu. Kendi markası 'Çoruh Çay' küçük ama sadık bir müşteri kitlesine sahipti.\n\nEşi Fatma Çoruh 2020'de mide kanserinden öldüğünde Necati içine kapandı. Kızı Nurdan İstanbul'a yerleşeli 8 yıl olmuştu, erkek kardeşi Salih de yıllar önce Ankara'ya taşınmıştı. Köyde tek başına kalmıştı — komşuları, muhtarı, kooperatif arkadaşları vardı ama 'aile' olarak yalnızdı. Yeğeni Fırat'ın 2023'te köye taşınması onu rahatlatmıştı.\n\nNecati otoriter bir adamdı. Kararlarını kimseye danışmaz, aldığı kararın arkasında dururdu. Köyde saygı görürdü ama sevilmesi zor biriydi. Komşu Güler Aktepe ile 2 yıllık arazi sınır meselesi herkesin bildiği bir gerilimdi. Kooperatif müdürü Serkan Dereli ile de ticari anlaşmazlık yaşamıştı — Necati kooperatiften ayrılmayı düşünüyordu.",
+
+    "streamRecord": "Necati Çoruh'un cep telefonu olay yerinde bulundu. Son arama: 13 Mart 2025 saat 21:47'de kızı Nurdan ile 14 dakika görüşme. WhatsApp geçmişinde yeğeni Fırat ile son 2 ayda yoğunlaşan mesajlaşma. Depo giriş-çıkış defterinde 13 Mart gece 23:00 kaydı — Fırat Çoruh imzası.",
+
+    "mission": "Analiste görev: 14 Mart 2025 sabahı Çaykara'da kimin, neden Necati Çoruh'u zehirlediğini tespit et. Dosyada 24 belge mevcut: 6 şüpheli ifadesi (birinin 3, ikisinin 2 oturumu), otopsi raporu, olay yeri raporu, 8 fiziksel delil kartı, WhatsApp mesaj zinciri, 6 ek belge, teknik analizler.",
+
+    "warning": "Sahne doğal ölüm gibi kurgulanmış — ama toksikoloji her şeyi değiştirdi. Fail tıbbi bilgi sahibi değil; zirai ilacı bildiği tek zehir olarak kullandı ve izlerini tam temizleyemedi.",
+
+    "documentCount": 24,
+    "suspectCount": 6,
+    "timeOfIncident": "Sabah 05:30 — 06:30 (tahmini)"
+  },
+
+  "suspects": [
+    {
+      "id": "firat",
+      "name": "Fırat Çoruh",
+      "age": 32,
+      "role": "Yeğen, atölye yöneticisi — 2 yıldır Necati'ye yardım ediyor, Ankara'dan taşınmış",
+      "tag": "CKR-YGN/FÇ",
+      "quote": "Amcam benim için her şeydi. Bu köye onun için geldim. Kim yapar bunu, kim?",
+      "isFail": true
+    },
+    {
+      "id": "nurdan",
+      "name": "Nurdan Çoruh",
+      "age": 31,
+      "role": "Necati'nin kızı, İstanbul'da mimar — miras yararlanıcısı, son telefon görüşmesinde tartışma",
+      "tag": "IST-MIM/NÇ",
+      "quote": "Babamla son konuşmamızda tartıştık. Vasiyeti biliyordum — ama bu onu öldürmem için bir sebep değil.",
+      "isFail": false
+    },
+    {
+      "id": "salih",
+      "name": "Salih Çoruh",
+      "age": 56,
+      "role": "Necati'nin erkek kardeşi, Ankara'da emekli memur — arazi paylaşım ihtilafı",
+      "tag": "ANK-MEM/SÇ",
+      "quote": "Ağabeyim herkesten çok beni severdi. Araziyi konuşmaya gelmiştim. O kadar.",
+      "isFail": false
+    },
+    {
+      "id": "guler",
+      "name": "Güler Aktepe",
+      "age": 48,
+      "role": "Komşu çay üreticisi — 2 yıllık arazi sınır anlaşmazlığı ve su hakkı kavgası",
+      "tag": "CKR-KMŞ/GA",
+      "quote": "Necati Bey'le kavgamız herkesin bildiği bir şey. Ama cinayet mi? Ben çay yetiştiriyorum, insan öldürmüyorum.",
+      "isFail": false
+    },
+    {
+      "id": "serkan",
+      "name": "Serkan Dereli",
+      "age": 35,
+      "role": "Çay Alım Kooperatifi müdürü — Necati'ye borçlu, kooperatiften ayrılma tehdidi",
+      "tag": "CKR-KOP/SD",
+      "quote": "Necati Ağabey sert adamdı ama bu işin böyle bitmesini hiç istemezdim. Kooperatif borcu öyle büyük değildi.",
+      "isFail": false
+    },
+    {
+      "id": "havva",
+      "name": "Havva Sürmeneli",
+      "age": 62,
+      "role": "Köyün en yaşlı sakinlerinden, Necati'nin annesinin yakın arkadaşı — tapu meselesinin iç yüzünü bilen tek kişi",
+      "tag": "CKR-KÖY/HS",
+      "quote": "Ben bu ailenin her şeyini bilirim. Rıfat Bey zamanından. Bazı şeyler mezara gitmeli — ama gitmedi.",
+      "isFail": false
+    }
+  ],
+
+  "perpetratorDetail": {
+    "id": "firat",
+    "name": "Fırat Çoruh",
+    "primaryMotive": {
+      "category": "Miras / Aile Sırrı",
+      "specific": "Necati tüm araziyi kızı Nurdan'a bırakacak şekilde vasiyetini değiştirdi. Fırat bunu öğrendiğinde 2 yıldır 'bedavaya' çalıştığını fark etti. Babası Salih'in arazinin yarısını hak ettiğine inanıyordu — 30 yıl önce iki kardeş birlikte almıştı ama tapu yalnızca Necati adına geçmişti.",
+      "trigger": "Necati'nin 21 Şubat'ta notere gidip vasiyeti resmen değiştirmesi. Fırat bunu Havva Sürmeneli'den öğrendi — Havva notere giden Necati'yi gördü ve Fırat'a söyledi."
+    },
+    "secondaryMotive": {
+      "category": "Pragmatik",
+      "specific": "Fırat Ankara'daki işini bırakıp köye taşınmıştı. 2 yıllık emek, sıfır gelecek güvencesi. Necati ölürse miras davası açabilirdi — ama vasiyet resmileşmeden Necati ölürse yasal miras hakkı devreye girerdi."
+    },
+    "innerLogic": "Fırat kendini mağdur olarak görüyordu. '2 yıl boyunca bedavaya çalıştırdı, şimdi de her şeyi kızına veriyor. Babam bu arazinin yarısını ödedi. Biz ne olacağız?' Bu düşünce haftalar boyunca birikiyor, son kıvılcım Havva'nın noter haberini vermesiyle geldi.",
+    "criticalMistake": "Paraquat şişesini kullandıktan sonra atölyenin deposuna geri koydu — kendi parmak izi üzerinde. Ayrıca depo giriş-çıkış defterine 13 Mart gece 23:00'da kendi imzasıyla giriş yaptı. Şişenin envanter kaydında da Fırat'ın alım imzası var."
+  },
+
+  "redHerrings": [
+    {
+      "suspect": "Güler Aktepe",
+      "why_suspicious": "2 yıllık arazi sınır kavgası. 2 hafta önce köy meydanında Necati ile alenen tartışmış — birçok tanık var. Çay üreticisi olarak zirai ilaca erişimi var. Motif ve fırsat açık gibi görünüyor.",
+      "why_innocent": "Olay sabahı kendi evinde — kızı Elif (22) tanıklık ediyor. GSM baz istasyonu olay gecesi ve sabahı komşu köy Taşkıran'ı gösteriyor, Dereiçi'ni değil. Arazi kavgası gerçek ama cinayet motivasyonuna uzak — dava devam ediyor, kazanma şansı yüksek.",
+      "actualSecret": "Güler aslında Necati'nin kooperatiften ayrılma planını engellemeye çalışıyordu — kendi arazisi de kooperatife bağlı, Necati çıkarsa kooperatif zayıflar. Bu yüzden tartışma aslında arazi sınırı değil, kooperatif meselesi üzerineydi. Bunu söylemekten kaçındı çünkü kendi mali durumunu açık etmek istemiyordu."
+    },
+    {
+      "suspect": "Salih Çoruh",
+      "why_suspicious": "Normalde Ankara'da yaşıyor ama olay gecesi köyde olduğu ortaya çıkıyor — bunu gizledi. Arazi paylaşım meselesi yıllardır var. Necati'nin vasiyetini biliyordu — 'tüm arazi Nurdan'a' kararı onu doğrudan etkiliyor.",
+      "why_innocent": "Köye vasiyeti konuşmak için geldi. Geliş saatini gizledi çünkü ağabeyiyle tartışmasını kimsenin bilmesini istemiyordu — ama tartışma oldu, Necati kapıyı kapattı, Salih gece Havva'nın evinde kaldı (Havva bunu doğruluyor). Cinayet saatinde Havva'nın evindeydi.",
+      "actualSecret": "Salih aslında Necati ile barışmak için gelmişti. 30 yıllık arazi meselesini çözmek istiyordu — vasiyet değişikliğini Fırat'ın WhatsApp mesajından öğrenmişti. Ama Necati onu reddetti. Salih gecenin kalanını Havva'nın evinde ağlayarak geçirdi."
+    }
+  ],
+
+  "keyEvidence": [
+    "Termos çayı toksikoloji — paraquat kalıntısı (ölümcül doz)",
+    "Paraquat şişesi — depo rafında, Fırat Çoruh parmak izi eşleşmesi",
+    "Depo envanter kaydı — paraquat alım fişi, Fırat Çoruh imzası (28 Şubat 2025)",
+    "Depo giriş-çıkış defteri — 13 Mart 23:00 kaydı, Fırat Çoruh imzası",
+    "WhatsApp mesajları Fırat ↔ Salih — 'amca tüm araziyi Nurdan'a bırakıyor, biz ne olacağız'",
+    "Noterden vasiyet belgesi fotokopisi — 21 Şubat 2025 tarihli değişiklik",
+    "Havva Sürmeneli ifadesi — 'Fırat sordu, noter meselesini ben söyledim'",
+    "Termos parmak izi — Necati + Fırat (Fırat termosu doldurduğunu kabul etti, ama 'her sabah dolduruyor' dedi)"
+  ],
+
+  "diversityReport": {
+    "city": "Trabzon · Çaykara — İLK KARADENIZ VAKASI. Mevcut 6 vakadan 5'i İstanbul (Kadıköy, Beşiktaş, Bebek, Levent, Arnavutköy), 1'i Nevşehir Göreme. Karadeniz coğrafyası ilk kez kullanılıyor.",
+    "socioeconomic": "Tarımsal orta sınıf — çay üreticisi ve tüccar. Önceki kurbanlar: finans danışmanı, Twitch yayıncısı, koleksiyoner, turist, kurumsal yönetici, bagaj görevlisi. İlk kez tarımsal meslek.",
+    "victimAge": "58 yaş — İLK 50+ KURBAN. Önceki kurbanlar: 21 (053), 34 (042), 38 (089 — turist), 42 (082), diğerleri bilinmiyor ama hepsi orta yaş altı.",
+    "motive": "Miras + Aile Sırrı — İLK KEZ. Önceki motifler: Romantik takıntı (042), Pragmatik+sahiplik (053), Gizli geçmiş (067), Arazi+cinayet zinciri (089), Finansal (114), Korunma+sırlar (082). Miras kategorisi hiç kullanılmamıştı.",
+    "locationType": "Kırsal iş yeri — çay işleme atölyesi, dağ yamacında, köy ortamı. Önceki mekânlar: ev ×3, ofis ×1, dış mekân ×1, endüstriyel ×1. İlk kırsal iş yeri.",
+    "method": "Zehirleme (paraquat — zirai ilaç) — İLK KEZ. Önceki yöntemler: boğma ×2, diğerleri bilinmiyor. Zehirleme kategorisi ilk kez.",
+    "victimProfession": "Çay üreticisi/tüccar — İLK TARIMSAL MESLEK. Önceki meslekler: finans, yayıncılık, koleksiyonerlik, turizm, kurumsal yönetim, bagaj görevlisi.",
+    "perpetratorType": "Akraba (yeğen) — İLK KEZ. Önceki failler: eski sevgili ×2, yayıncılık menajeri, iş ortağı, otelci, iş arkadaşı. Aile içi fail ilk kez.",
+    "summary": "Vaka 033, 8/8 çeşitlilik kriterinden 7'sini farklılaştırıyor: (1) İlk Karadeniz vakası, (2) ilk tarımsal kurban, (3) ilk 50+ yaş kurban, (4) ilk zehirleme yöntemi, (5) ilk akraba fail, (6) ilk miras motifi, (7) ilk kırsal iş yeri mekânı. Tek ortak nokta: erkek kurban — ama yaş, sınıf, meslek tamamen farklı."
+  }
+}

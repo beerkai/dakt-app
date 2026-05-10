@@ -1,0 +1,816 @@
+import type { CaseData } from "@/lib/case-types";
+import { case033MessageThreads } from "./033-message-threads";
+
+export const case033: CaseData = {
+  "id": "033",
+  "codename": "Sis Vadisi",
+  "fullTitle": "Sis Vadisi Dosyası",
+  "status": "active",
+  "difficulty": "Zor",
+  "recommendedPlayers": "2–4 analist",
+  "location": "Trabzon · Çaykara · Dereiçi Köyü · Çoruh Çay İşleme Atölyesi",
+  "victim": "Necati Çoruh (58, erkek)",
+  "date": "14 Mart 2025 · Sabah 05:30 — 06:30",
+  "shortSummary": "Trabzon yamaçlarında sisli bir sabah. Miras kavgası ve zehirli bir bardak çay.",
+  "enabledTabs": [
+    "brief",
+    "supheliler",
+    "ifadeler",
+    "adli-tip",
+    "deliller",
+    "belgeler",
+    "teknik",
+    "deduction",
+    "cozum"
+  ],
+  "brief": {
+    "subtitle": "Çoruh Çay Atölyesi · Çaykara · 14 Mart 2025",
+    "metaPairs": [
+      {
+        "label": "Vaka No",
+        "value": "033"
+      },
+      {
+        "label": "Dosya Tipi",
+        "value": "Cinayet — Toksik Zehirlenme — Yüksek Öncelik"
+      },
+      {
+        "label": "Olay Tarihi",
+        "value": "14 Mart 2025 · Sabah 05:30 — 06:30 (tahmini)"
+      },
+      {
+        "label": "Konum",
+        "value": "Trabzon · Çaykara · Dereiçi Köyü"
+      },
+      {
+        "label": "Kurban",
+        "value": "Necati Çoruh (58, erkek)"
+      }
+    ],
+    "sections": [
+      {
+        "title": "Olay",
+        "body": "<p>14 Mart 2025 sabahı saat 07:10'da, Trabzon'un Çaykara ilçesine bağlı Dereiçi Köyü'nde, çay üreticisi Necati Çoruh kendi atölyesinin kurutma alanında ölü bulundu. Cesedi bulan kişi yeğeni Fırat Çoruh'tu — her sabah olduğu gibi atölyeye indiğinde amcasını kurutma masasına yığılmış halde görmüştü.</p><p>İlk bakışta kalp krizi veya ani ölüm izlenimi veren sahne, Trabzon Adli Tıp'ın ön incelemesiyle değişti. Necati Çoruh'un ağız çevresinde kimyasal yanık izleri, akciğerlerinde ise akut solunum yetmezliği bulguları tespit edildi. Yanında devrilmiş çelik termos — içinde kalan çay artığında sonradan <strong>paraquat</strong> (zirai ilaç) kalıntısı saptandı. Bu bir doğal ölüm değildi.</p>"
+      },
+      {
+        "title": "Mağdur Profili",
+        "body": "<p>Necati Çoruh, Çaykara'da 40 dönüm çay bahçesiyle bölgenin saygın üreticilerinden biriydi. Eşi Fatma'nın 5 yıl önce ölmesinin ardından yalnızlaşmıştı. Kızı Nurdan İstanbul'da mimarlık yapıyordu, erkek kardeşi Salih Ankara'da emekli memurdu. İki yıl önce yeğeni Fırat köye taşınmış, 'amcaya yardım edeceğim' diyerek atölyeyi yönetmeye başlamıştı.</p><p>Son üç haftada Necati sessizce bir noter randevusu almıştı. Çaykara'da herkes birbirinin işini bilir — ama bu randevuyu kimse bilmiyordu. Necati, tüm arazisini kızı Nurdan'a bırakacak şekilde vasiyetini değiştirmişti. Kardeşi Salih'e ve yeğeni Fırat'a hiçbir pay düşmüyordu. Bu karar, eski bir aile yarası üzerine alınmıştı: 30 yıl önce iki kardeş araziyi birlikte almıştı ama tapu yalnızca Necati adına geçmişti.</p>"
+      },
+      {
+        "title": "Görev",
+        "body": "<p>Analiste görev: 14 Mart 2025 sabahı Çaykara'da kimin, neden Necati Çoruh'u zehirlediğini tespit et. Dosyada 24 belge mevcut: 6 şüpheli ifadesi, otopsi raporu, olay yeri raporu, 8 fiziksel delil kartı, WhatsApp mesaj zinciri ve ek belgeler.</p><p style=\"background:rgba(107,22,32,.1);padding:12px 16px;border-left:3px solid var(--bordeaux);\"><strong>UYARI:</strong> Sahne doğal ölüm gibi kurgulanmış — ama toksikoloji her şeyi değiştirdi. Fail tıbbi bilgi sahibi değil; zirai ilacı bildiği tek zehir olarak kullandı ve izlerini tam temizleyemedi.</p>"
+      }
+    ],
+    "signature": {
+      "role": "Düzenleyen\nKriminal Soruşturma Birimi",
+      "name": "Bşçvş. M. Kılıç"
+    }
+  },
+  "timeline": [
+    {
+      "id": "tl033-0",
+      "time": "21.02.2025",
+      "event": "Necati Çoruh notere giderek vasiyetini değiştiriyor: Tüm varlığını kızı Nurdan'a bırakıyor.",
+      "source": "NÇ-VAS01 — Vasiyet fotokopisi",
+      "critical": true
+    },
+    {
+      "id": "tl033-1",
+      "time": "25.02.2025 · 18:40",
+      "event": "Fırat, vasiyet değişikliğini Havva'dan öğreniyor ve babası Salih'e WhatsApp'tan haber veriyor: 'Biz ne olacağız?'",
+      "source": "033-K msg-m1/m3 — WhatsApp",
+      "critical": true
+    },
+    {
+      "id": "tl033-2",
+      "time": "28.02.2025",
+      "event": "Fırat Çoruh, kooperatiften 4 şişe Paraquat ilacı satın alıyor ve imzalıyor.",
+      "source": "NÇ-ENV01 — Envanter Fişi",
+      "critical": false
+    },
+    {
+      "id": "tl033-3",
+      "time": "05.03.2025",
+      "event": "Necati Çoruh ile kooperatif müdürü Serkan Dereli arasında 45.000 TL'lik borç ve ayrılma üzerine toplantı.",
+      "source": "033-I — Kooperatif belgesi",
+      "critical": false
+    },
+    {
+      "id": "tl033-4",
+      "time": "10.03.2025",
+      "event": "Salih, Fırat'a Perşembe akşamı (13 Mart) gizlice köye geleceğini ve 'sürpriz yapacağını' mesaj atıyor.",
+      "source": "033-K msg-m8 — WhatsApp",
+      "critical": false
+    },
+    {
+      "id": "tl033-5",
+      "time": "13.03.2025 · 18:30",
+      "event": "Salih Çoruh, otobüsle Trabzon otogarına varıyor. Köye geçiyor.",
+      "source": "NÇ-BİLET01 — Kamil Koç",
+      "critical": true
+    },
+    {
+      "id": "tl033-6",
+      "time": "13.03.2025 · 21:30",
+      "event": "Salih, ağabeyi Necati'nin kapısını çalıyor. Vasiyet üzerine sert bir tartışma yaşanıyor, Necati kapıyı Salih'in yüzüne kapatıyor.",
+      "source": "salih-2 ifade",
+      "critical": false
+    },
+    {
+      "id": "tl033-7",
+      "time": "13.03.2025 · 21:47",
+      "event": "Necati, Salih gittikten sonra kızı Nurdan'ı arıyor. Vasiyet meselesi yüzünden kızıyla da telefonda tartışıyor (14 dakika).",
+      "source": "nurdan-1 ifade + HTS",
+      "critical": false
+    },
+    {
+      "id": "tl033-8",
+      "time": "13.03.2025 · 22:30",
+      "event": "Salih, gidecek yeri olmadığı için Havva Sürmeneli'nin evine sığınıyor ve geceyi orada geçiriyor.",
+      "source": "salih-2 ifade + Havva onayı",
+      "critical": false
+    },
+    {
+      "id": "tl033-9",
+      "time": "13.03.2025 · 23:00",
+      "event": "Fırat, atölyenin ilaç deposuna giriyor. Kayıt defterini 'Havalandırma kontrolü' diye imzalıyor.",
+      "source": "NÇ-DEF01 — Depo defteri",
+      "critical": true
+    },
+    {
+      "id": "tl033-10",
+      "time": "14.03.2025 · 02:15",
+      "event": "Salih, Havva'nın evinden Fırat'a mesaj atıyor: 'Konuşabildiniz mi?' — sonra mesajı siliyor.",
+      "source": "033-K msg-m10/m11 — WhatsApp",
+      "critical": false
+    },
+    {
+      "id": "tl033-11",
+      "time": "14.03.2025 · 04:00 - 08:00",
+      "event": "Güler Aktepe uyuyamadığı için yürüyüşe çıkıyor, telefonu Taşkıran köyünden sinyal veriyor.",
+      "source": "NÇ-GSM01 — HTS kaydı",
+      "critical": false
+    },
+    {
+      "id": "tl033-12",
+      "time": "14.03.2025 · 05:00",
+      "event": "Necati Çoruh her sabahki rutiniyle kalkıp atölyeye iniyor, çayını demliyor.",
+      "source": "firat-1 ifade",
+      "critical": false
+    },
+    {
+      "id": "tl033-13",
+      "time": "14.03.2025 · 05:30 - 06:00",
+      "event": "CİNAYET (ZEHİRLEME). Fırat atölyeye iniyor, termosa paraquat ekliyor. Şişeyi depoya geri bırakıyor.",
+      "source": "Otopsi, NÇ-ŞİŞ01, NÇ-TER01",
+      "critical": true
+    },
+    {
+      "id": "tl033-14",
+      "time": "14.03.2025 · 06:15",
+      "event": "Necati, zehirli çaydan yudum alıyor. Acı tatla kupayı düşürüp kırıyor. Akut solunum yetmezliğiyle masaya yığılıyor.",
+      "source": "Otopsi + Olay yeri",
+      "critical": true
+    },
+    {
+      "id": "tl033-15",
+      "time": "14.03.2025 · 06:45",
+      "event": "Fırat atölyeye resmi olarak inip 'amcasını buluyor'. Jandarmayı arıyor.",
+      "source": "firat-1 ifade",
+      "critical": false
+    },
+    {
+      "id": "tl033-16",
+      "time": "16.03.2025",
+      "event": "Güler Aktepe'nin asıl kavgası olan 'kooperatiften ayrılma' meselesi ortaya çıkıyor.",
+      "source": "guler-2 ifade",
+      "critical": false
+    },
+    {
+      "id": "tl033-17",
+      "time": "17.03.2025",
+      "event": "Toksikoloji raporu ve Fırat'ın depoya gece girdiği tespit ediliyor. Fırat panikliyor.",
+      "source": "firat-2 ifade",
+      "critical": true
+    },
+    {
+      "id": "tl033-18",
+      "time": "18.03.2025",
+      "event": "Zehir şişesinde Fırat'ın taze parmak izleri çıkıyor. Fırat itirafa başlıyor.",
+      "source": "firat-3 ifade, NÇ-ŞİŞ01",
+      "critical": true
+    }
+  ],
+  "timelineInitialOrder": [
+    "tl033-12",
+    "tl033-3",
+    "tl033-15",
+    "tl033-1",
+    "tl033-18",
+    "tl033-6",
+    "tl033-9",
+    "tl033-13",
+    "tl033-0",
+    "tl033-16",
+    "tl033-7",
+    "tl033-4",
+    "tl033-11",
+    "tl033-14",
+    "tl033-8",
+    "tl033-2",
+    "tl033-17",
+    "tl033-5",
+    "tl033-10"
+  ],
+  "deduction": {
+    "contradictions": [
+      {
+        "pin": true,
+        "text": "<strong>Fırat: 'Ben sadece çay dolduruyordum'</strong> → Kendi ilk ifadesinde 'Amcam her sabah çayını kendisi demler' demişti. Termostaki izler rutine uymuyor."
+      },
+      {
+        "pin": true,
+        "text": "<strong>Fırat: 'Depoya havalandırma için girdim'</strong> → Gece 23:00'da giriyor, sabah cinayet aleti olan şişenin üzerinde taze parmak izi çıkıyor (NÇ-ŞİŞ01)."
+      },
+      {
+        "pin": true,
+        "text": "<strong>Salih: 'Olay gecesi Ankara'daydım'</strong> → Otobüs bileti (NÇ-BİLET01) ve WhatsApp mesajı 'sürpriz yapacağım' (033-K) Trabzon'a geldiğini kanıtladı."
+      },
+      {
+        "pin": true,
+        "text": "<strong>Güler: 'Sınır kavgası yüzünden tartıştık'</strong> → Aslında kooperatif borçları ve Necati'nin ayrılma ihtimali yüzünden tartışmışlar (033-I)."
+      }
+    ],
+    "elimination": [
+      {
+        "pin": true,
+        "text": "<strong>Güler Aktepe:</strong> Motifleri gizliydi ama olay sabahı Dereiçi'nde değildi. HTS kaydı (NÇ-GSM01) uyuyamadığı için Taşkıran köyünde yürüdüğünü kanıtlıyor. Fiziksel temas imkânsız. ✗"
+      },
+      {
+        "pin": true,
+        "text": "<strong>Salih Çoruh:</strong> Köye geldiği ve Necati ile tartıştığı doğru. Yalan söylediği de doğru. Ancak 22:30'dan sabah 08:00'e kadar Havva'nın evindeydi. Alibisi doğrulandı. ✗"
+      },
+      {
+        "pin": true,
+        "text": "<strong>Nurdan Çoruh:</strong> Mirasın tek varisi, telefonda kavga etmiş. Ancak olay gecesi fiziksel olarak İstanbul'daydı. O saatlerde babasıyla görüşen tek kişi ama katil değil. ✗"
+      },
+      {
+        "pin": true,
+        "text": "<strong>Serkan Dereli:</strong> Kooperatif borcu (45 bin TL) bir cinayet için çok küçük. Depoya ve zirai ilaçlara doğrudan erişimi yok. ✗"
+      }
+    ]
+  },
+  "verdict": {
+    "perpetratorId": "firat",
+    "perpetratorName": "Fırat Çoruh",
+    "murderTime": "14 Mart 2025 · Sabah 05:30 — 06:00",
+    "murderLocation": "Trabzon · Çaykara · Dereiçi Köyü · Çay İşleme Atölyesi",
+    "murderWeapon": "Paraquat (zirai herbisit) ile zehirleme",
+    "motivation": "Ailesinin 30 yıllık miras hakkının kızı Nurdan'a devredildiğini öğrenmesi ve 2 yıl boyunca amcası tarafından sömürüldüğünü (amele yerine konduğunu) düşünmesi.",
+    "evidenceList": [
+      "NÇ-TOX01: Termos çayında Paraquat zehri tespiti",
+      "NÇ-ŞİŞ01: Paraquat şişesi üzerinde Fırat'ın parmak izi",
+      "NÇ-DEF01: Depo kayıt defteri (13 Mart 23:00 girişi)",
+      "NÇ-TER01: Termos dış yüzeyinde Fırat'ın taze parmak izleri",
+      "033-K WhatsApp: 'Biz ne olacağız?', 'bedavaya çalışıyorum' itirafları",
+      "Fırat 2. İfade: 'Ben sadece çay dolduruyordum' gafı"
+    ],
+    "conclusion": "Fırat, 2 yıl boyunca amcasının emrinde çalıştıktan sonra, babasının eski emeğinin ve kendi güncel emeğinin hiçe sayıldığını hissetti. Necati Çoruh'un otoriter ve dışlayıcı tutumu bu öfkeyi körükledi. Vasiyet değişikliği bardağı taşıran son damla oldu.",
+    "wrongAnswerMessage": "Bu şüpheli fail değil. Lütfen toksikoloji raporunu, depo kayıtlarını ve termos üzerindeki parmak izlerinin kime ait olduğunu tekrar gözden geçir.",
+    "solutionDocLabel": "033-Z2 · Resmi Çözüm Belgesi",
+    "solutionHtml": "<div class=\"verdict-stamp\">CLASSIFIED</div><div class=\"doc-id\" style=\"margin-bottom:12px;\">033-Z2 · Resmi Çözüm Belgesi · 20.03.2025</div><h3 style=\"font-family:'Cormorant Garamond',serif;font-size:24px;margin:0 0 8px;\">Failin Kimliği:</h3><div class=\"verdict-name\">Fırat Çoruh</div><h3>Cinayet Saati ve Yöntemi</h3><p><strong>14 Mart 2025, sabah 05:30 – 06:00 arası.</strong> Fırat Çoruh, babası Salih'in bir önceki gece köye geldiğini bilmiyordu. Bildiği tek şey vasiyetin değiştiği ve geleceğinin çalındığıydı. Gece 23:00'da depoya 'havalandırma' bahanesiyle girerek kendisinin aldığı <strong>Paraquat</strong> şişesini aldı. Sabah 05:00 sularında Necati Çoruh atölyeye inip kendi çayını demledi. Fırat sabah erkenden aşağı indi ve fırsatını bularak amcasının doldurduğu termos çayına zehri karıştırdı. Şişeyi depoya geri koydu. 06:15 sularında çayından yudum alan Necati, acı tatla kupayı düşürdü ve akut solunum yetmezliğiyle masaya yığılarak hayatını kaybetti.</p><h3>Cinayet Sonrası Davranış</h3><p>Fırat, amcasını ölü bulmuş gibi davrandı. Jandarmanın bunu kalp krizi veya doğal yollu bir ölüm sayacağını düşündü. Zehrin bu kadar kolay toksikolojide çıkacağını hesaplamamıştı. Tıbbi bilgisi yoktu, yalnızca tarlada kullanılan ilacın 'ölümcül' olduğunu biliyordu.</p><h3>Failin Kritik Hatası</h3><p>Paraquat şişesini çöpe atmak yerine <strong>depo rafına geri koyması</strong>. Üzerindeki parmak izini silmedi. Termosu da silmedi. Ayrıca kendi aldığı zehri cinayet silahı olarak kullandı. İkinci ifadesinde köşeye sıkışıp 'ben sadece çay dolduruyordum' demesi, kendi senaryosunu (amcam kendi demler) kendi çürütmesine yol açtı.</p><h3>İki Yalancı</h3><ol><li><strong>Fırat Çoruh</strong> — fail. Zehre erişimini gizledi, sabahki temasını yalanladı.</li><li><strong>Salih Çoruh</strong> — fail değil. Cinayet gecesi Trabzon'a geldiğini ve ağabeyiyle kavga ettiğini polisten gizledi (Ankara'dayım dedi). Geceyi Havva'nın evinde geçirerek alibi sağladı.</li></ol><h3>Kırmızı Ringalar</h3><p><strong>Güler Aktepe:</strong> Arazi kavgası herkesçe biliniyordu. İfadesinde yalan söyledi (sınır kavgası değil kooperatif kavgasıydı). Ancak HTS kayıtları olay anında Taşkıran köyünde olduğunu kanıtladı.</p><p><strong>Salih Çoruh:</strong> Eski bir intikamı ve güçlü bir motifi var. Gece köye geldi. Ama Necati ile yüzleştikten sonra Havva'nın evine gidip sabaha kadar oradan çıkmadı. Çaresiz bir yalanın kurbanıydı.</p><h3>Dayandığı Kritik Belgeler</h3><ol><li><strong>NÇ-TOX01:</strong> Termosta Paraquat tespiti (Zehirleme kanıtı)</li><li><strong>NÇ-ŞİŞ01:</strong> Zehir şişesinde Fırat izleri</li><li><strong>NÇ-DEF01:</strong> Gece 23:00 Fırat depo girişi imzası</li><li><strong>NÇ-BİLET01:</strong> Salih'in Trabzon'a geldiğinin tespiti</li><li><strong>033-K msg-m5:</strong> 'Bedavaya çalışıyorum' — Motifin itirafı</li></ol><p style=\"background:rgba(107,22,32,.12);padding:16px;border-left:3px solid var(--bordeaux);margin-top:24px;\"><strong>SONUÇ:</strong> Fırat Çoruh, 2 yıllık emeğinin ve babasının eski hakkının gasp edildiğini düşünerek derin bir hınç biriktirdi. Amcasının otoriter tavrı ve vasiyet değişikliği onu suça itti. Zirai ilacı acemice kullanarak hem kurbanın son anlarını acılı hale getirdi hem de yakalanmasına giden tüm izleri açıkta bıraktı.</p><p style=\"margin-top:18px;\"><strong>Tutuklama emri:</strong> 18 Mart 2025 · Fırat Çoruh, 3. oturum ifadesinin hemen ardından Trabzon Adliyesine sevk edildi ve tutuklandı.</p><div class=\"doc-signature\"><div class=\"sig-line\">Kıdemli Kriminal Analist · EGM</div><div class=\"sig-name\">Onaylı</div></div>"
+  },
+  "tabSectionSub": {
+    "brief": "033-A · Olay Yeri",
+    "adli-tip": "033-B · Otopsi",
+    "deliller": "8 Fiziksel Delil",
+    "belgeler": "033-K · WhatsApp",
+    "teknik": "033-I · Kooperatif",
+    "cozum": "033-Z2 · Sınırlı Erişim"
+  },
+  "suspects": [
+    {
+      "id": "firat",
+      "code": "SUSP-01 · CKR-YGN/FÇ",
+      "name": "Fırat Çoruh",
+      "role": "Yeğen, atölye yöneticisi — 2 yıldır Necati'ye yardım ediyor, Ankara'dan taşınmış",
+      "quote": "\"Amcam benim için her şeydi. Bu köye onun için geldim. Kim yapar bunu, kim?\""
+    },
+    {
+      "id": "nurdan",
+      "code": "SUSP-02 · IST-MIM/NÇ",
+      "name": "Nurdan Çoruh",
+      "role": "Necati'nin kızı, İstanbul'da mimar — miras yararlanıcısı, son telefon görüşmesinde tartışma",
+      "quote": "\"Babamla son konuşmamızda tartıştık. Vasiyeti biliyordum — ama bu onu öldürmem için bir sebep değil.\""
+    },
+    {
+      "id": "salih",
+      "code": "SUSP-03 · ANK-MEM/SÇ",
+      "name": "Salih Çoruh",
+      "role": "Necati'nin erkek kardeşi, Ankara'da emekli memur — arazi paylaşım ihtilafı",
+      "quote": "\"Ağabeyim herkesten çok beni severdi. Araziyi konuşmaya gelmiştim. O kadar.\""
+    },
+    {
+      "id": "guler",
+      "code": "SUSP-04 · CKR-KMŞ/GA",
+      "name": "Güler Aktepe",
+      "role": "Komşu çay üreticisi — 2 yıllık arazi sınır anlaşmazlığı ve su hakkı kavgası",
+      "quote": "\"Necati Bey'le kavgamız herkesin bildiği bir şey. Ama cinayet mi? Ben çay yetiştiriyorum, insan öldürmüyorum.\""
+    },
+    {
+      "id": "serkan",
+      "code": "SUSP-05 · CKR-KOP/SD",
+      "name": "Serkan Dereli",
+      "role": "Çay Alım Kooperatifi müdürü — Necati'ye borçlu, kooperatiften ayrılma tehdidi",
+      "quote": "\"Necati Ağabey sert adamdı ama bu işin böyle bitmesini hiç istemezdim. Kooperatif borcu öyle büyük değildi.\""
+    },
+    {
+      "id": "havva",
+      "code": "SUSP-06 · CKR-KÖY/HS",
+      "name": "Havva Sürmeneli",
+      "role": "Köyün en yaşlı sakinlerinden, Necati'nin annesinin yakın arkadaşı — tapu meselesinin iç yüzünü bilen tek kişi",
+      "quote": "\"Ben bu ailenin her şeyini bilirim. Rıfat Bey zamanından. Bazı şeyler mezara gitmeli — ama gitmedi.\""
+    }
+  ],
+  "testimonies": [
+    {
+      "id": "033-C",
+      "suspectName": "Fırat Çoruh",
+      "headerDocId": "033-C · Çaykara İlçe Jandarma",
+      "title": "İfade — Fırat Çoruh (1. Oturum)",
+      "date": "14.03.2025 · 10:15",
+      "birth": "12.06.1992",
+      "occupation": "Çoruh Çay Atölyesi Yöneticisi",
+      "address": "Dereiçi Köyü, Çaykara",
+      "session": 1,
+      "paragraphs": [
+        "Fırat Çoruh, amcasını bulduktan birkaç saat sonra ifade verdi. Üzerinde atölye kıyafetleri vardı, elleri titriyordu.",
+        "**S:** Başınız sağ olsun Fırat Bey. Amcanızı siz buldunuz. Anlatır mısınız?\n**C:** Sabah 06:45 gibi atölyeye indim. Çay hasadı yaklaşıyor, sabahları erken başlarız. İçeri girdiğimde... amcam kurutma masasının oraya yığılmıştı. Yüzüstü. Önce düştü sandım, veya kalp krizi. Yanına koştum. Nefes almıyordu.",
+        "**S:** O saate kadar atölyede kimse yok muydu?\n**C:** Amcam hep herkesten erken iner. 05:00 gibi kalkar, çayını demler, aşağı geçer. Bu onun ritüeliydi.",
+        "**S:** Onu en son ne zaman canlı gördünüz?\n**C:** Dün akşam. 21:00 civarıydı. Eve geçtiğini sanıyordum.",
+        "**S:** Amcanızla aranız nasıldı? Son zamanlarda bir gerginlik var mıydı?\n**C:** *[duraksama]* Hayır, gerginlik yoktu. Amcam sert adamdır, otoriterdir ama benimle bir sorunu yoktu. İki yıldır buradayım, ona ben yardım ediyorum. O olmasa bu işler zor dönerdi.",
+        "**S:** Köyde husumeti olan biri var mıydı?\n**C:** Herkes bilir, Güler Abla (Aktepe) ile sınır kavgası vardı. İki hafta önce köy meydanında epey yüksek sesle tartıştılar. Suyu kesmekle tehdit etmişti amcamı. Bir de kooperatifle, Serkan Ağabey'le borç meselesi vardı ama o kadar büyümez diye düşünüyorum."
+      ],
+      "signature": "F. Çoruh"
+    },
+    {
+      "id": "033-D",
+      "suspectName": "Güler Aktepe",
+      "headerDocId": "033-D · Çaykara İlçe Jandarma",
+      "title": "İfade — Güler Aktepe (1. Oturum)",
+      "date": "14.03.2025 · 11:30",
+      "birth": "04.09.1976",
+      "occupation": "Çay Üreticisi",
+      "address": "Dereiçi Köyü, Çaykara",
+      "session": 1,
+      "paragraphs": [
+        "Güler Aktepe Çaykara İlçe Jandarma Komutanlığına kendisi geldi. Oldukça gergin ama kendinden emin görünüyordu.",
+        "**S:** Necati Çoruh'un vefatını ne zaman öğrendiniz?\n**C:** Sabah köy kahvesine haber gelmiş. Bizim eve de komşular söyledi, 08:00 civarıydı.",
+        "**S:** Olay sabahı 05:00 ile 07:00 arası neredeydiniz?\n**C:** Evdeydim. Uyuyordum. Kızım Elif de evdeydi, ona sorabilirsiniz. Erken kalkarız ama o saatte daha yataktaydık.",
+        "**S:** İki hafta önce köy meydanında Necati Bey ile tartıştınız. Konu neydi?\n**C:** *[sinirli]* Su hattı meselesi. Yukarı bahçeden gelen suyu kendi tarafına çevirmişti, bizim filizler kurumaya başladı. Gittim konuştum, anlamadı. Meydanda da sesimiz yükseldi. Köylük yer, herkes herkesin sesini duyar.",
+        "**S:** Bu tartışma onu öldürmek için bir sebep olabilir mi?\n**C:** *[gülerek]* Komiserim, siz hiç köye gelmediniz herhalde? Arazi için, su için her gün kavga edilir burada. Ben kocamı toprağa verdim, bu bahçeyi tek başıma ayağa kaldırdım. Necati inatçıydı ama onu zehirleyecek kadar delirmedim. Benim işim çay yetiştirmek.",
+        "**S:** Zehirlendiğini nereden biliyorsunuz?\n**C:** *[duraksama]* ...Sabah jandarma gelince köyde konuşuldu. İlaç demişler. Öyle duydum.",
+        "<p style=\"background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux)\"><strong>Kritik:</strong> Otopsi raporu henüz çıkmadan 'zehirlenme' kelimesini kullandı. Ayrıca arazi kavgası açık bir motivasyon gibi görünüyor. İfadesi şüpheli, HTS (baz istasyonu) kaydı talep edildi.</p>"
+      ],
+      "signature": "G. Aktepe"
+    },
+    {
+      "id": "033-F",
+      "suspectName": "Nurdan Çoruh",
+      "headerDocId": "033-F · Çaykara İlçe Jandarma",
+      "title": "İfade — Nurdan Çoruh (1. Oturum)",
+      "date": "15.03.2025 · 14:00",
+      "birth": "21.05.1993",
+      "occupation": "Mimar",
+      "address": "Kadıköy, İstanbul",
+      "session": 1,
+      "paragraphs": [
+        "Nurdan Çoruh, haberi alır almaz ilk uçakla Trabzon'a geldi. Yorgun ve bitkin görünüyordu.",
+        "**S:** Başınız sağ olsun Nurdan Hanım. Babanızla son görüşmeniz ne zamandı?\n**C:** Dün akşam... Yani olaydan bir gece önce. Telefonla görüştük. 21:45 gibi.",
+        "**S:** Konuşmanın içeriği neydi? Tartıştığınıza dair bilgiler var.\n**C:** *[ağlama]* Tartışmak denmez. Sadece... bazı kararları için ona kızgındım. Vasiyetini değiştirdiğini söyledi. Tüm araziyi benim üzerime yapacakmış.",
+        "**S:** Bu neden bir tartışma konusu olsun ki?\n**C:** Çünkü o arazi sadece onun değildi! Babamın kardeşi Salih Amcamla ortak almışlardı zamanında. Ama tapuyu babam tek kendi üstüne yapmış. Yıllardır bu bir yaraydı ailede. Babam, amcama hiçbir pay vermeden her şeyi bana bırakmak istiyordu. Ben bunu istemediğimi, haksızlık olduğunu söyledim.",
+        "**S:** Babanızın tepkisi ne oldu?\n**C:** 'Benim dediğim olacak' dedi. Her zamanki gibi. 'O arazi benim terimle büyüdü' dedi. Kapattık telefonu. Keşke... keşke öyle kapatmasaydım.",
+        "**S:** Fırat'ın (yeğeni) bundan haberi var mıydı?\n**C:** Bilmiyorum. Babam söylememiştir. Ama köy küçük, bir şekilde duymuş olabilir."
+      ],
+      "signature": "N. Çoruh"
+    },
+    {
+      "id": "033-G",
+      "suspectName": "Serkan Dereli",
+      "headerDocId": "033-G · Çaykara İlçe Jandarma",
+      "title": "İfade — Serkan Dereli (1. Oturum)",
+      "date": "14.03.2025 · 16:45",
+      "birth": "11.10.1989",
+      "occupation": "Çay Alım Kooperatifi Müdürü",
+      "address": "Merkez, Çaykara",
+      "session": 1,
+      "paragraphs": [
+        "Serkan Dereli, kooperatif ofisinde, kravatlı ve resmi bir tavırla ifade verdi.",
+        "**S:** Necati Bey ile aranızdaki ticari anlaşmazlık neydi?\n**C:** Kooperatifin finansal döngüsüyle ilgili basit bir mesele. Geçen yılki hasattan kalan küçük bir ödeme gecikmesi vardı. Kendisi kooperatifin kurucu üyelerindendir, hakkı vardır.",
+        "**S:** Kooperatiften ayrılmakla tehdit ettiği doğru mu?\n**C:** *[boğazını temizler]* Evet, bir ara böyle bir söylemi oldu. Necati Ağabey çabuk parlar ama çabuk sönerdi. Onu kaybetmek kooperatif için kötü bir imaj olurdu, yalan yok.",
+        "**S:** Olay sabahı neredeydiniz?\n**C:** İlçe merkezinde, evimdeydim. Sabah 08:00'de kooperatifi açtım.",
+        "**S:** Necati Bey'in atölyesindeki kimyasallara erişiminiz var mı?\n**C:** Hayır, neden olsun? Kooperatif sadece alım yapar, üretim araçlarına veya depolarına karışmayız. O işlere yeğeni Fırat bakardı. Asıl siz Fırat'a sorun, o çocuk iki yıldır orada ne idüğü belirsiz şekilde çalışıyor."
+      ],
+      "signature": "S. Dereli"
+    },
+    {
+      "id": "033-H",
+      "suspectName": "Havva Sürmeneli",
+      "headerDocId": "033-H · Çaykara İlçe Jandarma",
+      "title": "İfade — Havva Sürmeneli (1. Oturum)",
+      "date": "15.03.2025 · 09:30",
+      "birth": "08.03.1963",
+      "occupation": "Emekli",
+      "address": "Dereiçi Köyü, Çaykara",
+      "session": 1,
+      "paragraphs": [
+        "Havva Hanım köyün en eski evlerinden birinde, elinde tespihiyle sakin sakin konuştu.",
+        "**S:** Başınız sağ olsun Havva Hanım. Necati Bey'i uzun zamandır tanıyormuşsunuz.\n**C:** Annesiyle ahrettiğim ben. Necati elimde büyüdü. İnatçı çocuktu, inatçı adam oldu. Ama içi temizdi.",
+        "**S:** Son zamanlarda köyde farklı bir şey gördünüz mü?\n**C:** Köyde her şey farklıdır, her şey aynıdır komiser bey. Ama 21 Şubat'ta Necati'yi ilçeye inip notere girerken gördüm. Hastane dönüşümdü, tesadüf. Sonra dönüşte bana çay içmeye uğradı. Anlattı.",
+        "**S:** Neyi anlattı?\n**C:** 'Kökü bağladım Havva Abla' dedi. 'Her şeyi Nurdan'a bıraktım.' Biliyordum ben dertlerini. Salih'in o arazide hakkı vardı. Necati bunu hep inkar etti ama vicdanı rahat değildi. Vasiyetle işi çözdüğünü sandı.",
+        "**S:** Bunu başkasına söylediniz mi?\n**C:** Fırat sordu. Birkaç gün sonra. 'Amcam nereye gitti' dedi. Ben de söyledim. Notere gitti dedim, her şeyi kızına bıraktı dedim. Çocuğun yüzü kül gibi oldu.",
+        "<p style=\"background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux)\"><strong>Kritik:</strong> Vasiyet değişikliği gizli kalmamış. Fırat bunu haftalar önceden öğrenmiş. Motif netleşiyor.</p>"
+      ],
+      "signature": "H. Sürmeneli"
+    },
+    {
+      "id": "033-E",
+      "suspectName": "Salih Çoruh",
+      "headerDocId": "033-E · Çaykara İlçe Jandarma",
+      "title": "İfade — Salih Çoruh (1. Oturum)",
+      "date": "16.03.2025 · 10:00",
+      "birth": "19.08.1968",
+      "occupation": "Emekli Memur",
+      "address": "Keçiören, Ankara",
+      "session": 1,
+      "paragraphs": [
+        "Salih Çoruh cenaze için geldiği Trabzon'da ifade verdi. Sesi titrek, elleri terliydi.",
+        "**S:** Salih Bey, ağabeyinizle aranız nasıldı?\n**C:** Uzaktık biz. Ben Ankara'ya yerleştim yıllar evvel. O toprağa bağlıydı. Kötü değildik ama çok görüşmezdik.",
+        "**S:** Arazi meselesi nedir? O arazide hakkınız olduğu söyleniyor.\n**C:** *[iç çeker]* Eski defterler. 90'larda o araziyi alırken paramın çoğunu ben koymuştum. Ama memuriyete girerken sorun olmasın diye tapuyu onun üzerine yaptık. O da bir daha hiç konusu açılmamış gibi davrandı.",
+        "**S:** Olay gecesi, 13 Mart'ı 14'e bağlayan gece neredeydiniz?\n**C:** Ankara'daydım evimde. Olayı sabah eşim haber verince öğrendim, televizyondan.",
+        "**S:** Oğlu Fırat burada çalışıyordu. Onunla görüşüyor muydunuz?\n**C:** Oğlum kendi hayatını kurmak istedi. Ben ona 'gitme' dedim, 'o adam seni sömürür' dedim. Dinlemedi. Sonra... vasiyet meselesi çıkmış. Fırat bana mesaj attı, 'Baba bu adam bize hiçbir şey vermeyecek' diye.",
+        "**S:** Siz ne dediniz?\n**C:** 'Sakin ol, ben konuşurum' dedim.",
+        "<p style=\"background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux)\"><strong>Kritik:</strong> Otobüs firması bilet kayıtlarında Salih Çoruh'un 13 Mart sabahı Trabzon'a geldiği görünüyor. İfadesinde 'Ankara'daydım' yalanı söylüyor. İkinci oturuma çağrılacak.</p>"
+      ],
+      "signature": "S. Çoruh"
+    },
+    {
+      "id": "033-D2",
+      "suspectName": "Güler Aktepe",
+      "headerDocId": "033-D2 · Çaykara İlçe Jandarma",
+      "title": "İfade — Güler Aktepe (2. Oturum)",
+      "date": "16.03.2025 · 14:00",
+      "birth": "—",
+      "occupation": "—",
+      "address": "—",
+      "session": 2,
+      "paragraphs": [
+        "Güler Aktepe bu kez daha gergindi. Ellerini kucağında sıkıca bağlamıştı.",
+        "**S:** Güler Hanım, köy meydanındaki tartışmanızın aslında sadece arazi sınırıyla ilgili olmadığı, Necati Bey'in kooperatiften ayrılma kararını engellemeye çalıştığınız anlaşıldı. Neden sakladınız?\n**C:** *[iç çeker]* Kendi derdimi köye yaymak istemedim komiserim. Kocamdan kalan borçlar var. Necati ayrılırsa kooperatifin alım gücü düşer, benim çayım elimde kalır. Sınır meselesi bahaneydi, evet.",
+        "**S:** Necati Bey size ne cevap verdi o gün?\n**C:** 'Kendi bacağından asıl Güler' dedi. 'Benim malım beni bağlar'. Çok kırıldım, çok öfkelendim.",
+        "**S:** Atölyesinin anahtarının nerede durduğunu biliyor muydunuz?\n**C:** Herkes bilir, o kapı doğru dürüst kilitlenmez zaten. Mandalı çekip girersiniz.",
+        "**S:** Olay sabahı evde olduğunuzu söylemiştiniz ama telefonunuz sabah 05:40'ta Taşkıran köyü baz istasyonundan sinyal vermiş.\n**C:** *[duraksama]* Evet... Çıktım evden. Uyuyamadım. Taşkıran tarafına, yukarıdaki yola kadar yürüdüm. Ama atölyeye inmedim, yemin ederim."
+      ],
+      "signature": "G. Aktepe",
+      "metaRows": [
+        {
+          "label": "Tarih",
+          "value": "16.03.2025 · 14:00"
+        },
+        {
+          "label": "Not",
+          "value": "Güler'in aslında kooperatif borcu ve Necati'nin kooperatiften ayrılma planıyla ilgili itirazlarının tespit edilmesinin ardından."
+        }
+      ],
+      "signatureRole": "İfade Sahibi"
+    },
+    {
+      "id": "033-E2",
+      "suspectName": "Salih Çoruh",
+      "headerDocId": "033-E2 · Çaykara İlçe Jandarma",
+      "title": "İfade — Salih Çoruh (2. Oturum)",
+      "date": "17.03.2025 · 11:00",
+      "birth": "—",
+      "occupation": "—",
+      "address": "—",
+      "session": 2,
+      "paragraphs": [
+        "**S:** Salih Bey, olay gecesi Ankara'da olduğunuzu söylemiştiniz. Ancak otobüs firmanız sizi 13 Mart akşamı Trabzon otogarına bırakmış.\n**C:** *[avukatla fısıldaşma]* Evet. Geldim. Yalan söyledim çünkü... korktum.",
+        "**S:** Neyden korktunuz? Kardeşinizi öldürmekten mi?\n**C:** Hayır! Onu öldürmedim! Ben... konuşmaya geldim. Gece 21:30 gibi kapısını çaldım. Evdeydi.",
+        "**S:** Ne konuştunuz?\n**C:** Vasiyeti sordum. Neden benim çocuğumu da dışlıyorsun, benim hakkım o arazide var dedim. 'O eskidendi' dedi. 'Ben işledim, ben büyüttüm, senin bir kovan bile toprağın yok burada' dedi.",
+        "**S:** Sonra?\n**C:** Tartıştık. Beni evden kovdu. Kapıyı suratıma kapattı.",
+        "**S:** O gece nerede kaldınız?\n**C:** Geri dönecek otobüs bulamadım o saatte. Havva Abla'nın kapısını çaldım. Geceyi onun misafir odasında geçirdim. O şahittir. Sabah da haber geldi zaten. Gitmeye korktum.",
+        "<p style=\"background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux)\"><strong>Kritik:</strong> Havva Sürmeneli, Salih'in gece 22:30'da ağlayarak kapısına geldiğini ve sabah 08:00'e kadar evden çıkmadığını doğruladı. Salih'in cinayet saatinde (05:30-06:30) alibisi var.</p>"
+      ],
+      "signature": "S. Çoruh",
+      "metaRows": [
+        {
+          "label": "Tarih",
+          "value": "17.03.2025 · 11:00"
+        },
+        {
+          "label": "Not",
+          "value": "Salih Çoruh'un 13 Mart günü Trabzon'a geldiğinin bilet kayıtlarıyla tespit edilmesinin ardından. Avukat hazır."
+        }
+      ],
+      "signatureRole": "İfade Sahibi · Avukat huzurunda"
+    },
+    {
+      "id": "033-C2",
+      "suspectName": "Fırat Çoruh",
+      "headerDocId": "033-C2 · Çaykara İlçe Jandarma",
+      "title": "İfade — Fırat Çoruh (2. Oturum)",
+      "date": "17.03.2025 · 15:30",
+      "birth": "—",
+      "occupation": "—",
+      "address": "—",
+      "session": 2,
+      "paragraphs": [
+        "**S:** Amcanız doğal yollarla ölmemiş. Termos çayına paraquat karıştırılmış. Zirai ilaç.\n**C:** *[gözleri fal taşı gibi açılır]* Zehir mi? Nasıl yani... İlaç mı içmiş?",
+        "**S:** İçmiş mi sence, içirilmiş mi? Atölyede o ilaçtan nerede var?\n**C:** Arka depoda var. Ama amcam her sabah o çayı kendisi demler. Termosu kendisi doldurur.",
+        "**S:** Depo giriş defterinde 13 Mart gece 23:00'da sizin imzanız var. Neden o saatte depoya girdiniz?\n**C:** *[duraksama]* Ben... havalandırmayı kapatmayı unutmuştum. Onu kontrol etmeye gittim. Bazen kalırım geç saatlere kadar.",
+        "**S:** Babanızın o gece Trabzon'da olduğundan haberiniz var mıydı?\n**C:** Babam mı? Hayır, haberim yoktu. Bana bir şey söylemedi.",
+        "**S:** Havva Hanım'ın size vasiyetle ilgili söylediği şey, amcanıza karşı öfke duymanıza sebep oldu mu?\n**C:** Öfke mi? Hayır... Kırıldım sadece. Ben burada ter döküyorum, o İstanbul'daki kızına veriyor her şeyi. Ama bu onu zehirleyeceğim anlamına gelmez. Ben sadece çay dolduruyordum.",
+        "**S:** Çay dolduruyordun? Amcanın kendi demlediğini söylemiştin az önce.\n**C:** *[panikler]* Yani çayı hazırlamaya yardım ediyordum demek istedim. Sabahları bazen.",
+        "<p style=\"background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux)\"><strong>Kritik:</strong> 'Ben sadece çay dolduruyordum' diyerek büyük bir gaf yaptı. 23:00 depo girişi ve termosu kimin doldurduğu çelişkili. Şişe üzerinde parmak izi analizi bekleniyor.</p>"
+      ],
+      "signature": "F. Çoruh",
+      "metaRows": [
+        {
+          "label": "Tarih",
+          "value": "17.03.2025 · 15:30"
+        },
+        {
+          "label": "Not",
+          "value": "Toksikoloji raporunda paraquat zehirlenmesi çıkması ve depo defterinde Fırat'ın gece 23:00 imzasının bulunmasının ardından."
+        }
+      ],
+      "signatureRole": "İfade Sahibi"
+    },
+    {
+      "id": "033-C3",
+      "suspectName": "Fırat Çoruh",
+      "headerDocId": "033-C3 · Çaykara İlçe Jandarma",
+      "title": "İfade — Fırat Çoruh (3. Oturum)",
+      "date": "18.03.2025 · 09:00",
+      "birth": "—",
+      "occupation": "—",
+      "address": "—",
+      "session": 3,
+      "paragraphs": [
+        "**S:** Fırat Bey, depodaki paraquat şişesinin üzerinde sağ elinizin baş ve işaret parmağı izi çıktı. Şişeyi siz almışsınız.\n**C:** *[uzun sessizlik, avukatıyla fısıldaşır]* İlacı ben satın aldım zaten. Benim izimin olması normal. Envanteri ben tutuyorum.",
+        "**S:** Evet, 28 Şubat'ta siz almışsınız. Ama izler taze. O şişe son 48 saat içinde tutulmuş.\n**C:** *[sessizlik]*",
+        "**S:** Gece 23:00'da depoya havalandırma için değil, o ilacı almak için girdiniz. Sabah 05:00'te amcanız inmeden önce de termosa karıştırdınız.\n**C:** *[ağlamaya başlar]* O beni kölesi gibi gördü... Kendi kanından, kardeşinin oğlunu hiç yerine koydu. 'Senin baban beceriksizdi, sen de aynısısın, burada sadece işçisin' dedi yüzüme. Babamın hakkı vardı o toprakta!",
+        "**S:** Zehirlemeyi nasıl yaptınız?\n**C:** *[avukat araya girer]* Müvekkilim ifadeyi burada kesmek istiyor. Bu bir itiraf değildir, duygusal bir patlamadır.",
+        "**S:** Son soru. Şişeyi neden silmediniz?\n**C:** *[düşük sesle]* Bilmiyorum. Sadece... ellerim titriyordu. Görmedim.",
+        "<p style=\"background:rgba(107,22,32,0.1);padding:12px;border-left:3px solid var(--bordeaux)\"><strong>Kritik:</strong> Cümleleri örtülü bir itiraf. Motivasyon tamamen ortaya çıktı: 2 yıllık sömürülme hissi, babasının gasp edilen hakkı ve son noktayı koyan aşağılama ('burada sadece işçisin'). Tutuklama talebi edildi.</p>"
+      ],
+      "signature": "F. Çoruh",
+      "metaRows": [
+        {
+          "label": "Tarih",
+          "value": "18.03.2025 · 09:00"
+        },
+        {
+          "label": "Not",
+          "value": "Paraquat şişesi üzerinde Fırat'ın sağ işaret parmağı ve başparmak izinin tespit edilmesinin ardından. Avukat hazır."
+        }
+      ],
+      "signatureRole": "İfade Sahibi · Avukat huzurunda"
+    }
+  ],
+  "forensics": [
+    {
+      "id": "033-A",
+      "docId": "033-A · Olay Yeri İnceleme",
+      "title": "Olay Yeri Raporu",
+      "meta": [
+        {
+          "label": "Olay Tarihi",
+          "value": "14.03.2025"
+        },
+        {
+          "label": "Hazırlayan",
+          "value": "Bşçvş. Murat Kılıç · Çaykara İlçe Jandarma"
+        }
+      ],
+      "body": "<h3>Bulgular</h3><ol><li>Kurban, atölye içindeki kurutma masasına yüzüstü yığılmış halde bulundu.</li><li>Yerde kurbana ait paslanmaz çelik termos (devrilmiş) ve kırık bir porselen kupa parçaları.</li><li>Termos içindeki sıvı (çay) zemine dökülmüş, az miktarda içinde kalmış.</li><li>Atölye giriş kapısı kilitli değil, zorlanma izi yok (mandal sistemi).</li><li>Atölye arka deposu kilitli, ancak anahtar depo kapısının üzerinde bırakılmış.</li></ol><p><strong>Ön değerlendirme:</strong> Dışarıdan bir müdahale veya boğuşma izi yok. Kurban sabah rutinini gerçekleştirirken aniden fenalaşmış gibi görünüyor. Termos içindeki sıvının toksikolojiye gönderilmesi elzemdir.</p>",
+      "signature": {
+        "role": "Olay Yeri İnceleme",
+        "name": "Bşçvş. M. Kılıç"
+      }
+    },
+    {
+      "id": "033-B",
+      "docId": "033-B · Trabzon Adli Tıp Kurumu",
+      "title": "Otopsi Raporu",
+      "meta": [
+        {
+          "label": "Rapor Tarihi",
+          "value": "15.03.2025"
+        },
+        {
+          "label": "Hazırlayan",
+          "value": "Uzm. Dr. Kenan Aydın · Trabzon Adli Tıp Kurumu"
+        }
+      ],
+      "body": "<h3>Dış Muayene</h3><ul><li>Ağız mukozası ve dudak çevresinde kimyasal temas izleri (kızarıklık, yüzeyel doku nekrozu).</li><li>Ellerde savunma izi YOK.</li><li>Gövdede düşmeye bağlı yüzeyel abrazyon (kurutma masasına düşme).</li><li>Parmak uçlarında siyanotik (morarma) değişimler.</li></ul><h3>İç Muayene</h3><ul><li>Mide mukozasında yaygın erozyon ve kanamalı alanlar.</li><li>Akciğerlerde akut ödem, şiddetli alveoler hemoraji (kanama).</li><li>Kalpte iskemik bulgular (ikincil kardiyak arrest).</li><li>Toksikoloji Taraması: Mide sıvısı ve kanda letal dozda 'Paraquat' (zirai herbisit) tespit edilmiştir.</li></ul><p><strong>Ölüm nedeni:</strong> Toksik dozda paraquat zehirlenmesine bağlı akut solunum ve çoklu organ yetmezliği.</p><p><strong>Ölüm zamanı (tahmini):</strong> Sabah 05:30 — 06:30 arası.</p><h3>Kritik bulgular</h3><ul><li>Zehir (paraquat) sıvı formda oral yolla alınmıştır.</li><li>Ölüm süreci dakikalar içinde (30-45 dk) solunum güçlüğüyle gerçekleşmiştir.</li><li>Herhangi bir mekanik travma bulgusu yoktur.</li></ul>",
+      "signature": {
+        "role": "Uzm. Dr.",
+        "name": "K. Aydın"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "id": "NÇ-TOX01",
+      "tag": "Toksikoloji",
+      "title": "Termos İçindeki Sıvı Analizi",
+      "description": "Olay yerinde devrilmiş bulunan çelik termosun dibinde kalan sıvının kimyasal analizi.",
+      "details": [
+        {
+          "label": "İçerik",
+          "value": "Siyah çay, şeker, %12 oranında Paraquat (herbisit) solüsyonu."
+        },
+        {
+          "label": "Özellik",
+          "value": "Paraquat, ticari tarımda kullanılan, kokusuz ama acı tatlandırıcı eklenmiş bir zehirdir."
+        },
+        {
+          "label": "Yorum",
+          "value": "Çay ile karıştığında sıcaklığın da etkisiyle tat maskelenmiş. Kurban birkaç yudum aldıktan sonra fark etmiş olabilir (kırık kupa bunu destekliyor)."
+        }
+      ]
+    },
+    {
+      "id": "NÇ-ŞİŞ01",
+      "tag": "Fiziksel",
+      "title": "Paraquat Şişesi",
+      "description": "Atölyenin arka deposunda, zehirli maddeler rafında bulunan 1 litrelik ticari zirai ilaç şişesi.",
+      "details": [
+        {
+          "label": "Buluntu Yeri",
+          "value": "Depo 3. raf, yarı karanlık alan."
+        },
+        {
+          "label": "Durum",
+          "value": "Kapağı tam sıkılmamış, dış yüzeyinde ince çay lekesi var."
+        },
+        {
+          "label": "Parmak İzi",
+          "value": "Sağ el işaret ve başparmak — Fırat Çoruh ile pozitif eşleşme."
+        },
+        {
+          "label": "Yorum",
+          "value": "Şişe cinayet silahı. Fail kullandıktan sonra panikle kendi yerine geri koymuş."
+        }
+      ]
+    },
+    {
+      "id": "NÇ-DEF01",
+      "tag": "Belge",
+      "title": "Depo Giriş-Çıkış Defteri",
+      "description": "Zirai ilaç deposunun rutin kayıt defteri.",
+      "details": [
+        {
+          "label": "Son Kayıt",
+          "value": "13 Mart 2025 · 23:00"
+        },
+        {
+          "label": "İşlem",
+          "value": "Giriş (Havalandırma Kontrolü)"
+        },
+        {
+          "label": "İmza",
+          "value": "Fırat Çoruh"
+        },
+        {
+          "label": "Yorum",
+          "value": "Fırat'ın gece 23:00'da depoya girdiğini belgeliyor. İlacın o saatte alındığı düşünülüyor."
+        }
+      ]
+    },
+    {
+      "id": "NÇ-ENV01",
+      "tag": "Belge",
+      "title": "Zirai İlaç Envanter Fişi",
+      "description": "Kooperatiften alınan ilaçların kayıt fişi.",
+      "details": [
+        {
+          "label": "Alım Tarihi",
+          "value": "28 Şubat 2025"
+        },
+        {
+          "label": "Kalem",
+          "value": "Paraquat 1L x 4 şişe"
+        },
+        {
+          "label": "Teslim Alan",
+          "value": "Fırat Çoruh (imza)"
+        },
+        {
+          "label": "Yorum",
+          "value": "Fırat'ın şişedeki parmak izini 'ben satın almıştım' diyerek açıklamasına zemin hazırlayan belge."
+        }
+      ]
+    },
+    {
+      "id": "NÇ-VAS01",
+      "tag": "Belge",
+      "title": "Vasiyetname Değişikliği (Fotokopi)",
+      "description": "Necati Çoruh'un ofis çekmecesinde bulunan Çaykara Noterliği tasdikli belge.",
+      "details": [
+        {
+          "label": "Tarih",
+          "value": "21 Şubat 2025"
+        },
+        {
+          "label": "İçerik",
+          "value": "Tüm gayrimenkul ve ticari varlıkların yegâne varisi olarak kızı Nurdan Çoruh tayin edilmiştir."
+        },
+        {
+          "label": "Önceki Durum",
+          "value": "Önceki vasiyette yasal paylar geçerliydi (Kardeş Salih'e cüzi bir pay düşebiliyordu)."
+        }
+      ]
+    },
+    {
+      "id": "NÇ-GSM01",
+      "tag": "Dijital",
+      "title": "Güler Aktepe HTS Kaydı",
+      "description": "Olay gecesi ve sabahı Güler Aktepe'nin telefon sinyalleri.",
+      "details": [
+        {
+          "label": "Saat 04:00 - 08:00",
+          "value": "Telefon kesintisiz olarak Taşkıran Köyü baz istasyonundan sinyal almış."
+        },
+        {
+          "label": "Konum",
+          "value": "Dereiçi (olay yeri) baz istasyonuna geçiş YOK."
+        },
+        {
+          "label": "Yorum",
+          "value": "Güler'in sabah erken saatte yürüyüşe çıktığı ifadesini doğruluyor, atölyeye inmediğini kanıtlıyor."
+        }
+      ]
+    },
+    {
+      "id": "NÇ-BİLET01",
+      "tag": "Belge",
+      "title": "Otobüs Bilet Kaydı — Salih Çoruh",
+      "description": "Kamil Koç turizm sistem kaydı.",
+      "details": [
+        {
+          "label": "Güzergah",
+          "value": "Ankara (AŞTİ) -> Trabzon (Otogar)"
+        },
+        {
+          "label": "Varış",
+          "value": "13 Mart 2025 · 18:30"
+        },
+        {
+          "label": "Yorum",
+          "value": "Salih Çoruh'un olay gecesi Ankara'da değil Trabzon'da olduğunu kesin olarak kanıtlıyor."
+        }
+      ]
+    },
+    {
+      "id": "NÇ-TER01",
+      "tag": "Fiziksel",
+      "title": "Termos Yüzeyi Parmak İzleri",
+      "description": "Zehirli çayın bulunduğu termos dış yüzeyindeki izler.",
+      "details": [
+        {
+          "label": "Kavrama İzi",
+          "value": "Necati Çoruh (gövdede)"
+        },
+        {
+          "label": "Kapak ve Kulp İzi",
+          "value": "Fırat Çoruh (taze izler)"
+        },
+        {
+          "label": "Yorum",
+          "value": "Fırat 'ben sadece çay dolduruyordum' diyerek bu taze izleri açıklamaya çalıştı ama amcasının kendi çayını demlediği gerçeğiyle çelişiyor."
+        }
+      ]
+    }
+  ],
+  "documents": [],
+  "technical": [
+    {
+      "id": "033-I",
+      "docId": "033-I · Kooperatif Mali",
+      "title": "Kooperatif Borç Dökümü",
+      "meta": [
+        {
+          "label": "Belge tipi",
+          "value": "Mali Belge"
+        }
+      ],
+      "body": "<h3>Çaykara Çay Alım Kooperatifi</h3><p><strong>Üye:</strong> Necati Çoruh<br/><strong>Durum:</strong> Aktif</p><p><strong>Açık Bakiye:</strong> 45.000 TL (Gecikmedeki ödemeler)<br/><strong>Açıklama:</strong> Kooperatif müdürü Serkan Dereli ile 05.03.2025 tarihinde yapılan görüşmede, Necati Çoruh borcun hasat sonrası kapatılacağını, ancak kooperatifin alım fiyatlarından memnun olmadığını ve sözleşme yenilemeyeceğini beyan etmiştir.</p><p style=\"background:rgba(107,22,32,.1);padding:12px;border-left:3px solid var(--bordeaux);\"><strong>Kriminal Not:</strong> 45 bin TL ticari bir işletme için cinayet sebebi olamayacak kadar küçük bir rakam. Serkan Dereli'nin motifi zayıf kalıyor.</p>"
+    }
+  ]
+};
+
+// MessageThread referansını CaseData'ya bağla
+(case033 as any).messageThreads = case033MessageThreads;

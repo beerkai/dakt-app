@@ -4,6 +4,19 @@ Yeni vaka karakterlerinde **bu isimleri tekrar etme**. Aynı isim farklı vakada
 
 ## Mevcut Vakalardaki Karakterler
 
+### Vaka 033 — Sis Vadisi
+| Rol | Ad | Soyad |
+|-----|-----|-------|
+| Kurban | Necati | Çoruh |
+| Fail | Fırat | Çoruh |
+| Şüpheli | Nurdan | Çoruh |
+| Şüpheli | Salih | Çoruh |
+| Şüpheli | Güler | Aktepe |
+| Şüpheli | Serkan | Dereli |
+| Şüpheli | Havva | Sürmeneli |
+
+---
+
 ### Vaka 042 — Karaağaç
 | Rol | Ad | Soyad |
 |-----|-----|-------|
@@ -73,10 +86,10 @@ Yeni vaka karakterlerinde **bu isimleri tekrar etme**. Aynı isim farklı vakada
 ## Yasaklı (zaten kullanılmış) — TEKRAR ETME
 
 ### Adlar (kullanıldı)
-Ayşe, Berk, Burak, Cemal, Defne, Hasan, Mehmet, Meryem, Sarp, Selin, Selim, Vedat, Volkan, Yasemin, Zeynep, Melis, Onur, Kaan, Halil, Deniz, Alp
+Ayşe, Berk, Burak, Cemal, Defne, Fırat, Güler, Hasan, Havva, Mehmet, Meryem, Necati, Nurdan, Sarp, Selin, Selim, Serkan, Vedat, Volkan, Yasemin, Zeynep, Melis, Onur, Kaan, Halil, Deniz, Alp, Salih
 
 ### Soyadlar (kullanıldı)
-Acar, Aydın, Bektaş, Demir, Dursun, Erdal, Erdoğan, Güldağ, Karaağaç, Karataş, Karaoğlan, Kaplan, Korkut, Savaş, Şenel, Tekin, Tümer, Yıldırım, Yılmaz, Çelik
+Acar, Aktepe, Aydın, Bektaş, Demir, Dereli, Dursun, Erdal, Erdoğan, Güldağ, Karaağaç, Karataş, Karaoğlan, Kaplan, Korkut, Savaş, Şenel, Sürmeneli, Tekin, Tümer, Yıldırım, Yılmaz, Çelik, Çoruh
 
 ---
 

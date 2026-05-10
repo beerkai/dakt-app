@@ -6,15 +6,15 @@ D.A.K.T. iyi yazılmış polisiye olmalı — yani **motiv her vakanın kalbi**.
 
 | Vaka | Birincil Motif | İkincil Katman | Kategori |
 |------|----------------|----------------|----------|
+| 033 Sis Vadisi | Miras / vasiyet gazı | Aile sırrı (eski tapu hakkı) + "emeğin hiçe sayılması" | Miras + Pragmatik |
 | 042 Karaağaç | Romantik takıntı | Sahip olma psikolojisi | İlişki |
 | 053 Offline | Finansal (sponsorluk) | Kanal devralma + yatırım koruma | Pragmatik + İlişki |
 | 067 Koleksiyoncu | Gizli geçmişin ifşası | Sosyal sermaye koruma | Sırlar |
 | 089 Peri Bacası | Arazi ihtilafı | Cinayet zinciri (ilk cinayetin örtbası) | Pragmatik + Önceki suç |
 | 114 Cam Kule | Finansal entrika | Yolsuzluk maskesi | Pragmatik |
 
-**Pattern:** 5 vakanın 4'ünde **finansal/pragmatik** motif birincil veya ikincil. Sadece 042 saf psikolojik.
-
-→ **Yeni vakalar farklı motif kategorilerinden gelmeli.**
+**Pattern:** Pragmatik/maddi motiv hâlâ güçlü; **033** ile **miras + aile yarası** katmanı eklendi (Saf romantik 042, sırlar 067, çoklu suç örtbası 089 ile ayrışır).  
+→ **Yeni vakalar** hâlâ intikam, ideolojik, korunma, kazara gibi az dolu kategorilerden beslenmeli.
 
 ---
 

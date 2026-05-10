@@ -6,14 +6,15 @@ D.A.K.T. Türkiye'nin **her yerinde** geçer. Bu dosya yeni vakanın hangi coğr
 
 | Vaka | Şehir | Bölge |
 |------|-------|-------|
+| 033 Sis Vadisi | Trabzon · Çaykara | Karadeniz - Taşra / çay |
 | 042 Karaağaç | İstanbul · Kadıköy | Marmara - Metropol |
 | 053 Offline | İstanbul · Beşiktaş | Marmara - Metropol |
 | 067 Koleksiyoncu | İstanbul · Bebek | Marmara - Metropol |
 | 089 Peri Bacası | Nevşehir · Göreme | İç Anadolu - Turistik |
 | 114 Cam Kule | İstanbul · Levent | Marmara - Metropol |
 
-**Pattern:** 4/5 vaka İstanbul. Geri kalan 1 vaka turistik bölge.  
-**Eksik:** Tüm Türkiye coğrafyası (7 bölge × onlarca şehir).
+**Pattern:** İstanbul ağırlığı sürüyor; **033** ile Karadeniz taşrası eklendi. Nevşehir (089) ile birlikte iki büyük coğrafik kırılım var.  
+**Eksik:** Ege kıyısı, Doğu Anadolu, Güneydoğu kasaba odaklı vakalar (sıradaki öncelikler).
 
 ---
 
