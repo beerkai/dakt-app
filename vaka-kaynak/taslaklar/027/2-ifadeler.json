@@ -1,0 +1,279 @@
+{
+  "id": "027",
+  "codename": "Güverte",
+  "fullTitle": "Güverte Cinayeti",
+  "classification": "Standart",
+  "caseCode": "DAKT-027-GVR",
+  "victim": {
+    "name": "Rıza Tunalı",
+    "description": "62, Erkek, Armatör ve İş İnsanı. Otoriter, kontrolcü, zengin."
+  },
+  "location": "Antalya · Kemer Açıkları · MV Poseidon Kruvaziyeri",
+  "dateRange": "15 Ağustos 2025 · Gece 02:00 — 03:00",
+  "brief": {
+    "summary": "15 Ağustos gecesi, Antalya Kemer açıklarında seyreden lüks kruvaziyer MV Poseidon'da, geminin sahibi ünlü armatör Rıza Tunalı, VIP kamarasının özel balkonundaki jakuzide ölü bulundu. İlk bakışta alkol zehirlenmesine bağlı kalp krizi veya boğulma gibi görünse de, otopsi raporu olayın sıradan bir kaza olmadığını ortaya koyacaktır. Kurbanın kanında bulunan yüksek dozdaki sedatif ilaçlar ve boyun bölgesindeki hafif baskı izleri, bunun planlı bir cinayet olduğunu gösteriyor.\n\nSoruşturmayı zorlaştıran en büyük faktör, cinayet saatinde VIP güvertenin kameralarında tam 15 dakikalık bir 'kısa devre' kaynaklı kesinti yaşanmasıdır. Bu süre zarfında katil, kurbanın balkonuna ulaşmış, işini bitirmiş ve güverteden ayrılmıştır. Olay yeri açık deniz, ancak katil hala gemide, yolcuların veya mürettebatın arasında saklanmaktadır.",
+    "victimProfile": "Rıza Tunalı (62), sektörde acımasızlığıyla tanınan, her şeyi ve herkesi kontrol etmeyi seven bir armatördü. Son yıllarda sağlık sorunları yaşamaya başlamış, ancak şirketini devretmemek için direnmiştir. Oğlu Cem ile ilişkisi her zaman çatışmalı olmuştur. Özel hayatında ise kendisinden oldukça genç olan nişanlısı Damla ile fırtınalı bir ilişki içindedir. Son günlerde agresif tavırları artmış, vasiyetini değiştirmeyi planladığı dedikoduları gemide yayılmaya başlamıştır.",
+    "streamRecord": "VIP Güverte Güvenlik Kamerası (Gece 02:15 - 02:30 arası şüpheli elektrik kesintisi)",
+    "mission": "Sınırlı bir kapalı alan olan gemide, o gece VIP güverteye erişimi olan şüphelilerin ifadelerini çapraz sorguya çek ve yalan söyleyenleri tespit et. Cinayet saatindeki karanlık 15 dakikanın şifresini çöz.",
+    "warning": "Kurban direnmemiş ve jakuzide pasif halde ölüme terk edilmiştir. Katil büyük ihtimalle kurbanın zaaflarını veya sağlık durumunu kendi lehine kullanmıştır.",
+    "documentCount": 24,
+    "suspectCount": 6,
+    "timeOfIncident": "Gece 02:15 — 02:30 (tahmini)"
+  },
+  "suspects": [
+    {
+      "id": "pinar",
+      "name": "Pınar Korkmaz",
+      "age": 28,
+      "role": "Özel Hemşire / Bakıcı",
+      "tag": "GVR-SAĞ/PK",
+      "quote": "O gece ilacını verdim ve odama çekildim. Zaten uyumuştu.",
+      "isFail": true
+    },
+    {
+      "id": "cem",
+      "name": "Cem Tunalı",
+      "age": 34,
+      "role": "Rıza'nın Oğlu / Yönetim Kurulu Üyesi",
+      "tag": "GVR-YÖN/CT",
+      "quote": "Babam şirketi bir harabeye çeviriyordu, ama onu öldürecek kadar aptal değilim.",
+      "isFail": false
+    },
+    {
+      "id": "hulya",
+      "name": "Hülya Adıgüzel",
+      "age": 55,
+      "role": "Kruvaziyer Direktörü",
+      "tag": "GVR-MÜR/HA",
+      "quote": "Benim tek derdim yolcuların güvenliğiydi, Rıza Bey'in özel hayatı değil.",
+      "isFail": false
+    },
+    {
+      "id": "aras",
+      "name": "Aras Eraslan",
+      "age": 42,
+      "role": "Gemi Kaptanı",
+      "tag": "GVR-KPT/AE",
+      "quote": "Köşkteydim, rotayı kontrol ediyordum. Elektrik kesintisi tamamen teknik bir arızaydı.",
+      "isFail": false
+    },
+    {
+      "id": "bekir",
+      "name": "Bekir İskenderun",
+      "age": 25,
+      "role": "Güverte Barmeni",
+      "tag": "GVR-MÜR/Bİ",
+      "quote": "O saatte barı kapatıyordum, yukarıda neler döndüğünü bilemem.",
+      "isFail": false
+    },
+    {
+      "id": "damla",
+      "name": "Damla Aydoğan",
+      "age": 31,
+      "role": "Rıza'nın Nişanlısı",
+      "tag": "GVR-VIP/DA",
+      "quote": "Biz tartışmadık, sadece biraz hava almak istediğini söyledi.",
+      "isFail": false
+    }
+  ],
+  "diversityReport": {
+    "city": "Antalya (İlk kez İstanbul dışı sahil şeridi kullanıldı)",
+    "socioeconomic": "Ultra zengin bir kurban ve alt sınıftan (mürettebat) üst sınıfa kadar değişen bir şüpheli karması",
+    "victimAge": "62 (İlk kez 60 yaş üstü bir kurban kullanıldı)",
+    "motive": "Sağlık zafiyetinden yararlanma, vasiyet/şantaj sarmalı",
+    "locationType": "Gemi / Kruvaziyer (İlk kez tamamen kapalı ve hareketli bir dış mekân konsepti)",
+    "method": "İlaç etkileşimi ve suda boğulma süsü verilmiş mekanik asfiksi",
+    "victimProfession": "Armatör / İş İnsanı",
+    "perpetratorType": "Özel bakıcı / Hizmetli (İlk kez sağlık/bakım rolünde bir fail)",
+    "summary": "Bu vaka, önceki vakalardan coğrafya (Antalya), kurban yaşı (62), konum tipi (Gemi), cinayet yöntemi (İlaç+Suda boğma) ve fail/kurban ilişkisi açısından açıkça farklılaşarak 5'ten fazla boyutta çeşitlilik kurallarını sağlamaktadır."
+  },
+  "testimonies": [
+    {
+      "id": "aras-1",
+      "docCode": "027-D1",
+      "suspectId": "aras",
+      "session": 1,
+      "title": "İfade — Aras Eraslan (1. Oturum)",
+      "date": "15.08.2025 · 09:30",
+      "meta": [
+        { "label": "Doğum", "value": "12.04.1983" },
+        { "label": "Meslek", "value": "Gemi Kaptanı (MV Poseidon)" },
+        { "label": "Adres", "value": "Mersin / Yenişehir (Gemi İkametli)" }
+      ],
+      "note": "",
+      "content": "S: Kaptan Bey, dün gece gemide yaşanan olaylarla ilgili bildiklerinizi anlatır mısınız? Navigasyon kayıtlarına göre gece boyu açık denizdeydiniz.\nC: Doğrudur komiserim. Kemer açıklarında, rüzgarsız, son derece sakin bir seyir halindeydik. Geminin tüm teknik parametreleri normaldi. Ben bizzat kaptan köşkünde, birinci zabitimle birlikte nöbetteydim. Olayı sabah 02:45 sularında Hülya Hanım'ın köprü üstünü aramasıyla öğrendim. Hemen acil durum protokolünü devreye sokup, tıbbi ekibi VIP güverteye yönlendirdim ama maalesef iş işten geçmişti.\nS: Bize VIP güvertedeki şu elektrik ve kamera kesintisinden bahsedin. Tam olarak 02:15 ile 02:30 arası.\nC: [İç çeker] Bakın, bu gemi son teknolojiyle donatılmıştır ama deniz şartlarında bazen lokal şalter atmaları yaşanabilir. Teknik ekibimizin incelemesine göre, VIP güvertenin bulunduğu koridordaki lokal sigorta paneli aşırı yüklenmeden veya manuel bir müdahaleden dolayı atmış. Bu, geminin ana seyir sistemlerini veya genel jeneratörleri etkilemez. Sadece o kattaki aydınlatma ve iki güvenlik kamerasını devre dışı bıraktı. \nS: Manuel bir müdahale dediniz. Biri kasten şarteli indirmiş olabilir mi?\nC: Teorik olarak evet. Sigorta kutusu, hemşirenin malzeme odasının hemen girişinde, duvarda yer alıyor. Herhangi bir mürettebat anahtarı o paneli açabilir. \nS: Rıza Bey'in ölümüyle ilgili sizin veya personelinizin herhangi bir anlaşmazlığı var mıydı?\nC: Rıza Bey patronumuzdu. Zor bir adamdı, bunu herkes bilir. Son zamanlarda gemiyi komple bir Alman grubuna satacağından bahsediyordu. Açıkçası bu durum tüm mürettebatı, beni de dahil, işsiz kalma korkusuyla strese sokmuştu. Ama takdir edersiniz ki, maaşımı ödeyen adamı jakuzide öldürmek benim sorunlarımı çözmez.",
+      "signature": "A. Eraslan",
+      "criticalNote": "Sigorta paneline erişim, VIP kattaki malzeme odasından sağlanabiliyor. Elektrik kesintisinin rastgele bir arıza olmadığı kesinleşti."
+    },
+    {
+      "id": "hulya-1",
+      "docCode": "027-D2",
+      "suspectId": "hulya",
+      "session": 1,
+      "title": "İfade — Hülya Adıgüzel (1. Oturum)",
+      "date": "15.08.2025 · 10:15",
+      "meta": [
+        { "label": "Doğum", "value": "08.11.1970" },
+        { "label": "Meslek", "value": "Kruvaziyer Direktörü" },
+        { "label": "Adres", "value": "Antalya / Muratpaşa" }
+      ],
+      "note": "",
+      "content": "S: Hülya Hanım, gemideki tüm yolcu ilişkileri ve genel düzenden siz sorumlusunuz. Rıza Bey'in son günlerdeki durumu nasıldı?\nC: Rıza Bey her zamankinden daha asabiydi. Seyahat başladığından beri herkesle kavga ediyordu. Özellikle dün akşam yemekte tam bir kriz yaşandı. Oğlu Cem Bey ile herkesin içinde büyük bir tartışmaya girdiler. Şirket hisseleri, devir işlemleri... Rıza Bey bağırarak, 'Bu gemiyi de, şirketi de satıp ikinize de zırnık koklatmayacağım!' dedi.\nS: İkinize de derken? Diğeri kimdi?\nC: Nişanlısı Damla Hanım. Damla masayı ağlayarak terk etti. Cem Bey de çok öfkeliydi. Ben olayı yatıştırmak için diğer yolcuların dikkatini dağıtmaya çalıştım. Rıza Bey daha sonra kendi süitine kapandı ve kimseyi görmek istemediğini söyledi.\nS: Gece 02:00 sularında siz neredeydiniz?\nC: Ben alt kattaki personelin vardiya değişimini organize ediyordum. Saat 01:30'da ana salondaki parti bitmişti, temizlik ekiplerini yönlendiriyordum. 02:30 civarı dinlenmek için kendi kamarama geçtim. 02:40 gibi Cem Bey'in bağırışlarını duyup VIP güverteye koştuğumda, Rıza Bey'i suyun içinde bulduk.\nS: Elektrik kesintisinden haberiniz var mıydı?\nC: Sadece bizim telsizlerden bir anons geçtiğini duydum, 'VIP koridorunda ışıklar gitti, teknik ekip baksın' dendi ama 15 dakika içinde geri geldiği için üzerinde durmadık. Benim tek derdim yolcuların güvenliğiydi, Rıza Bey'in özel hayatı ve kaprisleri değil. Doğrusu, gemideki yüzlerce insanın huzurunu bozduğu için ona içten içe kızgındım ama böyle bir sonu kimse hak etmez.",
+      "signature": "H. Adıgüzel",
+      "criticalNote": "Rıza Bey olay akşamı oğlu Cem ve nişanlısı Damla ile şiddetli bir tartışma yaşamış. Vasiyet ve geminin satışı gündemdeymiş."
+    },
+    {
+      "id": "bekir-1",
+      "docCode": "027-D3",
+      "suspectId": "bekir",
+      "session": 1,
+      "title": "İfade — Bekir İskenderun (1. Oturum)",
+      "date": "15.08.2025 · 11:00",
+      "meta": [
+        { "label": "Doğum", "value": "22.05.2000" },
+        { "label": "Meslek", "value": "Güverte Barmeni" },
+        { "label": "Adres", "value": "Hatay / İskenderun" }
+      ],
+      "note": "",
+      "content": "S: Bekir, gece VIP güverteye servis yapmışsın. Saat tam olarak kaçtı ve neler gördün?\nC: Evet amirim. Saat 01:25 civarıydı. Rıza Bey dahili hattan arayıp özel bir İskoç viskisi istedi. Çok sinirli bir sesi vardı, 'Çabuk getir, kimseyi de görmek istemiyorum' diye bağırdı. Tepsiyi hazırlayıp asansörle en üst kata çıktım.\nS: İçeri girdin mi?\nC: [Gergin bir şekilde] Hayır, hayır kesinlikle içeri girmedim. VIP süitin kapısını çaldım, Pınar hemşire açtı. Yüzü asıktı. 'Ver onu bana Bekir, ben içeri götürürüm' dedi. Şişeyi ve bardağı ona teslim edip hemen aşağı, kendi çalıştığım lobi bara döndüm. \nS: Saat 02:15'te nerede olduğunu kanıtlayabilir misin?\nC: Tabii ki. 02:00'de barı kapattım. Kasa hesabını alıyordum. Kameralarda vardır, lobi bardan hiç ayrılmadım. O saatte barı kapatıyordum, yukarıda neler döndüğünü bilemem.\nS: Cem Bey'i o gece gördün mü?\nC: [Yutkunur] Şey... Evet. 02:05 gibiydi, barın önünden hızlıca asansörlere doğru geçti. Yüzü kıpkırmızıydı, çok öfkeli görünüyordu. 'Bir şey ister misiniz Cem Bey' diyecek oldum, beni duymazdan gelip asansöre bindi. VIP güverteye giden tek asansördü o.\nS: Başka dikkatini çeken bir şey?\nC: Rıza Bey bana hep çok kötü davranırdı. Geçen hafta herkesin içinde tepsiyi düşürdüm diye bana hakaretler yağdırıp işten kovmakla tehdit etmişti. Bunu saklamıyorum, ondan nefret ederdim. Ama inanın o kata viskiyi bıraktıktan sonra bir daha ayak basmadım.",
+      "signature": "B. İskenderun",
+      "criticalNote": "Bekir, Cem'in olay saatinde (02:05) öfkeli bir şekilde VIP güverteye doğru çıktığını iddia ediyor."
+    },
+    {
+      "id": "damla-1",
+      "docCode": "027-D4",
+      "suspectId": "damla",
+      "session": 1,
+      "title": "İfade — Damla Aydoğan (1. Oturum)",
+      "date": "15.08.2025 · 11:45",
+      "meta": [
+        { "label": "Doğum", "value": "03.09.1994" },
+        { "label": "Meslek", "value": "Model / Rıza Tunalı'nın Nişanlısı" },
+        { "label": "Adres", "value": "İstanbul / Beşiktaş (Bebek)" }
+      ],
+      "note": "",
+      "content": "S: Damla Hanım, başınız sağ olsun. Akşam yemekte yaşanan gerginlikten başlayalım. Rıza Bey'le ne sorununuz vardı?\nC: [Gözyaşlarını silerek] Teşekkürler komiserim. O sadece küçük bir krizdi. Rıza son zamanlarda ilaçlarının dozu yüzünden çok dengesizleşmişti. Sürekli her şeyden şüphe ediyordu. Evlilik sözleşmemizi tek taraflı olarak iptal edeceğini söyledi masada. Bu beni çok kırdı. Onu sevdiğim için yanındaydım, parası için değil!\nS: Masadan kalktıktan sonra ne yaptınız?\nC: Kendi kamarama gittim. Biz Rıza ile ayrı kamaralarda kalıyorduk, malum hastalığından dolayı hemşiresi hep yanında olmak zorundaydı. Gece 01:00 civarı Rıza beni aradı. Sesi yorgundu. 'Biraz yalnız kalmak istiyorum, jakuziye gireceğim, sabah konuşuruz' dedi. Biz tartışmadık, sadece biraz hava almak istediğini söyledi.\nS: Pınar Korkmaz hakkında ne düşünüyorsunuz?\nC: O kız... Başından beri Rıza'ya gereğinden fazla yakın davranıyordu. Sadece bir hemşire gibi değildi, Rıza'nın her şeyini kontrol etmek istiyordu. Sürekli kulağına bir şeyler fısıldar, ilaçlarını bahane edip beni odadan çıkarırdı. Rıza o gece o viskiyi içmemeliydi! Pınar bunu nasıl engellemez? O kız kesinlikle bir şeyler saklıyor.\nS: Cinayet saatinde, 02:15'te odanızda mıydınız?\nC: Evet, odamdaydım. Ağlıyordum, çok üzgündüm. Uyumamış olabilirim ama dışarı adımımı atmadım.",
+      "signature": "D. Aydoğan",
+      "criticalNote": "Damla evlilik sözleşmesinin iptali nedeniyle Rıza ile çatışma halinde. Pınar hemşireyi doğrudan suçlama eğiliminde."
+    },
+    {
+      "id": "cem-1",
+      "docCode": "027-D5",
+      "suspectId": "cem",
+      "session": 1,
+      "title": "İfade — Cem Tunalı (1. Oturum)",
+      "date": "15.08.2025 · 13:00",
+      "meta": [
+        { "label": "Doğum", "value": "19.01.1991" },
+        { "label": "Meslek", "value": "Tunalı Denizcilik Yönetim Kurulu Üyesi" },
+        { "label": "Adres", "value": "İstanbul / Kadıköy (Fenerbahçe)" }
+      ],
+      "note": "",
+      "content": "S: Cem Bey, babanızın ölümünden dolayı taziyelerimi sunarım. Fakat şirket devri ve miras konularında ciddi tartışmalar yaşadığınızı biliyoruz.\nC: [Alaycı bir gülüş] Sağ olun komiserim. Babamın arkasından sahte gözyaşı dökecek değilim. Aramızdaki ilişki hep felaketti. Şirketi yıllar önce ben yönetmeye başlamalıydım ama o, o lanet olası koltuğu bırakmamak için her şeyi yaptı. Son zamanlarda da o genç nişanlısı yüzünden şirketin içini boşaltmaya, bu gemi dahil birçok varlığı satmaya kalkıştı.\nS: Dün gece restoranda ona bağırdığınızı herkes duymuş. Onu öldürmekle tehdit ettiniz mi?\nC: Tartıştık evet. O beni varisimlikten reddetmekle tehdit etti, ben de ona eğer şirketi Almanlara satarsa onu mahkemeye verip vesayet altına aldıracağımı söyledim. Babam şirketi bir harabeye çeviriyordu, ama onu öldürecek kadar aptal değilim. Miras zaten bana kalacaktı, hukuki yollarla halledecektim.\nS: Gece 02:00 ile 02:30 arasında neredeydiniz?\nC: Geminin alt katındaki casinodaydım komiserim. Orada bir sürü insan vardı. 03:00'e kadar rulet masasında oturdum, kafa dağıtıyordum. İsterseniz güvenlik kameralarına veya krupiyelere sorun. Yukarı çıkmadım bile.\nS: Babanızı ölü bulan siz değil miydiniz?\nC: 02:40'ta uyumak için odama çıkarken merak edip kapısını çaldım. Kapı aralıktı. İçeri girdiğimde balkondaki jakuzinin içinde hareketsiz yatıyordu. Hemen Hülya'yı ve kaptanı aradım. Hepsi bu.",
+      "signature": "C. Tunalı",
+      "criticalNote": "Cem, babasıyla olan husumetini inkar etmiyor ancak cinayet saatinde casinoda olduğunu iddia ediyor. Casino kameralarının incelenmesi şart."
+    },
+    {
+      "id": "pinar-1",
+      "docCode": "027-D6",
+      "suspectId": "pinar",
+      "session": 1,
+      "title": "İfade — Pınar Korkmaz (1. Oturum)",
+      "date": "15.08.2025 · 14:15",
+      "meta": [
+        { "label": "Doğum", "value": "10.10.1997" },
+        { "label": "Meslek", "value": "Özel Hemşire" },
+        { "label": "Adres", "value": "İstanbul / Şişli" }
+      ],
+      "note": "",
+      "content": "S: Pınar Hanım, Rıza Bey'in medikal durumundan tamamen siz sorumluydunuz. O gece yaşananları anlatır mısınız?\nC: [Sakin ve profesyonel] Komiserim, ben işimi yapıyordum. Rıza Bey son zamanlarda tansiyon atakları geçiriyordu. Saat 01:30 civarında barmen Bekir sipariş edilen viskiyi getirdi. Ben viskiyi aldım, Rıza Bey o sırada balkonda oturmuş denizi izliyordu. Çok gergindi. \nS: Ona herhangi bir ilaç verdiniz mi?\nC: Gece alması gereken rutin, çok hafif bir uyku ilacı vardı. O gece ilacını verdim ve odama çekildim. Zaten uyumuştu, yani uyuyacağını söylemişti. Viski ile ilacı birlikte almaması konusunda onu uyardım ama Rıza Bey talimat almayı seven biri değildi. 'Sen git işine bak' diyerek beni tersledi.\nS: Siz ne zaman odadan çıktınız?\nC: Saat 01:45 gibi. VIP süitin hemen yanındaki personel kamaramda kalıyorum. Oraya geçip kapımı kilitledim. \nS: Elektrik kesintisi olduğunda neredeydiniz? Neden müdahale etmediniz?\nC: Ben o sırada derin bir uykudaydım. Benim odamın elektriği, VIP süitin şalterinden bağımsız. Yani odam karanlıkta kalmadı. 02:45'te Hülya Hanım beni arayana kadar hiçbir şey duymadım. Balkona çıktığımda Cem Bey oradaydı, Rıza Bey suyun içindeydi. Nabzını kontrol ettim ama artık çok geçti. Yapabileceğim hiçbir şey yoktu komiserim. \nS: Rıza Bey'in ailesi, Damla Hanım özellikle, sizinle kurban arasında sadece profesyonel bir ilişki olmadığını iddia ediyor.\nC: [Hafifçe kızarır] Damla Hanım kıskanç ve güvensiz bir kadın. Rıza Bey bana güvenirdi çünkü onun krizlerini yönetebilen tek kişi bendim. Benim iş etiğim sabittir, hiçbir hastamla profesyonel sınırları aşmam.",
+      "signature": "P. Korkmaz",
+      "criticalNote": "Pınar soğukkanlı ve sadece hafif bir uyku ilacı verdiğini iddia ediyor. Kurbanın ilacı alkolle kasten karıştırmış olabileceği imasında bulunuyor."
+    },
+    {
+      "id": "damla-2",
+      "docCode": "027-D7",
+      "suspectId": "damla",
+      "session": 2,
+      "title": "İfade — Damla Aydoğan (2. Oturum)",
+      "date": "15.08.2025 · 16:30",
+      "meta": [
+        { "label": "Doğum", "value": "03.09.1994" },
+        { "label": "Meslek", "value": "Model / Rıza Tunalı'nın Nişanlısı" },
+        { "label": "Adres", "value": "İstanbul / Beşiktaş (Bebek)" }
+      ],
+      "note": "Temizlik personelinin Damla'yı 02:10'da VIP koridorda ağlarken gördüğünü belirtmesi üzerine tekrar çağrıldı.",
+      "content": "S: Damla Hanım, ilk ifadenizde odanızdan hiç çıkmadığınızı söylemiştiniz. Ancak bir temizlik görevlisi sizi saat 02:10'da VIP koridorda, Rıza Bey'in süitinin kapısında ağlarken görmüş. Neden yalan söylediniz?\nC: [Elleri titreyerek yüzünü kapatır] Yalan söylemek istemedim, sadece şüpheli durumuna düşmekten korktum! Evet, 02:10'da yukarı çıktım. Evlilik sözleşmesinin iptali konusunu onunla tekrar konuşmak, onu ikna etmek istedim. \nS: İçeri girdiniz mi? Rıza Bey ne durumdaydı?\nC: Kapı kilitli değildi, aralıktı. İçeri girdim, balkona doğru yürüdüm. Rıza jakuzinin içindeydi. Elinde viski bardağı vardı. \nS: Saat 02:10'da Rıza Bey hayatta mıydı yani?\nC: Evet! Yaşıyordu! Ama çok tuhaf görünüyordu. Gözleri kaymıştı, eliyle göğsünü tutuyordu. Bana doğru elini salladı, 'Git buradan, Pınar'ı çağır, midem bulanıyor' dedi. Sesi o kadar kısık ve hırıltılıydı ki korktum.\nS: Pınar'ı çağırdınız mı peki?\nC: [Ağlayarak] Hayır! O an o kadar öfkeliydim ki... Bana o haldeyken bile o kızı soruyordu. 'Ne halin varsa gör' deyip odadan çıktım. Elektrik falan kesilmemişti o sırada, ışıklar yanıyordu. Yemin ederim ben çıktığımda hala suyun üstünde oturuyordu, boğulmuyordu! \nS: Onu o halde bırakıp gittiniz. Bu ihmalden ölüme sebebiyet vermektir Damla Hanım.\nC: Bilmiyordum! Sadece sarhoş olduğunu, midesinin bulandığını düşündüm. Kalp krizi geçirdiğini veya öleceğini nereden bilebilirdim?",
+      "signature": "D. Aydoğan",
+      "criticalNote": "Damla olay saatinde (02:10) kurbanı yaşıyor halde ancak kriz geçirirken görmüş. Kurbanın o saatte fiziksel bir çöküşe geçtiği doğrulandı."
+    },
+    {
+      "id": "cem-2",
+      "docCode": "027-D8",
+      "suspectId": "cem",
+      "session": 2,
+      "title": "İfade — Cem Tunalı (2. Oturum)",
+      "date": "15.08.2025 · 17:15",
+      "meta": [
+        { "label": "Doğum", "value": "19.01.1991" },
+        { "label": "Meslek", "value": "Tunalı Denizcilik Yönetim Kurulu Üyesi" },
+        { "label": "Adres", "value": "İstanbul / Kadıköy (Fenerbahçe)" }
+      ],
+      "note": "Casino kamera kayıtlarında Cem'in 02:05'te casinodan ayrıldığı tespit edildi.",
+      "content": "S: Cem Bey, casino kameraları sizin 03:00'e kadar orada olduğunuzu doğrulamıyor. 02:05'te casinodan ayrılmışsınız. Ve barmen Bekir sizi asansöre doğru öfkeyle giderken görmüş. Nereye gittiniz?\nC: [Gömleğinin yakasını gevşetir] Tamam, kahretsin. Haklısınız. 02:05'te casinodan çıktım çünkü babamın o aptal nişanlısıyla veya vasiyet avukatlarıyla bir şeyler çevirdiğini düşündüm. VIP kata çıktım.\nS: Saat kaçta babanızın kapısındaydınız?\nC: 02:08 falandı. Ama içeri girmedim!\nS: Neden?\nC: Çünkü kapıya yaklaştığımda içeriden sesler geliyordu. Babam biriyle tartışıyordu.\nS: Kiminle?\nC: Kadın sesiydi ama Damla mıydı yoksa Pınar mıydı emin değilim. Babamın sesi boğuk çıkıyordu. 'Bunu bana yapamazsın' gibi bir şey dediğini duydum. Ben de aralarına girmemek için, biraz da midem bulandığı için geri döndüm, alt güverteye inip hava aldım.\nS: Geri döndünüz dediniz. Oysa 02:40'ta onu ölü buldunuz. O saate kadar nerede hava alıyordunuz?\nC: Söyledim ya, alt güvertede dolaşıyordum. Saat 02:40'ta tekrar yukarı çıktığımda ışıkların bir kısmı sönüktü. Odaya girdiğimde onu o halde buldum. Bakın komiserim, babamdan nefret ederdim ama onu ben öldürmedim. Onu o suya kim bastırdıysa, içerde tartıştığı o kadındır.",
+      "signature": "C. Tunalı",
+      "criticalNote": "Cem 02:05'te oradaydı ve içeriden kadın sesi duyduğunu iddia ediyor. Damla'nın 02:10'da orada olduğu biliniyor. Hikayeler örtüşüyor ancak Cem hala bazı detayları saklıyor gibi."
+    },
+    {
+      "id": "pinar-2",
+      "docCode": "027-D9",
+      "suspectId": "pinar",
+      "session": 2,
+      "title": "İfade — Pınar Korkmaz (2. Oturum)",
+      "date": "15.08.2025 · 18:30",
+      "meta": [
+        { "label": "Doğum", "value": "10.10.1997" },
+        { "label": "Meslek", "value": "Özel Hemşire" },
+        { "label": "Adres", "value": "İstanbul / Şişli" }
+      ],
+      "note": "İlk otopsi raporunda kurbanın kanında ölümcül dozda intravenöz (damar yoluyla) uygulanmış sedatif bulundu.",
+      "content": "S: Pınar Hanım, adli tıp uzmanları bize çok ilginç bir rapor sundu. Rıza Bey'in kanında sadece ağızdan alınan hap değil, doğrudan damar yolundan enjekte edilmiş ölümcül dozda 'Zolpidex' bulundu. Bu sizin 'hafif uyku ilacı verdim' beyanınızla tamamen çelişiyor.\nC: [Gergin bir şekilde elleriyle oynamaya başlar] Ben... Bakın, ben ona damar yoluyla hiçbir şey vermedim! Rıza Bey kendi ilaçlarını zaman zaman kendisi alırdı. Son günlerde acıları artmıştı. Benim tıbbi çantamdan enjektör ve Zolpidex çalmış olabilir.\nS: Damla Hanım, 02:10'da kurbanı jakuzide kriz geçirirken görmüş. Kurban sizden yardım istemesini söylemiş. Ancak siz 01:45'ten beri uyuduğunuzu iddia ediyorsunuz.\nC: Zaten uyuyordum! Neden bana inanmıyorsunuz? Damla o adamın servetine çökmek için yalan söylüyor. Eğer benden yardım isteseydi, odalarımız yan yana, duvardan seslense duyardım. \nS: VIP kattaki elektrik şalterinin sizin malzeme odanızda olduğunu biliyoruz. Kameraların kör olduğu o 15 dakika sizin kontrolünüzdeydi, değil mi?\nC: [Sesi yükselir] Bu bir komplo! Cem Bey babasını öldürüp suçu benim üzerime yıkmaya çalışıyor. O sigorta kutusu her an açık duruyor, asansörle çıkan herkes oraya girip şalteri indirebilir. Ben bir sağlıkçıyım, hayat kurtarırım, insan öldürmem. İlacı Rıza Bey viskiyle birlikte kendi kendine aşırı doz olarak aldı, olan biten bu!",
+      "signature": "P. Korkmaz",
+      "criticalNote": "Pınar'ın sakinliği kırıldı. Kurbanın ilacı kendisinin çaldığını iddia ederek savunma mekanizması geliştiriyor. Ancak Zolpidex damar yolundan uygulandığı için kurbanın bunu karanlıkta jakuzide kendi kendine yapması imkansız."
+    },
+    {
+      "id": "cem-3",
+      "docCode": "027-D10",
+      "suspectId": "cem",
+      "session": 3,
+      "title": "İfade — Cem Tunalı (3. Oturum)",
+      "date": "15.08.2025 · 19:45",
+      "meta": [
+        { "label": "Doğum", "value": "19.01.1991" },
+        { "label": "Meslek", "value": "Tunalı Denizcilik Yönetim Kurulu Üyesi" },
+        { "label": "Adres", "value": "İstanbul / Kadıköy (Fenerbahçe)" }
+      ],
+      "note": "Kamarotid güvenlik sistemi kayıtlarında Cem'in 02:20'de VIP odaya girdiği tespit edildi.",
+      "content": "S: Cem Bey, yalanlarınızın sonuna geldik. Kapıdaki dijital kilit kayıtlarına göre 02:20'de kendi yedek kartınızı kullanarak Rıza Bey'in süitine girmişsiniz. Elektriklerin kesik olduğu o 15 dakikanın tam ortasında. Şimdi bize gerçeği anlatın.\nC: [Başını ellerinin arasına alır, uzun süre susar] Tamam. Avukatımı istemiyorum, dürüst olacağım. Evet, 02:20'de içeri girdim. Karanlıktı. Balkondan boğuk su sesleri geliyordu.\nS: Babanızı siz mi öldürdünüz?\nC: Hayır! Yemin ederim ben yapmadım! Balkona çıktığımda babam suyun içindeydi, yüzüstü yatıyordu. Jakuzi köpürüp duruyordu. Onu sudan çıkarmaya çalıştım ama çok ağırdı, o sırada boynunu tuttum. Nefes almıyordu. Etrafta kimse yoktu.\nS: Neden yardım çağırmadınız? Neden 02:40'a kadar beklediniz?\nC: Çünkü panikledim! Aramızdaki o kavgadan sonra herkesin beni suçlayacağını biliyordum. Karanlıkta, babamın ölü bedeniyle orada yakalanmak istemedim. Çıktım, üstümü sildim, kendime gelmek için bekledim. Sonra hiçbir şey olmamış gibi 02:40'ta tekrar yukarı çıkıp onu 'yeni bulmuş' gibi yaptım.\nS: Karanlıkta odada başka birini hissettiniz mi?\nC: Odaya ilk girdiğimde, personel kapısının (Pınar'ın odasına açılan kapı) yavaşça kapandığını duydum. Orada biri vardı komiserim. O odaya sadece dışarıdan değil, içeriden de girildi. Lütfen bana inanın.",
+      "signature": "C. Tunalı",
+      "criticalNote": "Cem 02:20'de kurbanı ölü bulduğunu ve korkup sakladığını itiraf etti. Boynundaki hafif baskı izlerinin sebebi Cem'in kurbanı sudan çıkarmaya çalışması olabilir. Fail değil, ancak ağır bir yalan söyleyerek soruşturmayı yanılttı."
+    },
+    {
+      "id": "pinar-3",
+      "docCode": "027-D11",
+      "suspectId": "pinar",
+      "session": 3,
+      "title": "İfade — Pınar Korkmaz (3. Oturum)",
+      "date": "15.08.2025 · 21:00",
+      "meta": [
+        { "label": "Doğum", "value": "10.10.1997" },
+        { "label": "Meslek", "value": "Özel Hemşire" },
+        { "label": "Adres", "value": "İstanbul / Şişli" }
+      ],
+      "note": "Cem'in personel kapısıyla ilgili ifadesi ve Pınar'ın odasında bulunan ıslak havlu/boş enjektör delilleri sonrası çapraz sorgu.",
+      "content": "S: Pınar Korkmaz. Oyun bitti. Odanda yapılan aramada, çöp kutusunun dibine saklanmış boş bir Zolpidex enjektörü ve tuzlu jakuzi suyuyla sırılsıklam olmuş bir havlu bulduk. Cem 02:20'de içeri girdiğinde senin personel kapısından odana kaçtığını duymuş. İlacı damardan siz verdiniz, değil mi?\nC: [Sessizlik... Gözleri dolar ama bakışları serttir] Anlamıyorsunuz. O adamın ne kadar acı çektiğini, her gece nasıl inlediğini anlamıyorsunuz. Artık bir posaya dönmüştü ama kibrinden bunu kimseye göstermiyordu.\nS: Bu bir itiraf mı?\nC: İtiraf değil, bu bir kurtarıştı! O gece saat 01:45'te değil, 02:15'te odasına geçtim. Damla oradaydı, çıkıp gitmişti. Rıza kriz geçiriyordu, benden ilacı yüksek dozda vermemi, her şeyi bitirmemi istedi. \nS: Rıza Bey sizden kendisini öldürmenizi mi istedi? Buna inanmamızı mı bekliyorsunuz?\nC: [Güler] Neden inanmıyorsunuz? Oğlu parasını bekliyor, nişanlısı evlilik sözleşmesini düşünüyor. Onu sadece ben anlıyordum. Evet, şalteri indirdim çünkü kameralara yakalanmak istemedim. Balkona çıktım, ilacı damarına zerk ettim. Zaten bilinci kapanmak üzereydi. Vücudu suya kaydı. Onu tutmaya çalıştım, havlu o yüzden ıslandı. Ama direnmeye başladı, refleks olarak sudan çıkmaya çalıştı.\nS: Siz de onu suya geri ittiniz. Asfiksi izleri bu yüzden.\nC: Onu kurtardım komiserim. Onu o iğrenç ailesinden ve acılarından kurtardım. Ona huzuru ben verdim. Bunu bir cinayet olarak yazabilirsiniz ama ben görevimi yaptım.",
+      "signature": "P. Korkmaz",
+      "criticalNote": "Pınar Korkmaz cinayeti itiraf etti. Kurbanın talebiyle (ötanazi kisvesi altında) başladığını iddia etse de, elektrikleri kesip kasten şırınga etmesi ve kurban çırpındığında suya bastırması eylemin tasarlanmış, birinci derece cinayet olduğunu kanıtlıyor."
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "id": "027",
+  "codename": "Güverte",
+  "fullTitle": "Güverte Cinayeti",
+  "classification": "Standart",
+  "caseCode": "DAKT-027-GVR",
+  "victim": {
+    "name": "Rıza Tunalı",
+    "description": "62, Erkek, Armatör ve İş İnsanı. Otoriter, kontrolcü, zengin."
+  },
+  "location": "Antalya · Kemer Açıkları · MV Poseidon Kruvaziyeri",
+  "dateRange": "15 Ağustos 2025 · Gece 02:00 — 03:00",
+  "brief": {
+    "summary": "15 Ağustos gecesi, Antalya Kemer açıklarında seyreden lüks kruvaziyer MV Poseidon'da, geminin sahibi ünlü armatör Rıza Tunalı, VIP kamarasının özel balkonundaki jakuzide ölü bulundu. İlk bakışta alkol zehirlenmesine bağlı kalp krizi veya boğulma gibi görünse de, otopsi raporu olayın sıradan bir kaza olmadığını ortaya koyacaktır. Kurbanın kanında bulunan yüksek dozdaki sedatif ilaçlar ve boyun bölgesindeki hafif baskı izleri, bunun planlı bir cinayet olduğunu gösteriyor.\n\nSoruşturmayı zorlaştıran en büyük faktör, cinayet saatinde VIP güvertenin kameralarında tam 15 dakikalık bir 'kısa devre' kaynaklı kesinti yaşanmasıdır. Bu süre zarfında katil, kurbanın balkonuna ulaşmış, işini bitirmiş ve güverteden ayrılmıştır. Olay yeri açık deniz, ancak katil hala gemide, yolcuların veya mürettebatın arasında saklanmaktadır.",
+    "victimProfile": "Rıza Tunalı (62), sektörde acımasızlığıyla tanınan, her şeyi ve herkesi kontrol etmeyi seven bir armatördü. Son yıllarda sağlık sorunları yaşamaya başlamış, ancak şirketini devretmemek için direnmiştir. Oğlu Cem ile ilişkisi her zaman çatışmalı olmuştur. Özel hayatında ise kendisinden oldukça genç olan nişanlısı Damla ile fırtınalı bir ilişki içindedir. Son günlerde agresif tavırları artmış, vasiyetini değiştirmeyi planladığı dedikoduları gemide yayılmaya başlamıştır.",
+    "streamRecord": "VIP Güverte Güvenlik Kamerası (Gece 02:15 - 02:30 arası şüpheli elektrik kesintisi)",
+    "mission": "Sınırlı bir kapalı alan olan gemide, o gece VIP güverteye erişimi olan şüphelilerin ifadelerini çapraz sorguya çek ve yalan söyleyenleri tespit et. Cinayet saatindeki karanlık 15 dakikanın şifresini çöz.",
+    "warning": "Kurban direnmemiş ve jakuzide pasif halde ölüme terk edilmiştir. Katil büyük ihtimalle kurbanın zaaflarını veya sağlık durumunu kendi lehine kullanmıştır.",
+    "documentCount": 24,
+    "suspectCount": 6,
+    "timeOfIncident": "Gece 02:15 — 02:30 (tahmini)"
+  },
+  "suspects": [
+    {
+      "id": "pinar",
+      "name": "Pınar Korkmaz",
+      "age": 28,
+      "role": "Özel Hemşire / Bakıcı",
+      "tag": "GVR-SAĞ/PK",
+      "quote": "O gece ilacını verdim ve odama çekildim. Zaten uyumuştu.",
+      "isFail": true
+    },
+    {
+      "id": "cem",
+      "name": "Cem Tunalı",
+      "age": 34,
+      "role": "Rıza'nın Oğlu / YK Üyesi",
+      "tag": "GVR-YÖN/CT",
+      "quote": "Babam şirketi bir harabeye çeviriyordu, ama onu öldürecek kadar aptal değilim.",
+      "isFail": false
+    },
+    {
+      "id": "hulya",
+      "name": "Hülya Adıgüzel",
+      "age": 55,
+      "role": "Kruvaziyer Direktörü",
+      "tag": "GVR-MÜR/HA",
+      "quote": "Benim tek derdim yolcuların güvenliğiydi, Rıza Bey'in özel hayatı değil.",
+      "isFail": false
+    },
+    {
+      "id": "aras",
+      "name": "Aras Eraslan",
+      "age": 42,
+      "role": "Gemi Kaptanı",
+      "tag": "GVR-KPT/AE",
+      "quote": "Köşkteydim, rotayı kontrol ediyordum. Elektrik kesintisi tamamen teknik bir arızaydı.",
+      "isFail": false
+    },
+    {
+      "id": "bekir",
+      "name": "Bekir İskenderun",
+      "age": 25,
+      "role": "Güverte Barmeni",
+      "tag": "GVR-MÜR/Bİ",
+      "quote": "O saatte barı kapatıyordum, yukarıda neler döndüğünü bilemem.",
+      "isFail": false
+    },
+    {
+      "id": "damla",
+      "name": "Damla Aydoğan",
+      "age": 31,
+      "role": "Rıza'nın Nişanlısı",
+      "tag": "GVR-VIP/DA",
+      "quote": "Biz tartışmadık, sadece biraz hava almak istediğini söyledi.",
+      "isFail": false
+    }
+  ],
+  "diversityReport": {
+    "city": "Antalya (İlk kez İstanbul dışı sahil şeridi kullanıldı)",
+    "socioeconomic": "Ultra zengin bir kurban ve alt sınıftan (mürettebat) üst sınıfa kadar değişen bir şüpheli karması",
+    "victimAge": "62 (İlk kez 60 yaş üstü bir kurban kullanıldı)",
+    "motive": "Sağlık zafiyetinden yararlanma, vasiyet/şantaj sarmalı",
+    "locationType": "Gemi / Kruvaziyer (İlk kez tamamen kapalı ve hareketli bir dış mekân konsepti)",
+    "method": "İlaç etkileşimi ve suda boğulma süsü verilmiş mekanik asfiksi",
+    "victimProfession": "Armatör / İş İnsanı",
+    "perpetratorType": "Özel bakıcı / Hizmetli (İlk kez sağlık/bakım rolünde bir fail)",
+    "summary": "Bu vaka, önceki vakalardan coğrafya (Antalya), kurban yaşı (62), konum tipi (Gemi), cinayet yöntemi (İlaç+Suda boğma) ve fail/kurban ilişkisi açısından açıkça farklılaşarak 5'ten fazla boyutta çeşitlilik kurallarını sağlamaktadır."
+  }
+}
