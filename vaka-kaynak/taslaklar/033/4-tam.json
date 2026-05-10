@@ -805,7 +805,8 @@
           "isPerpetrator": true
         },
         {
-          "name": "Salih Çoruh"
+          "name": "Salih Çoruh",
+          "isUser": true
         }
       ],
       "messages": [

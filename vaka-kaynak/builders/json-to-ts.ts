@@ -133,6 +133,20 @@ function validate(): string[] {
     }
   }
 
+  const threads = caseData.messageThreads ?? [];
+  for (const t of threads) {
+    if (!t?.id) continue;
+    if (t.platform === "email") continue;
+    const userCount = (t.participants ?? []).filter(
+      (p: { isUser?: boolean }) => p.isUser === true,
+    ).length;
+    if (userCount !== 1) {
+      errors.push(
+        `messageThreads["${t.id}"]: sohbet balonu (${t.platform}) için tam olarak bir katılımcıda isUser: true olmalı — aksi halde tüm mesajlar aynı tarafta görünür. Şu an: ${userCount}.`,
+      );
+    }
+  }
+
   return errors;
 }
 

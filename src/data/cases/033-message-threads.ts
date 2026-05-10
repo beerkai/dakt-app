@@ -12,7 +12,8 @@ export const case033MessageThreads: MessageThread[] = [
         "isPerpetrator": true
       },
       {
-        "name": "Salih Çoruh"
+        "name": "Salih Çoruh",
+        "isUser": true
       }
     ],
     "messages": [

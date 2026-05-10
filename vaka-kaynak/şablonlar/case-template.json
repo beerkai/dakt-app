@@ -113,7 +113,7 @@
       }
     ],
     
-    "_messageThreads_yorum": "En az 1 mesaj zinciri. Vakaya uygun platform seçilir.",
+    "_messageThreads_yorum": "En az 1 mesaj zinciri. WhatsApp/iMessage/Instagram/Twitch: participants içinde tam 1 kişide isUser:true (sağ balon — telefon sahibi / karşı taraf); sender isimleri participants.name ile birebir eşleşmeli. Email bu kuraldan muaftır.",
     "messageThreads": [
       {
         "id": "[id]-[harf]",

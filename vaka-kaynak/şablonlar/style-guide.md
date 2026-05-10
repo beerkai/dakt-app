@@ -60,6 +60,15 @@ Veya doğrudan anlatım, sonra soru-cevap. Her ifade en az iki S/C bloğu içerm
 **Vurgulu kelimeler `<strong>` ile işaretlenir** (HTML'den geliyor — JSON'da da öyle olabilir, builder dönüştürür):
 > "Berk'in evine gittim ama **içeri girmedim**."
 
+## Dijital mesaj zincirleri (WhatsApp, iMessage, Instagram, Twitch)
+
+`MessageThread` bileşeni **balon hizasını** şöyle belirler: `participants` içinde **`isUser: true` olan tek kişi** = ekranda **sağ** (gönderen “bu telefonun sahibi” gibi). Diğer tüm gönderenler **sol** balonda.
+
+- **Zorunlu:** Balon kullanan her platform için (e-posta hariç) **tam olarak bir** katılımcıda `isUser: true` olmalı. Hiçbiri yoksa **tüm mesajlar sola** yığılır (yanlış görünüm).
+- **Öneri:** Fail balonda solda dursun diye `isUser: true`’yu genelde **faile bakan tarafta değil**; delilin çıkarıldığı cihazın “sahibi” veya diyalogdaki **karşı taraf** olacak şekilde ver (örn. vaka 082: `isUser` Volkan’da, Selim solda).
+- `messages[].sender` metni, `participants[].name` ile **birebir aynı** olmalı (isim eşleşmezse yine tek tarafa düşer).
+- **Referans:** `src/components/MessageThread.tsx` içinde `isFromUserPerspective`, `alignRight`.
+
 ## Belge başlıkları ve kodlama
 
 Her belgenin **kodu** olmalı. Format: `[VakaID]-[HARF]`

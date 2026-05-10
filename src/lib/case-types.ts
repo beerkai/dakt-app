@@ -111,6 +111,7 @@ export interface MessageParticipant {
   isVictim?: boolean;
   isPerpetrator?: boolean;
   avatar?: string;
+  /** Balon sohbetlerde sağ taraf (“bu telefonun kullanıcısı”). Thread başına tam bir kişide true olmalı (whatsapp / imessage / instagram / twitch). */
   isUser?: boolean;
 }
 

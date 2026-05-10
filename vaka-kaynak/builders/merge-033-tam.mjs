@@ -142,7 +142,7 @@ const messageThreads = [
     platform: thread.platform,
     participants: [
       { name: "Fırat Çoruh", isPerpetrator: true },
-      { name: "Salih Çoruh" },
+      { name: "Salih Çoruh", isUser: true },
     ],
     messages: thread.messages.map((m) => {
       const [datePart, ...timeParts] = m.timestamp.split(" ");

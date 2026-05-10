@@ -66,6 +66,8 @@ Aşama 1'in üzerine ekleme yapar. İçerik:
 - 6-10 ek belge: sözleşmeler, mali kayıtlar, mesaj zincirleri (MessageThread tipi), e-postalar, kameralar, vb.
 - En az 1 mesaj zinciri (Twitch/WhatsApp/Instagram/iMessage/email — vakaya uygun platform)
 
+**Mesaj zinciri (balon UI):** WhatsApp / iMessage / Instagram / Twitch thread’lerinde `participants` içinde **tam bir kişiye** `isUser: true` ver. Bu, sağ-sol balon ayrımını oluşturur; yoksa tüm mesajlar tek tarafta görünür. Ayrıntı: `vaka-kaynak/şablonlar/style-guide.md` → “Dijital mesaj zincirleri”. Final JSON’da `json-to-ts` bu kuralı doğrular.
+
 **ÖNEMLİ:** Deliller failin lehine ve aleyhine **dengeli** olmalı. Bazıları kırmızı ringa olabilir. Tek bir "smoking gun" değil, **3-4 katmanlı kanıt zinciri** olmalı.
 
 ### Aşama 4: Çözüm + Zaman Çizelgesi + Pano
