@@ -9,11 +9,10 @@ export const case016MessageThreads: MessageThread[] = [
     "participants": [
       {
         "name": "Pınar",
-        "isPerpetrator": false
+        "isUser": true
       },
       {
-        "name": "Cenk",
-        "isVictim": false
+        "name": "Cenk"
       }
     ],
     "messages": [
@@ -23,7 +22,8 @@ export const case016MessageThreads: MessageThread[] = [
         "type": "text",
         "text": "Kartların hepsini iptal etmiş inanabiliyor musun? Yemek bile söyleyemedim, kurye kapıda bekliyor iptal veriyor makine!",
         "time": "19:48",
-        "date": "14.02.2025"
+        "date": "14.02.2025",
+        "status": "read"
       },
       {
         "id": "msg-002",
@@ -31,7 +31,8 @@ export const case016MessageThreads: MessageThread[] = [
         "type": "text",
         "text": "Aşkım sakin ol, ben yollarım şimdi para. Senin annen cidden psikopat.",
         "time": "19:49",
-        "date": "14.02.2025"
+        "date": "14.02.2025",
+        "status": "read"
       },
       {
         "id": "msg-003",
@@ -39,7 +40,8 @@ export const case016MessageThreads: MessageThread[] = [
         "type": "text",
         "text": "Ona hayatının en kötü mesajını atacağım. Ne hali varsa görsün, umarım ölür ya bıktım cidden.",
         "time": "19:51",
-        "date": "14.02.2025"
+        "date": "14.02.2025",
+        "status": "read"
       },
       {
         "id": "msg-004",
@@ -47,7 +49,8 @@ export const case016MessageThreads: MessageThread[] = [
         "type": "text",
         "text": "Mesajımı attım, ama iletilmedi. Tek tikte kaldı.",
         "time": "20:05",
-        "date": "14.02.2025"
+        "date": "14.02.2025",
+        "status": "sent"
       },
       {
         "id": "msg-005",
@@ -55,7 +58,8 @@ export const case016MessageThreads: MessageThread[] = [
         "type": "text",
         "text": "Toplantıdadır o şimdi terör estiriyordur birilerine.",
         "time": "20:06",
-        "date": "14.02.2025"
+        "date": "14.02.2025",
+        "status": "read"
       }
     ]
   },
@@ -67,7 +71,7 @@ export const case016MessageThreads: MessageThread[] = [
     "participants": [
       {
         "name": "Vildan",
-        "isPerpetrator": false
+        "isUser": true
       },
       {
         "name": "Erkan",
@@ -81,7 +85,8 @@ export const case016MessageThreads: MessageThread[] = [
         "type": "text",
         "text": "Erkan saat sekiz oldu? Yemek rezervasyonu yanacak.",
         "time": "19:55",
-        "date": "14.02.2025"
+        "date": "14.02.2025",
+        "status": "read"
       },
       {
         "id": "msg-011",
@@ -89,7 +94,8 @@ export const case016MessageThreads: MessageThread[] = [
         "type": "text",
         "text": "Vildan çok üzgünüm, FSM projesiyle ilgili büyük bir kriz çıktı. Çizimleri yetiştirmem lazım, bu gece ofisteyim ben. Sen arkadaşlarınla çık istersen.",
         "time": "20:01",
-        "date": "14.02.2025"
+        "date": "14.02.2025",
+        "status": "read"
       },
       {
         "id": "msg-012",
@@ -97,7 +103,8 @@ export const case016MessageThreads: MessageThread[] = [
         "type": "text",
         "text": "Sevgililer gününde ofistesin demek? İnandım Erkan. İyi ne yapıyorsan yap.",
         "time": "20:05",
-        "date": "14.02.2025"
+        "date": "14.02.2025",
+        "status": "read"
       },
       {
         "id": "msg-013",
@@ -105,7 +112,8 @@ export const case016MessageThreads: MessageThread[] = [
         "type": "text",
         "text": "Podyumpark'a geçiyorum kızlarla. Zaten benim kocam hep 'çizim' yapar.",
         "time": "20:10",
-        "date": "14.02.2025"
+        "date": "14.02.2025",
+        "status": "read"
       },
       {
         "id": "msg-014",
@@ -113,7 +121,8 @@ export const case016MessageThreads: MessageThread[] = [
         "type": "text",
         "text": "İnanıp inanmamak sana kalmış. Çok işim var rahatsız etme beni.",
         "time": "20:15",
-        "date": "14.02.2025"
+        "date": "14.02.2025",
+        "status": "read"
       }
     ]
   }
