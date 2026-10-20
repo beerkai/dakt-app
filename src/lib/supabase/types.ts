@@ -42,3 +42,11 @@ export interface RoomPlayer {
   joined_at: string;
   left_at?: string;
 }
+
+export interface RoomTimelineRow {
+  room_id: string;
+  event_order: string[];
+  settled: boolean;
+  updated_by: string | null;
+  updated_at: string;
+}

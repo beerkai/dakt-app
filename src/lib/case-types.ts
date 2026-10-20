@@ -10,6 +10,7 @@ export type TabId =
   | "deliller"
   | "belgeler"
   | "teknik"
+  | "timeline"
   | "deduction"
   | "cozum";
 

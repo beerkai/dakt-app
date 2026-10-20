@@ -8,6 +8,7 @@ export const TAB_ROUTE_SLUG: Record<TabId, string> = {
   deliller: "deliller",
   belgeler: "belgeler",
   teknik: "teknik",
+  timeline: "timeline",
   deduction: "deduction",
   cozum: "cozum",
 };
@@ -20,6 +21,7 @@ export const TAB_LABEL: Record<TabId, string> = {
   deliller: "Deliller",
   belgeler: "Belgeler",
   teknik: "Teknik",
+  timeline: "Saat",
   deduction: "PANO",
   cozum: "Çözüm",
 };
@@ -32,6 +34,7 @@ const TAB_ORDER: TabId[] = [
   "deliller",
   "belgeler",
   "teknik",
+  "timeline",
   "deduction",
   "cozum",
 ];

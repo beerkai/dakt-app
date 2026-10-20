@@ -27,6 +27,7 @@ export default async function CozumPage({
         <CozumClient
           caseId={caseData.id}
           suspects={caseData.suspects}
+          requiresTimeline={isTabEnabled(caseData, "timeline")}
         />
       </Suspense>
     </section>
