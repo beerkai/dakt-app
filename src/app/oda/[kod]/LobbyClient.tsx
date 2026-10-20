@@ -16,6 +16,8 @@ import type {
   RoomPlayer,
 } from "@/lib/supabase/types";
 
+const LOBBY_POLL_MS = 8000;
+
 const mono =
   "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace]";
 const typewriter =
@@ -88,6 +90,34 @@ export default function LobbyClient({
       if (data) setPlayers(data as RoomPlayer[]);
     }
 
+    function handleRoomUpdate(updated: Room) {
+      setRoomState(updated);
+
+      if (updated.status === "playing" && updated.case_id) {
+        router.push(`/vaka/${updated.case_id}/brief?room=${updated.id}`);
+        return;
+      }
+      if (updated.status === "solved" || updated.status === "archived") {
+        router.push(`/oda/${updated.code}/sonlandirildi`);
+      }
+    }
+
+    async function refreshRoom() {
+      const { data } = await supabase
+        .from("rooms")
+        .select("*")
+        .eq("id", rid)
+        .maybeSingle();
+      if (data && (data as Room).status !== "waiting") {
+        handleRoomUpdate(data as Room);
+      }
+    }
+
+    function refreshAll() {
+      void refreshPlayers();
+      void refreshRoom();
+    }
+
     const channel = supabase
       .channel(`room-lobby:${rid}`)
       .on(
@@ -111,26 +141,7 @@ export default function LobbyClient({
           filter: `id=eq.${rid}`,
         },
         (payload) => {
-          const updated = payload.new as Room;
-          if (process.env.NODE_ENV === "development") {
-            // eslint-disable-next-line no-console
-            console.log("Lobby rooms UPDATE:", updated.status);
-          }
-          setRoomState(updated);
-
-          if (updated.status === "playing" && updated.case_id) {
-            const dest = `/vaka/${updated.case_id}/brief?room=${updated.id}`;
-            if (process.env.NODE_ENV === "development") {
-              // eslint-disable-next-line no-console
-              console.log("Lobby redirect:", dest);
-            }
-            router.push(dest);
-            return;
-          }
-          if (updated.status === "solved" || updated.status === "archived") {
-            router.push(`/oda/${updated.code}/sonlandirildi`);
-            return;
-          }
+          handleRoomUpdate(payload.new as Room);
         },
       )
       .subscribe((status) => {
@@ -142,7 +153,18 @@ export default function LobbyClient({
 
     void refreshPlayers();
 
+    // Realtime bağlantısı koparsa lobi takılı kalmasın.
+    const pollInterval = window.setInterval(refreshAll, LOBBY_POLL_MS);
+    function handleVisibility() {
+      if (document.visibilityState === "visible") refreshAll();
+    }
+    document.addEventListener("visibilitychange", handleVisibility);
+    window.addEventListener("focus", refreshAll);
+
     return () => {
+      window.clearInterval(pollInterval);
+      document.removeEventListener("visibilitychange", handleVisibility);
+      window.removeEventListener("focus", refreshAll);
       void supabase.removeChannel(channel);
     };
   }, [roomState.id, router, supabase]);
