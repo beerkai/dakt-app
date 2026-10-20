@@ -3,7 +3,10 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { MouseEvent } from "react";
 
-import { DAKT_GUEST_USERNAME_KEY } from "@/lib/guest-session";
+import {
+  migratePanoNotesKeys,
+  panoNotesStorageKey,
+} from "@/lib/guest-progress-transfer";
 
 const TTL_MS = 24 * 60 * 60 * 1000;
 const DEFAULT_TEXT = "Yeni not...";
@@ -14,15 +17,6 @@ export type PanoNote = {
   createdAt: number;
   rotation: number;
 };
-
-function notesStorageKey(caseId: string): string {
-  try {
-    const u = localStorage.getItem(DAKT_GUEST_USERNAME_KEY)?.trim() || "anon";
-    return `dakt_notes_${caseId}_${u}`;
-  } catch {
-    return `dakt_notes_${caseId}_anon`;
-  }
-}
 
 function randRotation(): number {
   return Math.round((Math.random() * 4 - 2) * 10) / 10;
@@ -75,7 +69,10 @@ export function PanoBoardClient({
   const persist = useCallback(
     (list: PanoNote[]) => {
       try {
-        localStorage.setItem(notesStorageKey(caseId), JSON.stringify(list));
+        localStorage.setItem(
+          panoNotesStorageKey(caseId),
+          JSON.stringify(list),
+        );
       } catch {
         /* ignore */
       }
@@ -85,7 +82,10 @@ export function PanoBoardClient({
 
   const reload = useCallback(() => {
     try {
-      setNotes(parseNotes(localStorage.getItem(notesStorageKey(caseId))));
+      migratePanoNotesKeys();
+      setNotes(
+        parseNotes(localStorage.getItem(panoNotesStorageKey(caseId))),
+      );
     } catch {
       setNotes([]);
     }
@@ -94,14 +94,6 @@ export function PanoBoardClient({
   useEffect(() => {
     reload();
     setHydrated(true);
-  }, [reload]);
-
-  useEffect(() => {
-    function onGuest() {
-      reload();
-    }
-    window.addEventListener("dakt_guest_changed", onGuest);
-    return () => window.removeEventListener("dakt_guest_changed", onGuest);
   }, [reload]);
 
   useLayoutEffect(() => {

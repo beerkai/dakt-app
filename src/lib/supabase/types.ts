@@ -18,6 +18,15 @@ export interface SolvedCase {
   solved_at: string;
 }
 
+export interface CasePlaythrough {
+  user_id: string;
+  case_id: string;
+  started_at: string;
+  attempt_count: number;
+  locked_suspect_ids: string[];
+  updated_at: string;
+}
+
 export type RoomStatus = "waiting" | "playing" | "solved" | "archived" | "terminated";
 
 export interface Room {
@@ -54,5 +63,13 @@ export interface RoomItemMarkRow {
   username: string;
   user_color: string;
   created_at: string;
+  updated_at: string;
+}
+
+export interface RoomTimelineRow {
+  room_id: string;
+  event_order: string[];
+  settled: boolean;
+  updated_by: string | null;
   updated_at: string;
 }

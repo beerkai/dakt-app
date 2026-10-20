@@ -140,6 +140,13 @@ function CaseGlyph({ tab, active }: { tab: TabId; active: boolean }) {
           <path d="M9.5 4.5v2.5M12 4.5v2.5M14.5 4.5v2.5M9.5 17v2.5M12 17v2.5M14.5 17v2.5M4.5 9.5H7M4.5 12H7M4.5 14.5H7M17 9.5h2.5M17 12h2.5M17 14.5h2.5" />
         </Glyph>
       );
+    case "timeline":
+      return (
+        <Glyph active={active}>
+          <circle cx="12" cy="12" r="7.5" />
+          <path d="M12 7.5v5l3.2 2" />
+        </Glyph>
+      );
     case "deduction":
       return (
         <Glyph active={active}>

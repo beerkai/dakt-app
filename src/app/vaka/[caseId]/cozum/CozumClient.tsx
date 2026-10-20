@@ -45,8 +45,19 @@ import {
   markedSuspectsStorageKey,
   readMarkedSuspects,
 } from "@/lib/marked-suspects-storage";
+import {
+  LOCKED_SUSPECTS_CHANGED_EVENT,
+  lockSuspectLocal,
+  readLockedSuspects,
+} from "@/lib/locked-suspects-storage";
+import { createClient } from "@/lib/supabase/client";
+import {
+  isSoloTimelineSettled,
+  TIMELINE_CHANGED_EVENT,
+} from "@/lib/timeline-storage";
+import { safeHtml } from "@/lib/html-sanitize";
 
-type ViewState = "voting" | "envelope" | "result";
+type ViewState = "voting" | "envelope" | "result" | "lesson";
 
 function cozumSessionKey(caseId: string) {
   return `dakt_v${caseId}_cozum_session`;
@@ -75,15 +86,20 @@ function VerdictDocumentHtml({ solutionHtml }: { solutionHtml: string }) {
 export function CozumClient({
   caseId,
   suspects,
+  requiresTimeline = false,
 }: {
   caseId: string;
   suspects: Suspect[];
+  /** Saat sekmesi varsa fail seçiminden önce kronoloji kilitlenmeli. */
+  requiresTimeline?: boolean;
 }) {
   const router = useRouter();
   const { user } = useAuth();
   const hasRecordedSolved = useRef(false);
   const voteSubmitLockRef = useRef(false);
   const flipHandledRef = useRef(false);
+  const [timelineSettled, setTimelineSettled] = useState(false);
+  const [timelineReady, setTimelineReady] = useState(false);
   const baseVoteSuspects: VoteSuspect[] = useMemo(
     () =>
       suspects.map((s) => ({
@@ -97,6 +113,7 @@ export function CozumClient({
   );
 
   const [markedSuspectIds, setMarkedSuspectIds] = useState<string[]>([]);
+  const [lockedSuspectIds, setLockedSuspectIds] = useState<string[]>([]);
 
   useEffect(() => {
     function syncMarked() {
@@ -116,18 +133,80 @@ export function CozumClient({
     };
   }, [caseId]);
 
+  // ═══ CO-OP STATE ═══
+  const roomId = useCaseRoomId(caseId);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function syncLocked() {
+      if (roomId) {
+        const supabase = createClient();
+        const { data, error } = await supabase
+          .from("room_elim_suspects")
+          .select("suspect_id")
+          .eq("room_id", roomId);
+        if (cancelled) return;
+        if (error) {
+          console.warn("[Cozum] locked suspects:", error.message);
+          setLockedSuspectIds(readLockedSuspects(caseId));
+          return;
+        }
+        setLockedSuspectIds(
+          (data ?? []).map((r) => String(r.suspect_id)).filter(Boolean),
+        );
+        return;
+      }
+      setLockedSuspectIds(readLockedSuspects(caseId));
+    }
+
+    void syncLocked();
+
+    function onLocal() {
+      if (!roomId) setLockedSuspectIds(readLockedSuspects(caseId));
+    }
+    window.addEventListener(LOCKED_SUSPECTS_CHANGED_EVENT, onLocal);
+    window.addEventListener("storage", onLocal);
+
+    const supabase = createClient();
+    const channel = roomId
+      ? supabase
+          .channel(`room-elim:${roomId}`)
+          .on(
+            "postgres_changes",
+            {
+              event: "*",
+              schema: "public",
+              table: "room_elim_suspects",
+              filter: `room_id=eq.${roomId}`,
+            },
+            () => {
+              void syncLocked();
+            },
+          )
+          .subscribe()
+      : null;
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener(LOCKED_SUSPECTS_CHANGED_EVENT, onLocal);
+      window.removeEventListener("storage", onLocal);
+      if (channel) void supabase.removeChannel(channel);
+    };
+  }, [caseId, roomId]);
+
   const voteSuspects: VoteSuspect[] = useMemo(() => {
+    const locked = new Set(lockedSuspectIds);
+    const open = baseVoteSuspects.filter((v) => !locked.has(v.suspectId));
     const marked = new Set(markedSuspectIds);
-    const order = new Map(
-      baseVoteSuspects.map((v, i) => [v.suspectId, i] as const),
-    );
-    return [...baseVoteSuspects].sort((a, b) => {
+    const order = new Map(open.map((v, i) => [v.suspectId, i] as const));
+    return [...open].sort((a, b) => {
       const aM = marked.has(a.suspectId) ? 0 : 1;
       const bM = marked.has(b.suspectId) ? 0 : 1;
       if (aM !== bM) return aM - bM;
       return (order.get(a.suspectId) ?? 0) - (order.get(b.suspectId) ?? 0);
     });
-  }, [baseVoteSuspects, markedSuspectIds]);
+  }, [baseVoteSuspects, markedSuspectIds, lockedSuspectIds]);
 
   const markedSet = useMemo(
     () => new Set(markedSuspectIds),
@@ -139,22 +218,25 @@ export function CozumClient({
   const [revealError, setRevealError] = useState<string | null>(null);
   const revealPromiseRef = useRef<Promise<Verdict | null> | null>(null);
 
-  function startReveal(suspectId: string) {
-    setRevealError(null);
-    revealPromiseRef.current = revealVerdict(caseId, suspectId)
-      .then((r) => {
-        if ("error" in r) {
-          setRevealError(r.error);
+  const startReveal = useCallback(
+    (suspectId: string) => {
+      setRevealError(null);
+      revealPromiseRef.current = revealVerdict(caseId, suspectId, roomId)
+        .then((r) => {
+          if ("error" in r) {
+            setRevealError(r.error);
+            return null;
+          }
+          setVerdict(r);
+          return r;
+        })
+        .catch(() => {
+          setRevealError("Sonuç alınamadı, bağlantını kontrol et.");
           return null;
-        }
-        setVerdict(r);
-        return r;
-      })
-      .catch(() => {
-        setRevealError("Sonuç alınamadı, bağlantını kontrol et.");
-        return null;
-      });
-  }
+        });
+    },
+    [caseId, roomId],
+  );
 
   const [view, setView] = useState<ViewState>("voting");
   const [selectedSuspect, setSelectedSuspect] = useState<string | null>(null);
@@ -166,9 +248,6 @@ export function CozumClient({
   type SuccessMeta = { durationMs: number; attempts: number; accuracy: number };
   const [successMeta, setSuccessMeta] = useState<SuccessMeta | null>(null);
   const [solvedRecorded, setSolvedRecorded] = useState(false);
-
-  // ═══ CO-OP STATE ═══
-  const roomId = useCaseRoomId(caseId);
   const [coopVoteComplete, setCoopVoteComplete] = useState(false);
   const [hostBypassEnabled, setHostBypassEnabled] = useState(false);
   const [coopIsHost, setCoopIsHost] = useState(false);
@@ -226,6 +305,67 @@ export function CozumClient({
   }, [view, isCorrect]);
 
   const isCoop = Boolean(roomId);
+
+  useEffect(() => {
+    if (!requiresTimeline) return;
+
+    let cancelled = false;
+
+    async function syncTimelineGate() {
+      if (roomId) {
+        const supabase = createClient();
+        const { data, error } = await supabase
+          .from("room_timeline")
+          .select("settled")
+          .eq("room_id", roomId)
+          .maybeSingle();
+        if (cancelled) return;
+        if (error) console.warn("[Cozum] timeline gate:", error.message);
+        setTimelineSettled(data?.settled === true);
+        setTimelineReady(true);
+        return;
+      }
+      setTimelineSettled(isSoloTimelineSettled(caseId));
+      setTimelineReady(true);
+    }
+
+    void syncTimelineGate();
+
+    function onSoloChange() {
+      if (!roomId) setTimelineSettled(isSoloTimelineSettled(caseId));
+    }
+    window.addEventListener(TIMELINE_CHANGED_EVENT, onSoloChange);
+    window.addEventListener("storage", onSoloChange);
+
+    const supabase = createClient();
+    const channel = roomId
+      ? supabase
+          .channel(`cozum-timeline-gate:${roomId}`)
+          .on(
+            "postgres_changes",
+            {
+              event: "*",
+              schema: "public",
+              table: "room_timeline",
+              filter: `room_id=eq.${roomId}`,
+            },
+            (payload) => {
+              const row = payload.new as { settled?: boolean } | null;
+              if (row && typeof row.settled === "boolean") {
+                setTimelineSettled(row.settled);
+              }
+            },
+          )
+          .subscribe()
+      : null;
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener(TIMELINE_CHANGED_EVENT, onSoloChange);
+      window.removeEventListener("storage", onSoloChange);
+      if (channel) void supabase.removeChannel(channel);
+    };
+  }, [requiresTimeline, roomId, caseId]);
 
   const {
     count: activePlayerCount,
@@ -324,7 +464,6 @@ export function CozumClient({
       return;
     }
     const ok = result.correct;
-    setView("result");
     setIsCorrect(ok);
     if (!ok && typeof navigator !== "undefined" && typeof navigator.vibrate === "function") {
       try {
@@ -343,22 +482,77 @@ export function CozumClient({
       });
     }
     if (ok) {
-      const start = readCaseStartTimestamp(caseId);
+      setView("result");
+      const attempts = result.attemptCount || readAttemptCount(caseId);
       const durationMs =
-        start != null ? Math.max(0, Date.now() - start) : 0;
-      const attempts = readAttemptCount(caseId);
-      const accuracy = accuracyPercentForAttempts(attempts);
-      setSuccessMeta({ durationMs, attempts, accuracy });
+        result.durationSeconds > 0
+          ? result.durationSeconds * 1000
+          : (() => {
+              const start = readCaseStartTimestamp(caseId);
+              return start != null ? Math.max(0, Date.now() - start) : 0;
+            })();
+      setSuccessMeta({
+        durationMs,
+        attempts,
+        accuracy: accuracyPercentForAttempts(attempts),
+      });
+      return;
     }
+
+    const lockedId = result.lockedSuspectId;
+    if (!roomId) {
+      setLockedSuspectIds(lockSuspectLocal(caseId, lockedId));
+    } else {
+      setLockedSuspectIds((prev) =>
+        prev.includes(lockedId) ? prev : [...prev, lockedId],
+      );
+    }
+    setView("lesson");
+    voteSubmitLockRef.current = false;
+  }
+
+  function continueAfterLesson() {
+    setView("voting");
+    setSelectedSuspect(null);
+    setVerdict(null);
+    setEnvelopeOpen(false);
+    setCoopVoteComplete(false);
+    flipHandledRef.current = false;
+    voteSubmitLockRef.current = false;
   }
 
   const btnMono =
     "[font-family:var(--font-jetbrains-mono),monospace] text-[10px] font-medium uppercase tracking-[0.26em] transition-colors duration-300 ease-in-out";
 
+  const clockLocked = !requiresTimeline || timelineSettled;
+  const showTimelineGate =
+    requiresTimeline && timelineReady && !timelineSettled && view === "voting";
+
   return (
     <>
+      {requiresTimeline && !timelineReady && view === "voting" ? (
+        <p
+          className={`${btnMono} mb-6 text-[var(--kraft)]`}
+          style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
+        >
+          Kronoloji durumu kontrol ediliyor…
+        </p>
+      ) : null}
+
+      {showTimelineGate ? (
+        <div className="cozum-callout-warn mb-6">
+          Faili seçmeden önce saati oturt.{" "}
+          <Link
+            href={caseTabHref(caseId, "timeline", roomId)}
+            className="underline"
+          >
+            Kronoloji sekmesine git
+          </Link>
+        </div>
+      ) : null}
+
       {/* ═══ CO-OP OYLAMA OVERLAY ═══ */}
-      {isCoop && !coopVoteComplete && roomId && (
+      {clockLocked && isCoop && !coopVoteComplete && roomId && (
         user?.id ? (
           playersLoading || activePlayerCount < 1 ? (
             <p
@@ -372,11 +566,11 @@ export function CozumClient({
           ) : (
             <CoopVotingOverlay
               roomId={roomId}
-              suspects={suspects.map((s) => ({
-                id: s.id,
+              suspects={voteSuspects.map((s) => ({
+                id: s.suspectId,
                 name: s.name,
                 role: s.role,
-                code: s.code,
+                code: s.idLine,
               }))}
               activeUserIds={activeUserIds}
               userId={user.id}
@@ -412,7 +606,7 @@ export function CozumClient({
       ) : null}
 
       {/* ═══ SOLO OYLAMA (mevcut akış) ═══ */}
-      {view === "voting" && (!isCoop || coopVoteComplete) && (
+      {clockLocked && view === "voting" && (!isCoop || coopVoteComplete) && (
         <>
           <div className="cozum-callout-warn">
             ⚠ DİKKAT — Şüpheli listesinden faili işaret et. Yanlış tahmin: fail
@@ -645,63 +839,66 @@ export function CozumClient({
       )}
 
 
-      {view === "result" && !isCorrect && (
-        <div className="cozum-result-fail">
-          <div
-            className="mx-auto mb-8 inline-block border-4 border-double px-5 py-3 text-[clamp(1.1rem,3.5vw,1.75rem)] font-bold uppercase tracking-[0.22em] text-[var(--classified)]"
-            style={{
-              fontFamily: "var(--font-jetbrains-mono), monospace",
-              transform: "rotate(-5deg)",
-            }}
-          >
-            Classified
-          </div>
-          <h2
-            className="mb-4 text-[clamp(2rem,6vw,3.25rem)] font-semibold italic text-[var(--bordeaux-bright)]"
-            style={{ fontFamily: "var(--font-cormorant), serif" }}
-          >
-            FAİL KAÇTI
-          </h2>
+      {view === "lesson" && verdict && !verdict.correct ? (
+        <div className="cozum-result-fail cozum-lesson">
           <p
-            className="mb-6 text-[11px] uppercase tracking-[0.22em] text-[var(--subtitle-text)]"
+            className="mb-4 text-[11px] uppercase tracking-[0.22em] text-[var(--subtitle-text)]"
             style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
           >
-            DOSYA №{caseId} · KAPATILDI · ÇÖZÜLEMEDİ
+            DOSYA №{caseId} · ELEME · {selectedName}
           </p>
+          <h2
+            className="mb-4 text-[clamp(1.75rem,5vw,2.75rem)] font-semibold italic text-[var(--bordeaux-bright)]"
+            style={{ fontFamily: "var(--font-cormorant), serif" }}
+          >
+            Bu şüpheli fail değil
+          </h2>
           <p
-            className="mx-auto mb-10 max-w-lg text-[16px] leading-[1.55] text-[var(--body-text)]"
+            className="mx-auto mb-6 max-w-lg text-[15px] leading-[1.55] text-[var(--body-text)]"
             style={{ fontFamily: "var(--font-newsreader), serif" }}
           >
             {(() => {
-              const message =
-                verdict && !verdict.correct ? verdict.wrongAnswerMessage : "";
+              const message = verdict.wrongAnswerMessage;
               const [a, b] = message.split("[SECILEN_ISIM]");
               return (
                 <>
                   {a}
-                  <strong className="text-[var(--kraft-light)]">{selectedName}</strong>
+                  <strong className="text-[var(--kraft-light)]">
+                    {selectedName}
+                  </strong>
                   {b}
                 </>
               );
             })()}
           </p>
+          <article
+            className="cozum-lesson-card mx-auto mb-10 max-w-lg"
+            dangerouslySetInnerHTML={safeHtml(verdict.lessonHtml)}
+          />
           <div className="flex flex-col gap-3 sm:mx-auto sm:max-w-md">
-            <Link
-              href="/davalar"
-              className={`${btnMono} inline-flex justify-center border border-[var(--bordeaux)] bg-[var(--bordeaux)] py-4 text-[var(--paper)] hover:bg-[var(--bordeaux-bright)]`}
-            >
-              Yeni Vakaya Geç
-            </Link>
+            {voteSuspects.length > 0 ? (
+              <button
+                type="button"
+                onClick={continueAfterLesson}
+                className={`${btnMono} border border-[var(--bordeaux)] bg-[var(--bordeaux)] py-4 text-[var(--paper)] hover:bg-[var(--bordeaux-bright)]`}
+              >
+                ▸ Başka şüpheli seç
+              </button>
+            ) : (
+              <p className="cozum-callout-warn text-center">
+                Açık şüpheli kalmadı. Dosyayı yeniden incele.
+              </p>
+            )}
             <button
               type="button"
               onClick={() => router.push(caseTabHref(caseId, "brief", roomId))}
-              className={`${btnMono} border border-[var(--kraft)] bg-transparent py-4 text-[var(--kraft-light)] hover:border-[var(--kraft-light)] hover:bg-[rgba(255,255,255,0.04)]`}
+              className={`${btnMono} border border-[var(--kraft)] bg-transparent py-4 text-[var(--kraft-light)] hover:border-[var(--kraft-light)]`}
             >
-              Bu Vakayı Tekrar İncele
+              Dosyaya dön
             </button>
           </div>
         </div>
-      )}
+      ) : null}
     </>
   );
 }
