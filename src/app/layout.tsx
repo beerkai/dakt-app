@@ -80,22 +80,13 @@ export const metadata: Metadata = {
     title: "D.A.K.T. — Division of Analytic Knowledge & Testimonies",
     description: "Co-op suç çözme oyunu. Belgeler, ifadeler, çözüm.",
     siteName: "D.A.K.T.",
-    images: [
-      {
-        url: "/web-app-manifest-512x512.png",
-        width: 512,
-        height: 512,
-        alt: "D.A.K.T.",
-      },
-    ],
   },
 
   // Twitter Card
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "D.A.K.T.",
     description: "Co-op suç çözme oyunu.",
-    images: ["/web-app-manifest-512x512.png"],
   },
 };
 
