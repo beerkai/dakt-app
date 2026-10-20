@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 
-import SiteFooter from "@/components/SiteFooter";
 import { checkAdmin } from "@/lib/admin";
 
 import GMNav from "./GMNav";
@@ -23,20 +22,12 @@ export default async function YonetimLayout({
   }
 
   return (
-    <div className="gm-theme flex min-h-full flex-1 flex-col">
-      <div
-        className="gm-perforation gm-perforation-left"
-        aria-hidden="true"
-      />
-      <div
-        className="gm-perforation gm-perforation-right"
-        aria-hidden="true"
-      />
-
-      <GMNav username={profile?.username ?? "DİREKTÖR"} />
-
-      <div className="gm-container flex-1">{children}</div>
-      <SiteFooter variant="marketing" />
+    <div className="gm-theme gm-shell">
+      <style>{`body::before,body::after{content:none}`}</style>
+      <GMNav username={profile?.username ?? "Direktör"} />
+      <div className="gm-main">
+        <div className="gm-container">{children}</div>
+      </div>
     </div>
   );
 }

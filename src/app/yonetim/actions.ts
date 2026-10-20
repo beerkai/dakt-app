@@ -130,12 +130,16 @@ export async function unsuspendUser(userId: string, username: string) {
 export async function deleteUser(userId: string, username: string) {
   await ensureAdmin();
 
-  const supabase = await createClient();
-  const { data: targetProfile } = await supabase
+  const adminDb = createAdminClient();
+  const { data: targetProfile, error: roleError } = await adminDb
     .from("profiles")
     .select("role")
     .eq("id", userId)
-    .single();
+    .maybeSingle();
+
+  if (roleError) {
+    return { error: "Rol okunamadı: " + roleError.message };
+  }
 
   if (targetProfile?.role === "admin") {
     return { error: "Admin hesapları silinemez. Önce rolü değiştir." };
@@ -357,14 +361,27 @@ export async function changeUserRole(
 
   const adminDb = createAdminClient();
 
-  // Güvenlik 2: Son admin'i indirme engeli
-  if (newRole === "user") {
-    const { data: adminRows } = await adminDb
+  const { data: target, error: targetError } = await adminDb
+    .from("profiles")
+    .select("role")
+    .eq("id", userId)
+    .maybeSingle();
+
+  if (targetError) {
+    return { error: "Rol okunamadı: " + targetError.message };
+  }
+  if (!target) return { error: "Kullanıcı bulunamadı" };
+
+  if (newRole === "user" && target.role === "admin") {
+    const { count, error: countError } = await adminDb
       .from("profiles")
-      .select("id")
+      .select("id", { count: "exact", head: true })
       .eq("role", "admin");
 
-    if ((adminRows?.length ?? 0) <= 1) {
+    if (countError) {
+      return { error: "Yönetici sayısı okunamadı: " + countError.message };
+    }
+    if ((count ?? 0) <= 1) {
       return {
         error:
           "Son yöneticiyi indiremezsin. Önce başka bir yönetici tanımla.",

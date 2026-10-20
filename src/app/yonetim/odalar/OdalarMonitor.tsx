@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import ConfirmModal from "@/components/ConfirmModal";
+import { fetchAllRows } from "@/lib/fetch-all-rows";
 import { createClient } from "@/lib/supabase/client";
 
 import { adminTerminateRoom } from "../actions";
@@ -49,26 +50,36 @@ export default function OdalarMonitor({
     const supabase = createClient();
 
     async function refetch() {
-      const { data: roomsData } = await supabase
-        .from("rooms")
-        .select("*")
-        .in("status", ["waiting", "playing"])
-        .order("created_at", { ascending: false });
+      try {
+      const roomsData = await fetchAllRows<Room>((from, to) =>
+        supabase
+          .from("rooms")
+          .select("*")
+          .in("status", ["waiting", "playing"])
+          .order("created_at", { ascending: false })
+          .range(from, to),
+      );
 
-      const roomIds = roomsData?.map((r) => r.id) ?? [];
+      const roomIds = roomsData.map((r) => r.id);
 
-      const { data: playersData } =
+      const playersData =
         roomIds.length > 0
-          ? await supabase
-              .from("room_players")
-              .select("*")
-              .in("room_id", roomIds)
-              .is("left_at", null)
-          : { data: [] };
+          ? await fetchAllRows<Player>((from, to) =>
+              supabase
+                .from("room_players")
+                .select("*")
+                .in("room_id", roomIds)
+                .is("left_at", null)
+                .range(from, to),
+            )
+          : [];
 
-      setRooms((roomsData ?? []) as Room[]);
-      setPlayers((playersData ?? []) as Player[]);
+      setRooms(roomsData);
+      setPlayers(playersData);
       setLastRefresh(new Date());
+      } catch (err) {
+        console.error(err);
+      }
     }
 
     const interval = setInterval(refetch, 5000);
@@ -168,16 +179,7 @@ export default function OdalarMonitor({
               <div key={room.id} className="gm-card">
                 <div className="gm-card-corner" />
 
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "baseline",
-                    marginBottom: 16,
-                    paddingBottom: 12,
-                    borderBottom: "1px dashed var(--gm-rule-soft)",
-                  }}
-                >
+                <div className="gm-room-head">
                   <div>
                     <span
                       style={{
@@ -266,18 +268,7 @@ export default function OdalarMonitor({
                       const isHost = p.user_id === room.host_user_id;
                       const email = emailMap[p.user_id];
                       return (
-                        <div
-                          key={`${room.id}-${p.user_id}`}
-                          style={{
-                            display: "grid",
-                            gridTemplateColumns: "20px 1fr 1fr 80px",
-                            gap: 12,
-                            alignItems: "baseline",
-                            fontFamily: "var(--font-jetbrains-mono), monospace",
-                            fontSize: 11,
-                            padding: "6px 0",
-                          }}
-                        >
+                        <div key={`${room.id}-${p.user_id}`} className="gm-player-row">
                           <span style={{ color: "var(--gm-accent)" }}>
                             {isHost ? "★" : "·"}
                           </span>
@@ -301,13 +292,7 @@ export default function OdalarMonitor({
                               </span>
                             ) : null}
                           </span>
-                          <span
-                            style={{
-                              color: "var(--gm-meta)",
-                              fontFamily: "var(--font-newsreader), serif",
-                              fontSize: 11,
-                            }}
-                          >
+                          <span className="gm-player-email" style={{ color: "var(--gm-meta)" }}>
                             {email ?? "misafir"}
                           </span>
                           <span
@@ -358,7 +343,7 @@ export default function OdalarMonitor({
           if (terminateModal) void handleTerminate(terminateModal);
         }}
         title="Odayı zorla sonlandır?"
-        description="Tüm oyuncular sonlandırma sayfasına yönlenir. Bu aksiyon GERİ ALINAMAZ. Sadece sorunlu odalar için kullan."
+        description="Oda arşivlenir ve içindeki oyuncular dava listesine döner. Bu aksiyon geri alınamaz."
         confirmText="Sonlandır"
         cancelText="İptal"
         variant="danger"

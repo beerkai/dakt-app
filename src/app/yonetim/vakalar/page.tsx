@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 
 import { getAllCaseAdminSummaries } from "@/lib/case-helpers";
+import { fetchAllRows } from "@/lib/fetch-all-rows";
 
 import GMPageFooter from "../components/GMPageFooter";
 import GMPageHeader from "../components/GMPageHeader";
@@ -21,9 +22,15 @@ export default async function VakalarPage() {
 
   const metaMap = new Map(metadata?.map((m) => [m.case_id, m]) ?? []);
 
-  const { data: allSolves } = await supabase
-    .from("solved_cases")
-    .select("case_id, attempt_count, duration_seconds");
+  const allSolves = await fetchAllRows<{
+    case_id: string;
+    attempt_count: number;
+  }>((from, to) =>
+    supabase
+      .from("solved_cases")
+      .select("case_id, attempt_count")
+      .range(from, to),
+  );
 
   const statsMap = new Map<string, { count: number; firstTry: number }>();
   allSolves?.forEach((s) => {
@@ -66,7 +73,7 @@ export default async function VakalarPage() {
         {allCases.map((c, idx) => {
           const meta = metaMap.get(c.id);
           const stats = statsMap.get(c.id);
-          const status = meta?.status ?? "published";
+          const status = meta?.status ?? "missing";
 
           return (
             <div key={c.id} className="gm-list-row">

@@ -20,10 +20,19 @@ export default async function AnalystDetailPage({
   const { id } = await params;
   const supabase = await createClient();
 
-  const [profileRes, email] = await Promise.all([
-    supabase.from("profiles").select("*").eq("id", id).maybeSingle(),
-    getUserEmail(id),
-  ]);
+  const profileRes = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", id)
+    .maybeSingle();
+  let email: string | null = null;
+  let emailWarning: string | null = null;
+  try {
+    email = await getUserEmail(id);
+  } catch (err) {
+    emailWarning =
+      err instanceof Error ? err.message : "E-posta okunamadı";
+  }
 
   const profile = profileRes.data;
 
@@ -135,7 +144,11 @@ export default async function AnalystDetailPage({
               fontSize: 12,
             }}
           >
-            {email ?? (
+            {emailWarning ? (
+              <em style={{ color: "var(--gm-danger)" }}>{emailWarning}</em>
+            ) : email ? (
+              email
+            ) : (
               <em style={{ color: "var(--gm-meta)" }}>— misafir hesap</em>
             )}
           </dd>

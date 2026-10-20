@@ -274,16 +274,8 @@ export default function AnalystActions({
               value={newUsername}
               onChange={(e) => setNewUsername(e.target.value)}
               autoFocus
-              style={{
-                width: "100%",
-                padding: "10px 12px",
-                border: "1px solid var(--gm-rule)",
-                background: "var(--gm-paper-bright)",
-                color: "var(--gm-ink)",
-                fontFamily: "var(--font-jetbrains-mono), monospace",
-                fontSize: 13,
-                marginBottom: 24,
-              }}
+              className="gm-input"
+              style={{ marginBottom: 24 }}
             />
             <div className="confirm-modal-actions">
               <button

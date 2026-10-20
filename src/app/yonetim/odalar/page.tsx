@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { getAllUserEmails } from "@/lib/admin";
+import { fetchAllRows } from "@/lib/fetch-all-rows";
 import { createClient } from "@/lib/supabase/server";
 
 import GMPageFooter from "../components/GMPageFooter";
@@ -14,11 +15,22 @@ export const metadata = {
 export default async function OdalarPage() {
   const supabase = await createClient();
 
-  const { data: rooms } = await supabase
-    .from("rooms")
-    .select("*")
-    .in("status", ["waiting", "playing"])
-    .order("created_at", { ascending: false });
+  const rooms = await fetchAllRows<{
+    id: string;
+    code: string;
+    case_id: string;
+    host_user_id: string;
+    status: string;
+    created_at: string;
+    started_at: string | null;
+  }>((from, to) =>
+    supabase
+      .from("rooms")
+      .select("*")
+      .in("status", ["waiting", "playing"])
+      .order("created_at", { ascending: false })
+      .range(from, to),
+  );
 
   const roomIds = rooms?.map((r) => r.id) ?? [];
 
@@ -31,7 +43,12 @@ export default async function OdalarPage() {
           .is("left_at", null)
       : { data: [] };
 
-  const emailMap = await getAllUserEmails();
+  let emailMap = new Map<string, string | null>();
+  try {
+    emailMap = await getAllUserEmails();
+  } catch {
+    emailMap = new Map();
+  }
 
   return (
     <>

@@ -11,6 +11,7 @@ interface Props {
 }
 
 const statusOptions = [
+  { value: "missing", label: "KAYIT YOK", color: "var(--gm-warn)" },
   { value: "draft", label: "TASLAK", color: "var(--gm-meta)" },
   { value: "test", label: "TEST", color: "var(--gm-stamp-blue)" },
   { value: "published", label: "YAYINDA", color: "var(--gm-stamp-green)" },
@@ -24,7 +25,7 @@ export default function CaseStatusControl({ caseId, currentStatus }: Props) {
 
   async function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
     const newStatus = e.target.value;
-    if (newStatus === status) return;
+    if (newStatus === status || newStatus === "missing") return;
 
     if (
       !confirm(
@@ -51,24 +52,19 @@ export default function CaseStatusControl({ caseId, currentStatus }: Props) {
 
   return (
     <select
+      className="gm-select"
       value={status}
       onChange={handleChange}
       disabled={loading}
       style={{
-        fontFamily: "var(--font-jetbrains-mono), monospace",
-        fontSize: 10,
-        letterSpacing: "0.18em",
-        padding: "6px 10px",
-        border: `1px solid ${current?.color ?? "var(--gm-rule)"}`,
-        background: "var(--gm-paper)",
-        color: current?.color ?? "var(--gm-ink)",
+        borderColor: current?.color ?? "var(--gm-line)",
+        color: current?.color ?? "var(--gm-text)",
         cursor: loading ? "wait" : "pointer",
-        textTransform: "uppercase",
         opacity: loading ? 0.5 : 1,
       }}
     >
       {statusOptions.map((opt) => (
-        <option key={opt.value} value={opt.value}>
+        <option key={opt.value} value={opt.value} disabled={opt.value === "missing"}>
           {opt.label}
         </option>
       ))}

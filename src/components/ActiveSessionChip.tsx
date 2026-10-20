@@ -47,6 +47,7 @@ export default function ActiveSessionChip() {
   }, []);
 
   if (!session) return null;
+  if (pathname?.startsWith("/yonetim") || pathname?.startsWith("/gm")) return null;
 
   if (pathname?.startsWith(`/vaka/${session.caseId}`)) return null;
 

@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 interface Props {
-  initialActiveRooms: number;
-  initialPlaying: number;
-  initialWaiting: number;
+  initialActiveRooms: number | null;
+  initialPlaying: number | null;
+  initialWaiting: number | null;
 }
 
 export default function LiveRoomCount({
@@ -23,15 +23,25 @@ export default function LiveRoomCount({
     const supabase = createClient();
 
     async function refetch() {
-      const { data } = await supabase
-        .from("rooms")
-        .select("status")
-        .in("status", ["waiting", "playing"]);
+      const [all, playingRows, waitingRows] = await Promise.all([
+        supabase
+          .from("rooms")
+          .select("id", { count: "exact", head: true })
+          .in("status", ["waiting", "playing"]),
+        supabase
+          .from("rooms")
+          .select("id", { count: "exact", head: true })
+          .eq("status", "playing"),
+        supabase
+          .from("rooms")
+          .select("id", { count: "exact", head: true })
+          .eq("status", "waiting"),
+      ]);
 
-      if (data) {
-        setActive(data.length);
-        setPlaying(data.filter((r) => r.status === "playing").length);
-        setWaiting(data.filter((r) => r.status === "waiting").length);
+      if (!all.error && !playingRows.error && !waitingRows.error) {
+        setActive(all.count ?? 0);
+        setPlaying(playingRows.count ?? 0);
+        setWaiting(waitingRows.count ?? 0);
       }
     }
 
@@ -59,10 +69,10 @@ export default function LiveRoomCount({
       <span className="gm-stat-label">Aktif Oda</span>
       <div className="gm-stat-value">
         <span className="gm-live-dot" />
-        {active}
+        {active ?? "—"}
       </div>
       <div className="gm-stat-sub">
-        {playing} oynanıyor · {waiting} bekliyor
+        {playing ?? "—"} oynanıyor · {waiting ?? "—"} bekliyor
       </div>
     </div>
   );

@@ -20,6 +20,7 @@ const ACTION_LABELS: Record<string, string> = {
   change_case_status: "Vaka Durumu Değişti",
   change_username: "Username Değiştirildi",
   admin_terminate_room: "Oda Zorla Sonlandırıldı",
+  coop_host_bypass_change: "Co-op oylama kuralı değişti",
 };
 
 export default async function SicilPage() {

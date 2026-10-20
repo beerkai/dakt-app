@@ -10,19 +10,12 @@ export default function GMPageHeader({
   reference,
 }: GMPageHeaderProps) {
   return (
-    <div className="gm-meta-strip">
-      <div className="gm-meta-cell">
-        <span className="gm-meta-label">SECTION</span>
-        <span className="gm-meta-value">{section}</span>
+    <header className="gm-pagehead">
+      <p className="gm-kicker">{section}</p>
+      <div className="gm-pagehead-row">
+        <p className="gm-page-title">{subject}</p>
+        <span className="gm-ref">{reference}</span>
       </div>
-      <div className="gm-meta-cell gm-meta-cell-center">
-        <span className="gm-meta-label">SUBJECT</span>
-        <span className="gm-meta-value">{subject}</span>
-      </div>
-      <div className="gm-meta-cell gm-meta-cell-right">
-        <span className="gm-meta-label">REFERENCE</span>
-        <span className="gm-meta-value">{reference}</span>
-      </div>
-    </div>
+    </header>
   );
 }

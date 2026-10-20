@@ -6,7 +6,13 @@ import SiteFooter from "@/components/SiteFooter";
 const btnMono =
   "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace] text-[10px] font-medium uppercase tracking-[0.26em] transition-colors";
 
-export default function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams?: Promise<{ error?: string }>;
+}) {
+  const unauthorized = ((await searchParams)?.error ?? "") === "unauthorized";
+
   return (
     <main className="relative z-[1] flex min-h-full flex-1 flex-col">
       {/* —— A) Hero —— */}
@@ -24,6 +30,14 @@ export default function Home() {
         />
 
         <div className="relative z-[1]">
+          {unauthorized ? (
+            <p
+              className="mb-6 border border-[var(--bordeaux-bright)] bg-[var(--anthracite)] px-4 py-3 text-[15px] leading-relaxed text-[var(--kraft-light)] [font-family:var(--font-newsreader),serif]"
+              role="alert"
+            >
+              Genel Müdürlük yalnızca yöneticilere açık.
+            </p>
+          ) : null}
           <div className="classification-strip mb-6 md:mb-8" lang="en">
             EYES ONLY · CLASSIFIED · ANALYST CLEARANCE REQUIRED
           </div>

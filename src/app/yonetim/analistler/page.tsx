@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { getAllUserEmails } from "@/lib/admin";
+import { fetchAllRows } from "@/lib/fetch-all-rows";
 import GMPageHeader from "../components/GMPageHeader";
 import GMPageFooter from "../components/GMPageFooter";
 import AnalistlerSearch from "./AnalistlerSearch";
@@ -30,16 +31,23 @@ export default async function AnalistlerPage() {
     )
     .order("created_at", { ascending: false });
 
-  const { data: solvedCounts } = await supabase
-    .from("solved_cases")
-    .select("user_id");
+  const solvedCounts = await fetchAllRows<{ user_id: string }>((from, to) =>
+    supabase.from("solved_cases").select("user_id").range(from, to),
+  );
 
   const solvedMap = new Map<string, number>();
   solvedCounts?.forEach((s) => {
     solvedMap.set(s.user_id, (solvedMap.get(s.user_id) ?? 0) + 1);
   });
 
-  const emailMap = await getAllUserEmails();
+  let emailMap = new Map<string, string | null>();
+  let emailWarning: string | null = null;
+  try {
+    emailMap = await getAllUserEmails();
+  } catch (err) {
+    emailWarning =
+      err instanceof Error ? err.message : "E-posta listesi okunamadı";
+  }
 
   // Profilleri zenginleştir
   const enriched: ProfileWithMeta[] = (profiles ?? []).map((p) => ({
@@ -65,6 +73,7 @@ export default async function AnalistlerPage() {
         yoneticiler={yoneticiler}
         testerlar={testerlar}
         analistler={analistler}
+        emailWarning={emailWarning}
       />
 
       <GMPageFooter section="RANK" page="02" />

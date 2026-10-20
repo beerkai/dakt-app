@@ -20,6 +20,7 @@ interface Props {
   yoneticiler: ProfileWithMeta[];
   testerlar: ProfileWithMeta[];
   analistler: ProfileWithMeta[];
+  emailWarning?: string | null;
 }
 
 function isOnline(lastSeen: string | null): boolean {
@@ -123,26 +124,24 @@ export default function AnalistlerSearch({
   yoneticiler,
   testerlar,
   analistler,
+  emailWarning,
 }: Props) {
   const [query, setQuery] = useState("");
 
-  const normalizedQuery = query.trim().toLowerCase();
-
-  function matches(p: ProfileWithMeta): boolean {
-    if (!normalizedQuery) return true;
-    const username = p.username.toLowerCase();
-    const email = (p.email ?? "").toLowerCase();
-    return username.includes(normalizedQuery) || email.includes(normalizedQuery);
-  }
-
-  const filtered = useMemo(
-    () => ({
+  const filtered = useMemo(() => {
+    const normalizedQuery = query.trim().toLowerCase();
+    function matches(p: ProfileWithMeta): boolean {
+      if (!normalizedQuery) return true;
+      const username = p.username.toLowerCase();
+      const email = (p.email ?? "").toLowerCase();
+      return username.includes(normalizedQuery) || email.includes(normalizedQuery);
+    }
+    return {
       yoneticiler: yoneticiler.filter(matches),
       testerlar: testerlar.filter(matches),
       analistler: analistler.filter(matches),
-    }),
-    [query, yoneticiler, testerlar, analistler],
-  );
+    };
+  }, [query, yoneticiler, testerlar, analistler]);
 
   const totalAll =
     yoneticiler.length + testerlar.length + analistler.length;
@@ -155,22 +154,18 @@ export default function AnalistlerSearch({
     <>
       {/* Arama */}
       <div style={{ marginBottom: 24 }}>
+        {emailWarning ? (
+          <p className="gm-alert" role="alert">
+            E-postalar okunamadı. Servis anahtarını kontrol et. {emailWarning}
+          </p>
+        ) : null}
         <input
-          type="text"
+          type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="@username veya email ara..."
-          style={{
-            width: "100%",
-            padding: "12px 16px",
-            border: "1px solid var(--gm-rule)",
-            background: "var(--gm-paper-bright)",
-            color: "var(--gm-ink)",
-            fontFamily: "var(--font-jetbrains-mono), monospace",
-            fontSize: 12,
-            letterSpacing: "0.05em",
-            outline: "none",
-          }}
+          placeholder="Kullanıcı adı veya e-posta"
+          className="gm-input"
+          aria-label="Analist ara"
         />
         {query ? (
           <div
