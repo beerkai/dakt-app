@@ -4,7 +4,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, type FormEvent } from "react";
 
-import { signIn, signUp } from "@/app/auth/actions";
+import {
+  signIn,
+  signUp,
+  transferGuestProgress,
+} from "@/app/auth/actions";
 import {
   DAKT_GUEST_USERNAME_KEY,
   DAKT_USER_COLOR_KEY,
@@ -14,10 +18,10 @@ import {
   writeGuestUsername,
 } from "@/lib/guest-session";
 import {
-  clearLocalSolvedRecords,
-  readLocalSolvedRecords,
-} from "@/lib/local-solved-storage";
-import { createClient } from "@/lib/supabase/client";
+  clearTransferredGuestServerState,
+  collectGuestProgress,
+  guestProgressSummary,
+} from "@/lib/guest-progress-transfer";
 import type { AnalystColor } from "@/lib/supabase/types";
 
 type Tab = "misafir" | "kayit" | "giris";
@@ -88,6 +92,34 @@ export default function GirisPage() {
 
   const [regColor, setRegColor] = useState<AnalystColor>("mavi");
 
+  async function runGuestTransfer(): Promise<number> {
+    try {
+      const payload = collectGuestProgress();
+      const summary = guestProgressSummary(payload);
+      if (!summary.hasAnything) return 0;
+      const result = await transferGuestProgress(payload);
+      if ("error" in result) {
+        console.error("Misafir ilerleme aktarımı:", result.error);
+        return 0;
+      }
+      clearTransferredGuestServerState();
+      if (result.solvedCount > 0) {
+        try {
+          sessionStorage.setItem(
+            "dakt_welcome_transfer",
+            String(result.solvedCount),
+          );
+        } catch {
+          /* ignore */
+        }
+      }
+      return result.solvedCount;
+    } catch (e) {
+      console.error("Misafir ilerleme aktarımı:", e);
+      return 0;
+    }
+  }
+
   async function handleSignUp(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSignUpError(null);
@@ -100,47 +132,8 @@ export default function GirisPage() {
       return;
     }
 
-    let transferred = 0;
-    try {
-      const localSolved = readLocalSolvedRecords();
-      if (localSolved.length > 0) {
-        const supabase = createClient();
-        let u = (await supabase.auth.getSession()).data.session?.user ?? null;
-        if (!u) {
-          await new Promise((r) => setTimeout(r, 150));
-          u = (await supabase.auth.getUser()).data.user;
-        }
-        if (u) {
-          const records = localSolved.map((s) => ({
-            user_id: u!.id,
-            case_id: s.case_id,
-            accuracy: s.accuracy,
-            attempt_count: s.attempt_count,
-            duration_seconds: s.duration_seconds,
-            solved_at: s.solved_at,
-          }));
-          const { error: upErr } = await supabase
-            .from("solved_cases")
-            .upsert(records, { onConflict: "user_id,case_id" });
-          if (!upErr) {
-            transferred = records.length;
-            clearLocalSolvedRecords();
-          } else {
-            console.error("Misafir çözüm aktarımı:", upErr);
-          }
-        }
-      }
-    } catch (e) {
-      console.error("Misafir çözüm aktarımı:", e);
-    }
-
-    if (transferred > 0) {
-      try {
-        sessionStorage.setItem("dakt_welcome_transfer", String(transferred));
-      } catch {
-        /* ignore */
-      }
-    }
+    await runGuestTransfer();
+    clearGuestUsername();
 
     setSignUpLoading(false);
     router.refresh();
@@ -158,6 +151,11 @@ export default function GirisPage() {
       setSignInLoading(false);
       return;
     }
+
+    await runGuestTransfer();
+    clearGuestUsername();
+
+    setSignInLoading(false);
     router.refresh();
     router.push("/");
   }
@@ -388,8 +386,9 @@ export default function GirisPage() {
             Kayıt Ol
           </h1>
           <p className="mb-8 text-[16px] leading-relaxed text-[var(--subtitle-text)] [font-family:var(--font-newsreader),serif]">
-            Misafir olarak başlayabilirsin, hesabını sonradan oluşturursun. Tüm
-            ilerlemen aktarılır.
+            Misafir olarak başlayabilirsin; hesabını sonradan açarsın. Bu
+            tarayıcıdaki çözümler, deneme sayıları ve pano notların hesaba
+            geçer. Damgalar ve kronoloji aynı cihazda kalır.
           </p>
 
           <form className="space-y-5" onSubmit={handleSignUp}>
