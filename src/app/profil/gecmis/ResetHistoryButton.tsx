@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import { resetSolvedHistory } from "@/app/profil/actions";
 import ConfirmModal from "@/components/ConfirmModal";
+import { DAKT_LOCAL_SOLVED_KEY } from "@/lib/local-solved-storage";
 
 const mono =
   "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace]";
@@ -27,6 +28,7 @@ function clearPlaythroughLocalStorage() {
       }
     }
     for (const k of toRemove) localStorage.removeItem(k);
+    localStorage.removeItem(DAKT_LOCAL_SOLVED_KEY);
   } catch {
     /* ignore */
   }

@@ -33,6 +33,7 @@ export default async function ProfilGecmisPage() {
     .order("solved_at", { ascending: false });
 
   const rows = (solved ?? []) as SolvedCase[];
+  const coopRooms = await loadCoopHistory(supabase, user.id);
 
   const dateTimeFmt = new Intl.DateTimeFormat("tr-TR", {
     day: "numeric",
@@ -42,7 +43,7 @@ export default async function ProfilGecmisPage() {
     minute: "2-digit",
   });
 
-  if (rows.length === 0) {
+  if (rows.length === 0 && coopRooms.length === 0) {
     return (
       <div className="relative z-[1] mx-auto w-full max-w-[720px] flex-1 px-5 py-12 md:px-7 md:py-16">
         <header className="mb-10 text-center">
@@ -81,6 +82,11 @@ export default async function ProfilGecmisPage() {
         </p>
       </header>
 
+      {rows.length === 0 ? (
+        <p className={`m-0 text-[12px] text-[var(--meta-label)] ${typewriter}`}>
+          Henüz çözülmüş vaka kaydın yok.
+        </p>
+      ) : null}
       <ul className="m-0 flex list-none flex-col gap-4 p-0">
         {rows.map((row) => {
           const caseData = getCase(row.case_id);
@@ -118,20 +124,96 @@ export default async function ProfilGecmisPage() {
         })}
       </ul>
 
-      <section
-        className="mt-12 border border-dashed border-[var(--rule)] bg-[var(--anthracite)]/60 p-6"
-        aria-label="Co-op geçmişi"
-      >
-        <h2 className={`mb-3 text-[11px] uppercase tracking-[0.26em] text-[var(--kraft)] ${mono}`}>
+      <section className="mt-12" aria-labelledby="gecmis-oda-oturumlari">
+        <h2
+          id="gecmis-oda-oturumlari"
+          className={`mb-4 text-[11px] uppercase tracking-[0.26em] text-[var(--kraft)] ${mono}`}
+        >
           Oda Oturumları
         </h2>
-        <p className={`m-0 text-[12px] leading-relaxed text-[var(--meta-label)] ${typewriter}`}>
-          ○ YAKINDA — Co-op modu açıldığında ekiple çözdüğün vakalar burada
-          listelenecek.
-        </p>
+        {coopRooms.length === 0 ? (
+          <p className={`m-0 text-[12px] leading-relaxed text-[var(--meta-label)] ${typewriter}`}>
+            Henüz kapanmış bir co-op odan yok. Ekiple oynadığın vakalar burada
+            listelenecek.
+          </p>
+        ) : (
+          <ul className="m-0 flex list-none flex-col gap-3 p-0">
+            {coopRooms.map((room) => {
+              const codename = getCase(room.case_id)?.codename ?? "—";
+              const endedAt = room.finished_at ?? room.archived_at;
+              const solvedByMe = rows.some((r) => r.case_id === room.case_id);
+              return (
+                <li
+                  key={room.id}
+                  className="flex flex-wrap items-center justify-between gap-3 border border-[var(--rule)] bg-[var(--anthracite)] px-5 py-4"
+                >
+                  <div>
+                    <p className="m-0 text-[11px] uppercase tracking-[0.24em] text-[var(--kraft)] [font-family:var(--font-cormorant),serif]">
+                      DOSYA №{room.case_id} ·{" "}
+                      <span className="italic text-[var(--paper)]">
+                        {codename.toLocaleUpperCase("tr-TR")}
+                      </span>
+                    </p>
+                    <p className={`m-0 mt-1 text-[10px] uppercase tracking-[0.18em] text-[var(--meta-label)] ${mono}`}>
+                      ODA {room.code} · {room.isHost ? "HOST" : "ANALİST"}
+                      {endedAt ? ` · ${dateTimeFmt.format(new Date(endedAt))}` : ""}
+                    </p>
+                  </div>
+                  <span
+                    className={`${mono} shrink-0 text-[10px] uppercase tracking-[0.2em] ${
+                      solvedByMe ? "text-[var(--kraft-light)]" : "text-[var(--meta-label)]"
+                    }`}
+                  >
+                    {solvedByMe ? "✓ Çözüldü" : room.status === "archived" ? "Arşivlendi" : "Kapandı"}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </section>
 
       <ResetHistoryButton />
     </div>
   );
+}
+
+type CoopHistoryRoom = {
+  id: string;
+  code: string;
+  case_id: string;
+  status: string;
+  finished_at: string | null;
+  archived_at: string | null;
+  isHost: boolean;
+};
+
+async function loadCoopHistory(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  userId: string,
+): Promise<CoopHistoryRoom[]> {
+  const { data: memberships } = await supabase
+    .from("room_players")
+    .select("room_id")
+    .eq("user_id", userId);
+  const roomIds = [...new Set((memberships ?? []).map((m) => m.room_id))];
+  if (roomIds.length === 0) return [];
+
+  const { data: rooms } = await supabase
+    .from("rooms")
+    .select("id, code, case_id, status, host_user_id, finished_at, archived_at")
+    .in("id", roomIds)
+    .in("status", ["solved", "archived"])
+    .order("created_at", { ascending: false })
+    .limit(20);
+
+  return (rooms ?? []).map((r) => ({
+    id: String(r.id),
+    code: String(r.code ?? "").toUpperCase(),
+    case_id: String(r.case_id),
+    status: String(r.status),
+    finished_at: r.finished_at ?? null,
+    archived_at: r.archived_at ?? null,
+    isHost: r.host_user_id === userId,
+  }));
 }
