@@ -17,6 +17,12 @@ export async function purgeUserAccount(
     .eq("user_id", userId);
   if (solvedErr) console.error("[purgeUserAccount] solved_cases:", solvedErr);
 
+  const { error: playErr } = await adminClient
+    .from("case_playthroughs")
+    .delete()
+    .eq("user_id", userId);
+  if (playErr) console.error("[purgeUserAccount] case_playthroughs:", playErr);
+
   const { error: votesErr } = await adminClient
     .from("room_votes")
     .delete()

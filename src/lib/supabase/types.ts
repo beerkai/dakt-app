@@ -18,6 +18,15 @@ export interface SolvedCase {
   solved_at: string;
 }
 
+export interface CasePlaythrough {
+  user_id: string;
+  case_id: string;
+  started_at: string;
+  attempt_count: number;
+  locked_suspect_ids: string[];
+  updated_at: string;
+}
+
 export type RoomStatus = "waiting" | "playing" | "solved" | "archived" | "terminated";
 
 export interface Room {

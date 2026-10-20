@@ -1634,6 +1634,25 @@ a.nav-item {
   }
 }
 
+/* === YANLIŞ HÜKÜM DERSİ === */
+.cozum-lesson-card {
+  padding: 18px 20px;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--bordeaux);
+  background: color-mix(in srgb, var(--paper) 94%, var(--bordeaux) 6%);
+  font-family: var(--font-newsreader), Georgia, serif;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--ink);
+  text-align: left;
+}
+.cozum-lesson-card p {
+  margin: 0 0 0.6em;
+}
+.cozum-lesson-card p:last-child {
+  margin-bottom: 0;
+}
+
 /* === TIMELINE / KRONOLOJİ === */
 .timeline-board {
   margin-top: 8px;
