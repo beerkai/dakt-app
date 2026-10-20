@@ -2,7 +2,8 @@
 
 :root {
   /* Sticky vaka kümesi (sistem şeridi + iç nav) — SiteNav tek satırına göre */
-  --site-nav-offset: 3.125rem;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --site-nav-offset: calc(3.125rem + var(--safe-top));
   --ink: #0e0f10;
   --anthracite: #1a1c1f;
   --anthracite-2: #232629;
@@ -40,7 +41,7 @@
 
 @media (min-width: 768px) {
   :root {
-    --site-nav-offset: 3.375rem;
+    --site-nav-offset: calc(3.375rem + var(--safe-top));
   }
 }
 
@@ -54,13 +55,18 @@
 
 html {
   min-height: 100%;
+  min-height: 100dvh;
   overflow-x: hidden;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
   position: relative;
   min-height: 100%;
+  min-height: 100dvh;
   overflow-x: hidden;
+  overscroll-behavior: none;
   background: var(--ink);
   color: var(--body-text);
   font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
@@ -666,6 +672,14 @@ body::after {
   max-width: 340px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
   animation: chipSlideIn 0.3s ease;
+}
+
+@media (max-width: 767px) {
+  .active-session-chip {
+    right: 12px;
+    bottom: calc(4.25rem + env(safe-area-inset-bottom));
+    max-width: min(340px, calc(100vw - 24px));
+  }
 }
 
 @keyframes chipSlideIn {
@@ -1637,6 +1651,142 @@ body::after {
 
 html[data-age-ok] .age-content-gate {
   display: none;
+}
+
+.site-header {
+  view-transition-name: site-header;
+}
+
+.app-chrome-pad {
+  padding-bottom: calc(3.75rem + env(safe-area-inset-bottom));
+}
+
+@media (min-width: 768px) {
+  .app-chrome-pad {
+    padding-bottom: 0;
+  }
+}
+
+.app-tab-bar {
+  view-transition-name: app-tab-bar;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 210;
+  border-top: 1px solid var(--rule);
+  background: var(--ink);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.app-tab-bar-root,
+.app-tab-bar-scroll {
+  display: flex;
+  align-items: stretch;
+  min-height: 3.5rem;
+}
+
+.app-tab-bar-scroll {
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.app-tab-bar-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.app-tab {
+  display: flex;
+  flex: 1 0 auto;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  border-top: 2px solid transparent;
+  color: var(--meta-label);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.app-tab-root {
+  flex: 1 1 0;
+}
+
+.app-tab-active {
+  border-top-color: var(--bordeaux-bright);
+  color: var(--kraft-light);
+}
+
+.install-prompt {
+  position: fixed;
+  right: 12px;
+  bottom: calc(3.75rem + env(safe-area-inset-bottom) + 12px);
+  left: 12px;
+  z-index: 220;
+  border: 1px solid var(--kraft-dark);
+  background: var(--anthracite);
+  padding: 14px 16px;
+}
+
+.install-prompt-kicker {
+  margin: 0 0 6px;
+  color: var(--kraft);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.install-prompt-text {
+  margin: 0;
+  color: var(--body-text);
+  font-family: var(--font-newsreader), Georgia, serif;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.install-prompt-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.install-prompt-add,
+.install-prompt-later {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--rule);
+  background: transparent;
+  color: var(--kraft-light);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.install-prompt-add {
+  border-color: var(--bordeaux-bright);
+  background: var(--bordeaux);
+}
+
+::view-transition-old(.page-fade) {
+  animation: 140ms ease-out both page-fade-out;
+}
+
+::view-transition-new(.page-fade) {
+  animation: 180ms ease-out both page-fade-in;
+}
+
+@keyframes page-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+  }
 }
 
 /* Klavye ile gezinmede görünür odak halkası (fare tıklamalarında görünmez). */

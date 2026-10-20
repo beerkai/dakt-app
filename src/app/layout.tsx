@@ -9,6 +9,7 @@ import { Suspense } from "react";
 import ActiveSessionChip from "@/components/ActiveSessionChip";
 import AgeContentGate, { AGE_GATE_BOOT_SCRIPT } from "@/components/AgeContentGate";
 import { AuthProvider } from "@/components/AuthProvider";
+import { AppChrome } from "@/components/AppChrome";
 import { ConditionalSiteNav } from "@/components/ConditionalSiteNav";
 import { createClient } from "@/lib/supabase/server";
 import type { Profile } from "@/lib/supabase/types";
@@ -94,10 +95,11 @@ export const metadata: Metadata = {
 
 // Viewport ayrı export — Next.js 14+ best practice
 export const viewport: Viewport = {
-  themeColor: "#1a1a1a",
+  themeColor: "#0e0f10",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
+  viewportFit: "cover",
 };
 
 export default async function RootLayout({
@@ -138,7 +140,7 @@ export default async function RootLayout({
         >
           <ConditionalSiteNav />
           <div className="relative z-[1] flex min-h-0 flex-1 flex-col">
-            {children}
+            <AppChrome>{children}</AppChrome>
           </div>
           <Suspense fallback={null}>
             <ActiveSessionChip />

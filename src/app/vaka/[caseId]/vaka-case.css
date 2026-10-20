@@ -156,6 +156,12 @@
   }
 }
 
+@media (max-width: 767px) {
+  .vaka-case-strip-tabs-row {
+    display: none;
+  }
+}
+
 .vaka-case-strip-tabs {
   display: flex;
   justify-content: flex-start;

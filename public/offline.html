@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Çevrimdışı · D.A.K.T.</title>
+    <style>
+      :root { color-scheme: dark; }
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #0e0f10;
+        color: #e8e4d8;
+        font-family: Georgia, "Times New Roman", serif;
+        padding: 32px 24px calc(32px + env(safe-area-inset-bottom));
+      }
+      main { max-width: 28rem; }
+      p.kicker {
+        font-family: ui-monospace, monospace;
+        font-size: 11px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: #c9b48a;
+      }
+      h1 { font-weight: 500; font-style: italic; font-size: 2.4rem; margin: 12px 0; }
+      p { line-height: 1.55; color: #9c9588; }
+      button {
+        margin-top: 24px;
+        background: #6b1620;
+        color: #f1e7cf;
+        border: 1px solid #a8242f;
+        padding: 14px 22px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        font-family: ui-monospace, monospace;
+        font-size: 11px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="kicker">D.A.K.T. · bağlantı yok</p>
+      <h1>Dosya şu an açılamıyor.</h1>
+      <p>
+        Ağ yok. Daha önce açtığın sayfalar bu cihazda duruyor olabilir;
+        bağlantı gelince kaldığın yerden devam edersin.
+      </p>
+      <button type="button" onclick="location.reload()">Yeniden dene</button>
+    </main>
+  </body>
+</html>

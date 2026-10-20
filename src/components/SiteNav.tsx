@@ -308,7 +308,7 @@ export function SiteNav() {
   return (
     <>
       <header
-        className="sticky top-0 z-[200] border-b border-[var(--rule)] bg-[var(--ink)]/95 backdrop-blur-sm"
+        className="site-header sticky top-0 z-[200] border-b border-[var(--rule)] bg-[var(--ink)]/95 pt-[env(safe-area-inset-top)] backdrop-blur-sm"
         style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.35)" }}
       >
         <div

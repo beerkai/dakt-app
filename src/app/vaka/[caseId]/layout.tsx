@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import GuestSessionBanner from "@/components/GuestSessionBanner";
 import SiteFooter from "@/components/SiteFooter";
 import SessionTracker from "@/components/SessionTracker";
+import { PublishCaseTabs } from "@/components/PublishCaseTabs";
 import { SystemBar } from "@/components/SystemBar";
 import { createClient } from "@/lib/supabase/server";
 import { VakaCaseInnerNav } from "./VakaCaseInnerNav";
@@ -96,6 +97,7 @@ export default async function CaseLayout({
 
   return (
     <div className="relative z-[1] flex min-h-full flex-1 flex-col">
+      <PublishCaseTabs caseId={caseId} tabs={caseData.enabledTabs} />
       <div className="vaka-case-sticky-cluster">
         <Suspense fallback={<SystemBarFallback />}>
           <SystemBar caseId={caseId} />
