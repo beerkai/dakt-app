@@ -18,7 +18,7 @@ const STEPS = [
     num: "02",
     title: "İncele",
     body:
-      "İfadeleri oku, delilleri damgala (şüpheli / ele alındı / elendi), zaman çizelgesini diz, deduction board'da notlar al.",
+      "İfadeleri oku, delilleri damgala (şüpheli / ele alındı / elendi), şüphelendiklerini işaretle, Pano'ya notlarını yaz.",
   },
   {
     num: "03",
@@ -30,7 +30,7 @@ const STEPS = [
     num: "04",
     title: "Zarfı Aç",
     body:
-      "Doğru tahmin: dava çözüldü. Yanlış: fail kaçtı. Bir dahaki sefere daha dikkatli analiz et.",
+      "Doğru tahmin: dava çözüldü. Yanlış: fail kaçtı — dosyaya dönüp yeniden inceleyebilirsin, ama her deneme kayda geçer.",
   },
 ] as const;
 
@@ -74,7 +74,8 @@ export default function NasilOynanirPage() {
       <div className="mb-12 border border-[var(--bordeaux)] bg-[var(--anthracite)] p-6 md:mb-14 md:p-8">
         <p className="text-[12px] leading-[1.85] tracking-[0.05em] text-[var(--subtitle-text)] [font-family:var(--font-special-elite),monospace]">
           Co-op modunda 1-5 oyuncu aynı oda kodu ile bir dosyaya beraber
-          bağlanabilir. Damga vurma, not alma, oylama — hepsi senkronize.
+          bağlanabilir. Oda, oyuncular ve oylama canlı senkronize; damgalar ve
+          Pano notları her analistin kendi cihazında tutulur.
         </p>
       </div>
 

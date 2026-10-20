@@ -387,7 +387,11 @@ export function CozumClient({
           )
         ) : (
           <div className="cozum-callout-warn mb-6">
-            Co-op oylaması için oturum açmalısınız.
+            Co-op oylaması için oturum gerekiyor.{" "}
+            <Link href="/giris" className="underline">
+              Giriş yap ya da misafir olarak devam et
+            </Link>
+            , ardından oda koduyla tekrar katıl.
           </div>
         )
       )}
@@ -396,8 +400,9 @@ export function CozumClient({
       {view === "voting" && (!isCoop || coopVoteComplete) && (
         <>
           <div className="cozum-callout-warn">
-            ⚠ DİKKAT — Tek hakkın var. Şüpheli listesinden faili işaret et.
-            Yanlış tahmin: dosya kapanır, fail kaçar. Doğru tahmin: dava çözülür.
+            ⚠ DİKKAT — Şüpheli listesinden faili işaret et. Yanlış tahmin: fail
+            kaçar, dosyaya dönüp yeniden inceleyebilirsin ama her deneme kayda
+            geçer. Doğru tahmin: dava çözülür.
           </div>
 
           <div className="suspect-grid">

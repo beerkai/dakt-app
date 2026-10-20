@@ -35,7 +35,7 @@ export default async function SuphelilerPage({
           padding: 24,
         }}
       >
-        ▸ Kartlarda ⚐ ŞÜPHELENDİKLERİME EKLE; deduction ve oylamada öne çıkar.
+        ▸ Kartlarda ⚐ ŞÜPHELENDİKLERİME EKLE; Pano'da listelenir, oylamada en üste taşınır.
       </p>
     </section>
   );

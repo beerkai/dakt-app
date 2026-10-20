@@ -2,6 +2,7 @@ import { getCase, isTabEnabled } from "@/lib/case-helpers";
 import { sectionNumForTab } from "@/lib/case-section-utils";
 import { notFound } from "next/navigation";
 
+import { MarkedSuspectsCallout } from "../MarkedSuspectsCallout";
 import { PanoBoardClient } from "./PanoBoardClient";
 
 export default async function DeductionPage({
@@ -15,5 +16,10 @@ export default async function DeductionPage({
 
   const num = sectionNumForTab(caseData, "deduction");
 
-  return <PanoBoardClient caseId={caseId} sectionNum={num} />;
+  return (
+    <>
+      <MarkedSuspectsCallout caseId={caseId} suspects={caseData.suspects} />
+      <PanoBoardClient caseId={caseId} sectionNum={num} />
+    </>
+  );
 }

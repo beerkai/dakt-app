@@ -41,8 +41,8 @@ export default function GuestSessionBanner() {
         <div className="guest-banner-text">
           <strong>Misafir oturumu</strong>
           <p>
-            Notların ve ilerlemen 24 saat saklanır. Kalıcı kaydetmek ve co-op
-            için{" "}
+            İlerlemen yalnızca bu tarayıcıda saklanır; Pano notları 24 saat
+            sonra silinir. Kalıcı kaydetmek ve co-op için{" "}
             <Link href="/giris" className="guest-banner-link">
               hesap aç
             </Link>

@@ -306,8 +306,8 @@ export default function GirisPage() {
           </p>
 
           <div className="mb-8 border-2 border-[var(--bordeaux)] bg-[var(--paper-dim)] p-4 text-[12px] leading-[1.75] tracking-[0.04em] text-[var(--ink)] [font-family:var(--font-special-elite),monospace]">
-            ⓘ Misafir oyuncuların ilerlemesi 24 saat sonra silinir. Kalıcı kayıt
-            için hesap oluştur.
+            ⓘ Misafir ilerlemesi yalnızca bu tarayıcıda saklanır; Pano notları
+            24 saat sonra silinir. Kalıcı kayıt için hesap oluştur.
           </div>
 
           <div className="mb-6">

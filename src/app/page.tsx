@@ -44,7 +44,7 @@ export default function Home() {
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
             <Link
-              href="/giris"
+              href="/giris?tab=misafir"
               className={`${btnMono} inline-flex min-h-[52px] items-center justify-center border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] px-8 py-4 text-[var(--paper)] hover:bg-[var(--bordeaux-bright)] md:min-h-0 md:px-10 md:py-[18px]`}
             >
               ▸ Misafir Olarak Oyna
