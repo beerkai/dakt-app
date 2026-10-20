@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, "..");
-const htmlPath = path.join(root, "dakt-vaka-114.html");
+const htmlPath = path.join(root, "vaka-kaynak", "kaynak-html", "dakt-vaka-114.html");
 const outPath = path.join(root, "src/data/cases/114-payload.json");
 
 const html = fs.readFileSync(htmlPath, "utf8");

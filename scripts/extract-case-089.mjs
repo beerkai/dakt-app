@@ -8,7 +8,7 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, "..");
-const htmlPath = path.join(root, "dakt-vaka-089.html");
+const htmlPath = path.join(root, "vaka-kaynak", "kaynak-html", "dakt-vaka-089.html");
 const html = fs.readFileSync(htmlPath, "utf8");
 
 function sliceBetween(src, startMarker, endMarker) {
