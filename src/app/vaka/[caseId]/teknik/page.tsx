@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { sectionNumForTab } from "@/lib/case-section-utils";
 import { RenderCaseDocument } from "../RenderCaseDocument";
 import { WaveformClient } from "../WaveformClient";
+import { safeHtml } from "@/lib/html-sanitize";
 
 export default async function TeknikPage({
   params,
@@ -40,7 +41,7 @@ export default async function TeknikPage({
                   {audio.transcript.map((line, i) => (
                     <p
                       key={`${doc.id}-tr-${i}`}
-                      dangerouslySetInnerHTML={{ __html: line }}
+                      dangerouslySetInnerHTML={safeHtml(line)}
                     />
                   ))}
                 </div>

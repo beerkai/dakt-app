@@ -4,6 +4,7 @@ import { ClientDocArticle } from "../ClientDocArticle";
 import { getCase } from "@/lib/case-helpers";
 import { notFound } from "next/navigation";
 import { sectionNumForTab } from "@/lib/case-section-utils";
+import { safeHtml } from "@/lib/html-sanitize";
 
 export default async function BriefPage({
   params,
@@ -53,7 +54,7 @@ export default async function BriefPage({
                 {caseData.brief.sections.map((sec) => (
                   <section key={sec.title}>
                     <h3>{sec.title}</h3>
-                    <div dangerouslySetInnerHTML={{ __html: sec.body }} />
+                    <div dangerouslySetInnerHTML={safeHtml(sec.body)} />
                   </section>
                 ))}
                 {caseData.brief.signature ? (

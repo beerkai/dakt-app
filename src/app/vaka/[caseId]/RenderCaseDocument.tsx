@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { ClientDocArticle } from "./ClientDocArticle";
 import type { Document as CaseDocument } from "@/lib/case-types";
+import { safeHtml } from "@/lib/html-sanitize";
 
 export function RenderCaseDocument({
   caseId,
@@ -31,7 +32,7 @@ export function RenderCaseDocument({
               ))}
             </dl>
           ) : null}
-          <div dangerouslySetInnerHTML={{ __html: doc.body }} />
+          <div dangerouslySetInnerHTML={safeHtml(doc.body)} />
           {doc.signature ? (
             <div className="doc-signature">
               <div

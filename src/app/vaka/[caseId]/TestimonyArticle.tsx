@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { ClientDocArticle } from "./ClientDocArticle";
-import { testimonialParagraphHtml } from "@/lib/html-sanitize";
+import { safeHtml, testimonialParagraphHtml } from "@/lib/html-sanitize";
 import type { Testimony } from "@/lib/case-types";
 
 export function TestimonyArticle({
@@ -52,7 +52,7 @@ export function TestimonyArticle({
               return (
                 <div
                   key={`${t.id}-p-${i}`}
-                  dangerouslySetInnerHTML={{ __html: para }}
+                  dangerouslySetInnerHTML={safeHtml(para)}
                 />
               );
             }

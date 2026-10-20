@@ -5,6 +5,7 @@ import type {
   MessagePlatform,
   MessageThread as MessageThreadT,
 } from "@/lib/case-types";
+import { safeHtml } from "@/lib/html-sanitize";
 
 function PlatformBadge({ platform }: { platform: MessagePlatform }) {
   if (platform === "whatsapp") {
@@ -153,7 +154,7 @@ export function MessageThread({ thread }: { thread: MessageThreadT }) {
           >
             📋{" "}
             <span
-              dangerouslySetInnerHTML={{ __html: meta.forensicNote }}
+              dangerouslySetInnerHTML={safeHtml(meta.forensicNote)}
             />
           </p>
         </div>

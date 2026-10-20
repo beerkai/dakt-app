@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { getCase } from "@/lib/case-helpers";
 import { createAdminClient } from "@/lib/supabase/admin-client";
 import { createClient } from "@/lib/supabase/server";
+import { sanitizeCaseHtml } from "@/lib/html-sanitize";
 
 export type RevealVerdictResult =
   | { correct: true; perpetratorName: string; solutionHtml: string }
@@ -27,7 +28,7 @@ export async function revealVerdict(
     return {
       correct: true,
       perpetratorName: verdict.perpetratorName,
-      solutionHtml: verdict.solutionHtml,
+      solutionHtml: sanitizeCaseHtml(verdict.solutionHtml),
     };
   }
   return { correct: false, wrongAnswerMessage: verdict.wrongAnswerMessage };

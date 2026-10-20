@@ -7,6 +7,7 @@ import {
   PLAYER_STAMP_OVERLAY,
 } from "@/lib/case-types";
 import { useCaseItemStamp } from "@/hooks/useCaseItemStamp";
+import { safeHtml } from "@/lib/html-sanitize";
 
 export function EvidenceStampCard({
   caseId,
@@ -45,13 +46,13 @@ export function EvidenceStampCard({
       <h3 className="evidence-title">{e.title}</h3>
       <p
         className="evidence-desc"
-        dangerouslySetInnerHTML={{ __html: e.description }}
+        dangerouslySetInnerHTML={safeHtml(e.description)}
       />
       <div className="evidence-detail">
         {e.details.map((d, i) => (
           <span key={`${e.id}-d-${i}`}>
             <span>▸ {d.label}:</span>{" "}
-            <span dangerouslySetInnerHTML={{ __html: d.value }} />
+            <span dangerouslySetInnerHTML={safeHtml(d.value)} />
             <br />
           </span>
         ))}
