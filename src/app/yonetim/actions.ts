@@ -393,3 +393,40 @@ export async function changeUserRole(
   revalidatePath("/yonetim/analistler");
   return { success: true };
 }
+
+export async function updateCoopHostBypass(
+  enabled: boolean,
+): Promise<{ success: true } | { error: string }> {
+  await ensureAdmin();
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const adminDb = createAdminClient();
+  const { error } = await adminDb.from("coop_settings").upsert(
+    {
+      id: 1,
+      host_bypass_enabled: enabled,
+      updated_at: new Date().toISOString(),
+      updated_by: user?.id ?? null,
+    },
+    { onConflict: "id" },
+  );
+
+  if (error) {
+    console.error("[updateCoopHostBypass]", error);
+    return { error: error.message };
+  }
+
+  await logAdminAction({
+    action: "coop_host_bypass_change",
+    targetType: "system",
+    targetLabel: "Co-op host bypass",
+    payload: { host_bypass_enabled: enabled },
+  });
+
+  revalidatePath("/yonetim/ayarlar");
+  return { success: true };
+}
