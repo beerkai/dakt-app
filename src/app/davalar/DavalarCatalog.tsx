@@ -132,6 +132,15 @@ export function DavalarCatalog({
           katılmayı dene.
         </p>
       ) : null}
+      {cases.length === 0 ? (
+        <p
+          className={`${typewriter} mb-8 border border-dashed border-[var(--rule)] bg-[var(--anthracite-2)] px-6 py-8 text-center text-[13px] leading-relaxed tracking-[0.05em] text-[var(--subtitle-text)]`}
+          role="status"
+        >
+          Şu an incelemeye açık dosya yok. Arşiv yeniden açıldığında yeni
+          vakalar burada listelenecek.
+        </p>
+      ) : null}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-6">
         {cases.map((c) => {
           const active = c.active;

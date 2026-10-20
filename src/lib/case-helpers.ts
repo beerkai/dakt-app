@@ -13,20 +13,42 @@ import { case114 } from "@/data/cases/114";
 import { orderedEnabledTabs } from "./case-tab-routes";
 import type { CaseCatalogItem, CaseData, TabId } from "./case-types";
 
-const ALL_CASES: Record<string, CaseData> = {
-  "016": case016,
-  "027": case027,
-  "033": case033,
-  "036": case036,
-  "042": case042,
-  "048": case048,
-  "053": case053,
-  "067": case067,
-  "082": case082,
-  "089": case089,
-  "104": case104,
-  "114": case114,
+const TAB_HAS_CONTENT: Partial<Record<TabId, (c: CaseData) => boolean>> = {
+  supheliler: (c) => (c.suspects?.length ?? 0) > 0,
+  ifadeler: (c) => (c.testimonies?.length ?? 0) > 0,
+  "adli-tip": (c) => (c.forensics?.length ?? 0) > 0,
+  deliller: (c) => (c.evidence?.length ?? 0) > 0,
+  belgeler: (c) =>
+    (c.documents?.length ?? 0) + (c.messageThreads?.length ?? 0) > 0,
+  teknik: (c) => (c.technical?.length ?? 0) > 0 || Boolean(c.technicalAudio),
 };
+
+/** İçeriği olmayan sekmeleri şeritten ve rotalardan düşürür. */
+function withContentTabs(c: CaseData): CaseData {
+  const enabledTabs = c.enabledTabs.filter(
+    (tab) => TAB_HAS_CONTENT[tab]?.(c) ?? true,
+  );
+  return enabledTabs.length === c.enabledTabs.length
+    ? c
+    : { ...c, enabledTabs };
+}
+
+const ALL_CASES: Record<string, CaseData> = Object.fromEntries(
+  Object.entries({
+    "016": case016,
+    "027": case027,
+    "033": case033,
+    "036": case036,
+    "042": case042,
+    "048": case048,
+    "053": case053,
+    "067": case067,
+    "082": case082,
+    "089": case089,
+    "104": case104,
+    "114": case114,
+  }).map(([id, c]) => [id, withContentTabs(c)]),
+);
 
 export function getCase(id: string): CaseData | null {
   return ALL_CASES[id] ?? null;
