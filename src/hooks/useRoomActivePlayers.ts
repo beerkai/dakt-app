@@ -3,7 +3,11 @@
 import { createClient } from "@/lib/supabase/client";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-export type RoomPlayerStrip = { username: string; color: string };
+export type RoomPlayerStrip = {
+  user_id: string;
+  username: string;
+  color: string;
+};
 
 const POLLING_INTERVAL_MS = 8000;
 
@@ -29,7 +33,7 @@ export function useRoomActivePlayers(roomId: string | null) {
 
     const { data, error } = await supabase
       .from("room_players")
-      .select("username, color")
+      .select("user_id, username, color")
       .eq("room_id", currentRoomId)
       .is("left_at", null);
 
@@ -109,5 +113,7 @@ export function useRoomActivePlayers(roomId: string | null) {
     };
   }, [roomId, supabase, load]);
 
-  return { players, loading, count: players.length };
+  const userIds = useMemo(() => players.map((p) => p.user_id), [players]);
+
+  return { players, userIds, loading, count: players.length };
 }

@@ -51,3 +51,35 @@ export function getReturnUrl(session: ActiveSession): string {
   }
   return `/vaka/${session.caseId}/brief`;
 }
+
+function coopVoteFinishedKey(roomId: string) {
+  return `dakt_coop_vote_finished_${roomId}`;
+}
+
+/** Bu sekmede oylama sonuçlandı: oda `solved` olunca sonuç ekranında kal. */
+export function markCoopVoteFinished(roomId: string): void {
+  if (typeof window === "undefined") return;
+  try {
+    sessionStorage.setItem(coopVoteFinishedKey(roomId), "1");
+  } catch {
+    /* ignore */
+  }
+}
+
+export function isCoopVoteFinished(roomId: string): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    return sessionStorage.getItem(coopVoteFinishedKey(roomId)) === "1";
+  } catch {
+    return false;
+  }
+}
+
+export function clearCoopVoteFinished(roomId: string): void {
+  if (typeof window === "undefined") return;
+  try {
+    sessionStorage.removeItem(coopVoteFinishedKey(roomId));
+  } catch {
+    /* ignore */
+  }
+}

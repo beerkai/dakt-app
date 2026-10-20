@@ -22,7 +22,7 @@ export type CoopOverlaySuspect = {
 type CoopVotingOverlayProps = {
   roomId: string;
   suspects: CoopOverlaySuspect[];
-  playerCount: number;
+  activeUserIds: string[];
   userId: string;
   onVoteComplete: (suspectId: string) => void;
   hostBypassEnabled: boolean;
@@ -35,7 +35,7 @@ const mono =
 export function CoopVotingOverlay({
   roomId,
   suspects,
-  playerCount,
+  activeUserIds,
   userId,
   onVoteComplete,
   hostBypassEnabled,
@@ -45,7 +45,7 @@ export function CoopVotingOverlay({
     useRoomVoting({
       roomId,
       userId,
-      playerCount,
+      activeUserIds,
       onConsensus: onVoteComplete,
     });
 
@@ -66,7 +66,7 @@ export function CoopVotingOverlay({
         birleşince zarf açılır.
         {votes.length > 0 ? (
           <span className="mt-2 block text-[var(--body-text)]">
-            Oy veren: {votes.length} / {playerCount}
+            Oy veren: {votes.length} / {activeUserIds.length}
           </span>
         ) : null}
       </div>

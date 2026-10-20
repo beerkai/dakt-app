@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { useCaseRoomId } from "@/hooks/useCaseRoomId";
+import { isCoopVoteFinished } from "@/lib/active-session";
 import { useRoomActivePlayers } from "@/hooks/useRoomActivePlayers";
 import { createClient } from "@/lib/supabase/client";
 import type { Room } from "@/lib/supabase/types";
@@ -68,6 +69,7 @@ export function SystemBar({ caseId }: { caseId?: string }) {
         (payload) => {
           const updated = payload.new as Room;
           if (updated.status === "solved") {
+            if (isCoopVoteFinished(updated.id)) return;
             router.push(`/oda/${updated.code}/sonlandirildi`);
             return;
           }

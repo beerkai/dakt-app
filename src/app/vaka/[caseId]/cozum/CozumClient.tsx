@@ -29,7 +29,15 @@ import { useRoomActivePlayers } from "@/hooks/useRoomActivePlayers";
 import { getCoopSettings, type CoopSettings } from "@/lib/get-coop-settings";
 import { CoopVotingOverlay } from "./CoopVotingOverlay";
 import { caseTabHref } from "@/lib/case-tab-routes";
-import { recordSolvedCase } from "./actions";
+import {
+  clearCoopVoteFinished,
+  markCoopVoteFinished,
+} from "@/lib/active-session";
+import {
+  completeCoopRoom,
+  recordSolvedCase,
+  resetRoomVotes,
+} from "./actions";
 // Aşama 4 (SSR sertifika): Certificate + formatCertificateDate yeniden eklenecek.
 // import { Certificate, type CertificateHandle } from "@/components/Certificate";
 import {
@@ -187,7 +195,7 @@ export function CozumClient({
       void (async () => {
         const result = await recordSolvedCase({
           caseId,
-          accuracy: successMeta.accuracy,
+          suspectId: correctId,
           attemptCount: successMeta.attempts,
           durationSeconds,
         });
@@ -211,24 +219,22 @@ export function CozumClient({
         solved_at: new Date().toISOString(),
       });
     }
-  }, [view, isCorrect, user, successMeta, caseId, router]);
+  }, [view, isCorrect, user, successMeta, caseId, correctId, router]);
 
   useEffect(() => {
     if (view !== "result" || !isCorrect) return;
 
-    const session = getActiveSession();
-    const sessionIsCoop = session?.mode === "coop" && !!session?.roomId;
-
-    if (!sessionIsCoop) {
-      clearActiveSession();
-      window.dispatchEvent(new Event("dakt-session-change"));
-    }
+    clearActiveSession();
+    window.dispatchEvent(new Event("dakt-session-change"));
   }, [view, isCorrect]);
 
   const isCoop = Boolean(roomId);
 
-  const { count: activePlayerCount, loading: playersLoading } =
-    useRoomActivePlayers(isCoop ? roomId : null);
+  const {
+    count: activePlayerCount,
+    userIds: activeUserIds,
+    loading: playersLoading,
+  } = useRoomActivePlayers(isCoop ? roomId : null);
 
   // ═══ CO-OP: host bypass ayarını oku ═══
   useEffect(() => {
@@ -319,6 +325,15 @@ export function CozumClient({
     const ok = selectedSuspect === correctId;
     setView("result");
     setIsCorrect(ok);
+    if (isCoop && roomId && selectedSuspect) {
+      if (!ok) clearCoopVoteFinished(roomId);
+      void (ok
+        ? completeCoopRoom(roomId, selectedSuspect)
+        : resetRoomVotes(roomId)
+      ).then((r) => {
+        if (!r.success) console.error("Co-op oda güncellemesi:", r.error);
+      });
+    }
     if (ok) {
       const start = readCaseStartTimestamp(caseId);
       const durationMs =
@@ -355,9 +370,10 @@ export function CozumClient({
                 role: s.role,
                 code: s.code,
               }))}
-              playerCount={activePlayerCount}
+              activeUserIds={activeUserIds}
               userId={user.id}
               onVoteComplete={(suspectId: string) => {
+                markCoopVoteFinished(roomId);
                 setSelectedSuspect(suspectId);
                 setCoopVoteComplete(true);
                 incrementAttemptCount(caseId);

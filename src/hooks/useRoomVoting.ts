@@ -13,18 +13,24 @@ export type RoomVote = {
 type UseRoomVotingOpts = {
   roomId: string;
   userId: string;
-  playerCount: number;
+  /** Odadaki aktif (ayrılmamış) oyuncular; ayrılanların oyları sayılmaz. */
+  activeUserIds: string[];
   onConsensus: (suspectId: string) => void;
 };
 
 export function useRoomVoting({
   roomId,
   userId,
-  playerCount,
+  activeUserIds,
   onConsensus,
 }: UseRoomVotingOpts) {
   const supabase = useMemo(() => createClient(), []);
-  const [votes, setVotes] = useState<RoomVote[]>([]);
+  const [allVotes, setVotes] = useState<RoomVote[]>([]);
+  const playerCount = activeUserIds.length;
+  const votes = useMemo(() => {
+    const active = new Set(activeUserIds);
+    return allVotes.filter((v) => active.has(v.user_id));
+  }, [allVotes, activeUserIds]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
