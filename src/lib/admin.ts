@@ -1,7 +1,13 @@
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin-client";
 
-const SUPER_ADMIN_EMAIL = "beerkai@outlook.com";
+/** Virgülle ayrılmış e-posta listesi; profiles.role = 'admin' yoksa yedek yetki. */
+function superAdminEmails(): string[] {
+  return (process.env.SUPER_ADMIN_EMAILS ?? "")
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+}
 
 export interface AdminCheck {
   isAdmin: boolean;
@@ -11,7 +17,7 @@ export interface AdminCheck {
 
 /**
  * Server-side admin kontrolü.
- * Hibrit: profiles.role = 'admin' VEYA email = SUPER_ADMIN_EMAIL
+ * Hibrit: profiles.role = 'admin' VEYA email ∈ SUPER_ADMIN_EMAILS (env)
  */
 export async function checkAdmin(): Promise<AdminCheck> {
   const supabase = await createClient();
@@ -30,7 +36,10 @@ export async function checkAdmin(): Promise<AdminCheck> {
     .maybeSingle();
 
   const isAdminByRole = profile?.role === "admin";
-  const isAdminByEmail = user.email === SUPER_ADMIN_EMAIL;
+  const isAdminByEmail =
+    !!user.email &&
+    !!user.email_confirmed_at &&
+    superAdminEmails().includes(user.email.toLowerCase());
 
   return {
     isAdmin: isAdminByRole || isAdminByEmail,
@@ -57,13 +66,14 @@ export async function logAdminAction(params: {
   } = await supabase.auth.getUser();
   if (!user) return;
 
-  const { data: profile } = await supabase
+  const adminDb = createAdminClient();
+  const { data: profile } = await adminDb
     .from("profiles")
     .select("username")
     .eq("id", user.id)
     .single();
 
-  await supabase.from("admin_audit_log").insert({
+  const { error } = await adminDb.from("admin_audit_log").insert({
     admin_id: user.id,
     admin_username: profile?.username ?? "—",
     action: params.action,
@@ -72,6 +82,7 @@ export async function logAdminAction(params: {
     target_label: params.targetLabel ?? null,
     payload: params.payload ?? null,
   });
+  if (error) console.error("[logAdminAction] insert error:", error.message);
 }
 
 /**

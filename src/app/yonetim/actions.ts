@@ -187,8 +187,13 @@ export async function deleteUser(userId: string, username: string) {
   return { success: true, redirect: "/yonetim/analistler" as const };
 }
 
+const CASE_STATUSES = ["draft", "test", "published", "archived"] as const;
+
 export async function setCaseStatus(caseId: string, newStatus: string) {
   await ensureAdmin();
+  if (!(CASE_STATUSES as readonly string[]).includes(newStatus)) {
+    return { error: "Geçersiz vaka durumu" };
+  }
   const adminDb = createAdminClient();
 
   const updates: Record<string, string> = { status: newStatus };

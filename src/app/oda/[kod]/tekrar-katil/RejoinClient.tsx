@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import type { CaseData } from "@/lib/case-types";
-import { createClient } from "@/lib/supabase/client";
+import { rejoinRoom } from "@/app/oda/actions";
 
 export function RejoinClient({
   room,
@@ -27,36 +27,13 @@ export function RejoinClient({
     setError(null);
 
     try {
-      const supabase = createClient();
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      if (!user) {
-        setError("Giriş gerekli");
+      const result = await rejoinRoom(room.id);
+      if ("error" in result) {
+        setError(result.error);
         setLoading(false);
         return;
       }
-
-      const { error: updateError } = await supabase
-        .from("room_players")
-        .update({ left_at: null })
-        .eq("room_id", room.id)
-        .eq("user_id", user.id);
-
-      if (updateError) {
-        setError(`Tekrar katılım başarısız: ${updateError.message}`);
-        setLoading(false);
-        return;
-      }
-
-      if (room.status === "playing") {
-        router.push(`/vaka/${room.case_id}/brief?room=${room.id}`);
-      } else if (room.status === "waiting") {
-        router.push(`/oda/${room.code}`);
-      } else {
-        router.push("/davalar?error=archived");
-      }
+      router.push(result.redirect);
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error("Rejoin failed:", err);

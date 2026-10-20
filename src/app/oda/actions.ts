@@ -2,8 +2,20 @@
 
 import { revalidatePath } from "next/cache";
 
+import { getCase } from "@/lib/case-helpers";
 import { createClient } from "@/lib/supabase/server";
 import type { AnalystColor } from "@/lib/supabase/types";
+
+const ANALYST_COLORS: AnalystColor[] = [
+  "mavi",
+  "sari",
+  "yesil",
+  "mor",
+  "turuncu",
+];
+
+const MAX_ROOM_PLAYERS = 5;
+const GUEST_USERNAME_MAX = 48;
 
 // 1. ODA KUR
 export async function createRoom(caseId: string) {
@@ -14,6 +26,19 @@ export async function createRoom(caseId: string) {
 
   if (!user) {
     return { error: "Oda kurmak için giriş yapmalısın" };
+  }
+
+  if (!getCase(caseId)) {
+    return { error: "Vaka bulunamadı" };
+  }
+
+  const { data: caseMeta } = await supabase
+    .from("cases_metadata")
+    .select("status")
+    .eq("case_id", caseId)
+    .maybeSingle();
+  if (!caseMeta || caseMeta.status === "draft" || caseMeta.status === "archived") {
+    return { error: "Bu vaka şu an oynanamıyor" };
   }
 
   const { data: profile } = await supabase
@@ -107,10 +132,29 @@ export async function ensureAnonProfile(
   if (!user) {
     return { error: "Oturum bulunamadı" };
   }
+  if (!user.is_anonymous) {
+    return { error: "Bu işlem yalnızca misafir oturumları içindir" };
+  }
 
   const trimmed = username.trim();
   if (!trimmed) {
     return { error: "Takma ad gerekli" };
+  }
+  if (trimmed.length > GUEST_USERNAME_MAX) {
+    return { error: `Takma ad en fazla ${GUEST_USERNAME_MAX} karakter olabilir` };
+  }
+  if (!ANALYST_COLORS.includes(color)) {
+    return { error: "Geçersiz renk" };
+  }
+
+  const { data: taken } = await supabase
+    .from("profiles")
+    .select("id")
+    .eq("username", trimmed)
+    .neq("id", user.id)
+    .maybeSingle();
+  if (taken) {
+    return { error: "Bu takma ad zaten kullanılıyor" };
   }
 
   const { error } = await supabase.from("profiles").upsert(
@@ -196,8 +240,8 @@ export async function joinRoom(code: string): Promise<JoinRoomResult> {
     return { error: "Oda bilgileri alınamadı" };
   }
 
-  if (activePlayers.length >= 5) {
-    return { error: "Oda dolu (5/5)" };
+  if (activePlayers.length >= MAX_ROOM_PLAYERS) {
+    return { error: `Oda dolu (${MAX_ROOM_PLAYERS}/${MAX_ROOM_PLAYERS})` };
   }
 
   const { data: profile } = await supabase
@@ -214,14 +258,7 @@ export async function joinRoom(code: string): Promise<JoinRoomResult> {
   let assignedColor: AnalystColor = profile.color;
 
   if (usedColors.includes(profile.color)) {
-    const allColors: AnalystColor[] = [
-      "mavi",
-      "sari",
-      "yesil",
-      "mor",
-      "turuncu",
-    ];
-    const available = allColors.filter((c) => !usedColors.includes(c));
+    const available = ANALYST_COLORS.filter((c) => !usedColors.includes(c));
     if (available.length === 0) {
       return { error: "Tüm renkler dolu" };
     }
@@ -238,6 +275,28 @@ export async function joinRoom(code: string): Promise<JoinRoomResult> {
 
   if (joinError) {
     return { error: `Odaya katılınamadı: ${joinError.message}` };
+  }
+
+  // Sayım ile ekleme arasında eşzamanlı katılımlar kapasiteyi aşarsa
+  // en son katılan geri çekilir.
+  const { data: afterJoin } = await supabase
+    .from("room_players")
+    .select("user_id, joined_at")
+    .eq("room_id", room.id)
+    .is("left_at", null)
+    .order("joined_at", { ascending: true });
+  if (afterJoin && afterJoin.length > MAX_ROOM_PLAYERS) {
+    const admitted = afterJoin
+      .slice(0, MAX_ROOM_PLAYERS)
+      .some((p) => p.user_id === user.id);
+    if (!admitted) {
+      await supabase
+        .from("room_players")
+        .delete()
+        .eq("room_id", room.id)
+        .eq("user_id", user.id);
+      return { error: `Oda dolu (${MAX_ROOM_PLAYERS}/${MAX_ROOM_PLAYERS})` };
+    }
   }
 
   revalidatePath(`/oda/${normalizedCode}`);
@@ -258,7 +317,8 @@ export async function toggleReady(roomId: string) {
     .select("is_ready")
     .eq("room_id", roomId)
     .eq("user_id", user.id)
-    .single();
+    .is("left_at", null)
+    .maybeSingle();
 
   if (!player) return { error: "Oyuncu bulunamadı" };
 
@@ -266,7 +326,8 @@ export async function toggleReady(roomId: string) {
     .from("room_players")
     .update({ is_ready: !player.is_ready })
     .eq("room_id", roomId)
-    .eq("user_id", user.id);
+    .eq("user_id", user.id)
+    .is("left_at", null);
 
   if (error) return { error: error.message };
 
@@ -416,5 +477,72 @@ export async function startCase(roomId: string) {
     success: true as const,
     caseId: room.case_id,
     roomId,
+  };
+}
+
+export type RejoinRoomResult =
+  | { success: true; redirect: string }
+  | { error: string };
+
+// 6. ODAYA TEKRAR KATIL (daha önce ayrılmış oyuncu)
+export async function rejoinRoom(roomId: string): Promise<RejoinRoomResult> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) return { error: "Giriş gerekli" };
+
+  const { data: room } = await supabase
+    .from("rooms")
+    .select("id, code, case_id, status")
+    .eq("id", roomId)
+    .maybeSingle();
+
+  if (!room) return { error: "Oda bulunamadı" };
+  if (room.status !== "waiting" && room.status !== "playing") {
+    return { success: true, redirect: "/davalar?error=archived" };
+  }
+
+  const { data: previous } = await supabase
+    .from("room_players")
+    .select("left_at")
+    .eq("room_id", room.id)
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  if (!previous) return { error: "Bu odanın üyesi değilsin" };
+
+  if (previous.left_at) {
+    const { count } = await supabase
+      .from("room_players")
+      .select("user_id", { count: "exact", head: true })
+      .eq("room_id", room.id)
+      .is("left_at", null);
+    if ((count ?? 0) >= MAX_ROOM_PLAYERS) {
+      return { error: `Oda dolu (${MAX_ROOM_PLAYERS}/${MAX_ROOM_PLAYERS})` };
+    }
+
+    const { data: updated, error } = await supabase
+      .from("room_players")
+      .update({ left_at: null, is_ready: false })
+      .eq("room_id", room.id)
+      .eq("user_id", user.id)
+      .select("user_id");
+
+    if (error) return { error: `Tekrar katılım başarısız: ${error.message}` };
+    if (!updated || updated.length === 0) {
+      return { error: "Tekrar katılım kaydedilemedi" };
+    }
+  }
+
+  const code = String(room.code ?? "").toUpperCase();
+  revalidatePath(`/oda/${code}`);
+  return {
+    success: true,
+    redirect:
+      room.status === "playing"
+        ? `/vaka/${room.case_id}/brief?room=${room.id}`
+        : `/oda/${code}`,
   };
 }
