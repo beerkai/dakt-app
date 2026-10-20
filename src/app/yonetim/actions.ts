@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 
+import { purgeUserAccount } from "@/lib/account-deletion";
 import { checkAdmin, logAdminAction } from "@/lib/admin";
 import { createAdminClient } from "@/lib/supabase/admin-client";
 import { createClient } from "@/lib/supabase/server";
@@ -139,41 +140,8 @@ export async function deleteUser(userId: string, username: string) {
     return { error: "Admin hesapları silinemez. Önce rolü değiştir." };
   }
 
-  const adminClient = createAdminClient();
-
-  const { error: solvedErr } = await adminClient
-    .from("solved_cases")
-    .delete()
-    .eq("user_id", userId);
-  if (solvedErr) console.error("[deleteUser] solved_cases:", solvedErr);
-
-  const { error: roomPlayersErr } = await adminClient
-    .from("room_players")
-    .delete()
-    .eq("user_id", userId);
-  if (roomPlayersErr) console.error("[deleteUser] room_players:", roomPlayersErr);
-
-  await adminClient
-    .from("rooms")
-    .update({
-      status: "archived",
-      archived_at: new Date().toISOString(),
-      finished_at: new Date().toISOString(),
-    })
-    .eq("host_user_id", userId)
-    .in("status", ["waiting", "playing"]);
-
-  const { error: profileErr } = await adminClient
-    .from("profiles")
-    .delete()
-    .eq("id", userId);
-  if (profileErr) console.error("[deleteUser] profiles:", profileErr);
-
-  const { error: authError } = await adminClient.auth.admin.deleteUser(userId);
-
-  if (authError) {
-    return { error: "Auth silme başarısız: " + authError.message };
-  }
+  const purged = await purgeUserAccount(userId);
+  if ("error" in purged) return { error: purged.error };
 
   await logAdminAction({
     action: "delete_user",

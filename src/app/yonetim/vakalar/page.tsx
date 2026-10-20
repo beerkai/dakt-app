@@ -23,14 +23,13 @@ export default async function VakalarPage() {
 
   const { data: allSolves } = await supabase
     .from("solved_cases")
-    .select("case_id, accuracy, duration_seconds");
+    .select("case_id, attempt_count, duration_seconds");
 
-  const statsMap = new Map<string, { count: number; avgAccuracy: number }>();
+  const statsMap = new Map<string, { count: number; firstTry: number }>();
   allSolves?.forEach((s) => {
-    const cur = statsMap.get(s.case_id) ?? { count: 0, avgAccuracy: 0 };
+    const cur = statsMap.get(s.case_id) ?? { count: 0, firstTry: 0 };
     cur.count += 1;
-    cur.avgAccuracy =
-      ((cur.avgAccuracy * (cur.count - 1)) + s.accuracy) / cur.count;
+    if (s.attempt_count === 1) cur.firstTry += 1;
     statsMap.set(s.case_id, cur);
   });
 
@@ -79,7 +78,7 @@ export default async function VakalarPage() {
                 <div className="gm-list-detail" style={{ marginTop: 4 }}>
                   {stats?.count ?? 0} çözüm ·
                   {stats
-                    ? ` ${Math.round(stats.avgAccuracy)}% ort. doğruluk`
+                    ? ` %${Math.round((stats.firstTry / stats.count) * 100)} ilk denemede`
                     : " henüz çözen yok"}
                 </div>
               </div>

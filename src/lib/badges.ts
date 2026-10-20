@@ -83,7 +83,7 @@ export function calculateStats(solved: SolvedCaseMetrics[]) {
   if (solved.length === 0) {
     return {
       totalSolved: 0,
-      averageAccuracy: 0,
+      averageAttempts: 0,
       fastestSolve: null as number | null,
       totalPlayTime: 0,
       firstTryRate: 0,
@@ -92,9 +92,12 @@ export function calculateStats(solved: SolvedCaseMetrics[]) {
   }
 
   const totalSolved = solved.length;
-  const averageAccuracy = Math.round(
-    solved.reduce((sum, s) => sum + s.accuracy, 0) / totalSolved,
-  );
+  const averageAttempts =
+    Math.round(
+      (solved.reduce((sum, s) => sum + Math.max(1, s.attempt_count), 0) /
+        totalSolved) *
+        10,
+    ) / 10;
   const fastestSolve = Math.min(...solved.map((s) => s.duration_seconds));
   const totalPlayTime = solved.reduce((sum, s) => sum + s.duration_seconds, 0);
   const firstTryCount = solved.filter((s) => s.attempt_count === 1).length;
@@ -103,7 +106,7 @@ export function calculateStats(solved: SolvedCaseMetrics[]) {
 
   return {
     totalSolved,
-    averageAccuracy,
+    averageAttempts,
     fastestSolve,
     totalPlayTime,
     firstTryRate,

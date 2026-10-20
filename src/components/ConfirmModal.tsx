@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useId, useRef, type ReactNode } from "react";
 
 export type ConfirmVariant = "default" | "warning" | "danger";
 
@@ -18,7 +18,13 @@ interface ConfirmModalProps {
   altActionVariant?: ConfirmVariant;
   /** Cancel / secondary: defaults to onClose when omitted */
   onCancel?: () => void;
+  /** Açıklama ile butonlar arasına ek içerik (ör. onay alanı). */
+  children?: ReactNode;
+  confirmDisabled?: boolean;
 }
+
+const FOCUSABLE =
+  'button:not([disabled]), [href], input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])';
 
 export default function ConfirmModal({
   open,
@@ -33,15 +39,45 @@ export default function ConfirmModal({
   onAltAction,
   altActionVariant = "default",
   onCancel,
+  children,
+  confirmDisabled = false,
 }: ConfirmModalProps) {
+  const titleId = useId();
+  const descId = useId();
+  const dialogRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!open) return;
-    function handleEsc(e: KeyboardEvent) {
-      if (e.key === "Escape") (onCancel ?? onClose)();
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        (onCancel ?? onClose)();
+        return;
+      }
+      if (e.key !== "Tab" || !dialogRef.current) return;
+      const items = Array.from(
+        dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE),
+      );
+      if (items.length === 0) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     }
-    document.addEventListener("keydown", handleEsc);
-    return () => document.removeEventListener("keydown", handleEsc);
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
   }, [open, onClose, onCancel]);
+
+  useEffect(() => {
+    if (!open) return;
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    dialogRef.current?.querySelector<HTMLElement>(FOCUSABLE)?.focus();
+    return () => previouslyFocused?.focus?.();
+  }, [open]);
 
   useEffect(() => {
     if (open) {
@@ -75,16 +111,27 @@ export default function ConfirmModal({
   return (
     <div className="confirm-modal-backdrop" onClick={handleCancel}>
       <div
+        ref={dialogRef}
         className="confirm-modal"
+        role={variant === "danger" ? "alertdialog" : "dialog"}
+        aria-modal="true"
+        aria-labelledby={titleId}
+        aria-describedby={description ? descId : undefined}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="confirm-modal-corner" />
+        <div className="confirm-modal-corner" aria-hidden />
 
-        <h3 className="confirm-modal-title">{title}</h3>
+        <h3 id={titleId} className="confirm-modal-title">
+          {title}
+        </h3>
 
         {description ? (
-          <p className="confirm-modal-description">{description}</p>
+          <p id={descId} className="confirm-modal-description">
+            {description}
+          </p>
         ) : null}
+
+        {children}
 
         <div className="confirm-modal-actions">
           <button
@@ -118,6 +165,7 @@ export default function ConfirmModal({
             onClick={() => {
               onConfirm();
             }}
+            disabled={confirmDisabled}
             className={confirmClassName}
           >
             {confirmText}

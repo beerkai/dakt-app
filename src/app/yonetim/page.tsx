@@ -143,8 +143,9 @@ export default async function YonetimDashboardPage() {
                   </span>
                 </span>
                 <span className="gm-list-detail">
-                  {Math.round(solve.accuracy)}% doğruluk ·{" "}
-                  {solve.attempt_count} deneme
+                  {solve.attempt_count === 1
+                    ? "ilk denemede"
+                    : `${solve.attempt_count} deneme`}
                 </span>
                 <span className="gm-list-meta-box">{dateStr}</span>
               </div>

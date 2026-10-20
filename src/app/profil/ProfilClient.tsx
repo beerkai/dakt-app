@@ -1,9 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState, type FormEvent } from "react";
 
+import ConfirmModal from "@/components/ConfirmModal";
 import { UserColorPicker } from "@/components/UserColorPicker";
+import { clearActiveSession } from "@/lib/active-session";
+import { changePassword, deleteOwnAccount } from "./actions";
 import {
   ANALYST_COLOR_HEX,
   ANALYST_COLOR_LABEL_TR,
@@ -12,6 +16,12 @@ import type { Profile } from "@/lib/supabase/types";
 
 const mono =
   "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace]";
+
+const labelMono =
+  "mb-2 block text-[9px] uppercase tracking-[0.22em] text-[var(--meta-label)] [font-family:var(--font-jetbrains-mono),monospace]";
+
+const inputClass =
+  "w-full border border-[var(--kraft-dark)] bg-[var(--anthracite)] px-4 py-3 text-[13px] text-[var(--body-text)] [font-family:var(--font-special-elite),monospace] placeholder:text-[var(--meta-label)] focus:border-[var(--kraft)] focus:outline-none";
 
 export function ProfilClient({
   profile,
@@ -24,12 +34,64 @@ export function ProfilClient({
   memberSinceLabel: string;
   stats: {
     totalSolved: number;
-    avgAccuracy: number;
+    firstTryRate: number;
     fastestSolveSec: number;
     totalDurationSec: number;
   };
 }) {
+  const router = useRouter();
   const [colorOpen, setColorOpen] = useState(false);
+
+  const [pwOpen, setPwOpen] = useState(false);
+  const [pwBusy, setPwBusy] = useState(false);
+  const [pwMessage, setPwMessage] = useState<
+    { kind: "ok" | "error"; text: string } | null
+  >(null);
+
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [deleteConfirm, setDeleteConfirm] = useState("");
+  const [deleteBusy, setDeleteBusy] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
+
+  async function handlePasswordSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (pwBusy) return;
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const currentPassword = String(data.get("current") ?? "");
+    const newPassword = String(data.get("next") ?? "");
+    const repeat = String(data.get("repeat") ?? "");
+    if (newPassword !== repeat) {
+      setPwMessage({ kind: "error", text: "Yeni şifreler eşleşmiyor." });
+      return;
+    }
+    setPwBusy(true);
+    setPwMessage(null);
+    const result = await changePassword({ currentPassword, newPassword });
+    setPwBusy(false);
+    if ("error" in result) {
+      setPwMessage({ kind: "error", text: result.error });
+      return;
+    }
+    form.reset();
+    setPwMessage({ kind: "ok", text: "Şifren güncellendi." });
+  }
+
+  async function handleDeleteAccount() {
+    if (deleteBusy) return;
+    setDeleteBusy(true);
+    setDeleteError(null);
+    const result = await deleteOwnAccount(deleteConfirm);
+    if ("error" in result) {
+      setDeleteError(result.error);
+      setDeleteBusy(false);
+      return;
+    }
+    clearActiveSession();
+    window.dispatchEvent(new Event("dakt-session-change"));
+    router.push("/");
+    router.refresh();
+  }
 
   function formatDurationSec(s: number) {
     if (s <= 0) return "—";
@@ -40,8 +102,8 @@ export function ProfilClient({
 
   const hex = ANALYST_COLOR_HEX[profile.color];
   const label = ANALYST_COLOR_LABEL_TR[profile.color];
-  const avgLabel =
-    stats.totalSolved > 0 ? `${stats.avgAccuracy}%` : "—";
+  const firstTryLabel =
+    stats.totalSolved > 0 ? `${stats.firstTryRate}%` : "—";
 
   return (
     <div className="relative z-[1] mx-auto w-full max-w-[640px] flex-1 px-5 py-10 md:px-7 md:py-14">
@@ -93,6 +155,41 @@ export function ProfilClient({
         </button>
       </section>
 
+      <ConfirmModal
+        open={deleteOpen}
+        onClose={() => {
+          if (!deleteBusy) setDeleteOpen(false);
+        }}
+        onConfirm={() => void handleDeleteAccount()}
+        title="Hesabı kalıcı olarak sil"
+        description="Çözüm geçmişin, rozetlerin ve oda kayıtların silinir; host olduğun açık odalar kapatılır. Bu işlem geri alınamaz."
+        confirmText={deleteBusy ? "Siliniyor…" : "Hesabı Sil"}
+        variant="danger"
+        confirmDisabled={deleteBusy || deleteConfirm.trim() !== profile.username}
+      >
+        <div className="mb-6">
+          <label htmlFor="delete-confirm" className={labelMono}>
+            Onay için takma adını yaz: {profile.username}
+          </label>
+          <input
+            id="delete-confirm"
+            type="text"
+            value={deleteConfirm}
+            onChange={(e) => setDeleteConfirm(e.target.value)}
+            autoComplete="off"
+            className={inputClass}
+          />
+          {deleteError ? (
+            <p
+              role="alert"
+              className={`${mono} mt-2 text-[10px] uppercase tracking-[0.18em] text-[var(--bordeaux-bright)]`}
+            >
+              {deleteError}
+            </p>
+          ) : null}
+        </div>
+      </ConfirmModal>
+
       <UserColorPicker
         currentColor={profile.color}
         open={colorOpen}
@@ -120,10 +217,10 @@ export function ProfilClient({
           </div>
           <div className="border border-[var(--rule)] bg-[var(--anthracite-2)] p-4">
             <p className={`${mono} mb-1 text-[9px] uppercase tracking-[0.2em] text-[var(--meta-label)]`}>
-              Ortalama doğruluk
+              İlk denemede çözme
             </p>
             <p className={`text-xl text-[var(--kraft-light)] ${mono}`}>
-              {avgLabel}
+              {firstTryLabel}
             </p>
           </div>
           <div className="border border-[var(--rule)] bg-[var(--anthracite-2)] p-4">
@@ -167,20 +264,101 @@ export function ProfilClient({
           Tehlikeli bölge
         </h2>
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          {email ? (
+            <button
+              type="button"
+              onClick={() => {
+                setPwOpen((v) => !v);
+                setPwMessage(null);
+              }}
+              aria-expanded={pwOpen}
+              aria-controls="profil-sifre-form"
+              className={`${mono} border border-[var(--kraft)] bg-transparent px-4 py-3 text-[10px] uppercase tracking-[0.2em] text-[var(--kraft-light)] transition-colors hover:border-[var(--kraft-light)]`}
+            >
+              Şifre Değiştir
+            </button>
+          ) : null}
           <button
             type="button"
-            disabled
-            className={`${mono} cursor-not-allowed border border-[var(--rule)] bg-[var(--anthracite-2)] px-4 py-3 text-[10px] uppercase tracking-[0.2em] text-[var(--meta-label)] opacity-60`}
+            onClick={() => {
+              setDeleteConfirm("");
+              setDeleteError(null);
+              setDeleteOpen(true);
+            }}
+            className={`${mono} border border-[var(--bordeaux)] bg-transparent px-4 py-3 text-[10px] uppercase tracking-[0.2em] text-[var(--bordeaux-bright)] transition-colors hover:bg-[var(--bordeaux)] hover:text-[var(--paper)]`}
           >
-            Hesap Sil ○ YAKINDA
+            Hesabı Sil
           </button>
-          <span
-            className={`inline-flex items-center px-2 text-[10px] uppercase tracking-[0.18em] text-[var(--kraft-dark)] ${mono}`}
-          >
-            Şifre değiştir —{" "}
-            <span className="text-[var(--meta-label)]">yakında</span>
-          </span>
         </div>
+
+        {pwOpen ? (
+          <form
+            id="profil-sifre-form"
+            onSubmit={(e) => void handlePasswordSubmit(e)}
+            className="mt-6 flex flex-col gap-4"
+          >
+            <div>
+              <label htmlFor="pw-current" className={labelMono}>
+                Mevcut şifre
+              </label>
+              <input
+                id="pw-current"
+                name="current"
+                type="password"
+                autoComplete="current-password"
+                required
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label htmlFor="pw-next" className={labelMono}>
+                Yeni şifre
+              </label>
+              <input
+                id="pw-next"
+                name="next"
+                type="password"
+                autoComplete="new-password"
+                minLength={6}
+                required
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label htmlFor="pw-repeat" className={labelMono}>
+                Yeni şifre (tekrar)
+              </label>
+              <input
+                id="pw-repeat"
+                name="repeat"
+                type="password"
+                autoComplete="new-password"
+                minLength={6}
+                required
+                className={inputClass}
+              />
+            </div>
+            {pwMessage ? (
+              <p
+                role={pwMessage.kind === "error" ? "alert" : "status"}
+                className={`${mono} text-[10px] uppercase tracking-[0.18em] ${
+                  pwMessage.kind === "error"
+                    ? "text-[var(--bordeaux-bright)]"
+                    : "text-[var(--kraft-light)]"
+                }`}
+              >
+                {pwMessage.text}
+              </p>
+            ) : null}
+            <button
+              type="submit"
+              disabled={pwBusy}
+              className={`${mono} border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] px-4 py-3 text-[10px] uppercase tracking-[0.2em] text-[var(--paper)] hover:bg-[var(--bordeaux-bright)] disabled:opacity-50`}
+            >
+              {pwBusy ? "Güncelleniyor…" : "▸ Şifreyi Güncelle"}
+            </button>
+          </form>
+        ) : null}
       </section>
 
       <p className="mt-8 text-center">

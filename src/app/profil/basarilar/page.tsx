@@ -91,9 +91,13 @@ export default async function ProfilBasarilarPage() {
           sub="toplam dosya"
         />
         <StatCard
-          label="ORTALAMA DOĞRULUK"
-          value={`%${stats.averageAccuracy}`}
-          sub="dosya başına kayıtlı skor"
+          label="ORTALAMA DENEME"
+          value={
+            stats.totalSolved > 0
+              ? stats.averageAttempts.toLocaleString("tr-TR")
+              : "—"
+          }
+          sub="çözüm başına oylama"
         />
         <StatCard
           label="EN HIZLI ÇÖZÜM"

@@ -246,8 +246,9 @@ export default async function AnalystDetailPage({
               </span>
               <span className="gm-list-name">Vaka {s.case_id}</span>
               <span className="gm-list-detail">
-                {Math.round(s.accuracy)}% doğruluk · {s.attempt_count}{" "}
-                deneme
+                {s.attempt_count === 1
+                  ? "ilk denemede"
+                  : `${s.attempt_count} deneme`}
               </span>
               <span className="gm-list-meta-box">
                 {new Date(s.solved_at).toLocaleDateString("tr-TR", {

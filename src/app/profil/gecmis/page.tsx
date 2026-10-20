@@ -104,7 +104,7 @@ export default async function ProfilGecmisPage() {
                 <p
                   className={`${mono} mb-2 text-[10px] uppercase tracking-[0.2em] text-[var(--kraft-light)]`}
                 >
-                  DOĞRULUK: %{row.accuracy} · SÜRE:{" "}
+                  SÜRE:{" "}
                   {Math.floor(row.duration_seconds / 60)} dk{" "}
                   {row.duration_seconds % 60} sn · DENEME:{" "}
                   {row.attempt_count}.
