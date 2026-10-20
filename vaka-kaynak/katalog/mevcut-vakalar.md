@@ -184,7 +184,104 @@ Yeni vaka oluşturmadan önce **mutlaka oku**. Bu dosya çeşitlilik kontrolün�
 
 ---
 
-# Pattern Analizi — Mevcut 5 Vakada Tekrarlayan Şeyler
+> Aşağıdaki beş vaka (016, 027, 036, 048, 104) statik veriden özetlendi; motif, yöntem ve mekân tipi notlarını elle tamamla.
+
+## Vaka 016 — Gönye
+
+**Codename:** Gönye
+**Zorluk:** Zor · 1-4
+
+### Özet
+- **Kurban:** Şükran Atalay (48, kadın)
+- **Konum:** Bursa · Osmangazi · Uludağ Yolu 8. Kilometre (Cesedin Bulunduğu Yer)
+- **Tarih:** 15 Şubat 2025 · Gece 02:30 (Bulunma)
+- **Kısa özet:** 15 Şubat 2025 gecesi Uludağ yolunda, ayakları kesilmiş bir kadın cesedi bulunur. Kurban, tavizsiz bir belediye imar denetçisidir. Ancak bu vahşetin arkasında psikopatolojik bir ritüel değil, tamamen pratik bir sığdıramama problemi yatmaktadır.
+
+### Fail
+- **Kim:** Erkan Çevik — Mimar / Proje Sahibi
+
+### Yapısal özellikler
+- 6 şüpheli, 12 ifade, 10 delil, 8 belge, 2 mesaj zinciri, 1 teknik rapor
+
+---
+
+## Vaka 027 — Güverte
+
+**Codename:** Güverte
+**Zorluk:** Zor · 2–4 analist
+
+### Özet
+- **Kurban:** Rıza Tunalı (62, erkek)
+- **Konum:** Antalya · Kemer Açıkları · MV Poseidon Kruvaziyeri
+- **Tarih:** 15 Ağustos 2025 · Gece 02:00 — 03:00
+- **Kısa özet:** Antalya açıklarında kruvaziyerde VIP jakuzi cinayeti. Kameraları sahte kesinti süresi bağladı.
+
+### Fail
+- **Kim:** Pınar Korkmaz — Özel Hemşire / Bakıcı
+
+### Yapısal özellikler
+- 6 şüpheli, 11 ifade, 6 delil, 7 belge, 3 mesaj zinciri, 1 teknik rapor
+
+---
+
+## Vaka 036 — Bedel
+
+**Codename:** Bedel
+**Zorluk:** Zor · 2–4 analist
+
+### Özet
+- **Kurban:** Cevher Şanlı (62, erkek)
+- **Konum:** Diyarbakır · Sur · Kuyumcular Çarşısı · Şanlı Kuyumculuk Arka Odası
+- **Tarih:** 18 Nisan 2025 · Gece 22:30 — 23:30
+- **Kısa özet:** Sur Kuyumcular Çarşısı'nda tefeci cinayeti: tanıdığın gece dükkana giriş, boğulma ve kayıp kırmızı defter.
+
+### Fail
+- **Kim:** Civan Diyarlı — Bakırcı Ustası (Borçlu esnaf)
+
+### Yapısal özellikler
+- 6 şüpheli, 11 ifade, 6 delil, 5 belge, 1 mesaj zinciri, 0 teknik rapor
+
+---
+
+## Vaka 048 — Tezgâh
+
+**Codename:** Tezgâh
+**Zorluk:** Zor · 2–4 analist
+
+### Özet
+- **Kurban:** Necati Balcı (61, erkek)
+- **Konum:** İzmir · Konak · Kemeraltı Çarşısı · Altın Sokak No:14
+- **Tarih:** 17 Mart 2025 · Akşam 19:30
+- **Kısa özet:** Kemeraltı Çarşısı'nın en eski kuyumcusu arka odasında çay içerken öldü. Tezgâhın altındaki sır 15 yıldır bekliyordu.
+
+### Fail
+- **Kim:** Cemre Erkan — Kuyumcu çırağı · 8 aydır Necati'nin yanında · 29
+
+### Yapısal özellikler
+- 6 şüpheli, 10 ifade, 7 delil, 5 belge, 1 mesaj zinciri, 1 teknik rapor
+
+---
+
+## Vaka 104 — Kusurlu Hasat
+
+**Codename:** Kusurlu Hasat
+**Zorluk:** Zor · 4-5
+
+### Özet
+- **Kurban:** Vedat Somer (55, erkek)
+- **Konum:** İzmir · Urla
+- **Tarih:** 20 Eylül 2024 · 19:00 — 19:15 arası
+- **Kısa özet:** Urla, 20 Eylül 2024, 19:45. Şarap mahzeninde ölü bulunan bir vizyoner. Kırık bir kadeh, zehirli bir fıçı, silinmiş akıllı havalandırma logları. Bu davada kapıyı kırarak girenler değil, içeriden havalandıranlar tehlikelidir.
+
+### Fail
+- **Kim:** Aylin Somer — Ortağı · Kurbanın Kız Kardeşi · 48
+
+### Yapısal özellikler
+- 7 şüpheli, 3 ifade, 5 delil, 2 belge, 1 mesaj zinciri, 3 teknik rapor
+
+---
+
+# Pattern Analizi — İlk 5 Vakada Tekrarlayan Şeyler (12 vakaya göre güncellenmeli)
 
 Yeni vaka aşağıdaki **tekrarlardan kaçınmalı**:
 
@@ -300,7 +397,7 @@ Yeni vaka oluşturmadan önce **şu sorulara cevap ver**:
 İlerideki vakalar için fikir:
 - **Karadeniz**: Hamsi, Yamaç, Çay (Sis Vadisi → 033'te kullanıldı)
 - **Akademik**: Tez, Konferans, Arşiv, Hisar
-- **Endüstriyel**: Bagaj, Vardiya, Hat, Depo
+- **Endüstriyel**: Vardiya, Hat, Depo (Bagaj → 082'de kullanıldı)
 - **Tarihi**: Mahalle, Hisar, Sur, Ahşap
 - **Kıyı**: Liman, Marina, Deniz, Kıyı
 - **Kentsel**: Geçit, Tünel, Köprü, Kavşak

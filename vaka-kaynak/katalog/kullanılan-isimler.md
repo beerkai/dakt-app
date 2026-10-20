@@ -2,249 +2,193 @@
 
 Yeni vaka karakterlerinde **bu isimleri tekrar etme**. Aynı isim farklı vakada okuyucuyu karıştırır.
 
-## Mevcut Vakalardaki Karakterler
+> Bu dosya `scripts/generate-name-catalog.ts` ile statik vaka verisinden üretilir; elle düzenleme yapma.
 
-### Vaka 033 — Sis Vadisi
-| Rol | Ad | Soyad |
-|-----|-----|-------|
-| Kurban | Necati | Çoruh |
-| Fail | Fırat | Çoruh |
-| Şüpheli | Nurdan | Çoruh |
-| Şüpheli | Salih | Çoruh |
-| Şüpheli | Güler | Aktepe |
-| Şüpheli | Serkan | Dereli |
-| Şüpheli | Havva | Sürmeneli |
+## Vaka 016 — Gönye
 
----
-
-### Vaka 042 — Karaağaç
-| Rol | Ad | Soyad |
-|-----|-----|-------|
-| Kurban | Burak | Karaağaç |
-| Fail | Meryem | Güldağ |
-
-(Diğer şüpheli isimleri TS dosyasından çıkarılabilir — şu an eksik, sonra güncelleriz.)
+| Rol | Ad Soyad | Görev |
+|-----|----------|-------|
+| Kurban | Şükran Atalay (48, kadın) | — |
+| Fail | Erkan Çevik | Mimar / Proje Sahibi |
+| Şüpheli | Vildan Çevik | Peyzaj Mimarı (Erkan'ın eşi) |
+| Şüpheli | Tayfun Gürses | İmar Müdürlüğü Asistanı |
+| Şüpheli | Salih Kocabaş | Uludağ Yolu Çay Bahçesi İşletmecisi |
+| Şüpheli | Pınar Atalay | Üniversite Öğrencisi (Kızı) |
+| Şüpheli | Hakan Saygın | Müteahhit |
 
 ---
 
-### Vaka 053 — Offline
-| Rol | Ad | Soyad |
-|-----|-----|-------|
-| Kurban | Zeynep | Korkut |
-| Fail | Berk | Savaş |
-| Şüpheli | Melis | Yıldırım |
-| Şüpheli | Onur | Demir |
-| Şüpheli | Kaan | Tekin |
-| Şüpheli | Halil | Dursun |
-| Şüpheli | Deniz | Acar |
-| Otopsi uzmanı | Dr. H. | Demir (soyadı çakışıyor — yeniden kullanma) |
+## Vaka 027 — Güverte
+
+| Rol | Ad Soyad | Görev |
+|-----|----------|-------|
+| Kurban | Rıza Tunalı (62, erkek) | — |
+| Fail | Pınar Korkmaz | Özel Hemşire / Bakıcı |
+| Şüpheli | Cem Tunalı | Rıza'nın Oğlu / YK Üyesi |
+| Şüpheli | Hülya Adıgüzel | Kruvaziyer Direktörü |
+| Şüpheli | Aras Eraslan | Gemi Kaptanı |
+| Şüpheli | Bekir İskenderun | Güverte Barmeni |
+| Şüpheli | Damla Aydoğan | Rıza'nın Nişanlısı |
 
 ---
 
-### Vaka 067 — Koleksiyoncu
-| Rol | Ad | Soyad |
-|-----|-----|-------|
-| Fail | Selin | Çelik |
+## Vaka 033 — Sis Vadisi
 
-(Diğer karakterler eklenmeli — TS'den çıkartılarak güncellenebilir.)
-
----
-
-### Vaka 089 — Peri Bacası
-| Rol | Ad | Soyad |
-|-----|-----|-------|
-| Kurban | Defne | Karataş |
-| Fail | Alp | Erdoğan |
-
-(Diğer karakterler eklenmeli.)
+| Rol | Ad Soyad | Görev |
+|-----|----------|-------|
+| Kurban | Necati Çoruh (58, erkek) | — |
+| Fail | Fırat Çoruh | Yeğen, atölye yöneticisi — 2 yıldır Necati'ye yardım ediyor, Ankara'dan taşınmış |
+| Şüpheli | Nurdan Çoruh | Necati'nin kızı, İstanbul'da mimar — miras yararlanıcısı, son telefon görüşmesinde tartışma |
+| Şüpheli | Salih Çoruh | Necati'nin erkek kardeşi, Ankara'da emekli memur — arazi paylaşım ihtilafı |
+| Şüpheli | Güler Aktepe | Komşu çay üreticisi — 2 yıllık arazi sınır anlaşmazlığı ve su hakkı kavgası |
+| Şüpheli | Serkan Dereli | Çay Alım Kooperatifi müdürü — Necati'ye borçlu, kooperatiften ayrılma tehdidi |
+| Şüpheli | Havva Sürmeneli | Köyün en yaşlı sakinlerinden, Necati'nin annesinin yakın arkadaşı — tapu meselesinin iç yüzünü bilen tek kişi |
 
 ---
 
-### Vaka 114 — Cam Kule
-| Rol | Ad | Soyad |
-|-----|-----|-------|
-| Kurban | Yasemin | Tümer |
-| Fail | Vedat | Kaplan |
+## Vaka 036 — Bedel
 
-(Diğer karakterler eklenmeli.)
-
----
-
-### Vaka 082 — Bagaj
-| Rol | Ad | Soyad |
-|-----|-----|-------|
-| Kurban | Hasan | Aydın |
-| Fail | Selim | Karaoğlan |
-| Şüpheli | Mehmet | Erdal |
-| Şüpheli | Ayşe | Aydın (eski eş — Hasan'la aynı soyad) |
-| Şüpheli | Volkan | Şenel |
-| Şüpheli | Sarp | Yılmaz |
-| Şüpheli | Cemal | Bektaş |
+| Rol | Ad Soyad | Görev |
+|-----|----------|-------|
+| Kurban | Cevher Şanlı (62, erkek) | — |
+| Fail | Civan Diyarlı | Bakırcı Ustası (Borçlu esnaf) |
+| Şüpheli | Ceren Diyarlı | Civan'ın kız kardeşi |
+| Şüpheli | Mahmut Şanlı | Kurbanın oğlu |
+| Şüpheli | Saliha Şanlı | Kurbanın eşi |
+| Şüpheli | Hozan Akpınar | Rakip Kuyumcu |
+| Şüpheli | Yasin İskender | Kuyumcu Çırağı |
 
 ---
 
-## Yasaklı (zaten kullanılmış) — TEKRAR ETME
+## Vaka 042 — Karaağaç
 
-### Adlar (kullanıldı)
-Ayşe, Berk, Burak, Cemal, Defne, Fırat, Güler, Hasan, Havva, Mehmet, Meryem, Necati, Nurdan, Sarp, Selin, Selim, Serkan, Vedat, Volkan, Yasemin, Zeynep, Melis, Onur, Kaan, Halil, Deniz, Alp, Salih
-
-### Soyadlar (kullanıldı)
-Acar, Aktepe, Aydın, Bektaş, Demir, Dereli, Dursun, Erdal, Erdoğan, Güldağ, Karaağaç, Karataş, Karaoğlan, Kaplan, Korkut, Savaş, Şenel, Sürmeneli, Tekin, Tümer, Yıldırım, Yılmaz, Çelik, Çoruh
-
----
-
-## Kullanılmamış Türk İsimleri — Önerilen Havuz
-
-### Modern, kentli adlar (genç-orta yaş, profesyonel)
-
-**Erkek:**
-- Ahmet, Ali, Aras, Arda, Atakan, Aydın, Aytaç, Barış, Bora, Can, Cem, Cenk, Çağatay, Çağlar, Doruk, Efe, Egemen, Ege, Emir, Emre, Erdem, Eren, Erol, Ertan, Fırat, Furkan, Gökhan, Görkem, Hakan, Halit, Harun, Hüseyin, İlker, İlhan, Kaan (kullanıldı), Kerem, Korhan, Kuzey, Levent, Mehmet, Mert, Murat, Mustafa, Nadir, Necati, Okan, Oktay, Onuralp, Orhan, Osman, Övünç, Polat, Rüzgar, Sabri, Sami, Sarp, Selçuk, Selim, Serhan, Serkan, Sertaç, Soner, Suat, Sümer, Tarık, Taylan, Timur, Tolga, Tuğrul, Ufuk, Umut, Uras, Ünal, Yağız, Yiğit, Yusuf, Zafer
-- Sıkı uyarı: **Berk** kullanıldı (053). **Aydın** soyadı, ama ad olarak da yaygın — dikkat.
-
-**Kadın:**
-- Aslı, Ayça, Aydan, Ayla, Ayşe, Banu, Bahar, Begüm, Belkıs, Berna, Beyza, Bilge, Buket, Burcu, Büşra, Cemre, Ceren, Ceyda, Damla, Derya, Dilek, Duygu, Ebru, Eda, Ela, Elif, Emine, Esin, Esma, Esra, Eylül, Fatma, Feyza, Filiz, Funda, Gamze, Gizem, Gökçe, Görkem, Gül, Gülay, Gülşah, Hande, Hülya, Hürrem, İlayda, İrem, İpek, Kübra, Lale, Leyla, Merve, Müge, Nazlı, Nehir, Neslihan, Nilay, Nur, Nurdan, Özlem, Pelin, Pınar, Pırıl, Rabia, Saliha, Sare, Seda, Selen, Selma, Semra, Senem, Serap, Sevgi, Sevil, Seyran, Sibel, Simge, Sude, Sümeyye, Tuğçe, Tülin, Tuana, Türkan, Vildan, Yağmur, Yeliz, Zehra
-
-### Yöresel adlar (Anadolu, Karadeniz, Doğu)
-
-**Erkek:**
-- Aslan, Ayhan, Aytuğ, Cebrail, Cemal, Doğan, Ekin, Erkan, Faruk, Hamza, Hasan, Hayri, Hızır, İbrahim, İdris, İlyas, İskender, İsmail, Kadir, Kâmil, Kazım, Mahmut, Mehmet Ali, Memet (Karadeniz), Mesut, Mete, Mete, Naci, Necmettin, Nihat, Niyazi, Nurettin, Ömer, Ramazan, Recep, Resul, Rıdvan, Rıfat, Rıza, Salih, Selami, Servet, Sezai, Sinan, Şahin, Şakir, Tayfun, Veysel, Yakup, Yaşar, Yunus, Ziya, Zülfü
-
-**Kadın:**
-- Adviye, Ayten, Bedriye, Cevriye, Dilan (Kürtçe), Dilara, Düriye, Emel, Fadime, Fahriye, Fatma, Gönül, Güler, Gülizar, Halime, Hanife, Hatice, Havva, Hayriye, Hediye, Hülya, Kıymet, Mediha, Melahat, Meliha, Meral, Müesser, Müjde, Naciye, Nalan, Naime, Nazife, Nazire, Nebahat, Necla, Nesibe, Nesrin, Nigar, Niyaz, Nuray, Nuriye, Refika, Reyhan, Rukiye, Sabahat, Sadiye, Saime, Saliha, Sema, Senem, Sermin, Sevda, Sevim, Şükriye, Tülay, Ümmühan, Ürgüp, Vahide, Zekiye, Zeliha
-
-### Etnik çeşitlilik adları
-
-**Kürt kökenli (Kuzey-Doğu, Doğu, Güneydoğu):**
-- Erkek: Botan, Bedirhan, Berdan, Cevher, Civan, Delaver, Dilşah, Diyar, Hozan, Mazlum, Reber, Şivan, Welat
-- Kadın: Beriwan, Diyar, Helin, Jiyan, Lena, Maral, Newroz, Rojda, Şilan, Zelal
-
-**Laz kökenli (Doğu Karadeniz):**
-- Erkek: Eşref, Hasan Ali, Mustafa Reşat
-- Kadın: Şuayp, Naile
-
-**Çerkez kökenli:**
-- Erkek: Adıge, Bekir, Çetin, Tuğan
-- Kadın: Çiğdem, Dilan, Nart
-
-**Arap kökenli (Hatay, Şırnak):**
-- Erkek: Bekir, Halil, İbrahim, Salim, Yasin
-- Kadın: Aliye, Hatice, Selma, Şükran
-
-### Yaşa göre seçim
-
-**Yaşlı karakterler (60+):**
-- Erkek: Hasan, Hüseyin, İbrahim, İsmail, Kâmil, Mahmut, Necati, Ömer, Ramazan, Salih
-- Kadın: Adviye, Ayten, Cevriye, Hatice, Hayriye, Mediha, Müesser, Nesibe, Saliha, Zeliha
-
-**Orta yaş (40-55):**
-- Erkek: Ali, Cemal, Erdal, Hakan, Levent, Mehmet, Mustafa, Selçuk, Sezai
-- Kadın: Aslı, Ayşe, Belkıs, Esra, Hülya, Müge, Nuray, Sevim, Tülay
-
-**Genç (20-35):**
-- Erkek: Arda, Berk (053), Can, Cem, Doruk, Ege, Emre, Mert, Yiğit
-- Kadın: Aslı, Beyza, Ceren, Damla, Derya, Ela, Eylül, İrem, Nehir, Sude, Tuğçe, Yağmur
+| Rol | Ad Soyad | Görev |
+|-----|----------|-------|
+| Kurban | Burak Karaağaç (28, erkek) | — |
+| Şüpheli | Aylin Yalçın | Eski sevgili · Olay gecesi evdeydi |
+| Şüpheli | Emir Sezer | Yakın arkadaş · Aylin'in evindeydi |
+| Şüpheli | Sinem Gürbüz | Yeni ilişki · "O gece bana gelecekti" |
+| Şüpheli | Şükrü Aydın | Apartman görevlisi · 11 yıllık kapıcı |
+| Fail | Meryem Güldağ | Eski danışman hocası · Tehditkâr ses kaydı |
 
 ---
 
-## Türk Soyadı Havuzu (Kullanılmamış)
+## Vaka 048 — Tezgâh
 
-### Genel/yaygın
-Acar (kullanıldı), Adıgüzel, Akar, Akay, Akbulut, Akgül, Akın, Aksoy, Aktaş, Aldemir, Altay, Aral, Aras, Arıkan, Arslan, Asan, Aşkın, Atalay, Ataman, Atik, Avcı, Aydın, Ayhan, Aykaç, Aytaç, Baki, Balcı, Balık, Baran, Başaran, Başkan, Bayar, Baydar, Bayraktar, Bektaş, Berber, Beyaz, Bozdağ, Bulut, Çakır, Çakmak, Çankaya, Çelebi, Çetin, Çevik, Çiçek, Çiftçi, Çolak, Çoban, Demir (kullanıldı), Demirci, Demirel, Doğan, Doğru, Doğuş, Doruk, Durak, Durmaz, Düşmez, Edirneli, Ekinci, Eraslan, Erbakan, Ercan, Erdal, Erdem, Erdoğan (kullanıldı), Eren, Ergin, Eriş, Erkan, Erol, Ersoy, Ertan, Eryılmaz, Esenkaya, Eskinazi, Esmer, Evren, Eyüboğlu, Fidan, Filiz, Genç, Gencer, Gönül, Görür, Güler, Güllü, Gümüş, Gündüz, Güneş, Güngör, Güroy, Gürses, Güven, Hacıoğlu, Halıcı, Hanifi, Has, Işık, İl, İnan, İlhan, İnce, Kahraman, Kanat, Kandemir, Kaplan (kullanıldı), Kara, Karaca, Karadağ, Karadeniz, Karaduman, Karagöz, Karakaya, Karaköse, Karaman, Karasoy, Karataş (kullanıldı), Kasapoğlu, Kavaklı, Kaya, Kaynak, Keçeli, Keleş, Keser, Keskin, Kılıç, Kırık, Kıvanç, Kızıl, Kızılkaya, Koca, Kocabaş, Kocaman, Koç, Konuk, Korkmaz, Korucu, Kösemen, Köylü, Kurt, Kurtulan, Küçük, Mert, Mete, Murt, Nalbant, Naz, Oğuz, Oğuzhan, Oktay, Olcay, Onar, Onaran, Onur, Oral, Orman, Osmanoğlu, Öcalan, Önder, Özata, Özbek, Özçelik, Özdemir, Özdoğan, Özen, Özer, Özgül, Özkan, Özsoy, Öztürk, Pala, Pamuk, Pekkan, Polat, Pulat, Sağlam, Sarı, Saygılı, Saygın, Sayın, Sayman, Selçuk, Selvi, Sema, Sertel, Sevgi, Seyhan, Sezer, Sırmalı, Sönmez, Soyak, Sönmez, Süslü, Şafak, Şahin, Şanlı, Şenay, Şener, Şensoy, Tanrıöven, Tanyel, Taş, Taşçı, Taşkın, Tatar, Tavşanlı, Temiz, Tezcan, Tilki, Tok, Topal, Toprak, Tosun, Tuğrul, Tunalı, Tuncer, Türel, Türkmen, Uçar, Uğur, Uğurlu, Ulaş, Uluç, Umut, Uslu, Ülgen, Ülker, Üner, Ünlü, Üstün, Üzüm, Varol, Yağmur, Yakut, Yalçın, Yaman, Yapıcı, Yardım, Yaşar, Yavaş, Yavru, Yavuz, Yıldız, Yılmaz, Yorulmaz, Yurt, Yüce, Yüksel, Zeren, Ziya
-
-### Bölgesel/yöresel soyadlar
-
-**Karadeniz:**
-- Aktepe, Akyıldız, Bayraktar, Çakırgöz, Çoruh, Dereli, Hemşinli, Kalkanlı, Karadenizli, Sürmeneli, Trabzonlu, Vakfıkebirli
-
-**Doğu/Güneydoğu:**
-- Adıyaman, Ağrılı, Ağuş, Akpınar, Antep, Bingöl, Diyarlı, Erzincanlı, Hakkari, Mardinli, Şanlı, Vanlı
-
-**Ege:**
-- Ayvalık, Bodrumlu, Çeşmeli, Denizli, Kuşadası, Marmaris, Söke
-
-**Akdeniz:**
-- Antalyalı, Hatay, İskenderun, Mersinli, Tarsus
+| Rol | Ad Soyad | Görev |
+|-----|----------|-------|
+| Kurban | Necati Balcı (61, erkek) | — |
+| Fail | Cemre Erkan | Kuyumcu çırağı · 8 aydır Necati'nin yanında · 29 |
+| Şüpheli | Levent Aksoy | Komşu kuyumcu · Aksoy Gold · 47 |
+| Şüpheli | Sevda Balcı | Necati'nin eşi · ayrılık aşamasında · 58 |
+| Şüpheli | Tarık Gündüz | Eski çırak · Gündüz Kuyumculuk sahibi · 36 |
+| Şüpheli | Rıza Karadağ | Esnaf Derneği başkanı · Karadağ Baharat · 53 |
+| Şüpheli | Pelin Yüce | Altın toptancısı · Yüce Gold Toptan · 34 |
 
 ---
 
-## İsim Atama Kuralları
+## Vaka 053 — Offline
 
-### Kural 1: Ad + Soyad uyumu
-
-- Modern profesyonel kurban → modern ad + neutral soyad (Burak Karaağaç ✓)
-- Yaşlı taşra fail → geleneksel ad + yöresel soyad (Hasan Karadağlı ✓)
-- Genç şehirli → modern ad + neutral soyad (Mert Akay ✓)
-
-### Kural 2: Karakter sayısı çakışmasın
-
-Aynı vakada **iki karakter aynı harfle başlamasın** (özellikle ana karakterler):
-
-❌ Kötü: Berk, Burak, Berkay (üç B)
-✅ İyi: Berk, Mert, Aslı, Onur, Halil, Deniz (B, M, A, O, H, D — 6 farklı harf)
-
-### Kural 3: Soyadların telaffuzu farklı olsun
-
-❌ Kötü: Aydın + Aydoğan (yakın ses, kafa karıştırır)
-✅ İyi: Karagöz + Mert (uzak sesler)
-
-### Kural 4: Etnik çeşitlilik bilinçli olsun
-
-Türkiye'de **etnik çeşitlilik gerçek**. Vakalarda:
-- Kürt karakterler (Doğu/Güneydoğu vakaları)
-- Çerkez/Laz/Gürcü (Karadeniz)
-- Arap (Hatay/Şırnak)
-- Rum/Ermeni mirası (İstanbul tarihi semtler — soyadlar)
-
-Stereotipleştirmeden, isimlerin geldiği coğrafyaları yansıt.
-
-### Kural 5: İsim psikolojisi
-
-Karakterin "havası" isminde olsun:
-- **Otoriter, soğuk:** Vedat, Ferit, Hülya, Gülbahar
-- **Sıcak, yumuşak:** Sude, Ela, Cem, Ege
-- **Geleneksel, taşralı:** Hasan, Mehmet, Ayşe, Hatice
-- **Modern, kentli:** Doruk, Eren, Damla, Pınar
-- **İddialı, sanatçı:** Aras, Cemre, Eylül, Yağız
+| Rol | Ad Soyad | Görev |
+|-----|----------|-------|
+| Kurban | Zeynep Korkut (21, kadın) | — |
+| Fail | Berk Savaş | Yayıncılık menajeri · 30 |
+| Şüpheli | Melis Yıldırım | En yakın arkadaş · Video editörü · 22 |
+| Şüpheli | Onur Demir | Eski erkek arkadaş · En büyük bağışçı · 24 |
+| Şüpheli | Kaan Tekin | Stalker / obsesif izleyici · 27 |
+| Şüpheli | Halil Dursun | Apartman görevlisi · 56 · İlk bulan |
+| Şüpheli | Deniz Acar | VoltUp pazarlama müdürü · 35 |
 
 ---
 
-## Bu Dosyayı Güncelleme
+## Vaka 067 — Koleksiyoncu
 
-**Her yeni vaka oluşturduktan sonra:**
-
-1. Yeni karakterleri "Mevcut Vakalardaki Karakterler" listesine ekle
-2. Adları/soyadları "Yasaklı (kullanıldı)" listesine ekle
-3. Kullanılmış havuzdan çıkar
-
-Bu güncellemeyi **build aşamasında** Claude Code yapsın. SKILL.md'de bu adım var.
+| Rol | Ad Soyad | Görev |
+|-----|----------|-------|
+| Kurban | Kerem Avcıoğlu (58, erkek) | — |
+| Şüpheli | Ferhat Yıldırım | Ortak · 12 yıllık iş partneri · 44 |
+| Fail | Selin Çelik | Sekreter · 5 yıllık asistan · 31 |
+| Şüpheli | Muzaffer Kozan | Rakip koleksiyoncu · 67 |
+| Şüpheli | Emre Öztürk | Tedarikçi · Kaçak eser ağı · 38 |
+| Şüpheli | Nilüfer Avcıoğlu | Eş · Antalya'da · 54 |
+| Şüpheli | Tarık Coşar | Eski stajyer · Restorasyon uzmanı · 29 |
+| Şüpheli | Burcu Yaman | Sanat danışmanı · Komisyon davası · 47 |
 
 ---
 
-## Hızlı seçim için: önerilen kombinasyonlar
+## Vaka 082 — Bagaj
 
-### Modern profesyonel (kentli, 30-45 yaş)
-- Aras Berk + Tunalı
-- Cemre + Adıgüzel
-- Doruk + Eraslan
-- Eylül + Korucu
-- Mert + Karaca
+| Rol | Ad Soyad | Görev |
+|-----|----------|-------|
+| Kurban | Hasan Aydın (42, erkek) | — |
+| Fail | Selim Karaoğlan | Bagaj görevlisi · vardiya arkadaşı · 38 |
+| Şüpheli | Mehmet Erdal | Vardiya amiri · hat sorumlusu · 51 |
+| Şüpheli | Ayşe Aydın | Eski eş · velayet davası · 39 |
+| Şüpheli | Volkan Şenel | Kargo şoförü · Güney Marmara Lojistik · 33 |
+| Şüpheli | Sarp Yılmaz | Havalimanı güvenlik · Hat-4 sorumlusu · 29 |
+| Şüpheli | Cemal Bektaş | Sendika temsilcisi · Hasan'ın danıştığı kişi · 45 |
 
-### Yaşlı taşrali (50-70 yaş)
-- Hasan + Karadenizli
-- Hatice + Karadağlı
-- İsmail + Çoruh
-- Saliha + Aktepe
-- Recep + Eskinazi
+---
 
-### Genç şehirli (20-30 yaş)
-- Sude + Yalçın
-- Yiğit + Sönmez
-- Damla + Aydoğan
-- Arda + Tezcan
-- Pınar + Korkmaz
+## Vaka 089 — Peri Bacası
 
-### Etnik çeşitlilik
-- Beriwan + Mardin (Kürt, Mardinli)
-- Hozan + Diyarlı (Kürt, Diyarbakır)
-- Bekir + İskenderun (Arap, Hatay)
-- Şuayp + Çoruh (Laz, Trabzon)
+| Rol | Ad Soyad | Görev |
+|-----|----------|-------|
+| Kurban | Defne Karataş (25, kadın) | — |
+| Şüpheli | İpek Sarıhan | Yakın arkadaş · Tatil grubu üyesi · 26 |
+| Şüpheli | Ceren Aksoy | Yakın arkadaş · Tatil grubu üyesi · 25 |
+| Şüpheli | Tolga Kıvanç | Otel barmen · Yerel · 32 |
+| Fail | Alp Erdoğan | ATV tur rehberi · Eski sevgili (Defne) · 28 |
+| Şüpheli | Hakan Orbay | İstanbul işadamı · Oteldeki misafir · 45 |
+| Şüpheli | Elif Mertoğlu | Otel müdiresi · Kelebek Cave Otel · 39 |
+
+---
+
+## Vaka 104 — Kusurlu Hasat
+
+| Rol | Ad Soyad | Görev |
+|-----|----------|-------|
+| Kurban | Vedat Somer (55, erkek) | — |
+| Fail | Aylin Somer | Ortağı · Kurbanın Kız Kardeşi · 48 |
+| Şüpheli | Timur Arıcan | Komşu Bağ Sahibi · 59 |
+| Şüpheli | Caner Somer | Oğul · Mirasçı · 26 |
+| Şüpheli | Elif Kara | Eski Önolog (Şarap Uzmanı) · 32 |
+| Şüpheli | Rıza Usta | Bağ Bekçisi ve Kahya · 62 |
+| Şüpheli | Melis Somer | Eski Eş · Nafaka Alacaklısı · 45 |
+| Şüpheli | Hakan Yılmaz | Şarap Dağıtımcısı · 38 |
+
+---
+
+## Vaka 114 — Cam Kule
+
+| Rol | Ad Soyad | Görev |
+|-----|----------|-------|
+| Kurban | Yasemin Tümer (33, kadın) | — |
+| Fail | Vedat Kaplan | Büro kurucu ortağı · 52 |
+| Şüpheli | Dilan Arslan | Stajyer avukat · 26 · Yasemin'in ekibinde |
+| Şüpheli | Nuri Çakır | Gece güvenlik görevlisi · 41 |
+| Şüpheli | Songül Yıldız | Temizlik personeli · 48 · 7 yıldır binada |
+| Şüpheli | Cem Balcı | IT destek · Dış kaynak · 29 · Gece bakım için orada |
+
+---
+
+## Birden fazla vakada geçen soyadları
+
+- **Aksoy** — 048, 089
+- **Aydın** — 042, 082
+- **Balcı** — 048, 114
+- **Yıldırım** — 053, 067
+- **Yılmaz** — 082, 104
+
+## Birden fazla vakada geçen adlar
+
+- **Aylin** — 042, 104
+- **Cem** — 027, 114
+- **Ceren** — 036, 089
+- **Elif** — 089, 104
+- **Hakan** — 016, 089, 104
+- **Melis** — 053, 104
+- **Pınar** — 016, 027
+- **Rıza** — 048, 104
+- **Salih** — 016, 033
+- **Tarık** — 048, 067

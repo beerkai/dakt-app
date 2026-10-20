@@ -18,7 +18,7 @@ export interface SolvedCase {
   solved_at: string;
 }
 
-export type RoomStatus = "waiting" | "playing" | "solved" | "archived";
+export type RoomStatus = "waiting" | "playing" | "solved" | "archived" | "terminated";
 
 export interface Room {
   id: string;
