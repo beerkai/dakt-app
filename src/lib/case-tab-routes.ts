@@ -41,6 +41,11 @@ export function orderedEnabledTabs(enabled: TabId[]): TabId[] {
   return TAB_ORDER.filter((t) => set.has(t));
 }
 
-export function caseTabHref(caseId: string, tab: TabId): string {
-  return `/vaka/${caseId}/${TAB_ROUTE_SLUG[tab]}`;
+export function caseTabHref(
+  caseId: string,
+  tab: TabId,
+  roomId?: string | null,
+): string {
+  const base = `/vaka/${caseId}/${TAB_ROUTE_SLUG[tab]}`;
+  return roomId ? `${base}?room=${encodeURIComponent(roomId)}` : base;
 }

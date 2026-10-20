@@ -1,18 +1,18 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import { useCaseRoomId } from "@/hooks/useCaseRoomId";
 import { useRoomActivePlayers } from "@/hooks/useRoomActivePlayers";
 import { createClient } from "@/lib/supabase/client";
 import type { Room } from "@/lib/supabase/types";
 
 /** Sadece vaka dosyaları: operasyon şeridi (canlı saat, UTC+3). */
-export function SystemBar() {
+export function SystemBar({ caseId }: { caseId?: string }) {
   const router = useRouter();
   const [parts, setParts] = useState({ h: "--", m: "--", s: "--" });
-  const searchParams = useSearchParams();
-  const roomId = searchParams.get("room");
+  const roomId = useCaseRoomId(caseId);
   const { players, count: activePlayerCount, loading: playersLoading } =
     useRoomActivePlayers(roomId);
 

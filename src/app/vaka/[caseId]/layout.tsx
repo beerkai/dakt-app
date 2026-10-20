@@ -98,7 +98,7 @@ export default async function CaseLayout({
     <div className="relative z-[1] flex min-h-full flex-1 flex-col">
       <div className="vaka-case-sticky-cluster">
         <Suspense fallback={<SystemBarFallback />}>
-          <SystemBar />
+          <SystemBar caseId={caseId} />
         </Suspense>
         <Suspense fallback={<InnerNavFallback />}>
           <VakaCaseInnerNav caseId={caseId} caseData={caseData} />

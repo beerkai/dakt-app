@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { leaveRoom, terminateCase } from "@/app/oda/actions";
@@ -15,6 +15,7 @@ import { sectionNumForTab } from "@/lib/case-section-utils";
 import ConfirmModal from "@/components/ConfirmModal";
 import { clearActiveSession, getActiveSession } from "@/lib/active-session";
 import { createClient } from "@/lib/supabase/client";
+import { useCaseRoomId } from "@/hooks/useCaseRoomId";
 
 export function VakaCaseInnerNav({
   caseId,
@@ -25,8 +26,7 @@ export function VakaCaseInnerNav({
 }) {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const roomId = searchParams.get("room");
+  const roomId = useCaseRoomId(caseId);
 
   const tabs = orderedEnabledTabs(caseData.enabledTabs);
   const codenameUpper = caseData.codename.toLocaleUpperCase("tr-TR");
@@ -196,8 +196,8 @@ export function VakaCaseInnerNav({
           <div className="vaka-case-strip-tabs-row">
             <div className="vaka-case-strip-tabs">
               {tabs.map((tab) => {
-                const href = caseTabHref(caseId, tab);
-                const active = pathname === href;
+                const href = caseTabHref(caseId, tab, roomId);
+                const active = pathname === caseTabHref(caseId, tab);
                 const num = sectionNumForTab(caseData, tab);
                 return (
                   <Link

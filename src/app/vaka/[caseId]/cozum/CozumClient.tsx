@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import {
   useCallback,
   useEffect,
@@ -24,9 +24,11 @@ import {
   upsertLocalSolvedRecord,
 } from "@/lib/local-solved-storage";
 import { useAuth } from "@/components/AuthProvider";
+import { useCaseRoomId } from "@/hooks/useCaseRoomId";
 import { useRoomActivePlayers } from "@/hooks/useRoomActivePlayers";
 import { getCoopSettings, type CoopSettings } from "@/lib/get-coop-settings";
 import { CoopVotingOverlay } from "./CoopVotingOverlay";
+import { caseTabHref } from "@/lib/case-tab-routes";
 import { recordSolvedCase } from "./actions";
 // Aşama 4 (SSR sertifika): Certificate + formatCertificateDate yeniden eklenecek.
 // import { Certificate, type CertificateHandle } from "@/components/Certificate";
@@ -148,10 +150,7 @@ export function CozumClient({
   const [analystDisplay, setAnalystDisplay] = useState("Misafir Analist");
 
   // ═══ CO-OP STATE ═══
-  const searchParams = useSearchParams();
-  const roomIdFromUrl = searchParams.get("room");
-
-  const [roomId, setRoomId] = useState<string | null>(roomIdFromUrl);
+  const roomId = useCaseRoomId(caseId);
   const [coopVoteComplete, setCoopVoteComplete] = useState(false);
   const [hostBypassEnabled, setHostBypassEnabled] = useState(false);
   const [coopIsHost, setCoopIsHost] = useState(false);
@@ -225,22 +224,6 @@ export function CozumClient({
       window.dispatchEvent(new Event("dakt-session-change"));
     }
   }, [view, isCorrect]);
-
-  // ═══ CO-OP: roomId sync (URL + active session fallback) ═══
-  useEffect(() => {
-    function syncRoom() {
-      const fromUrl = searchParams.get("room");
-      const session = getActiveSession();
-      setRoomId(fromUrl || session?.roomId || null);
-    }
-    syncRoom();
-    window.addEventListener("dakt-session-change", syncRoom);
-    window.addEventListener("storage", syncRoom);
-    return () => {
-      window.removeEventListener("dakt-session-change", syncRoom);
-      window.removeEventListener("storage", syncRoom);
-    };
-  }, [searchParams]);
 
   const isCoop = Boolean(roomId);
 
@@ -720,7 +703,7 @@ export function CozumClient({
             </Link>
             <button
               type="button"
-              onClick={() => router.push(`/vaka/${caseId}/brief`)}
+              onClick={() => router.push(caseTabHref(caseId, "brief", roomId))}
               className={`${btnMono} border border-[var(--kraft)] bg-transparent py-4 text-[var(--kraft-light)] hover:border-[var(--kraft-light)] hover:bg-[rgba(255,255,255,0.04)]`}
             >
               Bu Vakayı Tekrar İncele
