@@ -761,4 +761,4 @@ export const case048: CaseData = {
   }
 };
 
-(case048 as any).messageThreads = case048MessageThreads;
+case048.messageThreads = case048MessageThreads;

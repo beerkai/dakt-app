@@ -813,4 +813,4 @@ export const case033: CaseData = {
 };
 
 // MessageThread referansını CaseData'ya bağla
-(case033 as any).messageThreads = case033MessageThreads;
+case033.messageThreads = case033MessageThreads;
