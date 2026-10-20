@@ -161,10 +161,8 @@ export function SiteNav() {
   useEffect(() => {
     if (!menuOpen) {
       setMenuSlideIn(false);
-      document.body.style.overflow = "";
       return;
     }
-    document.body.style.overflow = "hidden";
     const id = requestAnimationFrame(() => {
       requestAnimationFrame(() => setMenuSlideIn(true));
     });
@@ -174,7 +172,6 @@ export function SiteNav() {
     window.addEventListener("keydown", onKey);
     return () => {
       cancelAnimationFrame(id);
-      document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
     };
   }, [menuOpen]);
