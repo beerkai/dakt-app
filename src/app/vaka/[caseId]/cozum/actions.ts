@@ -6,6 +6,33 @@ import { getCase } from "@/lib/case-helpers";
 import { createAdminClient } from "@/lib/supabase/admin-client";
 import { createClient } from "@/lib/supabase/server";
 
+export type RevealVerdictResult =
+  | { correct: true; perpetratorName: string; solutionHtml: string }
+  | { correct: false; wrongAnswerMessage: string }
+  | { error: string };
+
+/** Oy verildikten sonra sonucu döner; çözüm bilgisi istemciye önceden gönderilmez. */
+export async function revealVerdict(
+  caseId: string,
+  suspectId: string,
+): Promise<RevealVerdictResult> {
+  const caseData = getCase(caseId);
+  if (!caseData) return { error: "Vaka bulunamadı" };
+  if (!caseData.suspects.some((s) => s.id === suspectId)) {
+    return { error: "Şüpheli bulunamadı" };
+  }
+
+  const { verdict } = caseData;
+  if (verdict.perpetratorId === suspectId) {
+    return {
+      correct: true,
+      perpetratorName: verdict.perpetratorName,
+      solutionHtml: verdict.solutionHtml,
+    };
+  }
+  return { correct: false, wrongAnswerMessage: verdict.wrongAnswerMessage };
+}
+
 export type RecordSolvedCaseResult =
   | { success: true }
   | { success: false; error: string };

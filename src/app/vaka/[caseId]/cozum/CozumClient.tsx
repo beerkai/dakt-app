@@ -10,7 +10,7 @@ import {
   useRef,
   useState,
 } from "react";
-import type { Suspect, VerdictData } from "@/lib/case-types";
+import type { Suspect } from "@/lib/case-types";
 import {
   accuracyPercentForAttempts,
   formatDurationMs,
@@ -37,6 +37,8 @@ import {
   completeCoopRoom,
   recordSolvedCase,
   resetRoomVotes,
+  revealVerdict,
+  type RevealVerdictResult,
 } from "./actions";
 // Aşama 4 (SSR sertifika): Certificate + formatCertificateDate yeniden eklenecek.
 // import { Certificate, type CertificateHandle } from "@/components/Certificate";
@@ -62,16 +64,12 @@ type VoteSuspect = {
   quote: string;
 };
 
-function VerdictDocumentHtml({
-  verdict,
-}: {
-  verdict: VerdictData;
-}) {
+function VerdictDocumentHtml({ solutionHtml }: { solutionHtml: string }) {
   return (
     <article
       className="verdict"
       style={{ marginTop: 24 }}
-      dangerouslySetInnerHTML={{ __html: verdict.solutionHtml }}
+      dangerouslySetInnerHTML={{ __html: solutionHtml }}
     />
   );
 }
@@ -80,12 +78,10 @@ export function CozumClient({
   caseId,
   codename,
   suspects,
-  verdict,
 }: {
   caseId: string;
   codename: string;
   suspects: Suspect[];
-  verdict: VerdictData;
 }) {
   const router = useRouter();
   const { user } = useAuth();
@@ -142,7 +138,27 @@ export function CozumClient({
     [markedSuspectIds],
   );
 
-  const correctId = verdict.perpetratorId;
+  type Verdict = Exclude<RevealVerdictResult, { error: string }>;
+  const [verdict, setVerdict] = useState<Verdict | null>(null);
+  const [revealError, setRevealError] = useState<string | null>(null);
+  const revealPromiseRef = useRef<Promise<Verdict | null> | null>(null);
+
+  function startReveal(suspectId: string) {
+    setRevealError(null);
+    revealPromiseRef.current = revealVerdict(caseId, suspectId)
+      .then((r) => {
+        if ("error" in r) {
+          setRevealError(r.error);
+          return null;
+        }
+        setVerdict(r);
+        return r;
+      })
+      .catch(() => {
+        setRevealError("Sonuç alınamadı, bağlantını kontrol et.");
+        return null;
+      });
+  }
 
   const [view, setView] = useState<ViewState>("voting");
   const [selectedSuspect, setSelectedSuspect] = useState<string | null>(null);
@@ -195,7 +211,7 @@ export function CozumClient({
       void (async () => {
         const result = await recordSolvedCase({
           caseId,
-          suspectId: correctId,
+          suspectId: selectedSuspect ?? "",
           attemptCount: successMeta.attempts,
           durationSeconds,
         });
@@ -219,7 +235,7 @@ export function CozumClient({
         solved_at: new Date().toISOString(),
       });
     }
-  }, [view, isCorrect, user, successMeta, caseId, correctId, router]);
+  }, [view, isCorrect, user, successMeta, caseId, selectedSuspect, router]);
 
   useEffect(() => {
     if (view !== "result" || !isCorrect) return;
@@ -302,6 +318,7 @@ export function CozumClient({
     if (!selectedSuspect || voteSubmitLockRef.current) return;
     voteSubmitLockRef.current = true;
     incrementAttemptCount(caseId);
+    startReveal(selectedSuspect);
     setVoteConfirmed(true);
     window.setTimeout(() => {
       setVoteConfirmed(false);
@@ -322,7 +339,20 @@ export function CozumClient({
     if (!envelopeOpen || view !== "envelope") return;
     if (flipHandledRef.current) return;
     flipHandledRef.current = true;
-    const ok = selectedSuspect === correctId;
+    void finishReveal();
+  }
+
+  async function finishReveal() {
+    const result = await revealPromiseRef.current;
+    if (!result) {
+      flipHandledRef.current = false;
+      voteSubmitLockRef.current = false;
+      setEnvelopeOpen(false);
+      setCoopVoteComplete(false);
+      setView("voting");
+      return;
+    }
+    const ok = result.correct;
     setView("result");
     setIsCorrect(ok);
     if (isCoop && roomId && selectedSuspect) {
@@ -374,6 +404,7 @@ export function CozumClient({
               userId={user.id}
               onVoteComplete={(suspectId: string) => {
                 markCoopVoteFinished(roomId);
+                startReveal(suspectId);
                 setSelectedSuspect(suspectId);
                 setCoopVoteComplete(true);
                 incrementAttemptCount(caseId);
@@ -395,6 +426,12 @@ export function CozumClient({
           </div>
         )
       )}
+
+      {revealError && view === "voting" ? (
+        <p role="alert" className="cozum-callout-warn mb-6">
+          {revealError}
+        </p>
+      ) : null}
 
       {/* ═══ SOLO OYLAMA (mevcut akış) ═══ */}
       {view === "voting" && (!isCoop || coopVoteComplete) && (
@@ -553,7 +590,9 @@ export function CozumClient({
           >
             <div>
               <div className="mb-2 text-[var(--meta-label)]">Fail</div>
-              <div className="text-[var(--ink)]">{verdict.perpetratorName}</div>
+              <div className="text-[var(--ink)]">
+                {verdict?.correct ? verdict.perpetratorName : "—"}
+              </div>
             </div>
             <div>
               <div className="mb-2 text-[var(--meta-label)]">
@@ -612,7 +651,9 @@ export function CozumClient({
             </div>
           </div>
 
-          {showVerdictDoc ? <VerdictDocumentHtml verdict={verdict} /> : null}
+          {showVerdictDoc && verdict?.correct ? (
+            <VerdictDocumentHtml solutionHtml={verdict.solutionHtml} />
+          ) : null}
         </div>
       )}
 
@@ -709,7 +750,9 @@ export function CozumClient({
             style={{ fontFamily: "var(--font-special-elite), monospace" }}
           >
             {(() => {
-              const [a, b] = verdict.wrongAnswerMessage.split("[SECILEN_ISIM]");
+              const message =
+                verdict && !verdict.correct ? verdict.wrongAnswerMessage : "";
+              const [a, b] = message.split("[SECILEN_ISIM]");
               return (
                 <>
                   {a}

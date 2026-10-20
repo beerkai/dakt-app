@@ -28,7 +28,6 @@ export default async function CozumPage({
           caseId={caseData.id}
           codename={caseData.codename}
           suspects={caseData.suspects}
-          verdict={caseData.verdict}
         />
       </Suspense>
     </section>
