@@ -42,3 +42,17 @@ export interface RoomPlayer {
   joined_at: string;
   left_at?: string;
 }
+
+export type RoomItemMarkKind = "supheli" | "ele-alindi" | "elendi";
+
+export interface RoomItemMarkRow {
+  id: string;
+  room_id: string;
+  user_id: string;
+  item_id: string;
+  mark_kind: RoomItemMarkKind;
+  username: string;
+  user_color: string;
+  created_at: string;
+  updated_at: string;
+}

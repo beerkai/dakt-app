@@ -10,6 +10,7 @@ import { PublishCaseTabs } from "@/components/PublishCaseTabs";
 import { RememberLastPlace } from "@/components/RememberLastPlace";
 import { SystemBar } from "@/components/SystemBar";
 import { createClient } from "@/lib/supabase/server";
+import { RoomMarksProvider } from "@/components/RoomMarksProvider";
 import { VakaCaseInnerNav } from "./VakaCaseInnerNav";
 import { VakaCaseSoloTease } from "./VakaCaseSoloTease";
 
@@ -125,7 +126,11 @@ export default async function CaseLayout({
         />
       </Suspense>
       <GuestSessionBanner />
-      <main className="workspace min-w-0 flex-1">{children}</main>
+      <main className="workspace min-w-0 flex-1">
+        <Suspense fallback={children}>
+          <RoomMarksProvider caseId={caseId}>{children}</RoomMarksProvider>
+        </Suspense>
+      </main>
       <SiteFooter variant="case" />
       <Suspense fallback={null}>
         <VakaCaseSoloTease

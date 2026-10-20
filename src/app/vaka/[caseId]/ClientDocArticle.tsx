@@ -1,9 +1,11 @@
 "use client";
 
 import { type ReactNode } from "react";
+
+import { PeerStampDots } from "@/components/PeerStampDots";
 import { StampControls } from "@/components/StampControls";
-import { PLAYER_STAMP_OVERLAY } from "@/lib/case-types";
 import { useCaseItemStamp } from "@/hooks/useCaseItemStamp";
+import { PLAYER_STAMP_OVERLAY } from "@/lib/case-types";
 
 export function ClientDocArticle({
   caseId,
@@ -19,7 +21,11 @@ export function ClientDocArticle({
   headerMain: ReactNode;
   body: ReactNode;
 }) {
-  const { active, select } = useCaseItemStamp(enableStamps, caseId, itemId);
+  const { active, select, peers, roomShared } = useCaseItemStamp(
+    enableStamps,
+    caseId,
+    itemId,
+  );
 
   return (
     <article className="doc" data-doc={itemId}>
@@ -32,6 +38,7 @@ export function ClientDocArticle({
         <div>{headerMain}</div>
         {enableStamps ? (
           <div className="doc-stamp-area">
+            {roomShared ? <PeerStampDots peers={peers} /> : null}
             <StampControls active={active} select={select} />
           </div>
         ) : null}

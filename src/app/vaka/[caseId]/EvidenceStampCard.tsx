@@ -1,9 +1,10 @@
 "use client";
 
+import { PeerStampDots } from "@/components/PeerStampDots";
 import { StampControls } from "@/components/StampControls";
+import { useCaseItemStamp } from "@/hooks/useCaseItemStamp";
 import type { Evidence } from "@/lib/case-types";
 import { PLAYER_STAMP_OVERLAY } from "@/lib/case-types";
-import { useCaseItemStamp } from "@/hooks/useCaseItemStamp";
 import { safeHtml } from "@/lib/html-sanitize";
 
 export function EvidenceStampCard({
@@ -13,7 +14,11 @@ export function EvidenceStampCard({
   caseId: string;
   evidence: Evidence;
 }) {
-  const { active, select } = useCaseItemStamp(true, caseId, e.id);
+  const { active, select, peers, roomShared } = useCaseItemStamp(
+    true,
+    caseId,
+    e.id,
+  );
 
   return (
     <div className="evidence-card" data-evidence={e.id}>
@@ -23,6 +28,7 @@ export function EvidenceStampCard({
         </div>
       ) : null}
       <div className="evidence-stamp-controls">
+        {roomShared ? <PeerStampDots peers={peers} surface="dark" /> : null}
         <StampControls
           active={active}
           select={select}

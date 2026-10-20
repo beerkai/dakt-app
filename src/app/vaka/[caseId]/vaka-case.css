@@ -792,9 +792,46 @@ a.nav-item {
   --rot: rotate(-12deg);
 }
 
+.peer-stamp-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+.peer-stamp-dot {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid var(--peer-color, var(--kraft));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--peer-color, var(--kraft)) 22%, transparent);
+  color: var(--peer-color, var(--kraft));
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 11px;
+  line-height: 1;
+}
+
+.peer-stamp-dots--dark .peer-stamp-dot {
+  background: color-mix(in srgb, var(--peer-color, var(--kraft)) 28%, #0e0f10);
+}
+
+.peer-stamp-dot-glyph {
+  transform: translateY(0.5px);
+}
+
+.doc-stamp-area .peer-stamp-dots {
+  width: 100%;
+}
+
 .evidence-stamp-controls {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
   margin-bottom: 6px;
 }
 .evidence-stamp-controls .stamp-sheet-mobile {

@@ -30,9 +30,10 @@ npm run dev
 
 1. `coop_rooms_base.sql` — `rooms`, `room_players` (tablolar yoksa)
 2. `coop_voting_and_settings.sql` — `room_votes`, `coop_settings`
-3. `solved_cases_server_only_writes.sql` — çözüm kayıtları yalnızca sunucudan yazılır
-4. `cases_metadata_all.sql` — her vaka için görünürlük satırı (`test` ile açılır)
-5. `cases_metadata_read_policy.sql` — `published` herkese, `test` yalnızca `is_tester` kullanıcılara
+3. `coop_room_item_marks.sql` — oda içi ortak damgalar (`room_item_marks`)
+4. `solved_cases_server_only_writes.sql` — çözüm kayıtları yalnızca sunucudan yazılır
+5. `cases_metadata_all.sql` — her vaka için görünürlük satırı (`test` ile açılır)
+6. `cases_metadata_read_policy.sql` — `published` herkese, `test` yalnızca `is_tester` kullanıcılara
 
 Vakaların yayın durumu **Yönetim → Vakalar** ekranından değiştirilir
 (`draft` · `test` · `published` · `archived`).
