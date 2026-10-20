@@ -35,7 +35,7 @@ export function RejoinClient({
       }
       router.push(result.redirect);
     } catch (err) {
-      // eslint-disable-next-line no-console
+       
       console.error("Rejoin failed:", err);
       setError("Bir hata oluştu");
       setLoading(false);

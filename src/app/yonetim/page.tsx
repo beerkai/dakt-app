@@ -18,6 +18,10 @@ function usernameFromJoined(profiles: unknown): string | null {
   return null;
 }
 
+function isoHoursAgo(hours: number): string {
+  return new Date(Date.now() - hours * 60 * 60 * 1000).toISOString();
+}
+
 export default async function YonetimDashboardPage() {
   const supabase = await createClient();
 
@@ -49,7 +53,7 @@ export default async function YonetimDashboardPage() {
   };
   const solveRows = (recentSolvesRaw ?? []) as SolveRow[];
 
-  const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+  const oneDayAgo = isoHoursAgo(24);
   const { count: activeToday } = await supabase
     .from("profiles")
     .select("id", { count: "exact", head: true })

@@ -62,7 +62,7 @@ export function AuthProvider({
       const { signOut: serverSignOut } = await import("@/app/auth/actions");
       await serverSignOut();
     } catch (err) {
-      // eslint-disable-next-line no-console
+       
       console.error("[signOutAndRedirect] error:", err);
     }
 

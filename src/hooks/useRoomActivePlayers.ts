@@ -19,7 +19,9 @@ export function useRoomActivePlayers(roomId: string | null) {
   // Stable load function — referans değişmesin
   const cancelledRef = useRef(false);
   const roomIdRef = useRef(roomId);
-  roomIdRef.current = roomId;
+  useEffect(() => {
+    roomIdRef.current = roomId;
+  }, [roomId]);
 
   const load = useCallback(async (initial: boolean) => {
     const currentRoomId = roomIdRef.current;

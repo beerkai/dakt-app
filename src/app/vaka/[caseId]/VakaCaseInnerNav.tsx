@@ -80,7 +80,7 @@ export function VakaCaseInnerNav({
     try {
       const result = await leaveRoom(roomId);
       if (result && "error" in result && result.error) {
-        // eslint-disable-next-line no-console
+         
         console.error("Leave error:", result.error);
         setCoopActionBusy(false);
         return;
@@ -90,7 +90,7 @@ export function VakaCaseInnerNav({
       setLeaveModalOpen(false);
       router.push("/davalar");
     } catch (err) {
-      // eslint-disable-next-line no-console
+       
       console.error("Leave failed:", err);
       setCoopActionBusy(false);
     }
@@ -102,7 +102,7 @@ export function VakaCaseInnerNav({
     try {
       const result = await terminateCase(roomId);
       if (result && "error" in result && result.error) {
-        // eslint-disable-next-line no-console
+         
         console.error("Terminate error:", result.error);
         setCoopActionBusy(false);
         return;
@@ -122,7 +122,7 @@ export function VakaCaseInnerNav({
       }
       setCoopActionBusy(false);
     } catch (err) {
-      // eslint-disable-next-line no-console
+       
       console.error("Terminate failed:", err);
       setCoopActionBusy(false);
     }

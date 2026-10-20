@@ -138,7 +138,7 @@ export function MisafirClient() {
       const result = await joinRoom(codeFromUrl);
 
       if (process.env.NODE_ENV === "development") {
-        // eslint-disable-next-line no-console
+         
         console.log("joinRoom result (misafir):", result);
       }
 
@@ -169,7 +169,7 @@ export function MisafirClient() {
       setError("Beklenmeyen bir hata oluştu");
     } catch (err) {
       if (process.env.NODE_ENV === "development") {
-        // eslint-disable-next-line no-console
+         
         console.error("misafir join error:", err);
       }
       setError("Bağlantı hatası, tekrar dene");

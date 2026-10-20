@@ -35,7 +35,9 @@ export function useRoomVoting({
   const [submitting, setSubmitting] = useState(false);
 
   const onConsensusRef = useRef(onConsensus);
-  onConsensusRef.current = onConsensus;
+  useEffect(() => {
+    onConsensusRef.current = onConsensus;
+  }, [onConsensus]);
 
   const firedRef = useRef(false);
 

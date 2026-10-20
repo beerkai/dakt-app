@@ -5,6 +5,14 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
+  {
+    rules: {
+      // Kalan uyarılar mount sonrası localStorage/sessionStorage ve Supabase
+      // durumunu okuyan efektler; SSR hidrasyonu için bilinçli. Yeni kodda
+      // useSyncExternalStore veya türetilmiş state tercih edilmeli.
+      "react-hooks/set-state-in-effect": "warn",
+    },
+  },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:

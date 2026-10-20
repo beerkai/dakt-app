@@ -100,7 +100,15 @@ export function MessageThread({ thread }: { thread: MessageThreadT }) {
   const showSenderAboveBubble = participants.length > 2;
   const headerTitle = isEmail ? "E-posta Yazışması" : counterpartLine;
 
-  let prevDate: string | undefined;
+  const dayDividers = new Map<string, string>();
+  {
+    let prevDate: string | undefined;
+    for (const m of messages) {
+      if (m.type === "system" || isEmail || m.date == null) continue;
+      if (m.date !== prevDate) dayDividers.set(m.id, m.date);
+      prevDate = m.date;
+    }
+  }
 
   return (
     <article
@@ -227,11 +235,7 @@ export function MessageThread({ thread }: { thread: MessageThreadT }) {
               );
             }
 
-            const dayChanged =
-              msg.date != null && msg.date !== prevDate
-                ? msg.date
-                : null;
-            if (msg.date != null) prevDate = msg.date;
+            const dayChanged = dayDividers.get(msg.id) ?? null;
 
             const fromUser = isFromUserPerspective(participants, msg.sender);
             const pMeta = participantBySender(participants, msg.sender);

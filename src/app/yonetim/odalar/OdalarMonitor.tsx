@@ -121,7 +121,7 @@ export default function OdalarMonitor({
 
   function formatDuration(startTime: string | null): string {
     if (!startTime) return "—";
-    const diffMs = Date.now() - new Date(startTime).getTime();
+    const diffMs = lastRefresh.getTime() - new Date(startTime).getTime();
     const mins = Math.floor(diffMs / 60000);
     if (mins < 60) return `${mins} dk`;
     const hours = Math.floor(mins / 60);

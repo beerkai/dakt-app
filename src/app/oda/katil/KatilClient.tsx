@@ -45,11 +45,11 @@ export function KatilClient() {
     .slice(0, 6);
   const autojoin = searchParams.get("autojoin") === "true";
 
-  useEffect(() => {
-    if (normalizedFromUrl.length > 0) {
-      setCode(normalizedFromUrl);
-    }
-  }, [normalizedFromUrl]);
+  const [prevCodeFromUrl, setPrevCodeFromUrl] = useState("");
+  if (prevCodeFromUrl !== normalizedFromUrl) {
+    setPrevCodeFromUrl(normalizedFromUrl);
+    if (normalizedFromUrl.length > 0) setCode(normalizedFromUrl);
+  }
 
   const runJoin = useCallback(
     async (raw: string) => {
@@ -65,7 +65,7 @@ export function KatilClient() {
         const result = await joinRoom(trimmed);
 
         if (process.env.NODE_ENV === "development") {
-          // eslint-disable-next-line no-console
+           
           console.log("joinRoom result:", result);
         }
 
@@ -106,7 +106,7 @@ export function KatilClient() {
         setError("Beklenmeyen bir hata oluştu");
       } catch (err) {
         if (process.env.NODE_ENV === "development") {
-          // eslint-disable-next-line no-console
+           
           console.error("joinRoom error:", err);
         }
         setError("Bağlantı hatası, tekrar dene");

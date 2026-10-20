@@ -267,11 +267,11 @@ export function SiteNav() {
       try {
         const result = await leaveRoom(session.roomId);
         if (result && "error" in result && result.error) {
-          // eslint-disable-next-line no-console
+           
           console.error("Leave room error:", result.error);
         }
       } catch (err) {
-        // eslint-disable-next-line no-console
+         
         console.error("Leave room error:", err);
       }
     }

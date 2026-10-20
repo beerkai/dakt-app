@@ -65,14 +65,20 @@ export default function LobbyClient({
   const [readyBusy, setReadyBusy] = useState(false);
   const [leaveBusy, setLeaveBusy] = useState(false);
   const [colorNoteVisible, setColorNote] = useState(Boolean(colorReassignMessage));
+  const [prevInitialPlayers, setPrevInitialPlayers] = useState(initialPlayers);
+  const [prevColorMessage, setPrevColorMessage] = useState(colorReassignMessage);
 
-  useEffect(() => {
+  if (prevInitialPlayers !== initialPlayers) {
+    setPrevInitialPlayers(initialPlayers);
     setPlayers(initialPlayers);
-  }, [initialPlayers]);
+  }
+  if (prevColorMessage !== colorReassignMessage) {
+    setPrevColorMessage(colorReassignMessage);
+    setColorNote(Boolean(colorReassignMessage));
+  }
 
   useEffect(() => {
     if (!colorReassignMessage) return;
-    setColorNote(true);
     const t = window.setTimeout(() => setColorNote(false), 10_000);
     return () => window.clearTimeout(t);
   }, [colorReassignMessage]);
@@ -146,7 +152,7 @@ export default function LobbyClient({
       )
       .subscribe((status) => {
         if (process.env.NODE_ENV === "development") {
-          // eslint-disable-next-line no-console
+           
           console.log("Lobby subscription:", status);
         }
       });
@@ -206,7 +212,7 @@ export default function LobbyClient({
       const result = await startCase(roomState.id);
 
       if (process.env.NODE_ENV === "development") {
-        // eslint-disable-next-line no-console
+         
         console.log("startCase result:", result);
       }
 
@@ -240,7 +246,7 @@ export default function LobbyClient({
       setStartBusy(false);
     } catch (e) {
       if (process.env.NODE_ENV === "development") {
-        // eslint-disable-next-line no-console
+         
         console.error("startCase error:", e);
       }
       setStartError("Başlatma başarısız oldu");
