@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  outputFileTracingIncludes: {
+    "/vaka/*/sertifika": ["./src/assets/fonts/**/*.ttf"],
+  },
 };
 
 export default nextConfig;

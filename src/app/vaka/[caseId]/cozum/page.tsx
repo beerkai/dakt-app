@@ -26,7 +26,6 @@ export default async function CozumPage({
       <Suspense fallback={null}>
         <CozumClient
           caseId={caseData.id}
-          codename={caseData.codename}
           suspects={caseData.suspects}
         />
       </Suspense>

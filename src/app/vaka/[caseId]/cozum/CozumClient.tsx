@@ -40,8 +40,6 @@ import {
   revealVerdict,
   type RevealVerdictResult,
 } from "./actions";
-// Aşama 4 (SSR sertifika): Certificate + formatCertificateDate yeniden eklenecek.
-// import { Certificate, type CertificateHandle } from "@/components/Certificate";
 import {
   MARKED_SUSPECTS_CHANGED_EVENT,
   markedSuspectsStorageKey,
@@ -76,11 +74,9 @@ function VerdictDocumentHtml({ solutionHtml }: { solutionHtml: string }) {
 
 export function CozumClient({
   caseId,
-  codename,
   suspects,
 }: {
   caseId: string;
-  codename: string;
   suspects: Suspect[];
 }) {
   const router = useRouter();
@@ -169,9 +165,7 @@ export function CozumClient({
 
   type SuccessMeta = { durationMs: number; attempts: number; accuracy: number };
   const [successMeta, setSuccessMeta] = useState<SuccessMeta | null>(null);
-  // Aşama 4: const [certModalOpen, setCertModalOpen] = useState(false);
-  // Aşama 4: const certRef = useRef<CertificateHandle>(null);
-  const [analystDisplay, setAnalystDisplay] = useState("Misafir Analist");
+  const [solvedRecorded, setSolvedRecorded] = useState(false);
 
   // ═══ CO-OP STATE ═══
   const roomId = useCaseRoomId(caseId);
@@ -180,25 +174,11 @@ export function CozumClient({
   const [coopIsHost, setCoopIsHost] = useState(false);
 
   useEffect(() => {
-    function readName() {
-      const v = readGuestUsernameTrimmed();
-      setAnalystDisplay(v ?? "Misafir Analist");
-    }
-    readName();
-    function onGuest() {
-      readName();
-    }
-    window.addEventListener("dakt_guest_changed", onGuest);
-    return () => window.removeEventListener("dakt_guest_changed", onGuest);
-  }, []);
-
-  useEffect(() => {
     setSuccessMeta(null);
     hasRecordedSolved.current = false;
     setCoopVoteComplete(false);
     voteSubmitLockRef.current = false;
     flipHandledRef.current = false;
-    // Aşama 4: setCertModalOpen(false);
   }, [caseId]);
 
   useEffect(() => {
@@ -217,6 +197,7 @@ export function CozumClient({
         });
         if (result.success) {
           hasRecordedSolved.current = true;
+          setSolvedRecorded(true);
           router.refresh();
         } else {
           console.error("Vaka kaydı hatası:", result.error);
@@ -271,16 +252,6 @@ export function CozumClient({
       window.removeEventListener("dakt-session-change", syncHost);
   }, []);
 
-  /* Aşama 4: sertifika modal — Escape ile kapatma
-  useEffect(() => {
-    if (!certModalOpen) return;
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") setCertModalOpen(false);
-    }
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [certModalOpen]);
-  */
   const frontSizerRef = useRef<HTMLDivElement>(null);
   const flipInnerRef = useRef<HTMLDivElement>(null);
   const [flipMinH, setFlipMinH] = useState(MIN_FLIP_H);
@@ -632,23 +603,32 @@ export function CozumClient({
             >
               Davalara Dön
             </Link>
-            <div className="relative pt-5">
-              <span
-                className={`${btnMono} pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 whitespace-nowrap text-[9px] tracking-[0.18em] text-[var(--meta-label)] opacity-100`}
-                aria-hidden
+            {user && solvedRecorded ? (
+              <div className="flex flex-col gap-2 sm:flex-row">
+                <a
+                  href={`/vaka/${caseId}/sertifika?indir`}
+                  download
+                  className={`${btnMono} inline-flex flex-1 justify-center border-2 border-[var(--kraft)] py-4 font-semibold text-[var(--kraft-light)] hover:border-[var(--kraft-light)]`}
+                >
+                  ▸ Sertifikayı İndir
+                </a>
+                <a
+                  href={`/vaka/${caseId}/sertifika`}
+                  target="_blank"
+                  rel="noopener"
+                  className={`${btnMono} inline-flex justify-center border border-[var(--rule)] px-6 py-4 text-[var(--meta-label)] hover:text-[var(--kraft-light)]`}
+                >
+                  Önizle
+                </a>
+              </div>
+            ) : !user ? (
+              <Link
+                href="/giris?tab=kayit"
+                className={`${btnMono} inline-flex justify-center border border-dashed border-[var(--rule)] py-4 text-[var(--meta-label)] hover:text-[var(--kraft-light)]`}
               >
-                ○ YAKINDA
-              </span>
-              <button
-                type="button"
-                disabled
-                title={analystDisplay}
-                className={`${btnMono} w-full border-2 border-[var(--rule)] bg-[var(--anthracite-2)] py-4 font-semibold text-[var(--meta-label)] opacity-50 shadow-none`}
-                style={{ cursor: "not-allowed" }}
-              >
-                Sertifikayı İndir
-              </button>
-            </div>
+                Sertifika için hesap aç
+              </Link>
+            ) : null}
           </div>
 
           {showVerdictDoc && verdict?.correct ? (
@@ -657,70 +637,6 @@ export function CozumClient({
         </div>
       )}
 
-      {/* Aşama 4 (SSR sertifika): modal + PNG — geçici kapalı
-      {certModalOpen && successMeta ? (
-        <div
-          className="fixed inset-0 z-[280] flex items-center justify-center p-4 md:p-6"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="cert-modal-title"
-        >
-          <button
-            type="button"
-            className="absolute inset-0 border-0 bg-[var(--ink)]/80 backdrop-blur-sm"
-            aria-label="Pencereyi kapat"
-            onClick={() => setCertModalOpen(false)}
-          />
-          <div
-            className="relative z-[1] flex max-h-[min(96vh,940px)] w-full max-w-[800px] flex-col overflow-hidden rounded border-2 border-[var(--kraft-dark)] bg-[var(--paper)] shadow-[var(--shadow)]"
-            style={{ boxSizing: "border-box" }}
-          >
-            <h3
-              id="cert-modal-title"
-              className="border-b border-[var(--rule)] px-4 py-3 text-center text-[13px] font-semibold tracking-[0.12em] text-[var(--ink)] [font-family:var(--font-cormorant),serif]"
-            >
-              Dosya kapama sertifikası
-            </h3>
-            <div
-              className="min-h-0 flex-1 overflow-auto px-4 py-4 md:p-5"
-              style={{ boxSizing: "border-box" }}
-            >
-              <div
-                className="mx-auto w-full max-w-[800px]"
-                style={{ boxSizing: "border-box" }}
-              >
-                <Certificate
-                  ref={certRef}
-                  analystName={analystDisplay}
-                  caseNumber={caseId}
-                  codename={codename}
-                  date={formatCertificateDate()}
-                  analysisTime={formatDurationMs(successMeta.durationMs)}
-                  attemptCount={successMeta.attempts}
-                  accuracy={successMeta.accuracy}
-                />
-              </div>
-            </div>
-            <div className="flex flex-col gap-2 border-t border-[var(--rule)] bg-[var(--anthracite)] p-3 sm:flex-row sm:justify-end sm:gap-3">
-              <button
-                type="button"
-                onClick={() => setCertModalOpen(false)}
-                className={`${btnMono} border border-[var(--kraft)] px-4 py-3 text-[var(--kraft-light)] hover:border-[var(--kraft-light)]`}
-              >
-                Kapat
-              </button>
-              <button
-                type="button"
-                onClick={() => void certRef.current?.downloadPng()}
-                className={`${btnMono} border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] px-4 py-3 text-[var(--paper)] hover:bg-[var(--bordeaux-bright)]`}
-              >
-                PNG İndir
-              </button>
-            </div>
-          </div>
-        </div>
-      ) : null}
-      */}
 
       {view === "result" && !isCorrect && (
         <div className="cozum-result-fail">

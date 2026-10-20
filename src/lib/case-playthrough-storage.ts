@@ -62,13 +62,6 @@ export function accuracyPercentForAttempts(_attempts: number): number {
   return 100;
 }
 
-export function formatCertificateDate(d = new Date()): string {
-  const dd = String(d.getDate()).padStart(2, "0");
-  const mm = String(d.getMonth() + 1).padStart(2, "0");
-  const yyyy = d.getFullYear();
-  return `${dd}.${mm}.${yyyy}`;
-}
-
 export function formatDurationMs(ms: number): string {
   const s = Math.max(0, Math.floor(ms / 1000));
   const m = Math.floor(s / 60);
