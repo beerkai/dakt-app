@@ -716,7 +716,11 @@ body::after {
   .app-overlay-actions {
     flex-direction: column-reverse;
     gap: 10px;
-    padding: 12px 20px calc(16px + var(--safe-bottom));
+    padding: 14px 20px calc(22px + var(--safe-bottom));
+  }
+
+  .app-overlay-panel--paper .sheet-grab {
+    background: rgba(0, 0, 0, 0.22);
   }
 
   .confirm-btn {

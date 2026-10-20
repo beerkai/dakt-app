@@ -590,9 +590,12 @@ export function SiteNav() {
             onClick={closeMobileMenu}
           />
           <div
-            className={`flex h-full min-h-0 w-[min(88vw,420px)] shrink-0 flex-col overflow-y-auto border-l border-[rgba(255,255,255,0.08)] bg-[var(--ink)] p-8 shadow-[-12px_0_40px_rgba(0,0,0,0.45)] transition-transform duration-300 ease-out ${
+            className={`flex h-full min-h-0 w-[min(88vw,420px)] shrink-0 flex-col overflow-y-auto border-l border-[rgba(255,255,255,0.08)] bg-[var(--ink)] px-8 pt-8 shadow-[-12px_0_40px_rgba(0,0,0,0.45)] transition-transform duration-300 ease-out ${
               menuSlideIn ? "translate-x-0" : "translate-x-full"
             }`}
+            style={{
+              paddingBottom: "calc(2rem + env(safe-area-inset-bottom, 0px))",
+            }}
           >
             <div className="mb-6 flex items-start justify-between gap-4">
               <div>
