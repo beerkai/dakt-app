@@ -8,7 +8,7 @@ import {
   startCase,
   toggleReady,
 } from "@/app/oda/actions";
-import type { CaseData } from "@/lib/case-types";
+import type { CaseIdentity } from "@/lib/case-types";
 import { createClient } from "@/lib/supabase/client";
 import type {
   AnalystColor,
@@ -41,7 +41,7 @@ const COLOR_LABEL: Record<AnalystColor, string> = {
 
 type LobbyClientProps = {
   room: Room;
-  caseData: CaseData;
+  caseData: CaseIdentity;
   currentUserId: string;
   initialPlayers: RoomPlayer[];
   colorReassignMessage: string | null;

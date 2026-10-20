@@ -3,14 +3,14 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-import type { CaseData } from "@/lib/case-types";
+import type { CaseIdentity } from "@/lib/case-types";
 import { clearActiveSession } from "@/lib/active-session";
 
 export function TerminatedClient({
   caseData,
   durationSeconds,
 }: {
-  caseData: CaseData;
+  caseData: CaseIdentity;
   durationSeconds: number;
 }) {
   const router = useRouter();

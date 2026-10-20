@@ -102,7 +102,7 @@ export default async function LobiPage({
   return (
     <LobbyClient
       room={roomRow}
-      caseData={caseData}
+      caseData={{ id: caseData.id, codename: caseData.codename }}
       currentUserId={user.id}
       initialPlayers={(players ?? []) as RoomPlayer[]}
       colorReassignMessage={colorReassignMessage}

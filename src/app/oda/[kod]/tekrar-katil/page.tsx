@@ -42,7 +42,7 @@ export default async function TekrarKatilPage({
         code: room.code as string,
         status: room.status as string,
       }}
-      caseData={caseData}
+      caseData={{ id: caseData.id, codename: caseData.codename }}
     />
   );
 }

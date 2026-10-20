@@ -101,7 +101,13 @@ export default async function CaseLayout({
           <SystemBar caseId={caseId} />
         </Suspense>
         <Suspense fallback={<InnerNavFallback />}>
-          <VakaCaseInnerNav caseId={caseId} caseData={caseData} />
+          <VakaCaseInnerNav
+            caseId={caseId}
+            caseData={{
+              codename: caseData.codename,
+              enabledTabs: caseData.enabledTabs,
+            }}
+          />
         </Suspense>
       </div>
       <Suspense fallback={null}>

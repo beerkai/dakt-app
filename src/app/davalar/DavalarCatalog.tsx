@@ -11,10 +11,9 @@ import {
 
 import { useAuth } from "@/components/AuthProvider";
 import { CaseCard } from "@/components/CaseCard";
-import { countDocuments, visibleTabCount } from "@/lib/case-helpers";
 import { writeGuestUsername } from "@/lib/guest-session";
 import { caseTabHref } from "@/lib/case-tab-routes";
-import type { CaseData } from "@/lib/case-types";
+import type { CaseCatalogItem } from "@/lib/case-types";
 
 const PLACEHOLDER_CARDS = [
   { n: "070", label: "○ Yakında — Dosya №070" },
@@ -44,7 +43,7 @@ export function DavalarCatalog({
   archivedRoomClosed = false,
   notInRoomNotice = false,
 }: {
-  cases: CaseData[];
+  cases: CaseCatalogItem[];
   solvedCaseIds?: string[];
   archivedRoomClosed?: boolean;
   notInRoomNotice?: boolean;
@@ -135,7 +134,7 @@ export function DavalarCatalog({
       ) : null}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-6">
         {cases.map((c) => {
-          const active = c.status === "active";
+          const active = c.active;
           const briefHref = active ? caseTabHref(c.id, "brief") : "";
           const solved = active && solvedCaseIds.includes(c.id);
           return (
@@ -147,9 +146,9 @@ export function DavalarCatalog({
               summary={c.shortSummary}
               recommendedPlayers={c.recommendedPlayers}
               difficulty={c.difficulty}
-              tabCount={visibleTabCount(c)}
-              docCount={countDocuments(c)}
-              suspectCount={c.suspects.length}
+              tabCount={c.tabCount}
+              docCount={c.docCount}
+              suspectCount={c.suspectCount}
               status={active ? "DOSYA AÇIK" : "YAKINDA"}
               isSolved={solved}
               briefHref={active ? briefHref : undefined}

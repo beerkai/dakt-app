@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import SiteFooter from "@/components/SiteFooter";
 
 import { DavalarCatalog } from "./DavalarCatalog";
-import { getAllCases } from "@/lib/case-helpers";
+import { getAllCases, toCatalogItem } from "@/lib/case-helpers";
 import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
@@ -80,7 +80,7 @@ export default async function DavalarPage({
         </header>
 
         <DavalarCatalog
-          cases={visibleCases}
+          cases={visibleCases.map(toCatalogItem)}
           solvedCaseIds={solvedCaseIds}
           archivedRoomClosed={archivedRoomClosed}
           notInRoomNotice={notInRoomNotice}

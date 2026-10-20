@@ -11,7 +11,7 @@ import { case089 } from "@/data/cases/089";
 import { case104 } from "@/data/cases/104";
 import { case114 } from "@/data/cases/114";
 import { orderedEnabledTabs } from "./case-tab-routes";
-import type { CaseData, TabId } from "./case-types";
+import type { CaseCatalogItem, CaseData, TabId } from "./case-types";
 
 const ALL_CASES: Record<string, CaseData> = {
   "016": case016,
@@ -74,4 +74,19 @@ export function isTabEnabled(caseData: CaseData, tab: TabId): boolean {
 /** Şeritte görünen sekme sayısı (`sectionNumForTab` ile aynı liste). */
 export function visibleTabCount(caseData: CaseData): number {
   return orderedEnabledTabs(caseData.enabledTabs).length;
+}
+
+export function toCatalogItem(c: CaseData): CaseCatalogItem {
+  return {
+    id: c.id,
+    codename: c.codename,
+    location: c.location,
+    shortSummary: c.shortSummary,
+    recommendedPlayers: c.recommendedPlayers,
+    difficulty: c.difficulty,
+    active: c.status === "active",
+    tabCount: visibleTabCount(c),
+    docCount: countDocuments(c),
+    suspectCount: c.suspects.length,
+  };
 }

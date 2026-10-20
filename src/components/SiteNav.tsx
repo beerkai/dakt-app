@@ -197,8 +197,8 @@ export function SiteNav() {
     try {
       if (typeof navigator !== "undefined" && navigator.share) {
         await navigator.share({
-          title: "D.A.K.T. — Karaağaç Davası",
-          text: "Bu vakayı çözmemde bana yardım eder misin?",
+          title: "D.A.K.T. — Polisiye analiz oyunu",
+          text: "Birlikte bir vaka çözelim mi?",
           url,
         });
         return;

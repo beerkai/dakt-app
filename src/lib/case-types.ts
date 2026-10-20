@@ -202,3 +202,20 @@ export interface CaseData {
   /** Sayfa başlığı sağ üst şerit (örn. 042-A · Olay Yeri) */
   tabSectionSub: Partial<Record<TabId, string>>;
 }
+
+/** İstemci bileşenlerine geçirilebilen, çözüm içermeyen vaka kimliği. */
+export type CaseIdentity = Pick<CaseData, "id" | "codename">;
+
+/** Katalog kartı için sunucuda hesaplanan özet. */
+export interface CaseCatalogItem {
+  id: string;
+  codename: string;
+  location: string;
+  shortSummary: string;
+  recommendedPlayers: string;
+  difficulty: Difficulty;
+  active: boolean;
+  tabCount: number;
+  docCount: number;
+  suspectCount: number;
+}

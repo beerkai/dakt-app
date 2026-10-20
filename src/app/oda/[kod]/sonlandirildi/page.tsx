@@ -44,6 +44,6 @@ export default async function SonlandirildiPage({
   }
 
   return (
-    <TerminatedClient caseData={caseData} durationSeconds={durationSeconds} />
+    <TerminatedClient caseData={{ id: caseData.id, codename: caseData.codename }} durationSeconds={durationSeconds} />
   );
 }

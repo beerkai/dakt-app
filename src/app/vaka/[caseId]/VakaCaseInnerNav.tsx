@@ -22,7 +22,7 @@ export function VakaCaseInnerNav({
   caseData,
 }: {
   caseId: string;
-  caseData: CaseData;
+  caseData: Pick<CaseData, "codename" | "enabledTabs">;
 }) {
   const router = useRouter();
   const pathname = usePathname();

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import type { CaseData } from "@/lib/case-types";
+import type { CaseIdentity } from "@/lib/case-types";
 import { rejoinRoom } from "@/app/oda/actions";
 
 export function RejoinClient({
@@ -16,7 +16,7 @@ export function RejoinClient({
     code: string;
     status: string;
   };
-  caseData: CaseData;
+  caseData: CaseIdentity;
 }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
