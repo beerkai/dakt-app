@@ -7,7 +7,7 @@ import {
 import { Suspense } from "react";
 
 import ActiveSessionChip from "@/components/ActiveSessionChip";
-import AgeContentGate from "@/components/AgeContentGate";
+import AgeContentGate, { AGE_GATE_BOOT_SCRIPT } from "@/components/AgeContentGate";
 import { AuthProvider } from "@/components/AuthProvider";
 import { ConditionalSiteNav } from "@/components/ConditionalSiteNav";
 import { createClient } from "@/lib/supabase/server";
@@ -131,7 +131,11 @@ export default async function RootLayout({
     <html
       lang="tr"
       className={`${cormorantGaramond.variable} ${specialElite.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: AGE_GATE_BOOT_SCRIPT }} />
+      </head>
       <body className="flex min-h-full flex-col">
         <AgeContentGate />
         <AuthProvider

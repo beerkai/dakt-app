@@ -1,34 +1,34 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const ACCEPTED_KEY = "dakt_age_content_accepted_v1";
 
-export default function AgeContentGate() {
-  const [accepted, setAccepted] = useState<boolean | null>(null);
+/**
+ * <head> içinde ilk boyamadan önce çalışır: onay daha önce verildiyse kapı CSS
+ * ile gizlenir. Böylece ne ilk ziyaretçiye içerik sızar ne de onaylamış
+ * kullanıcıda kapı yanıp söner.
+ */
+export const AGE_GATE_BOOT_SCRIPT = `try{if(localStorage.getItem(${JSON.stringify(
+  ACCEPTED_KEY,
+)})==="true")document.documentElement.dataset.ageOk="1"}catch(e){}`;
 
-  useEffect(() => {
-    try {
-      const value = localStorage.getItem(ACCEPTED_KEY);
-      setAccepted(value === "true");
-    } catch {
-      setAccepted(false);
-    }
-  }, []);
+export default function AgeContentGate() {
+  const [accepted, setAccepted] = useState(false);
 
   function handleAccept() {
     try {
       localStorage.setItem(ACCEPTED_KEY, "true");
     } catch {}
+    document.documentElement.dataset.ageOk = "1";
     setAccepted(true);
   }
 
-  if (accepted === null) return null;
-  if (accepted === true) return null;
+  if (accepted) return null;
 
   return (
     <div
-      className="fixed inset-0 z-[400] flex items-center justify-center"
+      className="age-content-gate fixed inset-0 z-[400] flex items-center justify-center"
       style={{
         background: "rgba(0, 0, 0, 0.92)",
         backdropFilter: "blur(12px)",

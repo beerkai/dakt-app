@@ -405,7 +405,11 @@ export function CozumClient({
             geçer. Doğru tahmin: dava çözülür.
           </div>
 
-          <div className="suspect-grid">
+          <div
+            className="suspect-grid"
+            role="radiogroup"
+            aria-label="Fail olarak işaretlenecek şüpheli"
+          >
             {voteSuspects.map((s) => {
               const sel = selectedSuspect === s.suspectId;
               return (

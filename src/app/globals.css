@@ -1634,3 +1634,13 @@ body::after {
 .foot-email:hover {
   color: var(--kraft-light);
 }
+
+html[data-age-ok] .age-content-gate {
+  display: none;
+}
+
+/* Klavye ile gezinmede görünür odak halkası (fare tıklamalarında görünmez). */
+:where(a, button, [role="button"], [role="radio"], [role="tab"], input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--kraft-light);
+  outline-offset: 2px;
+}

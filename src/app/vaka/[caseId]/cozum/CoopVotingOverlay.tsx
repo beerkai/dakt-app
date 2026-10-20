@@ -71,7 +71,7 @@ export function CoopVotingOverlay({
         ) : null}
       </div>
 
-      <div className="suspect-grid">
+      <div className="suspect-grid" role="group" aria-label="Şüpheliye oy ver">
         {suspects.map((s) => {
           const sel = myVote === s.id;
           const pile = tallies.get(s.id) ?? [];
@@ -80,6 +80,9 @@ export function CoopVotingOverlay({
               key={s.id}
               role="button"
               tabIndex={0}
+              aria-pressed={sel}
+              aria-disabled={submitting}
+              aria-label={`${s.name} — ${s.role}. ${pile.length} oy`}
               className={`suspect-card${sel ? " suspect-card--vote-selected" : ""}${submitting ? " opacity-60" : ""}`}
               onClick={() => {
                 if (!submitting) void submitVote(s.id);
