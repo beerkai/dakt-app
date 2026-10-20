@@ -44,7 +44,7 @@ export default function NasilOynanirPage() {
         <h1 className="mb-3 text-4xl font-semibold text-[var(--paper)] [font-family:var(--font-cormorant),serif] md:text-5xl">
           Nasıl Oynanır?
         </h1>
-        <p className="max-w-xl text-[13px] tracking-[0.06em] text-[var(--subtitle-text)] [font-family:var(--font-special-elite),monospace]">
+        <p className="max-w-xl text-[16px] text-[var(--subtitle-text)] [font-family:var(--font-newsreader),serif]">
           Hızlı bir analiz brifi.
         </p>
       </header>
@@ -64,7 +64,7 @@ export default function NasilOynanirPage() {
             <h2 className="mb-3 text-xl font-semibold text-[var(--kraft-light)] [font-family:var(--font-cormorant),serif] md:text-[1.35rem]">
               {step.title}
             </h2>
-            <p className="flex-1 text-[13px] leading-[1.8] tracking-[0.05em] text-[var(--body-text)] [font-family:var(--font-special-elite),monospace]">
+            <p className="flex-1 text-[16px] leading-[1.55] text-[var(--body-text)] [font-family:var(--font-newsreader),serif]">
               {step.body}
             </p>
           </li>
@@ -72,7 +72,7 @@ export default function NasilOynanirPage() {
       </ol>
 
       <div className="mb-12 border border-[var(--bordeaux)] bg-[var(--anthracite)] p-6 md:mb-14 md:p-8">
-        <p className="text-[12px] leading-[1.85] tracking-[0.05em] text-[var(--subtitle-text)] [font-family:var(--font-special-elite),monospace]">
+        <p className="text-[15px] leading-[1.55] text-[var(--subtitle-text)] [font-family:var(--font-newsreader),serif]">
           Co-op modunda 1-5 oyuncu aynı oda kodu ile bir dosyaya beraber
           bağlanabilir. Oda, oyuncular ve oylama canlı senkronize; damgalar ve
           Pano notları her analistin kendi cihazında tutulur.

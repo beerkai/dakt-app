@@ -10,7 +10,7 @@ import { DAKT_LOCAL_SOLVED_KEY } from "@/lib/local-solved-storage";
 const mono =
   "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace]";
 const typewriter =
-  "[font-family:var(--font-special-elite),monospace]";
+  "[font-family:var(--font-newsreader),serif]";
 
 function clearPlaythroughLocalStorage() {
   if (typeof window === "undefined") return;
@@ -66,7 +66,7 @@ export function ResetHistoryButton() {
         >
           Tehlike bölgesi
         </h2>
-        <p className={`mb-5 max-w-xl text-[12px] leading-relaxed text-[var(--subtitle-text)] ${typewriter}`}>
+        <p className={`mb-5 max-w-xl text-[15px] leading-relaxed text-[var(--subtitle-text)] ${typewriter}`}>
           Çözüm geçmişini sıfırla — tüm vaka çözüm kayıtların ve başarım
           ilerlemen silinir. Bu işlem geri alınamaz.
         </p>

@@ -662,8 +662,8 @@ export function CozumClient({
             DOSYA №{caseId} · KAPATILDI · ÇÖZÜLEMEDİ
           </p>
           <p
-            className="mx-auto mb-10 max-w-lg text-[13px] leading-[1.85] tracking-[0.05em] text-[var(--body-text)]"
-            style={{ fontFamily: "var(--font-special-elite), monospace" }}
+            className="mx-auto mb-10 max-w-lg text-[16px] leading-[1.55] text-[var(--body-text)]"
+            style={{ fontFamily: "var(--font-newsreader), serif" }}
           >
             {(() => {
               const message =

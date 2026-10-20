@@ -63,7 +63,7 @@ export default async function OdalarPage() {
 
       <p
         style={{
-          fontFamily: "var(--font-special-elite), monospace",
+          fontFamily: "var(--font-newsreader), serif",
           fontSize: 12,
           color: "var(--gm-ink-soft)",
           marginBottom: 24,

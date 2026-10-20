@@ -77,7 +77,7 @@ export default async function AnalystDetailPage({
             gridTemplateColumns: "150px 1fr",
             gap: "12px 24px",
             fontSize: 12,
-            fontFamily: "var(--font-special-elite), monospace",
+            fontFamily: "var(--font-newsreader), serif",
           }}
         >
           <dt
@@ -263,7 +263,7 @@ export default async function AnalystDetailPage({
       ) : (
         <p
           style={{
-            fontFamily: "var(--font-special-elite), monospace",
+            fontFamily: "var(--font-newsreader), serif",
             color: "var(--gm-meta)",
             fontStyle: "italic",
           }}

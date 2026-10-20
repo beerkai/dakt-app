@@ -35,7 +35,7 @@ const GUEST_NAME_PLACEHOLDER_OPTIONS = [
 const mono =
   "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace]";
 const typewriter =
-  "[font-family:var(--font-special-elite),monospace]";
+  "[font-family:var(--font-newsreader),serif]";
 
 export function DavalarCatalog({
   cases,
@@ -134,7 +134,7 @@ export function DavalarCatalog({
       ) : null}
       {cases.length === 0 ? (
         <p
-          className={`${typewriter} mb-8 border border-dashed border-[var(--rule)] bg-[var(--anthracite-2)] px-6 py-8 text-center text-[13px] leading-relaxed tracking-[0.05em] text-[var(--subtitle-text)]`}
+          className={`${typewriter} mb-8 border border-dashed border-[var(--rule)] bg-[var(--anthracite-2)] px-6 py-8 text-center text-[16px] leading-relaxed text-[var(--subtitle-text)]`}
           role="status"
         >
           Şu an incelemeye açık dosya yok. Arşiv yeniden açıldığında yeni
@@ -200,7 +200,7 @@ export function DavalarCatalog({
                 —
               </div>
               <p
-                className={`${typewriter} mt-auto text-[12px] leading-relaxed tracking-[0.06em] text-[var(--subtitle-text)]`}
+                className={`${typewriter} mt-auto text-[15px] leading-relaxed text-[var(--subtitle-text)]`}
               >
                 Yakında açılacak
               </p>
@@ -243,7 +243,7 @@ export function DavalarCatalog({
                   Analist <em className="text-[var(--bordeaux)]">takma adın</em>
                 </h2>
                 <p
-                  className={`${typewriter} text-[13px] leading-relaxed tracking-[0.05em] text-[var(--subtitle-text)]`}
+                  className={`${typewriter} text-[16px] leading-relaxed text-[var(--subtitle-text)]`}
                 >
                   Dosyaya girmeden önce D.A.K.T. için kullanacağın kısa bir takma
                   ad seç. Bu ad üst menüde görünür; sertifika ve kayıtların

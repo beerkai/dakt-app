@@ -19,7 +19,7 @@ import type { AnalystColor } from "@/lib/supabase/types";
 const mono =
   "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace]";
 const typewriter =
-  "[font-family:var(--font-special-elite),monospace]";
+  "[font-family:var(--font-newsreader),serif]";
 
 const COLOR_OPTIONS: { id: AnalystColor; fill: string; label: string }[] = [
   { id: "mavi", fill: "#4a90d9", label: "Mavi" },
@@ -189,7 +189,7 @@ export function MisafirClient() {
   if (!codeFromUrl) {
     return (
       <div className="space-y-4">
-        <p className={`${typewriter} text-[13px] text-[var(--body-text)]`}>
+        <p className={`${typewriter} text-[16px] text-[var(--body-text)]`}>
           Oda kodu eksik veya uzunluğu yanlış.{" "}
           <Link
             href="/oda/katil"
@@ -227,7 +227,7 @@ export function MisafirClient() {
         >
           Misafir olarak katıl
         </h2>
-        <p className={`${typewriter} text-[13px] text-[var(--subtitle-text)]`}>
+        <p className={`${typewriter} text-[16px] text-[var(--subtitle-text)]`}>
           Bu seans için takma ad ve renk seç.
         </p>
       </div>
@@ -252,7 +252,7 @@ export function MisafirClient() {
             setUsername(e.target.value);
             if (error) setError(null);
           }}
-          className="w-full border-2 border-[var(--kraft-dark)] bg-[var(--anthracite-2)] px-4 py-3 text-[14px] text-[var(--body-text)] [font-family:var(--font-special-elite),monospace] placeholder:text-[var(--meta-label)] focus:border-[var(--bordeaux-bright)] focus:outline-none disabled:opacity-60"
+          className="w-full border-2 border-[var(--kraft-dark)] bg-[var(--anthracite-2)] px-4 py-3 text-[14px] text-[var(--body-text)] [font-family:var(--font-newsreader),serif] placeholder:text-[var(--meta-label)] focus:border-[var(--bordeaux-bright)] focus:outline-none disabled:opacity-60"
           placeholder="Analist-…"
         />
       </div>
@@ -282,7 +282,7 @@ export function MisafirClient() {
         {busy ? "Katılıyorsun…" : "▸ Odaya katıl"}
       </button>
 
-      <p className={`${typewriter} text-[12px] text-[var(--subtitle-text)]`}>
+      <p className={`${typewriter} text-[15px] text-[var(--subtitle-text)]`}>
         Hesabın varsa{" "}
         <Link
           href="/giris"

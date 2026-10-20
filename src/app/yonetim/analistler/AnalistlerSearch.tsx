@@ -106,7 +106,7 @@ function EmptySection({ message }: { message: string }) {
     <div
       style={{
         padding: "20px 24px",
-        fontFamily: "var(--font-special-elite), monospace",
+        fontFamily: "var(--font-newsreader), serif",
         fontSize: 12,
         color: "var(--gm-meta)",
         fontStyle: "italic",

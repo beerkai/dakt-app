@@ -23,7 +23,7 @@ import {
 const mono =
   "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace]";
 const typewriter =
-  "[font-family:var(--font-special-elite),monospace]";
+  "[font-family:var(--font-newsreader),serif]";
 
 export function KatilClient() {
   const router = useRouter();
@@ -194,7 +194,7 @@ export function KatilClient() {
     <>
       <div className="relative z-[2] pointer-events-auto">
         <p
-          className={`${typewriter} mb-8 max-w-md text-[13px] leading-relaxed tracking-[0.05em] text-[var(--subtitle-text)]`}
+          className={`${typewriter} mb-8 max-w-md text-[16px] leading-relaxed text-[var(--subtitle-text)]`}
         >
           {!user
             ? "Kodu girip katıl: bir sonraki adımda misafir analist olarak takma ad ve renk seçersin."

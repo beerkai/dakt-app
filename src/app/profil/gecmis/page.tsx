@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 const mono =
   "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace]";
 const typewriter =
-  "[font-family:var(--font-special-elite),monospace]";
+  "[font-family:var(--font-newsreader),serif]";
 
 export default async function ProfilGecmisPage() {
   const supabase = await createClient();
@@ -50,7 +50,7 @@ export default async function ProfilGecmisPage() {
           <h1 className="mb-3 text-4xl font-semibold italic text-[var(--paper)] [font-family:var(--font-cormorant),serif] md:text-5xl">
             Geçmiş
           </h1>
-          <p className={`text-[13px] text-[var(--subtitle-text)] ${typewriter}`}>
+          <p className={`text-[16px] text-[var(--subtitle-text)] ${typewriter}`}>
             Çözdüğün vakaların kronolojik kaydı
           </p>
         </header>
@@ -77,13 +77,13 @@ export default async function ProfilGecmisPage() {
         <h1 className="mb-3 text-4xl font-semibold italic text-[var(--paper)] [font-family:var(--font-cormorant),serif] md:text-5xl">
           Geçmiş
         </h1>
-        <p className={`text-[13px] tracking-[0.06em] text-[var(--subtitle-text)] ${typewriter}`}>
+        <p className={`text-[16px] text-[var(--subtitle-text)] ${typewriter}`}>
           Çözdüğün vakaların kronolojik kaydı
         </p>
       </header>
 
       {rows.length === 0 ? (
-        <p className={`m-0 text-[12px] text-[var(--meta-label)] ${typewriter}`}>
+        <p className={`m-0 text-[15px] text-[var(--meta-label)] ${typewriter}`}>
           Henüz çözülmüş vaka kaydın yok.
         </p>
       ) : null}
@@ -115,7 +115,7 @@ export default async function ProfilGecmisPage() {
                   {row.duration_seconds % 60} sn · DENEME:{" "}
                   {row.attempt_count}.
                 </p>
-                <p className={`m-0 text-[12px] text-[var(--kraft-dark)] ${typewriter}`}>
+                <p className={`m-0 text-[15px] text-[var(--kraft-dark)] ${typewriter}`}>
                   {dateTimeFmt.format(new Date(row.solved_at))}
                 </p>
               </Link>
@@ -132,7 +132,7 @@ export default async function ProfilGecmisPage() {
           Oda Oturumları
         </h2>
         {coopRooms.length === 0 ? (
-          <p className={`m-0 text-[12px] leading-relaxed text-[var(--meta-label)] ${typewriter}`}>
+          <p className={`m-0 text-[15px] leading-relaxed text-[var(--meta-label)] ${typewriter}`}>
             Henüz kapanmış bir co-op odan yok. Ekiple oynadığın vakalar burada
             listelenecek.
           </p>

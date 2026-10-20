@@ -101,8 +101,8 @@ export default function AgeContentGate() {
 
         <p
           style={{
-            fontFamily: "var(--font-special-elite), monospace",
-            fontSize: 14,
+            fontFamily: "var(--font-newsreader), serif",
+            fontSize: 16,
             color: "var(--kraft-light)",
             lineHeight: 1.7,
             margin: 0,
@@ -116,8 +116,8 @@ export default function AgeContentGate() {
 
         <p
           style={{
-            fontFamily: "var(--font-special-elite), monospace",
-            fontSize: 13,
+            fontFamily: "var(--font-newsreader), serif",
+            fontSize: 15,
             color: "var(--kraft)",
             lineHeight: 1.6,
             margin: 0,

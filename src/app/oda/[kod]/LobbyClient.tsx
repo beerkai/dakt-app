@@ -21,7 +21,7 @@ const LOBBY_POLL_MS = 8000;
 const mono =
   "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace]";
 const typewriter =
-  "[font-family:var(--font-special-elite),monospace]";
+  "[font-family:var(--font-newsreader),serif]";
 
 const COLOR_FILL: Record<AnalystColor, string> = {
   mavi: "#4a90d9",
@@ -362,7 +362,7 @@ export default function LobbyClient({
                         ) : null}
                       </div>
                       <p
-                        className={`${typewriter} mt-1 text-[11px] tracking-[0.06em] ${
+                        className={`${typewriter} mt-1 text-[11px]  ${
                           slot.player.is_ready
                             ? "text-[var(--kraft)]"
                             : "text-[var(--meta-label)]"
@@ -374,7 +374,7 @@ export default function LobbyClient({
                   </>
                 ) : (
                   <p
-                    className={`${typewriter} w-full text-center text-[12px] tracking-[0.06em] text-[var(--meta-label)]`}
+                    className={`${typewriter} w-full text-center text-[15px] text-[var(--meta-label)]`}
                   >
                     Bekleniyor…
                   </p>
@@ -397,7 +397,7 @@ export default function LobbyClient({
               </button>
               {!allReady ? (
                 <p
-                  className={`${typewriter} text-[11px] leading-relaxed tracking-[0.05em] text-[var(--meta-label)]`}
+                  className={`${typewriter} text-[11px] leading-relaxed  text-[var(--meta-label)]`}
                 >
                   Tüm oyuncular hazır olmalı.
                 </p>
@@ -436,7 +436,7 @@ export default function LobbyClient({
           ) : null}
 
           <p
-            className={`${typewriter} mt-2 text-[10px] leading-relaxed tracking-[0.08em] text-[var(--meta-label)]`}
+            className={`${typewriter} mt-2 text-[10px] leading-relaxed  text-[var(--meta-label)]`}
           >
             Renk:{" "}
             {me ? `${COLOR_LABEL[me.color]} · ${me.color}` : "—"}

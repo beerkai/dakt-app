@@ -803,8 +803,8 @@ export function SiteNav() {
 
             <div
               style={{
-                fontFamily: "var(--font-special-elite), monospace",
-                fontSize: 13,
+                fontFamily: "var(--font-newsreader), serif",
+                fontSize: 16,
                 color: "var(--kraft-light)",
                 opacity: 0.8,
               }}

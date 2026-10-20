@@ -166,7 +166,7 @@ export function VakaCaseSoloTease({
     >
       <p
         id="solo-tease-title"
-        className="mb-3 text-[13px] leading-[1.65] tracking-[0.05em] text-[var(--kraft-light)] [font-family:var(--font-special-elite),monospace]"
+        className="mb-3 text-[16px] leading-[1.55] text-[var(--kraft-light)] [font-family:var(--font-newsreader),serif]"
       >
         <span className="text-[var(--bordeaux-bright)]" aria-hidden>
           ●

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 const mono =
   "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace]";
 const typewriter =
-  "[font-family:var(--font-special-elite),monospace]";
+  "[font-family:var(--font-newsreader),serif]";
 
 export default async function ProfilBasarilarPage() {
   const supabase = await createClient();
@@ -54,7 +54,7 @@ export default async function ProfilBasarilarPage() {
           <h1 className="mb-3 text-4xl font-semibold italic text-[var(--paper)] [font-family:var(--font-cormorant),serif] md:text-5xl">
             Başarılar
           </h1>
-          <p className={`text-[13px] text-[var(--subtitle-text)] ${typewriter}`}>
+          <p className={`text-[16px] text-[var(--subtitle-text)] ${typewriter}`}>
             Analiz performansın ve kazandığın rozetler
           </p>
         </header>
@@ -79,7 +79,7 @@ export default async function ProfilBasarilarPage() {
         <h1 className="mb-3 text-4xl font-semibold italic text-[var(--paper)] [font-family:var(--font-cormorant),serif] md:text-5xl">
           Başarılar
         </h1>
-        <p className={`text-[13px] tracking-[0.06em] text-[var(--subtitle-text)] ${typewriter}`}>
+        <p className={`text-[16px] text-[var(--subtitle-text)] ${typewriter}`}>
           Analiz performansın ve kazandığın rozetler
         </p>
       </header>

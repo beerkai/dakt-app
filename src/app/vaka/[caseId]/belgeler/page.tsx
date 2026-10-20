@@ -28,7 +28,7 @@ export default async function BelgelerPage({
       </div>
 
       {empty ? (
-        <p className="text-[var(--subtitle-text)] [font-family:var(--font-special-elite),monospace]">
+        <p className="text-[var(--subtitle-text)] [font-family:var(--font-newsreader),serif]">
           Bu dosya için belge sekmesi tanımlanmadı.
         </p>
       ) : (

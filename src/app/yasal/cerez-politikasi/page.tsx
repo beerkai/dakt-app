@@ -13,7 +13,7 @@ export default function CerezPolitikasiPage() {
         maxWidth: 720,
         margin: "0 auto",
         padding: "60px 28px 120px",
-        fontFamily: "var(--font-special-elite), monospace",
+        fontFamily: "var(--font-newsreader), serif",
         lineHeight: 1.8,
         color: "#d6cdb6",
       }}

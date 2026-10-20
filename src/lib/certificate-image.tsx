@@ -13,14 +13,14 @@ const KRAFT_DARK = "#8a774f";
 const FONT_DIR = join(process.cwd(), "src/assets/fonts");
 
 async function loadFonts() {
-  const [elite, cormorantBold, cormorantItalic, mono] = await Promise.all([
-    readFile(join(FONT_DIR, "SpecialElite-Regular.ttf")),
+  const [newsreader, cormorantBold, cormorantItalic, mono] = await Promise.all([
+    readFile(join(FONT_DIR, "Newsreader-Regular.ttf")),
     readFile(join(FONT_DIR, "CormorantGaramond-Bold.ttf")),
     readFile(join(FONT_DIR, "CormorantGaramond-SemiBoldItalic.ttf")),
     readFile(join(FONT_DIR, "JetBrainsMono-Medium.ttf")),
   ]);
   return [
-    { name: "Elite", data: elite, weight: 400 as const, style: "normal" as const },
+    { name: "Newsreader", data: newsreader, weight: 400 as const, style: "normal" as const },
     { name: "Cormorant", data: cormorantBold, weight: 700 as const, style: "normal" as const },
     { name: "Cormorant", data: cormorantItalic, weight: 600 as const, style: "italic" as const },
     { name: "Mono", data: mono, weight: 500 as const, style: "normal" as const },
@@ -51,7 +51,7 @@ function InfoRow({ label, value }: { label: string; value: string }) {
       >
         {label}
       </span>
-      <span style={{ fontFamily: "Elite", fontSize: 26, color: INK }}>
+      <span style={{ fontFamily: "Newsreader", fontSize: 26, color: INK }}>
         {value}
       </span>
     </div>
@@ -198,7 +198,7 @@ export async function renderCertificate(
                 marginTop: 28,
                 maxWidth: 1000,
                 textAlign: "center",
-                fontFamily: "Elite",
+                fontFamily: "Newsreader",
                 fontSize: 26,
                 lineHeight: 1.6,
                 color: INK,

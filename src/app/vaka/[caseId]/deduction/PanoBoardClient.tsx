@@ -169,7 +169,7 @@ export function PanoBoardClient({
         <span className="section-sub">Notlar · Sadece sana özel</span>
       </div>
 
-      <p className="mb-6 max-w-2xl text-[12px] leading-[1.7] tracking-[0.05em] text-[var(--subtitle-text)] [font-family:var(--font-special-elite),monospace]">
+      <p className="mb-6 max-w-2xl text-[15px] leading-[1.55] text-[var(--subtitle-text)] [font-family:var(--font-newsreader),serif]">
         Bu pano sadece sana ait. Vakayla ilgili düşüncelerini, bağlantılarını,
         şüphelerini buraya yaz. Notların 24 saat saklanır. Co-op modu yakında —
         o zaman ekibinle paylaşabileceksin.
@@ -186,7 +186,7 @@ export function PanoBoardClient({
       </div>
 
       {!hydrated ? null : notes.length === 0 ? (
-        <p className="flex flex-wrap items-center justify-center gap-3 border border-dashed border-[var(--kraft-dark)]/50 bg-[var(--paper)]/5 px-6 py-10 text-[14px] italic leading-relaxed text-[var(--meta-label)] [font-family:var(--font-special-elite),monospace]">
+        <p className="flex flex-wrap items-center justify-center gap-3 border border-dashed border-[var(--kraft-dark)]/50 bg-[var(--paper)]/5 px-6 py-10 text-[14px] italic leading-relaxed text-[var(--meta-label)] [font-family:var(--font-newsreader),serif]">
           <span aria-hidden className="text-[var(--kraft)]">
             ✎
           </span>
@@ -202,7 +202,7 @@ export function PanoBoardClient({
               key={n.id}
               role="button"
               tabIndex={0}
-              className="group relative min-h-[140px] cursor-text p-5 shadow-[0_4px_12px_var(--post-it-shadow),0_2px_4px_rgba(0,0,0,0.4)] transition-[box-shadow] [color:var(--post-it-text)] [font-family:var(--font-special-elite),monospace] [background:var(--post-it)]"
+              className="group relative min-h-[140px] cursor-text p-5 shadow-[0_4px_12px_var(--post-it-shadow),0_2px_4px_rgba(0,0,0,0.4)] transition-[box-shadow] [color:var(--post-it-text)] [font-family:var(--font-newsreader),serif] [background:var(--post-it)]"
               style={{
                 transform: `rotate(${n.rotation}deg)`,
                 fontSize: "14px",
@@ -228,7 +228,7 @@ export function PanoBoardClient({
               {editingId === n.id ? (
                 <textarea
                   ref={taRef}
-                  className="min-h-[100px] w-full resize-none border-none bg-transparent p-0 text-[14px] leading-[1.6] text-[var(--post-it-text)] outline-none [font-family:var(--font-special-elite),monospace] ring-0 focus:shadow-[0_0_0_2px_rgba(138,119,79,0.45)]"
+                  className="min-h-[100px] w-full resize-none border-none bg-transparent p-0 text-[14px] leading-[1.6] text-[var(--post-it-text)] outline-none [font-family:var(--font-newsreader),serif] ring-0 focus:shadow-[0_0_0_2px_rgba(138,119,79,0.45)]"
                   value={n.text}
                   onChange={(e) => updateText(n.id, e.target.value)}
                   onPointerDown={(e) => e.stopPropagation()}

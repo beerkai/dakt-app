@@ -35,7 +35,7 @@ export default function Home() {
           </h1>
 
           <p
-            className="max-w-[640px] text-[clamp(13px,2.5vw,15px)] leading-[1.75] tracking-[0.05em] text-[var(--subtitle-text)] [font-family:var(--font-special-elite),monospace]"
+            className="max-w-[640px] text-[clamp(16px,2.2vw,18px)] leading-[1.55] text-[var(--subtitle-text)] [font-family:var(--font-newsreader),serif]"
           >
             D.A.K.T. — bürokratik bir gizlilik içinde, soğuk bir ofiste,
             vakaları çözen bir analist olursun. İfadeleri çapraz oku, delilleri
@@ -96,7 +96,7 @@ export default function Home() {
               <h3 className="mb-3 text-2xl font-semibold italic text-[var(--paper)] [font-family:var(--font-cormorant),serif]">
                 Çok oyunculu
               </h3>
-              <p className="mb-4 text-[13px] leading-relaxed tracking-[0.05em] text-[var(--subtitle-text)] [font-family:var(--font-special-elite),monospace]">
+              <p className="mb-4 text-[16px] leading-relaxed text-[var(--subtitle-text)] [font-family:var(--font-newsreader),serif]">
                 1-5 kişiye kadar co-op. Aynı dosyayı, aynı anda inceleyin.
               </p>
               <p className="border-l-2 border-[var(--bordeaux-bright)] pl-3 text-[9px] uppercase leading-snug tracking-[0.22em] text-[var(--kraft)] [font-family:var(--font-jetbrains-mono),monospace]">
@@ -124,8 +124,8 @@ export default function Home() {
               <h3 className="mb-3 text-2xl font-semibold italic text-[var(--paper)] [font-family:var(--font-cormorant),serif]">
                 Gerçek dosya hissi
               </h3>
-              <p className="text-[13px] leading-relaxed tracking-[0.05em] text-[var(--subtitle-text)] [font-family:var(--font-special-elite),monospace]">
-                Damgalar, mühürler, daktilo notlar. Dijital ama elinde
+              <p className="text-[16px] leading-relaxed text-[var(--subtitle-text)] [font-family:var(--font-newsreader),serif]">
+                Damgalar, mühürler, dosya notları. Dijital ama elinde
                 tutuyormuş gibi.
               </p>
             </div>
@@ -150,7 +150,7 @@ export default function Home() {
               <h3 className="mb-3 text-2xl font-semibold italic text-[var(--paper)] [font-family:var(--font-cormorant),serif]">
                 Aylık yeni vaka
               </h3>
-              <p className="text-[13px] leading-relaxed tracking-[0.05em] text-[var(--subtitle-text)] [font-family:var(--font-special-elite),monospace]">
+              <p className="text-[16px] leading-relaxed text-[var(--subtitle-text)] [font-family:var(--font-newsreader),serif]">
                 Her ay yeni bir cinayet, yeni bir gizem.
               </p>
             </div>
@@ -194,7 +194,7 @@ export default function Home() {
             <p className="mb-3 text-3xl font-semibold italic leading-tight text-[var(--ink)] [font-family:var(--font-cormorant),serif] md:text-4xl">
               Operasyon özeti
             </p>
-            <p className="mb-6 text-[12px] leading-[1.8] tracking-[0.06em] text-[var(--anthracite-2)] [font-family:var(--font-special-elite),monospace]">
+            <p className="mb-6 text-[15px] leading-[1.55] text-[var(--anthracite-2)] [font-family:var(--font-newsreader),serif]">
               Kadıköy, Caferağa. Konteyner sahası. Kimlik tespiti bekleyen beden,
               beş ifade, on bir ek belge. Çelişkiler kayıtlı; damga setin
               hazır…

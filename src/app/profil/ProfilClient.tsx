@@ -21,7 +21,7 @@ const labelMono =
   "mb-2 block text-[9px] uppercase tracking-[0.22em] text-[var(--meta-label)] [font-family:var(--font-jetbrains-mono),monospace]";
 
 const inputClass =
-  "w-full border border-[var(--kraft-dark)] bg-[var(--anthracite)] px-4 py-3 text-[13px] text-[var(--body-text)] [font-family:var(--font-special-elite),monospace] placeholder:text-[var(--meta-label)] focus:border-[var(--kraft)] focus:outline-none";
+  "w-full border border-[var(--kraft-dark)] bg-[var(--anthracite)] px-4 py-3 text-[16px] text-[var(--body-text)] [font-family:var(--font-newsreader),serif] placeholder:text-[var(--meta-label)] focus:border-[var(--kraft)] focus:outline-none";
 
 export function ProfilClient({
   profile,
@@ -112,7 +112,7 @@ export function ProfilClient({
           Profil
         </h1>
         <p
-          className={`text-[12px] tracking-[0.08em] text-[var(--subtitle-text)] [font-family:var(--font-special-elite),monospace]`}
+          className={`text-[15px] text-[var(--subtitle-text)] [font-family:var(--font-newsreader),serif]`}
         >
           Hesap bilgileri ve ayarlar
         </p>

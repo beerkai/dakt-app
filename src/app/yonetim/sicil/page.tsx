@@ -94,7 +94,7 @@ export default async function SicilPage() {
       ) : (
         <p
           style={{
-            fontFamily: "var(--font-special-elite), monospace",
+            fontFamily: "var(--font-newsreader), serif",
             color: "var(--gm-meta)",
             fontStyle: "italic",
             padding: "24px 0",

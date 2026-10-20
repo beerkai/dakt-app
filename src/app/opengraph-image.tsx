@@ -14,8 +14,8 @@ const KRAFT_DARK = "#8a774f";
 
 export default async function OpengraphImage() {
   const dir = join(process.cwd(), "src/assets/fonts");
-  const [elite, cormorant, mono] = await Promise.all([
-    readFile(join(dir, "SpecialElite-Regular.ttf")),
+  const [newsreader, cormorant, mono] = await Promise.all([
+    readFile(join(dir, "Newsreader-Regular.ttf")),
     readFile(join(dir, "CormorantGaramond-Bold.ttf")),
     readFile(join(dir, "JetBrainsMono-Medium.ttf")),
   ]);
@@ -70,7 +70,7 @@ export default async function OpengraphImage() {
             </div>
             <div
               style={{
-                fontFamily: "Elite",
+                fontFamily: "Newsreader",
                 fontSize: 30,
                 marginTop: 18,
                 color: "#3a3832",
@@ -89,7 +89,7 @@ export default async function OpengraphImage() {
           >
             <div
               style={{
-                fontFamily: "Elite",
+                fontFamily: "Newsreader",
                 fontSize: 24,
                 color: INK,
               }}
@@ -119,7 +119,7 @@ export default async function OpengraphImage() {
     {
       ...size,
       fonts: [
-        { name: "Elite", data: elite, weight: 400, style: "normal" },
+        { name: "Newsreader", data: newsreader, weight: 400, style: "normal" },
         { name: "Cormorant", data: cormorant, weight: 700, style: "normal" },
         { name: "Mono", data: mono, weight: 500, style: "normal" },
       ],

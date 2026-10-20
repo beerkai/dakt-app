@@ -135,7 +135,7 @@ export function MessageThread({ thread }: { thread: MessageThreadT }) {
             </p>
             {!isEmail ? (
               <p
-                className="mt-1 text-[11px] leading-snug tracking-[0.04em] text-[var(--kraft-dark)] [font-family:var(--font-special-elite),monospace]"
+                className="mt-1 text-[11px] leading-snug  text-[var(--kraft-dark)] [font-family:var(--font-newsreader),serif]"
               >
                 son görülme: dün 23:42
               </p>
@@ -158,7 +158,7 @@ export function MessageThread({ thread }: { thread: MessageThreadT }) {
           className="border-b border-[rgba(255,255,255,0.08)] border-l-[3px] border-l-[var(--bordeaux)] bg-[var(--anthracite-2)] px-3.5 py-2.5 md:px-[14px] md:py-2.5"
         >
           <p
-            className={`m-0 text-xs leading-relaxed tracking-[0.06em] text-[var(--body-text)] [font-family:var(--font-special-elite),monospace]`}
+            className={`m-0 text-xs leading-relaxed text-[var(--body-text)] [font-family:var(--font-newsreader),serif]`}
           >
             📋{" "}
             <span
@@ -184,7 +184,7 @@ export function MessageThread({ thread }: { thread: MessageThreadT }) {
               return (
                 <p
                   key={msg.id}
-                  className="py-2 text-center text-[13px] italic text-[var(--subtitle-text)] [font-family:var(--font-special-elite),monospace]"
+                  className="py-2 text-center text-[16px] italic text-[var(--subtitle-text)] [font-family:var(--font-newsreader),serif]"
                 >
                   {msg.systemText ?? msg.text}
                 </p>

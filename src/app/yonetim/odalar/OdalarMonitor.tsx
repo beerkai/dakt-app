@@ -149,7 +149,7 @@ export default function OdalarMonitor({
           <div className="gm-card-corner" />
           <p
             style={{
-              fontFamily: "var(--font-special-elite), monospace",
+              fontFamily: "var(--font-newsreader), serif",
               color: "var(--gm-meta)",
               fontStyle: "italic",
               margin: 0,
@@ -304,7 +304,7 @@ export default function OdalarMonitor({
                           <span
                             style={{
                               color: "var(--gm-meta)",
-                              fontFamily: "var(--font-special-elite), monospace",
+                              fontFamily: "var(--font-newsreader), serif",
                               fontSize: 11,
                             }}
                           >

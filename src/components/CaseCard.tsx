@@ -46,7 +46,7 @@ export type CaseCardProps = {
 const mono =
   "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace]";
 const typewriter =
-  "[font-family:var(--font-special-elite),monospace]";
+  "[font-family:var(--font-newsreader),serif]";
 
 export function CaseCard({
   caseNumber,
@@ -291,13 +291,13 @@ export function CaseCard({
         </h2>
 
         <p
-          className={`${typewriter} mb-4 text-[12px] uppercase tracking-[0.14em] text-[var(--subtitle-text)]`}
+          className={`${typewriter} mb-4 text-[15px] uppercase tracking-[0.14em] text-[var(--subtitle-text)]`}
         >
           {location}
         </p>
 
         <p
-          className={`${typewriter} mb-8 flex-1 text-[13px] leading-[1.75] tracking-[0.05em] text-[var(--body-text)]`}
+          className={`${typewriter} mb-8 flex-1 text-[16px] leading-[1.55] text-[var(--body-text)]`}
         >
           {summary}
         </p>
@@ -387,7 +387,7 @@ export function CaseCard({
                     Tek başına oyna
                   </span>
                   <span
-                    className={`${typewriter} text-[12px] leading-relaxed tracking-[0.06em] text-[var(--kraft-dark)]`}
+                    className={`${typewriter} text-[15px] leading-relaxed text-[var(--kraft-dark)]`}
                   >
                     Solo analist olarak çöz
                   </span>
@@ -407,7 +407,7 @@ export function CaseCard({
                       {creating ? "Oda hazırlanıyor..." : "Oda kur"}
                     </span>
                     <span
-                      className={`${typewriter} text-[12px] leading-relaxed tracking-[0.06em] text-[var(--kraft-dark)]`}
+                      className={`${typewriter} text-[15px] leading-relaxed text-[var(--kraft-dark)]`}
                     >
                       5 kişiye kadar ekiple oyna
                     </span>
@@ -432,14 +432,14 @@ export function CaseCard({
                         Oda kur
                       </span>
                       <span
-                        className={`${typewriter} text-[12px] text-[var(--meta-label)]`}
+                        className={`${typewriter} text-[15px] text-[var(--meta-label)]`}
                       >
                         5 kişiye kadar ekiple oyna
                       </span>
                     </div>
                     <div className="case-modal-guest-warning">
                       <p
-                        className={`${typewriter} text-[12px] leading-relaxed tracking-[0.05em] text-[var(--body-text)]`}
+                        className={`${typewriter} text-[15px] leading-relaxed text-[var(--body-text)]`}
                       >
                         Co-op için <strong className="text-[var(--paper)]">hesap gerekli</strong>.
                         Arkadaşlarınla birlikte çözmek istersen:
@@ -467,7 +467,7 @@ export function CaseCard({
 
               <div className="border-t border-[var(--rule)] pt-6">
                 <p
-                  className={`${typewriter} mb-4 text-center text-[12px] tracking-[0.05em] text-[var(--subtitle-text)] md:text-left`}
+                  className={`${typewriter} mb-4 text-center text-[15px] text-[var(--subtitle-text)] md:text-left`}
                 >
                   Bir odaya katılmak istersen:
                 </p>

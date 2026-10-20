@@ -29,7 +29,7 @@ const labelMono =
   "mb-2 block text-[9px] uppercase tracking-[0.22em] text-[var(--meta-label)] [font-family:var(--font-jetbrains-mono),monospace]";
 
 const inputClass =
-  "w-full border border-[var(--kraft-dark)] bg-[var(--anthracite)] px-4 py-3 text-[13px] text-[var(--body-text)] [font-family:var(--font-special-elite),monospace] placeholder:text-[var(--meta-label)] focus:border-[var(--kraft)] focus:outline-none";
+  "w-full border border-[var(--kraft-dark)] bg-[var(--anthracite)] px-4 py-3 text-[16px] text-[var(--body-text)] [font-family:var(--font-newsreader),serif] placeholder:text-[var(--meta-label)] focus:border-[var(--kraft)] focus:outline-none";
 
 const COLOR_OPTIONS: { id: AnalystColor; fill: string; label: string }[] = [
   { id: "mavi", fill: "#4a90d9", label: "Mavi" },
@@ -301,11 +301,11 @@ export default function GirisPage() {
           <h1 className="mb-3 text-3xl font-semibold text-[var(--paper)] [font-family:var(--font-cormorant),serif] md:text-4xl">
             Hızlıca Başla
           </h1>
-          <p className="mb-8 text-[13px] leading-relaxed tracking-[0.05em] text-[var(--subtitle-text)] [font-family:var(--font-special-elite),monospace]">
+          <p className="mb-8 text-[16px] leading-relaxed text-[var(--subtitle-text)] [font-family:var(--font-newsreader),serif]">
             Bir analist takma adı seç, vakaya gir. Hesap oluşturmaya gerek yok.
           </p>
 
-          <div className="mb-8 border-2 border-[var(--bordeaux)] bg-[var(--paper-dim)] p-4 text-[12px] leading-[1.75] tracking-[0.04em] text-[var(--ink)] [font-family:var(--font-special-elite),monospace]">
+          <div className="mb-8 border-2 border-[var(--bordeaux)] bg-[var(--paper-dim)] p-4 text-[15px] leading-[1.55] text-[var(--ink)] [font-family:var(--font-newsreader),serif]">
             ⓘ Misafir ilerlemesi yalnızca bu tarayıcıda saklanır; Pano notları
             24 saat sonra silinir. Kalıcı kayıt için hesap oluştur.
           </div>
@@ -341,7 +341,7 @@ export default function GirisPage() {
 
           {sessionGuest ? (
             <div className="mb-6 border-2 border-[var(--bordeaux)] bg-[var(--anthracite-2)] p-4 md:p-5">
-              <p className="text-[12px] leading-[1.75] tracking-[0.05em] text-[var(--body-text)] [font-family:var(--font-special-elite),monospace]">
+              <p className="text-[15px] leading-[1.55] text-[var(--body-text)] [font-family:var(--font-newsreader),serif]">
                 <span className="text-[var(--bordeaux-bright)]" aria-hidden>
                   ●
                 </span>{" "}
@@ -387,7 +387,7 @@ export default function GirisPage() {
           <h1 className="mb-3 text-3xl font-semibold text-[var(--paper)] [font-family:var(--font-cormorant),serif] md:text-4xl">
             Kayıt Ol
           </h1>
-          <p className="mb-8 text-[13px] leading-relaxed tracking-[0.05em] text-[var(--subtitle-text)] [font-family:var(--font-special-elite),monospace]">
+          <p className="mb-8 text-[16px] leading-relaxed text-[var(--subtitle-text)] [font-family:var(--font-newsreader),serif]">
             Misafir olarak başlayabilirsin, hesabını sonradan oluşturursun. Tüm
             ilerlemen aktarılır.
           </p>
@@ -565,7 +565,7 @@ export default function GirisPage() {
             </button>
           </form>
 
-          <p className="mt-8 text-center text-[11px] text-[var(--meta-label)] [font-family:var(--font-special-elite),monospace]">
+          <p className="mt-8 text-center text-[11px] text-[var(--meta-label)] [font-family:var(--font-newsreader),serif]">
             Şimdilik{" "}
             <button
               type="button"
@@ -591,7 +591,7 @@ export default function GirisPage() {
           <h1 className="mb-3 text-3xl font-semibold text-[var(--paper)] [font-family:var(--font-cormorant),serif] md:text-4xl">
             Giriş Yap
           </h1>
-          <p className="mb-8 text-[13px] leading-relaxed tracking-[0.05em] text-[var(--subtitle-text)] [font-family:var(--font-special-elite),monospace]">
+          <p className="mb-8 text-[16px] leading-relaxed text-[var(--subtitle-text)] [font-family:var(--font-newsreader),serif]">
             Kayıtlı analist hesabınla dosyalarına eriş.
           </p>
 
@@ -640,7 +640,7 @@ export default function GirisPage() {
             </button>
           </form>
 
-          <p className="mt-8 text-center text-[11px] text-[var(--meta-label)] [font-family:var(--font-special-elite),monospace]">
+          <p className="mt-8 text-center text-[11px] text-[var(--meta-label)] [font-family:var(--font-newsreader),serif]">
             <button
               type="button"
               onClick={() => {

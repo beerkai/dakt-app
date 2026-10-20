@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import {
   Cormorant_Garamond,
   JetBrains_Mono,
-  Special_Elite,
+  Newsreader,
 } from "next/font/google";
 import { Suspense } from "react";
 
@@ -16,20 +16,22 @@ import "./globals.css";
 
 const cormorantGaramond = Cormorant_Garamond({
   variable: "--font-cormorant",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   weight: ["400", "600", "700"],
   style: ["normal", "italic"],
 });
 
-const specialElite = Special_Elite({
-  variable: "--font-special-elite",
-  weight: "400",
-  subsets: ["latin"],
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
 });
 
 export const metadata: Metadata = {
@@ -121,7 +123,7 @@ export default async function RootLayout({
   return (
     <html
       lang="tr"
-      className={`${cormorantGaramond.variable} ${specialElite.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${cormorantGaramond.variable} ${newsreader.variable} ${jetbrainsMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>

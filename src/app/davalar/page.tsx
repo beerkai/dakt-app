@@ -73,7 +73,7 @@ export default async function DavalarPage({
             <em className="text-[var(--kraft)]">Aktif</em> Dosyalar
           </h1>
           <p
-            className="max-w-xl text-[13px] tracking-[0.06em] text-[var(--subtitle-text)] [font-family:var(--font-special-elite),monospace]"
+            className="max-w-xl text-[16px] text-[var(--subtitle-text)] [font-family:var(--font-newsreader),serif]"
           >
             Erişimine açık vakalar.
           </p>

@@ -342,9 +342,9 @@ a.nav-item {
   margin-bottom: 32px;
   position: relative;
   box-shadow: var(--shadow);
-  font-family: var(--font-special-elite), "Special Elite", monospace;
-  font-size: 13px;
-  line-height: 1.85;
+  font-family: var(--font-newsreader), "Newsreader", serif;
+  font-size: 17px;
+  line-height: 1.55;
   box-sizing: border-box;
   max-width: 100%;
   min-width: 0;
@@ -772,8 +772,8 @@ a.nav-item {
   margin-bottom: 4px;
 }
 .suspect-role {
-  font-family: var(--font-special-elite), "Special Elite", monospace;
-  font-size: 12px;
+  font-family: var(--font-newsreader), "Newsreader", serif;
+  font-size: 15px;
   color: var(--kraft);
   margin-bottom: 14px;
 }
@@ -896,10 +896,10 @@ a.nav-item {
   background: rgba(107, 22, 32, 0.12);
   padding: 16px 20px;
   margin-bottom: 28px;
-  font-family: var(--font-special-elite), monospace;
-  font-size: 13px;
-  line-height: 1.7;
-  letter-spacing: 0.04em;
+  font-family: var(--font-newsreader), serif;
+  font-size: 16px;
+  line-height: 1.55;
+  letter-spacing: 0;
   color: var(--body-text);
 }
 .cozum-result-fail {
@@ -962,10 +962,10 @@ a.nav-item {
   letter-spacing: -0.01em;
 }
 .evidence-desc {
-  font-family: var(--font-special-elite), "Special Elite", monospace;
-  font-size: 12px;
+  font-family: var(--font-newsreader), "Newsreader", serif;
+  font-size: 15px;
   color: #b8b1a0;
-  line-height: 1.6;
+  line-height: 1.55;
   margin-bottom: 14px;
 }
 .evidence-detail {
@@ -1002,10 +1002,10 @@ a.nav-item {
 }
 .deduction-marked-callout-text {
   margin: 0;
-  font-family: var(--font-special-elite), "Special Elite", monospace;
-  font-size: 12px;
-  line-height: 1.65;
-  letter-spacing: 0.04em;
+  font-family: var(--font-newsreader), "Newsreader", serif;
+  font-size: 15px;
+  line-height: 1.55;
+  letter-spacing: 0;
   color: var(--subtitle-text);
 }
 .deduction-marked-callout-lead {
@@ -1060,8 +1060,8 @@ a.nav-item {
   border: 1px solid var(--rule);
   padding: 12px 14px;
   margin-bottom: 10px;
-  font-family: var(--font-special-elite), "Special Elite", monospace;
-  font-size: 12px;
+  font-family: var(--font-newsreader), "Newsreader", serif;
+  font-size: 15px;
   color: #c4bda8;
   line-height: 1.5;
   position: relative;
@@ -1082,9 +1082,9 @@ a.nav-item {
   color: var(--ink);
   padding: 18px;
   margin-top: 20px;
-  font-family: var(--font-special-elite), "Special Elite", monospace;
-  font-size: 13px;
-  line-height: 1.7;
+  font-family: var(--font-newsreader), "Newsreader", serif;
+  font-size: 16px;
+  line-height: 1.55;
   border: none;
   width: 100%;
   min-height: 140px;
@@ -1148,8 +1148,8 @@ a.nav-item {
   line-height: 1;
 }
 .gate-warn {
-  font-family: var(--font-special-elite), "Special Elite", monospace;
-  font-size: 13px;
+  font-family: var(--font-newsreader), "Newsreader", serif;
+  font-size: 16px;
   color: #9c9588;
   max-width: 540px;
   margin: 0 auto 36px;
@@ -1194,9 +1194,9 @@ a.nav-item {
   margin: 32px 0;
   position: relative;
   box-shadow: var(--shadow);
-  font-family: var(--font-special-elite), "Special Elite", monospace;
-  font-size: 13px;
-  line-height: 1.85;
+  font-family: var(--font-newsreader), "Newsreader", serif;
+  font-size: 17px;
+  line-height: 1.55;
 }
 .verdict-stamp {
   position: absolute;

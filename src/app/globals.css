@@ -48,7 +48,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-cormorant);
-  --font-display: var(--font-special-elite);
+  --font-display: var(--font-newsreader);
   --font-mono: var(--font-jetbrains-mono);
 }
 
@@ -258,12 +258,12 @@ body::after {
 }
 
 .hero-subtitle {
-  font-family: var(--font-special-elite), "Special Elite", monospace;
-  font-size: clamp(13px, 2.5vw, 14px);
-  letter-spacing: 0.05em;
+  font-family: var(--font-newsreader), "Newsreader", serif;
+  font-size: clamp(16px, 2.4vw, 18px);
+  letter-spacing: 0;
   color: var(--subtitle-text);
-  max-width: 540px;
-  line-height: 1.7;
+  max-width: 38rem;
+  line-height: 1.55;
   margin-top: 28px;
 }
 
@@ -297,8 +297,8 @@ body::after {
 }
 
 .hero-meta-cell .val {
-  font-family: var(--font-special-elite), "Special Elite", monospace;
-  font-size: 14px;
+  font-family: var(--font-newsreader), "Newsreader", serif;
+  font-size: 16px;
   color: var(--kraft-light);
 }
 
@@ -356,11 +356,11 @@ body::after {
 }
 
 .hero-cta-prompt {
-  font-family: var(--font-special-elite), "Special Elite", monospace;
-  font-size: 13px;
+  font-family: var(--font-newsreader), "Newsreader", serif;
+  font-size: 16px;
   color: var(--kraft-dark);
   margin-bottom: 16px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0;
 }
 
 .hero-join-button {
@@ -494,10 +494,10 @@ body::after {
 }
 
 .confirm-modal-description {
-  font-family: var(--font-special-elite), "Special Elite", monospace;
-  font-size: 13px;
+  font-family: var(--font-newsreader), "Newsreader", serif;
+  font-size: 16px;
   color: var(--kraft-light, #a09680);
-  line-height: 1.7;
+  line-height: 1.55;
   margin-bottom: 28px;
 }
 
@@ -916,13 +916,13 @@ body::after {
 }
 
 .terminated-meta-value {
-  font-family: var(--font-special-elite), "Special Elite", monospace;
+  font-family: var(--font-newsreader), "Newsreader", serif;
   font-size: 14px;
   color: var(--kraft);
 }
 
 .terminated-description {
-  font-family: var(--font-special-elite), "Special Elite", monospace;
+  font-family: var(--font-newsreader), "Newsreader", serif;
   font-size: 13px;
   color: var(--kraft-light);
   line-height: 1.7;
@@ -997,7 +997,7 @@ body::after {
 }
 
 .rejoin-description {
-  font-family: var(--font-special-elite), "Special Elite", monospace;
+  font-family: var(--font-newsreader), "Newsreader", serif;
   font-size: 14px;
   color: var(--kraft-light);
   line-height: 1.7;
@@ -1045,8 +1045,8 @@ body::after {
 
 .guest-banner-text {
   flex: 1;
-  font-family: var(--font-special-elite), "Special Elite", monospace;
-  font-size: 12px;
+  font-family: var(--font-newsreader), "Newsreader", serif;
+  font-size: 15px;
   color: var(--kraft-light);
   line-height: 1.6;
 }
@@ -1270,7 +1270,7 @@ body::after {
 }
 
 .gm-stat-sub {
-  font-family: var(--font-special-elite), monospace;
+  font-family: var(--font-newsreader), serif;
   font-size: 11px;
   color: var(--gm-ink-soft);
   margin-top: 6px;
@@ -1320,7 +1320,7 @@ body::after {
 }
 
 .gm-list-detail {
-  font-family: var(--font-special-elite), monospace;
+  font-family: var(--font-newsreader), serif;
   color: var(--gm-ink-soft);
   font-size: 11px;
   letter-spacing: 0.04em;

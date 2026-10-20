@@ -5,7 +5,7 @@ import { KatilClient } from "./KatilClient";
 const mono =
   "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace]";
 const typewriter =
-  "[font-family:var(--font-special-elite),monospace]";
+  "[font-family:var(--font-newsreader),serif]";
 
 export default function OdaKatilPage() {
   return (
@@ -20,7 +20,7 @@ export default function OdaKatilPage() {
           Bir Odaya Katıl
         </h1>
         <p
-          className={`${typewriter} max-w-md text-[13px] leading-relaxed tracking-[0.06em] text-[var(--subtitle-text)]`}
+          className={`${typewriter} max-w-md text-[16px] leading-relaxed text-[var(--subtitle-text)]`}
         >
           Sana paylaşılan 6 haneli kodu gir.
         </p>

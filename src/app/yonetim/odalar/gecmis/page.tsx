@@ -76,7 +76,7 @@ export default async function GecmisOdalarPage() {
 
       <p
         style={{
-          fontFamily: "var(--font-special-elite), monospace",
+          fontFamily: "var(--font-newsreader), serif",
           fontSize: 12,
           color: "var(--gm-ink-soft)",
           marginBottom: 24,
@@ -92,7 +92,7 @@ export default async function GecmisOdalarPage() {
           <div className="gm-card-corner" />
           <p
             style={{
-              fontFamily: "var(--font-special-elite), monospace",
+              fontFamily: "var(--font-newsreader), serif",
               color: "var(--gm-meta)",
               fontStyle: "italic",
               margin: 0,
