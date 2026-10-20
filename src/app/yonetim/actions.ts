@@ -1,5 +1,6 @@
 "use server";
 
+import { getCase } from "@/lib/case-helpers";
 import { revalidatePath } from "next/cache";
 
 import { purgeUserAccount } from "@/lib/account-deletion";
@@ -162,6 +163,7 @@ export async function setCaseStatus(caseId: string, newStatus: string) {
   if (!(CASE_STATUSES as readonly string[]).includes(newStatus)) {
     return { error: "Geçersiz vaka durumu" };
   }
+  if (!getCase(caseId)) return { error: "Vaka bulunamadı" };
   const adminDb = createAdminClient();
 
   const updates: Record<string, string> = { status: newStatus };
@@ -172,8 +174,7 @@ export async function setCaseStatus(caseId: string, newStatus: string) {
 
   const { error } = await adminDb
     .from("cases_metadata")
-    .update(updates)
-    .eq("case_id", caseId);
+    .upsert({ case_id: caseId, ...updates }, { onConflict: "case_id" });
 
   if (error) {
     console.error("[setCaseStatus] Update error:", error);
