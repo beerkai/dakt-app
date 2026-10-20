@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
+import { BottomSheet } from "@/components/BottomSheet";
 import { useRoomVoting, type RoomVote } from "@/hooks/useRoomVoting";
 
 const COLOR_FILL: Record<string, string> = {
@@ -48,6 +49,7 @@ export function CoopVotingOverlay({
       activeUserIds,
       onConsensus: onVoteComplete,
     });
+  const [sheetOpen, setSheetOpen] = useState(false);
 
   const tallies = useMemo(() => {
     const m = new Map<string, RoomVote[]>();
@@ -59,18 +61,10 @@ export function CoopVotingOverlay({
     return m;
   }, [votes]);
 
-  return (
-    <>
-      <div className="cozum-callout-warn">
-        Co-op oylama — her analist bir şüpheli seçer. Tüm oylar aynı kişide
-        birleşince zarf açılır.
-        {votes.length > 0 ? (
-          <span className="mt-2 block text-[var(--body-text)]">
-            Oy veren: {votes.length} / {activeUserIds.length}
-          </span>
-        ) : null}
-      </div>
+  const votedName = suspects.find((s) => s.id === myVote)?.name;
 
+  function renderGrid() {
+    return (
       <div className="suspect-grid" role="group" aria-label="Şüpheliye oy ver">
         {suspects.map((s) => {
           const sel = myVote === s.id;
@@ -119,15 +113,47 @@ export function CoopVotingOverlay({
           );
         })}
       </div>
+    );
+  }
 
-      {loading ? (
-        <p
-          className={`${mono} mt-6 text-[var(--meta-label)]`}
-          style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
-        >
-          Oylar yükleniyor…
-        </p>
-      ) : null}
+  return (
+    <>
+      <div className="cozum-callout-warn">
+        Co-op oylama — her analist bir şüpheli seçer. Tüm oylar aynı kişide
+        birleşince zarf açılır.
+        {votes.length > 0 ? (
+          <span className="mt-2 block text-[var(--body-text)]">
+            Oy veren: {votes.length} / {activeUserIds.length}
+          </span>
+        ) : null}
+      </div>
+
+      {loading && votes.length === 0 ? (
+        <div className="coop-vote-skeleton" aria-hidden>
+          <div className="skeleton h-24 w-full" />
+          <div className="skeleton h-24 w-full" />
+        </div>
+      ) : (
+        <>
+          <div className="coop-vote-desktop">{renderGrid()}</div>
+          <div className="coop-vote-mobile">
+            <button
+              type="button"
+              className="coop-vote-open"
+              onClick={() => setSheetOpen(true)}
+            >
+              {votedName ? `Oyun: ${votedName}` : "Oy ver"}
+            </button>
+            <BottomSheet
+              open={sheetOpen}
+              title="Oy ver"
+              onClose={() => setSheetOpen(false)}
+            >
+              {renderGrid()}
+            </BottomSheet>
+          </div>
+        </>
+      )}
 
       {hostBypassEnabled && isHost && myVote ? (
         <div className="mt-8 border border-[var(--kraft-dark)] bg-[var(--anthracite-2)] p-4">

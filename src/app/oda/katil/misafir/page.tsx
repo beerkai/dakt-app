@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 
+import { RouteSkeleton } from "@/components/RouteSkeleton";
 import { MisafirClient } from "../MisafirClient";
 
 const mono =
@@ -27,15 +28,7 @@ export default function OdaKatilMisafirPage() {
         </p>
       </header>
 
-      <Suspense
-        fallback={
-          <p
-            className={`${mono} text-[10px] uppercase tracking-[0.22em] text-[var(--kraft)]`}
-          >
-            Yükleniyor…
-          </p>
-        }
-      >
+      <Suspense fallback={<RouteSkeleton kind="fields" />}>
         <MisafirClient />
       </Suspense>
     </div>

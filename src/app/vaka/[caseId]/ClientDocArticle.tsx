@@ -1,11 +1,8 @@
 "use client";
 
 import { type ReactNode } from "react";
-import {
-  PLAYER_STAMP_BTN_LABEL,
-  PLAYER_STAMP_ORDER,
-  PLAYER_STAMP_OVERLAY,
-} from "@/lib/case-types";
+import { StampControls } from "@/components/StampControls";
+import { PLAYER_STAMP_OVERLAY } from "@/lib/case-types";
 import { useCaseItemStamp } from "@/hooks/useCaseItemStamp";
 
 export function ClientDocArticle({
@@ -35,20 +32,7 @@ export function ClientDocArticle({
         <div>{headerMain}</div>
         {enableStamps ? (
           <div className="doc-stamp-area">
-            <div className="stamp-controls" role="group" aria-label="Damgalar">
-              {PLAYER_STAMP_ORDER.map((kind) => (
-                <button
-                  key={kind}
-                  type="button"
-                  className={`stamp-btn stamp-btn-${kind}${active === kind ? " is-active" : ""}`}
-                  data-stamp={kind}
-                  onClick={() => select(kind)}
-                  aria-pressed={active === kind}
-                >
-                  {PLAYER_STAMP_BTN_LABEL[kind]}
-                </button>
-              ))}
-            </div>
+            <StampControls active={active} select={select} />
           </div>
         ) : null}
       </div>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { ResumeCard } from "@/components/ResumeCard";
 import SiteFooter from "@/components/SiteFooter";
 
 const btnMono =
@@ -41,6 +42,8 @@ export default function Home() {
             vakaları çözen bir analist olursun. İfadeleri çapraz oku, delilleri
             damgala, faili bul. Tek başına ya da 1-5 kişilik ekibinle.
           </p>
+
+          <ResumeCard />
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
             <Link

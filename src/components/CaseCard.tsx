@@ -322,7 +322,14 @@ export function CaseCard({
             aria-busy={busy}
             className={`${mono} inline-flex w-full items-center justify-center border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] py-4 text-[10px] font-medium uppercase tracking-[0.26em] text-[var(--kraft-light)] transition-colors hover:bg-[var(--bordeaux-bright)] md:w-auto md:self-start md:px-10 ${busy ? "cursor-wait opacity-75" : "cursor-pointer"}`}
           >
-            {busy ? "Yükleniyor..." : "Dosyayı aç →"}
+            {busy ? (
+              <>
+                <span className="sr-only">Yükleniyor</span>
+                <span className="skeleton skeleton-inline" aria-hidden />
+              </>
+            ) : (
+              "Dosyayı aç →"
+            )}
           </button>
         ) : (
           <div

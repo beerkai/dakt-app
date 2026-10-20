@@ -326,6 +326,13 @@ export function CozumClient({
     const ok = result.correct;
     setView("result");
     setIsCorrect(ok);
+    if (!ok && typeof navigator !== "undefined" && typeof navigator.vibrate === "function") {
+      try {
+        navigator.vibrate(40);
+      } catch {
+        /* bazı tarayıcılar titreşimi reddeder */
+      }
+    }
     if (isCoop && roomId && selectedSuspect) {
       if (!ok) clearCoopVoteFinished(roomId);
       void (ok

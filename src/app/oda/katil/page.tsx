@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 
+import { RouteSkeleton } from "@/components/RouteSkeleton";
 import { KatilClient } from "./KatilClient";
 
 const mono =
@@ -26,15 +27,7 @@ export default function OdaKatilPage() {
         </p>
       </header>
 
-      <Suspense
-        fallback={
-          <p
-            className={`${mono} text-[10px] uppercase tracking-[0.22em] text-[var(--kraft)]`}
-          >
-            Yükleniyor…
-          </p>
-        }
-      >
+      <Suspense fallback={<RouteSkeleton kind="fields" />}>
         <KatilClient />
       </Suspense>
     </div>

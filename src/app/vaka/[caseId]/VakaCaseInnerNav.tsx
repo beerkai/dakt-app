@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 
 import { leaveRoom, terminateCase } from "@/app/oda/actions";
 import type { CaseData } from "@/lib/case-types";
@@ -17,6 +17,15 @@ import { clearActiveSession, getActiveSession } from "@/lib/active-session";
 import { createClient } from "@/lib/supabase/client";
 import { useCaseRoomId } from "@/hooks/useCaseRoomId";
 
+function subscribeSession(onChange: () => void) {
+  window.addEventListener("dakt-session-change", onChange);
+  window.addEventListener("storage", onChange);
+  return () => {
+    window.removeEventListener("dakt-session-change", onChange);
+    window.removeEventListener("storage", onChange);
+  };
+}
+
 export function VakaCaseInnerNav({
   caseId,
   caseData,
@@ -30,6 +39,18 @@ export function VakaCaseInnerNav({
 
   const tabs = orderedEnabledTabs(caseData.enabledTabs);
   const codenameUpper = caseData.codename.toLocaleUpperCase("tr-TR");
+  const tabSlug = pathname?.match(/^\/vaka\/[^/]+\/([^/]+)/)?.[1] ?? "";
+  const tabIndex = tabs.findIndex((tab) => tab === tabSlug);
+  const previousTab = tabIndex > 0 ? tabs[tabIndex - 1] : null;
+  const sessionCode = useSyncExternalStore(
+    subscribeSession,
+    () => {
+      const session = getActiveSession();
+      if (!session || session.caseId !== caseId || !session.code) return null;
+      return session.code;
+    },
+    () => null,
+  );
 
   const [isHost, setIsHost] = useState(false);
   const [navExitOpen, setNavExitOpen] = useState(false);
@@ -139,13 +160,25 @@ export function VakaCaseInnerNav({
       <nav className="vaka-case-strip" aria-label="Vaka gezinmesi ve sekmeler">
         <div className="vaka-case-strip-inner">
           <div className="vaka-case-strip-head">
-            <Link
-              href="/davalar"
-              onClick={handleBackDavalarClick}
-              className="vaka-case-strip-back"
-            >
-              ← DAVALAR
-            </Link>
+            {previousTab ? (
+              <Link
+                href={caseTabHref(caseId, previousTab, roomId)}
+                className="vaka-case-strip-back"
+              >
+                ← ÖNCEKİ
+              </Link>
+            ) : (
+              <Link
+                href="/davalar"
+                onClick={handleBackDavalarClick}
+                className="vaka-case-strip-back"
+              >
+                ← DAVALAR
+              </Link>
+            )}
+            {sessionCode ? (
+              <span className="vaka-case-strip-room">ODA {sessionCode}</span>
+            ) : null}
             <p className="vaka-case-strip-id">
               <span className="vaka-case-strip-id-text">
                 VAKA №{caseId}

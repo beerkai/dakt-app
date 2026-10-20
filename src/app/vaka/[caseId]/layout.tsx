@@ -7,6 +7,7 @@ import GuestSessionBanner from "@/components/GuestSessionBanner";
 import SiteFooter from "@/components/SiteFooter";
 import SessionTracker from "@/components/SessionTracker";
 import { PublishCaseTabs } from "@/components/PublishCaseTabs";
+import { RememberLastPlace } from "@/components/RememberLastPlace";
 import { SystemBar } from "@/components/SystemBar";
 import { createClient } from "@/lib/supabase/server";
 import { VakaCaseInnerNav } from "./VakaCaseInnerNav";
@@ -98,6 +99,9 @@ export default async function CaseLayout({
   return (
     <div className="relative z-[1] flex min-h-full flex-1 flex-col">
       <PublishCaseTabs caseId={caseId} tabs={caseData.enabledTabs} />
+      <Suspense fallback={null}>
+        <RememberLastPlace caseId={caseId} codename={caseData.codename} />
+      </Suspense>
       <div className="vaka-case-sticky-cluster">
         <Suspense fallback={<SystemBarFallback />}>
           <SystemBar caseId={caseId} />

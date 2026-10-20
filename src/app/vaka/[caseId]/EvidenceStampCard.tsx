@@ -1,11 +1,8 @@
 "use client";
 
+import { StampControls } from "@/components/StampControls";
 import type { Evidence } from "@/lib/case-types";
-import {
-  PLAYER_STAMP_BTN_LABEL,
-  PLAYER_STAMP_ORDER,
-  PLAYER_STAMP_OVERLAY,
-} from "@/lib/case-types";
+import { PLAYER_STAMP_OVERLAY } from "@/lib/case-types";
 import { useCaseItemStamp } from "@/hooks/useCaseItemStamp";
 import { safeHtml } from "@/lib/html-sanitize";
 
@@ -26,20 +23,12 @@ export function EvidenceStampCard({
         </div>
       ) : null}
       <div className="evidence-stamp-controls">
-        <div className="stamp-controls" role="group" aria-label="Delil damgaları">
-          {PLAYER_STAMP_ORDER.map((kind) => (
-            <button
-              key={kind}
-              type="button"
-              className={`stamp-btn stamp-btn-${kind}${active === kind ? " is-active" : ""}`}
-              data-stamp={kind}
-              onClick={() => select(kind)}
-              aria-pressed={active === kind}
-            >
-              {PLAYER_STAMP_BTN_LABEL[kind]}
-            </button>
-          ))}
-        </div>
+        <StampControls
+          active={active}
+          select={select}
+          label="Delil damgaları"
+          surface="dark"
+        />
       </div>
       <span className="evidence-tag">{e.tag}</span>
       <div className="evidence-code">{e.id}</div>

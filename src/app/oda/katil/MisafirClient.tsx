@@ -13,6 +13,7 @@ import {
 
 import { ensureAnonProfile, joinRoom } from "@/app/oda/actions";
 import { useAuth } from "@/components/AuthProvider";
+import { RouteSkeleton } from "@/components/RouteSkeleton";
 import { createClient } from "@/lib/supabase/client";
 import type { AnalystColor } from "@/lib/supabase/types";
 
@@ -179,11 +180,7 @@ export function MisafirClient() {
   }
 
   if (authLoading) {
-    return (
-      <p className={`${mono} text-[10px] uppercase tracking-[0.22em] text-[var(--kraft)]`}>
-        Yükleniyor…
-      </p>
-    );
+    return <RouteSkeleton kind="fields" />;
   }
 
   if (!codeFromUrl) {
