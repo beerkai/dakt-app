@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import ConfirmModal from "@/components/ConfirmModal";
+import { useAppOverlayLock } from "@/hooks/useAppOverlayLock";
 import * as actions from "../../actions";
 
 interface Props {
@@ -32,6 +33,7 @@ export default function AnalystActions({
   const [modal, setModal] = useState<string | null>(null);
   const [usernameModalOpen, setUsernameModalOpen] = useState(false);
   const [newUsername, setNewUsername] = useState("");
+  useAppOverlayLock(usernameModalOpen);
 
   async function handle(
     actionKey: string,
@@ -264,19 +266,21 @@ export default function AnalystActions({
             className="confirm-modal"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="confirm-modal-corner" />
-            <h3 className="confirm-modal-title">Username değiştir</h3>
-            <p className="confirm-modal-description">
-              Yeni username 2-24 karakter, sadece harf/rakam/alt çizgi.
-            </p>
-            <input
-              type="text"
-              value={newUsername}
-              onChange={(e) => setNewUsername(e.target.value)}
-              autoFocus
-              className="gm-input"
-              style={{ marginBottom: 24 }}
-            />
+            <div className="confirm-modal-grab sheet-grab" aria-hidden />
+            <div className="confirm-modal-corner" aria-hidden />
+            <div className="confirm-modal-body">
+              <h3 className="confirm-modal-title">Username değiştir</h3>
+              <p className="confirm-modal-description">
+                Yeni username 2-24 karakter, sadece harf/rakam/alt çizgi.
+              </p>
+              <input
+                type="text"
+                value={newUsername}
+                onChange={(e) => setNewUsername(e.target.value)}
+                autoFocus
+                className="gm-input"
+              />
+            </div>
             <div className="confirm-modal-actions">
               <button
                 type="button"

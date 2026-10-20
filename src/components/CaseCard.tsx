@@ -15,6 +15,7 @@ import {
 } from "@/lib/active-session";
 import { DAKT_LOCAL_SOLVED_KEY } from "@/lib/local-solved-storage";
 import { readGuestUsernameTrimmed } from "@/lib/guest-session";
+import { useAppOverlayLock } from "@/hooks/useAppOverlayLock";
 
 export type CaseStatus = "DOSYA AÇIK" | "YAKINDA";
 
@@ -80,6 +81,7 @@ export function CaseCard({
     useState<ActiveSession | null>(null);
   const [creating, setCreating] = useState(false);
   const [createError, setCreateError] = useState<string | null>(null);
+  useAppOverlayLock(choiceModalOpen);
 
   useEffect(() => {
     function readLocal() {
@@ -341,51 +343,38 @@ export function CaseCard({
       </div>
 
       {choiceModalOpen ? (
-        <div
-          className="fixed inset-0 z-[240] flex min-h-0 flex-col md:items-center md:justify-center md:p-6"
-          role="presentation"
-        >
+        <div className="app-overlay" role="presentation">
           <button
             type="button"
             aria-label="Kapat"
-            className="absolute inset-0 z-0 bg-[var(--ink)]/90"
+            className="app-overlay-backdrop"
             onClick={closeChoiceModal}
           />
           <div
             role="dialog"
             aria-modal="true"
             aria-labelledby={choiceTitleId}
-            className="relative z-[2] flex max-h-[min(92vh,920px)] min-h-full w-full max-w-[480px] flex-col overflow-hidden border border-[var(--kraft-dark)] bg-[var(--anthracite)] shadow-[var(--shadow)] md:min-h-0 md:rounded-sm pointer-events-auto"
-            style={{
-              backgroundImage: `repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 3px,
-                rgba(255,255,255,0.02) 3px,
-                rgba(255,255,255,0.02) 4px
-              )`,
-            }}
+            className="app-overlay-panel"
           >
-            <div className="flex flex-1 flex-col gap-6 overflow-y-auto p-6 md:p-8">
-              <div className="space-y-3 text-center md:text-left">
-                <p
-                  className="text-[clamp(1.35rem,4vw,1.75rem)] font-semibold italic leading-tight tracking-[0.06em] text-[var(--kraft)] [font-family:var(--font-cormorant),serif]"
-                >
+            <div className="sheet-grab md:hidden" aria-hidden />
+            <div className="app-overlay-scroll flex flex-col gap-5">
+              <div className="space-y-2">
+                <p className="m-0 text-[clamp(1.35rem,4vw,1.75rem)] font-semibold italic leading-tight tracking-[0.06em] text-[var(--kraft)] [font-family:var(--font-cormorant),serif]">
                   {codename}
                 </p>
                 <h2
                   id={choiceTitleId}
-                  className="text-lg font-semibold italic leading-snug text-[var(--paper)] [font-family:var(--font-cormorant),serif] md:text-[18px]"
+                  className="m-0 text-lg font-semibold italic leading-snug text-[var(--paper)] [font-family:var(--font-cormorant),serif] md:text-[18px]"
                 >
                   Bu vakayı nasıl açmak istersin?
                 </h2>
               </div>
 
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-3">
                 <button
                   type="button"
                   onClick={handleSolo}
-                  className="group flex w-full flex-col items-start gap-1 border border-[var(--kraft-dark)] bg-[var(--anthracite-2)]/50 px-5 py-4 text-left transition-[border-color,box-shadow] hover:border-[var(--bordeaux-bright)] hover:shadow-[0_0_24px_rgba(107,22,32,0.25)]"
+                  className="group flex w-full flex-col items-start gap-1 border border-[var(--kraft-dark)] bg-[var(--anthracite-2)]/50 px-5 py-4 text-left transition-[border-color,box-shadow] hover:border-[var(--bordeaux-bright)]"
                 >
                   <span className={`${mono} text-[13px] uppercase tracking-[0.14em] text-[var(--kraft)]`}>
                     <span aria-hidden className="mr-2 inline-block">
@@ -405,7 +394,7 @@ export function CaseCard({
                     type="button"
                     disabled={creating}
                     onClick={() => void handleCreateRoom()}
-                    className="group flex w-full flex-col items-start gap-2 border border-[var(--kraft-dark)] bg-[var(--anthracite-2)]/50 px-5 py-4 text-left transition-[border-color,box-shadow] hover:border-[var(--bordeaux-bright)] hover:shadow-[0_0_24px_rgba(107,22,32,0.25)] disabled:cursor-wait disabled:opacity-60"
+                    className="group flex w-full flex-col items-start gap-2 border border-[var(--kraft-dark)] bg-[var(--anthracite-2)]/50 px-5 py-4 text-left transition-[border-color,box-shadow] hover:border-[var(--bordeaux-bright)] disabled:cursor-wait disabled:opacity-60"
                   >
                     <span className={`${mono} text-[13px] uppercase tracking-[0.14em] text-[var(--kraft)]`}>
                       <span aria-hidden className="mr-2 inline-block">
@@ -472,27 +461,26 @@ export function CaseCard({
                 </p>
               ) : null}
 
-              <div className="border-t border-[var(--rule)] pt-6">
+              <div className="border-t border-[var(--rule)] pt-5">
                 <p
-                  className={`${typewriter} mb-4 text-center text-[15px] text-[var(--subtitle-text)] md:text-left`}
+                  className={`${typewriter} mb-3 text-[15px] text-[var(--subtitle-text)]`}
                 >
                   Bir odaya katılmak istersen:
                 </p>
-                <div className="flex justify-center md:justify-start">
-                  <Link
-                    href="/oda/katil"
-                    onClick={closeChoiceModal}
-                    className={`${mono} inline-flex border border-[var(--kraft)] px-5 py-3 text-[11px] uppercase tracking-[0.2em] text-[var(--kraft-light)] transition-colors hover:border-[var(--bordeaux-bright)] hover:bg-[var(--bordeaux)]/15`}
-                  >
-                    ▸ Kod ile katıl
-                  </Link>
-                </div>
+                <Link
+                  href="/oda/katil"
+                  onClick={closeChoiceModal}
+                  className={`${mono} inline-flex min-h-[44px] items-center border border-[var(--kraft)] px-5 py-3 text-[11px] uppercase tracking-[0.2em] text-[var(--kraft-light)] transition-colors hover:border-[var(--bordeaux-bright)] hover:bg-[var(--bordeaux)]/15`}
+                >
+                  ▸ Kod ile katıl
+                </Link>
               </div>
-
+            </div>
+            <div className="app-overlay-actions">
               <button
                 type="button"
                 onClick={closeChoiceModal}
-                className={`${mono} inline-flex min-h-[44px] items-center justify-center border border-[var(--kraft-dark)] bg-transparent px-6 py-3 text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--kraft)] transition-colors hover:border-[var(--kraft)] hover:text-[var(--kraft-light)]`}
+                className="confirm-btn confirm-btn-cancel"
               >
                 İptal
               </button>

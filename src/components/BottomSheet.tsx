@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 
+import { useAppOverlayLock } from "@/hooks/useAppOverlayLock";
+
 export function BottomSheet({
   open,
   title,
@@ -20,12 +22,12 @@ export function BottomSheet({
     onCloseRef.current = onClose;
   }, [onClose]);
 
+  useAppOverlayLock(open);
+
   useEffect(() => {
     if (!open) return;
     const panel = panelRef.current;
     const previously = document.activeElement as HTMLElement | null;
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
 
     function focusables() {
       if (!panel) return [];
@@ -62,7 +64,6 @@ export function BottomSheet({
     document.addEventListener("keydown", onKey);
     return () => {
       document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prevOverflow;
       previously?.focus();
     };
   }, [open]);
@@ -71,7 +72,12 @@ export function BottomSheet({
 
   return (
     <div className="sheet-root">
-      <button type="button" className="sheet-backdrop" aria-label="Kapat" onClick={onClose} />
+      <button
+        type="button"
+        className="sheet-backdrop"
+        aria-label="Kapat"
+        onClick={onClose}
+      />
       <div
         ref={panelRef}
         className="sheet-panel"

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { updateProfileColor } from "@/app/profil/actions";
 import { ANALYST_COLOR_HEX } from "@/lib/colors";
 import type { AnalystColor } from "@/lib/supabase/types";
+import { useAppOverlayLock } from "@/hooks/useAppOverlayLock";
 
 const COLORS: AnalystColor[] = [
   "mavi",
@@ -31,6 +32,7 @@ export function UserColorPicker({
   const [selected, setSelected] = useState<AnalystColor>(currentColor);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  useAppOverlayLock(open);
 
   useEffect(() => {
     if (open) {
@@ -38,6 +40,15 @@ export function UserColorPicker({
       setError(null);
     }
   }, [open, currentColor]);
+
+  useEffect(() => {
+    if (!open) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape" && !saving) onClose();
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, saving, onClose]);
 
   if (!open) return null;
 
@@ -55,13 +66,10 @@ export function UserColorPicker({
   }
 
   return (
-    <div
-      className="fixed inset-0 z-[280] flex items-center justify-center p-4 md:p-6"
-      role="presentation"
-    >
+    <div className="app-overlay" role="presentation">
       <button
         type="button"
-        className="absolute inset-0 border-0 bg-[var(--ink)]/80 backdrop-blur-sm"
+        className="app-overlay-backdrop"
         aria-label="Kapat"
         onClick={() => !saving && onClose()}
       />
@@ -69,48 +77,50 @@ export function UserColorPicker({
         role="dialog"
         aria-modal="true"
         aria-labelledby="color-picker-title"
-        className={`relative z-[1] w-full max-w-[400px] border border-[var(--kraft-dark)] bg-[var(--anthracite)] p-6 shadow-[var(--shadow)] md:p-8 ${mono}`}
+        className={`app-overlay-panel ${mono}`}
       >
-        <h2
-          id="color-picker-title"
-          className="mb-2 text-xl italic text-[var(--kraft)] [font-family:var(--font-cormorant),serif]"
-        >
-          Analist rengi
-        </h2>
-        <p className="mb-6 text-[11px] uppercase tracking-[0.2em] text-[var(--meta-label)]">
-          Menü ve profil görünümünde kullanılır.
-        </p>
-
-        <div className="mb-6 flex flex-wrap justify-center gap-3">
-          {COLORS.map((c) => (
-            <button
-              key={c}
-              type="button"
-              title={c}
-              disabled={saving}
-              onClick={() => setSelected(c)}
-              className={`size-[60px] shrink-0 border-2 transition-[border-color,box-shadow] ${
-                selected === c
-                  ? "border-[var(--bordeaux)] shadow-[0_0_0_2px_var(--bordeaux-bright)]"
-                  : "border-[var(--rule)] hover:border-[var(--kraft-dark)]"
-              }`}
-              style={{ backgroundColor: ANALYST_COLOR_HEX[c] }}
-            />
-          ))}
-        </div>
-
-        {error ? (
-          <p className="mb-4 text-[11px] text-[var(--bordeaux-bright)]">
-            {error}
+        <div className="sheet-grab md:hidden" aria-hidden />
+        <div className="app-overlay-scroll">
+          <h2
+            id="color-picker-title"
+            className="mb-2 text-xl italic text-[var(--kraft)] [font-family:var(--font-cormorant),serif]"
+          >
+            Analist rengi
+          </h2>
+          <p className="mb-6 text-[11px] uppercase tracking-[0.2em] text-[var(--meta-label)]">
+            Menü ve profil görünümünde kullanılır.
           </p>
-        ) : null}
 
-        <div className="flex flex-col gap-2 sm:flex-row sm:justify-end">
+          <div className="mb-2 flex flex-wrap justify-center gap-3">
+            {COLORS.map((c) => (
+              <button
+                key={c}
+                type="button"
+                title={c}
+                disabled={saving}
+                onClick={() => setSelected(c)}
+                className={`size-[60px] shrink-0 border-2 transition-[border-color,box-shadow] ${
+                  selected === c
+                    ? "border-[var(--bordeaux)] shadow-[0_0_0_2px_var(--bordeaux-bright)]"
+                    : "border-[var(--rule)] hover:border-[var(--kraft-dark)]"
+                }`}
+                style={{ backgroundColor: ANALYST_COLOR_HEX[c] }}
+              />
+            ))}
+          </div>
+
+          {error ? (
+            <p className="mt-4 text-[11px] text-[var(--bordeaux-bright)]">
+              {error}
+            </p>
+          ) : null}
+        </div>
+        <div className="app-overlay-actions">
           <button
             type="button"
             disabled={saving}
             onClick={onClose}
-            className="border border-[var(--kraft)] bg-transparent px-4 py-3 text-[10px] uppercase tracking-[0.24em] text-[var(--kraft-light)] hover:border-[var(--kraft-light)]"
+            className="confirm-btn confirm-btn-cancel"
           >
             İptal
           </button>
@@ -118,7 +128,7 @@ export function UserColorPicker({
             type="button"
             disabled={saving}
             onClick={() => void handleSave()}
-            className="border border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] px-4 py-3 text-[10px] uppercase tracking-[0.24em] text-[var(--paper)] hover:bg-[var(--bordeaux-bright)]"
+            className="confirm-btn confirm-btn-primary"
           >
             {saving ? "Kaydediliyor..." : "Kaydet"}
           </button>

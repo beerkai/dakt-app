@@ -28,146 +28,44 @@ export default function AgeContentGate() {
 
   return (
     <div
-      className="age-content-gate fixed inset-0 z-[400] flex items-center justify-center"
-      style={{
-        background: "rgba(0, 0, 0, 0.92)",
-        backdropFilter: "blur(12px)",
-      }}
+      className="age-content-gate"
       role="dialog"
       aria-labelledby="age-gate-title"
       aria-modal="true"
     >
-      <div
-        style={{
-          background: "var(--anthracite)",
-          border: "1px solid var(--bordeaux)",
-          padding: "44px 40px",
-          maxWidth: 520,
-          margin: "0 24px",
-          textAlign: "center",
-          position: "relative",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            top: "-1px",
-            left: "-1px",
-            width: 32,
-            height: 32,
-            borderTop: "3px solid var(--bordeaux-bright)",
-            borderLeft: "3px solid var(--bordeaux-bright)",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: "-1px",
-            right: "-1px",
-            width: 32,
-            height: 32,
-            borderBottom: "3px solid var(--bordeaux-bright)",
-            borderRight: "3px solid var(--bordeaux-bright)",
-          }}
-        />
+      <div className="age-content-gate-panel">
+        <div className="age-content-gate-corner age-content-gate-corner--tl" aria-hidden />
+        <div className="age-content-gate-corner age-content-gate-corner--br" aria-hidden />
 
-        <div
-          style={{
-            fontFamily: "var(--font-jetbrains-mono), monospace",
-            fontSize: 11,
-            letterSpacing: "0.35em",
-            color: "var(--bordeaux-bright)",
-            textTransform: "uppercase",
-            marginBottom: 24,
-          }}
-        >
-          ⚠ EYES ONLY · CLASSIFIED CONTENT
-        </div>
+        <p className="age-content-gate-kicker">
+          EYES ONLY · CLASSIFIED CONTENT
+        </p>
 
-        <h2
-          id="age-gate-title"
-          style={{
-            fontFamily: "var(--font-cormorant), serif",
-            fontStyle: "italic",
-            fontSize: 36,
-            color: "var(--paper)",
-            lineHeight: 1.2,
-            margin: 0,
-            marginBottom: 20,
-          }}
-        >
+        <h2 id="age-gate-title" className="age-content-gate-title">
           +16 İçerik Uyarısı
         </h2>
 
-        <p
-          style={{
-            fontFamily: "var(--font-newsreader), serif",
-            fontSize: 16,
-            color: "var(--kraft-light)",
-            lineHeight: 1.7,
-            margin: 0,
-            marginBottom: 16,
-          }}
-        >
+        <p className="age-content-gate-copy">
           D.A.K.T. <em>kurmaca polisiye</em> bir araştırma oyunudur. Vakalar
           cinayet, şiddet, suç içerikli temalar barındırır. Tüm karakterler ve
           olaylar hayalidir.
         </p>
 
-        <p
-          style={{
-            fontFamily: "var(--font-newsreader), serif",
-            fontSize: 15,
-            color: "var(--kraft)",
-            lineHeight: 1.6,
-            margin: 0,
-            marginBottom: 36,
-            opacity: 0.85,
-          }}
-        >
+        <p className="age-content-gate-copy age-content-gate-copy--soft">
           16 yaşından küçük kullanıcılar için uygun değildir.
         </p>
 
         <button
           type="button"
           onClick={handleAccept}
-          style={{
-            background: "var(--bordeaux)",
-            border: "1px solid var(--bordeaux-bright)",
-            color: "var(--paper)",
-            padding: "16px 36px",
-            fontFamily: "var(--font-jetbrains-mono), monospace",
-            fontSize: 12,
-            letterSpacing: "0.3em",
-            textTransform: "uppercase",
-            cursor: "pointer",
-            transition: "all 0.2s ease",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = "var(--bordeaux-bright)";
-            e.currentTarget.style.letterSpacing = "0.4em";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = "var(--bordeaux)";
-            e.currentTarget.style.letterSpacing = "0.3em";
-          }}
+          className="age-content-gate-cta"
         >
           ▸ 16 yaşından büyüğüm, devam et
         </button>
 
-        <div
-          style={{
-            marginTop: 24,
-            fontFamily: "var(--font-jetbrains-mono), monospace",
-            fontSize: 9,
-            letterSpacing: "0.2em",
-            color: "var(--kraft-dark)",
-            textTransform: "uppercase",
-            opacity: 0.6,
-          }}
-        >
+        <p className="age-content-gate-foot">
           dakt.app · Division of Analytic Knowledge & Testimonies
-        </div>
+        </p>
       </div>
     </div>
   );

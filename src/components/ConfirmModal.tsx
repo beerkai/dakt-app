@@ -2,6 +2,8 @@
 
 import { useEffect, useId, useRef, type ReactNode } from "react";
 
+import { useAppOverlayLock } from "@/hooks/useAppOverlayLock";
+
 export type ConfirmVariant = "default" | "warning" | "danger";
 
 interface ConfirmModalProps {
@@ -79,14 +81,7 @@ export default function ConfirmModal({
     return () => previouslyFocused?.focus?.();
   }, [open]);
 
-  useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = "";
-      };
-    }
-  }, [open]);
+  useAppOverlayLock(open);
 
   if (!open) return null;
 
@@ -119,19 +114,22 @@ export default function ConfirmModal({
         aria-describedby={description ? descId : undefined}
         onClick={(e) => e.stopPropagation()}
       >
+        <div className="confirm-modal-grab sheet-grab" aria-hidden />
         <div className="confirm-modal-corner" aria-hidden />
 
-        <h3 id={titleId} className="confirm-modal-title">
-          {title}
-        </h3>
+        <div className="confirm-modal-body">
+          <h3 id={titleId} className="confirm-modal-title">
+            {title}
+          </h3>
 
-        {description ? (
-          <p id={descId} className="confirm-modal-description">
-            {description}
-          </p>
-        ) : null}
+          {description ? (
+            <p id={descId} className="confirm-modal-description">
+              {description}
+            </p>
+          ) : null}
 
-        {children}
+          {children}
+        </div>
 
         <div className="confirm-modal-actions">
           <button

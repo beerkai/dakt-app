@@ -18,6 +18,7 @@ import {
   readGuestColor,
 } from "@/lib/guest-session";
 import type { AnalystColor, Profile } from "@/lib/supabase/types";
+import { useAppOverlayLock } from "@/hooks/useAppOverlayLock";
 
 const mono =
   "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace]";
@@ -48,6 +49,7 @@ export function SiteNav() {
   const [farewellVisible, setFarewellVisible] = useState(false);
   const [pendingHref, setPendingHref] = useState<string | null>(null);
   const [exitIsCoop, setExitIsCoop] = useState(false);
+  useAppOverlayLock(menuOpen);
 
   const isInCase = pathname?.startsWith("/vaka/") ?? false;
   const isInLobby =

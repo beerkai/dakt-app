@@ -14,6 +14,7 @@ import { CaseCard } from "@/components/CaseCard";
 import { writeGuestUsername } from "@/lib/guest-session";
 import { caseTabHref } from "@/lib/case-tab-routes";
 import type { CaseCatalogItem } from "@/lib/case-types";
+import { useAppOverlayLock } from "@/hooks/useAppOverlayLock";
 
 const PLACEHOLDER_CARDS = [
   { n: "070", label: "○ Yakında — Dosya №070" },
@@ -64,6 +65,7 @@ export function DavalarCatalog({
   const [guestNamePlaceholder, setGuestNamePlaceholder] = useState<string>(
     GUEST_NAME_PLACEHOLDER_OPTIONS[0],
   );
+  useAppOverlayLock(guestModalOpen);
 
   const closeGuestModal = useCallback(() => {
     setGuestModalOpen(false);
@@ -215,35 +217,31 @@ export function DavalarCatalog({
       </div>
 
       {guestModalOpen ? (
-        <div
-          className="fixed inset-0 z-[240] flex min-h-0 flex-col md:items-center md:justify-center md:p-6"
-          role="presentation"
-        >
+        <div className="app-overlay" role="presentation">
           <button
             type="button"
             aria-label="Kapat"
-            className="absolute inset-0 bg-[var(--ink)]/85"
+            className="app-overlay-backdrop"
             onClick={closeGuestModal}
           />
-          <div
+          <form
+            onSubmit={submitGuest}
             role="dialog"
             aria-modal="true"
             aria-labelledby={modalTitleId}
-            className="relative z-[1] flex min-h-full w-full flex-col border-[var(--kraft-dark)] bg-[var(--paper)] text-[var(--ink)] shadow-[var(--shadow)] md:min-h-0 md:max-w-[480px] md:rounded-sm md:border-2"
+            className="app-overlay-panel app-overlay-panel--paper"
           >
-            <form
-              onSubmit={submitGuest}
-              className="flex flex-1 flex-col gap-6 p-6 md:p-8"
-            >
+            <div className="sheet-grab md:hidden" aria-hidden />
+            <div className="app-overlay-scroll flex flex-col gap-5">
               <div className="space-y-3">
                 <h2
                   id={modalTitleId}
-                  className="text-2xl font-semibold italic text-[var(--ink)] [font-family:var(--font-cormorant),serif]"
+                  className="m-0 text-2xl font-semibold italic text-[var(--ink)] [font-family:var(--font-cormorant),serif]"
                 >
                   Analist <em className="text-[var(--bordeaux)]">takma adın</em>
                 </h2>
                 <p
-                  className={`${typewriter} text-[16px] leading-relaxed text-[var(--subtitle-text)]`}
+                  className={`${typewriter} m-0 text-[16px] leading-relaxed text-[var(--subtitle-text)]`}
                 >
                   Dosyaya girmeden önce D.A.K.T. için kullanacağın kısa bir takma
                   ad seç. Bu ad üst menüde görünür; sertifika ve kayıtların
@@ -280,24 +278,23 @@ export function DavalarCatalog({
                   </p>
                 ) : null}
               </div>
-
-              <div className="mt-auto flex flex-col gap-3 sm:flex-row-reverse sm:justify-end">
-                <button
-                  type="submit"
-                  className={`${mono} inline-flex min-h-[48px] flex-1 items-center justify-center border-2 border-[var(--bordeaux-bright)] bg-[var(--bordeaux)] px-6 py-3 text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--kraft-light)] transition-colors hover:bg-[var(--bordeaux-bright)] sm:flex-none`}
-                >
-                  ▸ Vakaya gir
-                </button>
-                <button
-                  type="button"
-                  onClick={closeGuestModal}
-                  className={`${mono} inline-flex min-h-[48px] flex-1 items-center justify-center border border-[var(--ink)]/28 bg-[var(--ink)]/[0.07] px-6 py-3 text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--ink)]/85 transition-colors hover:border-[var(--ink)]/40 hover:bg-[var(--ink)]/12 hover:text-[var(--ink)] sm:flex-none`}
-                >
-                  İptal
-                </button>
-              </div>
-            </form>
-          </div>
+            </div>
+            <div className="app-overlay-actions app-overlay-actions--paper">
+              <button
+                type="button"
+                onClick={closeGuestModal}
+                className="confirm-btn confirm-btn-cancel"
+              >
+                İptal
+              </button>
+              <button
+                type="submit"
+                className="confirm-btn confirm-btn-primary"
+              >
+                ▸ Vakaya gir
+              </button>
+            </div>
+          </form>
         </div>
       ) : null}
     </>
