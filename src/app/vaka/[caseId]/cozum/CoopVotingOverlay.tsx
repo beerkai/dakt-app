@@ -142,7 +142,7 @@ export function CoopVotingOverlay({
               className="coop-vote-open"
               onClick={() => setSheetOpen(true)}
             >
-              {votedName ? `Oyun: ${votedName}` : "Oy ver"}
+              {votedName ? `Oy: ${votedName}` : "Oy ver"}
             </button>
             <BottomSheet
               open={sheetOpen}
