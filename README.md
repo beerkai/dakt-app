@@ -38,6 +38,11 @@ npm run dev
 8. `cases_metadata_all.sql` — her vaka için görünürlük satırı (`test` ile açılır)
 9. `cases_metadata_read_policy.sql` — `published` herkese, `test` yalnızca `is_tester` kullanıcılara
 
+`supabase/migrations/` altındaki dosyalar prod veritabanına Supabase migration
+olarak uygulanmış değişikliklerin kaydıdır (`<sürüm>_<ad>.sql`, sürüm
+`supabase_migrations.schema_migrations` ile aynıdır). Yeni şema değişiklikleri
+burada migration olarak tutulur.
+
 Vakaların yayın durumu **Yönetim → Vakalar** ekranından değiştirilir
 (`draft` · `test` · `published` · `archived`).
 
