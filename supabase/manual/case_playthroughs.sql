@@ -28,13 +28,9 @@ DROP POLICY IF EXISTS "Users read own playthrough" ON public.case_playthroughs;
 CREATE POLICY "Users read own playthrough" ON public.case_playthroughs
   FOR SELECT USING (auth.uid() = user_id);
 
+-- İstemci yazma politikası yok: tüm yazmalar server action (service role) ile.
+-- (Eski istemci INSERT/UPDATE politikaları attempt_count/started_at sahteciliğine izin veriyordu.)
 DROP POLICY IF EXISTS "Users insert own playthrough" ON public.case_playthroughs;
-CREATE POLICY "Users insert own playthrough" ON public.case_playthroughs
-  FOR INSERT WITH CHECK (auth.uid() = user_id);
-
 DROP POLICY IF EXISTS "Users update own playthrough" ON public.case_playthroughs;
-CREATE POLICY "Users update own playthrough" ON public.case_playthroughs
-  FOR UPDATE USING (auth.uid() = user_id)
-  WITH CHECK (auth.uid() = user_id);
 
--- Yazma/artırma server action (service role) ile de yapılır.
+-- Yazma/artırma yalnızca server action (service role) ile yapılır.
