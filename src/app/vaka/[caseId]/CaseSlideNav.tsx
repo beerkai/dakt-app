@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import type { TabId } from "@/lib/case-types";
 import { adjacentTabs, caseTabHref, TAB_LABEL } from "@/lib/case-tab-routes";
@@ -38,6 +38,8 @@ function inHorizontalScroller(el: EventTarget | null): boolean {
   }
   return false;
 }
+
+const FLOAT_LAYERS = ".vaka042-solo-tease, .install-prompt, .guest-banner, .active-session-chip";
 
 function overlayOpen(): boolean {
   if (document.documentElement.dataset.appOverlay === "1") return true;
@@ -121,6 +123,56 @@ export function CaseSlideNav({
     };
   }, [slug, prevHref, nextHref, router]);
 
+  // Alt float katmanları (solo tease, kurulum istemi, misafir bandı, oturum çipi)
+  // kaydırma sırasında düğmelerin üstüne gelirse geçici olarak saydamlaşsın.
+  const navRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (!slug) return;
+    const root = document.documentElement;
+    let raf = 0;
+    const check = () => {
+      raf = 0;
+      const nav = navRef.current;
+      let cover = false;
+      if (nav) {
+        const links = Array.from(nav.querySelectorAll<HTMLElement>(".case-slide-nav-link")).map(
+          (l) => l.getBoundingClientRect(),
+        );
+        const layers = document.querySelectorAll<HTMLElement>(FLOAT_LAYERS);
+        outer: for (const layer of layers) {
+          if (layer.getClientRects().length === 0) continue;
+          const r = layer.getBoundingClientRect();
+          if (r.width === 0 || r.height === 0) continue;
+          for (const b of links) {
+            if (b.left < r.right && b.right > r.left && b.top < r.bottom && b.bottom > r.top) {
+              cover = true;
+              break outer;
+            }
+          }
+        }
+      }
+      if (cover) root.dataset.slideNavCover = "1";
+      else delete root.dataset.slideNavCover;
+    };
+    const schedule = () => {
+      if (!raf) raf = requestAnimationFrame(check);
+    };
+    schedule();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    // Katmanlar kaydırma olmadan da belirebilir / boyut değiştirebilir.
+    const mo = new MutationObserver(schedule);
+    mo.observe(document.body, { childList: true, subtree: true });
+    mo.observe(root, { attributes: true, attributeFilter: ["data-float-tease", "data-float-install", "data-float-guest", "style"] });
+    return () => {
+      if (raf) cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      mo.disconnect();
+      delete root.dataset.slideNavCover;
+    };
+  }, [slug]);
+
   useEffect(() => {
     if (prevHref) router.prefetch(prevHref);
     if (nextHref) router.prefetch(nextHref);
@@ -129,7 +181,7 @@ export function CaseSlideNav({
   if (!slug || (!prev && !next)) return null;
 
   return (
-    <nav className="case-slide-nav" aria-label="Sekmeler arasında gezin">
+    <nav ref={navRef} className="case-slide-nav" aria-label="Sekmeler arasında gezin">
       {prev && prevHref ? (
         <Link
           href={prevHref}

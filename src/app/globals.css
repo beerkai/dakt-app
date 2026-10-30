@@ -2189,8 +2189,28 @@ html[data-age-ok] .age-content-gate {
 
 @media (min-width: 768px) {
   .app-chrome-pad {
-    padding-bottom: 0;
+    /* Masaüstü: sağ alttaki solo tease sayfa sonundaki içeriği (slayt gezinmesi) örtmesin. */
+    padding-bottom: var(--app-float-inset-desktop, 0px);
   }
+}
+
+/*
+ * Kaydırma sırasında slayt gezinmesi bir alt float katmanının altından geçerken
+ * (CaseSlideNav html[data-slide-nav-cover] bayrağını yönetir) katman geçici
+ * olarak saydamlaşır ve tıklamayı geçirir — "Sonraki" düğmesi hiç örtülmez.
+ */
+.vaka042-solo-tease,
+.install-prompt,
+.guest-banner,
+.active-session-chip {
+  transition: opacity 0.18s ease;
+}
+html[data-slide-nav-cover="1"] .vaka042-solo-tease,
+html[data-slide-nav-cover="1"] .install-prompt,
+html[data-slide-nav-cover="1"] .guest-banner,
+html[data-slide-nav-cover="1"] .active-session-chip {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .app-tab-bar {

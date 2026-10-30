@@ -26,6 +26,14 @@ function sync() {
   } else {
     root.style.removeProperty("--app-float-inset");
   }
+  // Masaüstünde alttaki tek float katman solo tease'dir (md:bottom-8 = 32px);
+  // misafir bandı üstte, kurulum istemi md:hidden. Sayfa sonu bu kadar boşluk bırakır.
+  const tease = heights.get("tease");
+  if (tease) {
+    root.style.setProperty("--app-float-inset-desktop", `${Math.ceil(tease) + 32 + 16}px`);
+  } else {
+    root.style.removeProperty("--app-float-inset-desktop");
+  }
 }
 
 export function useFloatingLayer(
