@@ -18,6 +18,7 @@ import {
   isRoomMarkKind,
   type RoomItemMark,
 } from "@/lib/room-item-marks";
+import { runInBackground } from "@/lib/background-task";
 
 type PlayerMe = {
   roomId: string;
@@ -75,6 +76,7 @@ export function RoomMarksProvider({
 }) {
   const roomId = useCaseRoomId(caseId);
   const { user } = useAuth();
+  const userId = user?.id ?? null;
   const supabase = useMemo(() => createClient(), []);
   const [marks, setMarks] = useState<RoomItemMark[]>([]);
   const [me, setMe] = useState<PlayerMe | null>(null);
@@ -96,7 +98,8 @@ export function RoomMarksProvider({
   );
 
   useEffect(() => {
-    if (!roomId || !user) return;
+    if (!roomId || !userId) return;
+    const uid: string = userId;
 
     let cancelled = false;
 
@@ -105,14 +108,14 @@ export function RoomMarksProvider({
         .from("room_players")
         .select("username, color")
         .eq("room_id", roomId)
-        .eq("user_id", user!.id)
+        .eq("user_id", uid)
         .is("left_at", null)
         .maybeSingle();
 
       if (cancelled) return;
       setMe({
         roomId: roomId!,
-        userId: user!.id,
+        userId: uid,
         username: String(profile?.username ?? "Analist"),
         color: String(profile?.color ?? ""),
       });
@@ -122,7 +125,7 @@ export function RoomMarksProvider({
       setMarks(rows);
     }
 
-    void boot();
+    runInBackground(boot, "RoomMarks");
 
     const channel = supabase
       .channel(`room-item-marks:${roomId}`)
@@ -148,7 +151,7 @@ export function RoomMarksProvider({
       cancelled = true;
       void supabase.removeChannel(channel);
     };
-  }, [roomId, user, supabase, fetchMarks]);
+  }, [roomId, userId, supabase, fetchMarks]);
 
   const activeMe =
     me && roomId && user && me.roomId === roomId && me.userId === user.id

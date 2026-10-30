@@ -12,6 +12,7 @@ import {
 import { createClient } from "@/lib/supabase/client";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
+import { runInBackground } from "@/lib/background-task";
 
 function guestLocallySolved(caseId: string): boolean {
   if (typeof window === "undefined") return false;
@@ -116,7 +117,7 @@ export default function SessionTracker({
       window.dispatchEvent(new Event("dakt-session-change"));
     }
 
-    void enrichCoopSession();
+    runInBackground(enrichCoopSession, "SessionTracker");
   }, [roomId, caseId]);
 
   return null;

@@ -56,6 +56,7 @@ import {
   TIMELINE_CHANGED_EVENT,
 } from "@/lib/timeline-storage";
 import { safeHtml } from "@/lib/html-sanitize";
+import { runInBackground } from "@/lib/background-task";
 
 type ViewState = "voting" | "envelope" | "result" | "lesson";
 
@@ -376,8 +377,11 @@ export function CozumClient({
   // ═══ CO-OP: host bypass ayarını oku ═══
   useEffect(() => {
     if (!isCoop) return;
-    void getCoopSettings().then((s: CoopSettings) =>
-      setHostBypassEnabled(s.hostBypassEnabled),
+    runInBackground(
+      getCoopSettings().then((s: CoopSettings) =>
+        setHostBypassEnabled(s.hostBypassEnabled),
+      ),
+      "getCoopSettings",
     );
   }, [isCoop]);
 
