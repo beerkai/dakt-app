@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { requireAdminDb } from "@/lib/admin";
 
 import { getAllCaseAdminSummaries } from "@/lib/case-helpers";
 import { fetchAllRows } from "@/lib/fetch-all-rows";
@@ -12,7 +12,8 @@ export const metadata = {
 };
 
 export default async function VakalarPage() {
-  const supabase = await createClient();
+  // profiles/solved_cases RLS yalnızca kendi satırı → tüm kullanıcılar için service role.
+  const { adminDb: supabase } = await requireAdminDb();
 
   const allCases = getAllCaseAdminSummaries();
 

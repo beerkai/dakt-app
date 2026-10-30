@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { requireAdminDb } from "@/lib/admin";
 
 import GMPageFooter from "./components/GMPageFooter";
 import GMPageHeader from "./components/GMPageHeader";
@@ -23,7 +23,8 @@ function isoHoursAgo(hours: number): string {
 }
 
 export default async function YonetimDashboardPage() {
-  const supabase = await createClient();
+  // profiles/solved_cases RLS yalnızca kendi satırı → tüm kullanıcılar için service role.
+  const { adminDb: supabase } = await requireAdminDb();
 
   const [
     analystsRes,

@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { getUserEmail } from "@/lib/admin";
-import { createClient } from "@/lib/supabase/server";
+import { getUserEmail, requireAdminDb } from "@/lib/admin";
 
 import GMPageFooter from "../../components/GMPageFooter";
 import GMPageHeader from "../../components/GMPageHeader";
@@ -18,7 +17,8 @@ export default async function AnalystDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const supabase = await createClient();
+  // profiles/solved_cases RLS yalnızca kendi satırı → tüm kullanıcılar için service role.
+  const { adminDb: supabase, check } = await requireAdminDb();
 
   const profileRes = await supabase
     .from("profiles")
@@ -39,10 +39,7 @@ export default async function AnalystDetailPage({
   if (!profile) notFound();
 
   // isSelf — bu profile şu an giriş yapan admin'in kendisi mi
-  const {
-    data: { user: currentUser },
-  } = await supabase.auth.getUser();
-  const isSelf = currentUser?.id === id;
+  const isSelf = check.user?.id === id;
 
   // isLastAdmin — bu kullanıcı tek admin mi
   const { count: adminCount } = await supabase

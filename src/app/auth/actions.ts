@@ -6,6 +6,7 @@ import type { GuestProgressPayload } from "@/lib/guest-progress-transfer";
 import { getCase } from "@/lib/case-helpers";
 import { createAdminClient } from "@/lib/supabase/admin-client";
 import { createClient } from "@/lib/supabase/server";
+import { isUsernameTaken } from "@/lib/username-availability";
 import type { AnalystColor } from "@/lib/supabase/types";
 
 const ANALYST_COLORS: AnalystColor[] = [
@@ -41,13 +42,7 @@ export async function signUp(formData: FormData): Promise<AuthActionResult> {
     return { error: "Şifre en az 6 karakter olmalı." };
   }
 
-  const { data: existing } = await supabase
-    .from("profiles")
-    .select("username")
-    .eq("username", username)
-    .maybeSingle();
-
-  if (existing) {
+  if (await isUsernameTaken(username)) {
     return { error: "Bu analist takma adı zaten kullanılıyor." };
   }
 
