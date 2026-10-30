@@ -8,6 +8,7 @@ import { isCoopVoteFinished } from "@/lib/active-session";
 import { useRoomActivePlayers } from "@/hooks/useRoomActivePlayers";
 import { createClient } from "@/lib/supabase/client";
 import type { Room } from "@/lib/supabase/types";
+import { runInBackground } from "@/lib/background-task";
 
 /** Sadece vaka dosyaları: operasyon şeridi (canlı saat, UTC+3). */
 export function SystemBar({ caseId }: { caseId?: string }) {
@@ -49,7 +50,7 @@ export function SystemBar({ caseId }: { caseId?: string }) {
         .single();
       if (data?.code) setRoomCode(String(data.code));
     }
-    void fetchCode();
+    runInBackground(fetchCode, "SystemBar");
   }, [roomId]);
 
   useEffect(() => {

@@ -70,70 +70,127 @@ export function AuthProvider({
     router.refresh();
   }, [router, signingOut]);
 
+  // Aynı kullanıcı için yeni bir User nesnesi gelse bile (INITIAL_SESSION,
+  // TOKEN_REFRESHED, getUser) referansı koru; `user`a bağlı efektler
+  // gereksiz yere yeniden çalışmasın.
+  const applyUser = useCallback((next: User | null) => {
+    setUser((prev) => {
+      if (!next) return null;
+      if (
+        prev &&
+        prev.id === next.id &&
+        prev.updated_at === next.updated_at &&
+        prev.email === next.email
+      ) {
+        return prev;
+      }
+      return next;
+    });
+  }, []);
+
   useEffect(() => {
+    let active = true;
+    let profileTimer: ReturnType<typeof setTimeout> | null = null;
+
+    // ÖNEMLİ: Bu callback supabase-js auth kilidi (navigator.locks) tutulurken
+    // çağrılır ve await edilir. İçeride başka bir Supabase çağrısını await
+    // etmek (ör. profiles sorgusu → getSession) kilidi asla bırakmaz ve
+    // sonraki tüm Supabase isteklerini kilitler. Bu yüzden callback senkron
+    // kalır; Supabase işi setTimeout ile kilit bırakıldıktan sonra yapılır.
+    // https://supabase.com/docs/reference/javascript/auth-onauthstatechange
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (event, session) => {
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (profileTimer) {
+        clearTimeout(profileTimer);
+        profileTimer = null;
+      }
+
       if (event === "SIGNED_OUT" || !session) {
-        setUser(null);
+        applyUser(null);
         setProfile(null);
         return;
       }
 
-      setUser(session.user);
-      if (session.user) {
-        const { data: profileData } = await supabase
+      const sessionUser = session.user;
+      applyUser(sessionUser);
+      if (!sessionUser) return;
+
+      profileTimer = setTimeout(() => {
+        profileTimer = null;
+        void supabase
           .from("profiles")
           .select("*")
-          .eq("id", session.user.id)
-          .maybeSingle();
-        setProfile(profileData ?? null);
-      }
+          .eq("id", sessionUser.id)
+          .maybeSingle()
+          .then(
+            ({ data: profileData }) => {
+              if (active) setProfile((profileData as Profile | null) ?? null);
+            },
+            (err: unknown) => {
+              console.warn("[AuthProvider] profile load failed:", err);
+            },
+          );
+      }, 0);
     });
 
-    return () => subscription.unsubscribe();
-  }, [supabase]);
+    return () => {
+      active = false;
+      if (profileTimer) clearTimeout(profileTimer);
+      subscription.unsubscribe();
+    };
+  }, [supabase, applyUser]);
 
   // Layout client’ta yeniden mount olmaz; client navigasyon + auth cookie sonrası tekrar oku
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const {
-        data: { user: u },
-      } = await supabase.auth.getUser();
-      if (cancelled) return;
-      setUser(u ?? null);
+      try {
+        const {
+          data: { user: u },
+        } = await supabase.auth.getUser();
+        if (cancelled) return;
+        applyUser(u ?? null);
 
-      if (u) {
-        const { data: profileData } = await supabase
-          .from("profiles")
-          .select("*")
-          .eq("id", u.id)
-          .maybeSingle();
-        if (!cancelled) setProfile((profileData as Profile | null) ?? null);
-      } else if (!cancelled) {
-        setProfile(null);
+        if (u) {
+          const { data: profileData } = await supabase
+            .from("profiles")
+            .select("*")
+            .eq("id", u.id)
+            .maybeSingle();
+          if (!cancelled) setProfile((profileData as Profile | null) ?? null);
+        } else if (!cancelled) {
+          setProfile(null);
+        }
+      } catch (err) {
+        // Ağ hatası / sayfa geçişinde iptal edilen fetch (WebKit: "Load failed")
+        if (!cancelled) console.warn("[AuthProvider] auth refresh failed:", err);
+      } finally {
+        if (!cancelled) setLoading(false);
       }
-
-      if (!cancelled) setLoading(false);
     })();
 
     return () => {
       cancelled = true;
     };
-  }, [pathname, supabase]);
+  }, [pathname, supabase, applyUser]);
+
+  const userId = user?.id ?? null;
 
   useEffect(() => {
-    if (!user) return;
-    const userId = user.id;
+    if (!userId) return;
 
     async function ping() {
-      const { error: rpcErr } = await supabase.rpc("update_last_seen");
-      if (rpcErr) {
-        await supabase
-          .from("profiles")
-          .update({ last_seen_at: new Date().toISOString() })
-          .eq("id", userId);
+      try {
+        const { error: rpcErr } = await supabase.rpc("update_last_seen");
+        if (rpcErr) {
+          await supabase
+            .from("profiles")
+            .update({ last_seen_at: new Date().toISOString() })
+            .eq("id", userId);
+        }
+      } catch {
+        // Çevrimdışı / iptal edilen istek: bir sonraki ping'de tekrar denenir.
       }
     }
 
@@ -141,7 +198,7 @@ export function AuthProvider({
     const interval = setInterval(() => void ping(), 5 * 60 * 1000);
 
     return () => clearInterval(interval);
-  }, [user, supabase]);
+  }, [userId, supabase]);
 
   return (
     <AuthContext.Provider

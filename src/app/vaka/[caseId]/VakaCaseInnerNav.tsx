@@ -16,6 +16,7 @@ import ConfirmModal from "@/components/ConfirmModal";
 import { clearActiveSession, getActiveSession } from "@/lib/active-session";
 import { createClient } from "@/lib/supabase/client";
 import { useCaseRoomId } from "@/hooks/useCaseRoomId";
+import { runInBackground } from "@/lib/background-task";
 
 function subscribeSession(onChange: () => void) {
   window.addEventListener("dakt-session-change", onChange);
@@ -82,7 +83,7 @@ export function VakaCaseInnerNav({
       if (room) setIsHost(room.host_user_id === user.id);
     }
 
-    void checkHost();
+    runInBackground(checkHost, "VakaCaseInnerNav");
   }, [roomId]);
 
   function handleBackDavalarClick(e: React.MouseEvent) {

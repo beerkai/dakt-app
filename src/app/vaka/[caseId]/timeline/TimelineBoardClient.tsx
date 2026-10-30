@@ -22,6 +22,7 @@ import {
 } from "@/lib/timeline-storage";
 
 import { checkTimelineOrder } from "./actions";
+import { runInBackground } from "@/lib/background-task";
 
 function reorder(ids: string[], from: number, to: number): string[] {
   if (from === to || from < 0 || to < 0 || from >= ids.length || to >= ids.length) {
@@ -45,6 +46,9 @@ export function TimelineBoardClient({
 }) {
   const roomId = useCaseRoomId(caseId);
   const { user } = useAuth();
+  // Efektler `user` nesnesine değil kimliğe bağlı: aynı kullanıcı için yeni
+  // User nesnesi gelmesi room_timeline'ı yeniden çekmesin.
+  const userId = user?.id ?? null;
   const supabase = useMemo(() => createClient(), []);
   const byId = useMemo(() => {
     const m = new Map<string, TimelineCard>();
@@ -73,7 +77,7 @@ export function TimelineBoardClient({
       if (opts?.persistSolo !== false && !roomId) {
         writeSoloTimeline(caseId, { order: next, settled: false });
       }
-      if (opts?.persistRoom && roomId && user) {
+      if (opts?.persistRoom && roomId && userId) {
         if (persistRoomTimer.current) {
           window.clearTimeout(persistRoomTimer.current);
         }
@@ -86,7 +90,7 @@ export function TimelineBoardClient({
                 room_id: roomId,
                 event_order: next,
                 settled: false,
-                updated_by: user.id,
+                updated_by: userId,
                 updated_at: new Date().toISOString(),
               },
               { onConflict: "room_id" },
@@ -97,7 +101,7 @@ export function TimelineBoardClient({
         }, 280);
       }
     },
-    [caseId, roomId, settled, supabase, user],
+    [caseId, roomId, settled, supabase, userId],
   );
 
   useEffect(() => {
@@ -105,11 +109,20 @@ export function TimelineBoardClient({
 
     async function boot() {
       if (roomId) {
-        const { data, error: err } = await supabase
-          .from("room_timeline")
-          .select("event_order, settled")
-          .eq("room_id", roomId)
-          .maybeSingle();
+        let data: { event_order: string[] | null; settled: boolean | null } | null =
+          null;
+        let err: { message: string } | null = null;
+        try {
+          const res = await supabase
+            .from("room_timeline")
+            .select("event_order, settled")
+            .eq("room_id", roomId)
+            .maybeSingle();
+          data = res.data;
+          err = res.error;
+        } catch (e) {
+          err = { message: e instanceof Error ? e.message : String(e) };
+        }
         if (cancelled) return;
         if (err) console.warn("[Timeline] load:", err.message);
         if (data?.event_order?.length) {
@@ -123,17 +136,25 @@ export function TimelineBoardClient({
         } else {
           setOrder(seedOrder);
           setSettled(false);
-          if (user) {
-            void supabase.from("room_timeline").upsert(
-              {
-                room_id: roomId,
-                event_order: seedOrder,
-                settled: false,
-                updated_by: user.id,
-                updated_at: new Date().toISOString(),
-              },
-              { onConflict: "room_id" },
-            );
+          if (userId && !err) {
+            void supabase
+              .from("room_timeline")
+              .upsert(
+                {
+                  room_id: roomId,
+                  event_order: seedOrder,
+                  settled: false,
+                  updated_by: userId,
+                  updated_at: new Date().toISOString(),
+                },
+                { onConflict: "room_id" },
+              )
+              .then(
+                ({ error: upErr }) => {
+                  if (upErr) console.warn("[Timeline] seed upsert:", upErr.message);
+                },
+                (e: unknown) => console.warn("[Timeline] seed upsert:", e),
+              );
           }
         }
       } else {
@@ -152,11 +173,11 @@ export function TimelineBoardClient({
       if (!cancelled) setHydrated(true);
     }
 
-    void boot();
+    runInBackground(boot, "Timeline");
     return () => {
       cancelled = true;
     };
-  }, [caseId, roomId, seedOrder, byId, supabase, user]);
+  }, [caseId, roomId, seedOrder, byId, supabase, userId]);
 
   useEffect(() => {
     if (!roomId) return;
