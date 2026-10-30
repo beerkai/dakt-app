@@ -13,6 +13,7 @@ import { createClient } from "@/lib/supabase/server";
 import { RoomMarksProvider } from "@/components/RoomMarksProvider";
 import { VakaCaseInnerNav } from "./VakaCaseInnerNav";
 import { VakaCaseSoloTease } from "./VakaCaseSoloTease";
+import { CaseSlideNav } from "./CaseSlideNav";
 
 function SystemBarFallback() {
   return (
@@ -129,6 +130,9 @@ export default async function CaseLayout({
       <main className="workspace min-w-0 flex-1">
         <Suspense fallback={children}>
           <RoomMarksProvider caseId={caseId}>{children}</RoomMarksProvider>
+        </Suspense>
+        <Suspense fallback={null}>
+          <CaseSlideNav caseId={caseId} enabledTabs={caseData.enabledTabs} />
         </Suspense>
       </main>
       <SiteFooter variant="case" />

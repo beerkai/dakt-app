@@ -34,7 +34,6 @@ const TAB_ORDER: TabId[] = [
   "deliller",
   "belgeler",
   "teknik",
-  "timeline",
   "deduction",
   "cozum",
 ];
@@ -51,4 +50,15 @@ export function caseTabHref(
 ): string {
   const base = `/vaka/${caseId}/${TAB_ROUTE_SLUG[tab]}`;
   return roomId ? `${base}?room=${encodeURIComponent(roomId)}` : base;
+}
+
+/** Sekme şeridindeki (alt nav) önceki / sonraki sekme — slayt gezinmesi için. */
+export function adjacentTabs(
+  enabled: TabId[],
+  current: string,
+): { prev: TabId | null; next: TabId | null } {
+  const tabs = orderedEnabledTabs(enabled);
+  const i = tabs.findIndex((t) => TAB_ROUTE_SLUG[t] === current);
+  if (i < 0) return { prev: null, next: null };
+  return { prev: tabs[i - 1] ?? null, next: tabs[i + 1] ?? null };
 }
