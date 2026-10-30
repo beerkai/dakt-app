@@ -3,11 +3,41 @@
 import { useAuth } from "@/components/AuthProvider";
 import { DAKT_GUEST_USERNAME_KEY } from "@/lib/guest-session";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+import { useFloatingLayer } from "@/hooks/useFloatingLayer";
 
 export default function GuestSessionBanner() {
   const { user, loading } = useAuth();
   const [visible, setVisible] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  useFloatingLayer("guest", rootRef, visible);
+
+  // Masaüstü/iPad: bant yapışkan vaka kümesinin (sistem şeridi + iç nav) hemen
+  // altına yerleşir; böylece ne "Kapat" ne de "Vakadan çık" örtülür.
+  useEffect(() => {
+    if (!visible) return;
+    const root = document.documentElement;
+    let frame = 0;
+    const place = () => {
+      frame = 0;
+      const cluster = document.querySelector(".vaka-case-sticky-cluster");
+      const bottom = cluster?.getBoundingClientRect().bottom ?? 0;
+      root.style.setProperty("--guest-banner-top", `${Math.max(16, Math.round(bottom) + 16)}px`);
+    };
+    const schedule = () => {
+      if (!frame) frame = window.requestAnimationFrame(place);
+    };
+    place();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      root.style.removeProperty("--guest-banner-top");
+    };
+  }, [visible]);
 
   useEffect(() => {
     if (loading) return;
@@ -35,7 +65,7 @@ export default function GuestSessionBanner() {
   if (!visible) return null;
 
   return (
-    <div className="guest-banner">
+    <div ref={rootRef} className="guest-banner">
       <div className="guest-banner-content">
         <div className="guest-banner-icon">◉</div>
         <div className="guest-banner-text">

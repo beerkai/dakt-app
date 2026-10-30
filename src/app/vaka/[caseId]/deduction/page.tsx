@@ -4,6 +4,9 @@ import { notFound } from "next/navigation";
 
 import { MarkedSuspectsCallout } from "../MarkedSuspectsCallout";
 import { PanoBoardClient } from "./PanoBoardClient";
+import { caseTabCanonical } from "@/lib/canonical";
+
+export const generateMetadata = caseTabCanonical("deduction");
 
 export default async function DeductionPage({
   params,

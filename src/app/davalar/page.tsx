@@ -7,6 +7,7 @@ import { getAllCases, toCatalogItem } from "@/lib/case-helpers";
 import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/davalar" },
   title: "Aktif Dosyalar · D.A.K.T.",
   description: "Erişimine açık sınıflandırılmış vaka dosyaları.",
 };

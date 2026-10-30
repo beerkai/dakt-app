@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+import { useFloatingLayer } from "@/hooks/useFloatingLayer";
 
 const DISMISS_KEY = "dakt_install_dismissed_at";
 const DISMISS_MS = 14 * 24 * 60 * 60 * 1000;
@@ -33,6 +35,8 @@ function isStandalone() {
 export function InstallPrompt() {
   const [mode, setMode] = useState<"android" | "ios" | null>(null);
   const [deferred, setDeferred] = useState<BeforeInstallPromptEvent | null>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+  useFloatingLayer("install", rootRef, mode !== null);
 
   useEffect(() => {
     if (dismissedRecently() || isStandalone()) return;
@@ -89,7 +93,7 @@ export function InstallPrompt() {
   if (!mode) return null;
 
   return (
-    <div className="install-prompt md:hidden" role="dialog" aria-label="Ana ekrana ekle">
+    <div ref={rootRef} className="install-prompt md:hidden" role="dialog" aria-label="Ana ekrana ekle">
       <p className={`${mono} install-prompt-kicker`}>Ana ekran</p>
       <p className="install-prompt-text">
         {mode === "ios"

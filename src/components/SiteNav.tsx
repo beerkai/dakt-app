@@ -283,7 +283,7 @@ export function SiteNav() {
     }
   }, [pendingHref, router]);
 
-  const navMidLinkClass = `${mono} text-[10px] font-medium uppercase tracking-[0.22em] text-[var(--kraft)] transition-colors duration-200 hover:text-[var(--bordeaux-bright)]`;
+  const navMidLinkClass = `tap-target ${mono} text-[10px] font-medium uppercase tracking-[0.22em] text-[var(--kraft)] transition-colors duration-200 hover:text-[var(--bordeaux-bright)]`;
 
   const outlineBtn =
     "inline-flex shrink-0 items-center justify-center border border-[var(--kraft)] bg-transparent font-medium uppercase tracking-[0.2em] text-[var(--kraft-light)] transition-colors [font-family:var(--font-jetbrains-mono),ui-monospace,monospace] hover:border-[var(--kraft-light)] hover:bg-[var(--anthracite-2)]";
@@ -318,14 +318,14 @@ export function SiteNav() {
             <Link
               href="/"
               title="Division of Analytic Knowledge & Testimonies"
-              className="shrink-0 text-[22px] italic leading-none tracking-[0.4em] text-[var(--kraft)] [font-family:var(--font-cormorant),serif] transition-colors hover:text-[var(--kraft-light)]"
+              className="tap-target shrink-0 text-[22px] italic leading-none tracking-[0.4em] text-[var(--kraft)] [font-family:var(--font-cormorant),serif] transition-colors hover:text-[var(--kraft-light)]"
               onClick={(e) => handleNavClick(e, "/")}
             >
               D.A.K.T.
             </Link>
             <Link
               href="/"
-              className="shrink-0 text-[15px] font-normal leading-none text-[var(--kraft)] transition-colors hover:text-[var(--bordeaux-bright)]"
+              className="tap-target tap-target-center shrink-0 text-[15px] font-normal leading-none text-[var(--kraft)] transition-colors hover:text-[var(--bordeaux-bright)]"
               aria-label="Ana sayfa"
               onClick={(e) => handleNavClick(e, "/")}
             >
@@ -360,7 +360,7 @@ export function SiteNav() {
               type="button"
               title="Bağlantıyı paylaş"
               onClick={() => void handleShare()}
-              className="cursor-pointer border-0 bg-transparent p-0 text-[20px] leading-none text-[var(--kraft)] transition-colors duration-200 hover:text-[var(--bordeaux-bright)]"
+              className="tap-target tap-target-center cursor-pointer border-0 bg-transparent p-0 text-[20px] leading-none text-[var(--kraft)] transition-colors duration-200 hover:text-[var(--bordeaux-bright)]"
               aria-label="Bağlantıyı paylaş"
             >
               ↗

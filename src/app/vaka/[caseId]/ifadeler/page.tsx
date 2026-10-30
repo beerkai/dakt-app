@@ -2,6 +2,9 @@ import { getCase, isTabEnabled } from "@/lib/case-helpers";
 import { notFound } from "next/navigation";
 import { sectionNumForTab } from "@/lib/case-section-utils";
 import { TestimonyArticle } from "../TestimonyArticle";
+import { caseTabCanonical } from "@/lib/canonical";
+
+export const generateMetadata = caseTabCanonical("ifadeler");
 
 export default async function IfadelerPage({
   params,

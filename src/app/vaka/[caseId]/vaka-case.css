@@ -115,6 +115,9 @@
 }
 
 .vaka-case-strip-back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
   flex-shrink: 0;
   font-family: var(--font-jetbrains-mono), "JetBrains Mono", monospace;
   font-size: 9px;
@@ -692,6 +695,10 @@ a.nav-item {
   }
 }
 .stamp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 24px;
   background: transparent;
   border: 1px solid var(--ink);
   padding: 4px 8px;
@@ -919,9 +926,13 @@ a.nav-item {
   );
   pointer-events: none;
 }
-.suspect-card:hover {
-  border-color: var(--kraft-dark);
-  transform: translateY(-2px);
+/* Yalnızca gerçek hover cihazlarında: dokunmatikte "yapışkan" :hover kartı
+   transform'lu bırakıp içindeki fixed katmanların konumunu bozuyordu. */
+@media (hover: hover) {
+  .suspect-card:hover {
+    border-color: var(--kraft-dark);
+    transform: translateY(-2px);
+  }
 }
 .suspect-card.flagged {
   border-color: var(--bordeaux-bright);
@@ -1085,15 +1096,32 @@ a.nav-item {
   text-align: center;
 }
 .cozum-callout-warn {
-  border: 2px solid var(--bordeaux);
-  background: rgba(107, 22, 32, 0.12);
+  /* WCAG 1.4.11: çerçeve sayfa zeminine karşı ≥3:1 (--classified ≈ 3.5:1;
+     eski --bordeaux ≈ 1.6:1 idi). Metin ve bağlantı ≥ 12:1. */
+  border: 2px solid var(--classified);
+  border-left-width: 6px;
+  /* Opak zemin: alttaki dokudan bağımsız kontrast. */
+  background: #2a1417;
   padding: 16px 20px;
   margin-bottom: 28px;
   font-family: var(--font-newsreader), serif;
   font-size: 16px;
   line-height: 1.55;
   letter-spacing: 0;
-  color: var(--body-text);
+  color: var(--paper);
+}
+.cozum-callout-warn a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  color: var(--kraft-light);
+  font-weight: 600;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.cozum-callout-warn a:hover,
+.cozum-callout-warn a:focus-visible {
+  color: var(--paper);
 }
 .cozum-result-fail {
   position: relative;
@@ -1812,6 +1840,8 @@ a.nav-item {
 .timeline-move-btn {
   width: 36px;
   height: 32px;
+  min-width: 24px;
+  min-height: 24px;
   border: 1px solid var(--rule);
   background: transparent;
   color: var(--ink);
@@ -1882,5 +1912,21 @@ a.nav-item {
     grid-column: 1 / -1;
     flex-direction: row;
     justify-content: flex-end;
+  }
+}
+
+/* === Dokunmatik hedefler (WCAG 2.5.5 — 44px) === */
+@media (pointer: coarse) {
+  .stamp-btn,
+  .vaka-case-strip-back,
+  .suspect-flag {
+    min-height: 44px;
+  }
+  .stamp-btn {
+    min-width: 44px;
+  }
+  .timeline-move-btn {
+    width: 44px;
+    height: 44px;
   }
 }

@@ -2,6 +2,9 @@ import { getCase, isTabEnabled } from "@/lib/case-helpers";
 import { notFound } from "next/navigation";
 import { sectionNumForTab } from "@/lib/case-section-utils";
 import { RenderCaseDocument } from "../RenderCaseDocument";
+import { caseTabCanonical } from "@/lib/canonical";
+
+export const generateMetadata = caseTabCanonical("adli-tip");
 
 export default async function AdliTipPage({
   params,

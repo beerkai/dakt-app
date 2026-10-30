@@ -247,7 +247,7 @@ export function KatilClient() {
             {!user ? (
               <Link
                 href="/giris"
-                className={`${mono} text-[9px] uppercase tracking-[0.2em] text-[var(--kraft)] underline-offset-4 hover:text-[var(--kraft-light)] hover:underline`}
+                className={`tap-target ${mono} text-[9px] uppercase tracking-[0.2em] text-[var(--kraft)] underline-offset-4 hover:text-[var(--kraft-light)] hover:underline`}
               >
                 Kayıtlı hesapla giriş →
               </Link>
