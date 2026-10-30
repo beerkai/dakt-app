@@ -207,44 +207,30 @@ export async function recordSolvedCase(input: {
 
   const caseData = getCase(input.caseId);
   if (!caseData) return { success: false, error: "Vaka bulunamadı" };
-  if (caseData.verdict.perpetratorId !== input.suspectId) {
+
+  // Cevap kontrolü + kayıt veritabanında (submit_solution, SECURITY DEFINER):
+  // istemci solved_cases'e doğrudan yazamaz, yanlış cevap kaydedilmez.
+  const { data, error } = await supabase.rpc("submit_solution", {
+    p_case_id: caseData.id,
+    p_suspect_id: input.suspectId,
+    p_attempt_count: clampInt(Number(input.attemptCount ?? 1), 1, MAX_ATTEMPTS),
+    p_duration_seconds: clampInt(
+      Number(input.durationSeconds ?? 0),
+      0,
+      MAX_DURATION_SECONDS,
+    ),
+  });
+  if (error) return { success: false, error: error.message };
+  const res = (data ?? {}) as {
+    solved?: boolean;
+    attempt_count?: number;
+    duration_seconds?: number;
+  };
+  if (res.solved !== true) {
     return { success: false, error: "Çözüm doğrulanamadı" };
   }
-
-  const admin = createAdminClient();
-  const { data: play } = await admin
-    .from("case_playthroughs")
-    .select("attempt_count, started_at")
-    .eq("user_id", user.id)
-    .eq("case_id", caseData.id)
-    .maybeSingle();
-
-  const attemptCount = clampInt(
-    Number(play?.attempt_count ?? input.attemptCount ?? 1),
-    1,
-    MAX_ATTEMPTS,
-  );
-  const durationSeconds = play?.started_at
-    ? clampInt(
-        (Date.now() - new Date(String(play.started_at)).getTime()) / 1000,
-        0,
-        MAX_DURATION_SECONDS,
-      )
-    : clampInt(Number(input.durationSeconds ?? 0), 0, MAX_DURATION_SECONDS);
-
-  const { error } = await admin.from("solved_cases").upsert(
-    {
-      user_id: user.id,
-      case_id: caseData.id,
-      accuracy: 100,
-      attempt_count: attemptCount,
-      duration_seconds: durationSeconds,
-      solved_at: new Date().toISOString(),
-    },
-    { onConflict: "user_id,case_id" },
-  );
-
-  if (error) return { success: false, error: error.message };
+  const attemptCount = Number(res.attempt_count ?? 1);
+  const durationSeconds = Number(res.duration_seconds ?? 0);
 
   revalidatePath("/davalar");
   revalidatePath("/profil");

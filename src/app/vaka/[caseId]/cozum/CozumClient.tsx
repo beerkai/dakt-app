@@ -294,6 +294,7 @@ export function CozumClient({
         attempt_count: successMeta.attempts,
         duration_seconds: durationSeconds,
         solved_at: new Date().toISOString(),
+        ...(selectedSuspect ? { suspect_id: selectedSuspect } : {}),
       });
     }
   }, [view, isCorrect, user, successMeta, caseId, selectedSuspect, router]);

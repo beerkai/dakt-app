@@ -144,33 +144,6 @@ export async function transferGuestProgress(
   let solvedCount = 0;
   let playthroughCount = 0;
 
-  const solved = Array.isArray(payload.solved) ? payload.solved : [];
-  for (const row of solved.slice(0, 50)) {
-    if (!row || typeof row.case_id !== "string") continue;
-    const caseData = getCase(row.case_id);
-    if (!caseData) continue;
-    const { error } = await admin.from("solved_cases").upsert(
-      {
-        user_id: user.id,
-        case_id: caseData.id,
-        accuracy: 100,
-        attempt_count: clampInt(Number(row.attempt_count), 1, MAX_ATTEMPTS),
-        duration_seconds: clampInt(
-          Number(row.duration_seconds),
-          0,
-          MAX_DURATION_SECONDS,
-        ),
-        solved_at:
-          typeof row.solved_at === "string"
-            ? row.solved_at
-            : new Date().toISOString(),
-      },
-      { onConflict: "user_id,case_id" },
-    );
-    if (!error) solvedCount += 1;
-    else console.warn("[transferGuest] solved:", error.message);
-  }
-
   const plays = Array.isArray(payload.playthroughs)
     ? payload.playthroughs
     : [];
@@ -227,6 +200,36 @@ export async function transferGuestProgress(
     );
     if (!error) playthroughCount += 1;
     else console.warn("[transferGuest] playthrough:", error.message);
+  }
+
+  // Çözümler en son: submit_solution RPC'si (SECURITY DEFINER) cevabı
+  // case_answers'tan doğrular ve süreyi yukarıda yazılan playthrough'tan hesaplar.
+  // Şüpheli kimliği olmayan (eski) ya da yanlış kayıtlar aktarılmaz.
+  const solved = Array.isArray(payload.solved) ? payload.solved : [];
+  for (const row of solved.slice(0, 50)) {
+    if (!row || typeof row.case_id !== "string") continue;
+    if (typeof row.suspect_id !== "string" || !row.suspect_id) continue;
+    const caseData = getCase(row.case_id);
+    if (!caseData) continue;
+    const solvedAtMs =
+      typeof row.solved_at === "string" ? Date.parse(row.solved_at) : NaN;
+    const { data, error } = await supabase.rpc("submit_solution", {
+      p_case_id: caseData.id,
+      p_suspect_id: row.suspect_id,
+      p_attempt_count: clampInt(Number(row.attempt_count), 1, MAX_ATTEMPTS),
+      p_duration_seconds: clampInt(
+        Number(row.duration_seconds),
+        0,
+        MAX_DURATION_SECONDS,
+      ),
+      p_solved_at: Number.isFinite(solvedAtMs)
+        ? new Date(solvedAtMs).toISOString()
+        : null,
+    });
+    if (error) console.warn("[transferGuest] solved:", error.message);
+    else if ((data as { solved?: boolean } | null)?.solved === true) {
+      solvedCount += 1;
+    }
   }
 
   if (solvedCount > 0) {

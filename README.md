@@ -55,6 +55,7 @@ Vakaların yayın durumu **Yönetim → Vakalar** ekranından değiştirilir
 | `npm run lint` | ESLint |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run db:types` | `SUPABASE_PROJECT_ID` ile Supabase tiplerini `src/lib/supabase/database.types.ts`'e üretir (Supabase CLI girişi gerekir) |
+| `npm run db:case-answers` | `case_answers` seed SQL'ini vaka verisinden üretir (yeni vaka → migration) |
 | `npm run catalog:names` | `vaka-kaynak/katalog/kullanılan-isimler.md` dosyasını vaka verisinden yeniden üretir |
 
 ## Yapı
@@ -86,6 +87,12 @@ scripts/                tek seferlik içerik çıkarma ve katalog betikleri
 3. `src/lib/case-helpers.ts` içindeki `ALL_CASES` kaydına ekle. İçeriği boş sekmeler otomatik gizlenir.
 4. `cases_metadata` tablosuna satır ekle ya da Yönetim → Vakalar'dan durum ver.
 5. `npm run catalog:names` ile isim kataloğunu güncelle.
+6. **Zorunlu:** `npm run db:case-answers` çıktısıyla bir migration yaz ve uygula. Çözüm kaydı
+   (`submit_solution` RPC) doğru cevabı yalnızca private `case_answers` tablosundan kontrol eder;
+   satırı olmayan vaka çözülmüş olarak kaydedilemez.
 
 Vaka verisi ve hüküm tarayıcıya gönderilmez: sekmeler sunucuda render edilir,
-hüküm oy verildikten sonra server action ile açılır.
+hüküm oy verildikten sonra server action ile açılır. `solved_cases` istemciden doğrudan
+yazılamaz; kayıt yalnızca cevabı veritabanında doğrulayan `submit_solution` RPC'si ile olur
+(misafir → hesap aktarımı dahil). Solo kronoloji kapısı bilinçli olarak istemci tarafındadır
+(tek oyunculu, düşük risk; co-op kapısı `room_timeline` ile sunucudadır).

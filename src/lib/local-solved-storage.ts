@@ -9,6 +9,8 @@ export type LocalSolvedRecord = {
   attempt_count: number;
   duration_seconds: number;
   solved_at: string;
+  /** Oy verilen şüpheli — hesaba aktarımda sunucu (submit_solution) doğrular. */
+  suspect_id?: string;
 };
 
 export function dispatchLocalSolvedChanged(): void {
