@@ -71,10 +71,31 @@ if (!fs.existsSync(draftPath)) {
   process.exit(1);
 }
 
+/** Taslak JSON'un builder'ın okuduğu alanları (geri kalanı olduğu gibi yazılır). */
+interface DraftThread {
+  id?: string;
+  platform?: string;
+  participants?: { isUser?: boolean }[];
+  [key: string]: unknown;
+}
+
+interface CaseDraft {
+  id?: string;
+  codename?: string;
+  fullTitle?: string;
+  victim?: unknown;
+  location?: unknown;
+  suspects?: { id?: string }[];
+  testimonies?: unknown[];
+  verdict?: { perpetratorId?: string };
+  messageThreads?: DraftThread[];
+  [key: string]: unknown;
+}
+
 const rawJson = fs.readFileSync(draftPath, "utf-8");
-let caseData: any;
+let caseData: CaseDraft;
 try {
-  caseData = JSON.parse(rawJson);
+  caseData = JSON.parse(rawJson) as CaseDraft;
 } catch (err) {
   console.error(`HATA: JSON parse edilemedi: ${draftPath}`);
   console.error(err);
@@ -82,22 +103,23 @@ try {
 }
 
 // _yorum alanlarını kaldır (JSON yorumları, builder'a gerek yok)
-function stripComments(obj: any): any {
+function stripComments(obj: unknown): unknown {
   if (Array.isArray(obj)) {
     return obj.map(stripComments);
   }
   if (obj && typeof obj === "object") {
-    const cleaned: any = {};
-    for (const key in obj) {
+    const source = obj as Record<string, unknown>;
+    const cleaned: Record<string, unknown> = {};
+    for (const key in source) {
       if (key.startsWith("_")) continue;
-      cleaned[key] = stripComments(obj[key]);
+      cleaned[key] = stripComments(source[key]);
     }
     return cleaned;
   }
   return obj;
 }
 
-caseData = stripComments(caseData);
+caseData = stripComments(caseData) as CaseDraft;
 
 // ============================================================
 // Validation
@@ -126,7 +148,7 @@ function validate(): string[] {
   } else {
     const failId = caseData.verdict.perpetratorId;
     const matchingSuspect = caseData.suspects?.find(
-      (s: any) => s.id === failId
+      (s) => s.id === failId
     );
     if (!matchingSuspect) {
       errors.push(`verdict.perpetratorId="${failId}" hiçbir suspects.id ile eşleşmiyor`);
