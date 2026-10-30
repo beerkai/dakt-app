@@ -16,6 +16,7 @@ function SiteFooterLegalRow() {
     >
       <Link
         href="/yasal/aydinlatma-metni"
+        className="tap-target"
         style={{ color: "inherit", textDecoration: "none" }}
       >
         Aydınlatma Metni
@@ -23,6 +24,7 @@ function SiteFooterLegalRow() {
       <span aria-hidden>·</span>
       <Link
         href="/yasal/kullanim-kosullari"
+        className="tap-target"
         style={{ color: "inherit", textDecoration: "none" }}
       >
         Kullanım Koşulları
@@ -30,6 +32,7 @@ function SiteFooterLegalRow() {
       <span aria-hidden>·</span>
       <Link
         href="/yasal/cerez-politikasi"
+        className="tap-target"
         style={{ color: "inherit", textDecoration: "none" }}
       >
         Çerez Politikası
@@ -48,12 +51,12 @@ function SiteFooterBrandRow() {
         href="https://instagram.com/dakt.app"
         target="_blank"
         rel="noopener noreferrer"
-        className="foot-instagram"
+        className="foot-instagram tap-target"
       >
         @dakt.app
       </a>{" "}
       ·{" "}
-      <a href="mailto:join@dakt.app" className="foot-email">
+      <a href="mailto:join@dakt.app" className="foot-email tap-target">
         join@dakt.app
       </a>
     </div>

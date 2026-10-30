@@ -5,6 +5,9 @@ import { getCase } from "@/lib/case-helpers";
 import { notFound } from "next/navigation";
 import { sectionNumForTab } from "@/lib/case-section-utils";
 import { safeHtml } from "@/lib/html-sanitize";
+import { caseTabCanonical } from "@/lib/canonical";
+
+export const generateMetadata = caseTabCanonical("brief");
 
 export default async function BriefPage({
   params,

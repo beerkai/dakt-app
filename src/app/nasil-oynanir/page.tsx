@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/nasil-oynanir" },
   title: "Nasıl Oynanır · D.A.K.T.",
   description:
     "Dosyayı aç, incele, oyla, zarfı aç — hızlı analist brifi.",

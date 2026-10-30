@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/yasal/aydinlatma-metni" },
   title: "Aydınlatma Metni · D.A.K.T.",
   description: "KVKK kapsamında veri işleme aydınlatma metni",
 };
@@ -19,6 +20,7 @@ export default function AydinlatmaMetniPage() {
       }}
     >
       <Link
+        className="tap-target"
         href="/"
         style={{
           fontFamily: "var(--font-jetbrains-mono), monospace",
@@ -27,7 +29,7 @@ export default function AydinlatmaMetniPage() {
           color: "var(--kraft-dark)",
           textTransform: "uppercase",
           textDecoration: "none",
-          display: "inline-block",
+          display: "inline-flex",
           marginBottom: 32,
         }}
       >

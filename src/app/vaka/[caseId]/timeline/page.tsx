@@ -4,6 +4,9 @@ import { buildShuffledTimelineCards } from "@/lib/timeline-cards";
 import { notFound } from "next/navigation";
 
 import { TimelineBoardClient } from "./TimelineBoardClient";
+import { caseTabCanonical } from "@/lib/canonical";
+
+export const generateMetadata = caseTabCanonical("timeline");
 
 export default async function TimelinePage({
   params,

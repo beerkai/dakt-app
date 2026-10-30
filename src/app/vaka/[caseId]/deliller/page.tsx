@@ -2,6 +2,9 @@ import { getCase, isTabEnabled } from "@/lib/case-helpers";
 import { notFound } from "next/navigation";
 import { sectionNumForTab } from "@/lib/case-section-utils";
 import { EvidenceStampCard } from "../EvidenceStampCard";
+import { caseTabCanonical } from "@/lib/canonical";
+
+export const generateMetadata = caseTabCanonical("deliller");
 
 export default async function DelillerPage({
   params,

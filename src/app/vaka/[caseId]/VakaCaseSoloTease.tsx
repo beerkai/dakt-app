@@ -2,7 +2,9 @@
 
 import { getActiveSession } from "@/lib/active-session";
 import { useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+
+import { useFloatingLayer } from "@/hooks/useFloatingLayer";
 
 const SOLO_VARIANTS = [
   "{codename} davası dört gözle daha hızlı çözülür.",
@@ -50,6 +52,8 @@ export function VakaCaseSoloTease({
   const [coopBlocked, setCoopBlocked] = useState(false);
   const [visible, setVisible] = useState(false);
   const [feedback, setFeedback] = useState("");
+  const rootRef = useRef<HTMLDivElement>(null);
+  useFloatingLayer("tease", rootRef, visible && !roomId && !coopBlocked);
   const [variantIdx] = useState(() =>
     Math.floor(Math.random() * SOLO_VARIANTS.length),
   );
@@ -159,7 +163,8 @@ export function VakaCaseSoloTease({
 
   return (
     <div
-      className="vaka042-solo-tease pointer-events-auto fixed bottom-5 right-4 z-[160] max-w-[min(100vw-2rem,320px)] border-2 border-[var(--bordeaux)] bg-[var(--anthracite)] p-4 shadow-[var(--shadow)] md:bottom-8 md:right-8"
+      ref={rootRef}
+      className="vaka042-solo-tease pointer-events-auto fixed bottom-[var(--app-float-offset)] right-4 z-[var(--z-float)] max-w-[min(100vw-2rem,320px)] border-2 border-[var(--bordeaux)] bg-[var(--anthracite)] p-4 shadow-[var(--shadow)] md:bottom-8 md:right-8"
       role="dialog"
       aria-labelledby="solo-tease-title"
       aria-live="polite"

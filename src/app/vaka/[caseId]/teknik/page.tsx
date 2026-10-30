@@ -4,6 +4,9 @@ import { sectionNumForTab } from "@/lib/case-section-utils";
 import { RenderCaseDocument } from "../RenderCaseDocument";
 import { WaveformClient } from "../WaveformClient";
 import { safeHtml } from "@/lib/html-sanitize";
+import { caseTabCanonical } from "@/lib/canonical";
+
+export const generateMetadata = caseTabCanonical("teknik");
 
 export default async function TeknikPage({
   params,

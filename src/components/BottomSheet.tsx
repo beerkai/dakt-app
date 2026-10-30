@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 
 import { useAppOverlayLock } from "@/hooks/useAppOverlayLock";
 
@@ -68,9 +69,14 @@ export function BottomSheet({
     };
   }, [open]);
 
-  if (!open) return null;
+  if (!open || typeof document === "undefined") return null;
 
-  return (
+  // Portal to <body>: the trigger often lives inside cards that get a
+  // `transform` on hover/tap (e.g. `.suspect-card:hover`), which turns
+  // `position: fixed` into card-relative positioning and lets the backdrop
+  // swallow taps meant for the sheet options. Rendering at the body level
+  // also lifts the sheet out of the page's `z-[1]` stacking context.
+  return createPortal(
     <div className="sheet-root">
       <button
         type="button"
@@ -95,6 +101,7 @@ export function BottomSheet({
         </div>
         <div className="sheet-body">{children}</div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

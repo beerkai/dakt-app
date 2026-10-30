@@ -3,6 +3,9 @@ import { notFound } from "next/navigation";
 import { sectionNumForTab } from "@/lib/case-section-utils";
 import { Suspense } from "react";
 import { CozumClient } from "./CozumClient";
+import { caseTabCanonical } from "@/lib/canonical";
+
+export const generateMetadata = caseTabCanonical("cozum");
 
 export default async function CozumPage({
   params,

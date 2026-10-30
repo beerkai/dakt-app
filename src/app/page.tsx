@@ -1,7 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { ResumeCard } from "@/components/ResumeCard";
 import SiteFooter from "@/components/SiteFooter";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 const btnMono =
   "[font-family:var(--font-jetbrains-mono),ui-monospace,monospace] text-[10px] font-medium uppercase tracking-[0.26em] transition-colors";

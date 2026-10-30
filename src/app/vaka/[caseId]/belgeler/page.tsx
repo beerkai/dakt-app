@@ -3,6 +3,9 @@ import { notFound } from "next/navigation";
 import { sectionNumForTab } from "@/lib/case-section-utils";
 import { MessageThread } from "@/components/MessageThread";
 import { RenderCaseDocument } from "../RenderCaseDocument";
+import { caseTabCanonical } from "@/lib/canonical";
+
+export const generateMetadata = caseTabCanonical("belgeler");
 
 export default async function BelgelerPage({
   params,

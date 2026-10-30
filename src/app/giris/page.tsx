@@ -476,7 +476,8 @@ export default function GirisPage() {
                   type="checkbox"
                   name="age_consent"
                   required
-                  style={{ marginTop: 4, accentColor: "var(--bordeaux)" }}
+                  className="tap-target-check"
+                  style={{ marginTop: 0, accentColor: "var(--bordeaux)" }}
                 />
                 <span>
                   <strong>16 yaşımdan büyüğüm</strong> ve{" "}
@@ -501,7 +502,8 @@ export default function GirisPage() {
                   type="checkbox"
                   name="kvkk_consent"
                   required
-                  style={{ marginTop: 4, accentColor: "var(--bordeaux)" }}
+                  className="tap-target-check"
+                  style={{ marginTop: 0, accentColor: "var(--bordeaux)" }}
                 />
                 <span>
                   <Link
@@ -537,7 +539,8 @@ export default function GirisPage() {
                   type="checkbox"
                   name="terms_consent"
                   required
-                  style={{ marginTop: 4, accentColor: "var(--bordeaux)" }}
+                  className="tap-target-check"
+                  style={{ marginTop: 0, accentColor: "var(--bordeaux)" }}
                 />
                 <span>
                   <Link
@@ -572,7 +575,7 @@ export default function GirisPage() {
                 setTab("misafir");
                 setTabLocked(true);
               }}
-              className="border-b border-[var(--kraft-dark)] text-[var(--kraft)] hover:border-[var(--kraft)]"
+              className="tap-target border-b border-[var(--kraft-dark)] text-[var(--kraft)] hover:border-[var(--kraft)]"
             >
               Misafir
             </button>{" "}
@@ -646,7 +649,7 @@ export default function GirisPage() {
                 setTab("misafir");
                 setTabLocked(true);
               }}
-              className="border-b border-[var(--kraft-dark)] text-[var(--kraft)] hover:border-[var(--kraft)]"
+              className="tap-target border-b border-[var(--kraft-dark)] text-[var(--kraft)] hover:border-[var(--kraft)]"
             >
               Misafir
             </button>{" "}
@@ -657,7 +660,7 @@ export default function GirisPage() {
                 setTab("kayit");
                 setTabLocked(true);
               }}
-              className="border-b border-[var(--kraft-dark)] text-[var(--kraft)] hover:border-[var(--kraft)]"
+              className="tap-target border-b border-[var(--kraft-dark)] text-[var(--kraft)] hover:border-[var(--kraft)]"
             >
               kayıt
             </button>{" "}
