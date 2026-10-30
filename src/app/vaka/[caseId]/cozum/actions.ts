@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 
 import { getCase } from "@/lib/case-helpers";
 import { sanitizeCaseHtml } from "@/lib/html-sanitize";
+import { clientIpKey, rateLimitHit } from "@/lib/rate-limit";
 import { createAdminClient } from "@/lib/supabase/admin-client";
 import { createClient } from "@/lib/supabase/server";
 import { lessonForWrongSuspect } from "@/lib/wrong-verdict-lesson";
@@ -26,6 +27,44 @@ export type RevealVerdictResult =
   | { error: string };
 
 const MAX_DURATION_SECONDS = 60 * 60 * 24 * 30;
+
+/** revealVerdict limitleri (10 dk pencere). Misafir solo oturumsuz → IP'ye göre. */
+const VERDICT_WINDOW_SECONDS = 600;
+const VERDICT_MAX_PER_USER = 30;
+const VERDICT_MAX_PER_GUEST_IP = 40;
+/** Aynı NAT arkasındaki oyuncular için geniş tutulur; sınırsız anonim hesap açmayı keser. */
+const VERDICT_MAX_PER_IP = 120;
+const RATE_LIMIT_MESSAGE = "Çok fazla deneme yaptın. Birkaç dakika sonra tekrar dene.";
+
+/** Vaka çağırana açık mı? (vaka layout'u ile aynı kural; co-op odası üyeliği de sayılır) */
+async function canPlayCase(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  caseId: string,
+  userId: string | null,
+  roomId: string | null | undefined,
+): Promise<boolean> {
+  const { data: caseMeta } = await supabase
+    .from("cases_metadata")
+    .select("status")
+    .eq("case_id", caseId)
+    .maybeSingle();
+  const status = caseMeta?.status;
+  if (status === "published") return true;
+  if (status !== "test" || !userId) return false;
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("is_tester")
+    .eq("id", userId)
+    .maybeSingle();
+  if (profile?.is_tester === true) return true;
+
+  if (roomId) {
+    const ctx = await requireActiveRoomMember(roomId);
+    return !("error" in ctx) && String(ctx.room.case_id) === caseId;
+  }
+  return false;
+}
 const MAX_ATTEMPTS = 1000;
 
 function clampInt(value: number, min: number, max: number): number {
@@ -130,6 +169,29 @@ export async function revealVerdict(
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  // Rate limit: oturum varsa kullanıcıya (anonim co-op misafiri dahil), yoksa IP'ye göre;
+  // her durumda geniş bir IP limiti de uygulanır (sınırsız anonim hesapla aşılmasın).
+  const ipKey = await clientIpKey();
+  const ipOk = await rateLimitHit(
+    `verdict:ip:${ipKey}`,
+    VERDICT_WINDOW_SECONDS,
+    user ? VERDICT_MAX_PER_IP : VERDICT_MAX_PER_GUEST_IP,
+  );
+  if (!ipOk) return { error: RATE_LIMIT_MESSAGE };
+  if (user) {
+    const userOk = await rateLimitHit(
+      `verdict:u:${user.id}`,
+      VERDICT_WINDOW_SECONDS,
+      VERDICT_MAX_PER_USER,
+    );
+    if (!userOk) return { error: RATE_LIMIT_MESSAGE };
+  }
+
+  // Yayında olmayan (taslak/test/arşiv) vakaların hükmü sızmasın.
+  if (!(await canPlayCase(supabase, caseId, user?.id ?? null, roomId))) {
+    return { error: "Vaka bulunamadı" };
+  }
 
   const { verdict } = caseData;
   const correct = verdict.perpetratorId === suspectId;
