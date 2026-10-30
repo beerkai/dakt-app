@@ -51,10 +51,6 @@ import {
   readLockedSuspects,
 } from "@/lib/locked-suspects-storage";
 import { createClient } from "@/lib/supabase/client";
-import {
-  isSoloTimelineSettled,
-  TIMELINE_CHANGED_EVENT,
-} from "@/lib/timeline-storage";
 import { safeHtml } from "@/lib/html-sanitize";
 import { runInBackground } from "@/lib/background-task";
 
@@ -87,20 +83,15 @@ function VerdictDocumentHtml({ solutionHtml }: { solutionHtml: string }) {
 export function CozumClient({
   caseId,
   suspects,
-  requiresTimeline = false,
 }: {
   caseId: string;
   suspects: Suspect[];
-  /** Saat sekmesi varsa fail seçiminden önce kronoloji kilitlenmeli. */
-  requiresTimeline?: boolean;
 }) {
   const router = useRouter();
   const { user } = useAuth();
   const hasRecordedSolved = useRef(false);
   const voteSubmitLockRef = useRef(false);
   const flipHandledRef = useRef(false);
-  const [timelineSettled, setTimelineSettled] = useState(false);
-  const [timelineReady, setTimelineReady] = useState(false);
   const baseVoteSuspects: VoteSuspect[] = useMemo(
     () =>
       suspects.map((s) => ({
@@ -308,67 +299,6 @@ export function CozumClient({
 
   const isCoop = Boolean(roomId);
 
-  useEffect(() => {
-    if (!requiresTimeline) return;
-
-    let cancelled = false;
-
-    async function syncTimelineGate() {
-      if (roomId) {
-        const supabase = createClient();
-        const { data, error } = await supabase
-          .from("room_timeline")
-          .select("settled")
-          .eq("room_id", roomId)
-          .maybeSingle();
-        if (cancelled) return;
-        if (error) console.warn("[Cozum] timeline gate:", error.message);
-        setTimelineSettled(data?.settled === true);
-        setTimelineReady(true);
-        return;
-      }
-      setTimelineSettled(isSoloTimelineSettled(caseId));
-      setTimelineReady(true);
-    }
-
-    void syncTimelineGate();
-
-    function onSoloChange() {
-      if (!roomId) setTimelineSettled(isSoloTimelineSettled(caseId));
-    }
-    window.addEventListener(TIMELINE_CHANGED_EVENT, onSoloChange);
-    window.addEventListener("storage", onSoloChange);
-
-    const supabase = createClient();
-    const channel = roomId
-      ? supabase
-          .channel(`cozum-timeline-gate:${roomId}`)
-          .on(
-            "postgres_changes",
-            {
-              event: "*",
-              schema: "public",
-              table: "room_timeline",
-              filter: `room_id=eq.${roomId}`,
-            },
-            (payload) => {
-              const row = payload.new as { settled?: boolean } | null;
-              if (row && typeof row.settled === "boolean") {
-                setTimelineSettled(row.settled);
-              }
-            },
-          )
-          .subscribe()
-      : null;
-
-    return () => {
-      cancelled = true;
-      window.removeEventListener(TIMELINE_CHANGED_EVENT, onSoloChange);
-      window.removeEventListener("storage", onSoloChange);
-      if (channel) void supabase.removeChannel(channel);
-    };
-  }, [requiresTimeline, roomId, caseId]);
-
   const {
     count: activePlayerCount,
     userIds: activeUserIds,
@@ -529,35 +459,10 @@ export function CozumClient({
   const btnMono =
     "[font-family:var(--font-jetbrains-mono),monospace] text-[10px] font-medium uppercase tracking-[0.26em] transition-colors duration-300 ease-in-out";
 
-  const clockLocked = !requiresTimeline || timelineSettled;
-  const showTimelineGate =
-    requiresTimeline && timelineReady && !timelineSettled && view === "voting";
-
   return (
     <>
-      {requiresTimeline && !timelineReady && view === "voting" ? (
-        <p
-          className={`${btnMono} mb-6 text-[var(--kraft)]`}
-          style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
-        >
-          Kronoloji durumu kontrol ediliyor…
-        </p>
-      ) : null}
-
-      {showTimelineGate ? (
-        <div className="cozum-callout-warn mb-6">
-          Faili seçmeden önce saati oturt.{" "}
-          <Link
-            href={caseTabHref(caseId, "timeline", roomId)}
-            className="underline"
-          >
-            Kronoloji sekmesine git
-          </Link>
-        </div>
-      ) : null}
-
       {/* ═══ CO-OP OYLAMA OVERLAY ═══ */}
-      {clockLocked && isCoop && !coopVoteComplete && roomId && (
+      {isCoop && !coopVoteComplete && roomId && (
         user?.id ? (
           playersLoading || activePlayerCount < 1 ? (
             <p
@@ -611,7 +516,7 @@ export function CozumClient({
       ) : null}
 
       {/* ═══ SOLO OYLAMA (mevcut akış) ═══ */}
-      {clockLocked && view === "voting" && (!isCoop || coopVoteComplete) && (
+      {view === "voting" && (!isCoop || coopVoteComplete) && (
         <>
           <div className="cozum-callout-warn">
             ⚠ DİKKAT — Şüpheli listesinden faili işaret et. Yanlış tahmin: fail

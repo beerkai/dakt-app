@@ -388,7 +388,7 @@ export default function GirisPage() {
           <p className="mb-8 text-[16px] leading-relaxed text-[var(--subtitle-text)] [font-family:var(--font-newsreader),serif]">
             Misafir olarak başlayabilirsin; hesabını sonradan açarsın. Bu
             tarayıcıdaki çözümler, deneme sayıları ve pano notların hesaba
-            geçer. Damgalar ve kronoloji aynı cihazda kalır.
+            geçer. Damgalar aynı cihazda kalır.
           </p>
 
           <form className="space-y-5" onSubmit={handleSignUp}>

@@ -21,22 +21,18 @@ const TAB_HAS_CONTENT: Partial<Record<TabId, (c: CaseData) => boolean>> = {
   belgeler: (c) =>
     (c.documents?.length ?? 0) + (c.messageThreads?.length ?? 0) > 0,
   teknik: (c) => (c.technical?.length ?? 0) > 0 || Boolean(c.technicalAudio),
-  timeline: (c) => (c.timeline?.length ?? 0) > 0,
 };
 
-/** Kronoloji sekmesini deduction/cozum öncesine ekler (vaka dosyalarında yazılı değil). */
-function withTimelineTab(tabs: TabId[], c: CaseData): TabId[] {
-  if ((c.timeline?.length ?? 0) === 0 || tabs.includes("timeline")) return tabs;
-  const before = tabs.findIndex((t) => t === "deduction" || t === "cozum");
-  if (before < 0) return [...tabs, "timeline"];
-  return [...tabs.slice(0, before), "timeline", ...tabs.slice(before)];
-}
+/**
+ * Kronoloji (timeline) sekmesi kaldırıldı: vaka verisinde `timeline` dursa da
+ * sekme şeride/rotalara eklenmez. Eski /timeline URL'leri bir sonraki sekmeye yönlenir.
+ */
+const RETIRED_TABS = new Set<TabId>(["timeline"]);
 
 /** İçeriği olmayan sekmeleri şeritten ve rotalardan düşürür. */
 function withContentTabs(c: CaseData): CaseData {
-  const withTl = withTimelineTab(c.enabledTabs, c);
-  const enabledTabs = withTl.filter(
-    (tab) => TAB_HAS_CONTENT[tab]?.(c) ?? true,
+  const enabledTabs = c.enabledTabs.filter(
+    (tab) => !RETIRED_TABS.has(tab) && (TAB_HAS_CONTENT[tab]?.(c) ?? true),
   );
   return enabledTabs.length === c.enabledTabs.length &&
     enabledTabs.every((t, i) => t === c.enabledTabs[i])
