@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 
 import { getCase } from "@/lib/case-helpers";
 import { createClient } from "@/lib/supabase/server";
+import { isUsernameTaken } from "@/lib/username-availability";
 import type { AnalystColor } from "@/lib/supabase/types";
 
 const ANALYST_COLORS: AnalystColor[] = [
@@ -147,13 +148,7 @@ export async function ensureAnonProfile(
     return { error: "Geçersiz renk" };
   }
 
-  const { data: taken } = await supabase
-    .from("profiles")
-    .select("id")
-    .eq("username", trimmed)
-    .neq("id", user.id)
-    .maybeSingle();
-  if (taken) {
+  if (await isUsernameTaken(trimmed, user.id)) {
     return { error: "Bu takma ad zaten kullanılıyor" };
   }
 

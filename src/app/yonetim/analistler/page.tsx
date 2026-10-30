@@ -1,5 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
-import { getAllUserEmails } from "@/lib/admin";
+import { getAllUserEmails, requireAdminDb } from "@/lib/admin";
 import { fetchAllRows } from "@/lib/fetch-all-rows";
 import GMPageHeader from "../components/GMPageHeader";
 import GMPageFooter from "../components/GMPageFooter";
@@ -22,7 +21,8 @@ interface ProfileWithMeta extends Profile {
 }
 
 export default async function AnalistlerPage() {
-  const supabase = await createClient();
+  // profiles/solved_cases RLS yalnızca kendi satırı → tüm kullanıcılar için service role.
+  const { adminDb: supabase } = await requireAdminDb();
 
   const { data: profiles } = await supabase
     .from("profiles")

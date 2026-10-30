@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin-client";
 
@@ -129,4 +131,15 @@ export async function getUserEmail(userId: string): Promise<string | null> {
 
   if (error || !data?.user) return null;
   return data.user.email ?? null;
+}
+
+/**
+ * Yönetim sayfaları için: admin değilse yönlendirir, admin ise service role
+ * istemcisi döner. `profiles` / `solved_cases` RLS'i yalnızca kendi satırına
+ * açık olduğundan tüm kullanıcıları listeleyen sayfalar bunu kullanmalı.
+ */
+export async function requireAdminDb() {
+  const check = await checkAdmin();
+  if (!check.isAdmin) redirect("/?error=unauthorized");
+  return { adminDb: createAdminClient(), check };
 }
